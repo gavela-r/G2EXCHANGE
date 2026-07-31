@@ -1,0 +1,23 @@
+services:
+  frontend:
+    build: ./client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+    container_name: frontend_valoracion
+
+  backend:
+    build: ./server
+    ports:
+      - "3000:3000"
+    container_name: backend_valoracion
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: 2GB
+    ports:
+      - "3307:3306"
+    container_name: mysql_valoracion

@@ -1,5 +1,5 @@
 import conexion from "../conexion/bd";
-
+import * as XLSX from "xlsx";
 
 interface EmpresaSEC {
     cick_str: number;
@@ -149,28 +149,28 @@ async function insertarSector(nombreSector: string) {
    USA (FINNHUB)
    ============================================================ */
 
-// async function insertarSectoresUSA() {
-//     const secURL = "https://www.sec.gov/files/company_tickers.json";
-//     const response = await fetch(secURL, { headers: { "User-Agent": "Mozilla/5.0" } });
-//     const data: Record<string, EmpresaSEC> = await response.json();
+async function insertarSectoresUSA() {
+    const secURL = "https://www.sec.gov/files/company_tickers.json";
+    const response = await fetch(secURL, { headers: { "User-Agent": "Mozilla/5.0" } });
+    const data: Record<string, EmpresaSEC> = await response.json();
 
-//     for (const key in data) {
-//         const empresa = data[key];
-//         const ticker = empresa.ticker;
+    for (const key in data) {
+        const empresa = data[key];
+        const ticker = empresa.ticker;
 
-//         const finHubUrl =
-//             `https://finnhub.io/api/v1/stock/profile2?symbol=${ticker}&token=d9ktkghr01qshkro93ggd9ktkghr01qshkro93h0`;
+        const finHubUrl =
+            `https://finnhub.io/api/v1/stock/profile2?symbol=${ticker}&token=d9lut01r01qhk6k6au20d9lut01r01qhk6k6au2g`;
 
-//         const finHubResponse = await fetch(finHubUrl);
-//         const finHubData = await finHubResponse.json();
+        const finHubResponse = await fetch(finHubUrl);
+        const finHubData = await finHubResponse.json();
 
-//         if (!finHubData || !finHubData.finnhubIndustry) continue;
+        if (!finHubData || !finHubData.finnhubIndustry) continue;
 
-//         await insertarSector(finHubData.finnhubIndustry);
-//     }
+        await insertarSector(finHubData.finnhubIndustry);
+    }
 
-//     console.log("Sectores USA insertados.");
-// }
+    console.log("Sectores USA insertados.");
+}
 
 /* ============================================================
    JAPÓN (EDINET)
@@ -186,7 +186,7 @@ async function obtenerSectoresJapon(): Promise<string[]> {
     const sectoresJP = new Set<string>();
 
     for (const fila of filas) {
-        const sectorJP = fila[10]; // columna real del sector
+        const sectorJP = fila[10];
         if (sectorJP) sectoresJP.add(sectorJP);
     }
 
@@ -194,7 +194,7 @@ async function obtenerSectoresJapon(): Promise<string[]> {
 }
 
 /* ============================================================
-   TAIWÁN (TWSE)
+   TAIWÁN (TWSE) — nota: probablemente bloqueado por WAF fuera de Taiwán
    ============================================================ */
 
 async function obtenerSectoresTaiwan(): Promise<string[]> {
@@ -231,30 +231,207 @@ async function obtenerSectoresTaiwan(): Promise<string[]> {
    ============================================================ */
 
 async function insertarSectores() {
-    // console.log("== Insertando sectores USA ==");
-    // await insertarSectoresUSA();
+    console.log("== Insertando sectores USA ==");
+    await insertarSectoresUSA();
 
     console.log("== Insertando sectores Japón ==");
     const sectoresJP = await obtenerSectoresJapon();
+    for (const sectorOriginal of sectoresJP) {
+        await insertarSector(normalizarSectorJP(sectorOriginal));
+    }
 
     console.log("== Insertando sectores Taiwán ==");
     const sectoresTW = await obtenerSectoresTaiwan();
-
-    const todos = [...sectoresJP, ...sectoresTW];
-
-    console.log(`== Normalizando ${todos.length} sectores ==`);
-
-    for (const sectorOriginal of todos) {
-        const normalizado =
-            normalizarSectorJP(sectorOriginal) ||
-            normalizarSectorTW(sectorOriginal) ||
-            "N/A";
-
-        await insertarSector(normalizado);
+    for (const sectorOriginal of sectoresTW) {
+        await insertarSector(normalizarSectorTW(sectorOriginal));
     }
 
-    console.log("== Inserción completa ==");
+    console.log("== Inserción de sectores completa ==");
 }
 
-insertarSectores();
+/* ============================================================
+   BETA APALANCADA POR SECTOR (Damodaran)
+   ============================================================ */
 
+const URL_BETA_GLOBAL = "https://www.stern.nyu.edu/~adamodar/pc/datasets/betaGlobal.xls";
+
+interface FilaBeta {
+    industria: string;
+    betaApalancada: number;
+}
+
+const mapeoSectoresDamodaran: Record<string, string> = {
+    "Advertising": "Media",
+    "Aerospace/Defense": "Aerospace & Defense",
+    "Air Transport": "Airlines",
+    "Apparel": "Textiles, Apparel & Luxury Goods",
+    "Auto & Truck": "Automobiles",
+    "Auto Parts": "Auto Components",
+    "Bank (Money Center)": "Banking",
+    "Banks (Regional)": "Banking",
+    "Beverage (Alcoholic)": "Beverages",
+    "Beverage (Soft)": "Beverages",
+    "Broadcasting": "Media",
+    "Brokerage & Investment Banking": "Financial Services",
+    "Building Materials": "Building Materials",
+    "Business & Consumer Services": "Commercial Services & Supplies",
+    "Cable TV": "Media",
+    "Chemical (Basic)": "Chemicals",
+    "Chemical (Diversified)": "Chemicals",
+    "Chemical (Specialty)": "Chemicals",
+    "Coal & Related Energy": "Energy",
+    "Computer Services": "Technology",
+    "Computers/Peripherals": "Technology",
+    "Construction Supplies": "Building Materials",
+    "Diversified": "Industrial Conglomerates",
+    "Drugs (Biotechnology)": "Biotechnology",
+    "Drugs (Pharmaceutical)": "Pharmaceuticals",
+    "Education": "Diversified Consumer Services",
+    "Electrical Equipment": "Electrical Equipment",
+    "Electronics (Consumer & Office)": "Technology",
+    "Electronics (General)": "Electrical Equipment",
+    "Engineering/Construction": "Construction",
+    "Entertainment": "Media",
+    "Environmental & Waste Services": "Commercial Services & Supplies",
+    "Farming/Agriculture": "Food Products",
+    "Financial Svcs. (Non-bank & Insurance)": "Financial Services",
+    "Food Processing": "Food Products",
+    "Food Wholesalers": "Trading Companies & Distributors",
+    "Furn/Home Furnishings": "Consumer Products",
+    "Green & Renewable Energy": "Energy",
+    "Healthcare Products": "Health Care",
+    "Healthcare Support Services": "Health Care",
+    "Heathcare Information and Technology": "Health Care",
+    "Homebuilding": "Construction",
+    "Hospitals/Healthcare Facilities": "Health Care",
+    "Hotel/Gaming": "Hotels, Restaurants & Leisure",
+    "Household Products": "Consumer Products",
+    "Information Services": "Professional Services",
+    "Insurance (General)": "Insurance",
+    "Insurance (Life)": "Insurance",
+    "Insurance (Prop/Cas.)": "Insurance",
+    "Investments & Asset Management": "Financial Services",
+    "Machinery": "Machinery",
+    "Metals & Mining": "Metals & Mining",
+    "Office Equipment & Services": "Technology",
+    "Oil/Gas (Integrated)": "Energy",
+    "Oil/Gas (Production and Exploration)": "Energy",
+    "Oil/Gas Distribution": "Energy",
+    "Oilfield Svcs/Equip.": "Energy",
+    "Packaging & Container": "Packaging",
+    "Paper/Forest Products": "Packaging",
+    "Power": "Utilities",
+    "Precious Metals": "Metals & Mining",
+    "Publishing & Newspapers": "Media",
+    "R.E.I.T.": "Real Estate",
+    "Real Estate (Development)": "Real Estate",
+    "Real Estate (General/Diversified)": "Real Estate",
+    "Real Estate (Operations & Services)": "Real Estate",
+    "Recreation": "Leisure Products",
+    "Reinsurance": "Insurance",
+    "Restaurant/Dining": "Hotels, Restaurants & Leisure",
+    "Retail (Automotive)": "Retail",
+    "Retail (Building Supply)": "Retail",
+    "Retail (Distributors)": "Distributors",
+    "Retail (General)": "Retail",
+    "Retail (Grocery and Food)": "Retail",
+    "Retail (REITs)": "Real Estate",
+    "Retail (Special Lines)": "Retail",
+    "Rubber& Tires": "Auto Components",
+    "Semiconductor": "Semiconductors",
+    "Semiconductor Equip": "Semiconductors",
+    "Shipbuilding & Marine": "Marine",
+    "Shoe": "Textiles, Apparel & Luxury Goods",
+    "Software (Entertainment)": "Technology",
+    "Software (Internet)": "Technology",
+    "Software (System & Application)": "Technology",
+    "Steel": "Metals & Mining",
+    "Telecom (Wireless)": "Telecommunication",
+    "Telecom. Equipment": "Telecommunication",
+    "Telecom. Services": "Telecommunication",
+    "Tobacco": "Tobacco",
+    "Transportation": "Logistics & Transportation",
+    "Transportation (Railroads)": "Road & Rail",
+    "Trucking": "Road & Rail",
+    "Utility (General)": "Utilities",
+    "Utility (Water)": "Utilities"
+};
+
+async function descargarBetasPorSector(): Promise<FilaBeta[]> {
+    console.log("== Descargando betas por sector (Damodaran) ==");
+
+    const res = await fetch(URL_BETA_GLOBAL);
+    const buffer = await res.arrayBuffer();
+    const workbook = XLSX.read(buffer, { type: "array" });
+
+    const nombreHoja = workbook.SheetNames.includes("Industry Averages")
+        ? "Industry Averages"
+        : workbook.SheetNames[0];
+
+    const hoja = workbook.Sheets[nombreHoja];
+
+    // La fila de encabezados reales está en el índice 9 (0-based)
+    const filasRaw = XLSX.utils.sheet_to_json<Record<string, any>>(hoja, { range: 9 });
+
+    const resultado: FilaBeta[] = [];
+
+    for (const filaRaw of filasRaw) {
+        // Normalizamos las claves quitando espacios sobrantes,
+        // para no depender de si el Excel trae "Beta " con espacio o no
+        const fila: Record<string, any> = {};
+        for (const key of Object.keys(filaRaw)) {
+            fila[key.trim()] = filaRaw[key];
+        }
+
+        const industria = fila["Industry Name"];
+        const betaRaw = fila["Beta"];
+        const betaNum = typeof betaRaw === "number" ? betaRaw : parseFloat(betaRaw);
+
+        if (!industria || isNaN(betaNum)) continue;
+
+        resultado.push({ industria: String(industria).trim(), betaApalancada: betaNum });
+    }
+
+    console.log(`  ${resultado.length} sectores con beta descargados de Damodaran`);
+    return resultado;
+}
+
+async function actualizarSensibilidadMercado() {
+    const betas = await descargarBetasPorSector();
+
+    let actualizados = 0;
+    let sinMatch = 0;
+
+    for (const { industria, betaApalancada } of betas) {
+        const nombreNormalizado = mapeoSectoresDamodaran[industria];
+
+        if (!nombreNormalizado) {
+            sinMatch++;
+            continue;
+        }
+
+        const [result]: any = await (conexion as any).query(
+            "UPDATE sector SET sensibilidad_al_mercado = ? WHERE nombre_sector = ?",
+            [betaApalancada, nombreNormalizado]
+        );
+
+        if (result.affectedRows > 0) {
+            actualizados++;
+        }
+    }
+
+    console.log(`== Betas actualizadas: ${actualizados} | Sin match en Damodaran (por mapear): ${sinMatch} ==`);
+}
+
+/* ============================================================
+   MAIN
+   ============================================================ */
+
+async function main() {
+    // await insertarSectores();
+    await actualizarSensibilidadMercado();
+}
+
+if (require.main === module) {
+    main();
+}

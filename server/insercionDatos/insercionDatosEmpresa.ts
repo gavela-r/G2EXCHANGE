@@ -1,5 +1,7 @@
 import conexion from "../conexion/bd";
 import { normalizarSectorJP, normalizarSectorTW } from "./insercionDatosSector"; 
+import { translate } from "@vitalets/google-translate-api";
+import pinyin from "pinyin";
 
 interface Empresa {
     ticker: string;
@@ -54,36 +56,72 @@ interface Empresa {
    ============================================================ */
 
 async function getEmpresasTaiwan(): Promise<Empresa[]> {
-    console.log("== Taiwán: descargando listado TWSE (CSV válido) ==");
+    console.log("== Taiwán: descargando listado desde API FinMind ==");
 
-    const url = "https://raw.githubusercontent.com/denny0223/twse-company-list/master/twse.csv";
+    // FinMind TaiwanStockInfo trae toda la lista de acciones
+    const url = "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInfo";
 
-    const res = await fetch(url);
-    const text = await res.text();
+    try {
+        const res = await fetch(url);
 
-    const filas = text.trim().split("\n").slice(1); // quitar cabecera
+        if (!res.ok) {
+            console.error(`  Error FinMind: ${res.status}. Saltando Taiwán por ahora.`);
+            return [];
+        }
 
-    const out: Empresa[] = [];
+        const json = await res.json();
+        
+        // La API de FinMind devuelve los datos dentro de un array llamado "data"
+        const data = json.data || [];
+        const out: Empresa[] = [];
 
-    for (const linea of filas) {
-        const partes = linea.split(",");
+        console.log(`  Procesando y traduciendo empresas de Taiwán (Esto tardará unos minutos por límite de Google)...`);
 
-        const ticker = partes[0]?.trim();
-        const nombreLocal = partes[1]?.trim();
-        const sector = partes[2]?.trim() || "N/A";
+        for (let i = 0; i < data.length; i++) {
+            const c = data[i];
+            
+            // FinMind devuelve "twse" (Listed) y "tpex" (OTC). Nos quedamos con la bolsa principal.
+            if (c.type !== "twse") continue;
 
-        if (!ticker || !nombreLocal) continue;
+            const ticker = c.stock_id;
+            const nombreLocal = c.stock_name;
+            const sector = c.industry_category || "N/A";
 
-        out.push({
-            ticker,
-            name: nombreLocal,
-            country: "TW",
-            sector
-        });
+            if (!ticker || !nombreLocal) continue;
+
+            let nombreFinal = nombreLocal;
+
+            // 1. Intentamos traducir con Google Translate (hacia el inglés 'en' o el idioma que prefieras)
+            try {
+                const traduccion = await translate(nombreLocal, { to: 'en' });
+                nombreFinal = traduccion.text;
+            } catch (error) {
+                // 2. Si Google bloquea la IP por límite de uso, entra Pinyin al rescate
+                nombreFinal = pinyin(nombreLocal, { style: pinyin.STYLE_NORMAL }).map((x: any) => x[0]).join(" ");
+            }
+
+            out.push({
+                ticker: String(ticker).trim(),
+                name: nombreFinal, 
+                country: "TW",
+                sector: String(sector).trim()
+            });
+
+            // PAUSA OBLIGATORIA DE 500ms: Sin esto, Google Translate te banea en segundos.
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Log para que veas que no se ha colgado
+            if (i > 0 && i % 100 === 0) console.log(`  Taiwán: ${i}/${data.length} empresas procesadas...`);
+        }
+
+        console.log(`  Taiwán: ${out.length} empresas guardadas con éxito.`);
+        return out;
+
+    } catch (error) {
+        console.error("  Fallo al descargar Taiwán desde FinMind.", error);
+        console.log("  Continuando con el resto del script...");
+        return [];
     }
-
-    console.log(`  Taiwán: ${out.length} empresas`);
-    return out;
 }
 
 

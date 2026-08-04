@@ -7,6 +7,14 @@ interface EmpresaSEC{
     title: string;
 }
 
+interface RiesgoPaisFMP {
+    country: string;
+    countryRiskPremium: number | string | null;
+}
+
+
+
+
 const paises: Record<string, string> = {
     US: 'Estados Unidos',
     USA: 'Estados Unidos',
@@ -135,10 +143,7 @@ async function insertarTipoInrteresBancoCentralUS(){
     }
 }
 
-interface RiesgoPaisFMP {
-    country: string;
-    countryRiskPremium: number | string | null;
-}
+
 
 async function insertarRiesgoExtraPorPais(){
     try{
@@ -181,7 +186,128 @@ async function insertarRiesgoExtraPorPais(){
     }
 }
 
+async function insertarBono10AnosJP(){
+    try{
+        const url = "https://api.stlouisfed.org/fred/series/observations?series_id=IRLTLT01JPM156N&api_key=3b7d9daac80dd66bb98c249ab369ee90&file_type=json&sort_order=desc&limit=1";
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const ultimaObservacion = data.observations[0];
+
+        if(!ultimaObservacion){
+            console.log("Fred no devolvio ninguna onbservacion");
+            return;
+        }
+
+        const {date: fecha, value: valor} = ultimaObservacion;
+
+        if(valor === '.'){
+            console.log("sin datos validos");
+            return;
+        }
+
+        const sql = "UPDATE pais SET interes_bono_10_ano = ?, fecha_publicacion_bono10 = ? WHERE codigo_iso = 'JP'";
+
+        await (conexion as any).query(sql, [valor, fecha]);
+        console.log("interes actualizado correctamente");
+
+    }catch(error){
+        console.log("Error en el servidor, " + error);
+    }
+}
+
+
+interface RespuestaBOJ {
+    STATUS: number;
+    MESSAGE?: string;
+    RESULTSET?: Array<{
+        SERIES_CODE: string;
+        SURVEY_DATES: Array<number | string>;
+        VALUES: Array<number | string | null>;
+    }>;
+}
+
+async function insertarTipoInteresBancoCentralJP(){
+    try{
+        const anoActual = new Date().getFullYear();
+
+        const url = `https://www.stat-search.boj.or.jp/api/v1/getDataCode?format=json&lang=en&db=IR01&startDate=${anoActual}01&endDate=${anoActual}12&code=MADR1Z@D`;
+
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error(`Banco de Japon respondio con ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if(data.STATUS !== 200 || !Array.isArray(data.RESULTSET)){
+            throw new Error(data.MESSAGE || 'El Banco de Japon no devolvio datos');
+        }
+
+        const serie = data.RESULTSET[0];
+
+        if(!serie || !Array.isArray(serie.VALUES.VALUES) || !Array.isArray(serie.VALUES.SURVEY_DATES)){
+            throw new Error('Formato de respuesta del Banco de Japon no valido');
+        }
+
+        let ultimoValor: number | null = null;
+        let ultimaFecha: string | null = null;
+
+        for(let i = serie.VALUES.VALUES.length - 1; i >= 0; i--){
+            const valorOriginal = serie.VALUES.VALUES[i];
+
+            if(valorOriginal === null || valorOriginal === ''){
+                continue;
+            }
+
+            const valor = parseFloat(String(valorOriginal).replace(',', '.'));
+
+            if(!Number.isNaN(valor)){
+                ultimoValor = valor;
+                ultimaFecha = String(serie.VALUES.SURVEY_DATES[i]);
+                break;
+            }
+        }
+
+        if(ultimoValor === null || !ultimaFecha){
+            console.log('El Banco de Japon no devolvio ningun valor valido');
+            return;
+        }
+
+        const fechaFormateada = `${ultimaFecha.slice(0, 4)}-${ultimaFecha.slice(4, 6)}-${ultimaFecha.slice(6, 8)}`;
+
+        const sql = `
+            UPDATE pais
+            SET tipo_interes_banco_central = ?,
+                fecha_publicacion_banco_central = ?
+            WHERE codigo_iso IN ('JP', 'JPN')
+        `;
+
+        await (conexion as any).query(sql, [
+            ultimoValor,
+            fechaFormateada
+        ]);
+
+        console.log(
+            `Tipo de interes del Banco de Japon actualizado: ${ultimoValor}%, ${fechaFormateada}`
+        );
+
+    }catch(error){
+        console.error(
+            'Error al insertar el tipo de interes del Banco de Japon:',
+            error
+        );
+    }
+}
+
+insertarTipoInteresBancoCentralJP();
+
+
+// insertarTipoInteresBancoCentralJP();
 // insertarBono10AnosUS();
 // insertarTipoInrteresBancoCentralUS();
 // insercionDatos();
-insertarRiesgoExtraPorPais();
+// insertarRiesgoExtraPorPais();
+// insertarBono10AnosJP();
+

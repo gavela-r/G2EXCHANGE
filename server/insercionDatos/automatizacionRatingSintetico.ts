@@ -4,7 +4,7 @@ import conexion from "../conexion/bd";
 
 type PerfilEmpreasa = "GRANDE_NO_FINANCIERA" | "PEQUENA_RIESGOSA" | "FINANCIERA";
 
-interface RtingRow extends RowDataPacket {
+interface RatingRow extends RowDataPacket {
     id: number;
     perfil_empresa: PerfilEmpreasa;
     conbertura_intereses_min_exclusiva: number | string;
@@ -143,6 +143,114 @@ export async function sincronizarSpreadsRating(req: Request, res : Response): Pr
     }
 }
 
+export async function calcularRatingSintetico(req: Request, res:Response): Promise<void>{
+    const {ebit, gastoIntereses, coberturaIntereses, perfilEmpresa = "GRANDE_NO_FINACIERA", tipoLibreRiesgo} = req.body ?? {};
+    
+    if(!perfilValido(perfilEmpresa)){
+        res.status(400).json({ ok: false, mensaje: "perfilEmpresa no es valido"});
+        return;
+    }
+    
+    let cobertura = numero(coberturaIntereses);
+    if(cobertura === null){
+        const ebitNumero = numero(ebit);
+        const interesesNumero = numero(gastoIntereses);
+        
+        if(ebitNumero === null || interesesNumero === null){
+            res.status(400).json({ok: false, mensaje: "Enviar coberturaIntereses o bien ebit y gastoInteres"});
+            return ;
+        }
+
+        if(interesesNumero < 0){
+            res.status(400).json({ok: false, mensaje: "gastIntereses no puede ser negativo"});
+            return;
+        }
+
+        if(interesesNumero === 0 ){
+            cobertura = 100000;
+        }else{
+            cobertura = ebitNumero / interesesNumero;
+        }
+
+        const [filas] = await conexion.query<RatingRow[]>(
+            `
+                SELCET * FROM rating_sintetico 
+                WHERE perfil_empresa = ? AND activo = TRUE
+                    AND ? > cobertura_intereses_min_exclusiva
+                    AND ? <= cobertura_intereses_max_inclusica
+                ORDER BY order_riesgo LIMIT 1
+            `,
+            [perfilEmpresa, cobertura, cobertura]
+        );
+
+        if(filas.length === 0){
+            res.status(422).json({
+                ok: false,
+                mensaje: "No existe un intervalo aplicable a la cobertura calculada",
+                coberturaIntereses: cobertura,
+                perfilEmpresa
+            });
+            return;
+        }
+
+        const fila = filas[0];
+        const rf = numero(tipoLibreRiesgo);
+        const respuesta: Record<string, unknown> = {
+            ok: true,
+            formulaCobertura: "EBIT / gasto_intereses",
+            conberturaIntereses: redondear(cobertura),
+            perfilEmpresa,
+            ratingEstimado: fila.ratitng_estimado,
+            bucketMercado: fila.bucket_mercado,
+            spreadsCredito: {
+                optimista: Number(fila.sapread_credito_optimista),
+                base: Number(fila.spread_credito_base),
+                pesimista: Number(fila.spread_credito_pesimista),
+                unidad: "puntos porcentuales"
+            },
+            referencia: {
+                spreadDamodaran : Number(fila.spread_damodaran),
+                seriesFred: fila.serie_fred,
+                fechaDatosMercado: fila.fecha_datos_mercado
+            }
+        };
+
+        if(rf !== null){
+            respuesta.costeDeudaAntesImpuestos = {
+                optimista: redondear(rf + Number(fila.spread_credito_optimista)),
+                base: redondear(rf + Number(fila.spread_credito_base)),
+                pesimista: redondear(rf + Number(fila.spread_credito_pesimista)),
+                formula: "tipo_libre_riesgo + spread_credito",
+                unidad: "puntos porcentuales"    
+            };
+        }
+
+        res.status(200).json(respuesta);
+    }
+}
+
+export async function listarTablaRatingSintetico(req: Request, res: Response): Promise<void>{
+    const perfil = req.query.perfilEmpresa;
+    const condiciones: string[] = ["activo = TRUE"];
+    const parametros: unknown[] =  [];
+
+    if(perfil !== undefined){
+        if(!perfilValido(perfil)){
+            res.status(400).json({ok: false, mensaje: "perfilEmpresa no es valido"});
+            return;
+        }
+
+        condiciones.push("perfil_empresa = ?");
+        parametros.push(perfil);
+    }
 
 
+    const [filas] = await conexion.query<RatingRow[]>(
+        `SELECT * FROM rating_sitetico WHERE ${condiciones.join(" AND ")} ORDER BY perfil_empresa, orden_riesgo`,
+        parametros    
+    );
 
+    res.status(200).json({ok: true, total: filas.length, datos: filas});
+
+
+}

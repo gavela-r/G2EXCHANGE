@@ -10,4 +10,3 @@ async function crearSnapshotCompleto(pool: Pool, empresaId: number, fecha: strin
 }
 // A partir de ahora, usar crearSnapshotCompleto() en vez de crearSnapshot()
 export {crearSnapshotCompleto}
-// en el flujo de valorarEmpresaCompleto() que ya tienes.

@@ -52,12 +52,30 @@ const PCV_SEC_MAX_RETRIES = Number(process.env.SEC_MAX_RETRIES || "3");
 // CONFIGURACIÓN TAIWAN
 // ============================================================================
 
-const TWOPT_FINMIND_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoianVhbmdhcjIwMDJAZ21haWwuY29tIiwiZW1haWwiOiJqdWFuZ2FyMjAwMkBnbWFpbC5jb20iLCJ0b2tlbl92ZXJzaW9uIjowfQ.Bhrtve4xNDKxGYLoAv66JQnKRCtm_f_RzMZCmkv82Fk";
+const TWOPT_FINMIND_TOKENS = [
 
-const TWOPT_YEARS = Number(process.env.FINMIND_PCV_YEARS || "4");
-const TWOPT_RPM = Number(process.env.FINMIND_PCV_RPM || "9");
-const TWOPT_TIMEOUT_MS = Number(process.env.FINMIND_PCV_TIMEOUT_MS || "20000");
-const TWOPT_MAX_RETRIES = Number(process.env.FINMIND_PCV_MAX_RETRIES || "3");
+    process.env.FINMIND_TOKEN_1 || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidmljZW50ZS5nYXZlbGFAZ21haWwuY29tIiwiZW1haWwiOiJ2aWNlbnRlLmdhdmVsYUBnbWFpbC5jb20iLCJ0b2tlbl92ZXJzaW9uIjowfQ.YEYE51_UgvZnYg4ND0P1_tYrv-MV-QFtiXEEl0DtHYo",
+
+    process.env.FINMIND_TOKEN_2 || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoianVhbmdhcmxvcDIwMDJAZ21haWwuY29tIiwiZW1haWwiOiJqdWFuZ2FybG9wMjAwMkBnbWFpbC5jb20iLCJ0b2tlbl92ZXJzaW9uIjowfQ.7FrSusCnEafRaXc5O1YtAdKGIr4TD5-fM2DdMeCZKU4",
+
+    process.env.FINMIND_TOKEN_3 || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYWRyaWFuZ2F2ZWxhOTdAZ21haWwuY29tIiwiZW1haWwiOiJhZHJpYW5nYXZlbGE5N0BnbWFpbC5jb20iLCJ0b2tlbl92ZXJzaW9uIjowfQ.-oEqGIBZuKCIkym5dn8TLK3URUyQke9t1Zo5ELlG71I",
+
+    process.env.FINMIND_TOKEN_4 || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoianVhbmdhcjIwMDJAZ21haWwuY29tIiwiZW1haWwiOiJqdWFuZ2FyMjAwMkBnbWFpbC5jb20iLCJ0b2tlbl92ZXJzaW9uIjowfQ.Bhrtve4xNDKxGYLoAv66JQnKRCtm_f_RzMZCmkv82Fk",
+]
+    .map(k => String(k).trim())
+    .filter((k, i, arr) => k && arr.indexOf(k) === i);
+
+const TWOPT_YEARS =
+    Number(process.env.FINMIND_PCV_YEARS || "4");
+
+const TWOPT_RPM =
+    Number(process.env.FINMIND_PCV_RPM || "9");
+
+const TWOPT_TIMEOUT_MS =
+    Number(process.env.FINMIND_PCV_TIMEOUT_MS || "20000");
+
+const TWOPT_MAX_RETRIES =
+    Number(process.env.FINMIND_PCV_MAX_RETRIES || "1");
 
 // ============================================================================
 // TIPOS JAPON
@@ -194,7 +212,25 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
     {
         codigo: "INGRESOS",
         categoria: "CUENTA_RESULTADOS",
-        aliases: ["NetSales", "Revenue", "Revenues", "OperatingRevenue", "Sales", "RevenueIFRS"]
+        aliases: [
+            "NetSalesSummaryOfBusinessResults",
+            "OrdinaryIncomeSummaryOfBusinessResults",
+            "OperatingRevenue1SummaryOfBusinessResults",
+            "OperatingRevenue2SummaryOfBusinessResults",
+            "GrossOperatingRevenueSummaryOfBusinessResults",
+            "RevenueIFRSSummaryOfBusinessResults",
+            "RevenuesUSGAAPSummaryOfBusinessResults",
+            "RevenueKeyFinancialData",
+            "NetSalesOfCompletedConstructionContractsCNS",
+            "OperatingIncomeINS",
+            "RevenueFromContractsWithCustomers",
+            "NetSales",
+            "Revenue",
+            "Revenues",
+            "OperatingRevenue",
+            "Sales",
+            "RevenueIFRS"
+        ]
     },
     {
         codigo: "BENEFICIO_BRUTO",
@@ -204,7 +240,18 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
     {
         codigo: "EBIT",
         categoria: "CUENTA_RESULTADOS",
-        aliases: ["OperatingIncome", "OperatingIncomeLoss", "OperatingProfitLoss", "OperatingProfit"]
+        aliases: [
+            "OperatingIncome",
+            "OperatingProfitLossIFRS",
+            "OperatingIncomeLossUSGAAPSummaryOfBusinessResults",
+            "ProfitFromBusinessActivitiesSummaryOfBusinessResults",
+            "CoreOperatingIncomeIFRSKeyFinancialData",
+            "BusinessProfitIFRSKeyFinancialData",
+            "BusinessProfitIFRSSummaryOfBusinessResults",
+            "OperatingIncomeLoss",
+            "OperatingProfitLoss",
+            "OperatingProfit"
+        ]
     },
     {
         codigo: "BENEFICIO_NETO",
@@ -252,6 +299,8 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
         aliases: [
             "CashDividendsPaidFinCF",
             "DividendsPaidClassifiedAsFinancingActivities",
+            "DividendsPaidToEquityHoldersOfParentClassifiedAsFinancingActivities",
+            "DividendsPaidClassifiedAsOperatingActivities",
             "DividendsPaid",
             "TotalAmountOfDividendsDividendsOfSurplus"
         ]
@@ -273,15 +322,16 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
     { 
         codigo: "GASTO_INTERESES",   
         categoria: "CUENTA_RESULTADOS",    
-        aliases: [        
-            "InterestExpenses",        
-            "InterestExpense",        
-            "InterestExpenseNonOperating",        
-            "InterestAndDebtExpense",        
-            "FinanceCosts",        
-            "FinanceCost",        
-            "InterestPaidOpeCF",        
-            "InterestPaid"    
+        aliases: [
+            "InterestExpensesNOE",
+            "FinanceCostsIFRS",
+            "InterestExpensesOpeCF",
+            "InterestExpenses",
+            "InterestExpense",
+            "InterestExpenseNonOperating",
+            "InterestAndDebtExpense",
+            "FinanceCosts",
+            "FinanceCost"
         ]
     },
     {
@@ -307,37 +357,60 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
     {
         codigo: "DEUDA_CORTO_PLAZO",
         categoria: "BALANCE",
-        aliases: ["ShortTermLoansPayable","ShortTermBorrowings","CurrentPortionOfLongTermLoansPayable","CurrentBorrowings"]
+        aliases: [
+            "InterestBearingLiabilitiesCLIFRS",
+            "BorrowingsCLIFRS",
+            "BorrowingsCurrent",
+            "CurrentBorrowings",
+            "ShortTermBorrowings",
+            "ShortTermLoansPayable",
+            "CurrentPortionOfLongTermBorrowingsCLIFRS",
+            "CurrentPortionOfLongTermLoansPayable",
+            "BondsPayableCLIFRS",
+            "CurrentPortionOfBonds",
+            "ShortTermBondsPayable",
+            "CommercialPapersLiabilities",
+            "CurrentPortionOfConvertibleBonds",
+            "CurrentPortionOfBondsWithSubscriptionRightsToShares",
+            "LeaseLiabilitiesCLIFRS",
+            "LeaseLiabilitiesCurrent",
+            "LeaseObligationsCL"
+        ]
     },
     {
         codigo: "DEUDA_LARGO_PLAZO",
         categoria: "BALANCE",
         aliases: [
-            // Agregados
+            "InterestBearingLiabilitiesNCLIFRS",
+            "BorrowingsNCLIFRS",
+            "BorrowingsNoncurrent",
             "NonCurrentBorrowings",
-            "BorrowingsNonCurrent",
-
-            // Préstamos LP
+            "LongTermDebtNCLIFRS",
             "LongTermLoansPayable",
             "LongTermBorrowings",
-
-            // Bonos
+            "BondsPayableNCLIFRS",
             "BondsPayable",
-            "Bonds",
-
-            // IFRS
-            "Borrowings",
-            "FinancialLiabilitiesNonCurrent",
-
-            // Leasing no corriente
+            "LeaseLiabilitiesNCLIFRS",
             "LeaseLiabilitiesNonCurrent",
-            "LeaseLiabilities"
+            "LeaseLiabilitiesNoncurrent",
+            "LeaseObligationsNCL"
         ]
     },
     {
         codigo: "FLUJO_CAJA_OPERATIVO",
         categoria: "FLUJO_CAJA",
-        aliases: ["NetCashProvidedByUsedInOperatingActivities","CashFlowsFromUsedInOperatingActivities","NetCashFromOperatingActivities"]
+        aliases: [
+            "NetCashProvidedByUsedInOperatingActivitiesSummaryOfBusinessResults",
+            "CashFlowsFromUsedInOperatingActivitiesIFRSSummaryOfBusinessResults",
+            "CashFlowsFromUsedInOperatingActivitiesJMISSummaryOfBusinessResults",
+            "CashFlowsFromUsedInOperatingActivitiesUSGAAPSummaryOfBusinessResults",
+            "NetCashProvidedByUsedInOperatingActivities",
+            "CashFlowsFromUsedInOperatingActivitiesIFRS",
+            "CashFlowsFromUsedInOperatingActivitiesJMIS",
+            "CashFlowsFromUsedInOperatingActivitiesUSGAAP",
+            "CashFlowsFromUsedInOperatingActivities",
+            "NetCashFromOperatingActivities"
+        ]
     },
     {
         codigo: "CAPEX",
@@ -353,6 +426,7 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
             "PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF",
             "PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssets",
             "PaymentsForPurchaseOfPropertyPlantAndEquipmentAndIntangibleAssets",
+            "PurchaseOfNoncurrentAssetsInvCF",
 
             // IFRS
             "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
@@ -367,15 +441,19 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
             "DepreciationAndAmortization",
             "DepreciationAndAmortizationOpeCF",
             "DepreciationOpeCF",
+            "DepreciationAndOtherAmortizationOpeCF",
             "Depreciation",
             "DepreciationExpense",
             "DepreciationAndAmortizationExpense",
 
             // IFRS / variantes ortográficas
+            "DepreciationAndAmortizationOpeCFIFRS",
+            "DepreciationExpenseOpeCFIFRS",
             "DepreciationAndAmortisation",
             "DepreciationAndAmortisationExpense",
             "DepreciationAmortisationAndImpairmentLoss",
-            "DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLoss"
+            "DepreciationAmortisationAndImpairmentLossReversalOfImpairmentLoss",
+            "DepreciationDepletionAndAmortization"
         ]
     },
     {
@@ -406,11 +484,15 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
         categoria: "BALANCE",
         aliases: [
             "NotesAndAccountsReceivableTradeAndContractAssetsNet",
+            "NotesAndAccountsReceivableTradeAndContractAssets",
             "NotesAndAccountsReceivableTradeNet",
-            "TradeAndOtherReceivables",
-            "AccountsReceivableTradeNet",
             "NotesAndAccountsReceivableTrade",
-            "AccountsReceivableTrade"
+            "TradeAndOtherReceivables",
+            "TradeReceivables",
+            "AccountsReceivableTradeNet",
+            "AccountsReceivableTrade",
+            "NotesReceivableTradeNet",
+            "NotesReceivableTrade"
         ]
     },
     {
@@ -419,19 +501,23 @@ const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
         aliases: [
             // Agregados — prioridad
             "TradeAndOtherPayables",
+            "TradeAndOtherPayablesCurrent",
             "NotesAndAccountsPayableTrade",
+            "NotesAndOperatingAccountsPayableTrade",
 
             // Cuentas comerciales
             "AccountsPayableTrade",
             "AccountsPayableTradeCurrent",
+            "OperatingAccountsPayable",
 
             // Documentos + cuentas comerciales
             "NotesAndAccountsPayableTradeCurrent",
+            "NotesPayableAccountsPayableForConstructionContractsCNS",
+            "NotesPayableAccountsPayableForConstructionContractsAndOtherCNS",
 
             // IFRS / variantes agregadas
             "TradePayables",
-            "TradePayablesCurrent",
-            "TradeAndOtherPayablesCurrent"
+            "TradePayablesCurrent"
         ]
     },
     {
@@ -1323,15 +1409,15 @@ export async function actualizarPartidasContablesJapon(
 // Si en el mismo archivo esta USA/Taiwan, dejar activa SOLO una ejecucion.
 // ============================================================================
 
-// ejecutarCargaPartidasContablesJapon()
-//     .then(resultado => {
-//         console.log("\n=== PARTIDA_CONTABLE_VALOR JAPON FINALIZADA ===");
-//         console.log(resultado);
-//     })
-//     .catch(error => {
-//         console.error("\n=== ERROR CRITICO PARTIDA_CONTABLE_VALOR JAPON ===", error);
-//         process.exitCode = 1;
-//     });
+ //ejecutarCargaPartidasContablesJapon()
+ //     .then(resultado => {
+  //       console.log("\n=== PARTIDA_CONTABLE_VALOR JAPON FINALIZADA ===");
+  //       console.log(resultado);
+  //   })
+  //   .catch(error => {
+  //       console.error("\n=== ERROR CRITICO PARTIDA_CONTABLE_VALOR JAPON ===", error);
+  //       process.exitCode = 1;
+  //   });
 
 // ============================================================================
 // TAXONOMIA MINIMA - USA
@@ -1339,236 +1425,675 @@ export async function actualizarPartidasContablesJapon(
 
 const PCV_CONCEPTOS: PCVConceptoDef[] = [
     {
-        codigo: "INGRESOS",
-        categoria: "CUENTA_RESULTADOS",
-        tags: [
-            // Taxonomía SEC moderna — máxima prioridad
-            "RevenueFromContractWithCustomerExcludingAssessedTax",
-            "RevenueFromContractWithCustomerIncludingAssessedTax",
+    codigo: "INGRESOS",
+    categoria: "CUENTA_RESULTADOS",
+    tags: [
+        // =====================================================
+        // US-GAAP MODERNO — máxima prioridad
+        // =====================================================
+        "RevenueFromContractWithCustomerExcludingAssessedTax",
+        "RevenueFromContractWithCustomerIncludingAssessedTax",
 
-            // Revenue / sales tradicionales
-            "SalesRevenueNet",
-            "SalesRevenueGoodsNet",
-            "SalesRevenueServicesNet",
-            "Revenues",
+        // Revenue fuera de ASC 606
+        "RevenueNotFromContractWithCustomer",
+        "RevenueNotFromContractWithCustomerOther",
 
-            // Variantes adicionales
-            "SalesRevenueNetOfReturnsAndAllowances",
-            "Revenue",
-            "OperatingRevenue",
-            "OperatingRevenues",
+        // =====================================================
+        // TOTALES GENERALES
+        // =====================================================
+        "Revenues",
+        "SalesRevenueNet",
+        "SalesRevenueGoodsNet",
+        "SalesRevenueServicesNet",
+        "SalesRevenueNetOfReturnsAndAllowances",
 
-            // Entidades financieras
-            "InterestAndDividendIncomeOperating",
-            "InterestIncomeExpenseNonoperatingNet"
-        ]
-    },
+        // =====================================================
+        // FINANCIERAS / BANCOS / BROKERS
+        // =====================================================
+        "RevenuesNetOfInterestExpense",
+        "RevenuesExcludingInterestAndDividends",
+        "FinancialServicesRevenue",
+        "InterestAndDividendIncomeOperating",
+
+        // =====================================================
+        // HEALTHCARE
+        // =====================================================
+        "HealthCareOrganizationRevenue",
+        "HealthCareOrganizationRevenueNetOfPatientServiceRevenueProvisions",
+
+        // =====================================================
+        // UTILITIES / ENERGÍA
+        // =====================================================
+        "RegulatedAndUnregulatedOperatingRevenue",
+        "ElectricUtilityRevenue",
+
+        // =====================================================
+        // REAL ESTATE / REIT
+        // =====================================================
+        "RealEstateRevenueNet",
+        "OperatingLeasesIncomeStatementLeaseRevenue",
+
+        // =====================================================
+        // MINERÍA / RECURSOS
+        // =====================================================
+        "RevenueMineralSales",
+
+        // =====================================================
+        // PRODUCTOS / INDUSTRIA
+        // =====================================================
+        "ProductSales",
+
+        // =====================================================
+        // FALLBACKS HISTÓRICOS
+        // =====================================================
+        "Revenue",
+        "OperatingRevenue",
+        "OperatingRevenues",
+
+        // =====================================================
+        // IFRS / 20-F / 40-F
+        // =====================================================
+        "ifrs-full:Revenue",
+        "ifrs-full:RevenueFromContractsWithCustomers"
+    ]
+},
+    
     {
         codigo: "BENEFICIO_BRUTO",
         categoria: "CUENTA_RESULTADOS",
-        tags: ["GrossProfit"]
+        tags: [
+            "GrossProfit",
+            "GrossProfitLoss",
+            "ifrs-full:GrossProfit"
+        ]
     },
+
+   {
+    codigo: "EBIT",
+    categoria: "CUENTA_RESULTADOS",
+    tags: [
+        // US-GAAP principal
+        "OperatingIncomeLoss",
+
+        // Variantes operativas cercanas / fallback
+        "OperatingProfitLoss",
+        "OperatingProfit",
+        "IncomeLossFromOperations",
+
+        // IFRS
+        "ifrs-full:ProfitLossFromOperatingActivities"
+    ]
+},
+
     {
-        codigo: "EBIT",
-        categoria: "CUENTA_RESULTADOS",
-        tags: ["OperatingIncomeLoss"]
-    },
-    {
-        codigo: "BENEFICIO_NETO",
-        categoria: "CUENTA_RESULTADOS",
-        tags: ["NetIncomeLoss", "ProfitLoss"]
-    },
+    codigo: "BENEFICIO_NETO",
+    categoria: "CUENTA_RESULTADOS",
+    tags: [
+        // US-GAAP principales
+        "NetIncomeLoss",
+        "ProfitLoss",
+
+        // Fallbacks US-GAAP
+        "NetIncomeLossAvailableToCommonStockholdersBasic",
+        "IncomeLossFromContinuingOperations",
+        "NetIncomeLossAllocatedToGeneralPartners",
+
+        // IFRS
+        "ifrs-full:ProfitLoss",
+        "ifrs-full:ProfitLossAttributableToOwnersOfParent"
+    ]
+},
+
     {
         codigo: "BENEFICIO_ANTES_IMPUESTOS",
         categoria: "CUENTA_RESULTADOS",
         tags: [
             "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
             "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
-            "IncomeLossFromContinuingOperationsBeforeIncomeTaxes"
+            "IncomeLossFromContinuingOperationsBeforeIncomeTaxes",
+
+            // IFRS
+            "ifrs-full:ProfitLossBeforeTax"
         ]
     },
+
     {
         codigo: "IMPUESTO_BENEFICIOS",
         categoria: "CUENTA_RESULTADOS",
-        tags: ["IncomeTaxExpenseBenefit"]
+        tags: [
+            "IncomeTaxExpenseBenefit",
+
+            // IFRS
+            "ifrs-full:IncomeTaxExpenseContinuingOperations",
+            "ifrs-full:IncomeTaxExpense"
+        ]
     },
+
     {
         codigo: "DIVIDENDOS_PAGADOS",
         categoria: "FLUJO_CAJA",
         tags: [
             "PaymentsOfDividends",
             "PaymentsOfDividendsCommonStock",
-            "PaymentsOfOrdinaryDividends"
+            "PaymentsOfOrdinaryDividends",
+            "PaymentsOfDividendsPreferredStockAndPreferenceStock",
+            "PaymentsOfDividendsMinorityInterest",
+            "PaymentsOfCapitalDistribution",
+
+            // Fallbacks desde estado de patrimonio
+            "DividendsCommonStockCash",
+            "DividendsCash",
+            "DividendsCommonStock",
+            "Dividends",
+
+            // IFRS
+            "ifrs-full:DividendsPaidClassifiedAsFinancingActivities",
+            "ifrs-full:DividendsPaid"
         ]
     },
+
     {
         codigo: "ACCIONES_EN_CIRCULACION",
         categoria: "BALANCE",
         tags: [
             "CommonStockSharesOutstanding",
-            "dei:EntityCommonStockSharesOutstanding"
+            "dei:EntityCommonStockSharesOutstanding",
+            "SharesOutstanding",
+
+            // IFRS
+            "ifrs-full:NumberOfSharesOutstanding"
         ]
     },
+
     {
-        codigo: "GASTO_INTERESES",
-        categoria: "CUENTA_RESULTADOS",
-        tags: ["InterestExpenseNonOperating", "InterestExpense", "InterestAndDebtExpense"]
-    },
+    codigo: "GASTO_INTERESES",
+    categoria: "CUENTA_RESULTADOS",
+    tags: [
+        // Totales preferidos
+        "InterestExpenseNonOperating",
+        "InterestExpense",
+        "InterestAndDebtExpense",
+
+        // Deuda
+        "InterestExpenseDebt",
+        "InterestExpenseLongTermDebt",
+        "InterestExpenseBorrowings",
+        "InterestExpenseShortTermBorrowings",
+        "InterestExpenseDebtExcludingAmortization",
+        "InterestExpenseDebtIncludingAmortization",
+
+        // Operativo / financiero
+        "InterestExpenseOperating",
+
+        // Bancos / entidades financieras
+        "InterestExpenseDeposits",
+        "InterestExpenseSubordinatedNotesAndDebentures",
+
+        // Otros tipos
+        "InterestExpenseOther",
+        "InterestExpenseRelatedParty",
+        "InterestCostsIncurred",
+        "FinanceLeaseInterestExpense",
+
+        // IFRS
+        "ifrs-full:InterestExpense",
+        "ifrs-full:FinanceCosts"
+    ]
+},
+
     {
         codigo: "EFECTIVO",
         categoria: "BALANCE",
         tags: [
             "CashAndCashEquivalentsAtCarryingValue",
-            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"
+            "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents",
+            "CashAndDueFromBanks",
+            "Cash",
+
+            // Fallbacks
+            "CashCashEquivalentsAndShortTermInvestments",
+            "CashAndCashEquivalentsFairValueDisclosure",
+
+            // IFRS
+            "ifrs-full:CashAndCashEquivalents"
         ]
     },
+
     {
         codigo: "ACTIVOS_TOTALES",
         categoria: "BALANCE",
-        tags: ["Assets"]
+        tags: [
+            "Assets",
+            "ifrs-full:Assets"
+        ]
     },
+
     {
         codigo: "PASIVOS_TOTALES",
         categoria: "BALANCE",
-        tags: ["Liabilities"]
+        tags: [
+            "Liabilities",
+            "ifrs-full:Liabilities"
+        ]
     },
+
     {
         codigo: "PATRIMONIO_NETO",
         categoria: "BALANCE",
         tags: [
             "StockholdersEquity",
-            "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"
+            "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+
+            // Partnerships / LLC
+            "PartnersCapital",
+            "MembersEquity",
+            "PartnersCapitalIncludingPortionAttributableToNoncontrollingInterest",
+
+            // IFRS
+            "ifrs-full:Equity",
+            "ifrs-full:EquityAttributableToOwnersOfParent"
         ]
     },
-    {
-        codigo: "DEUDA_CORTO_PLAZO",
-        categoria: "BALANCE",
-        tags: [
-            // Total deuda corriente
-            "DebtCurrent",
-            "ShortTermBorrowings",
 
-            // Deuda / préstamos CP
-            "ShortTermDebt",
-            "ShortTermLoans",
-            "CurrentBorrowings",
+   {
+    codigo: "DEUDA_CORTO_PLAZO",
+    categoria: "BALANCE",
+    tags: [
+        // Agregados - máxima prioridad
+        "DebtCurrent",
+        "ShortTermBorrowings",
 
-            // Vencimientos corrientes de deuda LP
-            "LongTermDebtCurrent",
-            "LongTermDebtAndFinanceLeaseObligationsCurrent",
-            "CurrentPortionOfLongTermDebt",
-            "CurrentPortionOfLongTermDebtAndCapitalLeaseObligations",
+        // Deuda corriente genérica
+        "ShortTermDebt",
+        "ShortTermLoans",
+        "CurrentBorrowings",
+        "OtherShortTermBorrowings",
 
-            // Commercial paper
-            "CommercialPaper"
-        ]
-    },
+        // Notes / loans
+        "NotesAndLoansPayableCurrent",
+        "NotesPayableCurrent",
+        "LoansPayableCurrent",
+        "LoansPayableToBankCurrent",
+        "OtherLoansPayableCurrent",
+
+        // Convertible
+        "ConvertibleNotesPayableCurrent",
+        "ConvertibleDebtCurrent",
+        "ConvertibleSubordinatedDebtCurrent",
+
+        // Garantizada / no garantizada
+        "SecuredDebtCurrent",
+        "UnsecuredDebtCurrent",
+        "SubordinatedDebtCurrent",
+
+        // Líneas de crédito / revolving
+        "LinesOfCreditCurrent",
+        "LineOfCredit",
+        "RevolvingCreditFacilityCurrent",
+
+        // Parte corriente de deuda LP
+        "LongTermDebtCurrent",
+        "LongTermDebtAndFinanceLeaseObligationsCurrent",
+        "LongTermDebtAndCapitalLeaseObligationsCurrent",
+        "CurrentPortionOfLongTermDebt",
+        "CurrentPortionOfLongTermDebtAndCapitalLeaseObligations",
+
+        // Notes / bonds que vencen CP
+        "SeniorNotesCurrent",
+        "SeniorDebtCurrent",
+        "SeniorSecuredNotesCurrent",
+        "SeniorUnsecuredNotesCurrent",
+        "SubordinatedNotesCurrent",
+        "NotesPayableCurrent",
+
+        // Commercial paper
+        "CommercialPaper",
+        "LongTermCommercialPaperCurrent",
+
+        // Construcción / transición / pollution
+        "LongTermConstructionLoanCurrent",
+        "LongtermTransitionBondCurrent",
+        "LongtermPollutionControlBondCurrent",
+
+        // Leasing financiero
+        "FinanceLeaseLiabilityCurrent",
+        "CapitalLeaseObligationsCurrent",
+
+        // IFRS
+        "ifrs-full:CurrentBorrowings",
+        "ifrs-full:CurrentPortionOfLongtermBorrowings",
+        "ifrs-full:CurrentLeaseLiabilities"
+    ]
+},
+
     {
         codigo: "DEUDA_LARGO_PLAZO",
         categoria: "BALANCE",
         tags: [
-            // Agregados: prioridad máxima
+            // Agregados no corrientes - máxima prioridad
+            "LongTermDebtAndFinanceLeaseObligationsNoncurrent",
             "LongTermDebtNoncurrent",
-            "LongTermDebt",
 
-            // Deuda financiera no corriente
+            // Notes / loans
+            "LongTermNotesAndLoans",
             "LongTermNotesPayable",
             "NotesPayableNoncurrent",
-            "LongTermDebtAndFinanceLeaseObligationsNoncurrent",
-            "LongTermDebtAndCapitalLeaseObligations",
+            "LongTermLoansPayable",
+            "LongTermLoansFromBank",
 
-            // Bonos / senior debt
+            // Convertibles
+            "ConvertibleNotesPayable",
+            "ConvertibleDebtNoncurrent",
+            "ConvertibleSubordinatedDebtNoncurrent",
+
+            // Senior / subordinada
+            "SeniorNotes",
+            "SeniorLongTermNotes",
+            "SubordinatedLongTermDebt",
+
+            // Garantizada / no garantizada
+            "SecuredDebt",
+            "UnsecuredDebt",
+
+            // Líneas de crédito
+            "LongTermLineOfCredit",
+
+            // Commercial paper / préstamos
+            "CommercialPaperNoncurrent",
+            "ConstructionLoanNoncurrent",
+
+            // Otros
+            "OtherLongTermDebtNoncurrent",
+            "LongTermTransitionBond",
+            "LongTermPollutionControlBond",
+
+            // Leasing
+            "FinanceLeaseLiabilityNoncurrent",
+            "CapitalLeaseObligationsNoncurrent",
+
+            // Totales como último fallback
+            "LongTermDebtAndCapitalLeaseObligations",
             "LongTermDebtAndFinanceLeaseObligations",
+            "LongTermDebt",
             "LongTermDebtFairValue",
-            "LongTermDebtCurrent"
+            "NotesPayable",
+
+            // IFRS
+            "ifrs-full:NoncurrentPortionOfNoncurrentLoansReceived",
+            "ifrs-full:LongtermBorrowings",
+            "ifrs-full:NoncurrentLeaseLiabilities",
+            "ifrs-full:Borrowings",
+            // AÑADIR
+            "LongTermDebtAndFinanceLeaseObligations",
+            "LongTermDebtAndCapitalLeaseObligationsCurrentAndNoncurrent",
+
+            // Senior / notes
+            "SeniorDebtNoncurrent",
+            "SeniorNotesNoncurrent",
+            "SeniorSecuredNotesNoncurrent",
+            "SeniorUnsecuredNotesNoncurrent",
+            "SubordinatedNotesNoncurrent",
+
+            // Loans / borrowings
+             "BorrowingsNoncurrent",
+             "LoansPayableNoncurrent",
+             "BankLoansNoncurrent",
+
+             // Revolving / líneas de crédito
+             "RevolvingCreditFacilityNoncurrent",
+             // Leasing
+             "FinanceLeaseLiabilityNoncurrent"
         ]
     },
-    {
-        codigo: "FLUJO_CAJA_OPERATIVO",
-        categoria: "FLUJO_CAJA",
-        tags: ["NetCashProvidedByUsedInOperatingActivities"]
-    },
+
+  {
+    codigo: "FLUJO_CAJA_OPERATIVO",
+    categoria: "FLUJO_CAJA",
+    tags: [
+        // US-GAAP principal
+        "NetCashProvidedByUsedInOperatingActivities",
+
+        // Operaciones continuadas
+        "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations",
+
+        // Alternativas históricas
+        "CashFlowsFromOperatingActivities",
+        "NetCashFlowFromOperatingActivities",
+
+        // IFRS
+        "ifrs-full:CashFlowsFromUsedInOperatingActivities",
+        "ifrs-full:CashFlowsFromUsedInOperations"
+    ]
+},
+
     {
         codigo: "CAPEX",
         categoria: "FLUJO_CAJA",
-        tags: ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsForAdditionsToPropertyPlantAndEquipment"]
-    },
-    {
-        codigo: "DEPRECIACION_AMORTIZACION",
-        categoria: "FLUJO_CAJA",
         tags: [
-            "DepreciationDepletionAndAmortization",
-            "Depreciation",
-            "DepreciationDepletionAndAmortizationPropertyPlantAndEquipment"
+            // Totales preferidos
+            "PaymentsToAcquirePropertyPlantAndEquipment",
+            "PaymentsForAdditionsToPropertyPlantAndEquipment",
+            "PaymentsToAcquireProductiveAssets",
+
+            // PP&E desglosado
+            "PaymentsToAcquireOtherPropertyPlantAndEquipment",
+            "PaymentsToAcquireMachineryAndEquipment",
+            "PaymentsToAcquireBuildings",
+            "PaymentsToAcquireFurnitureAndFixtures",
+            "PaymentsToAcquireLandHeldForUse",
+
+            // Sectoriales
+            "PaymentsToDevelopRealEstateAssets",
+            "PaymentsToAcquireCommercialRealEstate",
+            "PaymentsToAcquireOilAndGasPropertyAndEquipment",
+            "PaymentsToAcquireOilAndGasProperty",
+            "PaymentsToAcquireOilAndGasEquipment",
+
+            // Mejoras
+            "PaymentsForCapitalImprovements",
+
+            // IFRS
+            "ifrs-full:PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+            "ifrs-full:PurchaseOfPropertyPlantAndEquipment"
         ]
     },
+
+    {
+    codigo: "DEPRECIACION_AMORTIZACION",
+    categoria: "FLUJO_CAJA",
+    tags: [
+        // Agregados - máxima prioridad
+        "DepreciationDepletionAndAmortization",
+        "DepreciationAndAmortization",
+        "DepreciationAmortizationAndAccretionNet",
+        "DepreciationAmortizationAndOther",
+        "DepreciationDepletionAndAmortizationPropertyPlantAndEquipment",
+
+        // Componentes / fallbacks
+        "Depreciation",
+        "DepreciationExpense",
+        "DepreciationPropertyPlantAndEquipment",
+        "AmortizationOfIntangibleAssets",
+        "AmortizationOfIntangibleAssetsAndDeferredCharges",
+        "AmortizationOfDeferredCharges",
+        "AmortizationExpense",
+
+        // Sectoriales / específicos
+        "Depletion",
+        "DepletionExpense",
+        "AccretionExpense",
+
+        // IFRS
+        "ifrs-full:DepreciationAndAmortisationExpense",
+        "ifrs-full:DepreciationPropertyPlantAndEquipment",
+        "ifrs-full:AmortisationIntangibleAssetsOtherThanGoodwill"
+    ]
+},
     {
         codigo: "INVENTARIOS",
         categoria: "BALANCE",
         tags: [
-            // Total inventarios — preferidos
+            // Totales - máxima prioridad
             "InventoryNet",
             "InventoryNetOfAllowancesCustomerAdvancesAndProgressBillings",
-            "InventoryGross",
-
-            // Variantes
             "Inventory",
             "Inventories",
             "InventoryCurrent",
 
-            // Componentes — únicamente fallback
+            // Retail / consumo
+            "RetailRelatedInventory",
+            "RetailRelatedInventoryMerchandise",
+
+            // Utilities / energía
+            "PublicUtilitiesInventory",
+            "EnergyRelatedInventory",
+            "InventoryCrudeOilProductsAndMerchandise",
+
+            // Real estate
+            "InventoryRealEstate",
+
+            // Otros agregados
+            "InventoryFinishedGoodsAndWorkInProcess",
+            "InventoryNoncurrent",
+
+            // Bruto
+            "InventoryGross",
+
+            // Componentes como último recurso
             "InventoryFinishedGoodsNetOfAllowancesCustomerAdvancesAndProgressBillings",
             "InventoryWorkInProcessNetOfAllowancesCustomerAdvancesAndProgressBillings",
-            "InventoryRawMaterialsAndSuppliesNetOfAllowancesCustomerAdvancesAndProgressBillings"
+            "InventoryRawMaterialsAndSuppliesNetOfAllowancesCustomerAdvancesAndProgressBillings",
+            "InventoryFinishedGoods",
+            "InventoryWorkInProcess",
+            "InventoryRawMaterials",
+
+            // IFRS
+            "ifrs-full:Inventories",
+            // Componentes adicionales
+            "InventoryRawMaterialsAndSupplies",
+            "InventoryRawMaterialsAndSuppliesNet",
+            "InventoryFinishedGoodsNet",
+            "InventoryWorkInProcessNet",
+            "InventorySupplies",
+
+            // Mercancías / retail
+            "InventoryMerchandise",
+            "MerchandiseInventory",
+
+            // Energía / materias primas
+            "InventoryNaturalGas",
+            "InventoryPetroleumProducts",
+            "InventoryMaterialsAndSupplies",
+
+            // Otros
+            "InventoryPartsAndComponents",
+            "InventoryWorkInProcessAndRawMaterials",
+            
+            
         ]
     },
+
     {
         codigo: "CUENTAS_COBRAR",
         categoria: "BALANCE",
         tags: [
-            // Preferidos: cuentas comerciales a cobrar netas
             "AccountsReceivableNetCurrent",
             "AccountsReceivableNet",
 
-            // Trade receivables
             "TradeAccountsReceivableNetCurrent",
             "TradeAccountsReceivableNet",
             "TradeReceivablesCurrent",
 
-            // Accounts and notes receivable
             "AccountsAndNotesReceivableNetCurrent",
             "NotesAndAccountsReceivableNetCurrent",
+            "AccountsNotesAndLoansReceivableNetCurrent",
 
-            // Variantes adicionales SEC
+            "AccountsAndOtherReceivablesNetCurrent",
+            "ReceivablesNetCurrent",
+
             "AccountsReceivableCurrent",
-            "TradeAccountsReceivableCurrent"
+            "TradeAccountsReceivableCurrent",
+
+            // Brutas como último recurso
+            "AccountsReceivableGrossCurrent",
+
+            // IFRS
+            "ifrs-full:CurrentTradeReceivables",
+            "ifrs-full:TradeAndOtherCurrentReceivables",
+            // AÑADIR
+
+            // Receivables agregados
+            "ReceivablesCurrent",
+            "ReceivablesNet",
+            "TradeReceivablesNetCurrent",
+
+            // Accounts + notes
+            "AccountsAndNotesReceivableCurrent",
+            "AccountsAndNotesReceivableNet",
+            "NotesReceivableCurrent",
+            "NotesReceivableNetCurrent",
+
+            // Loans + receivables
+            "LoansAndReceivablesCurrent",
+
+            // Otros receivables
+            "OtherReceivablesCurrent",
+            "OtherReceivablesNetCurrent",
+
+            // IFRS adicionales
+            "ifrs-full:TradeReceivables",
+            "ifrs-full:OtherCurrentReceivables",
+            "ifrs-full:CurrentReceivables"
         ]
     },
+
     {
         codigo: "CUENTAS_PAGAR",
         categoria: "BALANCE",
         tags: [
-            // Principal US-GAAP
             "AccountsPayableCurrent",
 
-            // Trade payables
             "TradeAccountsPayableCurrent",
             "TradeAccountsPayable",
             "AccountsPayableTradeCurrent",
 
-            // Accounts payable
+            "AccountsAndNotesPayableCurrent",
+            "NotesAndAccountsPayableCurrent",
+
+            "AccountsPayableCurrentAndNoncurrent",
+            "AccountsPayableOtherCurrent",
+            "AccountsPayableRelatedPartiesCurrent",
+
             "AccountsPayable",
             "AccountsPayableAndAccruedLiabilitiesCurrent",
+            "AccountsPayableAndOtherAccruedLiabilities",
 
-            // Accounts + notes payable
-            "AccountsAndNotesPayableCurrent",
-            "NotesAndAccountsPayableCurrent"
+            // Último fallback
+            "AccruedLiabilitiesCurrent",
+
+            // IFRS
+            "ifrs-full:CurrentTradePayables",
+            "ifrs-full:TradeAndOtherCurrentPayables",
+            //AÑADIR NUEVOS
+            "TradePayablesCurrent",
+            "TradePayables",
+            "AccountsAndNotesPayable",
+            "OtherAccountsPayableCurrent",
+            "OtherPayablesCurrent",
+            "PayablesCurrent",
+            "ifrs-full:TradePayables",
+            "ifrs-full:OtherCurrentPayables",
+            "ifrs-full:CurrentPayables"
         ]
     },
+
     {
         codigo: "EPS_DILUIDO",
         categoria: "CUENTA_RESULTADOS",
-        tags: ["EarningsPerShareDiluted"]
+        tags: [
+            "EarningsPerShareDiluted",
+            "ifrs-full:DilutedEarningsLossPerShare"
+        ]
     }
 ];
 
@@ -2227,15 +2752,15 @@ export async function actualizarPartidasContablesUSA(
 // durante la prueba.
 // ============================================================================
 
-// ejecutarCargaPartidasContablesUSA()
-//     .then(resultado => {
-//         console.log("\n=== PARTIDA_CONTABLE_VALOR USA FINALIZADA ===");
-//         console.log(resultado);
+ //ejecutarCargaPartidasContablesUSA()
+ //    .then(resultado => {
+ //        console.log("\n=== PARTIDA_CONTABLE_VALOR USA FINALIZADA ===");
+ //        console.log(resultado);
 //     })
-//     .catch(error => {
-//         console.error("\n=== ERROR CRITICO PARTIDA_CONTABLE_VALOR USA ===", error);
-//         process.exitCode = 1;
-//     });
+ //    .catch(error => {
+ //        console.error("\n=== ERROR CRITICO PARTIDA_CONTABLE_VALOR USA ===", error);
+ //        process.exitCode = 1;
+ //    });
 
 // ============================================================================
 // TAXONOMIA - TAIWAN
@@ -2246,115 +2771,246 @@ const TWOPT_CONCEPTOS: TWOPTConcepto[] = [
         codigo: "INGRESOS",
         categoria: "CUENTA_RESULTADOS",
         datasets: ["TaiwanStockFinancialStatements"],
-        aliases: ["Revenue", "Revenues", "OperatingRevenue", "NetSales", "SalesRevenue", "SalesRevenueNet"]
+        aliases: [
+            "Revenue",
+            "Revenues",
+            "OperatingRevenue",
+            "NetSales",
+            "SalesRevenue",
+            "SalesRevenueNet"
+        ]
     },
     {
         codigo: "BENEFICIO_BRUTO",
         categoria: "CUENTA_RESULTADOS",
         datasets: ["TaiwanStockFinancialStatements"],
-        aliases: ["GrossProfit", "GrossProfitLoss"]
+        aliases: [
+            "GrossProfit",
+            "GrossProfitLoss"
+        ]
     },
     {
         codigo: "EBIT",
         categoria: "CUENTA_RESULTADOS",
         datasets: ["TaiwanStockFinancialStatements"],
-        aliases: ["OperatingIncome", "OperatingIncomeLoss", "OperatingProfit", "OperatingProfitLoss"]
+        aliases: [
+            "OperatingIncome",
+            "OperatingIncomeLoss",
+            "OperatingProfit",
+            "OperatingProfitLoss"
+        ]
     },
     {
         codigo: "BENEFICIO_NETO",
         categoria: "CUENTA_RESULTADOS",
         datasets: ["TaiwanStockFinancialStatements"],
-        aliases: ["NetIncome", "NetIncomeLoss", "ProfitLoss", "ProfitAttributableToOwnersOfParent", "IncomeAfterTaxes", "TotalConsolidatedProfitForThePeriod"]
+        aliases: [
+            "NetIncome",
+            "NetIncomeLoss",
+            "ProfitLoss",
+            "ProfitAttributableToOwnersOfParent",
+            "IncomeAfterTaxes",
+            "TotalConsolidatedProfitForThePeriod"
+        ]
     },
 
-    // PUNTO 5 - CONTRASTADO FINMIND.
-    // La documentación oficial muestra NetIncomeBeforeTax explícitamente
-    // en TaiwanStockCashFlowsStatement (TSMC 2330 y Taiwan Cement 1101).
     {
         codigo: "BENEFICIO_ANTES_IMPUESTOS",
         categoria: "CUENTA_RESULTADOS",
         datasets: ["TaiwanStockCashFlowsStatement"],
-        aliases: ["NetIncomeBeforeTax"]
+        aliases: [
+            "NetIncomeBeforeTax"
+        ]
     },
 
-    // Se mantienen nombres IFRS normalizados que FinMind usa en sus estados.
-    // La validación final debe hacerse sobre payload real de la cuenta del proyecto
-    // porque la documentación pública no publica un catálogo exhaustivo de todos
-    // los valores posibles de `type`.
     {
         codigo: "IMPUESTO_BENEFICIOS",
         categoria: "CUENTA_RESULTADOS",
         datasets: ["TaiwanStockFinancialStatements"],
-        aliases: ["IncomeTaxExpense", "IncomeTaxExpenseBenefit", "TaxExpense"]
+        aliases: [
+            "IncomeTaxExpense",
+            "IncomeTaxExpenseBenefit",
+            "TaxExpense"
+        ]
     },
 
-    // Preferencia por el CF: representa salida real de caja.
-    // No usar CashEarningsDistribution como si fuera importe total: es dividendo
-    // por acción en TaiwanStockDividend.
+    // ============================================================
+    // DIVIDENDOS
+    // ============================================================
+    // Mantenemos Cash Flow como fuente del pago real.
+    // TaiwanStockDividend se utiliza además como fuente específica
+    // para reconstruir dividendos cuando el CF no proporciona
+    // directamente el importe.
+    //
+    // En TaiwanStockDividend:
+    //
+    // CashEarningsDistribution
+    // CashStatutorySurplus
+    // ParticipateDistributionOfTotalShares
+    //
+    // están documentados oficialmente por FinMind.
+    //
+    // La reconstrucción debe hacerse fuera del matcher type/value:
+    //
+    // dividendos =
+    // (CashEarningsDistribution + CashStatutorySurplus)
+    // * ParticipateDistributionOfTotalShares
+    //
     {
         codigo: "DIVIDENDOS_PAGADOS",
         categoria: "FLUJO_CAJA",
-        datasets: ["TaiwanStockCashFlowsStatement"],
+        datasets: [
+            "TaiwanStockCashFlowsStatement",
+            "TaiwanStockDividend"
+        ],
         aliases: [
-            // Variantes principales
+            // EXISTENTES
             "CashDividendsPaid",
             "DividendsPaid",
             "DividendsPaidClassifiedAsFinancingActivities",
-
-            // Variantes IFRS / FinMind
             "DividendsPaidToOwnersOfParent",
             "DividendsPaidToEquityHoldersOfParent",
             "CashDividendsPaidToOwnersOfParent",
             "PaymentsOfDividends",
             "PaymentOfDividends",
-
-            // Distribuciones de efectivo a accionistas
             "CashDistributionToOwners",
-            "DistributionOfCashDividends"
+            "DistributionOfCashDividends",
+
+            // CAMPOS FINMIND DOCUMENTADOS
+            "CashEarningsDistribution",
+            "CashStatutorySurplus",
+            "ParticipateDistributionOfTotalShares"
+        ]
+    },
+
+    // ============================================================
+    // GASTO DE INTERESES
+    // ============================================================
+    // Se amplía la búsqueda también al Cash Flow.
+    //
+    {
+        codigo: "GASTO_INTERESES",
+        categoria: "CUENTA_RESULTADOS",
+        datasets: [
+            "TaiwanStockFinancialStatements",
+            "TaiwanStockCashFlowsStatement"
+        ],
+        aliases: [
+            // EXISTENTES
+            "InterestExpense",
+            "InterestExpenses",
+            "FinanceCosts",
+            "FinanceCost",
+
+            // AMPLIACIÓN
+            "InterestPaid",
+            "InterestExpenseNonOperating",
+            "InterestCosts",
+            "InterestCost",
+            "FinanceExpense",
+            "FinanceExpenses",
+            "FinancialCost",
+            "FinancialCosts",
+            "InterestAndFinanceCosts",
+            "InterestAndFinanceExpenses"
         ]
     },
 
     {
-        codigo: "GASTO_INTERESES",
-        categoria: "CUENTA_RESULTADOS",
-        datasets: ["TaiwanStockFinancialStatements"],
-        aliases: ["InterestExpense", "InterestExpenses", "FinanceCosts", "FinanceCost"]
-    },
-    {
         codigo: "EFECTIVO",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
-        aliases: ["CashAndCashEquivalents", "CashAndCashEquivalentsAtCarryingValue", "CashAndDeposits"]
+        aliases: [
+            "CashAndCashEquivalents",
+            "CashAndCashEquivalentsAtCarryingValue",
+            "CashAndDeposits"
+        ]
     },
+
     {
         codigo: "ACTIVOS_TOTALES",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
-        aliases: ["Assets", "TotalAssets"]
+        aliases: [
+            "Assets",
+            "TotalAssets"
+        ]
     },
+
     {
         codigo: "PASIVOS_TOTALES",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
-        aliases: ["Liabilities", "TotalLiabilities"]
+        aliases: [
+            "Liabilities",
+            "TotalLiabilities"
+        ]
     },
+
     {
         codigo: "PATRIMONIO_NETO",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
-        aliases: ["Equity", "TotalEquity", "StockholdersEquity", "NetAssets", "EquityAttributableToOwnersOfParent"]
+        aliases: [
+            "Equity",
+            "TotalEquity",
+            "StockholdersEquity",
+            "NetAssets",
+            "EquityAttributableToOwnersOfParent"
+        ]
     },
+
+    // ============================================================
+    // DEUDA CORTO PLAZO
+    // ============================================================
     {
         codigo: "DEUDA_CORTO_PLAZO",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
-        aliases: ["ShortTermBorrowings","ShortTermLoans","DebtCurrent","CurrentBorrowings","CurrentPortionOfLongTermDebt"]
+        aliases: [
+            // EXISTENTES
+            "ShortTermBorrowings",
+            "ShortTermLoans",
+            "DebtCurrent",
+            "CurrentBorrowings",
+            "CurrentPortionOfLongTermDebt",
+
+            // AMPLIACIÓN
+            "BorrowingsCurrent",
+            "ShortTermDebt",
+            "CurrentDebt",
+            "ShortTermBankLoans",
+            "BankLoansCurrent",
+            "LoansPayableCurrent",
+            "NotesPayableCurrent",
+            "ShortTermNotesPayable",
+
+            "BondsPayableCurrent",
+            "CurrentPortionOfBondsPayable",
+
+            "CurrentPortionOfLongTermBorrowings",
+            "CurrentPortionOfLongTermLoans",
+            "CurrentPortionOfLongTermDebtAndBorrowings",
+
+            "FinancialLiabilitiesCurrent",
+
+            "LeaseLiabilitiesCurrent",
+            "CurrentLeaseLiabilities",
+
+            "FinanceLeaseLiabilitiesCurrent",
+            "FinanceLeaseLiabilityCurrent"
+        ]
     },
+
+    // ============================================================
+    // DEUDA LARGO PLAZO
+    // ============================================================
     {
         codigo: "DEUDA_LARGO_PLAZO",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
         aliases: [
+            // EXISTENTES
             "LongTermDebtNoncurrent",
             "LongTermDebt",
             "NonCurrentBorrowings",
@@ -2366,82 +3022,171 @@ const TWOPT_CONCEPTOS: TWOPTConcepto[] = [
             "Bonds",
             "FinancialLiabilitiesNonCurrent",
             "LeaseLiabilitiesNonCurrent",
-            "LeaseLiabilities"
+            "LeaseLiabilities",
+
+            // AMPLIACIÓN
+            "DebtNonCurrent",
+            "DebtNoncurrent",
+            "NonCurrentDebt",
+            "NoncurrentDebt",
+
+            "BorrowingsNoncurrent",
+            "NoncurrentBorrowings",
+
+            "LongTermBankLoans",
+            "BankLoansNonCurrent",
+            "BankLoansNoncurrent",
+
+            "LoansPayableNonCurrent",
+            "LoansPayableNoncurrent",
+
+            "NotesPayableNonCurrent",
+            "NotesPayableNoncurrent",
+            "LongTermNotesPayable",
+
+            "BondsPayableNonCurrent",
+            "BondsPayableNoncurrent",
+            "LongTermBondsPayable",
+
+            "NonCurrentFinancialLiabilities",
+            "NoncurrentFinancialLiabilities",
+
+            "FinanceLeaseLiabilitiesNonCurrent",
+            "FinanceLeaseLiabilitiesNoncurrent",
+            "FinanceLeaseLiabilityNonCurrent",
+            "FinanceLeaseLiabilityNoncurrent",
+
+            "NonCurrentLeaseLiabilities",
+            "NoncurrentLeaseLiabilities"
         ]
     },
+
     {
         codigo: "FLUJO_CAJA_OPERATIVO",
         categoria: "FLUJO_CAJA",
         datasets: ["TaiwanStockCashFlowsStatement"],
-        aliases: ["CashFlowsFromOperatingActivities","NetCashProvidedByUsedInOperatingActivities","CashFlowsFromUsedInOperatingActivities","NetCashFromOperatingActivities"]
+        aliases: [
+            "CashFlowsFromOperatingActivities",
+            "NetCashProvidedByUsedInOperatingActivities",
+            "CashFlowsFromUsedInOperatingActivities",
+            "NetCashFromOperatingActivities"
+        ]
     },
+
     {
         codigo: "CAPEX",
         categoria: "FLUJO_CAJA",
         datasets: ["TaiwanStockCashFlowsStatement"],
-        aliases: ["PropertyAndPlantAndEquipment","PaymentsToAcquirePropertyPlantAndEquipment","PurchaseOfPropertyPlantAndEquipment","AcquisitionOfPropertyPlantAndEquipment"]
+        aliases: [
+            "PropertyAndPlantAndEquipment",
+            "PaymentsToAcquirePropertyPlantAndEquipment",
+            "PurchaseOfPropertyPlantAndEquipment",
+            "AcquisitionOfPropertyPlantAndEquipment"
+        ]
     },
+
     {
         codigo: "DEPRECIACION_AMORTIZACION",
         categoria: "FLUJO_CAJA",
         datasets: ["TaiwanStockCashFlowsStatement"],
-        aliases: ["DepreciationAndAmortization","Depreciation","DepreciationDepletionAndAmortization","AmortizationExpense"]
+        aliases: [
+            "DepreciationAndAmortization",
+            "Depreciation",
+            "DepreciationDepletionAndAmortization",
+            "AmortizationExpense"
+        ]
     },
+
     {
         codigo: "INVENTARIOS",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
-        aliases: ["Inventory", "InventoryNet", "Inventories"]
+        aliases: [
+            "Inventory",
+            "InventoryNet",
+            "Inventories"
+        ]
     },
+
     {
         codigo: "CUENTAS_COBRAR",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
         aliases: [
-            // Agregados / netos — prioridad
             "AccountsReceivableNetCurrent",
             "AccountsReceivableNet",
             "AccountsReceivable",
 
-            // Comerciales
             "TradeReceivables",
             "TradeReceivablesCurrent",
             "TradeAndOtherReceivables",
             "TradeAndOtherReceivablesCurrent",
 
-            // Notes + accounts receivable
             "NotesAndAccountsReceivable",
             "NotesAndAccountsReceivableCurrent"
         ]
     },
+
     {
         codigo: "CUENTAS_PAGAR",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
         aliases: [
-            // Preferencia: comerciales corrientes
             "AccountsPayableCurrent",
             "AccountsPayable",
             "TradePayablesCurrent",
             "TradePayables",
 
-            // Agregados trade + other
             "TradeAndOtherPayablesCurrent",
             "TradeAndOtherPayables",
 
-            // Notes + accounts payable
             "NotesAndAccountsPayableCurrent",
             "NotesAndAccountsPayable"
         ]
     },
+
     {
         codigo: "EPS_DILUIDO",
         categoria: "CUENTA_RESULTADOS",
         datasets: ["TaiwanStockFinancialStatements"],
-        aliases: ["DilutedEarningsPerShare", "EarningsPerShareDiluted", "DilutedEPS", "EPS"]
+        aliases: [
+            "DilutedEarningsPerShare",
+            "EarningsPerShareDiluted",
+            "DilutedEPS",
+            "EPS"
+        ]
+    },
+
+    // ============================================================
+    // ACCIONES EN CIRCULACIÓN
+    // ============================================================
+    //
+    // FUENTE PRINCIPAL:
+    // TaiwanStockShareholding.NumberOfSharesIssued
+    //
+    // FinMind documenta explícitamente este campo y dispone
+    // de histórico desde 2004-02-01.
+    //
+    // FALLBACK:
+    // TaiwanStockDividend.ParticipateDistributionOfTotalShares
+    //
+    // OJO:
+    // ambos son campos propios de sus datasets y no simples
+    // registros type/value. El motor debe tratarlos expresamente.
+    //
+    {
+        codigo: "ACCIONES_EN_CIRCULACION",
+        categoria: "BALANCE",
+        datasets: [
+            "TaiwanStockShareholding",
+            "TaiwanStockDividend"
+        ],
+        aliases: [
+            "NumberOfSharesIssued",
+            "ParticipateDistributionOfTotalShares"
+        ]
     }
 ];
-
 // ============================================================================
 // UTILIDADES - TAIWAN
 // ============================================================================
@@ -2511,18 +3256,153 @@ function twOptStartDate(): string {
     return d.toISOString().slice(0, 10);
 }
 
+async function twOptFetch(url: string): Promise<any> {
+    const tokenState = await twOptReservarToken();
+
+    const headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${tokenState.token}`
+    };
+
+    const controller = new AbortController();
+    const timeout = setTimeout(
+        () => controller.abort(),
+        TWOPT_TIMEOUT_MS
+    );
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers,
+            signal: controller.signal
+        });
+
+        tokenState.requests++;
+
+
+        // ============================================================
+        // 402 = CUOTA TOTAL DEL TOKEN AGOTADA
+        // Se desactiva este token y se prueba la misma petición
+        // automáticamente con otro token disponible.
+        // ============================================================
+
+        if (response.status === 402) {
+
+            tokenState.quotaExhausted = true;
+            tokenState.errores++;
+
+            console.warn(
+                `[TWOPT] Token ${tokenState.id} agotado (HTTP 402). ` +
+                `Se desactiva para esta ejecución.`
+            );
+
+            const quedanTokens = TWOPT_TOKEN_STATES.some(
+                t => !t.quotaExhausted
+            );
+
+            if (quedanTokens) {
+                return twOptFetch(url);
+            }
+
+            throw new Error(
+                "FINMIND_QUOTA_EXHAUSTED: todos los tokens FinMind han agotado su cuota."
+            );
+        }
+
+
+        // ============================================================
+        // 429 = RATE LIMIT TEMPORAL
+        // NO significa que la cuota esté agotada.
+        // Ponemos el token en cooldown durante 60 segundos.
+        // ============================================================
+
+        if (response.status === 429) {
+
+            tokenState.errores++;
+
+            tokenState.cooldownUntil = Math.max(
+                tokenState.cooldownUntil,
+                Date.now() + 60000
+            );
+
+            tokenState.rateLimits++;
+
+            console.warn(
+                `[TWOPT] Token ${tokenState.id} rate limit (HTTP 429). ` +
+                `Cooldown 60 segundos.`
+            );
+
+            // Intentar la misma petición con otro token disponible.
+            return twOptFetch(url);
+        }
+
+
+        // ============================================================
+        // RESTO DE ERRORES HTTP
+        // ============================================================
+
+        if (!response.ok) {
+
+            const cuerpo = await response.text().catch(() => "");
+
+            console.error(
+                `\n[TWOPT ERROR REAL]` +
+                `\nToken: ${tokenState.id}` +
+                `\nHTTP: ${response.status} ${response.statusText}` +
+                `\nURL: ${url}` +
+                `\nRespuesta FinMind: ${cuerpo.slice(0, 1000)}\n`
+            );
+
+            tokenState.errores++;
+
+            throw new Error(
+                `FinMind HTTP ${response.status}: ${cuerpo.slice(0, 300)}`
+            );
+        }
+
+
+        // ============================================================
+        // RESPUESTA CORRECTA
+        // ============================================================
+
+        return await response.json();
+
+
+    } catch (error) {
+
+        // ============================================================
+        // TIMEOUT
+        // ============================================================
+
+        if (
+            error instanceof Error &&
+            error.name === "AbortError"
+        ) {
+            tokenState.errores++;
+
+            throw new Error(
+                `FinMind timeout (${TWOPT_TIMEOUT_MS}ms) para ${url}`
+            );
+        }
+
+        throw error;
+
+    } finally {
+
+        clearTimeout(timeout);
+    }
+}
+
+
 // ============================================================================
 // FINMIND MULTI-TOKEN + RATE LIMITER - TAIWAN
 //
 // Mantiene el ritmo configurado en TWOPT_RPM POR TOKEN.
-// TOKEN 1 = TWOPT_FINMIND_TOKEN (el que ya usabas)
-// TOKEN 2 = FINMIND_TOKEN_2 desde .env
-// ============================================================================
 
-const TWOPT_FINMIND_TOKEN_2 = String(process.env.FINMIND_TOKEN_2 || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYWRyaWFuZ2F2ZWxhMDlAZ21haWwuY29tIiwiZW1haWwiOiJhZHJpYW5nYXZlbGEwOUBnbWFpbC5jb20iLCJ0b2tlbl92ZXJzaW9uIjowfQ.lqj290e1tvguRgDgxiWJLtzLGyvFMm6ez3cG3pmbyDU").trim();
+
 const TWOPT_WORKERS = Math.max(
     1,
-    Number(process.env.FINMIND_PCV_WORKERS || "6")
+    Number(process.env.FINMIND_PCV_WORKERS || "8")
 );
 
 interface TWOPTTokenState {
@@ -2533,23 +3413,23 @@ interface TWOPTTokenState {
     requests: number;
     rateLimits: number;
     errores: number;
+    quotaExhausted: boolean;
 }
 
 function twOptCrearTokenStates(): TWOPTTokenState[] {
-    const tokens = [
-        String(TWOPT_FINMIND_TOKEN || "").trim(),
-        TWOPT_FINMIND_TOKEN_2
-    ].filter((token, index, arr) => token && arr.indexOf(token) === index);
 
-    return tokens.map((token, index) => ({
-        id: index + 1,
-        token,
-        nextAllowedAt: 0,
-        cooldownUntil: 0,
-        requests: 0,
-        rateLimits: 0,
-        errores: 0
-    }));
+    return TWOPT_FINMIND_TOKENS.map(
+        (token, index) => ({
+            id: index + 1,
+            token,
+            nextAllowedAt: 0,
+            cooldownUntil: 0,
+            requests: 0,
+            rateLimits: 0,
+            errores: 0,
+            quotaExhausted: false
+        })
+    );
 }
 
 let TWOPT_TOKEN_STATES: TWOPTTokenState[] = [];
@@ -2621,112 +3501,6 @@ function twOptPonerCooldown(
 // ============================================================================
 // FETCH FINMIND - TAIWAN
 // ============================================================================
-
-async function twOptFetch(url: string, intento = 0): Promise<any> {
-    const estado = await twOptReservarToken();
-
-    const controller = new AbortController();
-    const timeout = setTimeout(
-        () => controller.abort(),
-        TWOPT_TIMEOUT_MS
-    );
-
-    try {
-        estado.requests++;
-
-        const headers: Record<string, string> = {
-            "Accept": "application/json",
-            "Authorization": `Bearer ${estado.token}`
-        };
-
-        const r = await fetch(url, {
-            headers,
-            signal: controller.signal
-        });
-
-        if (
-            (r.status === 429 || r.status === 402) &&
-            intento < TWOPT_MAX_RETRIES
-        ) {
-            const espera = twOptPonerCooldown(estado, intento);
-
-            console.warn(
-                `[TWOPT] Token ${estado.id} HTTP ${r.status}. ` +
-                `Cooldown ${espera} ms; se intentara con otro token disponible.`
-            );
-
-            return twOptFetch(url, intento + 1);
-        }
-
-        if (
-            r.status >= 500 &&
-            intento < TWOPT_MAX_RETRIES
-        ) {
-            estado.errores++;
-
-            await twOptSleep(
-                Math.min(2000 * Math.pow(2, intento), 30000)
-            );
-
-            return twOptFetch(url, intento + 1);
-        }
-
-        if (!r.ok) {
-            estado.errores++;
-
-            const body = await r.text();
-
-            throw new Error(
-                `FinMind HTTP ${r.status}: ${body.slice(0, 300)}`
-            );
-        }
-
-        const json = await r.json();
-
-        if (json?.status && Number(json.status) !== 200) {
-            const status = Number(json.status);
-
-            if (
-                (status === 429 || status === 402) &&
-                intento < TWOPT_MAX_RETRIES
-            ) {
-                const espera = twOptPonerCooldown(estado, intento);
-
-                console.warn(
-                    `[TWOPT] Token ${estado.id} status ${status}. ` +
-                    `Cooldown ${espera} ms.`
-                );
-
-                return twOptFetch(url, intento + 1);
-            }
-
-            estado.errores++;
-
-            throw new Error(
-                `FinMind status ${json.status}: ${json?.msg || ""}`
-            );
-        }
-
-        return json;
-    } catch (e) {
-        if (
-            intento < TWOPT_MAX_RETRIES &&
-            !(e instanceof Error && e.message.startsWith("FinMind HTTP 4"))
-        ) {
-            estado.errores++;
-
-            await twOptSleep(
-                Math.min(2000 * Math.pow(2, intento), 30000)
-            );
-
-            return twOptFetch(url, intento + 1);
-        }
-
-        throw e;
-    } finally {
-        clearTimeout(timeout);
-    }
-}
 
 // ============================================================================
 // TAXONOMIA - TAIWAN
@@ -3303,14 +4077,21 @@ export async function ejecutarCargaPartidasContablesTaiwanOptimizado() {
 
     const empresas = Array.from(porEmpresa.entries());
     let siguienteIndice = 0;
+    let detenerPorCuota = false;
 
     async function worker(workerId: number): Promise<void> {
-        while (true) {
-            const indice = siguienteIndice++;
+    while (true) {
 
-            if (indice >= empresas.length) {
-                return;
-            }
+        // Detener todos los workers si se agotó la cuota FinMind
+        if (detenerPorCuota) {
+            return;
+        }
+
+        const indice = siguienteIndice++;
+
+        if (indice >= empresas.length) {
+            return;
+        }
 
             const [empresaId, informesEmpresa] = empresas[indice];
             const ticker = informesEmpresa[0]?.ticker;
@@ -3453,16 +4234,39 @@ export async function ejecutarCargaPartidasContablesTaiwanOptimizado() {
                         `[TWOPT] Worker ${workerId}: alcanzado indice ${indice + 1}.`
                     );
                 }
-            } catch (error) {
-                empresasError++;
+          } catch (error) {
 
-                console.error(
-                    `[TWOPT] Error empresa ${empresaId} ticker ${ticker}:`,
-                    error instanceof Error
-                        ? error.message
-                        : String(error)
-                );
-            }
+    const mensaje =
+        error instanceof Error
+            ? error.message
+            : String(error);
+
+    // Si todos los tokens FinMind están agotados,
+    // activar parada global de todos los workers.
+    if (mensaje.includes("FINMIND_QUOTA_EXHAUSTED")) {
+
+        detenerPorCuota = true;
+
+        console.warn(
+            "\n[TWOPT] CUOTA FINMIND AGOTADA EN TODOS LOS TOKENS."
+        );
+
+        console.warn(
+            "[TWOPT] Se detiene Taiwan. " +
+            "Las empresas restantes NO se contabilizan como errores.\n"
+        );
+
+        return;
+    }
+
+    // Cualquier otro error sí cuenta como error real.
+    empresasError++;
+
+    console.error(
+        `[TWOPT] Error empresa ${empresaId} ticker ${ticker}:`,
+        mensaje
+    );
+} 
         }
     }
 
@@ -3553,11 +4357,11 @@ export async function actualizarPartidasContablesTaiwanOptimizado(
 // ============================================================================
 
 ejecutarCargaPartidasContablesTaiwanOptimizado()
-    .then(resultado => {
-        console.log("\n=== PARTIDA_CONTABLE_VALOR TAIWAN OPTIMIZADO FINALIZADO ===");
-        console.log(resultado);
-    })
-    .catch(error => {
-        console.error("\n=== ERROR CRITICO TAIWAN OPTIMIZADO ===", error);
-        process.exitCode = 1;
-    });
+  .then(resultado => {
+      console.log("\n=== PARTIDA_CONTABLE_VALOR TAIWAN OPTIMIZADO FINALIZADO ===");
+      console.log(resultado);
+ })
+  .catch(error => {
+      console.error("\n=== ERROR CRITICO TAIWAN OPTIMIZADO ===", error);
+      process.exitCode = 1;
+  });

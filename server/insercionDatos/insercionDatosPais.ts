@@ -1,5 +1,5 @@
 import conexion from '../conexion/bd';
-
+import * as XLSX from 'xlsx';
 /* ============================================================
    TIPOS
    ============================================================ */
@@ -13,6 +13,13 @@ interface EmpresaSEC {
 interface RiesgoPaisFMP {
     country: string;
     countryRiskPremium: number | string | null;
+}
+
+interface PrimaRiesgoMercado {
+    country: string;
+    primaRiesgoMercado: number;
+    fecha: string;
+    fuente: string;
 }
 
 interface DatoPais {
@@ -165,6 +172,7 @@ function mostrarResultadoUpdate(nombre: string, resultado: ResultadoMysql): void
     }
 }
 
+
 /* ============================================================
    PAÍSES (nombres + inserción inicial de filas)
    ============================================================ */
@@ -270,7 +278,161 @@ async function insertarRiesgoExtraPorPais() {
         console.log('Error al insertar el riesgo extra por pais:', error);
     }
 }
+// ============================================================
+// PRIMA DE RIESGO DEL MERCADO (Rm - Rf) - DAMODARAN
+// ============================================================
 
+async function insertarPrimaRiesgoMercado(): Promise<void> {
+
+    const url =
+        'https://pages.stern.nyu.edu/~adamodar/pc/datasets/ctryprem.xlsx';
+
+    const response = await fetchConReintentos(url, {
+        headers: {
+            Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        }
+    });
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    const workbook = XLSX.read(buffer, { type: 'buffer' });
+
+   const sheet = workbook.Sheets['PRS Worksheet'];
+
+    if (!sheet) {
+        throw new Error('No se encontró la hoja de Damodaran');
+    }
+
+    const filas = XLSX.utils.sheet_to_json<any[]>(sheet, {
+        header: 1,
+        defval: null
+    });
+
+    const paises = {
+        US: 'United States',
+        JP: 'Japan',
+        TW: 'Taiwan'
+    };
+
+    const normalizar = (valor: unknown): string =>
+        String(valor ?? '')
+            .trim()
+            .toLowerCase()
+                     .replace(/\s+/g, ' ');
+         console.log('\n=== ESTRUCTURA EXCEL DAMODARAN ===');
+         
+         filas.slice(0, 15).forEach((fila, indice) => {
+             console.log(`Fila ${indice + 1}:`, JSON.stringify(fila));
+         });
+         
+         console.log('================================\n');
+
+    const encabezadoIndex = filas.findIndex(fila =>
+        Array.isArray(fila) &&
+        fila.some(celda => normalizar(celda) === 'country') &&
+        fila.some(celda =>
+            normalizar(celda).includes('total equity risk premium')
+        )
+    );
+
+    if (encabezadoIndex === -1) {
+        throw new Error(
+            'No se encontró la columna Total Equity Risk Premium'
+        );
+    }
+
+    const encabezados = filas[encabezadoIndex].map(normalizar);
+
+    const indicePais = encabezados.indexOf('country');
+
+    const indiceERP = encabezados.findIndex(
+        nombre => nombre.includes('total equity risk premium')
+    );
+
+    if (indicePais === -1 || indiceERP === -1) {
+        throw new Error('No se pudieron identificar las columnas');
+    }
+
+    // Validamos primero todos los datos, antes de escribir en MySQL.
+    const actualizaciones: Array<{
+        codigo: string;
+        erp: number;
+    }> = [];
+
+    for (const [codigo, nombrePais] of Object.entries(paises)) {
+
+        const fila = filas.slice(encabezadoIndex + 1).find(
+            fila => normalizar(fila[indicePais]) === normalizar(nombrePais)
+        );
+
+        if (!fila) {
+            throw new Error(`No se encontró ${nombrePais}`);
+        }
+
+        const valorOriginal = fila[indiceERP];
+
+        const numero = convertirNumero(valorOriginal);
+
+        if (numero === null) {
+            throw new Error(`ERP no válido para ${nombrePais}`);
+        }
+
+        // En Excel, 5,5 % suele almacenarse como 0,055.
+        // En MySQL guardamos 5.5, es decir, puntos porcentuales.
+        const celda = sheet[
+            XLSX.utils.encode_cell({
+                r: filas.indexOf(fila),
+                c: indiceERP
+            })
+        ];
+
+       // Damodaran almacena el ERP como decimal.
+       // Ejemplo: 0.0423 = 4.23 %
+       if (numero < 0 || numero > 0.30) {
+           throw new Error(
+               `ERP fuera de rango para ${nombrePais}: ${numero}`
+           );
+       }
+       
+       const erp = numero * 100;
+
+        validarPorcentaje(
+            `Prima de riesgo del mercado ${nombrePais}`,
+            erp,
+            0,
+            30
+        );
+
+        actualizaciones.push({ codigo, erp });
+    }
+
+    for (const dato of actualizaciones) {
+
+        const sql = `
+            UPDATE pais
+            SET
+                prima_riesgo_mercado = ?,
+                fecha_actualizacion_prima_mercado = CURRENT_DATE(),
+                fuente_prima_mercado = ?
+            WHERE codigo_iso = ?
+        `;
+
+        const [resultado] = await (conexion as any).query(sql, [
+            dato.erp,
+            'Damodaran - Total Equity Risk Premium',
+            dato.codigo
+        ]);
+
+        mostrarResultadoUpdate(
+            `Prima de riesgo del mercado ${dato.codigo}`,
+            resultado
+        );
+
+        console.log(
+            `Prima de riesgo del mercado ${dato.codigo}: ${dato.erp}%`
+        );
+    }
+}
 /* ============================================================
    FRED (fuente compartida por EEUU y Japón)
    ============================================================ */
@@ -568,7 +730,8 @@ export async function insertarTasasImpositivas(): Promise<void> {
    ============================================================ */
 
 
-    insercionDatos();
+    //insercionDatos();
+    insertarPrimaRiesgoMercado();
     insertarRiesgoExtraPorPais();
 
     insertarBono10AnosUS();

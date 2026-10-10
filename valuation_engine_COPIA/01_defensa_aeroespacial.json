@@ -1,0 +1,118 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 1 /Kids [4 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 6 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 5371 >>
+stream
+0.075 0.18 0.3 rg 0 730 595 112 re f
+1 1 1 rg BT /F2 22 Tf 1 0 0 1 40 791 Tm (G2EXCHANGE  /  VALORACION) Tj ET
+0.83 0.91 0.98 rg BT /F1 11 Tf 1 0 0 1 40 764 Tm (EMPRESA FICTICIA PARA PRUEBAS   |   DEMO   |   2026-10-08) Tj ET
+0.075 0.18 0.3 rg BT /F2 14 Tf 1 0 0 1 40 701 Tm (COSTE DE CAPITAL POR ESCENARIO) Tj ET
+0.91 0.95 0.98 rg 40 670 515 22 re f
+0.075 0.18 0.3 rg BT /F2 8 Tf 1 0 0 1 47 677 Tm (CONCEPTO) Tj ET
+0.075 0.18 0.3 rg BT /F2 8 Tf 1 0 0 1 214 677 Tm (CONSERVADOR) Tj ET
+0.075 0.18 0.3 rg BT /F2 8 Tf 1 0 0 1 323 677 Tm (BASE) Tj ET
+0.075 0.18 0.3 rg BT /F2 8 Tf 1 0 0 1 432 677 Tm (OPTIMISTA) Tj ET
+0.967 0.975 0.985 rg 40 640 515 24 re f
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 647 Tm (Ke \(CAPM\)) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 647 Tm (14.16%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 647 Tm (14.16%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 647 Tm (14.16%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 622 Tm (Kd bruto) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 622 Tm (5.28%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 622 Tm (5.08%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 622 Tm (4.98%) Tj ET
+0.967 0.975 0.985 rg 40 590 515 24 re f
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 597 Tm (Kd neto) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 597 Tm (3.93%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 597 Tm (3.78%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 597 Tm (3.71%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 572 Tm (Peso patrimonio) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 572 Tm (80.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 572 Tm (80.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 572 Tm (80.00%) Tj ET
+0.967 0.975 0.985 rg 40 540 515 24 re f
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 547 Tm (Peso deuda) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 547 Tm (20.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 547 Tm (20.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 547 Tm (20.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 522 Tm (WACC financiero) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 522 Tm (12.11%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 522 Tm (12.09%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 522 Tm (12.07%) Tj ET
+0.967 0.975 0.985 rg 40 490 515 24 re f
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 497 Tm (Prima iliquidez) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 497 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 497 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 497 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 472 Tm (Prima tamano) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 472 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 472 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 472 Tm (0.00%) Tj ET
+0.967 0.975 0.985 rg 40 440 515 24 re f
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 447 Tm (Prima concentracion) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 447 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 447 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 447 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 47 422 Tm (Otros ajustes) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 214 422 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 323 422 Tm (0.00%) Tj ET
+0.1 0.19 0.29 rg BT /F1 9 Tf 1 0 0 1 432 422 Tm (0.00%) Tj ET
+0.967 0.975 0.985 rg 40 390 515 24 re f
+0.84 0.91 0.98 rg 40 389 515 25 re f
+0.1 0.19 0.29 rg BT /F2 9 Tf 1 0 0 1 47 397 Tm (WACC FINAL) Tj ET
+0.1 0.19 0.29 rg BT /F2 9 Tf 1 0 0 1 214 397 Tm (12.11%) Tj ET
+0.1 0.19 0.29 rg BT /F2 9 Tf 1 0 0 1 323 397 Tm (12.09%) Tj ET
+0.1 0.19 0.29 rg BT /F2 9 Tf 1 0 0 1 432 397 Tm (12.07%) Tj ET
+0.075 0.18 0.3 rg BT /F2 14 Tf 1 0 0 1 40 330 Tm (RESULTADO DEL MODELO) Tj ET
+0.95 0.97 0.985 rg 40 288 515 40 re f
+0.12 0.23 0.33 rg BT /F2 9 Tf 1 0 0 1 48 308 Tm (CONSERVATIVE) Tj ET
+0.12 0.2 0.31 rg BT /F1 9 Tf 1 0 0 1 215 308 Tm (Valor/accion: 44.50 USD) Tj ET
+0.12 0.2 0.31 rg BT /F1 9 Tf 1 0 0 1 405 308 Tm (WACC: 12.11%) Tj ET
+0.12 0.2 0.31 rg BT /F1 8 Tf 1 0 0 1 215 294 Tm (Max compra: 31.15 | WAIT) Tj ET
+1 1 1 rg 40 245 515 40 re f
+0.12 0.23 0.33 rg BT /F2 9 Tf 1 0 0 1 48 265 Tm (BASE) Tj ET
+0.12 0.2 0.31 rg BT /F1 9 Tf 1 0 0 1 215 265 Tm (Valor/accion: 72.64 USD) Tj ET
+0.12 0.2 0.31 rg BT /F1 9 Tf 1 0 0 1 405 265 Tm (WACC: 12.09%) Tj ET
+0.12 0.2 0.31 rg BT /F1 8 Tf 1 0 0 1 215 251 Tm (Max compra: 54.48 | WAIT) Tj ET
+0.95 0.97 0.985 rg 40 202 515 40 re f
+0.12 0.23 0.33 rg BT /F2 9 Tf 1 0 0 1 48 222 Tm (OPTIMISTIC) Tj ET
+0.12 0.2 0.31 rg BT /F1 9 Tf 1 0 0 1 215 222 Tm (Valor/accion: 105.94 USD) Tj ET
+0.12 0.2 0.31 rg BT /F1 9 Tf 1 0 0 1 405 222 Tm (WACC: 12.07%) Tj ET
+0.12 0.2 0.31 rg BT /F1 8 Tf 1 0 0 1 215 208 Tm (Max compra: 84.75 | BUY) Tj ET
+0.98 0.95 0.86 rg 40 112 515 55 re f
+0.32 0.24 0.1 rg BT /F2 10 Tf 1 0 0 1 48 151 Tm (ESTADO: REVIEW   |   PRIMAS: DRAFT_POLICY) Tj ET
+0.32 0.24 0.1 rg BT /F1 9 Tf 1 0 0 1 48 135 Tm (ERP TOTAL incluye riesgo pais. No se suma otra vez al CAPM.) Tj ET
+0.32 0.24 0.1 rg BT /F1 9 Tf 1 0 0 1 48 120 Tm (Primas automaticas DRAFT requieren revision financiera.) Tj ET
+0.3 0.4 0.5 rg BT /F1 9 Tf 1 0 0 1 40 84 Tm (Run DEMO-RUN-001  /  Snapshot DEMO-SNAPSHOT-001  |  G2EXCHANGE TS v1.5) Tj ET
+0.3 0.4 0.5 rg BT /F1 8 Tf 1 0 0 1 40 69 Tm (Informe de analisis, no recomendacion automatica de inversion.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000354 00000 n 
+0000005776 00000 n 
+trailer
+<< /Root 1 0 R /Size 7 >>
+startxref
+5878
+%%EOF

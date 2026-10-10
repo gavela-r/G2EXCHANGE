@@ -1,6 +1,5 @@
 import conexion from "../conexion/bd";
 import * as XLSX from "xlsx";
-import { agruparBetasPorSector, calcularBetaPonderada } from "./betaSectorial";
 
 interface EmpresaSEC {
     cick_str: number;
@@ -354,7 +353,6 @@ const URL_BETA_GLOBAL = "https://www.stern.nyu.edu/~adamodar/pc/datasets/betaGlo
 interface FilaBeta {
     industria: string;
     betaApalancada: number;
-    numeroEmpresas: number;
 }
 
 const mapeoSectoresDamodaran: Record<string, string> = {
@@ -486,19 +484,7 @@ async function descargarBetasPorSector(): Promise<FilaBeta[]> {
 
         if (!industria || isNaN(betaNum)) continue;
 
-        const empresasRaw = fila["Number of firms"];
-        const numeroEmpresas = Number(empresasRaw);
-
-        if (!Number.isSafeInteger(numeroEmpresas) || numeroEmpresas <= 0) {
-            console.warn(`Industria omitida por número de empresas inválido: ${industria}`);
-            continue;
-        }
-
-        resultado.push({
-            industria: String(industria).trim(),
-            betaApalancada: betaNum,
-            numeroEmpresas
-        });
+        resultado.push({ industria: String(industria).trim(), betaApalancada: betaNum });
     }
 
     console.log(`  ${resultado.length} sectores con beta descargados de Damodaran`);
@@ -512,7 +498,7 @@ async function descargarBetasPorSector(): Promise<FilaBeta[]> {
 // mayúsculas) -> beta.
 function obtenerSensibilidadFallbackDamodaran(
     nombreSector: string,
-    mapaDamodaran: Map<string, FilaBeta>
+    mapaDamodaran: Map<string, number>
 ): number | null {
     const sector = String(nombreSector || "").trim().toUpperCase();
     const equivalencias = SECTOR_DAMODARAN_FALLBACK[sector];
@@ -521,24 +507,26 @@ function obtenerSensibilidadFallbackDamodaran(
         return null;
     }
 
-    const industrias = equivalencias
+    const valores = equivalencias
         .map(nombre => mapaDamodaran.get(nombre.trim().toUpperCase()))
-        .filter((fila): fila is FilaBeta => fila !== undefined);
+        .filter((valor): valor is number => typeof valor === "number" && Number.isFinite(valor));
 
-    if (industrias.length === 0) {
+    if (valores.length === 0) {
         return null;
     }
 
-    return calcularBetaPonderada(industrias);
+    const media = valores.reduce((acum, valor) => acum + valor, 0) / valores.length;
+    return Number(media.toFixed(4));
 }
+
 async function actualizarSensibilidadMercado() {
     const betas = await descargarBetasPorSector();
 
     // Mapa auxiliar: industria de Damodaran (en mayúsculas) -> beta.
     // Lo usa el fallback para calcular la media de sectores equivalentes.
-    const mapaDamodaran = new Map<string, FilaBeta>();
-    for (const fila of betas) {
-        mapaDamodaran.set(fila.industria.trim().toUpperCase(), fila);
+    const mapaDamodaran = new Map<string, number>();
+    for (const { industria, betaApalancada } of betas) {
+        mapaDamodaran.set(industria.trim().toUpperCase(), betaApalancada);
     }
 
     /* ---------- PASADA 1: match directo vía mapeoSectoresDamodaran ---------- */
@@ -547,27 +535,27 @@ async function actualizarSensibilidadMercado() {
     let sinMatch = 0;
     const industriasSinMatch: string[] = [];
 
-    // Una única beta ponderada por sector, independientemente del orden
-    // de las industrias en el archivo de Damodaran.
-    const betasAgrupadas = agruparBetasPorSector(betas, mapeoSectoresDamodaran);
+    for (const { industria, betaApalancada } of betas) {
+        const nombreNormalizado = mapeoSectoresDamodaran[industria];
 
-    for (const { industria } of betas) {
-        if (!mapeoSectoresDamodaran[industria]) {
+        if (!nombreNormalizado) {
             sinMatch++;
             industriasSinMatch.push(industria);
+            continue;
         }
-    }
 
-    for (const [nombreNormalizado, datos] of betasAgrupadas) {
+        // TRIM() protege contra espacios colados al insertar sectores
+        // desde fuentes distintas (JSON de Finnhub, CSV de EDINET, JSON de TWSE).
         const [result]: any = await (conexion as any).query(
             "UPDATE sector SET sensibilidad_al_mercado = ? WHERE TRIM(nombre_sector) = TRIM(?)",
-            [datos.betaApalancada, nombreNormalizado]
+            [betaApalancada, nombreNormalizado]
         );
 
         if (result.affectedRows > 0) {
             actualizados++;
         }
     }
+
     console.log(`== Pasada 1 (match directo): ${actualizados} actualizados | ${sinMatch} industrias de Damodaran sin mapear ==`);
     if (industriasSinMatch.length > 0) {
         console.log("Industrias de Damodaran sin entrada en mapeoSectoresDamodaran:", industriasSinMatch);
@@ -595,7 +583,7 @@ async function actualizarSensibilidadMercado() {
         if (sensibilidad === null) {
             const totalMarket = mapaDamodaran.get("TOTAL MARKET");
             if (totalMarket !== undefined) {
-                sensibilidad = totalMarket.betaApalancada;
+                sensibilidad = totalMarket;
             }
         }
 

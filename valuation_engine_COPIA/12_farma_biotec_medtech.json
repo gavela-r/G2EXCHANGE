@@ -1,0 +1,20 @@
+{
+  "code": "05",
+  "slug": "AUTOMOCION_COMPONENTES",
+  "name": "Automoción / componentes",
+  "family": "FCFF",
+  "metrics": [
+    "units_sold",
+    "average_selling_price",
+    "ev_mix",
+    "capacity_utilization",
+    "warranty_to_revenue"
+  ],
+  "growth": 0.04,
+  "margin": 0.08,
+  "capex": 0.06,
+  "nwc": 0.02,
+  "beta": 1.2,
+  "multiple": 7.5,
+  "terminal": 0.02
+}

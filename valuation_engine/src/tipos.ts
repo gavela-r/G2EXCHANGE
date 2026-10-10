@@ -1,0 +1,143 @@
+export const ESCENARIOS = ['CONSERVATIVE','BASE','OPTIMISTIC'] as const;
+export type Escenario = typeof ESCENARIOS[number];
+export const FACTORES = ['prima_iliquidez','prima_tamano','prima_concentracion_clientes','otros_ajustes_wacc'] as const;
+export type Factor = typeof FACTORES[number];
+export interface Evidencia {value:number;source:string;reference_date:string}
+export type Ajustes = Record<Escenario,Record<Factor,Evidencia>>;
+export interface Finanzas {
+
+  fiscal_year:number;
+  period_end_date?: string;
+
+  revenue:number;ebitda?:number;ebit:number;net_income?:number;taxes_paid?:number;
+
+  da:number;capex?:number;nwc_balance?:number;change_nwc?:number;operating_cash_flow?:number;free_cash_flow?:number;
+
+  cash?:number;gross_debt?:number;equity?:number;total_assets?:number;total_liabilities?:number;
+
+  dividends?:number;diluted_shares?:number;
+
+}
+export interface NewsEvent {
+  signal_id:string|number;variable_code:string;source_url:string;approved:boolean;
+  confidence:number;materiality:number;proposed_adjustment:number;unit:string;
+  scenario?:Escenario;expiry_date?:string;independent_sources?:number;primary_official_source?:boolean;
+  systematic_unpriced?:boolean;
+}
+export interface ModeloInput {
+  template_code:string;company_id:string|number;instrument_id:string|number;company_name:string;ticker:string;
+  market:'US'|'JP'|'TW';valuation_date:string;currency:string;
+  valuation_run_id:string|number;input_snapshot_id:string|number;
+  reporting_currency:string;valuation_currency:string;fx_rate_used:number;
+  price_per_share:number;diluted_shares:number;gross_debt_fy0:number;cash_fy0:number;
+  minority_interest_fy0?:number;
+  risk_free_rate: number;
+  sector_beta: number;
+  equity_risk_premium: number;
+
+  // Tasa marginal estatutaria a largo plazo
+  tax_rate: number;
+
+  // Tasa efectiva normalizada de partida
+  effective_tax_rate_fy0?: Evidencia;
+  interest_coverage?:number;synthetic_rating?:string;credit_spread:number;
+  spread_credito_optimista:number;spread_credito_pesimista:number;
+  terminal_growth_max:number;financials:Finanzas[];sector_metrics?:Record<string,number[]>;
+  company_assumptions?: {
+    terminal_ebit_margin?: Evidencia;
+    sustainable_revenue_growth?: Evidencia;
+    terminal_roic?: Evidencia;
+  };
+  // ======================================================
+  // DATOS TTM Y CALENDARIO DE VALORACION
+  // ======================================================
+
+  // Fecha de cierre del último periodo financiero disponible
+  latest_financial_period_end?: string;
+
+  // Datos financieros de los últimos doce meses
+  ttm_financials?: Finanzas;
+
+  // Identificación y trazabilidad del TTM
+  ttm_source?: string;
+
+  // Fecha de referencia de los datos TTM
+  ttm_reference_date?: string;
+
+  // Política de descuento
+  discount_convention?: 'YEAR_END' | 'MID_YEAR';
+
+  data_version?:string;confidence?:'HIGH'|'MEDIUM'|'LOW';
+  premium_methodology?:'AUDITED_POLICY'|'MANUAL_APPROVED'|'DRAFT_POLICY'|'SIMULATION_ONLY';
+  wacc_adjustments?:Ajustes;
+  risk_inputs?:Record<string,Evidencia>;
+  news_events?:NewsEvent[];
+  sector_specific?:{
+    next_dividends_millions?:number;long_term_dividend_growth?:number;
+    affo_fy0_millions?:number;affo_growth?:number;
+  };
+}
+export interface WaccEscenario {
+  escenario:Escenario;rf:number;beta:number;erp:number;ke:number;spread_credito:number;
+  kd:number;kd_neto:number;equity_market_value_millions:number;debt_financial_millions:number;
+  peso_patrimonio:number;peso_deuda:number;impuesto:number;wacc_financiero:number;
+  ajustes:Record<Factor,Evidencia>;prima_total:number;wacc_ajustado:number;
+}
+export interface ValorEscenario {
+
+  terminal_method?: 'ROIC_REINVESTMENT' | 'LEGACY_FCFF';
+  terminal_roic_used?: number | null;
+  terminal_not_normalized?: boolean;
+
+  escenario: Escenario;
+
+  metodo: string;
+
+  valor_empresa_millones: number | null;
+
+  valor_patrimonio_millones: number | null;
+
+  fair_value: number | null;
+
+  max_buy_price: number | null;
+
+  upside: number | null;
+
+  decision: 'BUY' | 'WATCH' | 'WAIT' | 'DATA_PENDING';
+
+  wacc: number;
+
+  terminal_growth: number | null;
+
+  terminal_value_weight?: number | null;
+  terminal_value_warning?: string | null;
+
+  proyeccion_fcff: number[];
+
+  // AuditorÃ­a de las proyecciones financieras
+
+  historical_growth_rates?: number[];
+
+  historical_cagr?: number;
+
+  weighted_growth?: number;
+
+  projected_growth_rates?: number[];
+
+  projected_ebit_margins?: number[];
+
+  projection_method?: string;
+
+  projection_confidence?: 'HIGH' | 'MEDIUM' | 'LOW';
+
+  nota: string;
+
+}
+export interface Resultado {
+  motor:'G2EXCHANGE_TS_v1.5';company_name:string;ticker:string;template_code:string;
+  valuation_run_id:string|number;input_snapshot_id:string|number;valuation_date:string;
+  status:'REVIEW'|'PENDING_REVIEW';validation_status:'REVIEW'|'BLOCKED';
+  currency:string;premium_methodology:string;wacc_scenarios:WaccEscenario[];
+  valuations:ValorEscenario[];news_audit:Array<{signal_id:string|number;aplicado:boolean;motivo:string}>;
+  warnings:string[];information_note:string;
+}

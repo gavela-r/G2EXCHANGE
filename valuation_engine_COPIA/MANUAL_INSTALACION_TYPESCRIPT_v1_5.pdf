@@ -1,0 +1,10 @@
+{
+  "status":"DRAFT_REQUIRES_FINANCIAL_APPROVAL",
+  "version":"1.5.0",
+  "warning":"Reglas orientativas no calibradas empiricamente. Siempre REVIEW; no aptas para decisiones automaticas de inversion.",
+  "size_buckets":[{"below":500000000,"premium":0.01},{"below":2000000000,"premium":0.005}],
+  "illiquidity_buckets":[{"below":250000,"premium":0.015},{"below":1000000,"premium":0.0075}],
+  "concentration_buckets":[{"above":0.5,"premium":0.02},{"above":0.25,"premium":0.01}],
+  "multipliers":{"CONSERVATIVE":1.25,"BASE":1,"OPTIMISTIC":0.75},
+  "max_total_adjustment":0.08
+}

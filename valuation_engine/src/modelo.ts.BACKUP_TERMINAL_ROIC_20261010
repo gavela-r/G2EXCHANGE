@@ -1,0 +1,393 @@
+import { ESCENARIOS, type Escenario, type ModeloInput, type Resultado, type ValorEscenario, type WaccEscenario } from './tipos';
+import { construirPrimas } from './riesgo';
+import { procesarNoticias } from './noticias';
+import { calcularWacc, requireNumber } from './wacc';
+import path from 'node:path';
+import fs from 'node:fs';
+import { analizarCrecimiento } from './proyecciones';
+
+const CODE_RX=/^(0[1-9]|1[0-6])$/;
+function clamp(x:number,a:number,b:number){return Math.min(b,Math.max(a,x));}
+export function validarEntrada(data:ModeloInput):void {
+  if(!CODE_RX.test(data.template_code)) throw new Error('template_code 01..16');
+  if(!['US','JP','TW'].includes(data.market)) throw new Error('Solo US, JP y TW habilitados: otros mercados deben bloquearse');
+  if(!data.company_name?.trim()||!data.ticker?.trim()||!data.valuation_run_id||!data.input_snapshot_id) throw new Error('Faltan empresa/ticker/run/snapshot');
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(data.valuation_date)) throw new Error('Fecha YYYY-MM-DD obligatoria');
+  if(data.reporting_currency!==data.valuation_currency||data.currency!==data.valuation_currency||data.fx_rate_used!==1) throw new Error('FX: convertir a moneda de valoraciÃ³n ANTES, no mezclar unidades');
+  const byMarket:{[key:string]:string}={US:'USD',JP:'JPY',TW:'TWD'};
+  if(byMarket[data.market]!==data.valuation_currency) throw new Error(`${data.market}: requiere moneda ${byMarket[data.market]} o proceso FX explÃ­cito`);
+  if(!Array.isArray(data.financials)||data.financials.length!==4||new Set(data.financials.map(x=>x.fiscal_year)).size!==4) throw new Error('Se necesitan exactamente 4 ejercicios distintos');
+  for(let j=1;j<4;j++)if(data.financials[j].fiscal_year<=data.financials[j-1].fiscal_year)throw new Error('Ejercicios FY-3 a FY0 en orden');
+  for(const x of data.financials){
+    requireNumber(x.revenue,'revenue',0.00001);requireNumber(x.ebit,'ebit');
+    requireNumber(x.da,'da',0);
+  if (x.capex !== undefined) requireNumber(x.capex,'capex',0);
+  if (x.nwc_balance !== undefined) {
+    requireNumber(x.nwc_balance, 'nwc_balance');
+  }
+  if (x.change_nwc !== undefined) {
+  requireNumber(x.change_nwc, 'change_nwc');
+}
+  }
+  requireNumber(data.terminal_growth_max,'terminal_growth_max',-0.05,0.05);
+  requireNumber(data.cash_fy0,'cash_fy0',0);
+  if((data.minority_interest_fy0??0)<0) throw new Error('Minority interests deben ser >=0');
+}
+function calcFCFF(data:ModeloInput,w:WaccEscenario,news:{growth:number;capex_ratio:number},cfg:any):ValorEscenario {
+  const years=data.financials,fy0=years[3];
+  const analisisCrecimiento = analizarCrecimiento(years);
+  const prev=years[2];
+  const historicalGrowth=clamp(
+    analisisCrecimiento.weighted_growth,
+    -0.20,
+    0.35
+  );
+  
+  const verificarHipotesis=(e:any,nombre:string,min:number,max:number):number=>{
+    if(!e || typeof e.source!=='string' || !e.source.trim() || typeof e.reference_date!=='string' || !/^\d{4}-\d{2}-\d{2}$/.test(e.reference_date)) throw new Error(nombre+': fuente y fecha obligatorias');
+    return requireNumber(e.value,nombre,min,max);
+  };
+  const cfgGrowth=data.company_assumptions?.sustainable_revenue_growth
+    ? verificarHipotesis(data.company_assumptions.sustainable_revenue_growth,'crecimiento empresa',-0.05,0.15)
+    : requireNumber(cfg.growth,'growth config',-0.2,0.35);
+  const cfgMargin=data.company_assumptions?.terminal_ebit_margin ? verificarHipotesis(data.company_assumptions.terminal_ebit_margin,'margen empresa',-0.3,0.5) : requireNumber(cfg.margin,'margin config',-0.3,0.5);
+  const growth0=clamp(0.6*historicalGrowth+0.4*cfgGrowth+news.growth,-0.20,0.35);
+  // Margen EBIT de los cuatro ejercicios histÃ³ricos.
+  const historicalMargins = years.map(f => f.ebit / f.revenue);
+
+  // PonderaciÃ³n: mayor importancia a los ejercicios recientes.
+  const weightedMargin =
+    historicalMargins[0] * 0.10 +
+    historicalMargins[1] * 0.20 +
+    historicalMargins[2] * 0.30 +
+    historicalMargins[3] * 0.40;
+
+  // CombinaciÃ³n del margen histÃ³rico con la referencia sectorial.
+  const ebit0 = clamp(
+    0.65 * weightedMargin + 0.35 * cfgMargin, -0.30, 0.85);
+  // Margen sostenible especifico de la empresa.
+  // La estabilidad historica determina la confianza en su rentabilidad.
+  const recentMargins = historicalMargins.slice(-3);
+  const meanRecentMargin = recentMargins.reduce(
+    (sum, value) => sum + value, 0
+  ) / recentMargins.length;
+
+  const marginVolatility = Math.sqrt(
+    recentMargins.reduce(
+      (sum, value) => sum + Math.pow(value - meanRecentMargin, 2),
+      0
+    ) / recentMargins.length
+  );
+
+  // Mayor estabilidad: mayor peso de la rentabilidad propia.
+  const companyMarginWeight = clamp(
+    0.80 - 2 * marginVolatility,
+    0.30,
+    0.80
+  );
+
+  const sustainableCompanyMargin = clamp(
+    companyMarginWeight * meanRecentMargin +
+    (1 - companyMarginWeight) * cfgMargin, -0.30, 0.85);
+
+  const delta=w.escenario==='CONSERVATIVE'?-1:w.escenario==='OPTIMISTIC'?1:0;
+  const growth=clamp(growth0+delta*0.035,-0.20,0.35);
+  const margin=clamp(ebit0+delta*0.025,-0.30,0.85);
+ // Ratios histÃ³ricos de amortizaciÃ³n e inversiÃ³n.
+  const historicalDaRatios = years.map(f => f.da / f.revenue);
+  const historicalCapexRatios = years.map(f =>
+  f.capex === undefined || (f.capex === 0 && f.revenue > 0 && f.da > 0) ? null : f.capex / f.revenue
+);
+  // PonderaciÃ³n de los cuatro ejercicios:
+  // 2023: 10 %, 2024: 20 %, 2025: 30 %, 2026: 40 %.
+  const weights = [0.10, 0.20, 0.30, 0.40];
+  
+  const weightedDaRatio = historicalDaRatios.reduce(
+    (sum, ratio, i) => sum + ratio * weights[i],
+    0
+  );
+  
+  const availableCapexWeight = historicalCapexRatios.reduce<number>(
+    (sum, ratio, i) => sum + (ratio === null ? 0 : weights[i]),
+    0
+  );
+
+  if (availableCapexWeight < 0.50) {
+    throw new Error('Datos histÃ³ricos de CAPEX insuficientes para proyectar');
+  }
+
+  const weightedCapexRatio = historicalCapexRatios.reduce<number>(
+    (sum, ratio, i) => sum + (ratio === null ? 0 : ratio * weights[i]),
+    0
+  ) / availableCapexWeight;
+
+  // D&A: estimaciÃ³n basada en los cuatro ejercicios.
+  const daRatio = clamp(
+    weightedDaRatio,
+    0,
+    0.30
+  );
+  
+  // CAPEX: combinaciÃ³n del histÃ³rico y la referencia sectorial.
+  const capexRatio = clamp(
+    0.70 * weightedCapexRatio +
+    0.30 * requireNumber(cfg.capex, 'capex config', 0, 0.40) +
+    news.capex_ratio,
+    0,
+    0.40
+  );
+
+  // NWC operativo: saldo de balance dividido entre ingresos.
+  const historicalNwcRatios = years.map(f =>
+    f.nwc_balance === undefined
+      ? null
+      : f.nwc_balance / f.revenue
+  );
+
+  const availableNwcWeight = historicalNwcRatios.reduce<number>(
+    (sum, ratio, i) => sum + (ratio === null ? 0 : weights[i]),
+    0
+  );
+
+  if (availableNwcWeight < 0.50) {
+    throw new Error('Saldos historicos NWC insuficientes');
+  }
+
+  const weightedNwcRatio = historicalNwcRatios.reduce<number>(
+    (sum, ratio, i) => sum + (ratio === null ? 0 : ratio * weights[i]),
+    0
+  ) / availableNwcWeight;
+
+  const nwcRatio = clamp(weightedNwcRatio, -0.30, 0.50);
+
+  if (fy0.nwc_balance === undefined) {
+    throw new Error('Falta saldo NWC del ultimo ejercicio');
+  }
+
+  let previousNwcBalance = fy0.nwc_balance;
+
+  // Proyeccion dinamica de CAPEX: tendencia reciente y convergencia.
+  const validCapexRatios = historicalCapexRatios.filter(
+    (r): r is number => r !== null && Number.isFinite(r) && r >= 0
+  );
+  const lastCapexRatio = validCapexRatios[validCapexRatios.length - 1];
+  // Regresion log-lineal ponderada sobre los ejercicios validos.
+  // Conserva el indice temporal para no comprimir anos ausentes.
+  const capexObservations = historicalCapexRatios
+    .map((ratio, index) => ({ratio, index}))
+    .filter((o): o is {ratio: number; index: number} =>
+      o.ratio !== null && Number.isFinite(o.ratio) && o.ratio > 0
+    );
+
+  const regressionWeights = capexObservations.map(
+    o => o.index + 1
+  );
+  const totalRegressionWeight = regressionWeights.reduce(
+    (sum, weight) => sum + weight, 0
+  );
+
+  const meanX = capexObservations.reduce(
+    (sum, o, i) => sum + o.index * regressionWeights[i], 0
+  ) / totalRegressionWeight;
+
+  const meanY = capexObservations.reduce(
+    (sum, o, i) => sum + Math.log(o.ratio) * regressionWeights[i], 0
+  ) / totalRegressionWeight;
+
+  const numerator = capexObservations.reduce(
+    (sum, o, i) =>
+      sum + regressionWeights[i] *
+      (o.index - meanX) * (Math.log(o.ratio) - meanY),
+    0
+  );
+
+  const denominator = capexObservations.reduce(
+    (sum, o, i) =>
+      sum + regressionWeights[i] * Math.pow(o.index - meanX, 2),
+    0
+  );
+
+  const recentCapexTrend = denominator > 0
+    ? clamp(Math.exp(numerator / denominator) - 1, -0.30, 0.30)
+    : 0;
+  const sustainableCapexRatio = capexRatio;
+  const fcffs: number[] = [];
+  const projectedEbitMargins: number[] = [];
+  const projectedGrowthRates: number[] = [];
+
+  let revenue = fy0.revenue;
+  let pvSum = 0;
+
+  // Crecimiento sostenible de referencia sectorial.
+  const sustainableGrowth = clamp(cfgGrowth, -0.05, 0.15);
+
+  for (let y = 1; y <= 5; y++) {
+
+    // Convergencia progresiva hacia el crecimiento sostenible.
+    const convergence = (y - 1) / 4;
+
+    const projectedGrowth =
+      growth * (1 - convergence) +
+      sustainableGrowth * convergence;
+
+    projectedGrowthRates.push(projectedGrowth);
+
+    revenue *= 1 + projectedGrowth;
+    // El margen EBIT converge gradualmente hacia la referencia sectorial.
+    // Conservamos el ajuste correspondiente a cada escenario.
+    const projectedMargin = clamp(
+      margin * (1 - convergence) +
+      clamp((data.company_assumptions?.terminal_ebit_margin ? cfgMargin : sustainableCompanyMargin) + delta * 0.025, -0.30, 0.85) * convergence,
+      -0.30, 0.85);
+    
+    projectedEbitMargins.push(projectedMargin);
+    
+    // CAPEX dinamico: tendencia amortiguada y convergencia sectorial.
+    const trendDecay = Math.pow(0.5, y - 1);
+    const trendCapexRatio = clamp(
+      lastCapexRatio * (1 + recentCapexTrend * trendDecay),
+      0,
+      0.40
+    );
+    const projectedCapexRatio = clamp(
+      trendCapexRatio * (1 - convergence) +
+      sustainableCapexRatio * convergence,
+      0,
+      0.40
+    );
+
+    const projectedNwcBalance = revenue * nwcRatio;
+    const projectedNwcChange =
+      projectedNwcBalance - previousNwcBalance;
+
+    previousNwcBalance = projectedNwcBalance;
+
+    const fcff =
+      revenue * (
+        projectedMargin * (1 - data.tax_rate) +
+        daRatio -
+        projectedCapexRatio
+      ) - projectedNwcChange;
+    
+    fcffs.push(fcff);
+
+    pvSum += fcff / Math.pow(1 + w.wacc_ajustado, y);
+  }
+  const g=Math.min(data.terminal_growth_max,requireNumber(cfg.terminal,'terminal',-0.05,0.05));
+  if(w.wacc_ajustado<=g+0.005)throw new Error(`${w.escenario}: WACC-g demasiado pequeÃ±o; tasa no valorable`);
+  const terminal=fcffs[4]*(1+g)/(w.wacc_ajustado-g);
+  const ev=pvSum+terminal/Math.pow(1+w.wacc_ajustado,5);
+  // AuditorÃ­a del peso del valor terminal en el DCF.
+  const terminalPresentValue =
+    terminal / Math.pow(1 + w.wacc_ajustado, 5);
+
+  const terminalValueWeight =
+    ev > 0 ? terminalPresentValue / ev : null;
+  // Advertencia cuando la valoraciÃ³n depende demasiado
+  // de los flujos posteriores al quinto aÃ±o.
+  const terminalValueWarning =
+    terminalValueWeight === null
+      ? 'No se puede determinar el peso del valor terminal.'
+      : terminalValueWeight > 0.80
+        ? 'ALERTA: el valor terminal supera el 80 % del valor de empresa.'
+        : terminalValueWeight > 0.70
+          ? 'AVISO: el valor terminal supera el 70 % del valor de empresa.'
+          : null;
+  const equity=ev-data.gross_debt_fy0+data.cash_fy0-(data.minority_interest_fy0??0);
+  const fv=Math.max(0,equity/data.diluted_shares);
+  const mos=w.escenario==='CONSERVATIVE'?0.30:w.escenario==='BASE'?0.25:0.20;
+  const max=Math.max(0,fv*(1-mos));
+  const decision=fv<=0?'DATA_PENDING':data.price_per_share<=max?'BUY':data.price_per_share<=fv?'WATCH':'WAIT';
+  return {escenario:w.escenario,metodo:'FCFF_DCF_TS_5Y',valor_empresa_millones:ev,valor_patrimonio_millones:equity,
+    fair_value:fv,max_buy_price:max,upside:fv/data.price_per_share-1,decision,
+    wacc:w.wacc_ajustado,
+    terminal_growth:g,
+    terminal_value_weight: terminalValueWeight,
+    terminal_value_warning: terminalValueWarning,
+    proyeccion_fcff:fcffs,
+    projected_growth_rates:projectedGrowthRates,
+    projected_ebit_margins:projectedEbitMargins,
+
+    historical_growth_rates:analisisCrecimiento.historical_growth_rates,
+    historical_cagr:analisisCrecimiento.historical_cagr,
+    weighted_growth:analisisCrecimiento.weighted_growth,
+
+    projection_method:'HISTORICAL_ANALYSIS_V1',
+    projection_confidence:'MEDIUM',
+    nota:'DCF independiente TypeScript; hipÃ³tesis sectoriales configurables y revisiÃ³n humana obligatoria.'};
+}
+function calcEspecial(data:ModeloInput,w:WaccEscenario):ValorEscenario{
+  const code=data.template_code,s=data.sector_specific||{};
+  const result:ValorEscenario={escenario:w.escenario,metodo:code==='15'?'AFFO_GORDON_TS':'DDM_GORDON_TS',
+    valor_empresa_millones:null,valor_patrimonio_millones:null,fair_value:null,max_buy_price:null,
+    upside:null,decision:'DATA_PENDING',wacc:w.wacc_ajustado,terminal_growth:null,proyeccion_fcff:[],
+    nota:'Sin datos especÃ­ficos fiables; ninguna valoraciÃ³n forzada.'};
+  if(code==='13'||code==='14'){
+    if(s.next_dividends_millions===undefined||s.long_term_dividend_growth===undefined)return result;
+    const div=requireNumber(s.next_dividends_millions,'dividendos FY+1',0);
+    const g=requireNumber(s.long_term_dividend_growth,'crecimiento dividendo',-0.03,0.05);
+    // Equity cash flows: WACC inappropriate for banks and insurers.
+    const discount=w.ke+w.prima_total;
+    if(discount<=g+0.01)throw new Error('Ke ajustado debe superar crecimiento DDM >=1 pp');
+    const eq=div/(discount-g);const fair=eq/data.diluted_shares;
+    return {...result,valor_patrimonio_millones:eq,fair_value:fair,max_buy_price:fair*0.75,
+      upside:fair/data.price_per_share-1,decision:fair<=0?'DATA_PENDING':data.price_per_share<=fair*0.75?'BUY':data.price_per_share<=fair?'WATCH':'WAIT',
+      terminal_growth:g,nota:'Modelo DDM especÃ­fico (Ke ajustado; WACC solo informativo). Requiere revisar payout y solvencia.'};
+  }
+  if(s.affo_fy0_millions===undefined||s.affo_growth===undefined)return result;
+  const affo=requireNumber(s.affo_fy0_millions,'affo',0);
+  const g=requireNumber(s.affo_growth,'affo_growth',-0.03,0.05);
+  const discount=w.ke+w.prima_total;
+  if(discount<=g+0.01)throw new Error('Ke ajustado debe superar g AFFO >=1 pp');
+  const eq=affo*(1+g)/(discount-g);const fair=eq/data.diluted_shares;
+  return {...result,valor_patrimonio_millones:eq,fair_value:fair,max_buy_price:fair*0.75,upside:fair/data.price_per_share-1,
+    decision:fair<=0?'DATA_PENDING':data.price_per_share<=fair*0.75?'BUY':data.price_per_share<=fair?'WATCH':'WAIT',
+    terminal_growth:g,nota:'AFFO-Gordon simplificado, solo como referencia en revisiÃ³n; exige AFFO normalizado y estructura financiera.'};
+}
+export function valorar(dataOriginal:ModeloInput,options:{root?:string}={}):Resultado {
+  const data=JSON.parse(JSON.stringify(dataOriginal)) as ModeloInput;
+  validarEntrada(data);
+  const prem=construirPrimas(data);
+  const news=procesarNoticias(data,prem.ajustes);
+  data.diluted_shares*=news.dilutionMultiplier;
+  const wacc=calcularWacc(data,prem.ajustes);
+  const root=options.root||path.resolve(__dirname,'../../');
+  const configFile=fs.readdirSync(path.join(root,'generator/sector_configs')).find(x=>x.startsWith(data.template_code+'_'));
+  if(!configFile)throw new Error(`Sin configuraciÃ³n para plantilla ${data.template_code}`);
+  const cfg=JSON.parse(fs.readFileSync(path.join(root,'generator/sector_configs',configFile),'utf8'));
+  if(cfg.code!==data.template_code)throw new Error('ConfiguraciÃ³n no coincide con template_code');
+  const especial=['13','14','15'].includes(data.template_code);
+  const values=wacc.map(x=>especial?calcEspecial(data,x):calcFCFF(data,x,news.deltas,cfg));
+  const pending=values.some(v=>v.fair_value===null);
+  const warnings=[...prem.warnings];
+  if(pending)warnings.push('Faltan entradas especÃ­ficas para una o mÃ¡s valoraciones sectoriales: NO publicar fair value.');
+  if(news.audit.some(x=>!x.aplicado))warnings.push('Algunas noticias no se aplicaron: revisar auditorÃ­a.');
+  if(especial)warnings.push('Modelos bancario/asegurador/REIT simplificados. No homologados para decisiÃ³n automÃ¡tica.');
+    return {
+    motor: 'G2EXCHANGE_TS_v1.5',
+    company_name: data.company_name,
+    ticker: data.ticker,
+    template_code: data.template_code,
+    valuation_run_id: data.valuation_run_id,
+    input_snapshot_id: data.input_snapshot_id,
+    valuation_date: data.valuation_date,
+
+    status: (prem.method === 'DRAFT_POLICY' || prem.method === 'SIMULATION_ONLY')
+      ? 'REVIEW'
+      : 'PENDING_REVIEW',
+
+    validation_status: pending ? 'BLOCKED' : 'REVIEW',
+
+    currency: data.valuation_currency,
+    premium_methodology: prem.method,
+
+    wacc_scenarios: wacc,
+    valuations: values,
+
+    news_audit: news.audit,
+    warnings,
+
+    information_note:
+      'Resultados para anÃ¡lisis y validaciÃ³n profesional; no sustituyen revisiÃ³n financiera.'
+  };
+}

@@ -269,7 +269,7 @@ Promise<KpiInformeBase[]> {
 // 5. CARGAR PARTIDAS NORMALIZADAS DE UN INFORME
 // ============================================================================
 
-async function kpiCargarPartidas(
+export async function kpiCargarPartidas(
     informeId: number
 ): Promise<KpiPartidas> {
 
@@ -364,7 +364,7 @@ async function kpiCargarPartidas(
 //
 // ============================================================================
 
-function kpiCalcularInforme(
+export function kpiCalcularInforme(
     informeId: number,
     p: KpiPartidas
 ): KpiCalculado[] {
@@ -780,7 +780,7 @@ function kpiCalcularInforme(
 // 7. GUARDAR KPI
 // ============================================================================
 
-async function kpiGuardar(
+export async function kpiGuardar(
     kpis:
         KpiCalculado[]
 ): Promise<number> {

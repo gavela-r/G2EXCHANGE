@@ -1,0 +1,21 @@
+{
+  "code": "02",
+  "slug": "SOFTWARE_SAAS",
+  "name": "Software / SaaS",
+  "family": "FCFF",
+  "metrics": [
+    "arr",
+    "arr_growth",
+    "net_revenue_retention",
+    "churn",
+    "sbc_to_revenue",
+    "rule_of_40"
+  ],
+  "growth": 0.12,
+  "margin": 0.18,
+  "capex": 0.025,
+  "nwc": 0.0,
+  "beta": 1.15,
+  "multiple": 18.0,
+  "terminal": 0.025
+}

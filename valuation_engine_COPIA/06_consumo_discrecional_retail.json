@@ -1,0 +1,88 @@
+{
+  "model_version": "1.5.0",
+  "sheet_convention": [
+    "00_INSTRUCCIONES",
+    "01_CONTROL",
+    "02_DATOS_RAW",
+    "03_NORMALIZACION",
+    "04_METRICAS_SECTOR",
+    "05_AJUSTES_NOTICIAS",
+    "06_DRIVERS",
+    "07_WACC",
+    "08_PROYECCIONES",
+    "09_VALORACION",
+    "10_RESULTADO",
+    "11_OUTPUT_API",
+    "12_MAPEO_SOFTWARE",
+    "13_VALIDACIONES"
+  ],
+  "market_codes": {
+    "US": {
+      "label_key": "market.US",
+      "currency": "USD"
+    },
+    "TW": {
+      "label_key": "market.TW",
+      "currency": "TWD"
+    },
+    "HK": {
+      "label_key": "market.HK",
+      "currency": "HKD"
+    },
+    "CN": {
+      "label_key": "market.CN",
+      "currency": "CNY"
+    },
+    "JP": {
+      "label_key": "market.JP",
+      "currency": "JPY"
+    },
+    "IN": {
+      "label_key": "market.IN",
+      "currency": "INR"
+    }
+  },
+  "enum_codes": {
+    "confidence": [
+      "HIGH",
+      "MEDIUM",
+      "LOW"
+    ],
+    "decision": [
+      "BUY",
+      "WATCH",
+      "WAIT",
+      "DATA_PENDING"
+    ],
+    "status": [
+      "APPROVED",
+      "REVIEW",
+      "BLOCKED"
+    ],
+    "boolean": [
+      "YES",
+      "NO"
+    ],
+    "scenario": [
+      "CONSERVATIVE",
+      "BASE",
+      "OPTIMISTIC"
+    ]
+  },
+  "engine": "TypeScript/Node.js (calculo propio, sin Python ni LibreOffice)",
+  "forbidden_functions": [
+    "TABLE(",
+    "XLOOKUP(",
+    "LET(",
+    "LAMBDA(",
+    "INDIRECT(",
+    "OFFSET("
+  ],
+  "forbidden_features": [
+    "VBA",
+    "ActiveX",
+    "Power Query dependency",
+    "external workbook links"
+  ],
+  "wacc_contract": "CAPM_US_JP_TW_ERP_total_y_spreads_y_4_ajustes_por_escenario"
+}

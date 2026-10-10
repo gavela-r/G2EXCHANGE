@@ -1,0 +1,21 @@
+{
+  "code": "06",
+  "slug": "CONSUMO_DISCRECIONAL_RETAIL",
+  "name": "Consumo discrecional / retail",
+  "family": "FCFF",
+  "metrics": [
+    "same_store_sales",
+    "average_ticket",
+    "traffic",
+    "inventory_to_revenue",
+    "store_margin",
+    "net_store_openings"
+  ],
+  "growth": 0.05,
+  "margin": 0.09,
+  "capex": 0.035,
+  "nwc": 0.015,
+  "beta": 1.05,
+  "multiple": 9.0,
+  "terminal": 0.0225
+}

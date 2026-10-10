@@ -1423,7 +1423,7 @@ export async function actualizarPartidasContablesJapon(
 // TAXONOMIA MINIMA - USA
 // ============================================================================
 
-const PCV_CONCEPTOS: PCVConceptoDef[] = [
+export const PCV_CONCEPTOS: PCVConceptoDef[] = [
     {
     codigo: "INGRESOS",
     categoria: "CUENTA_RESULTADOS",
@@ -1434,9 +1434,7 @@ const PCV_CONCEPTOS: PCVConceptoDef[] = [
         "RevenueFromContractWithCustomerExcludingAssessedTax",
         "RevenueFromContractWithCustomerIncludingAssessedTax",
 
-        // Revenue fuera de ASC 606
-        "RevenueNotFromContractWithCustomer",
-        "RevenueNotFromContractWithCustomerOther",
+    
 
         // =====================================================
         // TOTALES GENERALES
@@ -2116,6 +2114,16 @@ function pcvNormalizarCIK(cik: number | string): string {
 function pcvFecha(valor: unknown): string | null {
     if (!valor) return null;
 
+    if (valor instanceof Date) {
+        if (!Number.isFinite(valor.getTime())) return null;
+
+        const year = valor.getFullYear();
+        const month = String(valor.getMonth() + 1).padStart(2, "0");
+        const day = String(valor.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
     const s = String(valor).trim().slice(0, 10);
 
     return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : null;
@@ -2343,7 +2351,7 @@ function pcvAgruparPorEmpresa(informes: PCVInformeUSA[]): Map<number, PCVInforme
 // COMPANYFACTS - USA
 // ============================================================================
 
-async function pcvDescargarCompanyFacts(cik: string): Promise<any> {
+export async function pcvDescargarCompanyFacts(cik: string): Promise<any> {
     const url = `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`;
 
     return await pcvFetchSEC(url);
@@ -2353,7 +2361,7 @@ async function pcvDescargarCompanyFacts(cik: string): Promise<any> {
 // CANDIDATOS DE UN TAG PARA UN INFORME - USA
 // ============================================================================
 
-function pcvCandidatosTag(
+export function pcvCandidatosTag(
     companyFacts: any,
     tag: string,
     informe: PCVInformeUSA
@@ -2434,7 +2442,7 @@ function pcvCandidatosTag(
 // - accessionNumber debe coincidir exactamente.
 // ============================================================================
 
-function pcvElegirMejorFact(
+export function pcvElegirMejorFact(
     candidatos: PCVCandidatoFact[],
     informe: PCVInformeUSA,
     categoria: string
@@ -2447,6 +2455,29 @@ function pcvElegirMejorFact(
     let mejorScore = -Infinity;
 
     for (const c of candidatos) {
+                // Validar que el dato pertenece al periodo del informe.
+        if (!informe.fecha_fin_periodo || c.end !== informe.fecha_fin_periodo) {
+            continue;
+        }
+
+        const dias = pcvDiasEntre(c.start, c.end);
+
+        if (categoria === "BALANCE") {
+            // El balance representa una fecha concreta.
+            if (c.start !== null) {
+                continue;
+            }
+        } else if (informe.tipo_periodo.toUpperCase() === "ANUAL") {
+            // Admitir ejercicios fiscales de 52 o 53 semanas.
+            if (dias === null || dias < 350 || dias > 380) {
+                continue;
+            }
+        } else if (informe.tipo_periodo.toUpperCase() === "TRIMESTRAL") {
+            // Admitir trimestres fiscales de duración variable.
+            if (dias === null || dias < 75 || dias > 105) {
+                continue;
+            }
+        }
         let score = 0;
 
         if (informe.fecha_fin_periodo && c.end === informe.fecha_fin_periodo) {
@@ -2498,7 +2529,7 @@ function pcvElegirMejorFact(
 // EXTRAER PARTIDAS NORMALIZADAS DE UN INFORME - USA
 // ============================================================================
 
-function pcvExtraerPartidasInforme(
+export function pcvExtraerPartidasInforme(
     companyFacts: any,
     informe: PCVInformeUSA,
     taxonomiaIds: Map<string, number>
@@ -2544,56 +2575,109 @@ function pcvExtraerPartidasInforme(
 // GUARDAR PARTIDAS - USA
 // ============================================================================
 
-async function pcvGuardarPartidas(partidas: PCVPartidaPreparada[]): Promise<number> {
-    if (partidas.length === 0) {
-        return 0;
-    }
+export async function pcvGuardarPartidas(
+    partidas: PCVPartidaPreparada[]
+): Promise<number> {
+    if (partidas.length === 0) return 0;
 
     const db = conexion as any;
+
+    // Una única partida por informe y concepto.
     const mapa = new Map<string, PCVPartidaPreparada>();
 
     for (const p of partidas) {
         mapa.set(`${p.informeId}|${p.conceptoEstandarId}`, p);
     }
 
-    const valores = Array.from(mapa.values()).map(p => [
-        p.informeId,
-        p.conceptoEstandarId,
-        p.conceptoOriginal,
-        p.importe,
-        p.nivelConfianza
-    ]);
+    const partidasUnicas = Array.from(mapa.values());
+    const connection = await db.getConnection();
 
-    const TAMANO_LOTE = 1000;
-    let total = 0;
+    try {
+        await connection.beginTransaction();
 
-    for (let i = 0; i < valores.length; i += TAMANO_LOTE) {
-        const lote = valores.slice(i, i + TAMANO_LOTE);
+        for (const p of partidasUnicas) {
+            // Bloquear los registros existentes de esta partida.
+            const [existentes]: any = await connection.query(
+                `
+                SELECT id
+                FROM partida_contable_valor
+                WHERE informe_id = ?
+                  AND concepto_estandar_id = ?
+                ORDER BY id ASC
+                FOR UPDATE
+                `,
+                [p.informeId, p.conceptoEstandarId]
+            );
 
-        const [resultado]: any = await db.query(
-            `
-            INSERT INTO partida_contable_valor (
-                informe_id,
-                concepto_estandar_id,
-                concepto,
-                importe,
-                nivel_confianza
-            )
-            VALUES ?
-            ON DUPLICATE KEY UPDATE
-                concepto = VALUES(concepto),
-                importe = VALUES(importe),
-                nivel_confianza = VALUES(nivel_confianza)
-            `,
-            [lote]
-        );
+            if (existentes.length === 0) {
+                // No existe: insertar.
+                await connection.query(
+                    `
+                    INSERT INTO partida_contable_valor
+                    (
+                        informe_id,
+                        concepto_estandar_id,
+                        concepto,
+                        importe,
+                        nivel_confianza
+                    )
+                    VALUES (?, ?, ?, ?, ?)
+                    `,
+                    [
+                        p.informeId,
+                        p.conceptoEstandarId,
+                        p.conceptoOriginal,
+                        p.importe,
+                        p.nivelConfianza
+                    ]
+                );
+            } else {
+                // Existe: actualizar el registro más antiguo.
+                const idConservar = Number(existentes[0].id);
 
-        total += Number(resultado?.affectedRows || lote.length);
+                await connection.query(
+                    `
+                    UPDATE partida_contable_valor
+                    SET concepto = ?,
+                        importe = ?,
+                        nivel_confianza = ?
+                    WHERE id = ?
+                    `,
+                    [
+                        p.conceptoOriginal,
+                        p.importe,
+                        p.nivelConfianza,
+                        idConservar
+                    ]
+                );
+
+                // Eliminar los duplicados de esta partida.
+                if (existentes.length > 1) {
+                    const idsEliminar = existentes
+                        .slice(1)
+                        .map((r: any) => Number(r.id));
+
+                    await connection.query(
+                        `
+                        DELETE FROM partida_contable_valor
+                        WHERE id IN (?)
+                        `,
+                        [idsEliminar]
+                    );
+                }
+            }
+        }
+
+        await connection.commit();
+
+        return partidasUnicas.length;
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
     }
-
-    return total;
 }
-
 // ============================================================================
 // MOTOR PRINCIPAL - USA
 // ============================================================================
@@ -4356,12 +4440,14 @@ export async function actualizarPartidasContablesTaiwanOptimizado(
 // Si USA/Japon estan en el mismo archivo, comentar sus ejecuciones directas.
 // ============================================================================
 
-ejecutarCargaPartidasContablesTaiwanOptimizado()
-  .then(resultado => {
-      console.log("\n=== PARTIDA_CONTABLE_VALOR TAIWAN OPTIMIZADO FINALIZADO ===");
-      console.log(resultado);
- })
-  .catch(error => {
-      console.error("\n=== ERROR CRITICO TAIWAN OPTIMIZADO ===", error);
-      process.exitCode = 1;
-  });
+if (require.main === module) {
+    ejecutarCargaPartidasContablesTaiwanOptimizado()
+        .then(resultado => {
+            console.log("\n=== PARTIDA_CONTABLE_VALOR TAIWAN OPTIMIZADO FINALIZADO ===");
+            console.log(resultado);
+        })
+        .catch(error => {
+            console.error("\n=== ERROR CRITICO TAIWAN OPTIMIZADO ===", error);
+            process.exitCode = 1;
+        });
+}

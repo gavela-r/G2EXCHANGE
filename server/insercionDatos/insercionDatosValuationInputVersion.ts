@@ -199,15 +199,16 @@ function vivFecha(
     }
 
     // MySQL puede devolver DATE como objeto Date de JavaScript
-    if (
-        valor instanceof Date &&
-        Number.isFinite(valor.getTime())
-    ) {
+  if (
+    valor instanceof Date &&
+    Number.isFinite(valor.getTime())
+) {
+    const year = valor.getFullYear();
+    const month = String(valor.getMonth() + 1).padStart(2, "0");
+    const day = String(valor.getDate()).padStart(2, "0");
 
-        return valor
-            .toISOString()
-            .slice(0, 10);
-    }
+    return `${year}-${month}-${day}`;
+}
 
     // Si ya viene como string YYYY-MM-DD
     const s =
@@ -556,7 +557,7 @@ function vivNivelConfianza(
 // 9. CREAR SNAPSHOT
 // ============================================================================
 
-async function vivConstruirSnapshot(
+export async function vivConstruirSnapshot(
     informe: VIVInforme
 ): Promise<VIVSnapshot> {
 
@@ -724,7 +725,7 @@ async function vivConstruirSnapshot(
 // 10. GUARDAR VERSION
 // ============================================================================
 
-async function vivGuardarVersion(
+export async function vivGuardarVersion(
     snapshot: VIVSnapshot
 ): Promise<number> {
 
@@ -798,7 +799,40 @@ async function vivGuardarVersion(
         )
 
         ON DUPLICATE KEY UPDATE
-            id = id
+        ingresos = VALUES(ingresos),
+        ebitda = VALUES(ebitda),
+        depreciacion_amortizacion = VALUES(depreciacion_amortizacion),
+        ebit = VALUES(ebit),
+        gasto_intereses = VALUES(gasto_intereses),
+        beneficio_antes_impuestos = VALUES(beneficio_antes_impuestos),
+        impuesto_beneficios = VALUES(impuesto_beneficios),
+        beneficio_neto = VALUES(beneficio_neto),
+        efectivo = VALUES(efectivo),
+        cuentas_cobrar = VALUES(cuentas_cobrar),
+        inventarios = VALUES(inventarios),
+        cuentas_pagar = VALUES(cuentas_pagar),
+        deuda_corto_plazo = VALUES(deuda_corto_plazo),
+        deuda_largo_plazo = VALUES(deuda_largo_plazo),
+        deuda_total = VALUES(deuda_total),
+        deuda_neta = VALUES(deuda_neta),
+        patrimonio_neto = VALUES(patrimonio_neto),
+        activos_totales = VALUES(activos_totales),
+        pasivos_totales = VALUES(pasivos_totales),
+        capital_circulante_operativo = VALUES(capital_circulante_operativo),
+        flujo_caja_operativo = VALUES(flujo_caja_operativo),
+        capex = VALUES(capex),
+        fcf = VALUES(fcf),
+        dividendos_pagados = VALUES(dividendos_pagados),
+        acciones_en_circulacion = VALUES(acciones_en_circulacion),
+        margen_ebit = VALUES(margen_ebit),
+        margen_ebitda = VALUES(margen_ebitda),
+        margen_neto = VALUES(margen_neto),
+        margen_fcf = VALUES(margen_fcf),
+        roa = VALUES(roa),
+        roe = VALUES(roe),
+        cobertura_intereses = VALUES(cobertura_intereses),
+        nivel_confianza = VALUES(nivel_confianza),
+        hash_inputs = VALUES(hash_inputs)
         `,
         [
             snapshot.empresa_id,

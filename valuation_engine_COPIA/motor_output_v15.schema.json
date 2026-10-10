@@ -1,0 +1,21 @@
+{
+  "code": "12",
+  "slug": "FARMA_BIOTEC_MEDTECH",
+  "name": "Farma / biotecnología / MedTech",
+  "family": "PHARMA",
+  "metrics": [
+    "product_revenue",
+    "patent_expiry_year",
+    "pipeline_assets",
+    "probability_of_success",
+    "rd_to_revenue",
+    "product_concentration"
+  ],
+  "growth": 0.08,
+  "margin": 0.2,
+  "capex": 0.03,
+  "nwc": 0.01,
+  "beta": 1.0,
+  "multiple": 14.0,
+  "terminal": 0.0225
+}

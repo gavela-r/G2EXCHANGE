@@ -1,0 +1,102 @@
+/**
+ * G2EXCHANGE - READ ONLY. No credentials in this package, no writes on import.
+ * This function takes an existing mysql2/promise Pool from server/conexion/bd.ts.
+ * It REQUIRES explicit unit declarations. Risk input evidence is supplied separately.
+ */
+import type { Pool, RowDataPacket } from 'mysql2/promise';
+import type { ModeloInput } from '../tipos';
+import { pctMysql } from '../wacc';
+export type Unidad='UNITS'|'MILLIONS';
+export interface ImportOptions {
+  financialUnit:Unidad;sharesUnit:Unidad;templateCode:string;
+  /** FX not inferred; both accounts and share price must already be same currency */
+  riskInputs?:ModeloInput['risk_inputs'];
+  sectorSpecific?:ModeloInput['sector_specific'];
+  /** Cambios anuales del NWC no monetario, de FY-3 a FY0, en millones; verificarlos. */
+  changeNwcMillions:[number,number,number,number];
+}
+function num(x:unknown,n:string,canNull=false):number {
+  if(x===null||x===undefined||x===''){
+    if(canNull) return 0;
+    throw new Error(`Falta campo ${n}; no sustituimos NULL por cero`);
+  }
+  const v=Number(x);if(!Number.isFinite(v)) throw new Error(`Campo ${n} no es numérico`);return v;
+}
+function dbDate(x:unknown):string {
+  if(x instanceof Date)return x.toISOString().slice(0,10);
+  const str=String(x??'');
+  if(!/^\d{4}-\d{2}-\d{2}/.test(str))throw new Error('Fecha MySQL no válida');return str.slice(0,10);
+}
+export async function exportarInputDesdeRun(pool:Pool,runId:number,opts:ImportOptions):Promise<ModeloInput>{
+  if(!Number.isSafeInteger(runId)||runId<=0)throw new Error('runId debe ser un entero positivo');
+  if(!opts||!['UNITS','MILLIONS'].includes(opts.financialUnit)||!['UNITS','MILLIONS'].includes(opts.sharesUnit))throw new Error('Declarar unidades de dinero y acciones');
+  if(!Array.isArray(opts.changeNwcMillions)||opts.changeNwcMillions.length!==4||opts.changeNwcMillions.some(v=>!Number.isFinite(v)))throw new Error('Aportar changeNwcMillions (4 flujos anuales en millones) desde fuentes verificadas');
+  if(!/^(0[1-9]|1[0-6])$/.test(opts.templateCode))throw new Error('Código plantilla inválido');
+  const [records]=await pool.query<RowDataPacket[]>(`
+    SELECT vr.id run_id,vr.empresa_id,vr.input_snapshot_id,vr.template_code,vr.estado,vr.valuation_method_family,
+           vs.fecha_valoracion,vs.precio_usado,vs.reporting_currency,vs.valuation_currency,vs.fx_rate_used,
+           vs.synthetic_rating,vs.interest_coverage,vs.rating_sintetico_id,
+           e.nombre_empresa,p.codigo_iso,p.interes_bono_10_ano,p.prima_riesgo_mercado,p.tasa_impositiva,
+           s.sensibilidad_al_mercado,r.spread_credito_base,r.spread_credito_optimista,r.spread_credito_pesimista
+    FROM valuation_run vr
+    JOIN valuation_input_snapshot vs ON vs.id=vr.input_snapshot_id AND vs.empresa_id=vr.empresa_id
+    JOIN empresa e ON e.id=vr.empresa_id
+    JOIN pais p ON p.id=e.pais_id
+    JOIN sector s ON s.id=e.sector_id
+    LEFT JOIN rating_sintetico r ON r.id=vs.rating_sintetico_id
+    WHERE vr.id=? LIMIT 1`,[runId]);
+  if(records.length!==1) throw new Error('RUN inexistente o no enlazado con empresa/snapshot');
+  const row=records[0];
+  if(row.estado!=='PREPARANDO')throw new Error('Solo exportar RUN PREPARANDO; histórico ya existente NO se vuelve a calcular');
+  if(String(row.template_code)!==opts.templateCode)throw new Error(`Template del RUN (${row.template_code}) no coincide con ${opts.templateCode}`);
+  if(!['US','JP','TW'].includes(String(row.codigo_iso))) throw new Error('Mercado bloqueado');
+  if(row.reporting_currency!==row.valuation_currency || num(row.fx_rate_used,'FX')!==1)throw new Error('Monedas mezcladas; conversión FX fuera de este adaptador');
+  const [inst]=await pool.query<RowDataPacket[]>(`SELECT id,ticker,isin,moneda FROM instrumento WHERE empresa_id=? AND moneda=? ORDER BY id ASC LIMIT 1`,[row.empresa_id,row.valuation_currency]);
+  if(inst.length!==1)throw new Error('No hay instrumento principal válido; selección manual requerida');
+  const [years]=await pool.query<RowDataPacket[]>(`
+    SELECT v.id,v.fecha_fin_periodo,v.moneda,v.ingresos,v.ebitda,v.ebit,v.beneficio_neto,
+           v.impuesto_beneficios,v.depreciacion_amortizacion,v.capex,
+           v.capital_circulante_operativo,v.flujo_caja_operativo,v.fcf,v.efectivo,
+           v.deuda_corto_plazo,v.deuda_largo_plazo,v.patrimonio_neto,v.activos_totales,
+           v.pasivos_totales,v.dividendos_pagados,v.acciones_en_circulacion
+    FROM valuation_input_snapshot_detalle d
+    JOIN valuation_input_version v ON v.id=d.valuation_input_version_id
+    WHERE d.snapshot_id=? ORDER BY d.orden_ejercicio ASC`,[row.input_snapshot_id]);
+  if(years.length!==4)throw new Error('El snapshot debe contener 4 ejercicios antes de crear una valoración');
+  const fac=opts.financialUnit==='UNITS'?1e6:1;
+  const facS=opts.sharesUnit==='UNITS'?1e6:1;
+  const fy=years.map((x,index)=>{
+    if(x.moneda && String(x.moneda)!==row.valuation_currency)throw new Error(`Moneda de VIV ${x.id} no coincide con moneda valoración`);
+    const part=(field:string)=>num(x[field],`${field} FY ${index}`)/fac;
+    // Not all source metrics required in original schema; when absent, fail rather than fabricate.
+    return {fiscal_year:Number(dbDate(x.fecha_fin_periodo).slice(0,4)),
+      revenue:part('ingresos'),ebitda:part('ebitda'),ebit:part('ebit'),net_income:part('beneficio_neto'),
+      taxes_paid:part('impuesto_beneficios'),da:part('depreciacion_amortizacion'),
+      capex:Math.abs(part('capex')),
+      // A change in working capital must be FLOW; never substitute the LEVEL capital_circulante_operativo.
+      change_nwc:opts.changeNwcMillions[index],
+      operating_cash_flow:part('flujo_caja_operativo'),free_cash_flow:part('fcf'),cash:part('efectivo'),
+      gross_debt:(num(x.deuda_corto_plazo,'deuda CP')+num(x.deuda_largo_plazo,'deuda LP'))/fac,
+      equity:part('patrimonio_neto'),total_assets:part('activos_totales'),total_liabilities:part('pasivos_totales'),
+      dividends:Math.abs(part('dividendos_pagados')),diluted_shares:num(x.acciones_en_circulacion,'acciones')/facS};
+  });
+  // Noncash NWC changes are injected explicitly from auditable financial sources.
+  const v0=fy[3];
+  return {
+    template_code:opts.templateCode,company_id:Number(row.empresa_id),instrument_id:Number(inst[0].id),
+    company_name:String(row.nombre_empresa),ticker:String(inst[0].ticker),market:String(row.codigo_iso) as ModeloInput['market'],
+    valuation_date:dbDate(row.fecha_valoracion),currency:String(row.valuation_currency),valuation_run_id:runId,
+    input_snapshot_id:Number(row.input_snapshot_id),reporting_currency:String(row.reporting_currency),
+    valuation_currency:String(row.valuation_currency),fx_rate_used:num(row.fx_rate_used,'fx_rate_used'),
+    price_per_share:num(row.precio_usado,'precio'),diluted_shares:v0.diluted_shares,
+    gross_debt_fy0:v0.gross_debt,cash_fy0:v0.cash,
+    risk_free_rate:pctMysql(row.interes_bono_10_ano,'Rf'),sector_beta:num(row.sensibilidad_al_mercado,'beta'),
+    equity_risk_premium:pctMysql(row.prima_riesgo_mercado,'ERP'),tax_rate:pctMysql(row.tasa_impositiva,'impuestos'),
+    synthetic_rating:String(row.synthetic_rating??'NOT_PROVIDED'),interest_coverage:num(row.interest_coverage,'cobertura',true),
+    credit_spread:pctMysql(row.spread_credito_base,'spread base'),
+    spread_credito_optimista:pctMysql(row.spread_credito_optimista,'spread optimista'),
+    spread_credito_pesimista:pctMysql(row.spread_credito_pesimista,'spread conservador'),
+    terminal_growth_max:0.025,financials:fy,risk_inputs:opts.riskInputs,sector_specific:opts.sectorSpecific,
+    confidence:'MEDIUM',data_version:'EXPORTED_FROM_DB_NEEDS_NWC_RECONCILIATION'
+  };
+}

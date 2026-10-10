@@ -1,0 +1,202 @@
+{
+  "motor": "G2EXCHANGE_TS_v1.5",
+  "company_name": "EMPRESA FICTICIA PARA PRUEBAS",
+  "ticker": "DEMO",
+  "template_code": "03",
+  "valuation_run_id": "DEMO-RUN-001",
+  "input_snapshot_id": "DEMO-SNAPSHOT-001",
+  "valuation_date": "2026-10-08",
+  "status": "REVIEW",
+  "validation_status": "REVIEW",
+  "currency": "USD",
+  "premium_methodology": "DRAFT_POLICY",
+  "wacc_scenarios": [
+    {
+      "escenario": "CONSERVATIVE",
+      "rf": 0.0468,
+      "beta": 2.1258,
+      "erp": 0.0446,
+      "ke": 0.14161068,
+      "spread_credito": 0.006,
+      "kd": 0.0528,
+      "kd_neto": 0.03929904,
+      "equity_market_value_millions": 80000,
+      "debt_financial_millions": 20000,
+      "peso_patrimonio": 0.8,
+      "peso_deuda": 0.2,
+      "impuesto": 0.2557,
+      "wacc_financiero": 0.12114835199999999,
+      "ajustes": {
+        "prima_iliquidez": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "prima_tamano": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "prima_concentracion_clientes": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "otros_ajustes_wacc": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / sin ajuste adicional",
+          "reference_date": "2026-10-08"
+        }
+      },
+      "prima_total": 0,
+      "wacc_ajustado": 0.12114835199999999
+    },
+    {
+      "escenario": "BASE",
+      "rf": 0.0468,
+      "beta": 2.1258,
+      "erp": 0.0446,
+      "ke": 0.14161068,
+      "spread_credito": 0.004,
+      "kd": 0.0508,
+      "kd_neto": 0.037810439999999994,
+      "equity_market_value_millions": 80000,
+      "debt_financial_millions": 20000,
+      "peso_patrimonio": 0.8,
+      "peso_deuda": 0.2,
+      "impuesto": 0.2557,
+      "wacc_financiero": 0.12085063199999999,
+      "ajustes": {
+        "prima_iliquidez": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "prima_tamano": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "prima_concentracion_clientes": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "otros_ajustes_wacc": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / sin ajuste adicional",
+          "reference_date": "2026-10-08"
+        }
+      },
+      "prima_total": 0,
+      "wacc_ajustado": 0.12085063199999999
+    },
+    {
+      "escenario": "OPTIMISTIC",
+      "rf": 0.0468,
+      "beta": 2.1258,
+      "erp": 0.0446,
+      "ke": 0.14161068,
+      "spread_credito": 0.003,
+      "kd": 0.049800000000000004,
+      "kd_neto": 0.037066140000000004,
+      "equity_market_value_millions": 80000,
+      "debt_financial_millions": 20000,
+      "peso_patrimonio": 0.8,
+      "peso_deuda": 0.2,
+      "impuesto": 0.2557,
+      "wacc_financiero": 0.12070177199999998,
+      "ajustes": {
+        "prima_iliquidez": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "prima_tamano": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "prima_concentracion_clientes": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / DEMO - no utilizar para inversión",
+          "reference_date": "2026-10-08"
+        },
+        "otros_ajustes_wacc": {
+          "value": 0,
+          "source": "DRAFT_POLICY v1.5 / sin ajuste adicional",
+          "reference_date": "2026-10-08"
+        }
+      },
+      "prima_total": 0,
+      "wacc_ajustado": 0.12070177199999998
+    }
+  ],
+  "valuations": [
+    {
+      "escenario": "CONSERVATIVE",
+      "metodo": "FCFF_DCF_TS_5Y",
+      "valor_empresa_millones": 52501.29756577969,
+      "valor_patrimonio_millones": 44501.29756577969,
+      "fair_value": 44.501297565779694,
+      "max_buy_price": 31.150908296045785,
+      "upside": -0.4437337804277538,
+      "decision": "WAIT",
+      "wacc": 0.12114835199999999,
+      "terminal_growth": 0.025,
+      "proyeccion_fcff": [
+        4688.9121,
+        4991.8158216599995,
+        5257.38042337231,
+        5477.138925069274,
+        5643.643948391379
+      ],
+      "nota": "DCF independiente TypeScript; hipótesis sectoriales configurables y revisión humana obligatoria."
+    },
+    {
+      "escenario": "BASE",
+      "metodo": "FCFF_DCF_TS_5Y",
+      "valor_empresa_millones": 80643.96622749284,
+      "valor_patrimonio_millones": 72643.96622749284,
+      "fair_value": 72.64396622749284,
+      "max_buy_price": 54.482974670619626,
+      "upside": -0.09195042215633953,
+      "decision": "WAIT",
+      "wacc": 0.12085063199999999,
+      "terminal_growth": 0.025,
+      "proyeccion_fcff": [
+        6701.996399999998,
+        7334.329760339998,
+        7904.207182718416,
+        8386.759031223377,
+        8759.131132209694
+      ],
+      "nota": "DCF independiente TypeScript; hipótesis sectoriales configurables y revisión humana obligatoria."
+    },
+    {
+      "escenario": "OPTIMISTIC",
+      "metodo": "FCFF_DCF_TS_5Y",
+      "valor_empresa_millones": 113935.34372254598,
+      "valor_patrimonio_millones": 105935.34372254598,
+      "fair_value": 105.93534372254598,
+      "max_buy_price": 84.74827497803679,
+      "upside": 0.32419179653182484,
+      "decision": "BUY",
+      "wacc": 0.12070177199999998,
+      "terminal_growth": 0.025,
+      "proyeccion_fcff": [
+        8832.307949999997,
+        9928.397366594996,
+        10943.079577461005,
+        11821.808867531125,
+        12512.20250539494
+      ],
+      "nota": "DCF independiente TypeScript; hipótesis sectoriales configurables y revisión humana obligatoria."
+    }
+  ],
+  "news_audit": [],
+  "warnings": [
+    "Reglas orientativas no calibradas empiricamente. Siempre REVIEW; no aptas para decisiones automaticas de inversion."
+  ],
+  "information_note": "Resultados para análisis y validación profesional; no sustituyen revisión financiera."
+}

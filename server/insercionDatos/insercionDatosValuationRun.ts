@@ -1,5 +1,6 @@
 import conexion from "../conexion/bd";
 import type { ResultSetHeader, RowDataPacket } from "mysql2/promise";
+import { resolverConfiguracionFinanciera } from "../src/valoracion/motorServicio";
 
 // ============================================================================
 // INSERTAR VALUATION_RUN
@@ -13,10 +14,27 @@ async function main() {
         const snapshotId = 2;
         const modelVersionId = 1;
 
-        // Plantilla 01: Defensa / Aeroespacial
-        // Método FCFF: Flujo de caja libre para la empresa
-        const templateCode = "01";
-        const valuationMethodFamily = "FCFF";
+        // Obtener el sector real de la empresa desde MySQL.
+        const [empresas] = await conexion.query<RowDataPacket[]>(
+            `
+            SELECT sector_id
+            FROM empresa
+            WHERE id = ?
+            `,
+            [empresaId]
+        );
+
+        if (empresas.length !== 1) {
+            throw new Error("Empresa inexistente o sin clasificación sectorial.");
+        }
+
+        // Resolver la plantilla financiera correspondiente.
+        const sectorId = Number(empresas[0].sector_id);
+
+        const {
+            templateCode,
+            valuationMethodFamily
+        } = resolverConfiguracionFinanciera(sectorId);       
 
         // ====================================================================
         // COMPROBAR QUE EL SNAPSHOT PERTENECE A LA EMPRESA

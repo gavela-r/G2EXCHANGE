@@ -17,6 +17,8 @@ Conservar por separado el dump final, su hash, `.env`, `valuation_engine/archive
 
 En otro ordenador, instalar MySQL 8, clonar la rama segura, instalar dependencias y configurar `.env`. Arrancar un contenedor de recuperación con una contraseña elegida localmente y el puerto configurado. No cambiar contraseñas del contenedor original.
 
+Con Docker Compose, configurar `G2_MYSQL_VOLUME=g2exchange-mysql-data` en la copia privada de `.env`, ejecutar `docker volume create g2exchange-mysql-data` y `docker compose up -d mysql`. El `.env` restaurado contiene el nombre del volumen del ordenador original: cambiarlo antes del arranque en un equipo diferente. No ejecutar `down -v` ni eliminar volúmenes. El contenedor original no se recreó durante esta intervención.
+
 ```powershell
 node server/scripts/restaurar-db.cjs ruta-privada/backup.sql g2_recovery_nuevo
 node server/scripts/estado-db.cjs g2_recovery_nuevo
@@ -31,6 +33,8 @@ npm.cmd --prefix server run valuation:replay -- 533
 ```
 
 El checkpoint puede trasladarse con sus datos privados. Si incluye un lock de otro equipo, comprobar primero que el worker anterior está detenido. Usar un directorio nuevo permite reconciliar con seguridad gracias a la idempotencia de MySQL; no borrar un lock perteneciente a un worker activo.
+
+Backup final verificado: `private_backups/g2-2026-10-12T16-25-48-542Z.sql`, 298.305.198 bytes, SHA-256 `aa07bc26d0e7a0d64ac843804818a1278abefeb3a1de9b763b39139c6a58c6a5`. Restaurado en `g2_recovery_release_20261012`: todas las tablas coinciden por checksum con producción y el replay del run 533 devuelve `reproduced:true`. El tar privado tiene SHA-256 `dd4bc14e22a76e84bdd26a4761f7b35038e9991e8a0348e4641bf947882b103d`; contiene secretos y no debe publicarse.
 
 ## Migraciones y reversión
 

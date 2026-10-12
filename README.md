@@ -44,13 +44,22 @@ $env:G2_RECONCILIATION_MINUTES='60'
 npm.cmd run valuation:watch -- --dry-run --directory server/resultados_valoraciones/servicio-dry
 ```
 
-Arranque en primer plano; parada con Ctrl+C. SIGTERM también termina el lote tras el instrumento actual, libera la conexión y conserva el checkpoint. Para activar escrituras, ejecutar el mismo comando con `--write` en **otro directorio** después de comprobar datos y backup. No se dejó un worker masivo escribiendo sin supervisión. El watch reconcilia los datos ya presentes en MySQL; no descarga por sí solo informes ni precios. Los importadores son procesos separados y algunos requieren claves gratuitas configuradas por el propietario.
+Arranque en primer plano; parada con Ctrl+C. SIGTERM también termina el lote tras el instrumento actual, libera la conexión y conserva el checkpoint. El servicio Docker quedó **activo con escrituras**, después de superar los lotes progresivos y pruebas de integridad, con intervalo de 60 minutos. Reconcilia los datos ya presentes en MySQL; no descarga por sí solo informes, precios ni parámetros macroeconómicos. Los importadores son procesos separados y algunos requieren claves gratuitas configuradas por el propietario.
+
+```powershell
+docker compose --profile automation up -d --no-deps valuation-watch
+docker compose --profile automation stop -t 30 valuation-watch
+docker compose --profile automation start valuation-watch
+docker compose --profile automation logs --tail 30 valuation-watch
+```
+
+La reanudación usa el checkpoint automáticamente. No ejecutar otro worker sobre `servicio`. Docker y el ordenador deben seguir encendidos; no hay alojamiento remoto contratado. MySQL referencia un volumen externo mediante `G2_MYSQL_VOLUME`: la configuración privada local conserva el volumen original. En otro equipo usar un volumen nuevo (`docker volume create g2exchange-mysql-data`) y restaurar el backup; el nombre de volumen del equipo original no traslada sus datos.
 
 ## Clasificación con evidencia
 
 ```powershell
 node server/scripts/clasificar-sec.cjs --limit 25
-node server/scripts/clasificar-sec.cjs --limit 100 --offset 100 --write
+node server/scripts/clasificar-sec.cjs --limit 100 --offset 500 --write
 node server/scripts/clasificar-finmind.cjs ruta-privada/TaiwanStockInfo.json
 node server/scripts/clasificar-finmind.cjs ruta-privada/TaiwanStockInfo.json --write
 node server/scripts/revisar-clasificacion.cjs dictamen-privado.json

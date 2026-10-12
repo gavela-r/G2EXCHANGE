@@ -33,6 +33,8 @@ services:
     ports:
       - "3307:3306"
     container_name: mysql_valoracion
+    volumes:
+      - mysql-data:/var/lib/mysql
 
   valuation-watch:
     profiles: [automation]
@@ -52,3 +54,8 @@ services:
     volumes:
       - ./valuation_engine/archives:/app/valuation_engine/archives
       - ./server/resultados_valoraciones/servicio:/app/server/resultados_valoraciones/servicio
+
+volumes:
+  mysql-data:
+    external: true
+    name: ${G2_MYSQL_VOLUME:-g2exchange-mysql-data}

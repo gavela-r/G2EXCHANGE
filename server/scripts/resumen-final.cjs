@@ -3,7 +3,7 @@ const pool=require('../dist/conexion/bd').default,{MAPEO_SECTORES}=require('../d
 const root=path.resolve(__dirname,'../..');
 (async()=>{const summary={counts:{},eligibility:{},classification:{},originals_unchanged:{}};
  for(const t of ['empresa','instrumento','valuation_input_version','valuation_input_snapshot','valuation_run','valuation_run_resultado','valuation_execution','classification_evidence'])summary.counts[t]=(await pool.query('SELECT COUNT(*) n FROM '+t))[0][0].n;
- for(const [key,dir] of [['initial','tercera-inicial'],['rating_policy','tercera-mejorada'],['final','tercera-sec-final']]){
+ for(const [key,dir] of [['initial','tercera-inicial'],['rating_policy','tercera-mejorada'],['final','tercera-definitiva']]){
  const file=path.join(root,'server/resultados_valoraciones',dir,'incidencias.jsonl');if(!fs.existsSync(file))continue;
  const progress=JSON.parse(fs.readFileSync(path.join(path.dirname(file),'progreso.json')));const reasons={};for(const line of fs.readFileSync(file,'utf8').trim().split('\n')){const row=JSON.parse(line);if(row.code)reasons[row.code]=(reasons[row.code]||0)+1;}
  summary.eligibility[key]={...progress,reasons};}

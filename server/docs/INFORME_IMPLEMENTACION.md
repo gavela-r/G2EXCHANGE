@@ -1,5 +1,7 @@
 # Informe de implementación — 12/10/2026
 
+Documento histórico de la segunda intervención. El estado actual de producción está en [TERCERA_INTERVENCION.md](TERCERA_INTERVENCION.md).
+
 El backend, el motor y la automatización compilan. El flujo de preparación, cálculo, persistencia transaccional y replay se ha comprobado en tablas temporales aisladas de MySQL. Se completó un barrido de lectura de los 8.417 instrumentos reales y una prueba de escala con 10.000 IDs sintéticos sin datos financieros.
 
 La escritura en la base real y el servicio periódico no están activados. No se aplicaron migraciones ni se modificaron los históricos originales. La base real conserva 532 runs y cero resultados. No se declara que todas las empresas sean actualmente valorables: faltan clasificación, datos y evidencias de hipótesis.

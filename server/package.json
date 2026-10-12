@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "node --watch --require ts-node/register src/index.ts",
     "build": "npm --prefix ../valuation_engine run build && tsc -p tsconfig.json",
     "start": "node dist/src/index.js",
     "test": "npm run build && node --require ./tests/config.cjs --test tests/*.test.cjs",
@@ -24,14 +24,13 @@
     "express": "^4.18.3",
     "mysql2": "^3.24.5",
     "pinyin": "^4.0.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.8",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.25",
     "@types/node": "^20.19.43",
-    "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
     "typescript": "5.6"
   }

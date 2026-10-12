@@ -95,3 +95,13 @@ test('Checkpoint reintenta un bloqueo transitorio de Windows sin borrar el anter
     await guardarProgreso(file,{cursor:2});assert.equal(attempts,2);assert.equal(JSON.parse(fs.readFileSync(file)).cursor,2);
   }finally{fs.renameSync=rename;fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+test('Reinicio con PID reutilizado recupera lock propio; lock de otro host permanece protegido',async()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'g2-restart-'));const opts={mode:'incremental',dryRun:true,resume:false,batchSize:1,asOf:'2026-10-12',directory:dir,shouldStop:()=>true};
+ try{await ejecutarLote({query:async()=>[[]]},opts);const lock=path.join(dir,'progreso.lock');
+ fs.writeFileSync(lock,JSON.stringify({pid:process.pid,hostname:os.hostname(),processStartedAt:require('node:perf_hooks').performance.timeOrigin-10000}));
+ const p=await ejecutarLote({query:async()=>[[]]},{...opts,resume:true,shouldStop:()=>false});assert.equal(p.done,true);
+ fs.writeFileSync(lock,JSON.stringify({pid:process.pid,hostname:os.hostname()+'-other',processStartedAt:1}));
+ await assert.rejects(()=>ejecutarLote({query:async()=>[[]]},{...opts,resume:true}),/otro host/);assert.equal(fs.existsSync(lock),true);
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});

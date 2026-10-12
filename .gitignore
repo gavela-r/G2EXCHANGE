@@ -9,6 +9,8 @@ server/resultados_valoraciones/
 **/*.BACKUP*
 *BACKUP*
 consulta_empresas_temporal.cjs
+ercionDatosinsercionDatosSector.ts*
+valuation_engine/docs/*.pdf
 .vite/
 .verification/
 valuation_engine_COPIA/

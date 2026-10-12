@@ -17,15 +17,38 @@ services:
       DB_USER: ${DB_USER:?Configure DB_USER}
       DB_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
       DB_NAME: ${DB_NAME:?Configure DB_NAME}
+    restart: unless-stopped
+    volumes:
+      - ./valuation_engine/archives:/app/valuation_engine/archives:ro
     ports:
       - "3000:3000"
     container_name: backend_valoracion
 
   mysql:
     image: mysql:8
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME:?Configure DB_NAME}
     ports:
       - "3307:3306"
     container_name: mysql_valoracion
+
+  valuation-watch:
+    profiles: [automation]
+    image: g2exchange-backend
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:?Configure DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
+      DB_NAME: ${DB_NAME:?Configure DB_NAME}
+      G2_RECONCILIATION_MINUTES: ${G2_RECONCILIATION_MINUTES:-60}
+    command: [sh, -c, "node /app/valuation_engine/scripts/manifest.cjs && exec node /app/server/dist/src/valoracion/watch.js --write --directory /app/server/resultados_valoraciones/servicio"]
+    volumes:
+      - ./valuation_engine/archives:/app/valuation_engine/archives
+      - ./server/resultados_valoraciones/servicio:/app/server/resultados_valoraciones/servicio

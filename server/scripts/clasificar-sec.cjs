@@ -12,15 +12,16 @@ async function request(url){const r=await fetch(url,{headers:{'User-Agent':conta
  const tickersFile=path.join(root,'private_backups/sec-company-tickers.json');
  const list=fs.existsSync(tickersFile)?JSON.parse(fs.readFileSync(tickersFile)):await request('https://www.sec.gov/files/company_tickers.json');
  const lookup=new Map();for(const row of Object.values(list)){const rows=lookup.get(row.ticker)||[];rows.push(row);lookup.set(row.ticker,rows);}
+ const [availableSectors]=await pool.query('SELECT id FROM sector');const validSectors=new Set(availableSectors.map(r=>r.id));
  const [instruments]=await pool.query("SELECT i.id,i.ticker,e.id empresa_id,e.nombre_empresa FROM instrumento i JOIN empresa e ON e.id=i.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso='US' AND e.sector_id=221 ORDER BY i.id LIMIT ? OFFSET ?",[limit,offset]);
  const report={date:asOf,offset,limit,processed:0,accepted:0,pending:0,errors:[],inserted:0};let failures=0;
  for(const i of instruments){try{
   const matches=lookup.get(i.ticker)||[];if(matches.length!==1){report.pending++;report.processed++;continue;}
   const cik=Number(matches[0].cik_str),url='https://data.sec.gov/submissions/CIK'+String(cik).padStart(10,'0')+'.json',cache=path.join(dir,String(cik)+'-'+asOf+'.json');
   const d=fs.existsSync(cache)?JSON.parse(fs.readFileSync(cache)):await request(url);fs.writeFileSync(cache,JSON.stringify(d));
-  const identity=identidadSecValida(i.nombre_empresa,i.ticker,cik,d),sectorId=identity?SEC_SIC[String(d.sic)]:undefined;
+  const identity=identidadSecValida(i.nombre_empresa,i.ticker,cik,d),mapped=identity?SEC_SIC[String(d.sic)]:undefined,sectorId=validSectors.has(mapped)?mapped:undefined;
   const evidence={empresa_id:i.empresa_id,instrument_id:i.id,ticker:i.ticker,source:url,source_identifier:'CIK:'+cik,reference_date:asOf,criterion:identity?'SEC_SIC_EXPLICIT_V1':'SEC_IDENTITY_PENDING_V1',confidence:sectorId?'HIGH':'LOW',status:sectorId?'ACCEPTED':'PENDING',sector_id:sectorId??null,metadata:{name:d.name,cik:d.cik,tickers:d.tickers,sic:d.sic,sicDescription:d.sicDescription}};
-  if(args.includes('--write')){const [r]=await pool.query(`INSERT IGNORE INTO classification_evidence(empresa_id,sector_id,source,reference_date,source_identifier,criterion,confidence,status,evidence_hash,evidence_json) VALUES(?,?,?,?,?,?,?,?,?,?)`,[i.empresa_id,sectorId??null,url,asOf,evidence.source_identifier,evidence.criterion,evidence.confidence,evidence.status,huella(evidence),serializar(evidence)]);report.inserted+=r.affectedRows;}
+  if(args.includes('--write')){const hash=huella(evidence),[existing]=await pool.query('SELECT id FROM classification_evidence WHERE evidence_hash=?',[hash]);await pool.query(`INSERT INTO classification_evidence(empresa_id,sector_id,source,reference_date,source_identifier,criterion,confidence,status,evidence_hash,evidence_json) VALUES(?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE evidence_hash=classification_evidence.evidence_hash`,[i.empresa_id,sectorId??null,url,asOf,evidence.source_identifier,evidence.criterion,evidence.confidence,evidence.status,hash,serializar(evidence)]);report.inserted+=existing.length?0:1;}
   report.processed++;report[sectorId?'accepted':'pending']++;failures=0;
  }catch(e){report.errors.push({instrument_id:i.id,error:e.message});if(++failures>=5)break;}
  await new Promise(resolve=>setTimeout(resolve,350));

@@ -1,6 +1,8 @@
 import type { Pool, RowDataPacket } from 'mysql2/promise';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
+import {performance} from 'node:perf_hooks';
 import { cargarMotor, raizProyecto,manifiestoMotor } from './rutas';
 import { prepararInstrumento, Pendiente, HipotesisInstrumento, validarResultado, huella } from './datos';
 import { comprobarEsquema, conBloqueoInstrumento, persistirEnConexion } from './repositorio';
@@ -27,9 +29,12 @@ export async function ejecutarLote(pool:Pool,opts:OpcionesLote):Promise<Progreso
   if(opts.resume&&fs.existsSync(localLock)) {
     const previous=JSON.parse(fs.readFileSync(localLock,'utf8'));
     if(!Number.isSafeInteger(previous.pid)||previous.pid<=0)throw new Error('Lock inválido: revisar propietario antes de recuperar');
-    try{process.kill(previous.pid,0);throw new Error('El worker anterior sigue activo');}catch(e:any){if(e.code==='ESRCH')fs.unlinkSync(localLock);else throw e;}
+    if(previous.hostname&&previous.hostname!==os.hostname())throw new Error('Lock de otro host: verificar parada del propietario o usar directorio nuevo');
+    // A restarted container often reuses PID 1. Distinguish this process from the dead owner.
+    if(previous.pid===process.pid&&Number.isFinite(previous.processStartedAt)&&previous.processStartedAt<performance.timeOrigin-1)fs.unlinkSync(localLock);
+    else try{process.kill(previous.pid,0);throw new Error('El worker anterior sigue activo');}catch(e:any){if(e.code==='ESRCH')fs.unlinkSync(localLock);else throw e;}
   }
-  const fd=fs.openSync(localLock,'wx');fs.writeFileSync(fd,JSON.stringify({pid:process.pid,started:new Date().toISOString()}));
+  const fd=fs.openSync(localLock,'wx');fs.writeFileSync(fd,JSON.stringify({pid:process.pid,hostname:os.hostname(),processStartedAt:performance.timeOrigin,started:new Date().toISOString()}));
   try {
     if(!opts.dryRun){const c=await pool.getConnection();try{await comprobarEsquema(c);}finally{c.release();}}
     let p:Progreso={version:1,signature,asOf:opts.asOf,cursor:0,processed:0,counts:{},done:false};

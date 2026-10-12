@@ -1,5 +1,7 @@
 # Valoración automática v2
 
+Documento histórico de la segunda intervención. Las autorizaciones, activación y verificaciones posteriores se documentan en [TERCERA_INTERVENCION.md](TERCERA_INTERVENCION.md).
+
 Estado: código implementado; escritura real desactivada hasta autorizar la migración. No se han cambiado datos históricos originales. Las pruebas SQL escriben únicamente tablas TEMPORARY de una conexión que se destruye al terminar.
 
 ## Compilación y comandos

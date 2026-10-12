@@ -1,0 +1,156 @@
+﻿FINMIND - TIPOS DE PARTIDA POR DATASET
+Empresas consultadas (12): 2330, 2317, 2454, 1301, 2412, 2603, 1216, 2002, 1101, 2308, 2609, 3008
+Desde: 2024-01-01
+Formato:  Tipo  [en cuantas empresas aparece]  ->  nombre original
+
+=== TaiwanStockFinancialStatements (cuenta de resultados) - 19 tipos ===
+CostOfGoodsSold  [12/12]  ->  營業成本
+EPS  [12/12]  ->  基本每股盈餘
+EquityAttributableToOwnersOfParent  [12/12]  ->  淨利（淨損）歸屬於母公司業主
+GrossProfit  [12/12]  ->  營業毛利（毛損）
+IncomeAfterTaxes  [12/12]  ->  本期淨利（淨損）
+IncomeFromContinuingOperations  [12/12]  ->  繼續營業單位本期淨利（淨損）
+OperatingExpenses  [12/12]  ->  營業費用
+OperatingIncome  [12/12]  ->  營業利益（損失）
+OtherComprehensiveIncome  [12/12]  ->  其他綜合損益（淨額）
+PreTaxIncome  [12/12]  ->  稅前淨利（淨損）
+Revenue  [12/12]  ->  營業收入
+TAX  [12/12]  ->  所得稅費用（利益）
+TotalConsolidatedProfitForThePeriod  [12/12]  ->  本期綜合損益總額
+TotalNonoperatingIncomeAndExpense  [12/12]  ->  營業外收入及支出
+ComprehensiveIncomeConsolidatedNetIncomeAttributedNonControllingInterest  [11/12]  ->  綜合損益總額歸屬於非控制權益
+NoncontrollingInterests  [11/12]  ->  淨利（淨損）歸屬於非控制權益
+OTHNOE  [4/12]  ->  其他收益及費損淨額
+RealizedGain  [2/12]  ->  已實現銷貨（損）益
+UnrealizedGain  [2/12]  ->  未實現銷貨（損）益
+
+=== TaiwanStockBalanceSheet (balance) - 59 tipos ===
+AccountsPayable  [12/12]  ->  應付帳款
+AccountsPayableToRelatedParties  [12/12]  ->  應付帳款－關係人
+AccountsReceivableDuefromRelatedPartiesNet  [12/12]  ->  應收帳款－關係人淨額
+AccountsReceivableNet  [12/12]  ->  應收帳款淨額
+CapitalStock  [12/12]  ->  股本合計
+CapitalSurplus  [12/12]  ->  資本公積合計
+CashAndCashEquivalents  [12/12]  ->  現金及約當現金
+CurrentAssets  [12/12]  ->  流動資產合計
+CurrentFinancialAssetsAtFairvalueThroughProfitOrLoss  [12/12]  ->  透過損益按公允價值衡量之金融資產－流動
+CurrentLiabilities  [12/12]  ->  流動負債合計
+DeferredTaxAssets  [12/12]  ->  遞延所得稅資產
+Equity  [12/12]  ->  權益總額
+EquityAttributableToOwnersOfParent  [12/12]  ->  歸屬於母公司業主之權益合計
+FinancialAssetsAtFairvalueThroughOtherComprehensiveIncomeNonCurrent  [12/12]  ->  透過其他綜合損益按公允價值衡量之金融資產－非流動
+IntangibleAssets  [12/12]  ->  無形資產
+Inventories  [12/12]  ->  存貨
+InvestmentAccountedForUsingEquityMethod  [12/12]  ->  採用權益法之投資
+Liabilities  [12/12]  ->  負債總額
+NoncontrollingInterests  [12/12]  ->  非控制權益
+NoncurrentAssets  [12/12]  ->  非流動資產合計
+NoncurrentLiabilities  [12/12]  ->  非流動負債合計
+NumberOfSharesInEntityHeldByEntityAndByItsSubsidiaries  [12/12]  ->  母公司暨子公司所持有之母公司庫藏股股數
+OrdinaryShare  [12/12]  ->  普通股股本
+OtherCurrentAssets  [12/12]  ->  其他流動資產
+OtherCurrentLiabilities  [12/12]  ->  其他流動負債
+OtherEquityInterest  [12/12]  ->  其他權益合計
+OtherNoncurrentAssets  [12/12]  ->  其他非流動資產
+OtherNoncurrentLiabilities  [12/12]  ->  其他非流動負債
+OtherPayables  [12/12]  ->  其他應付款
+PropertyPlantAndEquipment  [12/12]  ->  不動產、廠房及設備
+RetainedEarnings  [12/12]  ->  保留盈餘合計
+RightOfUseAsset  [12/12]  ->  使用權資產
+TotalAssets  [12/12]  ->  資產總額
+TotalLiabilitiesEquity  [12/12]  ->  負債及權益總計
+CurrentFinancialLiabilitiesAtFairValueThroughProfitOrLoss  [11/12]  ->  透過損益按公允價值衡量之金融負債－流動
+CurrentTaxLiabilities  [11/12]  ->  本期所得稅負債
+LongtermBorrowings  [11/12]  ->  長期借款
+ShorttermBorrowings  [11/12]  ->  短期借款
+UnappropriatedRetainedEarningsAaccumulatedDeficit  [11/12]  ->  未分配盈餘
+BondsPayable  [10/12]  ->  應付公司債
+FinancialAssetsAtAmortizedCostNonCurrent  [10/12]  ->  按攤銷後成本衡量之金融資產－非流動
+LegalReserve  [10/12]  ->  法定盈餘公積
+BillsReceivableNet  [9/12]  ->  應收票據淨額
+CurrentContractLiabilities  [9/12]  ->  合約負債
+NonCurrentFinancialAssetsAtFairvalueThroughProfitOrLoss  [9/12]  ->  透過損益按公允價值衡量之金融資產－非流動
+OtherReceivable  [9/12]  ->  其他應收款淨額
+FinancialAssetsAtAmortizedCost  [8/12]  ->  按攤銷後成本衡量之金融資產－流動
+FinancialAssetsAtFairvalueThroughOtherComprehensiveIncome  [8/12]  ->  透過其他綜合損益按公允價值衡量之金融資產－流動
+HedgingAinancialAssets  [8/12]  ->  避險之金融資產－流動
+Prepayments  [8/12]  ->  預付款項
+CurrentDerivativeFinancialLiabilitiesForHedging  [7/12]  ->  避險之金融負債－流動
+CurrentIncomeTaxAssets  [7/12]  ->  本期所得稅資產
+OtherReceivablesDueFromRelatedParties  [6/12]  ->  其他應收款－關係人淨額
+CapitalSurplusAdditionalPaidInCapital  [4/12]  ->  資本公積－發行溢價
+CurrentProvisions  [4/12]  ->  負債準備－流動
+CapitalSurplusChangesInEquityOfAssociatesAndJointVenturesAccountedForUsingEquityMethod  [3/12]  ->  資本公積－採用權益法認列關聯企業及合資股權淨值之變動數
+CapitalSurplusDonatedAssetsReceived  [2/12]  ->  資本公積－受贈資產
+HedgingAinancialAssetsNonCurrent  [2/12]  ->  避險之金融資產－非流動
+CapitalSurplusNetAssetsFromMerger  [1/12]  ->  資本公積－合併溢額
+
+=== TaiwanStockCashFlowsStatement (flujo de caja) - 32 tipos ===
+AccountsPayable  [12/12]  ->  應付帳款
+AmortizationExpense  [12/12]  ->  攤銷費用
+CashBalancesBeginningOfPeriod  [12/12]  ->  期初現金及約當現金餘額
+CashBalancesEndOfPeriod  [12/12]  ->  期末現金及約當現金餘額
+CashBalancesIncrease  [12/12]  ->  本期現金及約當現金增加（減少）數
+CashFlowsFromOperatingActivities  [12/12]  ->  營業活動之淨現金流入（流出）
+CashFlowsProvidedFromFinancingActivities  [12/12]  ->  籌資活動之淨現金流入（流出）
+CashProvidedByInvestingActivities  [12/12]  ->  投資活動之淨現金流入（流出）
+CashReceivedThroughOperations  [12/12]  ->  營運產生之現金流入（流出）
+Depreciation  [12/12]  ->  折舊費用
+IncomeBeforeIncomeTaxFromContinuingOperations  [12/12]  ->  繼續營業單位稅前淨利（淨損）
+InterestExpense  [12/12]  ->  利息費用
+InterestIncome  [12/12]  ->  利息收入
+InventoryIncrease  [12/12]  ->  存貨（增加）減少
+NetCashInflowFromOperatingActivities  [12/12]  ->  營業活動之淨現金流入
+NetIncomeBeforeTax  [12/12]  ->  本期稅前淨利（淨損）
+PayTheInterest  [12/12]  ->  支付之利息
+PropertyAndPlantAndEquipment  [12/12]  ->  取得不動產、廠房及設備
+ReceivableIncrease  [12/12]  ->  應收帳款（增加）減少
+RentalPrincipalRepayments  [12/12]  ->  租賃本金償還
+TotalIncomeLossItems  [12/12]  ->  收益費損項目合計
+DecreaseInShortTermLoans  [11/12]  ->  短期借款減少
+ProceedsFromLongTermDebt  [11/12]  ->  舉借長期借款
+RepaymentOfLongTermDebt  [11/12]  ->  償還長期借款
+RedemptionOfBonds  [10/12]  ->  償還公司債
+OtherNonCurrentLiabilitiesDecrease  [7/12]  ->  其他非流動負債減少
+OtherNonCurrentLiabilitiesIncrease  [7/12]  ->  其他非流動負債增加
+DecreaseInDepositDeposit  [6/12]  ->  存出保證金減少
+OtherInvestingActivities  [6/12]  ->  其他投資活動
+HedgingFinancialLiabilities  [2/12]  ->  除列避險之金融負債
+RealizedGain  [2/12]  ->  已實現銷貨損失（利益）
+UnrealizedGain  [1/12]  ->  未實現銷貨利益（損失）
+
+=== TIPOS RELACIONADOS CON DEUDA, DIVIDENDOS, ACCIONES, INTERESES E IMPUESTOS ===
+TaiwanStockFinancialStatements: IncomeAfterTaxes  [12/12]  ->  本期淨利（淨損）
+TaiwanStockFinancialStatements: PreTaxIncome  [12/12]  ->  稅前淨利（淨損）
+TaiwanStockFinancialStatements: TAX  [12/12]  ->  所得稅費用（利益）
+TaiwanStockFinancialStatements: ComprehensiveIncomeConsolidatedNetIncomeAttributedNonControllingInterest  [11/12]  ->  綜合損益總額歸屬於非控制權益
+TaiwanStockFinancialStatements: NoncontrollingInterests  [11/12]  ->  淨利（淨損）歸屬於非控制權益
+TaiwanStockBalanceSheet: CapitalStock  [12/12]  ->  股本合計
+TaiwanStockBalanceSheet: CapitalSurplus  [12/12]  ->  資本公積合計
+TaiwanStockBalanceSheet: DeferredTaxAssets  [12/12]  ->  遞延所得稅資產
+TaiwanStockBalanceSheet: NoncontrollingInterests  [12/12]  ->  非控制權益
+TaiwanStockBalanceSheet: NumberOfSharesInEntityHeldByEntityAndByItsSubsidiaries  [12/12]  ->  母公司暨子公司所持有之母公司庫藏股股數
+TaiwanStockBalanceSheet: OrdinaryShare  [12/12]  ->  普通股股本
+TaiwanStockBalanceSheet: OtherEquityInterest  [12/12]  ->  其他權益合計
+TaiwanStockBalanceSheet: CurrentTaxLiabilities  [11/12]  ->  本期所得稅負債
+TaiwanStockBalanceSheet: LongtermBorrowings  [11/12]  ->  長期借款
+TaiwanStockBalanceSheet: ShorttermBorrowings  [11/12]  ->  短期借款
+TaiwanStockBalanceSheet: BondsPayable  [10/12]  ->  應付公司債
+TaiwanStockBalanceSheet: FinancialAssetsAtAmortizedCostNonCurrent  [10/12]  ->  按攤銷後成本衡量之金融資產－非流動
+TaiwanStockBalanceSheet: FinancialAssetsAtAmortizedCost  [8/12]  ->  按攤銷後成本衡量之金融資產－流動
+TaiwanStockBalanceSheet: CurrentIncomeTaxAssets  [7/12]  ->  本期所得稅資產
+TaiwanStockBalanceSheet: CapitalSurplusAdditionalPaidInCapital  [4/12]  ->  資本公積－發行溢價
+TaiwanStockBalanceSheet: CapitalSurplusChangesInEquityOfAssociatesAndJointVenturesAccountedForUsingEquityMethod  [3/12]  ->  資本公積－採用權益法認列關聯企業及合資股權淨值之變動數
+TaiwanStockBalanceSheet: CapitalSurplusDonatedAssetsReceived  [2/12]  ->  資本公積－受贈資產
+TaiwanStockBalanceSheet: CapitalSurplusNetAssetsFromMerger  [1/12]  ->  資本公積－合併溢額
+TaiwanStockCashFlowsStatement: AmortizationExpense  [12/12]  ->  攤銷費用
+TaiwanStockCashFlowsStatement: Depreciation  [12/12]  ->  折舊費用
+TaiwanStockCashFlowsStatement: IncomeBeforeIncomeTaxFromContinuingOperations  [12/12]  ->  繼續營業單位稅前淨利（淨損）
+TaiwanStockCashFlowsStatement: InterestExpense  [12/12]  ->  利息費用
+TaiwanStockCashFlowsStatement: InterestIncome  [12/12]  ->  利息收入
+TaiwanStockCashFlowsStatement: NetIncomeBeforeTax  [12/12]  ->  本期稅前淨利（淨損）
+TaiwanStockCashFlowsStatement: PayTheInterest  [12/12]  ->  支付之利息
+TaiwanStockCashFlowsStatement: DecreaseInShortTermLoans  [11/12]  ->  短期借款減少
+TaiwanStockCashFlowsStatement: ProceedsFromLongTermDebt  [11/12]  ->  舉借長期借款
+TaiwanStockCashFlowsStatement: RepaymentOfLongTermDebt  [11/12]  ->  償還長期借款
+TaiwanStockCashFlowsStatement: RedemptionOfBonds  [10/12]  ->  償還公司債

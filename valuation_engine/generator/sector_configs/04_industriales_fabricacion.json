@@ -1,0 +1,20 @@
+{
+  "code": "04",
+  "slug": "INDUSTRIALES_FABRICACION",
+  "name": "Industriales / fabricación",
+  "family": "FCFF",
+  "metrics": [
+    "orders",
+    "book_to_bill",
+    "plant_utilization",
+    "maintenance_capex",
+    "cash_conversion_cycle"
+  ],
+  "growth": 0.05,
+  "margin": 0.11,
+  "capex": 0.045,
+  "nwc": 0.025,
+  "beta": 1.0,
+  "multiple": 9.5,
+  "terminal": 0.0225
+}

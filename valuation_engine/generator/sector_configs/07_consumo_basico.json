@@ -1,0 +1,20 @@
+{
+  "code": "07",
+  "slug": "CONSUMO_BASICO",
+  "name": "Consumo básico",
+  "family": "FCFF",
+  "metrics": [
+    "volume_growth",
+    "price_mix",
+    "distribution_points",
+    "market_share",
+    "commodity_cost_index"
+  ],
+  "growth": 0.035,
+  "margin": 0.14,
+  "capex": 0.03,
+  "nwc": 0.01,
+  "beta": 0.7,
+  "multiple": 12.0,
+  "terminal": 0.02
+}

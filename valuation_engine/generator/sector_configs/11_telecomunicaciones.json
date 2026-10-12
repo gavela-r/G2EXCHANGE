@@ -1,0 +1,21 @@
+{
+  "code": "11",
+  "slug": "TELECOMUNICACIONES",
+  "name": "Telecomunicaciones",
+  "family": "FCFF",
+  "metrics": [
+    "arpu",
+    "churn",
+    "net_additions",
+    "coverage",
+    "capex_to_revenue",
+    "spectrum_cost"
+  ],
+  "growth": 0.025,
+  "margin": 0.19,
+  "capex": 0.16,
+  "nwc": 0.005,
+  "beta": 0.8,
+  "multiple": 7.0,
+  "terminal": 0.015
+}

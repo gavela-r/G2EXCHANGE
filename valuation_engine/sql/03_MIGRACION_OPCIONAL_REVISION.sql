@@ -1,0 +1,8 @@
+-- NO EJECUTAR SIN REVISAR. Requiere backup y comparación de SHOW CREATE TABLE.
+-- Solo si las columnas indicadas NO existen en valuation_run_parametros.
+-- Para compatibilidad v1.5 se necesitan prima_tamano, otros_ajustes_wacc y auditoria JSON.
+-- MySQL 8.0: usar una vez, nunca automáticamente.
+-- ALTER TABLE valuation_run_parametros
+--   ADD COLUMN prima_tamano DECIMAL(10,6) NOT NULL DEFAULT 0,
+--   ADD COLUMN otros_ajustes_wacc DECIMAL(10,6) NOT NULL DEFAULT 0,
+--   ADD COLUMN auditoria_ajustes_json JSON NULL;

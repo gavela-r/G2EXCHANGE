@@ -1,0 +1,275 @@
+{
+  "release": "G2EXCHANGE_TS_v1.5",
+  "tech": "TypeScript/Node.js exclusively",
+  "python_runtime": false,
+  "libreoffice_runtime": false,
+  "sql_auto_writes": false,
+  "xlsx_templates": 16,
+  "source": "Legacy XLSX templates from G2EXCHANGE v1.4; implementation independently ported TS",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "31f3b174c4929db95e939badb7f41b5e7540b18ee2d4cad6073d481c5ea6fae3"
+    },
+    {
+      "path": "LEEME_PRIMERO.md",
+      "sha256": "7093407d1484581a2b59d8d1625c78657a9d3bbaf5d289c0dbbd12c3e02dba66"
+    },
+    {
+      "path": "config/risk_policy_v15.json",
+      "sha256": "1de1445601d903664f728322cfb833a4e476bb6d2959882d9a66dc105d485613"
+    },
+    {
+      "path": "docs/GUIA_INTEGRACION_BACKEND.md",
+      "sha256": "b41c0e927b4af709a0bcc24cbaaac38579a292f2bbf37ac12f3e82da16a450e1"
+    },
+    {
+      "path": "docs/MANUAL_INSTALACION_TYPESCRIPT_v1_5.pdf",
+      "sha256": "309f32800cd7e60a1c86cf48e5357e40c50505a5b3a47d030941f7c0f409b804"
+    },
+    {
+      "path": "docs/METODOLOGIA_Y_CONTROLES.md",
+      "sha256": "bb60a4c77f53f3a13a1269a01d12037df2d9eae0c7ec048832e9c3fb115fe098"
+    },
+    {
+      "path": "docs/PRUEBAS_Y_ESTADO.md",
+      "sha256": "1743f8816327e3486cd9e8cd141b827079ce91f0a0c81160734cbcccf974071c"
+    },
+    {
+      "path": "docs/SEGURIDAD_Y_CAMBIOS.md",
+      "sha256": "41df7137d867fadb389de4a223e8f0bdaf42a4ba58af7377c8108113300935b5"
+    },
+    {
+      "path": "ejemplos/DEMO_NO_REAL.json",
+      "sha256": "7d7dcf36de5c6a5616acea7fae481553eb5523cf71ffc797d28a11d3b8df5ae5"
+    },
+    {
+      "path": "ejemplos/salida_demo_ficticia/G2_DEMO_2026-10-08_DEMO-RUN-001.json",
+      "sha256": "d4963330d219fafcd6849333cef1d4b2cc7a53635d3d495e54798f4bd02a612e"
+    },
+    {
+      "path": "ejemplos/salida_demo_ficticia/G2_DEMO_2026-10-08_DEMO-RUN-001.pdf",
+      "sha256": "172b89ed1d202db5586fa384dbf21bcd7abe1784d1ebbf967ab8dd6d861f0468"
+    },
+    {
+      "path": "ejemplos/salida_demo_ficticia/G2_DEMO_2026-10-08_DEMO-RUN-001.xlsx",
+      "sha256": "23c38e9620112270168e53de1a12da3080a9ce3ac3fb57b194dfe8b66e6f06a9"
+    },
+    {
+      "path": "ejemplos/salida_demo_ficticia/G2_DEMO_2026-10-08_DEMO-RUN-001.zip",
+      "sha256": "595a67cf627b695afe9420cdfa098ea673e804dd9de5e82b11e0ccf8294330c9"
+    },
+    {
+      "path": "generator/check_templates.ts",
+      "sha256": "3846bb62693b3fde6b40ed98a4798e4c6574cfda619e911446a54fcdf1fba5fa"
+    },
+    {
+      "path": "generator/common_config.json",
+      "sha256": "f6461bb11ff93f0dacfb02ccf2a2c683af06a4cc1a18f10d3ca4e3a07d08e25f"
+    },
+    {
+      "path": "generator/sector_configs/01_defensa_aeroespacial.json",
+      "sha256": "58d5eacb2f7ccd43ce92525d7279c68258056239795539f3e50edd27424ff903"
+    },
+    {
+      "path": "generator/sector_configs/02_software_saas.json",
+      "sha256": "373629bafd89c239f2fb28218127b64fa9d0a15e9150b74c19eefac417873918"
+    },
+    {
+      "path": "generator/sector_configs/03_semiconductores_hardware.json",
+      "sha256": "337c124108471cb4f065fb380d8f7f2463171b54e86886a556059c9b38e21f52"
+    },
+    {
+      "path": "generator/sector_configs/04_industriales_fabricacion.json",
+      "sha256": "a8e4d6e6feb9fefb422bc149b51e7107763d96770ca8427a2caa098ec4021f25"
+    },
+    {
+      "path": "generator/sector_configs/05_automocion_componentes.json",
+      "sha256": "f3a9ff46baf8392044794daef2907411ad5715f8302e0145407505ebb7952a53"
+    },
+    {
+      "path": "generator/sector_configs/06_consumo_discrecional_retail.json",
+      "sha256": "2d04ea151beba775e88a827aa1c36df88eb4d8d183aaaa9c265270ca7673b8f2"
+    },
+    {
+      "path": "generator/sector_configs/07_consumo_basico.json",
+      "sha256": "77893a5d678c5cf39be72be468d28a8d5e6dc01cf56eee80733c2d2af3be54f8"
+    },
+    {
+      "path": "generator/sector_configs/08_petroleo_gas_energia.json",
+      "sha256": "b7f7b8946bedcdfd293a9b0ac4421ca6f6630a4af6c3a779935c6569b04aa15c"
+    },
+    {
+      "path": "generator/sector_configs/09_mineria_metales_materiales.json",
+      "sha256": "efb0f74ae3ff079e8f1f9d04f0bd956ed649d1c1935c737097715d35012e5878"
+    },
+    {
+      "path": "generator/sector_configs/10_utilities_infraestructuras.json",
+      "sha256": "a889df60c89f39e62e9fa8c7242f8f41ba8647904024f34a7738b336049d06b2"
+    },
+    {
+      "path": "generator/sector_configs/11_telecomunicaciones.json",
+      "sha256": "4387d0633bc8c9f93e957e20b3e65d24aec23df3712da9c07adf06af6531a61f"
+    },
+    {
+      "path": "generator/sector_configs/12_farma_biotec_medtech.json",
+      "sha256": "63775aba9262f503c87371692e7dae47a7615317dbfd5d57e627a013033dda8e"
+    },
+    {
+      "path": "generator/sector_configs/13_bancos_servicios_financieros.json",
+      "sha256": "c6f31e961fc27580be1c6fb8011fe884eea65500b2fe96df1944e2eea4e0bf7a"
+    },
+    {
+      "path": "generator/sector_configs/14_seguros.json",
+      "sha256": "44d3a93269942fe518382f5e274d4c87e9f50918c8f2ef852a8f03b92e50b76d"
+    },
+    {
+      "path": "generator/sector_configs/15_inmobiliario_reit.json",
+      "sha256": "68a2fa1c42c48b939363c16001735af8fbd292c7377ccb4bb780e1129319680b"
+    },
+    {
+      "path": "generator/sector_configs/16_general_no_financiero.json",
+      "sha256": "10cf836cb71f0267f31813b35089dc9bed1b874298fdbc6daceb2386b17f529e"
+    },
+    {
+      "path": "package.json",
+      "sha256": "a4c8081694a963afbd4727102c7722a2d4ada50f2b42448fec3a1b5f2f995d4b"
+    },
+    {
+      "path": "schema/README.md",
+      "sha256": "c13ab14c0e2ec1af13d4c156ee6efc76005e561053e69d73e82a41b05d62f549"
+    },
+    {
+      "path": "schema/motor_input_v15.schema.json",
+      "sha256": "2a9698796feda3f387bd740501500f715db6d95535149a92242fd0f49518355f"
+    },
+    {
+      "path": "schema/motor_output_v15.schema.json",
+      "sha256": "1fee5c64e02409fa79fa2c922743a4fc0ed6821832353da0c16f913961da752b"
+    },
+    {
+      "path": "sql/01_PRECHECK_SOLO_LECTURA.sql",
+      "sha256": "ab2c65b824b9e58427b52c60be572966e90e83fc57b89484bd505fc6e1fb9dc2"
+    },
+    {
+      "path": "sql/03_MIGRACION_OPCIONAL_REVISION.sql",
+      "sha256": "59263c52d4f583bbf1cf7769578ed79dbc41608306a5950983c04c4d88a7d18a"
+    },
+    {
+      "path": "src/cli.ts",
+      "sha256": "45425f8ab30d549cfaafe6f81f44e28105a10f8fdc36212a2bb8ed33cbca7e92"
+    },
+    {
+      "path": "src/integracion/mysql_persist_optin.ts",
+      "sha256": "4eea657e248f12f5e7d69923d8067ee143118c9171184b98a28e4e82d91ffd0c"
+    },
+    {
+      "path": "src/integracion/mysql_readonly.ts",
+      "sha256": "b3c8f7151842d1ec98dae651967162121c977212f0c88509cf9f1dce63acf9a0"
+    },
+    {
+      "path": "src/modelo.ts",
+      "sha256": "f0f1b2602de72e4fd2e588c6987d512d020e9354f4db5a0afb6bab9b0f1cf16e"
+    },
+    {
+      "path": "src/noticias.ts",
+      "sha256": "ad8d1697fa5b655a3626c1d36e57dfaaf2896cc76440b43356d6c9ab49909c7d"
+    },
+    {
+      "path": "src/reportes/excel.ts",
+      "sha256": "08b5f5e168a263b667ed5bb3d9da067312d2a4b468e1ea94474b9fd333fb969a"
+    },
+    {
+      "path": "src/reportes/pdf.ts",
+      "sha256": "0d69681906c1e6d63f6ed166576dd7bbf6150aa7c75965c29ce4cc4c8e61743d"
+    },
+    {
+      "path": "src/riesgo.ts",
+      "sha256": "956fe8fd5228972e78603fcf7bb49add3f5fde168349c3a5f1f21e7ae9bb24e0"
+    },
+    {
+      "path": "src/tipos.ts",
+      "sha256": "423ce11ecf658427c629dee4216658dbad18a475f789528f708041014408d5fa"
+    },
+    {
+      "path": "src/wacc.ts",
+      "sha256": "075b1b49095919ef2daa0eb8529bd9d9963ceaef779d8ee9615c544563320e97"
+    },
+    {
+      "path": "templates/Template_01_DEFENSA_AEROESPACIAL_v1_4.xlsx",
+      "sha256": "8b1fbaadab724efecc6a469f7fbc74c11e697f263d74f3599e2d7b665d2cc00f"
+    },
+    {
+      "path": "templates/Template_02_SOFTWARE_SAAS_v1_4.xlsx",
+      "sha256": "790fb621f486324ceb9eb94ef824bb990b34216642dbbce0a407fb15a9ea186e"
+    },
+    {
+      "path": "templates/Template_03_SEMICONDUCTORES_HARDWARE_v1_4.xlsx",
+      "sha256": "4f19bd0a54b1fb0e0a449e8bf76ed6a42e74b2129e87a40fae0ebfc75e53aac8"
+    },
+    {
+      "path": "templates/Template_04_INDUSTRIALES_FABRICACION_v1_4.xlsx",
+      "sha256": "e9e3c3006ef834e48c09ed743b7c5ee453e2fcd83210a394bbabfcbaaca749cb"
+    },
+    {
+      "path": "templates/Template_05_AUTOMOCION_COMPONENTES_v1_4.xlsx",
+      "sha256": "580a00016f3e75d0448ebdb0e771488ae67afa60a45a35c1c8e4c4e987176436"
+    },
+    {
+      "path": "templates/Template_06_CONSUMO_DISCRECIONAL_RETAIL_v1_4.xlsx",
+      "sha256": "7b29322837b3cd2cbf1cced8b22f3022413a01158e42b08d0000cb5ea377d71f"
+    },
+    {
+      "path": "templates/Template_07_CONSUMO_BASICO_v1_4.xlsx",
+      "sha256": "b5627e7ee4387215b64cff5a5622a947611234fb18b4e3797b0a23e52dfdf4b9"
+    },
+    {
+      "path": "templates/Template_08_PETROLEO_GAS_ENERGIA_v1_4.xlsx",
+      "sha256": "0dcf6f5f2ede79f912315ba1f89208228276e740f436743e65702c2949a9b572"
+    },
+    {
+      "path": "templates/Template_09_MINERIA_METALES_MATERIALES_v1_4.xlsx",
+      "sha256": "4971674dc77086b60bfa9240dee9a058ed8d8ed7b98f3c72fe40705b36af488d"
+    },
+    {
+      "path": "templates/Template_10_UTILITIES_INFRAESTRUCTURAS_v1_4.xlsx",
+      "sha256": "3575acffc0b5bf8ba3da2f69931d2d2a7df29ce230027b94b5e8899caf5a9874"
+    },
+    {
+      "path": "templates/Template_11_TELECOMUNICACIONES_v1_4.xlsx",
+      "sha256": "82a1a82649b5bf2d8179f4fa5d49ebd859711736909cb6acb6112ea769599a20"
+    },
+    {
+      "path": "templates/Template_12_FARMA_BIOTEC_MEDTECH_v1_4.xlsx",
+      "sha256": "287b13e0052e5307c86a96540e871aa932e4a407c9c29d6f73103acc6d5b50dd"
+    },
+    {
+      "path": "templates/Template_13_BANCOS_SERVICIOS_FINANCIEROS_v1_4.xlsx",
+      "sha256": "eda9c54aadbf01ca8de2fb7baaeb792e1d6ca5785c8f805ba4d3c470dec31202"
+    },
+    {
+      "path": "templates/Template_14_SEGUROS_v1_4.xlsx",
+      "sha256": "dc23e6f7644835edc8cba28750e30d289820bcc2dcd1161bf1060432db8c8e22"
+    },
+    {
+      "path": "templates/Template_15_INMOBILIARIO_REIT_v1_4.xlsx",
+      "sha256": "6e7699729eaf4090f36ca4ff06a5773897288b0dd20b78a73d94dac61eab4c73"
+    },
+    {
+      "path": "templates/Template_16_GENERAL_NO_FINANCIERO_v1_4.xlsx",
+      "sha256": "06920bc8fe26fec8b7f629de3603ed5e316760762e7b97c579d2b51c62d02596"
+    },
+    {
+      "path": "tests/reportes.test.ts",
+      "sha256": "a752b1da065474d820296df15d85cf8289bcf53e98be293f3226df3ae79dbe03"
+    },
+    {
+      "path": "tests/wacc.test.ts",
+      "sha256": "f7573027f06debc7a9cf5ead72484779dd77dd6a9ddcf196338c7522b0b0d590"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "98f2a88d072d7eee64c585dcad69b045854f0ab94c054f5c19cf622ea2ab39f2"
+    }
+  ]
+}

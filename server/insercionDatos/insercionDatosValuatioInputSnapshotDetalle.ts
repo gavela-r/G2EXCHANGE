@@ -1,0 +1,1 @@
+export { vincularEjerciciosAlSnapshot } from './insercionDatosValuationInputSnapshot';

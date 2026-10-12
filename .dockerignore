@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+**/node_modules
+**/dist
+**/*.log
+**/*.bak
+**/*.BACKUP*
+private_backups
+server/resultados_valoraciones
+valuation_engine_COPIA
+valuation_engine/archives
+.vite

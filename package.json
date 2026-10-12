@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "mysql2": "^3.23.2",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "5.6"
+  },
+  "scripts": {
+    "build": "npm --prefix server run build && npm --prefix client run build",
+    "test": "npm --prefix valuation_engine test && npm --prefix server test",
+    "valuation": "node server/dist/valoracionAutomatica.js",
+    "valuation:dev": "node server/node_modules/ts-node/dist/bin.js --project server/tsconfig.json server/valoracionAutomatica.ts",
+    "valuation:watch": "node server/dist/src/valoracion/watch.js"
+  }
+}

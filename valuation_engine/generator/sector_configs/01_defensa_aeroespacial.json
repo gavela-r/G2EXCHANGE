@@ -1,0 +1,20 @@
+{
+  "code": "01",
+  "slug": "DEFENSA_AEROESPACIAL",
+  "name": "Defensa y aeroespacial",
+  "family": "FCFF",
+  "metrics": [
+    "backlog",
+    "book_to_bill",
+    "new_orders",
+    "government_revenue_pct",
+    "customer_concentration_pct"
+  ],
+  "growth": 0.06,
+  "margin": 0.12,
+  "capex": 0.035,
+  "nwc": 0.015,
+  "beta": 0.95,
+  "multiple": 11.0,
+  "terminal": 0.0225
+}

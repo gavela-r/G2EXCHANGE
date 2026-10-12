@@ -1,0 +1,21 @@
+{
+  "code": "03",
+  "slug": "SEMICONDUCTORES_HARDWARE",
+  "name": "Semiconductores / hardware",
+  "family": "FCFF",
+  "metrics": [
+    "capacity_utilization",
+    "inventory_to_revenue",
+    "rd_to_revenue",
+    "installed_capacity",
+    "asp",
+    "product_mix"
+  ],
+  "growth": 0.09,
+  "margin": 0.2,
+  "capex": 0.09,
+  "nwc": 0.025,
+  "beta": 1.25,
+  "multiple": 13.0,
+  "terminal": 0.025
+}

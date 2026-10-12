@@ -1,0 +1,3 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');const {SEC_SIC,identidadSecValida}=require('../dist/src/valoracion/evidenciaSec');
+test('SEC: SIC específico distingue bancos e industria; desconocidos pendientes',()=>{assert.equal(SEC_SIC['6021'],16);assert.equal(SEC_SIC['3674'],19);assert.equal(SEC_SIC['6799'],undefined);});
+test('SEC: identidad exige nombre, ticker y CIK; no derivar CIK de accession',()=>{const d={name:'EXAMPLE INC.',tickers:['EXM'],cik:123};assert.equal(identidadSecValida('Example Inc','EXM',123,d),true);assert.equal(identidadSecValida('Otra empresa','EXM',123,d),false);assert.equal(identidadSecValida('Example Inc','OTHER',123,d),false);assert.equal(identidadSecValida('Example Inc','EXM',456,d),false);});

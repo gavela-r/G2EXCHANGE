@@ -1,0 +1,21 @@
+{
+  "code": "08",
+  "slug": "PETROLEO_GAS_ENERGIA",
+  "name": "Petróleo / gas / energía",
+  "family": "RESOURCE",
+  "metrics": [
+    "production",
+    "proved_reserves",
+    "probable_reserves",
+    "lifting_cost",
+    "reserve_life",
+    "realized_price"
+  ],
+  "growth": 0.02,
+  "margin": 0.22,
+  "capex": 0.12,
+  "nwc": 0.01,
+  "beta": 1.1,
+  "multiple": 6.0,
+  "terminal": 0.015
+}

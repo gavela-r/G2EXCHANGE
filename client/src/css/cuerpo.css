@@ -1,0 +1,21 @@
+.cuerpo{
+  background-color: #09111F;
+  background-image: radial-gradient(
+    ellipse 60% 45% at 80% 0%,
+    #122340 0%,
+    rgba(18, 35, 64, 0) 70%
+  );
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.cuerpo h1, .cuerpo p{
+  margin: 0;
+  color: #F1F5FB;
+  padding: 10px;
+}
+
+.cuerpo p{
+  color: #6B9CFF;
+}

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import './css/App.css';
+import { Home } from './home';
 
 function App() {
   
@@ -10,8 +11,9 @@ function App() {
     <>
       <Routes>
         <Route element={<Layout />}>
-        <Route path='/' element={<div></div>}/>
-        </ Route>
+          <Route path='/' element={<Home />}/>
+          
+        </Route>
       </Routes>
     </>
   )

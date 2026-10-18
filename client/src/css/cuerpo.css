@@ -8,6 +8,7 @@
   background-repeat: no-repeat;
   min-height: 100vh;
   padding: 20px;
+
 }
 
 .cuerpo h1, .cuerpo p{
@@ -18,4 +19,120 @@
 
 .cuerpo p{
   color: #6B9CFF;
+}
+
+.cuerpo .descripcion{
+  color: #8190A7;
+  font-size: 20px;
+}
+
+.cuerpo .principal{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.cuerpo .principal .left{
+  width: 400px;
+  border: 1px solid #25334A;
+  background-color: #111D2F;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  
+}
+.cuerpo .principal .left .subtitulo{
+  padding: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-align: start;
+}
+.cuerpo .principal .titulo{
+  margin: 8px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: start;
+  color: #F1F5FB
+}
+
+.cuerpo .principal .left .buscador{
+  position: relative;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.cuerpo .principal .left .lupa{
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #68778C;
+}
+.cuerpo .principal .left .buscar{
+  width: 100%;
+  height: 44px;
+  padding-left: 40px;
+  box-sizing: border-box;
+  background-color: #0F1A2B;
+  border: 1px solid #25334A;
+  border-radius: 10px;
+  color: #F1F5FB;
+  font-size: 14px;
+}
+
+.cuerpo .principal .left .buscar:focus{
+  outline: none;
+  border-color: #6B9CFF;
+}
+
+.principal .left .empresas .cavecera{
+  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.principal .left .empresas .cavecera .nombre,
+.principal .left .empresas .cavecera .ticker{
+  color: #68778C;
+}
+
+.principal .left .empresas .filas .fila{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #25334A;
+}
+
+.principal .left .empresas .filas .fila .caja{
+  background-color: #223C63;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 20%;
+  color: #A9C8FF;
+}
+
+.principal .left .empresas .filas .fila .informacion .nombre{
+  font-size: 14px;
+  color: #F1F5FB;
+}
+
+.principal .left .empresas .filas .fila .informacion .nasdaq{
+  font-size: 12px;
+  color: #68778C;
+}
+
+.principal .left .empresas .filas .fila .precio .ticker{
+  font-size: 14px;
+  color: #F1F5FB;
+}
+
+.principal .left .empresas .filas .fila .precio .valor{
+  font-size: 12px;
+  color: #3DD68C;
 }

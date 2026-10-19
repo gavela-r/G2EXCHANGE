@@ -40,7 +40,7 @@
   border-radius: 10px;
   box-sizing: border-box;
   padding: 20px;
-  
+  overflow: hidden;
 }
 .cuerpo .principal .left .subtitulo{
   padding: 0;
@@ -99,12 +99,17 @@
   color: #68778C;
 }
 
+.principal .left .empresas .filas{
+  margin: 0 -20px;
+}
+
 .principal .left .empresas .filas .fila{
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #25334A;
+  padding: 0 20px;
 }
 
 .principal .left .empresas .filas .fila .caja{
@@ -135,4 +140,10 @@
 .principal .left .empresas .filas .fila .precio .valor{
   font-size: 12px;
   color: #3DD68C;
+}
+
+.principal .left .empresas .filas .fila:hover{
+  background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
+  border-left-color: #6B9CFF;
+  cursor: pointer;
 }

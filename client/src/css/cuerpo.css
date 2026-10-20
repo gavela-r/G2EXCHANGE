@@ -8,7 +8,6 @@
   background-repeat: no-repeat;
   min-height: 100vh;
   padding: 20px;
-
 }
 
 .cuerpo h1, .cuerpo p{
@@ -27,9 +26,8 @@
 }
 
 .cuerpo .principal{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   margin-top: 20px;
 }
 
@@ -41,6 +39,7 @@
   box-sizing: border-box;
   padding: 20px;
   overflow: hidden;
+  
 }
 .cuerpo .principal .left .subtitulo{
   padding: 0;
@@ -87,6 +86,7 @@
   outline: none;
   border-color: #6B9CFF;
 }
+
 
 .principal .left .empresas .cavecera{
   font-size: 10px;
@@ -146,4 +146,101 @@
   background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
   border-left-color: #6B9CFF;
   cursor: pointer;
+}
+
+
+.principal .centro .nombreEmpresa{
+  width: 900px;
+  height: 130px;
+  border: 1px solid #25334A;
+  background-color: #111D2F;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.principal .centro .cajaEmpresa{
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border: 1px solid #25334A;
+  background-color: #111D2F;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #6692e2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.principal .centro .nombreEmpresa .cajaEmpresa .inicialEmpresa{
+  color: #F1F5FB;
+}
+
+.principal .centro .nombreEmpresa .infoEmpresa{
+  padding-right: 340px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.principal .centro .nombreEmpresa .infoEmpresa .nasdaq{
+  font-size: 10px;
+  color:#68778C;
+}
+
+.principal .centro .nombreEmpresa .precioEmpresa{
+  text-align: end;
+}
+
+.principal .centro .nombreEmpresa .precioEmpresa .precioActual{
+  font-size: 10px;
+  color: #68778C;
+}
+
+.principal .centro .nombreEmpresa .precioEmpresa .precio{
+  color: #F1F5FB;
+  margin: 0px;
+}
+
+.principal .centro .nombreEmpresa .precioEmpresa .valor{
+  color:#3DD68C;
+  font-size: 11px;
+}
+
+.principal .centro .evolucionAccion{
+  width: auto;
+  height: auto;
+  border: 1px solid #25334A;
+  border-radius: 10px;
+  background-color: #111D2F;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.principal .centro .evolucionAccion .tituloEvolucion{
+  color: #F1F5FB;
+}
+
+.principal .centro .evolucionAccion .precioValor{
+  display: flex;
+  align-items: center;
+}
+
+.principal .centro .evolucionAccion .precioValor .precioAccion{
+  color: #F1F5FB;
+}
+
+.principal .centro .evolucionAccion .precioValor .valor{
+  color:#3DD68C;
+  padding-left: 10px;
+}
+
+.principal .centro .evolucionAccion .precioValor .tiempo{
+  font-size: 10px;
+  color: #68778C
 }

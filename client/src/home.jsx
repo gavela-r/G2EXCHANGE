@@ -1,4 +1,4 @@
-import {Cuerpo} from './components/cuerpo.jsx';
+import { Cuerpo } from './components/Cuerpo.jsx';
 
 export function Home(){
     return <Cuerpo />

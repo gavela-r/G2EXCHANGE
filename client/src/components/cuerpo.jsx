@@ -1,4 +1,6 @@
 import '../css/cuerpo.css';
+import TradingViewWidget from './TradingViewWidget';
+
 export function Cuerpo(){
     return (
         <>
@@ -6,7 +8,6 @@ export function Cuerpo(){
                 <p>Mercados / Acciones</p>
                 <h1>Panel de Inversion</h1>
                 <p className="descripcion">Analiza oportunidades y toma decisiones con datos claros</p>
-
                 <section className="principal">
                     <div className="left">
                         <p className="subtitulo">WATCHLIST</p>
@@ -76,8 +77,39 @@ export function Cuerpo(){
                                         <p className="valor">+0.94%</p>
                                     </div>
                                 </div>
-                                
                             </div>
+                        </div>
+                    </div>
+                    <div className="centro">
+                        <div className="nombreEmpresa">
+                            <div className="cajaEmpresa">
+                                <p className="inicialEmpresa">N</p>
+                                </div>
+                            <div className="infoEmpresa">
+                                <h1 className="nombreCorporacion">NVIDIA Corporation</h1>
+                                <p className="nasdaq">NASDAQ NVDA - Semiconductores</p>
+                            </div>
+                            <div className="precioEmpresa">
+                                <p className="precioActual">PRECIO ACTUAL</p>
+                                <h2 className="precio">$139.40</h2>
+                                <p className="valor">+4.82% hoy</p>
+                            </div>
+                        </div>
+                        <div className="evolucionAccion">
+                            <p className="rendimiento">RENDIMIENTO</p>
+                            <h2 className="tituloEvolucion">EVOLUCION ACCION</h2>
+                            <div className="precioValor">
+                                <h2 className="precioAccion">$139.40 </h2>
+                                <span className='valor'>+$47.12(51.06%)</span>
+                                <p className="tiempo">Ultimos 12 meses</p>
+                            </div>
+                            <div className="grafico">
+                                <div className="grafico" style={{width: "100%", height: "500px"}}>
+                                    <TradingViewWidget />
+                                </div>
+                            </div>
+                            
+                            
                         </div>
                     </div>
                 </section>

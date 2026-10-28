@@ -18,6 +18,6 @@ let stopped=false;for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=
    if(retryMode)state.retryAfter=row.id;else state.after=row.id;state.processed++;state.retryReports=[...retry];state.updated_at=new Date().toISOString();guardarEstadoPcv(cp,state);count++;
   }
  }
- if(atEnd){state.scan_complete=true;state.retryAfter=0;}else state.scan_complete=false;state.done=atEnd&&retry.size===0&&!follow;state.daemon=follow;state.retryReports=[...retry];state.stopped=stopped;guardarEstadoPcv(cp,state);console.log(JSON.stringify(state));
+ if(atEnd){state.scan_complete=true;state.retryAfter=0;if(!retryMode)state.last_empty_scan_at=new Date().toISOString();}else state.scan_complete=false;state.done=atEnd&&retry.size===0&&!follow;state.daemon=follow;state.retryReports=[...retry];state.stopped=stopped;guardarEstadoPcv(cp,state);console.log(JSON.stringify(state));
  }finally{await c.query("SELECT RELEASE_LOCK('G2_PCV_RECOVERY_JP')").catch(()=>{});c.release();await pool.end();}
 })().catch(e=>{console.error(e.message);process.exitCode=1;});

@@ -4,6 +4,14 @@ GitHub contiene código, esquema sin datos, migraciones, documentación y fixtur
 
 ## Backup privado
 
+Actualización 28/10/2026: el respaldo `private_backups/g2-2026-10-28T22-01-40-669Z.sql` contiene las 28 tablas, incluidas las procedencias de PCV/KPI e informes nuevos. SHA-256 `a855c2d6c579f4fbc6b2ab97b92b4f5b3eb6b42fec0e2f87a571e10c8b2fa1e2`. Se restauró en `g2_recovery_aligned_20261028`: recuentos y checksums coinciden con el manifiesto y el replay del run 533 devuelve `reproduced:true`.
+
+Paquete privado del mismo punto de parada: `private_backups/pcv-recovery-controls-2026-10-28T22-10-55-076Z.tar`, SHA-256 `ee1070dc0464cafe82373fc803eaf5a84035006556c34379dbbc029e80764df2`. Incluye el dump, `.env` actualizado, motores archivados, compilados, scripts, auditorías, cuotas y checkpoints. Se extrajo en un directorio nuevo: coinciden el hash del SQL, los bytes de `.env` y los 157 archivos de motores archivados/compilados comprobados. El cursor JP era 497 y los workers estaban parados. Los procesos se reanudaron después y su avance posterior requiere otro backup. Contiene credenciales y datos privados; no subirlo a GitHub.
+
+El tar `replay-config-checkpoints.tar` citado más abajo es histórico del 12/10/2026 y no incluye las nuevas claves. Para trasladar la intervención PCV usar el paquete actualizado. Si cambia `DB_NAME` o la huella del código, conservar el checkpoint anterior y reconciliar con un directorio nuevo: no forzar firmas. El ZIP masivo de respuestas no se incluye; los documentos pueden volver a descargarse respetando cuotas.
+
+Prueba automática posterior: dump `g2-2026-10-28T22-49-05-732Z.sql` (SHA-256 `c22da4ec2d11fea4fca0d51bafaffbc6cacbd5a105716226a2e6bf453336bb1b`) y paquete `pcv-recovery-controls-2026-10-28T22-50-48-494Z.tar` (SHA-256 `aaf32682e21d0347ab515722ca2f1a331925844d96d8da224101d87a29167473`). El coordinador restauró y verificó todas las tablas en `g2_recovery_auto_20261028224859185`, comprobó SQL y `.env` extraídos y reprodujo el run 533 desde el código extraído. Este paquete incluye también el dump inicial para conservar la referencia de integridad. Cada paquete tiene su manifiesto y prueba `.validation.json` privados. El coordinador crea nuevos respaldos al completar barridos y colas; consultar `--status` para localizar el más reciente.
+
 ```powershell
 node server/scripts/backup-db.cjs
 node server/scripts/backup-db.cjs --schema
@@ -34,7 +42,7 @@ npm.cmd --prefix server run valuation:replay -- 533
 
 El checkpoint puede trasladarse con sus datos privados. Si incluye un lock de otro equipo, comprobar primero que el worker anterior está detenido. Usar un directorio nuevo permite reconciliar con seguridad gracias a la idempotencia de MySQL; no borrar un lock perteneciente a un worker activo.
 
-Backup final verificado: `private_backups/g2-2026-10-12T16-25-48-542Z.sql`, 298.305.198 bytes, SHA-256 `aa07bc26d0e7a0d64ac843804818a1278abefeb3a1de9b763b39139c6a58c6a5`. Restaurado en `g2_recovery_release_20261012`: todas las tablas coinciden por checksum con producción y el replay del run 533 devuelve `reproduced:true`. El tar privado tiene SHA-256 `dd4bc14e22a76e84bdd26a4761f7b35038e9991e8a0348e4641bf947882b103d`; contiene secretos y no debe publicarse.
+Backup histórico verificado del 12/10/2026: `private_backups/g2-2026-10-12T16-25-48-542Z.sql`, 298.305.198 bytes, SHA-256 `aa07bc26d0e7a0d64ac843804818a1278abefeb3a1de9b763b39139c6a58c6a5`. Restaurado en `g2_recovery_release_20261012`: todas las tablas coincidían por checksum con producción y el replay del run 533 devolvió `reproduced:true`. El tar histórico tiene SHA-256 `dd4bc14e22a76e84bdd26a4761f7b35038e9991e8a0348e4641bf947882b103d`; contiene secretos y no debe publicarse.
 
 ## Migraciones y reversión
 

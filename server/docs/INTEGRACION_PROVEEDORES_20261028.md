@@ -10,7 +10,7 @@ Backup de avance adicional: `private_backups/g2-2026-10-28T19-26-00-710Z.sql`, S
 
 ## Implementación y seguridad de datos
 
-El worker recomendado es `server/scripts/recuperar-pcv-proveedores.cjs`. Flujo US: SEC → FinDataEngine → Alpha Vantage. Flujo JP: EDINET oficial → EDINET DB. Taiwán queda excluido. Las tres claves complementarias se configuran únicamente en `.env` con los nombres de `.env.example`.
+El coordinador recomendado es `server/scripts/recuperar-pcv-plan.cjs`. US usa `recuperar-pcv-proveedores.cjs` y la revisión documental `recuperar-sec-vinculados.cjs`; JP usa `recuperar-informes-jp-v2.cjs` para informes ausentes y `recuperar-pcv-jp-v3.cjs` para los existentes. Flujo US: SEC → FinDataEngine → Alpha Vantage. Flujo JP: EDINET oficial → EDINET DB. Taiwán queda excluido. Las tres claves complementarias se configuran únicamente en `.env` con los nombres de `.env.example`.
 
 Se aplicó la migración aditiva 16 (`pcv_import_evidence`), ensayada dos veces en la copia y después aplicada dos veces sin modificar las tablas originales. Conserva el estado anterior y posterior, fuente, concepto, documento, contexto, moneda/unidad, política y hash de respuesta. Las inserciones de PCV, cálculo de KPI y ledger comparten una transacción por informe. La fila de informe bloqueada serializa la importación; no se elimina ni se colapsa ningún duplicado histórico. Un PCV no nulo nunca se sobrescribe. Un único PCV NULL puede completarse conservando su estado original en el ledger; NULL no se convierte automáticamente en cero.
 
@@ -29,6 +29,10 @@ Correcciones verificables:
 Una segunda revisión SEC (`recuperar-sec-vinculados.cjs`) examina los informes bloqueados por identidad. Solo expande abreviaturas legales explícitas (Co/Company, Corp/Corporation, Inc/Incorporated, Ltd/Limited), puntuación, “&/and”, artículo inicial y sufijo estatal SEC. No usa distancia de nombres ni elimina palabras de actividad o filial. Además exige el CIK del emisor, nombre legal completo actual o anterior con fecha válida, y el accession exacto con formulario, cierre y publicación iguales en submissions oficial, incluido su historial cuando procede. El prefijo del accession es únicamente un candidato que debe superar todas esas comprobaciones. La traza conserva ambos nombres y hashes de submissions/índice; los nombres en MySQL no cambian. La coherencia de importes principales sigue siendo obligatoria antes de consultar complementarios.
 
 Los informes nuevos JP tienen una recuperación específica de acciones emitidas al cierre (`recuperar-acciones-jp.cjs`). El XBRL oficial publica `TotalNumberOfIssuedSharesSummaryOfBusinessResults` en el contexto individual del emisor, aunque prepare estados consolidados. Se exige namespace oficial, emisor, cierre exacto, unidad shares, entero no negativo y ausencia de clases/segmentos o contradicciones. La procedencia identifica capital del emisor y acciones emitidas, sin construir un recuento diluido. Se excluyen snapshots de fecha de presentación. El piloto real pasó rollback, inserción y repetición sin duplicados, usando exclusivamente el ZIP verificado en caché. `--follow` permite completar también los informes que entren después.
+
+La lectura completa incorpora además etiquetas oficiales IFRS que faltaban, como `AssetsIFRS`, `LiabilitiesIFRS`, `EquityIFRS`, `ProfitLossIFRS` y compras de inmovilizado. Se admiten exclusivamente namespaces oficiales y contextos del emisor, cierre, duración, moneda y consolidación correctos. No se construyen subtotales ni se interpretan extensiones privadas de la empresa. El signo de salidas de caja solo se normaliza para etiquetas explícitas de pagos/compras y se conserva el importe original en la traza. Un piloto real recuperó nueve PCV y nueve KPI adicionales; la repetición añadió cero filas.
+
+Los importadores JP recomendados leen esas etiquetas y las acciones emitidas **antes** de consultar EDINET DB. Se abrieron los directorios nuevos `pcv-jp-informes-jun2022-v2`, `pcv-jp-informes-resto-v2` y `pcv-jp-full-v3`, conservando los anteriores. Los documentos ya descargados se reutilizan y la base impide duplicados; no se forzó ninguna firma. Los scripts de acciones/detalle separados quedan disponibles para ensayos, pero el plan activo incorpora su lectura directamente en la fase primaria.
 
 En una muestra inicial no probabilística de 100 informes SEC bloqueados, 92 superaron la comprobación documental y tenían alguna discrepancia numéricamente coincidente con otro cierre del emisor; ocho no se verificaron mediante el candidato usado en el diagnóstico. Esto es un indicio que requiere revisión, no prueba general de la causa. No se corrigieron ni sobrescribieron los importes heredados. La cobertura publicada mide presencia; no certifica exactitud de todos los datos originales.
 
@@ -73,18 +77,31 @@ Agregados iniciales: US PCV 79,9053%, KPI 72,4556%; JP PCV 91,0723%, KPI 93,1715
 
 ## Operación y recuperación
 
-Validación ejecutada: motor (20 pruebas), backend (59 pruebas) y cuatro pruebas de integración MySQL aprobadas; compilación completa aprobada. Las pruebas cubren rollback con fallo después de escribir, conservación de originales, NULL completado con evidencia, repetición sin duplicados, CIK/nombres históricos y abreviaturas legales con documento exacto, períodos, unidades, perímetro, TSV/BOM, EPS, acciones emitidas del emisor, cuotas, reinicio diario sin perder el presupuesto mensual y reintentos de locks Windows. El lote japonés se interrumpió y reanudó realmente desde su checkpoint; la integridad se comparó con la copia inicial.
+Validación ejecutada: motor (20 pruebas), backend (66 pruebas) y cuatro pruebas de integración MySQL aprobadas; compilación completa aprobada. Las pruebas cubren rollback con fallo después de escribir, conservación de originales, NULL completado con evidencia, repetición sin duplicados, CIK/nombres históricos y abreviaturas legales con documento exacto, períodos, unidades, perímetro, TSV/BOM, EPS, etiquetas IFRS, acciones emitidas del emisor, dependencias entre fases, cuotas y reintentos de locks Windows. Los lotes se interrumpieron y reanudaron realmente; la integridad se comparó con la copia inicial, incluidas todas las demás tablas originales.
 
 Un clon real de la rama publicada instaló dependencias, compiló y pasó las 77 pruebas unitarias sin `.env`. Se corrigieron tres dependencias con avisos nuevos de seguridad mediante actualizaciones compatibles; audit de servidor y motor sin vulnerabilidades conocidas en la comprobación ejecutada. El hash del esquema coincide también en el clon Windows. No se modificó el frontend.
 
 Compilar antes de ejecutar. Instalar dependencias desde la rama actual y mantener `.env`, dumps, cachés, logs y checkpoints en privado. No compartir directorios de checkpoints. El script de primarias dejado por Copilot ahora delega al worker seguro, con escritura explícita y un directorio por país; su checkpoint antiguo se conserva y no se interpreta como si tuviera el formato nuevo.
 
+El coordinador se ejecuta como proceso Windows oculto e independiente. Encadena SEC primaria, complementarios US, revisión de identidad, importación JP completa de junio de 2022, descubrimiento de publicaciones enero de 2022–junio de 2026, importación restante y barrido JP de informes existentes. Las cuotas pendientes de una fase no impiden empezar el siguiente barrido primario. La regla de cierre fiscal 2022–2025 se mantiene en todas las fases.
+
+Cada 30 minutos genera una auditoría consistente y actualiza el informe local. Al terminar los barridos primarios y al terminar las colas, pausa sus workers, comprueba integridad, exporta, restaura en una base nueva, verifica tablas y extrae un paquete privado. El replay del run 533 se ejecuta desde el código extraído contra la copia restaurada. La prueba completa del coordinador terminó correctamente y reanudó después la recuperación. Un fallo de integridad mantiene la escritura pausada; otros fallos quedan identificados para revisión. Los informes generados localmente pueden ser más recientes que el último commit.
+
+```powershell
+node server/scripts/recuperar-pcv-plan.cjs --status
+node server/scripts/recuperar-pcv-plan.cjs --write --resume-jobs
+node server/scripts/recuperar-pcv-plan.cjs --snapshot
+node server/scripts/recuperar-pcv-plan.cjs --stop
+```
+
+No iniciar un segundo coordinador ni supervisores manuales sobre esos mismos directorios. `--resume-jobs` retira los controles de parada de los trabajos del plan. Tras una salida anormal, `--resume` exige que el propietario anterior ya no esté activo. El proceso necesita que el ordenador permanezca encendido; no se ha instalado alojamiento de pago ni una tarea de arranque del sistema.
+
 ```powershell
 npm.cmd --prefix server run build
 node server/scripts/recuperar-pcv-proveedores.cjs --country US --limit 1 --directory private_backups/piloto-us
-node server/scripts/recuperar-pcv-proveedores.cjs --country JP --limit 1 --directory private_backups/piloto-jp
+node server/scripts/recuperar-pcv-jp-v3.cjs --country JP --limit 1 --directory private_backups/piloto-jp-v3
 node server/scripts/recuperar-pcv-proveedores.cjs --country US --write --primary-only --directory private_backups/pcv-us-primary-full --resume
-node server/scripts/recuperar-pcv-watch.cjs --country JP --write --directory private_backups/pcv-jp-full-v2
+node server/scripts/recuperar-pcv-watch.cjs --job jp-v3 --country JP --write --directory private_backups/pcv-jp-full-v3
 ```
 
 El supervisor detecta el checkpoint sin requerir `--resume`. Para una pasada US con complementarios, después de terminar la primaria:
@@ -97,10 +114,10 @@ node server/scripts/recuperar-pcv-watch.cjs --job sec-bound --directory private_
 Descubrimiento e importación de informes JP ausentes (la recogida debe terminar antes de importar):
 
 ```powershell
-node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase collect --from 2022-06-01 --to 2022-06-30 --directory private_backups/pcv-jp-documentos-jun2022
-node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase import --source-directory private_backups/pcv-jp-documentos-jun2022 --directory private_backups/pcv-jp-informes-jun2022 --write
-node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase collect --from 2022-01-01 --to 2026-06-30 --directory private_backups/pcv-jp-documentos-resto
-node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase import --source-directory private_backups/pcv-jp-documentos-resto --directory private_backups/pcv-jp-informes-resto --write
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp-v2 --phase collect --from 2022-06-01 --to 2022-06-30 --directory private_backups/pcv-jp-documentos-jun2022
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp-v2 --phase import --source-directory private_backups/pcv-jp-documentos-jun2022 --directory private_backups/pcv-jp-informes-jun2022-v2 --write
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp-v2 --phase collect --from 2022-01-01 --to 2026-06-30 --directory private_backups/pcv-jp-documentos-resto
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp-v2 --phase import --source-directory private_backups/pcv-jp-documentos-resto --directory private_backups/pcv-jp-informes-resto-v2 --write
 node server/scripts/recuperar-pcv-watch.cjs --job jp-issued-shares --directory private_backups/pcv-jp-acciones --write --follow
 ```
 

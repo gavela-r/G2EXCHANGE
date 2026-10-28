@@ -14,7 +14,9 @@
     "test:integration": "npm run build && node --test tests/mysqlValoracion.integration.cjs",
     "valuation:classification": "node dist/src/valoracion/informeClasificacion.js",
     "pcv:recover": "node scripts/recuperar-pcv-proveedores.cjs",
-    "pcv:reports:jp": "node scripts/recuperar-informes-jp.cjs",
+    "pcv:reports:jp": "node scripts/recuperar-informes-jp-v2.cjs",
+    "pcv:recover:jp": "node scripts/recuperar-pcv-jp-v3.cjs --country JP",
+    "pcv:plan": "node scripts/recuperar-pcv-plan.cjs",
     "pcv:audit": "node scripts/auditar-pcv-kpi-2022-2025.cjs",
     "test:pcv:integration": "npm run build && node --test tests/pcvMysql.integration.cjs tests/informeDiscovery.integration.cjs"
   },

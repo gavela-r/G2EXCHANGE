@@ -45,6 +45,8 @@ async function main() {
     ) SELECT r.*,e.nombre_empresa,p.codigo_iso FROM ranked r JOIN empresa e ON e.id=r.empresa_id JOIN pais p ON p.id=e.pais_id WHERE r.rn=1 ORDER BY p.codigo_iso,r.ejercicio,r.empresa_id`,
   );
   const reportIds = reports.map(r => Number(r.informe_id));
+  const reportIndex=new Map(reports.map(r=>[`${r.codigo_iso}|${Number(r.empresa_id)}|${Number(r.ejercicio)}`,r]));
+  const reportAt=(country,id,year)=>reportIndex.get(`${country}|${Number(id)}|${year}`);
   console.log(`PCV/KPI audit: ${reports.length} annual company-years; loading PCV/KPI`);
   const pcvByReport = new Map(), kpiByReport = new Map();
   if (reportIds.length) {
@@ -90,15 +92,17 @@ async function main() {
         kpiCalculable += calculatedSet.size;
         kpivailable += KPI_EXPECTED.filter(k => existingSet.has(k)).length;
         kpiMissing += KPI_EXPECTED.filter(k => !existingSet.has(k) && calculatedSet.has(k)).length;
-        perCompany.set(Number(r.empresa_id), { coreComplete: CORE.every(c => presentSet.has(c)), allExpected: expected.every(c => presentSet.has(c)), normalizationError });
+        perCompany.set(Number(r.empresa_id), { coreComplete: CORE.every(c => presentSet.has(c)), allExpected: expected.every(c => presentSet.has(c)), allKpi:KPI_EXPECTED.every(k=>existingSet.has(k)), normalizationError });
       }
       output.periods[`${country}-${year}`] = { target_companies: targetCompanies, companies_with_annual_report: rs.length, companies_without_annual_report:targetCompanies-rs.length, companies_with_any_pcv: reportsWithPcv, companies_all_core_17: reportsCoreComplete, companies_with_incomplete_core:rs.length-reportsCoreComplete, reports_with_pcv: reportsWithPcv, valid_pcv_present: pcvValid, expected_pcv_catalog_slots: pcvExpected, missing_pcv_catalog_slots: Math.max(0,pcvExpected-pcvValid), missing_by_concept:missingConcepts, pcv_coverage_pct: pct(pcvValid,pcvExpected), core_17_slots_present: pcvCorePresent, core_17_slots_expected: rs.length*CORE.length, core_17_slot_coverage_pct: pct(pcvCorePresent,rs.length*CORE.length), existing_kpi_available: kpivailable, missing_kpi_total:rs.length*KPI_EXPECTED.length-kpivailable, calculated_kpi_slots: kpiCalculable, missing_kpi_calculable_existing: kpiMissing, expected_kpi_slots: rs.length*KPI_EXPECTED.length, kpi_coverage_pct: pct(kpivailable,rs.length*KPI_EXPECTED.length), reports_with_four_year_sequence: null, companies_with_all_catalog_pcv: [...perCompany.values()].filter(x=>x.allExpected).length, reports_without_pcv: rs.length-reportsWithPcv, normalization_conflicts: [...perCompany.values()].filter(x=>x.normalizationError).length };
+      output.periods[`${country}-${year}`].companies_with_all_17_kpi=[...perCompany.values()].filter(x=>x.allKpi).length;
     }
     for(const year of YEARS){const p=output.periods[`${country}-${year}`];p.target_universe_pcv_slots=p.target_companies*sourceExpected[country].length;p.target_universe_kpi_slots=p.target_companies*KPI_EXPECTED.length;p.target_universe_pcv_coverage_pct=pct(p.valid_pcv_present,p.target_universe_pcv_slots);p.target_universe_kpi_coverage_pct=pct(p.existing_kpi_available,p.target_universe_kpi_slots);}
     const keys=YEARS.map(y=>`${country}-${y}`), agg=keys.map(k=>output.periods[k]);
     const pcv=agg.reduce((a,x)=>a+x.valid_pcv_present,0), expected=agg.reduce((a,x)=>a+x.expected_pcv_catalog_slots,0), kpi=agg.reduce((a,x)=>a+x.existing_kpi_available,0), kpiExp=agg.reduce((a,x)=>a+x.expected_kpi_slots,0);
-    const complete=targets.filter(t=>t.codigo_iso===country).filter(t=>YEARS.every(y=>reports.some(r=>r.codigo_iso===country&&Number(r.empresa_id)===Number(t.empresa_id)&&Number(r.ejercicio)===y))).length;
-    output.aggregates[country]={target_companies:targetCounts[country],pcv_valid_present:pcv,pcv_expected_catalog_slots:expected,pcv_missing_catalog_slots:Math.max(0,expected-pcv),pcv_coverage_pct:pct(pcv,expected),kpi_existing_available:kpi,kpi_expected_slots:kpiExp,kpi_coverage_pct:pct(kpi,kpiExp),companies_with_four_annual_reports_2022_2025:complete,companies_with_four_years_and_all_core_17:targets.filter(t=>t.codigo_iso===country).filter(t=>YEARS.every(y=>{const r=reports.find(r=>r.codigo_iso===country&&Number(r.empresa_id)===Number(t.empresa_id)&&Number(r.ejercicio)===y);return r&&(pcvByReport.get(Number(r.informe_id))||[]).length>0&&CORE.every(c=>(pcvByReport.get(Number(r.informe_id))||[]).some(p=>p.concepto_estandar===c&&p.importe!==null));})).length};
+    const allFour=condition=>targets.filter(t=>t.codigo_iso===country).filter(t=>YEARS.every(y=>{const r=reportAt(country,t.empresa_id,y);return r&&condition(r);})).length;
+    const hasPcv=(r,code)=>(pcvByReport.get(Number(r.informe_id))||[]).some(p=>p.concepto_estandar===code&&p.importe!==null&&Number.isFinite(Number(p.importe)));
+    output.aggregates[country]={target_companies:targetCounts[country],pcv_valid_present:pcv,pcv_expected_catalog_slots:expected,pcv_missing_catalog_slots:Math.max(0,expected-pcv),pcv_coverage_pct:pct(pcv,expected),kpi_existing_available:kpi,kpi_expected_slots:kpiExp,kpi_coverage_pct:pct(kpi,kpiExp),companies_with_four_annual_reports_2022_2025:allFour(()=>true),companies_with_four_years_and_all_core_17:allFour(r=>CORE.every(code=>hasPcv(r,code))),companies_with_four_years_and_all_catalog_pcv:allFour(r=>sourceExpected[country].every(code=>hasPcv(r,code))),companies_with_four_years_and_all_17_kpi:allFour(r=>KPI_EXPECTED.every(code=>(kpiByReport.get(Number(r.informe_id))||[]).some(k=>k.kpi===code&&k.valor!==null)))};
   }
   for(const country of ['US','JP']){const a=output.aggregates[country];a.target_universe_pcv_coverage_pct=pct(a.pcv_valid_present,targetCounts[country]*YEARS.length*sourceExpected[country].length);a.target_universe_kpi_coverage_pct=pct(a.kpi_existing_available,targetCounts[country]*YEARS.length*KPI_EXPECTED.length);}
   const [reportLedger]=await connection.query("SHOW TABLES LIKE 'financial_report_evidence'");
@@ -110,7 +114,7 @@ async function main() {
    output.providers=(await connection.query("SELECT e.provider,e.record_type,COUNT(*) records,COUNT(DISTINCT e.informe_id) reports,COUNT(DISTINCT i.empresa_id) companies,SUM(JSON_TYPE(JSON_EXTRACT(e.evidence_json,'$.before'))='NULL') new_rows FROM pcv_import_evidence e JOIN informe_financiero i ON i.id=e.informe_id GROUP BY e.provider,e.record_type"))[0];
    output.beneficiaries=(await connection.query("SELECT p.codigo_iso,COUNT(DISTINCT i.empresa_id) companies,COUNT(DISTINCT e.informe_id) reports FROM pcv_import_evidence e JOIN informe_financiero i ON i.id=e.informe_id JOIN empresa en ON en.id=i.empresa_id JOIN pais p ON p.id=en.pais_id WHERE e.record_type='PCV' GROUP BY p.codigo_iso"))[0];
   }
-  const label=process.argv.includes('--after')?'after':process.argv.includes('--baseline')?'baseline-verified':'before';
+  const label=process.argv.includes('--after')?'after':process.argv.includes('--baseline-enriched')?'baseline-enriched':process.argv.includes('--baseline')?'baseline-verified':'before';
   const file=path.join(outDir,`pcv-kpi-audit-${label}-2022-2025.json`);
   if(fs.existsSync(file)&&!process.argv.includes('--after'))throw new Error('Auditoría existente conservada; usar un archivo nuevo');
   fs.writeFileSync(file,JSON.stringify(output,null,2));

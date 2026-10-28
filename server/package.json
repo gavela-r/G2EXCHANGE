@@ -12,7 +12,10 @@
     "valuation:watch": "node dist/src/valoracion/watch.js",
     "valuation:replay": "node dist/src/valoracion/replay.js",
     "test:integration": "npm run build && node --test tests/mysqlValoracion.integration.cjs",
-    "valuation:classification": "node dist/src/valoracion/informeClasificacion.js"
+    "valuation:classification": "node dist/src/valoracion/informeClasificacion.js",
+    "pcv:recover": "node scripts/recuperar-pcv-proveedores.cjs",
+    "pcv:audit": "node scripts/auditar-pcv-kpi-2022-2025.cjs",
+    "test:pcv:integration": "npm run build && node --test tests/pcvMysql.integration.cjs"
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",

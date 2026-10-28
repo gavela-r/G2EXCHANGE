@@ -63,7 +63,8 @@ export function normalizarPartidas(rows:Partida[],fuente:string):{valores:Record
     if((k==='CAPEX'||k==='DIVIDENDOS_PAGADOS')&&v<0) {
       const alias=fuente==='EDINET'?r.alias_edinet:fuente==='SEC_EDGAR'?r.alias_sec:r.alias_finmind;
       const local=r.concepto.split(':').pop()!.toLowerCase();
-      if(!alias || local!==alias.toLowerCase()) {calidad[k]={estado:'INVALIDO',reason:'Signo de salida sin alias exacto verificable',source:r.concepto};continue;}
+      const salidaComplementaria=(k==='CAPEX'&&['EDINET_DB:purchase_of_ppe','FINDATAENGINE:capital_expenditures','ALPHAVANTAGE:capitalExpenditures'].includes(r.concepto))||(k==='DIVIDENDOS_PAGADOS'&&['EDINET_DB:cash_dividends_paid','FINDATAENGINE:dividends_paid','ALPHAVANTAGE:dividendPayout'].includes(r.concepto));
+      if(!salidaComplementaria&&(!alias || local!==alias.toLowerCase())) {calidad[k]={estado:'INVALIDO',reason:'Signo de salida sin alias exacto verificable',source:r.concepto};continue;}
       v=-v;calidad[k]={estado:'RECONSTRUIDO',rule:'SALIDA_CAJA_ALIAS_EXACTO',source:r.concepto};
     }
     if(valores[k]!==undefined && valores[k]!==v) throw new Pendiente('TAXONOMIA_AMBIGUA',`${k}: importes incompatibles para el mismo informe`);

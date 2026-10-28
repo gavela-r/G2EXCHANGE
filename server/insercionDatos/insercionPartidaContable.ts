@@ -3,6 +3,7 @@ import conexion from "../conexion/bd";
 import AdmZip from "adm-zip";
 import { parse } from "csv-parse/sync";
 import iconv from "iconv-lite";
+import { insertarSoloPCVAusentes } from "../src/pcv/insertarSoloAusentes";
 
 // ============================================================================
 // .ENV
@@ -10,8 +11,8 @@ import iconv from "iconv-lite";
 // EDINET_API_KEY_1=PEGA_AQUI_TU_API_KEY_1
 // EDINET_API_KEY_2=PEGA_AQUI_TU_API_KEY_2
 // EDINET_API_KEY_3=PEGA_AQUI_TU_API_KEY_3
-// EDINET_PCV_INTERVAL_MS=400
-// EDINET_PCV_CONCURRENCIA=12
+// EDINET_PCV_INTERVAL_MS=3000
+// EDINET_PCV_CONCURRENCIA=3
 // EDINET_PCV_TIMEOUT_MS=30000
 // EDINET_PCV_MAX_RETRIES=4
 //
@@ -23,6 +24,7 @@ import iconv from "iconv-lite";
 // ============================================================================
 
 const JP_PCV_EDINET_API_KEYS = [
+    process.env.EDINET_API_KEY || "",
     process.env.EDINET_API_KEY_1 || "",
     process.env.EDINET_API_KEY_2 || "",
     process.env.EDINET_API_KEY_3 || ""
@@ -30,11 +32,11 @@ const JP_PCV_EDINET_API_KEYS = [
     .map(k => String(k).trim())
     .filter((k, i, arr) => k && arr.indexOf(k) === i);
 
-// Intervalo MINIMO entre peticiones de una misma API key.
-// Con 3 keys y 400 ms, el techo teorico es ~7.5 req/s en total.
+// EDINET pide espaciar solicitudes 3-5 s. Se aplica por API key.
+// No crear ni rotar claves para eludir límites de cuenta.
 // Si solo configuras 1 o 2 keys, el mismo codigo sigue funcionando sin cambios.
-const JP_PCV_INTERVAL_MS = Number(process.env.EDINET_PCV_INTERVAL_MS || "400");
-const JP_PCV_CONCURRENCIA = Math.max(1, Number(process.env.EDINET_PCV_CONCURRENCIA || "12"));
+const JP_PCV_INTERVAL_MS = Math.max(3000, Number(process.env.EDINET_PCV_INTERVAL_MS || "3000"));
+const JP_PCV_CONCURRENCIA = Math.min(JP_PCV_EDINET_API_KEYS.length || 1, Math.max(1, Number(process.env.EDINET_PCV_CONCURRENCIA || "3")));
 const JP_PCV_TIMEOUT_MS = Number(process.env.EDINET_PCV_TIMEOUT_MS || "30000");
 const JP_PCV_MAX_RETRIES = Number(process.env.EDINET_PCV_MAX_RETRIES || "4");
 
@@ -208,7 +210,7 @@ interface TWOPTDividendFact {
 // y extensiones propias. Por eso usamos varios alias por concepto.
 // ============================================================================
 
-const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
+export const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
     {
         codigo: "INGRESOS",
         categoria: "CUENTA_RESULTADOS",
@@ -610,11 +612,10 @@ const JP_PCV_API_KEY_STATES: JPPCVApiKeyState[] = JP_PCV_EDINET_API_KEYS.map((ke
 }));
 
 /**
- * Reserva la primera API key disponible respetando un intervalo independiente
- * por clave. Si una clave esta en cooldown por 429, los workers usan cualquiera
- * de las otras disponibles. Si todas estan en cooldown, se espera hasta que
- * se recupere la primera.
+ * Reserva una clave respetando un intervalo global de cuenta. Un 429
+ * detiene todas las claves; no se rota para eludir el límite.
  */
+let jpPcvGlobalNextRequestAt=0;
 async function jpPcvAdquirirApiKey(): Promise<JPPCVApiKeyState> {
     if (JP_PCV_API_KEY_STATES.length === 0) {
         throw new Error("Falta al menos una API key EDINET en .env (EDINET_API_KEY_1/2/3)");
@@ -626,7 +627,7 @@ async function jpPcvAdquirirApiKey(): Promise<JPPCVApiKeyState> {
         let mejorDisponibleEn = Infinity;
 
         for (const estado of JP_PCV_API_KEY_STATES) {
-            const disponibleEn = Math.max(estado.nextRequestAt, estado.cooldownUntil);
+            const disponibleEn = Math.max(estado.nextRequestAt, estado.cooldownUntil,jpPcvGlobalNextRequestAt);
 
             if (disponibleEn < mejorDisponibleEn) {
                 mejor = estado;
@@ -648,6 +649,7 @@ async function jpPcvAdquirirApiKey(): Promise<JPPCVApiKeyState> {
         // La reserva se hace antes de devolver la key para que dos workers no
         // puedan cogerla simultaneamente en el mismo instante.
         mejor.nextRequestAt = ahora + JP_PCV_INTERVAL_MS;
+        jpPcvGlobalNextRequestAt=ahora+JP_PCV_INTERVAL_MS;
         mejor.totalRequests++;
 
         return mejor;
@@ -660,6 +662,7 @@ function jpPcvCooldown429(estado: JPPCVApiKeyState): number {
 
     const espera = Math.min(15000 * Math.pow(2, estado.consecutive429 - 1), 120000);
     estado.cooldownUntil = Math.max(estado.cooldownUntil, Date.now() + espera);
+    for(const keyState of JP_PCV_API_KEY_STATES)keyState.cooldownUntil=Math.max(keyState.cooldownUntil,estado.cooldownUntil);
 
     return espera;
 }
@@ -792,6 +795,14 @@ async function jpPcvPrepararTaxonomia(): Promise<Map<string, number>> {
 
 async function jpPcvCargarInformesPendientes(): Promise<JPPCVInforme[]> {
     const db = conexion as any;
+    const yearFrom = Number(process.env.PCV_IMPORT_YEAR_FROM || 0);
+    const yearTo = Number(process.env.PCV_IMPORT_YEAR_TO || 0);
+    const afterId = Math.max(0, Number(process.env.PCV_IMPORT_AFTER_REPORT_ID || 0));
+    const reportLimit = Math.max(0, Number(process.env.PCV_IMPORT_REPORT_LIMIT || 0));
+    if ((yearFrom && (!Number.isInteger(yearFrom) || yearFrom < 2000)) || (yearTo && (!Number.isInteger(yearTo) || yearTo < yearFrom))) {
+        throw new Error("Rango PCV_IMPORT_YEAR_FROM/TO inválido");
+    }
+    const conceptCodes = JP_PCV_CONCEPTOS.map(c => c.codigo);
 
     const [rows]: any = await db.query(
         `
@@ -807,8 +818,23 @@ async function jpPcvCargarInformesPendientes(): Promise<JPPCVInforme[]> {
         WHERE inf.fuente = 'EDINET'
           AND inf.identificador_fuente IS NOT NULL
           AND TRIM(inf.identificador_fuente) <> ''
-        ORDER BY inf.fecha_publicacion DESC, inf.id DESC
-        `
+                    AND (? = 0 OR YEAR(inf.fecha_fin_periodo) >= ?)
+                    AND (? = 0 OR YEAR(inf.fecha_fin_periodo) <= ?)
+                      AND inf.id > ?
+                    AND (COALESCE(?,0) = 0 OR inf.tipo_periodo = 'ANUAL')
+                    AND EXISTS (
+                            SELECT 1 FROM taxonomia_concepto tc
+                            WHERE tc.concepto_estandar IN (?) AND tc.activo=1
+                                AND NOT EXISTS (
+                                        SELECT 1 FROM partida_contable_valor pc
+                                        WHERE pc.informe_id=inf.id AND pc.concepto_estandar_id=tc.id
+                                            AND pc.importe IS NOT NULL
+                                )
+                    )
+        ORDER BY inf.id ASC
+        LIMIT ?
+                `,
+        [yearFrom, yearFrom, yearTo, yearTo, afterId, process.env.PCV_IMPORT_ANNUAL_ONLY === '1' ? 1 : 0, conceptCodes, reportLimit || 2147483647]
     );
 
     const resultado: JPPCVInforme[] = rows.map((row: any) => ({
@@ -862,7 +888,7 @@ function jpPcvDecodificarCsv(buffer: Buffer): string {
 // LEER TODOS LOS CSV DEL ZIP
 // ============================================================================
 
-function jpPcvLeerCsvsZip(zipBuffer: Buffer): Record<string, any>[] {
+export function jpPcvLeerCsvsZip(zipBuffer: Buffer): Record<string, any>[] {
     const zip = new AdmZip(zipBuffer);
     const filasTotales: Record<string, any>[] = [];
     const entries = zip.getEntries();
@@ -882,13 +908,7 @@ function jpPcvLeerCsvsZip(zipBuffer: Buffer): Record<string, any>[] {
 
             let texto: string;
 
-            // 1. DETECTAR UTF-16 LE
-            if (raw.length >= 2 && raw[0] === 0xFF && raw[1] === 0xFE) {
-                texto = iconv.decode(raw, "utf16-le");
-            } else {
-                // 2. PROBAR SHIFT_JIS / CP932
-                texto = iconv.decode(raw, "CP932");
-            }
+            texto = jpPcvDecodificarCsv(raw);
 
             // Eliminar BOM
             texto = texto.replace(/^\uFEFF/, "");
@@ -899,7 +919,7 @@ function jpPcvLeerCsvsZip(zipBuffer: Buffer): Record<string, any>[] {
             try {
                 filas = parse(texto, {
                     columns: true,
-                    delimiter: ",",
+                    delimiter: texto.split(/\r?\n/, 1)[0].includes("\t") ? "\t" : ",",
                     skip_empty_lines: true,
                     relax_column_count: true,
                     relax_quotes: true,
@@ -1011,13 +1031,16 @@ function jpPcvConvertirFacts(filas: Record<string, any>[]): JPPCVFactCSV[] {
 // Queremos: PERIODO ACTUAL, CONSOLIDADO cuando exista, evitar Previous/Prior.
 // ============================================================================
 
-function jpPcvScoreContexto(
+export function jpPcvScoreContexto(
     fact: JPPCVFactCSV,
     informe: JPPCVInforme,
     categoria: string
 ): number {
     const c = fact.contexto.toLowerCase();
     let score = 0;
+    if (/prior|previous/.test(c) || !c.includes('current')) return -Infinity;
+    if (informe.tipo_periodo.toUpperCase()==='ANUAL' && !c.includes('currentyear')) return -Infinity;
+    if (categoria==='BALANCE' ? !c.includes('instant') : !c.includes('duration')) return -Infinity;
 
     // Penalizar comparativos anteriores.
     if (c.includes("prior") || c.includes("previous")) {
@@ -1092,6 +1115,9 @@ function jpPcvBuscarConcepto(
         const alias = definicion.aliases[aliasIndex].toLowerCase();
 
         for (const fact of facts) {
+            const expectedUnit=definicion.codigo==='ACCIONES_EN_CIRCULACION'?'SHARES':definicion.codigo==='EPS_DILUIDO'?'JPY/SHARES':'JPY';
+            const unit=fact.unidad.toUpperCase().replace(/^ISO4217:/,'');
+            if(unit!==expectedUnit)continue;
             const local = jpPcvElementoLocal(fact.elemento).toLowerCase();
             if (definicion.codigo === "DEPRECIACION_AMORTIZACION" && /reversal|reserve|impairment|accretion/.test(local)) continue;
 
@@ -1169,40 +1195,19 @@ async function jpPcvGuardarPartidas(partidas: JPPCVPartida[]): Promise<number> {
         return 0;
     }
 
-    const db = conexion as any;
     const mapa = new Map<string, JPPCVPartida>();
 
     for (const p of partidas) {
         mapa.set(`${p.informeId}|${p.conceptoEstandarId}`, p);
     }
 
-    const valores = Array.from(mapa.values()).map(p => [
-        p.informeId,
-        p.conceptoEstandarId,
-        p.conceptoOriginal,
-        p.importe,
-        p.nivelConfianza
-    ]);
-
-    const [resultado]: any = await db.query(
-        `
-        INSERT INTO partida_contable_valor (
-            informe_id,
-            concepto_estandar_id,
-            concepto,
-            importe,
-            nivel_confianza
-        )
-        VALUES ?
-        ON DUPLICATE KEY UPDATE
-            concepto = VALUES(concepto),
-            importe = VALUES(importe),
-            nivel_confianza = VALUES(nivel_confianza)
-        `,
-        [valores]
-    );
-
-    return Number(resultado?.affectedRows || valores.length);
+    return insertarSoloPCVAusentes(conexion as any, Array.from(mapa.values()).map(p => ({
+        informeId: p.informeId,
+        conceptoEstandarId: p.conceptoEstandarId,
+        conceptoOriginal: p.conceptoOriginal,
+        importe: p.importe,
+        nivelConfianza: p.nivelConfianza
+    })));
 }
 
 // ============================================================================
@@ -2275,6 +2280,14 @@ async function pcvPrepararTaxonomia(): Promise<Map<string, number>> {
 
 async function pcvCargarInformesUSA(): Promise<PCVInformeUSA[]> {
     const db = conexion as any;
+    const yearFrom = Number(process.env.PCV_IMPORT_YEAR_FROM || 0);
+    const yearTo = Number(process.env.PCV_IMPORT_YEAR_TO || 0);
+    const afterId = Math.max(0, Number(process.env.PCV_IMPORT_AFTER_REPORT_ID || 0));
+    const reportLimit = Math.max(0, Number(process.env.PCV_IMPORT_REPORT_LIMIT || 0));
+    if ((yearFrom && (!Number.isInteger(yearFrom) || yearFrom < 2000)) || (yearTo && (!Number.isInteger(yearTo) || yearTo < yearFrom))) {
+        throw new Error("Rango PCV_IMPORT_YEAR_FROM/TO inválido");
+    }
+    const conceptCodes = PCV_CONCEPTOS.map(c => c.codigo);
 
     const [rows]: any = await db.query(
         `
@@ -2302,8 +2315,23 @@ async function pcvCargarInformesUSA(): Promise<PCVInformeUSA[]> {
           )
           AND i.ticker IS NOT NULL
           AND TRIM(i.ticker) <> ''
-        ORDER BY inf.empresa_id, inf.id
-        `
+                    AND (? = 0 OR YEAR(inf.fecha_fin_periodo) >= ?)
+                    AND (? = 0 OR YEAR(inf.fecha_fin_periodo) <= ?)
+                      AND inf.id > ?
+                    AND (COALESCE(?,0) = 0 OR inf.tipo_periodo = 'ANUAL')
+                    AND EXISTS (
+                            SELECT 1 FROM taxonomia_concepto tc
+                            WHERE tc.concepto_estandar IN (?) AND tc.activo=1
+                                AND NOT EXISTS (
+                                        SELECT 1 FROM partida_contable_valor pc
+                                        WHERE pc.informe_id=inf.id AND pc.concepto_estandar_id=tc.id
+                                            AND pc.importe IS NOT NULL
+                                )
+                    )
+        ORDER BY inf.id ASC
+        LIMIT ?
+                `,
+        [yearFrom, yearFrom, yearTo, yearTo, afterId, process.env.PCV_IMPORT_ANNUAL_ONLY === '1' ? 1 : 0, conceptCodes, reportLimit || 2147483647]
     );
 
     const mapa = new Map<number, PCVInformeUSA>();
@@ -2548,7 +2576,8 @@ export function pcvExtraerPartidasInforme(
         for (let i = 0; i < definicion.tags.length; i++) {
             const tag = definicion.tags[i];
 
-            const candidatos = pcvCandidatosTag(companyFacts, tag, informe);
+            const unidadEsperada=definicion.codigo==='ACCIONES_EN_CIRCULACION'?'shares':definicion.codigo==='EPS_DILUIDO'?'USD/shares':'USD';
+            const candidatos = pcvCandidatosTag(companyFacts, tag, informe).filter(c=>c.unit===unidadEsperada);
             const mejor = pcvElegirMejorFact(candidatos, informe, definicion.categoria);
 
             if (mejor) {
@@ -2581,8 +2610,6 @@ export async function pcvGuardarPartidas(
 ): Promise<number> {
     if (partidas.length === 0) return 0;
 
-    const db = conexion as any;
-
     // Una única partida por informe y concepto.
     const mapa = new Map<string, PCVPartidaPreparada>();
 
@@ -2590,94 +2617,13 @@ export async function pcvGuardarPartidas(
         mapa.set(`${p.informeId}|${p.conceptoEstandarId}`, p);
     }
 
-    const partidasUnicas = Array.from(mapa.values());
-    const connection = await db.getConnection();
-
-    try {
-        await connection.beginTransaction();
-
-        for (const p of partidasUnicas) {
-            // Bloquear los registros existentes de esta partida.
-            const [existentes]: any = await connection.query(
-                `
-                SELECT id
-                FROM partida_contable_valor
-                WHERE informe_id = ?
-                  AND concepto_estandar_id = ?
-                ORDER BY id ASC
-                FOR UPDATE
-                `,
-                [p.informeId, p.conceptoEstandarId]
-            );
-
-            if (existentes.length === 0) {
-                // No existe: insertar.
-                await connection.query(
-                    `
-                    INSERT INTO partida_contable_valor
-                    (
-                        informe_id,
-                        concepto_estandar_id,
-                        concepto,
-                        importe,
-                        nivel_confianza
-                    )
-                    VALUES (?, ?, ?, ?, ?)
-                    `,
-                    [
-                        p.informeId,
-                        p.conceptoEstandarId,
-                        p.conceptoOriginal,
-                        p.importe,
-                        p.nivelConfianza
-                    ]
-                );
-            } else {
-                // Existe: actualizar el registro más antiguo.
-                const idConservar = Number(existentes[0].id);
-
-                await connection.query(
-                    `
-                    UPDATE partida_contable_valor
-                    SET concepto = ?,
-                        importe = ?,
-                        nivel_confianza = ?
-                    WHERE id = ?
-                    `,
-                    [
-                        p.conceptoOriginal,
-                        p.importe,
-                        p.nivelConfianza,
-                        idConservar
-                    ]
-                );
-
-                // Eliminar los duplicados de esta partida.
-                if (existentes.length > 1) {
-                    const idsEliminar = existentes
-                        .slice(1)
-                        .map((r: any) => Number(r.id));
-
-                    await connection.query(
-                        `
-                        DELETE FROM partida_contable_valor
-                        WHERE id IN (?)
-                        `,
-                        [idsEliminar]
-                    );
-                }
-            }
-        }
-
-        await connection.commit();
-
-        return partidasUnicas.length;
-    } catch (error) {
-        await connection.rollback();
-        throw error;
-    } finally {
-        connection.release();
-    }
+    return insertarSoloPCVAusentes(conexion as any, Array.from(mapa.values()).map(p => ({
+        informeId: p.informeId,
+        conceptoEstandarId: p.conceptoEstandarId,
+        conceptoOriginal: p.conceptoOriginal,
+        importe: p.importe,
+        nivelConfianza: p.nivelConfianza
+    })));
 }
 // ============================================================================
 // MOTOR PRINCIPAL - USA
@@ -2706,6 +2652,8 @@ export async function ejecutarCargaPartidasContablesUSA() {
 
     console.log(`[PCV USA] Empresas con informes: ${informesPorEmpresa.size}`);
 
+    // The accession prefix may identify a submitting agent. Resolve the
+    // registrant from the official ticker directory and verify its facts.
     const mapaCIK = await pcvDescargarMapaCIK();
 
     let empresasProcesadas = 0;
@@ -2723,7 +2671,7 @@ export async function ejecutarCargaPartidasContablesUSA() {
         if (!cik) {
             empresasSinCIK++;
 
-            console.warn(`[PCV USA] Sin CIK: ${ticker} empresa_id=${empresaId}`);
+            console.warn(`[PCV USA] Accession sin CIK verificable: empresa_id=${empresaId}`);
 
             continue;
         }
@@ -2731,6 +2679,7 @@ export async function ejecutarCargaPartidasContablesUSA() {
         try {
             // UNA sola llamada CompanyFacts por empresa.
             const companyFacts = await pcvDescargarCompanyFacts(cik);
+            if (Number(companyFacts?.cik) !== Number(cik)) throw new Error('CIK de CompanyFacts incompatible');
 
             const partidasEmpresa: PCVPartidaPreparada[] = [];
 

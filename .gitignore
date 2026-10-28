@@ -13,6 +13,8 @@ ercionDatosinsercionDatosSector.ts*
 valuation_engine/docs/*.pdf
 .vite/
 .verification/
+# Separate repository supplied by the user; do not stage or alter it here.
+/G2EXCHANGE/
 valuation_engine_COPIA/
 valuation_engine/salida*/
 *.sql.gz

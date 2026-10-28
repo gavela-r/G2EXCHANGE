@@ -2,6 +2,8 @@
 
 Motor de valoración financiera reproducible con MySQL 8. El estado de producción está descrito en `server/docs/TERCERA_INTERVENCION.md`. Las valoraciones con hipótesis de sistema conservan `REVIEW`.
 
+La recuperación PCV/KPI US/JP de 2022–2025 del 28/10/2026 está documentada en [integración de proveedores](server/docs/INTEGRACION_PROVEEDORES_20261028.md) y [resultados medidos](server/docs/RESULTADOS_PROVEEDORES_20261028.md). La segunda página indica si el barrido sigue en curso o hay cuotas pendientes. Esta intervención continúa el trabajo local de Copilot en `g2-pcv-supplement-20261028`; Taiwán y el frontend quedan fuera.
+
 Requisitos: Node 22.12+ (también probado con Node 24), npm, MySQL 8; Docker para los procedimientos de backup incluidos. No se requieren APIs de pago para las pruebas ni para valorar los datos ya existentes.
 
 ## Instalación

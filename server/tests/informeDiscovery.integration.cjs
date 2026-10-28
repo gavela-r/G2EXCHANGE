@@ -1,0 +1,18 @@
+// Explicit opt-in; every mutation is confined to session TEMPORARY tables.
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),pool=require('../dist/conexion/bd').default,{insertarInformeDescubierto}=require('../dist/src/pcv/insertarInformeDescubierto');
+test('new annual report, PCV, KPI and provenance commit atomically; dry-run and failure preserve originals',async()=>{
+ const c=await pool.getConnection();try{
+ await c.query('CREATE TEMPORARY TABLE pais(id INT PRIMARY KEY,codigo_iso CHAR(2))');await c.query('CREATE TEMPORARY TABLE empresa(id INT PRIMARY KEY,nombre_empresa VARCHAR(255),pais_id INT)');
+ for(const table of ['informe_financiero','partida_contable_valor','taxonomia_concepto','kpi_financiero_informe','pcv_import_evidence']){const [[r]]=await c.query('SHOW CREATE TABLE '+table);await c.query(r['Create Table'].replace('CREATE TABLE','CREATE TEMPORARY TABLE').replace(/\n  CONSTRAINT [^\n]+/g,'').replace(/,\s*\) ENGINE/,'\n) ENGINE'));}
+ const ddl=fs.readFileSync(path.join(__dirname,'../sql/17_financial_report_evidence.sql'),'utf8').replace('CREATE TABLE IF NOT EXISTS','CREATE TEMPORARY TABLE').replace(/\n CONSTRAINT [^\n]+/g,'').replace(/,\s*\) ENGINE/,'\n) ENGINE');await c.query(ddl);
+ await c.query("INSERT INTO pais VALUES(1,'JP')");await c.query("INSERT INTO empresa VALUES(2,'SYNTHETIC CO.',1)");await c.query("INSERT INTO taxonomia_concepto(id,concepto_estandar,categoria,activo) VALUES(1,'INGRESOS','CUENTA_RESULTADOS',1),(2,'EBIT','CUENTA_RESULTADOS',1),(3,'BENEFICIO_NETO','CUENTA_RESULTADOS',1)");
+ const wrap=(fail=false)=>({getConnection:async()=>({query:async(sql,args)=>{if(fail&&sql.startsWith('INSERT INTO pcv_import_evidence'))throw Error('injected report failure');return c.query(sql,args);},beginTransaction:c.beginTransaction.bind(c),commit:c.commit.bind(c),rollback:c.rollback.bind(c),release(){}})});
+ const report={id:0,empresa_id:2,nombre_empresa:'SYNTHETIC CO.',country:'JP',end:'2022-03-31',filed:'2022-06-29',accession:'S9999999',form:'Annual Securities Report',tickers:['9999']},identity={edinetCode:'E99999',securityCode:'99990',end:report.end,consolidated:true};
+ const data=r=>[['INGRESOS',100],['EBIT',25],['BENEFICIO_NETO',20]].map(([codigo,importe])=>({codigo,importe,concepto:'SYNTHETIC:'+codigo,provider:'EDINET',identifier:r.accession,currency:'JPY',basis:'consolidated',evidence:{start:r.end.startsWith('2022')?'2021-04-01':'2022-04-01',end:r.end}}));
+ const dry=await insertarInformeDescubierto(wrap(),report,'2021-04-01',identity,data(report),{synthetic:true},false);assert.equal(dry.pcv,3);assert.equal((await c.query('SELECT COUNT(*) n FROM informe_financiero'))[0][0].n,0);
+ const saved=await insertarInformeDescubierto(wrap(),report,'2021-04-01',identity,data(report),{synthetic:true},true);assert.equal(saved.inserted,true);assert.equal(saved.pcv,3);assert.ok(saved.kpiNew>0);
+ const repeated=await insertarInformeDescubierto(wrap(),report,'2021-04-01',identity,data(report),{synthetic:true},true);assert.equal(repeated.inserted,false);
+ const next={...report,end:'2023-03-31',accession:'S8888888'};await assert.rejects(()=>insertarInformeDescubierto(wrap(true),next,'2022-04-01',{...identity,end:next.end},data(next),{synthetic:true},true),/injected/);
+ assert.equal((await c.query('SELECT COUNT(*) n FROM informe_financiero'))[0][0].n,1);assert.equal((await c.query('SELECT COUNT(*) n FROM financial_report_evidence'))[0][0].n,1);assert.equal((await c.query('SELECT COUNT(*) n FROM partida_contable_valor'))[0][0].n,3);
+ }finally{c.release();await pool.end();}
+});

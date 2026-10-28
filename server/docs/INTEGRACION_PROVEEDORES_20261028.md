@@ -26,6 +26,8 @@ Correcciones verificables:
 - EDINET DB: código EDINET y docID exactos, año y perímetro iguales a los verificados en el documento primario. No se usan snapshots recientes de acciones ni se sustituye CAPEX de caja por el resumen de inversiones.
 - Signos: los campos complementarios de salidas de caja tienen una lista explícita de normalización. No se aplica ABS indiscriminadamente ni se cambian las fórmulas financieras.
 
+Una segunda revisión SEC (`recuperar-sec-vinculados.cjs`) examina los informes bloqueados por identidad. Solo expande abreviaturas legales explícitas (Co/Company, Corp/Corporation, Inc/Incorporated, Ltd/Limited), puntuación, “&/and”, artículo inicial y sufijo estatal SEC. No usa distancia de nombres ni elimina palabras de actividad o filial. Además exige el CIK del emisor, nombre legal completo actual o anterior con fecha válida, y el accession exacto con formulario, cierre y publicación iguales en submissions oficial, incluido su historial cuando procede. El prefijo del accession es únicamente un candidato que debe superar todas esas comprobaciones. La traza conserva ambos nombres y hashes de submissions/índice; los nombres en MySQL no cambian. La coherencia de importes principales sigue siendo obligatoria antes de consultar complementarios.
+
 ## Cuotas, condiciones y automatización
 
 Solo se usan accesos gratuitos. [SEC documenta](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) CompanyFacts, unidades y el historial de nombres. Se configura un User-Agent de contacto real. EDINET se limita globalmente a solicitudes espaciadas; un 429 no provoca rotación de claves para saltarse la espera.
@@ -40,11 +42,17 @@ Checkpoint por empresa, registro JSONL por informe, transacciones por informe y 
 
 Los directorios V2 vuelven a examinar los documentos en caché con la corrección EPS; los checkpoints anteriores se conservaron. Se reprodujo un EPERM de Windows al renombrar el checkpoint y se añadieron ocho reintentos acotados que conservan el archivo anterior. La transición de huella por esta corrección operativa verificó que solo cambiaba el guardado, que los demás archivos financieros coincidían con la huella previa y conservó copias de los dos checkpoints. Después se verificó parada limpia y reanudación mediante `stop.request`.
 
-El objetivo temporal es 2022–2025 por el año de **fecha de cierre** fiscal. El worker recupera PCV en informes anuales que ya existen en MySQL; no crea informes anuales ficticios para los años sin documento. La ausencia de informe se muestra en cobertura y requiere una fase posterior de descubrimiento/importación de documentos verificables. El barrido EDINET es lento por el tamaño de la cartera y el espaciamiento de peticiones: terminar un barrido no significa alcanzar el 100% de cobertura.
+El objetivo temporal es 2022–2025 por el año de **fecha de cierre** fiscal. El worker PCV trabaja sobre informes existentes. El nuevo `recuperar-informes-jp.cjs` descubre documentos ausentes mediante las listas diarias oficiales y el [registro EDINET de emisores](https://disclosure2dl.edinet-fsa.go.jp/searchdocument/codelist/Edinetcode.zip). La recogida de junio de 2022 encontró 1.679 candidatos; el estado de su importación aparece en resultados. Otra recogida abarca publicaciones de enero de 2022 a junio de 2026, admitiendo exclusivamente cierres 2022–2025. Listados y documentos quedan en caché privada con hash.
+
+Se exige nombre legal inglés único, país y código bursátil compatible. Sin instrumento, solo se admite nombre legal exacto y único en el registro; no se crea un instrumento ni se inventa un ticker. Los nombres cortados por el antiguo parser CSV requieren además código bursátil independiente coincidente. El parser corregido conserva comas entre comillas; no se renombraron empresas existentes. Se rechazan documentos retirados, trimestrales, sin XBRL o fuera del período. El XBRL verifica emisor, cierre, duración y perímetro.
+
+La migración aditiva 17 añade `financial_report_evidence`, ensayada dos veces en la copia antes de producción. Se verificó antes la restauración de las 27 tablas del backup `g2-2026-10-28T21-11-20-112Z.sql`, SHA-256 `ec57b58da784f4d080d413e4d92a3cdfee6da23c4e55b271154cf1caf5f683df`. Informe, PCV, KPI y ambas trazas se confirman en una única transacción; cero PCV válidos provoca rollback. Nunca se sustituye un informe anual existente para la misma empresa/año. El piloto real y su repetición comprobaron que la segunda ejecución no añade duplicados.
+
+El barrido EDINET es lento por el tamaño de la cartera y el espaciamiento de peticiones: terminar un barrido no significa alcanzar el 100% de cobertura. El supervisor acepta `--job reports-jp`, conserva el checkpoint por documento y espera si otro lote JP mantiene el bloqueo.
 
 ## Auditoría y definición de cobertura
 
-Para cada país/año se selecciona un informe anual por empresa, con cierre/publicación/id más recientes. PCV es presencia de importe finito en el catálogo activo con alias del proveedor principal (22 conceptos). KPI es presencia en las 17 fórmulas existentes. Estos porcentajes se calculan **sobre los informes disponibles**; no representan el porcentaje de todas las empresas con cuatro ejercicios auditados. Las empresas sin informe, los conflictos de normalización, los conceptos potencialmente no aplicables y el núcleo de 17 partidas se cuentan por separado. El informe final usa exactamente la misma selección y denominadores para antes/después; la lectura final se hace con snapshot consistente de MySQL.
+Para cada país/año se selecciona un informe anual por empresa, con cierre/publicación/id más recientes. PCV es presencia de importe finito en el catálogo activo con alias del proveedor principal (22 conceptos). KPI es presencia en las 17 fórmulas existentes. La primera tabla calcula porcentajes **sobre informes disponibles**: al añadir informes antes ausentes cambia el denominador y puede bajar el porcentaje aunque crezcan los datos presentes. La segunda usa denominador fijo: empresas objetivo × 22 PCV o × 17 KPI por año. Ninguna equivale a empresas con cuatro ejercicios auditados. Ausencias de informe, conflictos, conceptos potencialmente no aplicables y núcleo de 17 partidas se cuentan aparte. Ambas auditorías usan la misma regla de selección y snapshot consistente de MySQL.
 
 | Período | PCV inicial | KPI inicial |
 |---|---:|---:|
@@ -61,7 +69,7 @@ Agregados iniciales: US PCV 79,9053%, KPI 72,4556%; JP PCV 91,0723%, KPI 93,1715
 
 ## Operación y recuperación
 
-Validación ejecutada: motor, backend y tres tests de integración MySQL aprobados; compilación completa aprobada. Las pruebas PCV cubren rollback con fallo inyectado después de escribir, conservación de originales, NULL completado con evidencia, repetición sin duplicados, CIK/nombres históricos, períodos, unidades, perímetro, TSV/BOM, EPS, cuotas, reinicio diario sin perder el presupuesto mensual y reintentos de locks Windows en checkpoints, cuotas y cachés. El lote japonés se interrumpió y reanudó realmente desde su checkpoint; la integridad se comparó con la copia inicial.
+Validación ejecutada: motor (20 pruebas), backend (57 pruebas) y cuatro pruebas de integración MySQL aprobadas; compilación completa aprobada. Las pruebas cubren rollback con fallo después de escribir, conservación de originales, NULL completado con evidencia, repetición sin duplicados, CIK/nombres históricos y abreviaturas legales con documento exacto, períodos, unidades, perímetro, TSV/BOM, EPS, cuotas, reinicio diario sin perder el presupuesto mensual y reintentos de locks Windows. El lote japonés se interrumpió y reanudó realmente desde su checkpoint; la integridad se comparó con la copia inicial.
 
 Un clon real de la rama publicada instaló dependencias, compiló y pasó los 66 tests unitarios sin `.env`. Se corrigieron tres dependencias con avisos nuevos de seguridad mediante actualizaciones compatibles; audit de servidor y motor sin vulnerabilidades conocidas en la comprobación ejecutada. No se modificó el frontend.
 
@@ -79,7 +87,19 @@ El supervisor detecta el checkpoint sin requerir `--resume`. Para una pasada US 
 
 ```powershell
 node server/scripts/recuperar-pcv-watch.cjs --country US --write --directory private_backups/pcv-us-complementarios-v2
+node server/scripts/recuperar-pcv-watch.cjs --job sec-bound --directory private_backups/pcv-us-vinculados --write
 ```
+
+Descubrimiento e importación de informes JP ausentes (la recogida debe terminar antes de importar):
+
+```powershell
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase collect --from 2022-06-01 --to 2022-06-30 --directory private_backups/pcv-jp-documentos-jun2022
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase import --source-directory private_backups/pcv-jp-documentos-jun2022 --directory private_backups/pcv-jp-informes-jun2022 --write
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase collect --from 2022-01-01 --to 2026-06-30 --directory private_backups/pcv-jp-documentos-resto
+node server/scripts/recuperar-pcv-watch.cjs --job reports-jp --phase import --source-directory private_backups/pcv-jp-documentos-resto --directory private_backups/pcv-jp-informes-resto --write
+```
+
+Para ensayar una importación, usar un directorio distinto y omitir `--write`; `--limit 1` acota el piloto. Las pruebas de inserción de informes no usan tablas permanentes. El esquema inicial incluye las migraciones 16 y 17; en una base existente se aplican de forma aditiva después de verificar backup y prueba aislada.
 
 Para parar desde otra terminal, sin depender del PID ni interrumpir una transacción:
 
@@ -99,6 +119,7 @@ npm.cmd --prefix server run test:pcv:integration
 node server/scripts/verificar-pcv-integridad.cjs g2_recovery_20261028_validation
 node server/scripts/auditar-pcv-kpi-2022-2025.cjs --after
 node server/scripts/informe-pcv-proveedores.cjs
+node server/scripts/verificar-publicacion.cjs --history
 node server/scripts/backup-db.cjs
 ```
 
@@ -112,6 +133,6 @@ node server/scripts/verificar-backup-pcv.cjs ruta-privada/backup.sql g2_recovery
 
 Estos comandos nunca restauran encima de producción. El manifiesto y el dump permanecen privados. El bloqueo global del exportador se libera incluso si falla el proceso.
 
-`verificar-pcv-integridad` exige cero PCV originales no nulos alterados, cero filas perdidas, trazabilidad de todos los nuevos PCV/KPI y cambios de KPI, y conservación de empresas, informes, versiones, snapshots, runs, resultados y taxonomías. Comprueba también que no se cambia PCV fuera de US/JP 2022–2025. La reparación de fechas y la actualización de versiones financieras usadas por valoraciones son fases separadas; no se han relanzado valoraciones con hipótesis para aumentar cobertura.
+`verificar-pcv-integridad` exige cero PCV originales no nulos alterados, cero filas perdidas, trazabilidad de nuevos PCV/KPI y cambios de KPI, y conservación de empresas, instrumentos, todos los informes originales, versiones, snapshots, runs, resultados y taxonomías. Cada informe nuevo debe tener su traza y pertenecer a JP 2022–2025. Comprueba también que no se cambia PCV ni KPI fuera de US/JP 2022–2025. La reparación de fechas y la actualización de versiones financieras usadas por valoraciones son fases separadas; no se han relanzado valoraciones con hipótesis para aumentar cobertura.
 
 El estado de los procesos y la comparación actualizada se generan en `RESULTADOS_PROVEEDORES_20261028.md`. Si hay cuotas pendientes o un barrido en curso, se declara expresamente allí: implementación, pruebas y recuperación parcial no equivalen a cobertura completa.

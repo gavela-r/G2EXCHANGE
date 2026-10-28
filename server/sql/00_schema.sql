@@ -122,6 +122,25 @@ CREATE TABLE `evento_corporativo` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `financial_report_evidence` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `informe_id` int NOT NULL,
+  `empresa_id` int NOT NULL,
+  `provider` varchar(30) NOT NULL,
+  `source_identifier` varchar(50) NOT NULL,
+  `registry_identifier` varchar(50) NOT NULL,
+  `evidence_json` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_report_evidence` (`informe_id`),
+  KEY `fk_report_evidence_empresa` (`empresa_id`),
+  CONSTRAINT `fk_report_evidence_empresa` FOREIGN KEY (`empresa_id`) REFERENCES `empresa` (`id`),
+  CONSTRAINT `fk_report_evidence_informe` FOREIGN KEY (`informe_id`) REFERENCES `informe_financiero` (`id`),
+  CONSTRAINT `ck_report_evidence_json` CHECK (json_valid(`evidence_json`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `informe_financiero` (
   `id` int NOT NULL AUTO_INCREMENT,
   `empresa_id` int DEFAULT NULL,

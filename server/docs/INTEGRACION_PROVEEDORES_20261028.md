@@ -20,6 +20,7 @@ Correcciones verificables:
 
 - SEC: no se usa el prefijo del accession como CIK del emisor, pues puede corresponder al agente presentador. Directorio de tickers y registro histórico oficiales resuelven el CIK; CompanyFacts y, cuando hace falta, submissions confirman identidad y nombres anteriores con su intervalo de fechas. Se exige documento, cierre, duración anual y unidad exactos. HELIX, posteriormente renombrada, sirvió como ensayo real de los cuatro ejercicios: 74 PCV y 58 KPI nuevos; repetición sin duplicados.
 - EDINET: XML XBRL del documento oficial valida código bursátil, código EDINET, cierre y consolidación mediante DEI. Los contextos anteriores, segmentos, unidades incompatibles y mezclas de consolidado/no consolidado se excluyen. Se corrigieron también BOM/TSV del parser CSV heredado y la admisión de contextos anteriores. El worker utiliza el camino XBRL estricto.
+- EPS diluido: se detectó que faltaba en los 8.076 informes japoneses del universo auditado. El alias oficial `DilutedEarningsPerShareSummaryOfBusinessResults` no estaba reconocido. Se añadió y se probó con datos reales y fixtures, separando JPY/shares de JPY. FinDataEngine y EDINET DB también admiten su campo explícito de EPS con unidad por acción; no se usa EPS básico como sustituto ni se recalcula EPS con acciones no diluidas. Los NULL y contextos no publicados permanecen pendientes. El esquema DECIMAL(24,4) no debe transformar un importe diminuto no nulo en cero: esos casos se mantienen pendientes y el ledger conserva la precisión persistida junto al valor de origen.
 - FinDataEngine: CIK/nombre, período anual, fecha de cierre y accession exactos; moneda respaldada por hechos USD del documento SEC. Una fila de otra reformulación queda pendiente.
 - Alpha Vantage: CIK de OVERVIEW y ticker, moneda USD y cierre exacto de annualReports. No se usan informes trimestrales como anuales.
 - EDINET DB: código EDINET y docID exactos, año y perímetro iguales a los verificados en el documento primario. No se usan snapshots recientes de acciones ni se sustituye CAPEX de caja por el resumen de inversiones.
@@ -36,6 +37,8 @@ Solo se usan accesos gratuitos. [SEC documenta](https://www.sec.gov/search-filin
 El contador HTTP se comparte entre directorios de lotes y se guarda por proveedor, para que iniciar otro directorio no reinicie la cuota. Se reservan peticiones antes de enviarlas, hay timeouts y reintentos acotados, y se detectan mensajes de cuota incluso bajo HTTP 200. No se imprimen claves, cabeceras de autenticación ni URLs con credenciales. No ejecutar dos workers del mismo país: GET_LOCK impide esa concurrencia.
 
 Checkpoint por empresa, registro JSONL por informe, transacciones por informe y cola de empresas aplazadas por cuota/error transitorio. El supervisor reanuda checkpoints incompletos y espera al siguiente reinicio diario UTC para la cola aplazada. Una interrupción durante una empresa repite esa empresa de forma idempotente. Un checkpoint incompatible no se fuerza. Los datos que una fuente no proporciona legítimamente permanecen ausentes.
+
+Los directorios V2 vuelven a examinar los documentos en caché con la corrección EPS; los checkpoints anteriores se conservaron. Se reprodujo un EPERM de Windows al renombrar el checkpoint y se añadieron ocho reintentos acotados que conservan el archivo anterior. La transición de huella por esta corrección operativa verificó que solo cambiaba el guardado, que los demás archivos financieros coincidían con la huella previa y conservó copias de los dos checkpoints. Después se verificó parada limpia y reanudación mediante `stop.request`.
 
 El objetivo temporal es 2022–2025 por el año de **fecha de cierre** fiscal. El worker recupera PCV en informes anuales que ya existen en MySQL; no crea informes anuales ficticios para los años sin documento. La ausencia de informe se muestra en cobertura y requiere una fase posterior de descubrimiento/importación de documentos verificables. El barrido EDINET es lento por el tamaño de la cartera y el espaciamiento de peticiones: terminar un barrido no significa alcanzar el 100% de cobertura.
 
@@ -58,7 +61,7 @@ Agregados iniciales: US PCV 79,9053%, KPI 72,4556%; JP PCV 91,0723%, KPI 93,1715
 
 ## Operación y recuperación
 
-Validación ejecutada: 20 tests de motor, 46 de backend y 3 de integración MySQL aprobados; compilación completa aprobada. Las pruebas PCV cubren rollback con fallo inyectado después de escribir, conservación de originales, NULL completado con evidencia, repetición sin duplicados, CIK/nombres históricos, períodos, unidades, perímetro, TSV/BOM, cuotas y reintentos. El lote japonés se interrumpió y reanudó realmente desde su checkpoint; la integridad se comparó con la copia inicial.
+Validación ejecutada: motor, backend y tres tests de integración MySQL aprobados; compilación completa aprobada. Las pruebas PCV cubren rollback con fallo inyectado después de escribir, conservación de originales, NULL completado con evidencia, repetición sin duplicados, CIK/nombres históricos, períodos, unidades, perímetro, TSV/BOM, EPS, cuotas, reinicio diario sin perder el presupuesto mensual y reintentos de locks Windows en checkpoints, cuotas y cachés. El lote japonés se interrumpió y reanudó realmente desde su checkpoint; la integridad se comparó con la copia inicial.
 
 Un clon real de la rama publicada instaló dependencias, compiló y pasó los 66 tests unitarios sin `.env`. Se corrigieron tres dependencias con avisos nuevos de seguridad mediante actualizaciones compatibles; audit de servidor y motor sin vulnerabilidades conocidas en la comprobación ejecutada. No se modificó el frontend.
 
@@ -69,14 +72,23 @@ npm.cmd --prefix server run build
 node server/scripts/recuperar-pcv-proveedores.cjs --country US --limit 1 --directory private_backups/piloto-us
 node server/scripts/recuperar-pcv-proveedores.cjs --country JP --limit 1 --directory private_backups/piloto-jp
 node server/scripts/recuperar-pcv-proveedores.cjs --country US --write --primary-only --directory private_backups/pcv-us-primary-full --resume
-node server/scripts/recuperar-pcv-watch.cjs --country JP --write --directory private_backups/pcv-jp-full
+node server/scripts/recuperar-pcv-watch.cjs --country JP --write --directory private_backups/pcv-jp-full-v2
 ```
 
 El supervisor detecta el checkpoint sin requerir `--resume`. Para una pasada US con complementarios, después de terminar la primaria:
 
 ```powershell
-node server/scripts/recuperar-pcv-watch.cjs --country US --write --directory private_backups/pcv-us-complementarios
+node server/scripts/recuperar-pcv-watch.cjs --country US --write --directory private_backups/pcv-us-complementarios-v2
 ```
+
+Para parar desde otra terminal, sin depender del PID ni interrumpir una transacción:
+
+```powershell
+node server/scripts/recuperar-pcv-watch.cjs --stop --directory private_backups/pcv-jp-full-v2
+node server/scripts/recuperar-pcv-watch.cjs --stop --directory private_backups/pcv-us-complementarios-v2
+```
+
+Para reanudar, retirar únicamente el archivo de control `stop.request` de ese directorio y repetir el comando del supervisor. Conservar `checkpoint.json`, journals y cuotas. Un cambio de política financiera exige un directorio nuevo; no editar la firma para saltarse la comprobación. El supervisor y el ordenador deben seguir operativos: no se ha contratado alojamiento remoto.
 
 Pruebas y comparación:
 

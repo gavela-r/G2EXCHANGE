@@ -5,7 +5,10 @@ import {normalizarPartidas} from '../valoracion/datos';
 import {kpiCalcularInforme} from '../../insercionDatos/insercionKPIInformeFinanciero';
 
 export async function persistirRecuperacion(pool:Pool,informe:InformePcv,datos:DatoPcv[],write:boolean){
- const c=await pool.getConnection();const result={pcv:0,kpiNew:0,kpiUpdated:0,kpiSkipped:false,byProvider:{} as Record<string,number>};
+ const c=await pool.getConnection();const result={pcv:0,kpiNew:0,kpiUpdated:0,kpiSkipped:false,precisionPending:0,byProvider:{} as Record<string,number>};
+ // A nonzero reported amount must never become a stored zero because the
+ // legacy DECIMAL(24,4) cannot represent it. Preserve it as pending instead.
+ datos=datos.filter(d=>{if(d.importe!==0&&Math.abs(d.importe)<0.00005){result.precisionPending++;return false;}return true;});
  try{await c.beginTransaction();
   const [meta]=await c.query<RowDataPacket[]>('SELECT * FROM informe_financiero WHERE id=? FOR UPDATE',[informe.id]);
   if(meta.length!==1||meta[0].empresa_id!==informe.empresa_id||meta[0].fecha_fin_periodo!==informe.end||meta[0].identificador_fuente!==informe.accession)throw new Error('INFORME_CAMBIO_DESDE_SELECCION');
@@ -24,7 +27,8 @@ export async function persistirRecuperacion(pool:Pool,informe:InformePcv,datos:D
    let id:number,before:unknown=null;
    if(old.length===1){id=old[0].id;before=old[0];await c.query('UPDATE partida_contable_valor SET concepto=?,importe=?,nivel_confianza=? WHERE id=? AND importe IS NULL',[d.concepto,d.importe,'ALTA',id]);}
    else{const [r]=await c.query<ResultSetHeader>('INSERT INTO partida_contable_valor(informe_id,concepto,concepto_estandar_id,importe,nivel_confianza) VALUES(?,?,?,?,?)',[informe.id,d.concepto,t.id,d.importe,'ALTA']);id=r.insertId;}
-   await record('PCV',id,d.provider,d.codigo,before,{importe:d.importe,concepto:d.concepto},d);
+   const [stored]=await c.query<RowDataPacket[]>('SELECT importe,concepto FROM partida_contable_valor WHERE id=?',[id]);
+   await record('PCV',id,d.provider,d.codigo,before,stored[0],{...d,persistence_precision:'MYSQL_DECIMAL_24_4'});
    result.pcv++;result.byProvider[d.provider]=(result.byProvider[d.provider]||0)+1;
   }
   const [parts]=await c.query<RowDataPacket[]>(`SELECT pc.concepto,pc.importe,tc.concepto_estandar,tc.signo_esperado,tc.alias_sec,tc.alias_edinet,tc.alias_finmind FROM partida_contable_valor pc JOIN taxonomia_concepto tc ON tc.id=pc.concepto_estandar_id WHERE pc.informe_id=? ORDER BY pc.id`,[informe.id]);

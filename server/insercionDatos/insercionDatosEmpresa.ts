@@ -2,6 +2,8 @@ import conexion from "../conexion/bd";
 import { normalizarSectorJP, normalizarSectorTW } from "./insercionDatosSector"; 
 import { translate } from "@vitalets/google-translate-api";
 import pinyin from "pinyin";
+import AdmZip from 'adm-zip';
+import {decodificarRegistroEdinet,leerRegistroEdinetCsv} from '../src/pcv/edinetRegistro';
 
 interface Empresa {
     ticker: string;
@@ -135,34 +137,17 @@ async function getEmpresasTaiwan(): Promise<Empresa[]> {
  async function getEmpresasJapon(): Promise<Empresa[]> {
     console.log("== Japón: descargando listado EDINET/JPX ==");
 
-    const res = await fetch(
-        "https://raw.githubusercontent.com/code4fukui/EDINET/main/data/edinetcode.csv"
-    );
-    const text = await res.text();
-
-    const filas = text.trim().split("\n").slice(2)
-        .map(linea => linea.split(",").map(celda => celda.replace(/^"|"$/g, "").trim()));
+    const res = await fetch('https://disclosure2dl.edinet-fsa.go.jp/searchdocument/codelist/Edinetcode.zip',{redirect:'error',signal:AbortSignal.timeout(30000)});
+    if(!res.ok)throw new Error('Registro oficial EDINET HTTP '+res.status);
+    const zip=new AdmZip(Buffer.from(await res.arrayBuffer())),entry=zip.getEntries().find(e=>/\.csv$/i.test(e.entryName));
+    if(!entry)throw new Error('Registro EDINET sin CSV');
+    const filas=leerRegistroEdinetCsv(decodificarRegistroEdinet(entry.getData()));
 
     const out: Empresa[] = [];
 
     for (const fila of filas) {
-        const [
-            ,               // 0 EDINETコード
-            ,               // 1 提出者種別
-            upperListado,   // 2 上場区分
-            ,               // 3 連結の有無
-            ,               // 4 資本金
-            ,               // 5 決算日
-            ,               // 6 提出者名
-            nombreIngles,   // 7 提出者名（英字）
-            ,               // 8 提出者名（ヨミ）
-            ,               // 9 所在地
-            sector,         // 10 提出者業種
-            ticker,         // 11 証券コード
-            ,               // 12 提出者法人番号
-        ] = fila;
-
-        if (upperListado !== "上場" || !ticker) continue;
+        const {listed,englishName:nombreIngles,securityCode:ticker,sector}=fila;
+        if (!listed || !ticker || !nombreIngles) continue;
 
         out.push({
             ticker,

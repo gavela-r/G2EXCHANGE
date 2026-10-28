@@ -1,10 +1,11 @@
 // Private response cache + account-wide request ledger. Never logs URLs or headers.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const {guardarEstadoPcv,renombrarPcvAtomico}=require('./pcv-checkpoint.cjs');
 class CuotaAgotada extends Error{constructor(provider){super('CUOTA_AGOTADA_'+provider);this.provider=provider;}}
 const POLICY={SEC_EDGAR:{hosts:['www.sec.gov','data.sec.gov'],daily:12000,interval:350},EDINET:{hosts:['api.edinet-fsa.go.jp'],daily:12000,interval:3500},FINDATAENGINE:{hosts:['asreported.io'],daily:5000,interval:2200},ALPHAVANTAGE:{hosts:['www.alphavantage.co'],daily:24,interval:13000},EDINET_DB:{hosts:['edinetdb.jp'],daily:96,interval:500}};
 class PcvHttp{
  constructor(directory){this.dir=directory;fs.mkdirSync(directory,{recursive:true});this.state={};this.last={};}
- save(provider){const file=path.join(this.dir,provider+'-quota.json');fs.writeFileSync(file+'.tmp',JSON.stringify(this.state[provider],null,2));fs.renameSync(file+'.tmp',file);}
+ save(provider){const file=path.join(this.dir,provider+'-quota.json');guardarEstadoPcv(file,this.state[provider]);}
  async get(provider,url,{headers={},binary=false,text=false}={}){
   const policy=POLICY[provider],u=new URL(url);if(!policy||!policy.hosts.includes(u.hostname)||u.protocol!=='https:')throw new Error('HOST_PROVEEDOR_NO_AUTORIZADO');
   const safe=new URL(u);for(const k of ['apikey','Subscription-Key'])safe.searchParams.delete(k);
@@ -29,7 +30,7 @@ class PcvHttp{
     if(provider==='ALPHAVANTAGE'&&(data.Note||data.Information)){q.blockedUntil=today+'T23:59:59.999Z';this.save(provider);throw new CuotaAgotada(provider);}
     if(data['Error Message']||data.error)throw new Error('RESPUESTA_ERROR_'+provider);
    }
-   q.consecutive429=0;fs.writeFileSync(cache+'.tmp',bytes);fs.renameSync(cache+'.tmp',cache);this.save(provider);return {data,hash:crypto.createHash('sha256').update(bytes).digest('hex'),cached:false};
+   q.consecutive429=0;fs.writeFileSync(cache+'.tmp',bytes);renombrarPcvAtomico(cache+'.tmp',cache);this.save(provider);return {data,hash:crypto.createHash('sha256').update(bytes).digest('hex'),cached:false};
   }throw new Error('REINTENTOS_AGOTADOS_'+provider);
  }
 }

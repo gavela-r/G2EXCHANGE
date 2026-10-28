@@ -3,15 +3,18 @@ const root=path.resolve(__dirname,'../..');require('dotenv').config({path:path.j
 const pool=require('../dist/conexion/bd').default;
 const N=require('../dist/src/pcv/normalizarProveedores'),{persistirRecuperacion}=require('../dist/src/pcv/persistirRecuperacion');
 const {PcvHttp,CuotaAgotada}=require('./pcv-http.cjs');
+const {guardarEstadoPcv}=require('./pcv-checkpoint.cjs');
 const args=process.argv.slice(2),value=(k,d)=>args.includes(k)?args[args.indexOf(k)+1]:d;
 const country=value('--country','US'),limit=Number(value('--limit','100000')),write=args.includes('--write'),resume=args.includes('--resume');
 const companyId=Number(value('--company-id','0'));
 if(!['US','JP'].includes(country)||!Number.isSafeInteger(limit)||limit<1)throw new Error('country US|JP; limit entero positivo');
 const dir=path.resolve(value('--directory',path.join(root,'private_backups/pcv-recovery-'+country+(write?'-write':'-dry'))));fs.mkdirSync(dir,{recursive:true});
 const checkpoint=path.join(dir,'checkpoint.json'),journal=path.join(dir,'journal.jsonl'),http=new PcvHttp(path.join(root,'private_backups/pcv-provider-http'));
-const signature=crypto.createHash('sha256').update(JSON.stringify({database:process.env.DB_NAME,country,write,companyId,primaryOnly:args.includes('--primary-only'),policy:'PCV_PROVIDER_V1',code:fs.readFileSync(path.join(__dirname,'../dist/src/pcv/normalizarProveedores.js'),'utf8')})).digest('hex');
+const stopFile=path.join(dir,'stop.request');
+const policyFiles=[__filename,path.join(__dirname,'pcv-http.cjs'),path.join(__dirname,'pcv-checkpoint.cjs'),...['src/pcv/normalizarProveedores.js','src/pcv/persistirRecuperacion.js','insercionDatos/insercionPartidaContable.js','insercionDatos/insercionKPIInformeFinanciero.js','src/valoracion/datos.js'].map(f=>path.join(__dirname,'../dist',f))];
+const signature=crypto.createHash('sha256').update(JSON.stringify({database:process.env.DB_NAME,country,write,companyId,primaryOnly:args.includes('--primary-only'),policy:'PCV_PROVIDER_V2_EPS',code:policyFiles.map(file=>fs.readFileSync(file,'utf8'))})).digest('hex');
 let stopped=false;for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{stopped=true;});
-function save(s){fs.writeFileSync(checkpoint+'.tmp',JSON.stringify(s,null,2));fs.renameSync(checkpoint+'.tmp',checkpoint);}
+function save(s){guardarEstadoPcv(checkpoint,s);}
 function log(row){fs.appendFileSync(journal,JSON.stringify({...row,at:new Date().toISOString()})+'\n');}
 const headers={SEC_EDGAR:{'User-Agent':process.env.SEC_USER_AGENT||''},FINDATAENGINE:{'X-API-Key':process.env.FINDATAENGINE_API_KEY||''},EDINET_DB:{'X-API-Key':process.env.EDINETDB_API_KEY||''}};
 const disabled=new Set(),metrics={},pendingCompanies=new Set();let currentCompany=0;
@@ -23,7 +26,7 @@ function missing(rows,known){const out=[];for(const r of rows)if(!known.has(r.co
 async function reports(company){const [rows]=await pool.query(`SELECT inf.*,e.nombre_empresa,p.codigo_iso FROM informe_financiero inf JOIN empresa e ON e.id=inf.empresa_id JOIN pais p ON p.id=e.pais_id WHERE inf.empresa_id=? AND inf.tipo_periodo='ANUAL' AND YEAR(inf.fecha_fin_periodo) BETWEEN 2022 AND 2025 AND inf.fuente=? ORDER BY inf.id`,[company,country==='US'?'SEC_EDGAR':'EDINET']);
  const [is]=await pool.query('SELECT ticker,moneda FROM instrumento WHERE empresa_id=? ORDER BY id',[company]);
  return rows.map(r=>({id:r.id,empresa_id:company,nombre_empresa:r.nombre_empresa,country,end:r.fecha_fin_periodo,filed:r.fecha_publicacion,accession:r.identificador_fuente,form:r.tipo_documento,tickers:is.filter(x=>country==='JP'||x.moneda==='USD').map(x=>x.ticker)}));}
-async function known(i){const [r]=await pool.query('SELECT DISTINCT tc.concepto_estandar FROM partida_contable_valor p JOIN taxonomia_concepto tc ON tc.id=p.concepto_estandar_id WHERE p.informe_id=? AND p.importe IS NOT NULL',[i.id]);return new Set(r.map(x=>x.concepto_estandar));}
+async function known(i){const [r]=await pool.query('SELECT DISTINCT tc.concepto_estandar,p.importe FROM partida_contable_valor p JOIN taxonomia_concepto tc ON tc.id=p.concepto_estandar_id WHERE p.informe_id=? AND p.importe IS NOT NULL',[i.id]);const result=new Set(r.map(x=>x.concepto_estandar));result.rawRows=r;return result;}
 async function processCompany(id,tickerMap){currentCompany=id;const rs=await reports(id);let sec=null,cik=null,fdeProfile=null,submission=null,alphaProfile=null;
  if(country==='US'){
   const matches=Object.values(tickerMap).filter(v=>rs[0]?.tickers.includes(v.ticker)&&N.nombreNormalizado(v.title)===N.nombreNormalizado(rs[0].nombre_empresa));
@@ -34,16 +37,18 @@ async function processCompany(id,tickerMap){currentCompany=id;const rs=await rep
   if(!sec){log({company:id,status:'PENDING',code:'SEC_IDENTITY_FACTS'});return;}
   if(!N.identidadUs(rs[0],cik,sec.data))submission=await get('SEC_EDGAR','https://data.sec.gov/submissions/CIK'+cik+'.json');
  }
- for(const i of rs){if(stopped)return;const existing=await known(i);if(existing.size>=22)continue;let selected=[],jpIdentity=null,primaryOK=false;
+ for(const i of rs){if(stopped||fs.existsSync(stopFile)){stopped=true;return;}const existing=await known(i);if(existing.size>=22)continue;let selected=[],jpIdentity=null,primaryOK=false;
   try{if(country==='US'){selected=N.normalizarSec(sec.data,i,cik,submission?.data).map(d=>({...d,evidence:{...d.evidence,responseHash:sec.hash,identityHistoryHash:submission?.hash}}));primaryOK=true;}
    else{const u=new URL('https://api.edinet-fsa.go.jp/api/v2/documents/'+encodeURIComponent(i.accession));u.searchParams.set('type','1');u.searchParams.set('Subscription-Key',process.env.EDINET_API_KEY||process.env.EDINET_API_KEY_1||'');const r=await get('EDINET',u,true);if(r){const parsed=N.normalizarEdinetZip(r.data,i);jpIdentity=parsed.identity;selected=parsed.rows.map(d=>({...d,evidence:{...d.evidence,responseHash:r.hash}}));primaryOK=true;}}
   }catch(e){log({report:i.id,company:id,stage:'PRIMARY',status:'PENDING',code:e.message});}
   const avail=new Set(existing),accepted=missing(selected,avail);
+  const incoherent=selected.find(d=>['INGRESOS','ACTIVOS_TOTALES','PASIVOS_TOTALES','FLUJO_CAJA_OPERATIVO'].includes(d.codigo)&&existing.rawRows.some(p=>p.concepto_estandar===d.codigo&&Math.abs(Number(p.importe)-d.importe)>Math.max(1,Math.abs(d.importe)*1e-8)));
+  if(incoherent){log({company:id,report:i.id,stage:'PRIMARY_COHERENCE',status:'PENDING',code:'PERIMETRO_O_UNIDAD_CONTRADICTORIA_'+incoherent.codigo});continue;}
   if(primaryOK&&country==='US'&&!args.includes('--primary-only')){
    // Supplemental values without currency metadata require USD facts in the exact filing.
    const usdVerified=Object.values(sec.data.facts?.['us-gaap']||{}).some(c=>Array.isArray(c.units?.USD)&&c.units.USD.some(f=>f.accn===i.accession&&f.end===i.end));
    const ticker=i.tickers.find(t=>Object.values(tickerMap).some(x=>x.ticker===t&&Number(x.cik_str)===Number(cik)))||i.tickers[0];
-   if(ticker&&usdVerified&&process.env.FINDATAENGINE_API_KEY){try{
+   if(ticker&&usdVerified&&process.env.FINDATAENGINE_API_KEY&&['income_statement','balance_sheet','cash_flow'].some(s=>N.necesitaStatement('FINDATAENGINE',s,avail))){try{
     if(!fdeProfile)fdeProfile=await get('FINDATAENGINE','https://asreported.io/v1/companies/'+encodeURIComponent(cik));
     for(const statement of ['income_statement','balance_sheet','cash_flow']){
      if(!N.necesitaStatement('FINDATAENGINE',statement,avail))continue;
@@ -78,7 +83,7 @@ async function processCompany(id,tickerMap){currentCompany=id;const rs=await rep
  if(country==='US'&&!listing)throw new Error('SEC_LISTING_UNAVAILABLE');
  if(country==='US'){try{const registry=await http.get('SEC_EDGAR','https://www.sec.gov/Archives/edgar/cik-lookup-data.txt',{headers:headers.SEC_EDGAR,text:true});for(const line of registry.data.split('\n')){const m=line.match(/^(.*):(\d+):\s*$/);if(!m)continue;const name=N.nombreNormalizado(m[1]);if(!historicalNames.has(name))historicalNames.set(name,new Set());historicalNames.get(name).add(m[2].padStart(10,'0'));}}catch{log({stage:'CIK_REGISTRY',status:'PENDING'});}}
  const retryMode=!!state.scan_complete&&!!state.retryCompanies?.length,retryRemaining=new Set(state.retryCompanies||[]),retryIds=[...retryRemaining];
- let count=0;while(!stopped&&count<limit){const [companies]=await pool.query(`SELECT e.id FROM empresa e JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? AND e.id>? AND (?=0 OR e.id=?) AND (?=0 OR e.id IN (?)) AND EXISTS(SELECT 1 FROM informe_financiero inf WHERE inf.empresa_id=e.id AND inf.tipo_periodo='ANUAL' AND inf.fuente=? AND YEAR(inf.fecha_fin_periodo) BETWEEN 2022 AND 2025) ORDER BY e.id LIMIT 25`,[country,retryMode?(state.retryAfter||0):state.after,companyId,companyId,retryMode?1:0,retryIds.length?retryIds:[0],country==='US'?'SEC_EDGAR':'EDINET']);if(!companies.length){state.scan_complete=true;state.retryAfter=0;state.done=retryRemaining.size===0;break;}
+ let count=0;while(!stopped&&count<limit){if(fs.existsSync(stopFile)){stopped=true;break;}const [companies]=await pool.query(`SELECT e.id FROM empresa e JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? AND e.id>? AND (?=0 OR e.id=?) AND (?=0 OR e.id IN (?)) AND EXISTS(SELECT 1 FROM informe_financiero inf WHERE inf.empresa_id=e.id AND inf.tipo_periodo='ANUAL' AND inf.fuente=? AND YEAR(inf.fecha_fin_periodo) BETWEEN 2022 AND 2025) ORDER BY e.id LIMIT 25`,[country,retryMode?(state.retryAfter||0):state.after,companyId,companyId,retryMode?1:0,retryIds.length?retryIds:[0],country==='US'?'SEC_EDGAR':'EDINET']);if(!companies.length){state.scan_complete=true;state.retryAfter=0;state.done=retryRemaining.size===0;break;}
  for(const company of companies){if(stopped||count>=limit)break;try{await processCompany(company.id,listing?.data);}catch(e){log({company:company.id,status:'ERROR',code:e.message});}
  if(stopped)break;if(retryMode)state.retryAfter=company.id;else state.after=company.id;if(pendingCompanies.has(company.id))retryRemaining.add(company.id);else retryRemaining.delete(company.id);state.retryCompanies=[...retryRemaining];state.processed++;count++;state.updated_at=new Date().toISOString();save(state);if(count%10===0)console.log(JSON.stringify({country,processed:state.processed,last:state.after,providerInsertions:metrics,paused:[...disabled]}));}
  }state.pausedProviders=[...disabled];state.stopped=stopped;save(state);console.log(JSON.stringify({country,...state,providerInsertions:metrics}));

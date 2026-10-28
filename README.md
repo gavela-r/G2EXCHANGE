@@ -1,6 +1,6 @@
 # G2EXCHANGE
 
-Motor de valoración financiera reproducible con MySQL 8. El estado de producción está descrito en `server/docs/TERCERA_INTERVENCION.md`. Las valoraciones con hipótesis de sistema conservan `REVIEW`.
+Motor de valoración financiera reproducible con MySQL 8. La activación del 12/10/2026 está descrita en `server/docs/TERCERA_INTERVENCION.md`; la intervención posterior de proveedores figura debajo. Las valoraciones con hipótesis de sistema conservan `REVIEW`.
 
 La recuperación PCV/KPI US/JP de 2022–2025 del 28/10/2026 está documentada en [integración de proveedores](server/docs/INTEGRACION_PROVEEDORES_20261028.md) y [resultados medidos](server/docs/RESULTADOS_PROVEEDORES_20261028.md). La segunda página indica si el barrido sigue en curso o hay cuotas pendientes. Esta intervención continúa el trabajo local de Copilot en `g2-pcv-supplement-20261028`; Taiwán y el frontend quedan fuera.
 
@@ -9,7 +9,7 @@ Requisitos: Node 22.12+ (también probado con Node 24), npm, MySQL 8; Docker par
 ## Instalación
 
 ```powershell
-git clone --branch activation-safe-20261012 --single-branch https://github.com/gavela-r/G2EXCHANGE.git
+git clone --branch g2-pcv-supplement-20261028 --single-branch https://github.com/gavela-r/G2EXCHANGE.git
 cd G2EXCHANGE
 npm.cmd --prefix valuation_engine ci
 npm.cmd --prefix server ci
@@ -71,4 +71,4 @@ SEC usa `SEC_USER_AGENT` o el contacto configurado en Git, identidad exacta (nom
 
 ## Git
 
-La rama `activation-safe-20261012` parte de un snapshot revisado sin arrastrar el historial previo que incluía credenciales. `main` permanece intacta. No mezclar las ramas ni publicar otras referencias sin revisar su historial. Las claves anteriores se conservaron localmente en el entorno privado; su rotación y la revisión del historial remoto corresponden al propietario. CI compila y prueba sin una base de producción; las pruebas de integración requieren una conexión configurada.
+La rama `activation-safe-20261012` parte de un snapshot revisado sin arrastrar el historial previo que incluía credenciales. La integración posterior está en `g2-pcv-supplement-20261028`, que continúa esa historia saneada. `main` permanece intacta. No mezclar el historial anterior ni publicar otras referencias sin revisarlas. Las claves se conservan únicamente en el entorno privado; la revisión de exposición histórica y su rotación corresponden al propietario. CI compila y prueba sin una base de producción; las pruebas de integración requieren una conexión configurada.

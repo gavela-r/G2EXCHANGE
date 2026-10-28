@@ -525,7 +525,7 @@ export const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
     {
         codigo: "EPS_DILUIDO",
         categoria: "CUENTA_RESULTADOS",
-        aliases: ["DilutedEarningsPerShare", "EarningsPerShareDiluted", "DilutedEarningsLossPerShare"]
+        aliases: ["DilutedEarningsPerShareSummaryOfBusinessResults", "DilutedEarningsPerShare", "EarningsPerShareDiluted", "DilutedEarningsLossPerShare"]
     }
 ];
 
@@ -1116,7 +1116,7 @@ function jpPcvBuscarConcepto(
 
         for (const fact of facts) {
             const expectedUnit=definicion.codigo==='ACCIONES_EN_CIRCULACION'?'SHARES':definicion.codigo==='EPS_DILUIDO'?'JPY/SHARES':'JPY';
-            const unit=fact.unidad.toUpperCase().replace(/^ISO4217:/,'');
+            const unit=fact.unidad.toUpperCase().replace(/^ISO4217:/,'').replace(/^JPYPERSHARES$/,'JPY/SHARES');
             if(unit!==expectedUnit)continue;
             const local = jpPcvElementoLocal(fact.elemento).toLowerCase();
             if (definicion.codigo === "DEPRECIACION_AMORTIZACION" && /reversal|reserve|impairment|accretion/.test(local)) continue;

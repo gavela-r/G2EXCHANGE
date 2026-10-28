@@ -5,7 +5,7 @@ test('MySQL PCV: atomic provenance, NULL fill, original preservation, recalculat
  const c=await pool.getConnection();try{
  for(const t of ['informe_financiero','partida_contable_valor','taxonomia_concepto','kpi_financiero_informe','pcv_import_evidence']){const [[row]]=await c.query('SHOW CREATE TABLE '+t);await c.query(row['Create Table'].replace('CREATE TABLE','CREATE TEMPORARY TABLE').replace(/\n  CONSTRAINT [^\n]+/g,'').replace(/,\s*\) ENGINE/,'\n) ENGINE'));}
  await c.query("INSERT INTO informe_financiero(id,empresa_id,tipo_periodo,fecha_fin_periodo,fuente,identificador_fuente) VALUES(1,2,'ANUAL','2024-12-31','SEC_EDGAR','SYNTHETIC')");
- await c.query("INSERT INTO taxonomia_concepto(id,concepto_estandar,categoria,activo) VALUES(1,'INGRESOS','CUENTA_RESULTADOS',1),(2,'EBIT','CUENTA_RESULTADOS',1),(3,'BENEFICIO_NETO','CUENTA_RESULTADOS',1)");
+ await c.query("INSERT INTO taxonomia_concepto(id,concepto_estandar,categoria,activo) VALUES(1,'INGRESOS','CUENTA_RESULTADOS',1),(2,'EBIT','CUENTA_RESULTADOS',1),(3,'BENEFICIO_NETO','CUENTA_RESULTADOS',1),(4,'EPS_DILUIDO','CUENTA_RESULTADOS',1)");
  await c.query("INSERT INTO partida_contable_valor(id,informe_id,concepto_estandar_id,concepto,importe) VALUES(1,1,1,'Revenues',100),(2,1,2,'old-null',NULL)");
  const p={getConnection:async()=>({query:c.query.bind(c),beginTransaction:c.beginTransaction.bind(c),commit:c.commit.bind(c),rollback:c.rollback.bind(c),release(){}})};
  const i={id:1,empresa_id:2,end:'2024-12-31',accession:'SYNTHETIC',country:'US'},d=(codigo,importe)=>({codigo,importe,concepto:'SYNTHETIC:'+codigo,provider:'SEC_EDGAR',identifier:'SYNTHETIC',currency:'USD',basis:'consolidated',evidence:{end:i.end}});
@@ -17,5 +17,7 @@ test('MySQL PCV: atomic provenance, NULL fill, original preservation, recalculat
  assert.equal((await c.query('SELECT importe FROM partida_contable_valor WHERE id=1'))[0][0].importe,'100.0000');
  assert.equal((await c.query("SELECT COUNT(*) n FROM pcv_import_evidence WHERE record_type='PCV'"))[0][0].n,2);
  await assert.rejects(()=>persistirRecuperacion(p,i,[d('INGRESOS',200)],true),/CONTRADICTORIA/);
+ const tiny=await persistirRecuperacion(p,i,[{...d('EPS_DILUIDO',0.0000001),currency:'USD/shares'}],true);assert.equal(tiny.pcv,0);assert.equal(tiny.precisionPending,1);
+ const zero=await persistirRecuperacion(p,i,[{...d('EPS_DILUIDO',0),currency:'USD/shares'}],true);assert.equal(zero.pcv,1);assert.equal((await c.query('SELECT importe FROM partida_contable_valor WHERE concepto_estandar_id=4'))[0][0].importe,'0.0000');
  }finally{c.release();await pool.end();}
 });

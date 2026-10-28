@@ -67,7 +67,7 @@ export function normalizarEdinetZip(bytes:Buffer,i:InformePcv):{identity:Identid
 }
 
 const FDE:Record<string,Record<string,string>>={
- income_statement:{revenue:'INGRESOS',gross_profit:'BENEFICIO_BRUTO',operating_income:'EBIT',net_income:'BENEFICIO_NETO',interest_expense:'GASTO_INTERESES',income_before_tax:'BENEFICIO_ANTES_IMPUESTOS',income_tax_expense:'IMPUESTO_BENEFICIOS'},
+ income_statement:{revenue:'INGRESOS',gross_profit:'BENEFICIO_BRUTO',operating_income:'EBIT',net_income:'BENEFICIO_NETO',interest_expense:'GASTO_INTERESES',income_before_tax:'BENEFICIO_ANTES_IMPUESTOS',income_tax_expense:'IMPUESTO_BENEFICIOS',eps_diluted:'EPS_DILUIDO'},
  balance_sheet:{cash_and_equivalents:'EFECTIVO',total_assets:'ACTIVOS_TOTALES',total_liabilities:'PASIVOS_TOTALES',total_stockholders_equity:'PATRIMONIO_NETO',short_term_debt:'DEUDA_CORTO_PLAZO',long_term_debt:'DEUDA_LARGO_PLAZO',inventory:'INVENTARIOS',accounts_receivable:'CUENTAS_COBRAR',accounts_payable:'CUENTAS_PAGAR'},
  cash_flow:{net_cash_operating:'FLUJO_CAJA_OPERATIVO',capital_expenditures:'CAPEX',depreciation_amortization:'DEPRECIACION_AMORTIZACION',dividends_paid:'DIVIDENDOS_PAGADOS'}
 };
@@ -89,7 +89,7 @@ export function normalizarAlpha(body:any,i:InformePcv,statement:string):DatoPcv[
  const matches=body.annualReports.filter((r:any)=>r.fiscalDateEnding===i.end&&r.reportedCurrency==='USD');if(matches.length!==1)return [];
  return mappedRows(AV[statement]||{},matches[0],'ALPHAVANTAGE',i,'USD',{symbol:body.symbol,statement,end:i.end,currency:'USD',accession_binding:'SEC profile + exact fiscal period; provider does not supply accession'});
 }
-const EDB:Record<string,string>={revenue:'INGRESOS',gross_profit:'BENEFICIO_BRUTO',operating_income:'EBIT',net_income:'BENEFICIO_NETO',profit_before_tax:'BENEFICIO_ANTES_IMPUESTOS',income_taxes:'IMPUESTO_BENEFICIOS',interest_expenses:'GASTO_INTERESES',cash:'EFECTIVO',total_assets:'ACTIVOS_TOTALES',total_liabilities:'PASIVOS_TOTALES',net_assets:'PATRIMONIO_NETO',ibd_current:'DEUDA_CORTO_PLAZO',ibd_noncurrent:'DEUDA_LARGO_PLAZO',inventories:'INVENTARIOS',trade_receivables:'CUENTAS_COBRAR',trade_payables:'CUENTAS_PAGAR',cf_operating:'FLUJO_CAJA_OPERATIVO',purchase_of_ppe:'CAPEX',depreciation:'DEPRECIACION_AMORTIZACION',cash_dividends_paid:'DIVIDENDOS_PAGADOS'};
+const EDB:Record<string,string>={revenue:'INGRESOS',gross_profit:'BENEFICIO_BRUTO',operating_income:'EBIT',net_income:'BENEFICIO_NETO',profit_before_tax:'BENEFICIO_ANTES_IMPUESTOS',income_taxes:'IMPUESTO_BENEFICIOS',interest_expenses:'GASTO_INTERESES',cash:'EFECTIVO',total_assets:'ACTIVOS_TOTALES',total_liabilities:'PASIVOS_TOTALES',net_assets:'PATRIMONIO_NETO',ibd_current:'DEUDA_CORTO_PLAZO',ibd_noncurrent:'DEUDA_LARGO_PLAZO',inventories:'INVENTARIOS',trade_receivables:'CUENTAS_COBRAR',trade_payables:'CUENTAS_PAGAR',cf_operating:'FLUJO_CAJA_OPERATIVO',purchase_of_ppe:'CAPEX',depreciation:'DEPRECIACION_AMORTIZACION',cash_dividends_paid:'DIVIDENDOS_PAGADOS',diluted_eps:'EPS_DILUIDO'};
 export function necesitaStatement(provider:'FINDATAENGINE'|'ALPHAVANTAGE',statement:string,known:Set<string>):boolean {
  return Object.values((provider==='FINDATAENGINE'?FDE:AV)[statement]||{}).some(code=>!known.has(code));
 }
@@ -100,5 +100,5 @@ export function normalizarEdinetDb(body:any,identity:IdentidadJp,i:InformePcv):D
  return mappedRows(EDB,r,'EDINET_DB',i,'JPY',{edinetCode:identity.edinetCode,doc_id:r.doc_id,year:r.fiscal_year,basis:r.basis,accounting_standard:r.accounting_standard},r.basis);
 }
 function mappedRows(mapping:Record<string,string>,row:any,provider:string,i:InformePcv,currency:string,evidence:Record<string,unknown>,basis='consolidated'):DatoPcv[]{
- return Object.entries(mapping).flatMap(([field,codigo])=>{const importe=numeroReportado(row[field]);return importe===null?[]:[{codigo,concepto:provider+':'+field,importe,provider,identifier:i.accession,currency,basis,evidence:{...evidence,field}}];});
+ return Object.entries(mapping).flatMap(([field,codigo])=>{const importe=numeroReportado(row[field]);return importe===null?[]:[{codigo,concepto:provider+':'+field,importe,provider,identifier:i.accession,currency:codigo==='EPS_DILUIDO'?currency+'/shares':currency,basis,evidence:{...evidence,field}}];});
 }

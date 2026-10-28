@@ -4,6 +4,8 @@ GitHub contiene código, esquema sin datos, migraciones, documentación y fixtur
 
 ## Backup privado
 
+Último respaldo verificado de esta entrega: `private_backups/g2-2026-10-28T23-49-54-642Z.sql`, restaurado con sus 28 tablas en `g2_recovery_auto_20261028234948256`. Paquete alineado: `private_backups/pcv-recovery-controls-2026-10-28T23-51-29-702Z.tar`. La prueba `.validation.json` confirma hashes, extracción de SQL/configuración y replay del run 533 desde el código extraído. El coordinador reanudó los trabajos después. Los manifiestos y hashes se conservan junto a los archivos privados; los puntos anteriores permanecen disponibles.
+
 Actualización 28/10/2026: el respaldo `private_backups/g2-2026-10-28T22-01-40-669Z.sql` contiene las 28 tablas, incluidas las procedencias de PCV/KPI e informes nuevos. SHA-256 `a855c2d6c579f4fbc6b2ab97b92b4f5b3eb6b42fec0e2f87a571e10c8b2fa1e2`. Se restauró en `g2_recovery_aligned_20261028`: recuentos y checksums coinciden con el manifiesto y el replay del run 533 devuelve `reproduced:true`.
 
 Paquete privado del mismo punto de parada: `private_backups/pcv-recovery-controls-2026-10-28T22-10-55-076Z.tar`, SHA-256 `ee1070dc0464cafe82373fc803eaf5a84035006556c34379dbbc029e80764df2`. Incluye el dump, `.env` actualizado, motores archivados, compilados, scripts, auditorías, cuotas y checkpoints. Se extrajo en un directorio nuevo: coinciden el hash del SQL, los bytes de `.env` y los 157 archivos de motores archivados/compilados comprobados. El cursor JP era 497 y los workers estaban parados. Los procesos se reanudaron después y su avance posterior requiere otro backup. Contiene credenciales y datos privados; no subirlo a GitHub.

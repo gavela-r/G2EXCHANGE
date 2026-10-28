@@ -6,6 +6,8 @@ Repositorio principal `G2EXCHANGE`, rama encontrada `g2-pcv-supplement-20261028`
 
 El backup previo de Copilot, `g2-2026-10-28T17-58-31-790Z.sql`, se comparó con su restauración `g2_recovery_20261028_validation`: todas las tablas coincidían antes de importar. La auditoría inicial existente se conservó y la repetición `pcv-kpi-audit-baseline-verified-2022-2025.json` obtuvo los mismos porcentajes para los ocho períodos.
 
+Backup de avance adicional: `private_backups/g2-2026-10-28T19-26-00-710Z.sql`, SHA-256 `c8708d8d8234b60c027b58ede68753f1fe65746441f1819c213ffd3271ec9d3b`. Se capturó un manifiesto de recuentos/checksums con un bloqueo breve de escritura y se restauró en `g2_recovery_pcv_progress_20261028`: las 27 tablas coinciden y el run 533 se reproduce. Conserva el avance hasta ese instante; los workers continuaron después. No restaurar un checkpoint más reciente que el dump como si correspondieran al mismo punto: usar un directorio nuevo y la idempotencia cuando no estén alineados.
+
 ## Implementación y seguridad de datos
 
 El worker recomendado es `server/scripts/recuperar-pcv-proveedores.cjs`. Flujo US: SEC → FinDataEngine → Alpha Vantage. Flujo JP: EDINET oficial → EDINET DB. Taiwán queda excluido. Las tres claves complementarias se configuran únicamente en `.env` con los nombres de `.env.example`.
@@ -58,6 +60,8 @@ Agregados iniciales: US PCV 79,9053%, KPI 72,4556%; JP PCV 91,0723%, KPI 93,1715
 
 Validación ejecutada: 20 tests de motor, 46 de backend y 3 de integración MySQL aprobados; compilación completa aprobada. Las pruebas PCV cubren rollback con fallo inyectado después de escribir, conservación de originales, NULL completado con evidencia, repetición sin duplicados, CIK/nombres históricos, períodos, unidades, perímetro, TSV/BOM, cuotas y reintentos. El lote japonés se interrumpió y reanudó realmente desde su checkpoint; la integridad se comparó con la copia inicial.
 
+Un clon real de la rama publicada instaló dependencias, compiló y pasó los 66 tests unitarios sin `.env`. Se corrigieron tres dependencias con avisos nuevos de seguridad mediante actualizaciones compatibles; audit de servidor y motor sin vulnerabilidades conocidas en la comprobación ejecutada. No se modificó el frontend.
+
 Compilar antes de ejecutar. Instalar dependencias desde la rama actual y mantener `.env`, dumps, cachés, logs y checkpoints en privado. No compartir directorios de checkpoints. El script de primarias dejado por Copilot ahora delega al worker seguro, con escritura explícita y un directorio por país; su checkpoint antiguo se conserva y no se interpreta como si tuviera el formato nuevo.
 
 ```powershell
@@ -85,6 +89,16 @@ node server/scripts/auditar-pcv-kpi-2022-2025.cjs --after
 node server/scripts/informe-pcv-proveedores.cjs
 node server/scripts/backup-db.cjs
 ```
+
+Para verificar un backup tomado durante la recuperación activa, usar un manifiesto del mismo instante:
+
+```powershell
+node server/scripts/backup-pcv-consistente.cjs
+node server/scripts/restaurar-db.cjs ruta-privada/backup.sql g2_recovery_nuevo
+node server/scripts/verificar-backup-pcv.cjs ruta-privada/backup.sql g2_recovery_nuevo
+```
+
+Estos comandos nunca restauran encima de producción. El manifiesto y el dump permanecen privados. El bloqueo global del exportador se libera incluso si falla el proceso.
 
 `verificar-pcv-integridad` exige cero PCV originales no nulos alterados, cero filas perdidas, trazabilidad de todos los nuevos PCV/KPI y cambios de KPI, y conservación de empresas, informes, versiones, snapshots, runs, resultados y taxonomías. Comprueba también que no se cambia PCV fuera de US/JP 2022–2025. La reparación de fechas y la actualización de versiones financieras usadas por valoraciones son fases separadas; no se han relanzado valoraciones con hipótesis para aumentar cobertura.
 

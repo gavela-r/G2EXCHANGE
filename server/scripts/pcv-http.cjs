@@ -18,9 +18,9 @@ class PcvHttp{
    if(q.used>=policy.daily||q.remaining===0||q.monthlyRemaining===0||(q.blockedUntil&&Date.parse(q.blockedUntil)>Date.now()))throw new CuotaAgotada(provider);
    const delay=Math.max(0,policy.interval-(Date.now()-(this.last[provider]||0)));if(delay)await new Promise(r=>setTimeout(r,delay));
    q.used++;if(q.remaining!==null)q.remaining--;if(q.monthlyRemaining!==null)q.monthlyRemaining--;this.save(provider);this.last[provider]=Date.now();
-   let response;try{response=await fetch(u,{headers,signal:AbortSignal.timeout(binary?60000:30000)});}catch{if(attempt<2)continue;throw new Error('HTTP_TRANSITORIO_'+provider);}
+   let response;try{response=await fetch(u,{headers,redirect:'error',signal:AbortSignal.timeout(binary?60000:30000)});}catch{if(attempt<2)continue;throw new Error('HTTP_TRANSITORIO_'+provider);}
    if(provider==='EDINET_DB')for(const [header,field] of [['x-ratelimit-remaining','remaining'],['x-ratelimit-monthly-remaining','monthlyRemaining']]){const v=response.headers.get(header);if(v!==null&&Number.isFinite(Number(v)))q[field]=Math.min(q[field]??Infinity,Number(v));}
-   if(response.status===429){const retry=Number(response.headers.get('retry-after'));q.blockedUntil=new Date(Date.now()+Math.max(60000,(Number.isFinite(retry)?retry:60)*1000)).toISOString();this.save(provider);throw new CuotaAgotada(provider);}
+   if(response.status===429){const retry=Number(response.headers.get('retry-after')),reset=Number(response.headers.get('x-ratelimit-reset'));q.consecutive429=(q.consecutive429||0)+1;q.blockedUntil=new Date(Math.max(Date.now()+Math.max(60000*Math.min(1440,2**(q.consecutive429-1)),(Number.isFinite(retry)?retry:60)*1000),Number.isFinite(reset)?reset*1000:0)).toISOString();this.save(provider);throw new CuotaAgotada(provider);}
    if(response.status===401||response.status===403){q.blockedUntil=today+'T23:59:59.999Z';this.save(provider);throw new Error('CREDENCIAL_O_ACCESO_'+provider+'_'+response.status);}
    if(response.status>=500&&attempt<2)continue;
    if(!response.ok)throw new Error('HTTP_'+provider+'_'+response.status);
@@ -29,7 +29,7 @@ class PcvHttp{
     if(provider==='ALPHAVANTAGE'&&(data.Note||data.Information)){q.blockedUntil=today+'T23:59:59.999Z';this.save(provider);throw new CuotaAgotada(provider);}
     if(data['Error Message']||data.error)throw new Error('RESPUESTA_ERROR_'+provider);
    }
-   fs.writeFileSync(cache+'.tmp',bytes);fs.renameSync(cache+'.tmp',cache);this.save(provider);return {data,hash:crypto.createHash('sha256').update(bytes).digest('hex'),cached:false};
+   q.consecutive429=0;fs.writeFileSync(cache+'.tmp',bytes);fs.renameSync(cache+'.tmp',cache);this.save(provider);return {data,hash:crypto.createHash('sha256').update(bytes).digest('hex'),cached:false};
   }throw new Error('REINTENTOS_AGOTADOS_'+provider);
  }
 }

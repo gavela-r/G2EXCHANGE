@@ -1,0 +1,6 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');const pool=require('../dist/conexion/bd').default;
+(async()=>{const file=path.resolve(process.argv[2]||''),target=process.argv[3];if(!/^g2_recovery_[A-Za-z0-9_]+$/.test(target||'')||target===process.env.DB_NAME)throw new Error('Base nueva recovery obligatoria');const m=JSON.parse(fs.readFileSync(file+'.manifest.json'));assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),m.backup.sha256);
+ const [tables]=await pool.query('SHOW TABLES FROM `'+target+'`');assert.deepEqual(tables.map(r=>Object.values(r)[0]).sort(),Object.keys(m.tables).sort());
+ for(const [table,expected]of Object.entries(m.tables)){const [[count]]=await pool.query('SELECT COUNT(*) n FROM `'+target+'`.`'+table+'`'),[[checksum]]=await pool.query('CHECKSUM TABLE `'+target+'`.`'+table+'`');assert.equal(Number(count.n),expected.rows,table+' rows');assert.equal(checksum.Checksum,expected.checksum,table+' checksum');}
+ const report={backup:file,restored:target,all_tables_equal:true,tables:tables.length,sha256:m.backup.sha256};fs.writeFileSync(file+'.restored.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+})().catch(e=>{console.error(e.message);process.exitCode=1;}).finally(()=>pool.end());

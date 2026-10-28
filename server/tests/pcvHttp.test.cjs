@@ -7,7 +7,7 @@ test('provider HTTP enforces the persisted free quota before issuing a request',
 });
 test('provider HTTP caches safely without API keys and shares its quota between instances',async()=>{
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'g2-pcv-http-')),old=global.fetch;let calls=0;
- global.fetch=async()=>{calls++;return new Response(JSON.stringify({symbol:'SYNTH',annualReports:[]}),{status:200,headers:{'content-type':'application/json'}});};
+ global.fetch=async(url,options)=>{assert.equal(options.redirect,'error');calls++;return new Response(JSON.stringify({symbol:'SYNTH',annualReports:[]}),{status:200,headers:{'content-type':'application/json'}});};
  try{const u='https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=SYNTH&apikey=SYNTHETIC_TEST_SECRET';await new PcvHttp(dir).get('ALPHAVANTAGE',u);const second=await new PcvHttp(dir).get('ALPHAVANTAGE',u);assert.equal(second.cached,true);assert.equal(calls,1);assert.equal(JSON.parse(fs.readFileSync(path.join(dir,'ALPHAVANTAGE-quota.json'))).used,1);for(const f of fs.readdirSync(dir))assert.ok(!fs.readFileSync(path.join(dir,f),'utf8').includes('SYNTHETIC_TEST_SECRET'));}finally{global.fetch=old;}
 });
 test('provider HTTP preserves account throttling and retries transient failures within the cap',async()=>{

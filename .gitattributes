@@ -1,0 +1,2 @@
+# Preserve the published schema checksum on Windows and Unix clones.
+server/sql/00_schema.sql text eol=lf

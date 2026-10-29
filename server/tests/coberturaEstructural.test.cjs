@@ -15,3 +15,4 @@ test('Missing calculation and disagreement are distinguished without changing fo
  const d=diagnosticarKpi(1,[row('BENEFICIO_NETO',10),row('ACTIVOS_TOTALES',100),row('PATRIMONIO_NETO',50)],'SEC_EDGAR',[{kpi:'ROA',valor:2}],['ROA','ROE']);
  assert.equal(d.states.ROA,'STORED_DISAGREES');assert.equal(d.states.ROE,'CALCULABLE_MISSING');assert.equal(d.calculated.find(x=>x.kpi==='ROE').valor,20);
 });
+test('A partial debt sum is an insufficient input state, not an unexecuted valid calculation',()=>{const rs=[row('DEUDA_LARGO_PLAZO',40)];const d=diagnosticarKpi(1,rs,'SEC_EDGAR',[{kpi:'DEUDA_TOTAL',valor:40}],['DEUDA_TOTAL','DEUDA_NETA']);assert.equal(d.states.DEUDA_TOTAL,'STORED_WITH_INCOMPLETE_DEBT_COMPONENTS');assert.equal(d.states.DEUDA_NETA,'MISSING_DEBT_COMPONENTS');assert.ok(!d.calculated.some(k=>k.kpi==='DEUDA_TOTAL'));});

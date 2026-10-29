@@ -1,0 +1,42 @@
+// Shared Japanese provider transport. Network reservations and response quota
+// merges are atomic across processes. A URL lease prevents duplicate downloads.
+// Financial writers retain their existing country lock and transaction policy.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),os=require('node:os'),{PcvHttp,CuotaAgotada,POLICY}=require('./pcv-http.cjs'),{guardarEstadoPcv,renombrarPcvAtomico}=require('./pcv-checkpoint.cjs'),{retryAfterUntil}=require('./pcv-retry-after.cjs');
+const sleep=ms=>new Promise(r=>setTimeout(r,Math.min(30000,ms))),sha=b=>crypto.createHash('sha256').update(b).digest('hex'),read=file=>fs.existsSync(file)?JSON.parse(fs.readFileSync(file)):null;
+function alive(pid){try{process.kill(pid,0);return true;}catch(e){return e.code!=='ESRCH';}}
+async function withLease(file,fn,{waitMs=240000}={}){const nonce=crypto.randomUUID(),start=Date.now();let acquired=false;
+ while(!acquired){try{const fd=fs.openSync(file,'wx');fs.writeFileSync(fd,JSON.stringify({pid:process.pid,hostname:os.hostname(),nonce,created_at:new Date().toISOString()}));fs.closeSync(fd);acquired=true;}catch(e){if(e.code!=='EEXIST')throw e;let owner;try{owner=read(file);}catch{}if(owner?.hostname===os.hostname()&&!alive(owner.pid)){try{fs.renameSync(file,file+'.abandoned-'+Date.now()+'-'+nonce);}catch(e){if(!['ENOENT','EPERM','EACCES'].includes(e.code))throw e;}continue;}if(Date.now()-start>=waitMs)throw Error('HTTP_TRANSITORIO_JP_LEASE_BUSY');await sleep(50);}}
+ try{return await fn();}finally{const owner=read(file);if(owner?.nonce!==nonce)throw Error('JP_LEASE_OWNER_CHANGED');fs.unlinkSync(file);}
+}
+function quotaState(old,now){const day=new Date(now).toISOString().slice(0,10),month=day.slice(0,7);return !old||old.day!==day?{day,month,used:0,remaining:null,monthlyRemaining:old?.month===month?old.monthlyRemaining:null,blockedUntil:old?.blockedUntil||null}:old;}
+function safeRequest(provider,url,binary,text){const policy=POLICY[provider],u=new URL(url);if(!['EDINET','EDINET_DB'].includes(provider)||u.protocol!=='https:'||!policy.hosts.includes(u.hostname))throw Error('JP_HTTP_HOST_NOT_ALLOWED');const safe=new URL(u);for(const key of ['apikey','Subscription-Key','token'])safe.searchParams.delete(key);return {url:u,key:sha(provider+' '+safe.toString()),extension:binary?'.zip':text?'.txt':'.json'};}
+function parseBytes(bytes,{provider,binary,text}){if(binary){if(bytes.subarray(0,2).toString()!=='PK')throw Error('ZIP_INVALIDO_'+provider);return bytes;}if(text)return bytes.toString('utf8');let data;try{data=JSON.parse(bytes.toString('utf8'));}catch{throw Error('JSON_INVALIDO_'+provider);}if(data.error||data['Error Message'])throw Error('RESPUESTA_ERROR_'+provider);return data;}
+async function sharedGet(directory,provider,url,{headers={},binary=false,text=false,background=false,transport=fetch,testPolicy=null}={}){
+ fs.mkdirSync(directory,{recursive:true});const request=safeRequest(provider,url,binary,text),file=path.join(directory,request.key+request.extension),qfile=path.join(directory,provider+'-quota.json'),coordFile=path.join(directory,provider+'-coordination.json'),globalLock=path.join(directory,provider+'-global.lock'),priorityDir=path.join(directory,provider+'-priority'),policy=testPolicy||POLICY[provider];fs.mkdirSync(priorityDir,{recursive:true});
+ const cached=()=>{if(!fs.existsSync(file)||!binary&&Date.now()-fs.statSync(file).mtimeMs>=86400000)return null;const bytes=fs.readFileSync(file);return {data:parseBytes(bytes,{provider,binary,text}),hash:sha(bytes),cached:true};};const hit=cached();if(hit)return hit;
+ return withLease(file+'.download.lock',async()=>{const hit=cached();if(hit)return hit;const priorityFile=path.join(priorityDir,process.pid+'-'+crypto.randomUUID()+'.json');if(!background)fs.writeFileSync(priorityFile,JSON.stringify({pid:process.pid,hostname:os.hostname()}));
+  try{for(let attempt=0;attempt<3;attempt++){if(!background&&!fs.existsSync(priorityFile))fs.writeFileSync(priorityFile,JSON.stringify({pid:process.pid,hostname:os.hostname()}));
+   let reserved=false;
+   while(!reserved){const ticket=await withLease(globalLock,async()=>{const now=Date.now(),q=quotaState(read(qfile),now),state=read(coordFile)||{};
+    if(q.used>=policy.daily||q.remaining===0||q.monthlyRemaining===0||q.blockedUntil&&Date.parse(q.blockedUntil)>now){guardarEstadoPcv(qfile,q);return {blocked:true,until:q.blockedUntil};}
+    if(background){for(const name of fs.readdirSync(priorityDir)){const p=path.join(priorityDir,name);let owner;try{owner=read(p);}catch{continue;}if(owner?.hostname===os.hostname()&&!alive(owner.pid)){fs.unlinkSync(p);continue;}return {wait:100};}}
+    const wait=Math.max(0,(state.last_started_at||0)+policy.interval-now);if(wait)return {wait};q.used++;if(q.remaining!==null)q.remaining--;if(q.monthlyRemaining!==null)q.monthlyRemaining--;guardarEstadoPcv(qfile,q);guardarEstadoPcv(coordFile,{...state,last_started_at:now,requests:(state.requests||0)+1});return {reserved:true};});
+    if(ticket.blocked){const e=new CuotaAgotada(provider);e.retryUntil=ticket.until;throw e;}if(ticket.wait){await sleep(ticket.wait);continue;}reserved=true;if(!background&&fs.existsSync(priorityFile))fs.unlinkSync(priorityFile);
+   }
+   const started=Date.now();let response,bytes;
+   try{response=await transport(request.url,{headers,redirect:'error',signal:AbortSignal.timeout(binary?60000:30000)});const length=Number(response.headers.get('content-length'));if(length>128*1024**2)throw Error('JP_RESPONSE_TOO_LARGE');const chunks=[];let size=0;for await(const chunk of response.body){size+=chunk.length;if(size>128*1024**2)throw Error('JP_RESPONSE_TOO_LARGE');chunks.push(chunk);}bytes=Buffer.concat(chunks);
+   }catch{if(attempt<2){await sleep(1000*2**attempt);continue;}throw Error('HTTP_TRANSITORIO_'+provider);}
+   await withLease(globalLock,async()=>{const q=quotaState(read(qfile),Date.now()),state=read(coordFile)||{},latency=Date.now()-started;if(provider==='EDINET_DB')for(const [header,field]of [['x-ratelimit-remaining','remaining'],['x-ratelimit-monthly-remaining','monthlyRemaining']]){const value=response.headers.get(header);if(value!==null&&Number.isFinite(Number(value)))q[field]=Math.min(q[field]??Infinity,Math.max(0,Number(value)));}
+    state.ewma_ms=state.ewma_ms===undefined?latency:Math.round(state.ewma_ms*.75+latency*.25);state.last_http=response.status;state.consecutive_failures=response.status===429||response.status>=500?(state.consecutive_failures||0)+1:0;
+    if(response.status===429){const retry=retryAfterUntil(response.headers.get('retry-after')),reset=Number(response.headers.get('x-ratelimit-reset'));q.blockedUntil=new Date(Math.max(Date.now()+60000*Math.min(1440,2**(q.consecutive429||0)),Date.parse(retry||'')||0,Number.isFinite(reset)?reset*1000:0)).toISOString();q.consecutive429=(q.consecutive429||0)+1;}
+    if(response.status===401||response.status===403)q.blockedUntil=q.day+'T23:59:59.999Z';guardarEstadoPcv(qfile,q);guardarEstadoPcv(coordFile,state);
+   });
+   if(response.status===429)throw new CuotaAgotada(provider);if(response.status===401||response.status===403)throw Error('CREDENCIAL_O_ACCESO_'+provider+'_'+response.status);if(response.status>=500&&attempt<2){await sleep(1000*2**attempt);continue;}if(!response.ok)throw Error('HTTP_'+provider+'_'+response.status);
+   const data=parseBytes(bytes,{provider,binary,text});if(fs.existsSync(file)){const old=fs.readFileSync(file);if(!old.equals(bytes)){const preserved=file+'.observed-'+sha(old);if(!fs.existsSync(preserved))fs.copyFileSync(file,preserved);}}
+   const temporary=file+'.tmp-'+process.pid;fs.writeFileSync(temporary,bytes);renombrarPcvAtomico(temporary,file);return {data,hash:sha(bytes),cached:false};
+  }throw Error('REINTENTOS_AGOTADOS_'+provider);}finally{if(!background&&fs.existsSync(priorityFile))fs.unlinkSync(priorityFile);}
+ });
+}
+function recommendedWorkers(state,maximum=3){if(state?.consecutive_failures||state?.last_http===429)return 1;return Math.max(1,Math.min(maximum,Math.ceil((state?.ewma_ms||0)/POLICY.EDINET.interval)));}
+function instalarTransporteCompartido(){const original=PcvHttp.prototype.get;if(original.jpSharedV1)return;const wrapped=function(provider,url,options){return ['EDINET','EDINET_DB'].includes(provider)?sharedGet(this.dir,provider,url,options):original.call(this,provider,url,options);};wrapped.jpSharedV1=true;PcvHttp.prototype.get=wrapped;}
+module.exports={withLease,quotaState,sharedGet,recommendedWorkers,instalarTransporteCompartido};

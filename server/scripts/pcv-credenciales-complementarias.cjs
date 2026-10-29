@@ -1,0 +1,20 @@
+// Credential aliases and health only. No key fragments, values or request URLs
+// enter logs. EDINET DB keys remain in ONE documented account-wide quota group.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const {retryAfterUntil}=require('./pcv-retry-after.cjs');
+function clasificarRespuesta(status){return status===200?'AVAILABLE':status===401?'AUTHENTICATION_FAILED':status===403?'ACCESS_FORBIDDEN':status===429?'QUOTA_OR_RATE_BLOCKED':status>=500?'TRANSIENT_PROVIDER_FAILURE':'UNAVAILABLE_ENDPOINT';}
+function puedeAlternar(a,b,proof={}){return a.quotaGroup!==b.quotaGroup&&proof.independentQuotasVerified===true&&proof.contractAllowsAlternation===true&&proof.noAccountLimitCircumvention===true;}
+function credenciales(env){return [['EDINETDB_API_KEY','edb-primary'],['EDINETDB_API_KEY_2','edb-secondary']].filter(([name])=>env[name]).map(([name,alias])=>({alias,environment:name,provider:'EDINET_DB',quotaGroup:'EDINET_DB_ACCOUNT',value:env[name]}));}
+async function probarCredenciales({root=path.resolve(__dirname,'../..'),env=process.env,transport=fetch,now=()=>Date.now()}={}){
+ const dir=path.join(root,'private_backups/pcv-credential-health');fs.mkdirSync(dir,{recursive:true});const result={observed_at:new Date(now()).toISOString(),edinet_keys:[],edinet_shared_quota:true,automatic_quota_rotation:false,legal_basis:'https://edinetdb.com/docs/api: rate limits aggregated per account',fmp:null};
+ async function probe(alias,secret,url,headers){const fingerprint=crypto.createHash('sha256').update(secret).digest('hex'),file=path.join(dir,alias+'.json');if(fs.existsSync(file)){const old=JSON.parse(fs.readFileSync(file));if(old.fingerprint===fingerprint&&now()-Date.parse(old.observed_at)<86400000&&!(old.public?.retry_until&&now()>=Date.parse(old.public.retry_until)))return {...old.public,cached_probe:true};}
+  let state;try{const r=await transport(url,{headers,redirect:'error',signal:AbortSignal.timeout(30000)}),bytes=Buffer.from(await r.arrayBuffer());state={alias,status:clasificarRespuesta(r.status),http:r.status,retry_until:retryAfterUntil(r.headers.get('retry-after'),now()),daily_remaining:r.headers.get('x-ratelimit-remaining'),monthly_remaining:r.headers.get('x-ratelimit-monthly-remaining')};
+   if(r.ok){let body;try{body=JSON.parse(bytes.toString('utf8'));}catch{state.status='UNEXPECTED_RESPONSE_SCHEMA';}if(alias.startsWith('edb-')&&body){const usage=body.data||body;state.usage={plan:usage.plan||null,daily_limit:usage.daily_limit??null,monthly_limit:usage.monthly_limit??null,daily_remaining:usage.daily_remaining??null,monthly_remaining:usage.monthly_remaining??null};}if(alias==='fmp-basic-profile'&&(!Array.isArray(body)||body[0]?.symbol!=='AAPL'))state.status='UNEXPECTED_RESPONSE_SCHEMA';}
+  }catch{state={alias,status:'NETWORK_FAILURE',http:null,retry_until:null};}fs.writeFileSync(file,JSON.stringify({fingerprint,observed_at:new Date(now()).toISOString(),public:state},null,2));return state;
+ }
+ for(const c of credenciales(env)){const health=await probe(c.alias,c.value,'https://edinetdb.jp/v1/usage',{'X-API-Key':c.value});result.edinet_keys.push({...health,quota_group:c.quotaGroup});}
+ if(env.FMP_API_KEY){const url=new URL('https://financialmodelingprep.com/stable/profile');url.searchParams.set('symbol','AAPL');url.searchParams.set('apikey',env.FMP_API_KEY);result.fmp={...await probe('fmp-basic-profile',env.FMP_API_KEY,url,{}),capability:'BASIC_PROFILE_PROBE_ONLY',taiwan_financial_download_enabled:false,reason:'Free global Taiwan financial history and commercial data licence not established; paid endpoints are not probed',pricing:'https://site.financialmodelingprep.com/developer/docs/pricing'};}
+ fs.writeFileSync(path.join(dir,'summary.json'),JSON.stringify(result,null,2));return result;
+}
+module.exports={retryAfterUntil,clasificarRespuesta,puedeAlternar,credenciales,probarCredenciales};
+if(require.main===module){require('dotenv').config({path:path.resolve(__dirname,'../../.env')});probarCredenciales().then(r=>console.log(JSON.stringify(r))).catch(()=>{console.error('CREDENTIAL_HEALTH_CHECK_FAILED');process.exitCode=1;});}

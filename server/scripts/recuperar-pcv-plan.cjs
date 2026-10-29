@@ -10,6 +10,7 @@ const jobs=[
  {id:'us-mapping',directory:'pcv-us-mapeo-v2',after:'us-transient',requireDone:true,args:['--job','sec-mapping-v2']},
  {id:'us-complement',directory:'pcv-us-complementos-v5',after:'us-mapping',requireDone:true,args:['--job','complement-sec-v5','--country','US']},
  {id:'jp-cached',directory:'pcv-jp-cached-v4',args:['--job','edinet-verified','--phase','existing','--cached-only']},
+ {id:'jp-prefetch',directory:'pcv-jp-prefetch-v1',after:'jp-cached',requireDone:true,args:['--job','jp-prefetch','--max-workers','3']},
  {id:'jp-identity-cached',directory:'pcv-jp-identidad-cached-v6',after:'jp-cached',requireDone:true,args:['--job','edinet-identity-v6','--phase','discover','--cached-only','--from','2022-01-01','--to','2026-06-30']},
  {id:'jp-discover',directory:'pcv-jp-descubrimiento-v4',after:'jp-identity-cached',requireDone:true,args:['--job','edinet-verified','--phase','discover','--from','2022-01-01','--to','2026-06-30']},
  {id:'jp-identity-discover',directory:'pcv-jp-identidad-descubrir-v6',after:'jp-discover',requireDone:true,args:['--job','edinet-identity-v6','--phase','discover','--from','2022-01-01','--to','2026-06-30']},

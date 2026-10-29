@@ -12,6 +12,7 @@ server/resultados_valoraciones/
 !server/scripts/verificar-backup-pcv.cjs
 !server/scripts/backup-controles-pcv.cjs
 !server/scripts/backup-db.cjs
+!server/scripts/backup-pcv-en-vivo.cjs
 consulta_empresas_temporal.cjs
 ercionDatosinsercionDatosSector.ts*
 valuation_engine/docs/*.pdf

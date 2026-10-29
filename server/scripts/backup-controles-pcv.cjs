@@ -20,7 +20,7 @@ const {sha256File:streamDigest}=require('./pcv-file-hash.cjs');
  // audits on a clean recovery host. Preserve their own manifests/proofs too.
  const interventionInitial='private_backups/g2-2026-10-29T08-02-28-629Z.sql';
  for(const base of [initial,interventionInitial])for(const suffix of ['', '.sha256','.manifest.json','.restored.json']){const file=base+suffix;if(fs.existsSync(path.join(root,file))&&!files.includes(file))files.push(file);}
- for(const file of fs.readdirSync(directory).filter(n=>/^pcv-kpi-audit-.*\.json$/.test(n)||/^cobertura-estructural-.*\.json$/.test(n)||/^periodos-sec-heredados(?:-privado)?\.json$/.test(n)||['pcv-provider-comparison.json','pcv-integrity-final.json','pcv-pause-manifest.json'].includes(n)))files.push(path.join('private_backups',file));
+ for(const file of fs.readdirSync(directory).filter(n=>/^pcv-kpi-audit-.*\.json$/.test(n)||/^cobertura-estructural-.*\.json$/.test(n)||/^cobertura-tw-.*\.json$/.test(n)||/^periodos-sec-heredados(?:-privado)?\.json$/.test(n)||['pcv-provider-comparison.json','pcv-integrity-final.json','pcv-pause-manifest.json'].includes(n)))files.push(path.join('private_backups',file));
  // Retain the actual official ZIPs and observed provider responses as well as
  // quota counters. A later API response need not reproduce an earlier hash.
  const quotaDir=path.join(directory,'pcv-provider-http');if(fs.existsSync(quotaDir))files.push('private_backups/pcv-provider-http');

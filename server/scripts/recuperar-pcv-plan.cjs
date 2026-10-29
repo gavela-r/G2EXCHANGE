@@ -28,8 +28,8 @@ const legacyJobs=[
  {id:'jp-existing-v3',directory:'pcv-jp-full-v3'}
 ].map(j=>({...j,reason:'SUPERSEDED_BY_VERIFIED_FIELDS_V4; original checkpoints/queues preserved; never forced complete'}));
 function eligibleJobs(states){return jobs.filter(j=>!states[j.id]?.done&&(!j.after||(j.requireDone?states[j.after]?.done:states[j.after]?.scan_complete||states[j.after]?.done))).map(j=>j.id);}
-function sourceRecoveryComplete(states){return jobs.every(j=>states[j.id]?.done);}
-function cumpleObjetivo85(periods){return ['US','JP'].every(country=>[2022,2023,2024,2025].every(year=>{const p=periods?.[country+'-'+year];return p&&p.fixed_pcv_pct>=85&&p.fixed_kpi_pct>=85&&p.source_verified_pcv_pct>=85&&p.source_verified_kpi_pct>=85;}));}
+function sourceRecoveryComplete(states){return jobs.every(j=>states[j.id]?.done)&&states['tw-recovery']?.financial_recovery_done===true;}
+function cumpleObjetivo85(periods){return ['US','JP','TW'].every(country=>[2022,2023,2024,2025].every(year=>{const p=periods?.[country+'-'+year];return !!p&&p.source_certification_measured!==false&&['fixed_pcv_pct','fixed_kpi_pct','source_verified_pcv_pct','source_verified_kpi_pct'].every(key=>Number.isFinite(p[key])&&p[key]>=85&&p[key]<=100);}));}
 module.exports={eligibleJobs,sourceRecoveryComplete,cumpleObjetivo85,jobs,legacyJobs};
 if(require.main===module)main().catch(e=>{console.error(e.message);process.exitCode=1;});
 async function main(){
@@ -62,7 +62,7 @@ async function main(){
  try{
   if(args.includes('--resume-jobs'))resumeJobs();
   while(true){
-   if(fs.existsSync(stopFile))requestStop();const current=states(),eligible=new Set(eligibleJobs(current));
+   if(fs.existsSync(stopFile))requestStop();const current={...states(),'tw-recovery':read(path.join(root,'private_backups/pcv-tw-financiero-v1/checkpoint.json'))||read(path.join(root,'private_backups/pcv-tw-preparacion-v2/checkpoint.json'))},eligible=new Set(eligibleJobs(current));
    if(!stopping&&!maintenancePaused&&!sourceRecoveryComplete(current))for(const j of jobs){
     if(!eligible.has(j.id)||children.has(j.id)||failed.has(j.id)||fs.existsSync(path.join(root,'private_backups',j.directory,'stop.request')))continue;
     const out=fs.openSync(path.join(directory,j.id+'.out.log'),'a'),err=fs.openSync(path.join(directory,j.id+'.err.log'),'a');
@@ -79,7 +79,7 @@ async function main(){
     else if(!maintenancePaused&&Date.now()-Date.parse(maintenance.last_metrics_at||'1970-01-01')>=30*60000){maintenance.active='METRICS';maintenanceTask=metrics().catch(e=>{maintenance.last_error=e.message;}).finally(()=>{maintenance.active=null;maintenanceTask=null;});}
    }
    if(allDone&&maintenance.completion_backup&&!stopping)requestStop();
-   guardarEstadoPcv(stateFile,{updated_at:new Date().toISOString(),pid:process.pid,status:stopping?(children.size||maintenanceTask?'STOPPING':'STOPPED'):maintenance.active?'MAINTENANCE':failed.size||maintenance.integrity_failed?'REVIEW_FAILURES':primaryDone?'PRIMARY_SCANS_FINISHED_QUOTA_OR_DATA_PENDING':'RUNNING',primary_scans_finished:primaryDone,source_recovery_finished:!!allDone,recovery_finished:!!allDone&&!!maintenance.completion_backup,maintenance,coverage_85_certified:cumpleObjetivo85(read(path.join(root,'private_backups/cobertura-estructural-after.json'))?.periods),retired_jobs:legacyJobs.map(j=>({...j,checkpoint_preserved:fs.existsSync(path.join(root,'private_backups',j.directory,'checkpoint.json'))})),active:Object.fromEntries([...children].map(([id,p])=>[id,p.child.pid])),failed:Object.fromEntries(failed),jobs:Object.fromEntries(jobs.map(j=>[j.id,{directory:j.directory,scan_complete:!!current[j.id]?.scan_complete,done:!!current[j.id]?.done,cursor:current[j.id]?.after??null,deferred:current[j.id]?.retryCompanies?.length||current[j.id]?.retryReports?.length||current[j.id]?.retrySources?.length||0,blocked_by:j.after&&!eligible.has(j.id)&&!current[j.id]?.done?j.after:null,stop_requested:fs.existsSync(path.join(root,'private_backups',j.directory,'stop.request'))}]))});
+   guardarEstadoPcv(stateFile,{updated_at:new Date().toISOString(),pid:process.pid,status:stopping?(children.size||maintenanceTask?'STOPPING':'STOPPED'):maintenance.active?'MAINTENANCE':failed.size||maintenance.integrity_failed?'REVIEW_FAILURES':jobs.every(j=>current[j.id]?.done)?'AWAITING_TAIWAN_SOURCE_REQUIREMENTS':primaryDone?'PRIMARY_SCANS_FINISHED_QUOTA_OR_DATA_PENDING':'RUNNING',primary_scans_finished:primaryDone,source_recovery_finished:!!allDone,recovery_finished:!!allDone&&!!maintenance.completion_backup,maintenance,coverage_85_certified:cumpleObjetivo85({...read(path.join(root,'private_backups/cobertura-estructural-after.json'))?.periods,...read(path.join(root,'private_backups/cobertura-tw-after-2022-2025.json'))?.periods}),taiwan_recovery:current['tw-recovery']||null,retired_jobs:legacyJobs.map(j=>({...j,checkpoint_preserved:fs.existsSync(path.join(root,'private_backups',j.directory,'checkpoint.json'))})),active:Object.fromEntries([...children].map(([id,p])=>[id,p.child.pid])),failed:Object.fromEntries(failed),jobs:Object.fromEntries(jobs.map(j=>[j.id,{directory:j.directory,scan_complete:!!current[j.id]?.scan_complete,done:!!current[j.id]?.done,cursor:current[j.id]?.after??null,deferred:current[j.id]?.retryCompanies?.length||current[j.id]?.retryReports?.length||current[j.id]?.retrySources?.length||0,blocked_by:j.after&&!eligible.has(j.id)&&!current[j.id]?.done?j.after:null,stop_requested:fs.existsSync(path.join(root,'private_backups',j.directory,'stop.request'))}]))});
    if(stopping&&!children.size&&!maintenanceTask)break;
    await new Promise(resolve=>setTimeout(resolve,5000));
   }

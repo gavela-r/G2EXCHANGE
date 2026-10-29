@@ -1,7 +1,7 @@
 // Private verification/backup tasks used by the recovery coordinator.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'../..'),hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-const streamHash=async file=>{const h=crypto.createHash('sha256');for await(const b of fs.createReadStream(file))h.update(b);return h.digest('hex');};
+const {sha256File:streamHash}=require('./pcv-file-hash.cjs');
 function run(executable,args,{capture=false,env={},label='maintenance'}={}){
  const logs=path.join(root,'private_backups/pcv-orchestrator');fs.mkdirSync(logs,{recursive:true});
  return new Promise((resolve,reject)=>{const out=fs.openSync(path.join(logs,label+'.out.log'),'a'),err=fs.openSync(path.join(logs,label+'.err.log'),'a');let text='',finished=false;
@@ -24,7 +24,7 @@ async function crearSnapshot(){
  await run('git',['archive','--format=tar','--output',source,'HEAD'],{label:'source_archive'});
  await run('tar',['-xf',source,'-C',validation],{label:'extract_source'});await run('tar',['-xf',bundle.archive,'-C',validation],{label:'extract_private'});
  const manifest=JSON.parse(fs.readFileSync(bundle.archive+'.manifest.json'));
- if(hash(path.join(validation,manifest.backup))!==backup.sha256||hash(path.join(validation,'.env'))!==hash(path.join(root,'.env')))throw Error('EXTRACCION_PRIVADA_NO_COINCIDE');
+ if(await streamHash(path.join(validation,manifest.backup))!==backup.sha256||hash(path.join(validation,'.env'))!==hash(path.join(root,'.env')))throw Error('EXTRACCION_PRIVADA_NO_COINCIDE');
  const replay=object(await run(process.execPath,[path.join(validation,'server/dist/src/valoracion/replay.js'),'533'],{capture:true,label:'extracted_replay',env:{DB_NAME:database,NODE_PATH:path.join(root,'server/node_modules')}}));
  if(replay.reproduced!==true||replay.run_id!==533)throw Error('REPLAY_EXTRAIDO_NO_REPRODUCIDO');
  const proof={created_at:new Date().toISOString(),database,backup:backup.backup,backup_sha256:backup.sha256,archive:bundle.archive,archive_sha256:bundle.sha256,all_tables_restored_and_verified:true,extracted_sql_verified:true,extracted_env_verified:true,extracted_replay_reproduced:true,run_id:533};

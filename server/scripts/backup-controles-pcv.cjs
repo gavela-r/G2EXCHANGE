@@ -1,10 +1,9 @@
 // Private portable bundle. Requires a restored/verified dump and paused workers.
 // The bundle CONTAINS CREDENTIALS; never stage, upload or publish it.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{spawnSync}=require('node:child_process'),root=path.resolve(__dirname,'../..'),pool=require('../dist/conexion/bd').default;
-const digest=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-const streamDigest=async file=>{const h=crypto.createHash('sha256');for await(const chunk of fs.createReadStream(file))h.update(chunk);return h.digest('hex');};
+const {sha256File:streamDigest}=require('./pcv-file-hash.cjs');
 (async()=>{const backup=path.resolve(process.argv[2]||'');const relative=path.relative(root,backup);if(!relative.startsWith('private_backups'+path.sep)||path.isAbsolute(relative)||!backup.endsWith('.sql'))throw Error('Dump privado dentro del repositorio obligatorio');
- const manifest=JSON.parse(fs.readFileSync(backup+'.manifest.json')),proof=JSON.parse(fs.readFileSync(backup+'.restored.json'));if(proof.all_tables_equal!==true||digest(backup)!==manifest.backup.sha256||fs.readFileSync(backup+'.sha256','utf8').trim()!==manifest.backup.sha256||proof.sha256!==manifest.backup.sha256)throw Error('Backup restaurado y hashes verificados obligatorios');
+ const manifest=JSON.parse(fs.readFileSync(backup+'.manifest.json')),proof=JSON.parse(fs.readFileSync(backup+'.restored.json'));if(proof.all_tables_equal!==true||await streamDigest(backup)!==manifest.backup.sha256||fs.readFileSync(backup+'.sha256','utf8').trim()!==manifest.backup.sha256||proof.sha256!==manifest.backup.sha256)throw Error('Backup restaurado y hashes verificados obligatorios');
  const directory=path.join(root,'private_backups'),jobDirs=fs.readdirSync(directory,{withFileTypes:true}).filter(e=>e.isDirectory()&&e.name.startsWith('pcv-')&&e.name!=='pcv-provider-http').map(e=>path.join(directory,e.name));
  for(const dir of jobDirs)for(const name of ['checkpoint.json','collect-checkpoint.json']){const file=path.join(dir,name);if(fs.existsSync(file)&&!JSON.parse(fs.readFileSync(file)).done&&!fs.existsSync(path.join(dir,'stop.request')))throw Error('PAUSAR_CHECKPOINT_'+path.basename(dir));}
  const c=await pool.getConnection();try{for(const country of ['US','JP']){const [[l]]=await c.query('SELECT GET_LOCK(?,0) acquired',['G2_PCV_RECOVERY_'+country]);if(!l.acquired)throw Error('WORKER_ACTIVO_'+country);}

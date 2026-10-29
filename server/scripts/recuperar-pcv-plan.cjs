@@ -9,9 +9,12 @@ const jobs=[
  {id:'us-transient',directory:'pcv-us-transitorios',after:'us-verified',requireDone:true,args:['--job','transient-us']},
  {id:'us-complement',directory:'pcv-us-complementos-v4',after:'us-transient',requireDone:true,args:['--job','complement-verified','--country','US']},
  {id:'jp-cached',directory:'pcv-jp-cached-v4',args:['--job','edinet-verified','--phase','existing','--cached-only']},
- {id:'jp-discover',directory:'pcv-jp-descubrimiento-v4',after:'jp-cached',requireDone:true,args:['--job','edinet-verified','--phase','discover','--from','2022-01-01','--to','2026-06-30']},
- {id:'jp-existing',directory:'pcv-jp-online-v5',after:'jp-discover',requireDone:true,args:['--job','edinet-online-v5','--phase','existing']},
- {id:'jp-complement',directory:'pcv-jp-complementos-v4',after:'jp-existing',requireDone:true,args:['--job','complement-verified','--country','JP']}
+ {id:'jp-identity-cached',directory:'pcv-jp-identidad-cached-v6',after:'jp-cached',requireDone:true,args:['--job','edinet-identity-v6','--phase','discover','--cached-only','--from','2022-01-01','--to','2026-06-30']},
+ {id:'jp-discover',directory:'pcv-jp-descubrimiento-v4',after:'jp-identity-cached',requireDone:true,args:['--job','edinet-verified','--phase','discover','--from','2022-01-01','--to','2026-06-30']},
+ {id:'jp-identity-discover',directory:'pcv-jp-identidad-descubrir-v6',after:'jp-discover',requireDone:true,args:['--job','edinet-identity-v6','--phase','discover','--from','2022-01-01','--to','2026-06-30']},
+ {id:'jp-identity-existing',directory:'pcv-jp-identidad-existing-v6',after:'jp-identity-discover',requireDone:true,args:['--job','edinet-identity-v6','--phase','existing']},
+ {id:'jp-existing',directory:'pcv-jp-online-v5',after:'jp-identity-existing',requireDone:true,args:['--job','edinet-online-v5','--phase','existing']},
+ {id:'jp-complement',directory:'pcv-jp-complementos-identidad-v5',after:'jp-existing',requireDone:true,args:['--job','complement-identity-jp','--country','JP']}
 ];
 const legacyJobs=[
  {id:'us-primary-v2',directory:'pcv-us-primary-full'},
@@ -66,7 +69,7 @@ async function main(){
     const finish=code=>{const active=children.get(j.id);if(!active||active.child!==child)return;children.delete(j.id);fs.closeSync(out);fs.closeSync(err);if(code!==0&&!stopping)failed.set(j.id,{code:code??'SIGNAL_EXIT',at:new Date().toISOString()});};
     child.on('exit',finish);child.on('error',()=>finish(1));
    }
-   const primaryDone=['us-bulk','us-verified','us-transient','jp-cached','jp-discover','jp-existing'].every(id=>current[id]?.scan_complete||current[id]?.done);
+   const primaryDone=['us-bulk','us-verified','us-transient','jp-cached','jp-identity-cached','jp-discover','jp-identity-discover','jp-identity-existing','jp-existing'].every(id=>current[id]?.scan_complete||current[id]?.done);
    const allDone=sourceRecoveryComplete(current);
    if(!stopping&&!maintenanceTask){
     let kind=fs.existsSync(snapshotFile)?'REQUESTED':allDone&&!maintenance.completion_backup&&!failed.has('maintenance')?'COMPLETE':primaryDone&&!maintenance.primary_backup&&!failed.has('maintenance')?'PRIMARY':null;

@@ -1,9 +1,13 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),{eligibleJobs,sourceRecoveryComplete,cumpleObjetivo85,jobs,legacyJobs}=require('../scripts/recuperar-pcv-plan.cjs');
 test('A finished first pass with a quota queue is not a completed source workflow',()=>{const states=Object.fromEntries(jobs.map(j=>[j.id,{done:true,scan_complete:true}]));assert.equal(sourceRecoveryComplete(states),true);states['us-complement']={done:false,scan_complete:true,retryCompanies:[1]};assert.equal(sourceRecoveryComplete(states),false);});
-test('JP streams discovery/import after its cache pass; online work waits for the complete date range',()=>{
- assert.ok(eligibleJobs({}).includes('jp-cached'));assert.ok(!eligibleJobs({'jp-cached':{scan_complete:true,done:false}}).includes('jp-discover'));
- assert.ok(eligibleJobs({'jp-cached':{done:true}}).includes('jp-discover'));assert.ok(!eligibleJobs({'jp-discover':{scan_complete:true,done:false}}).includes('jp-existing'));assert.ok(eligibleJobs({'jp-discover':{done:true}}).includes('jp-existing'));
+test('JP identity recovery is serialized between cache, discovery, online and supplemental passes',()=>{
+ assert.ok(eligibleJobs({}).includes('jp-cached'));assert.ok(!eligibleJobs({'jp-cached':{scan_complete:true,done:false}}).includes('jp-identity-cached'));
+ assert.ok(eligibleJobs({'jp-cached':{done:true}}).includes('jp-identity-cached'));
+ for(const [previous,next]of [['jp-identity-cached','jp-discover'],['jp-discover','jp-identity-discover'],['jp-identity-discover','jp-identity-existing'],['jp-identity-existing','jp-existing']]){
+  assert.ok(!eligibleJobs({[previous]:{scan_complete:true,done:false}}).includes(next));assert.ok(eligibleJobs({[previous]:{done:true}}).includes(next));
+ }
 });
+
 test('US extraction waits for bulk; supplements in both countries wait for their complete primary pass',()=>{
  assert.ok(eligibleJobs({}).includes('us-bulk'));assert.ok(!eligibleJobs({}).includes('us-verified'));assert.ok(eligibleJobs({'us-bulk':{done:true}}).includes('us-verified'));
  assert.ok(!eligibleJobs({'us-verified':{scan_complete:true,done:false}}).includes('us-transient'));assert.ok(eligibleJobs({'us-verified':{done:true}}).includes('us-transient'));assert.ok(!eligibleJobs({'us-verified':{done:true}}).includes('us-complement'));assert.ok(eligibleJobs({'us-transient':{done:true}}).includes('us-complement'));

@@ -10,7 +10,7 @@ test('JP identity recovery is serialized between cache, discovery, online and su
 
 test('US extraction waits for bulk; supplements in both countries wait for their complete primary pass',()=>{
  assert.ok(eligibleJobs({}).includes('us-bulk'));assert.ok(!eligibleJobs({}).includes('us-verified'));assert.ok(eligibleJobs({'us-bulk':{done:true}}).includes('us-verified'));
- assert.ok(!eligibleJobs({'us-verified':{scan_complete:true,done:false}}).includes('us-transient'));assert.ok(eligibleJobs({'us-verified':{done:true}}).includes('us-transient'));assert.ok(!eligibleJobs({'us-verified':{done:true}}).includes('us-complement'));assert.ok(eligibleJobs({'us-transient':{done:true}}).includes('us-complement'));
+ assert.ok(!eligibleJobs({'us-verified':{scan_complete:true,done:false}}).includes('us-transient'));assert.ok(eligibleJobs({'us-verified':{done:true}}).includes('us-transient'));assert.ok(!eligibleJobs({'us-verified':{done:true}}).includes('us-complement'));assert.ok(eligibleJobs({'us-transient':{done:true}}).includes('us-mapping'));assert.ok(!eligibleJobs({'us-transient':{done:true}}).includes('us-complement'));assert.ok(eligibleJobs({'us-mapping':{done:true}}).includes('us-complement'));
  assert.ok(!eligibleJobs({'jp-existing':{scan_complete:true,done:false}}).includes('jp-complement'));assert.ok(eligibleJobs({'jp-existing':{done:true}}).includes('jp-complement'));
 });
 test('Retired checkpoint queues are preserved rather than relaunched or declared done',()=>{for(const j of legacyJobs){assert.ok(j.reason.includes('preserved'));assert.ok(!jobs.some(n=>n.directory===j.directory));}});

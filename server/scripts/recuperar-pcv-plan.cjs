@@ -7,7 +7,8 @@ const jobs=[
  {id:'us-bulk',directory:'pcv-us-bulk-20261029',args:['--job','sec-bulk']},
  {id:'us-verified',directory:'pcv-us-verificado-v1',after:'us-bulk',requireDone:true,args:['--job','sec-verified']},
  {id:'us-transient',directory:'pcv-us-transitorios',after:'us-verified',requireDone:true,args:['--job','transient-us']},
- {id:'us-complement',directory:'pcv-us-complementos-v4',after:'us-transient',requireDone:true,args:['--job','complement-verified','--country','US']},
+ {id:'us-mapping',directory:'pcv-us-mapeo-v2',after:'us-transient',requireDone:true,args:['--job','sec-mapping-v2']},
+ {id:'us-complement',directory:'pcv-us-complementos-v5',after:'us-mapping',requireDone:true,args:['--job','complement-sec-v5','--country','US']},
  {id:'jp-cached',directory:'pcv-jp-cached-v4',args:['--job','edinet-verified','--phase','existing','--cached-only']},
  {id:'jp-identity-cached',directory:'pcv-jp-identidad-cached-v6',after:'jp-cached',requireDone:true,args:['--job','edinet-identity-v6','--phase','discover','--cached-only','--from','2022-01-01','--to','2026-06-30']},
  {id:'jp-discover',directory:'pcv-jp-descubrimiento-v4',after:'jp-identity-cached',requireDone:true,args:['--job','edinet-verified','--phase','discover','--from','2022-01-01','--to','2026-06-30']},
@@ -69,7 +70,7 @@ async function main(){
     const finish=code=>{const active=children.get(j.id);if(!active||active.child!==child)return;children.delete(j.id);fs.closeSync(out);fs.closeSync(err);if(code!==0&&!stopping)failed.set(j.id,{code:code??'SIGNAL_EXIT',at:new Date().toISOString()});};
     child.on('exit',finish);child.on('error',()=>finish(1));
    }
-   const primaryDone=['us-bulk','us-verified','us-transient','jp-cached','jp-identity-cached','jp-discover','jp-identity-discover','jp-identity-existing','jp-existing'].every(id=>current[id]?.scan_complete||current[id]?.done);
+   const primaryDone=['us-bulk','us-verified','us-transient','us-mapping','jp-cached','jp-identity-cached','jp-discover','jp-identity-discover','jp-identity-existing','jp-existing'].every(id=>current[id]?.scan_complete||current[id]?.done);
    const allDone=sourceRecoveryComplete(current);
    if(!stopping&&!maintenanceTask){
     let kind=fs.existsSync(snapshotFile)?'REQUESTED':allDone&&!maintenance.completion_backup&&!failed.has('maintenance')?'COMPLETE':primaryDone&&!maintenance.primary_backup&&!failed.has('maintenance')?'PRIMARY':null;

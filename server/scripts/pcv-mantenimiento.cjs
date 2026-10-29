@@ -12,7 +12,7 @@ function run(executable,args,{capture=false,env={},label='maintenance'}={}){
 }
 const script=(name,args=[],options={})=>run(process.execPath,[path.join(__dirname,name),...args],{label:name.replace(/\W/g,'_'),...options});
 const object=text=>JSON.parse(text.trim().split(/\r?\n/).filter(line=>line.startsWith('{')).at(-1)||'{}');
-async function actualizarMetricas(){await script('auditar-pcv-kpi-2022-2025.cjs',['--after']);await script('informe-pcv-proveedores.cjs');return new Date().toISOString();}
+async function actualizarMetricas(){await script('auditar-pcv-kpi-2022-2025.cjs',['--after']);await script('informe-pcv-proveedores.cjs');await script('auditar-cobertura-estructural.cjs',['--after']);await script('informe-cobertura-85.cjs');return new Date().toISOString();}
 async function verificarIntegridad(){await script('verificar-pcv-integridad.cjs',['g2_recovery_20261028_validation']);}
 async function crearSnapshot(){
  const stat=fs.statfsSync(root);if(Number(stat.bavail)*Number(stat.bsize)<3*1024**3)throw Error('ESPACIO_INSUFICIENTE_PARA_VERIFICAR_BACKUP');

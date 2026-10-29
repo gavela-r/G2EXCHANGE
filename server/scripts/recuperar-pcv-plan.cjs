@@ -51,7 +51,7 @@ async function main(){
  const pauseJobs=()=>{for(const j of [...jobs,...legacyJobs]){const dir=path.join(root,'private_backups',j.directory);fs.mkdirSync(dir,{recursive:true});if(!fs.existsSync(path.join(dir,'stop.request')))fs.writeFileSync(path.join(dir,'stop.request'),new Date().toISOString());}};
  const resumeJobs=()=>{for(const file of [stopFile,...jobs.map(j=>path.join(root,'private_backups',j.directory,'stop.request'))])if(fs.existsSync(file))fs.renameSync(file,file+'.previous-'+Date.now());};
  const requestStop=()=>{stopping=true;pauseJobs();};
- const metrics=async()=>{maintenance.last_metrics_at=await M.actualizarMetricas();};
+ const metrics=async()=>{maintenance.last_metrics_at=await M.actualizarMetricas();maintenance.last_error=null;};
  const snapshot=async kind=>{maintenancePaused=true;maintenance.active='BACKUP_'+kind;pauseJobs();while(children.size)await new Promise(r=>setTimeout(r,1000));
   let verified=false;try{await M.verificarIntegridad();verified=true;maintenance.integrity_failed=false;await metrics();const proof=await M.crearSnapshot();maintenance.snapshots.push({kind,...proof});if(kind==='PRIMARY')maintenance.primary_backup=proof;if(kind==='COMPLETE')maintenance.completion_backup=proof;maintenance.last_error=null;failed.delete('maintenance');guardarEstadoPcv(stateFile,{...read(stateFile),updated_at:new Date().toISOString(),maintenance,recovery_finished:kind==='COMPLETE'});await metrics();}
   catch(e){maintenance.last_error=e.message;if(!verified)maintenance.integrity_failed=true;failed.set('maintenance',{code:e.message,at:new Date().toISOString()});}

@@ -2,6 +2,7 @@
 // KPI certification requires a complete, coherent input cohort and the existing
 // formula; a stored numeric result alone is never source certification.
 const {diagnosticarPartidas}=require('./pcv-cobertura-modelo.cjs');
+const {deudaCompleta}=require('./pcv-prerrequisitos-kpi.cjs');
 const {kpiCalcularInforme}=require('../dist/insercionDatos/insercionKPIInformeFinanciero');
 const DEBT=new Set(['DEUDA_TOTAL','DEUDA_NETA','DEUDA_SOBRE_PATRIMONIO','DEUDA_SOBRE_ACTIVOS']);
 const parsed=value=>typeof value==='string'?JSON.parse(value):value;
@@ -26,7 +27,7 @@ function certificarInforme(report,rows,stored,evidence,expected){
   for(const [code]of entries){if(actual[code]!==undefined&&source[code]!==undefined&&Math.abs(actual[code]-source[code])<=0.000051){values[code]=actual[code];pcv.add(code);}}
   if(!Object.keys(values).length)continue;coherentCohorts++;
   const unverifiedDebt=rows.some(r=>['DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO'].includes(r.concepto_estandar)&&r.importe!==null&&values[r.concepto_estandar]===undefined);
-  for(const calc of kpiCalcularInforme(report.id,values)){if(!Number.isFinite(calc.valor)||unverifiedDebt&&DEBT.has(calc.kpi))continue;const old=stored.filter(r=>r.kpi===calc.kpi&&r.valor!==null&&Number.isFinite(Number(r.valor)));if(old.length&&old.every(r=>Math.abs(Number(r.valor)-calc.valor)<=Math.max(0.00000000005,Math.abs(calc.valor)*1e-12)))kpi.add(calc.kpi);}
+  for(const calc of kpiCalcularInforme(report.id,values)){if(!Number.isFinite(calc.valor)||(unverifiedDebt||!deudaCompleta(values))&&DEBT.has(calc.kpi))continue;const old=stored.filter(r=>r.kpi===calc.kpi&&r.valor!==null&&Number.isFinite(Number(r.valor)));if(old.length&&old.every(r=>Math.abs(Number(r.valor)-calc.valor)<=Math.max(0.00000000005,Math.abs(calc.valor)*1e-12)))kpi.add(calc.kpi);}
  }
  return {pcv,kpi,coherentCohorts};
 }

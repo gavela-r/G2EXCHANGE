@@ -13,14 +13,14 @@ const {sha256File:streamDigest}=require('./pcv-file-hash.cjs');
  // SEC archives are immutable source evidence. Keep their compressed bytes,
  // bindings and manifests, but omit re-extractable multi-GB JSON directories.
  const jobPaths=jobDirs.flatMap(dir=>path.basename(dir).startsWith('pcv-us-bulk-')?fs.readdirSync(dir,{withFileTypes:true}).filter(e=>e.isFile()&&!e.name.endsWith('.partial')).map(e=>path.relative(root,path.join(dir,e.name))):[path.relative(root,dir)]);
- const files=['.env','valuation_engine/archives','valuation_engine/dist','server/dist','server/scripts','server/resultados_valoraciones',relative,relative+'.sha256',relative+'.manifest.json',relative+'.restored.json',...jobPaths];
+ const files=['private_backups/fmp-capabilities-v1','.env','valuation_engine/archives','valuation_engine/dist','server/dist','server/scripts','server/resultados_valoraciones',relative,relative+'.sha256',relative+'.manifest.json',relative+'.restored.json',...jobPaths];
  if(fs.existsSync(path.join(directory,'copilot-original')))files.push('private_backups/copilot-original');
  const initial='private_backups/g2-2026-10-28T17-58-31-790Z.sql';if(fs.existsSync(path.join(root,initial)))for(const file of [initial,initial+'.sha256'])if(fs.existsSync(path.join(root,file)))files.push(file);
  // Both frozen comparison cuts are required by integrity and before/after
  // audits on a clean recovery host. Preserve their own manifests/proofs too.
  const interventionInitial='private_backups/g2-2026-10-29T08-02-28-629Z.sql';
  for(const base of [initial,interventionInitial])for(const suffix of ['', '.sha256','.manifest.json','.restored.json']){const file=base+suffix;if(fs.existsSync(path.join(root,file))&&!files.includes(file))files.push(file);}
- for(const file of fs.readdirSync(directory).filter(n=>/^pcv-kpi-audit-.*\.json$/.test(n)||/^cobertura-estructural-.*\.json$/.test(n)||/^cobertura-tw-.*\.json$/.test(n)||/^periodos-sec-heredados(?:-privado)?\.json$/.test(n)||['pcv-provider-comparison.json','pcv-integrity-final.json','pcv-pause-manifest.json'].includes(n)))files.push(path.join('private_backups',file));
+ for(const file of fs.readdirSync(directory).filter(n=>/^pcv-kpi-audit-.*\.json$/.test(n)||/^cobertura-estructural-.*\.json$/.test(n)||/^cobertura-tw-.*\.json$/.test(n)||/^cobertura-presencia-.*\.json$/.test(n)||/^periodos-sec-heredados(?:-privado)?\.json$/.test(n)||['pcv-provider-comparison.json','pcv-integrity-final.json','pcv-pause-manifest.json'].includes(n)))files.push(path.join('private_backups',file));
  // Retain the actual official ZIPs and observed provider responses as well as
  // quota counters. A later API response need not reproduce an earlier hash.
  const quotaDir=path.join(directory,'pcv-provider-http');if(fs.existsSync(quotaDir))files.push('private_backups/pcv-provider-http');

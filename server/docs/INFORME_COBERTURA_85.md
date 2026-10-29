@@ -1,6 +1,6 @@
 # G2EXCHANGE: auditoría y recuperación hacia el 85 %
 
-Generado: 2026-10-29T14:32:30.796Z. Corte SQL actualizado: 2026-10-29T14:19:40.012Z. Corte inicial congelado: 2026-10-29T08:12:14.053Z.
+Generado: 2026-10-29T14:56:06.399Z. Corte SQL actualizado: 2026-10-29T14:19:40.012Z. Corte inicial congelado: 2026-10-29T08:12:14.053Z.
 Estado del objetivo: **NO ALCANZADO**. La intervención y los barridos pendientes se describen sin confundir procesamiento terminado con cobertura alcanzada.
 
 ## 1. Diagnóstico de la cobertura inicial
@@ -47,7 +47,7 @@ FinDataEngine se consulta [a la fecha de la presentación](https://asreported.io
 | Cuenta | Día del contador | Solicitudes locales | Saldo diario observado | Saldo mensual observado |
 |---|---|---:|---:|---:|
 | SEC_EDGAR | 2026-10-29 | 7 | no determinado | no determinado |
-| EDINET | 2026-10-29 | 2008 | no determinado | no determinado |
+| EDINET | 2026-10-29 | 2409 | no determinado | no determinado |
 | FINDATAENGINE | 2026-10-29 | 128 | no determinado | no determinado |
 | ALPHAVANTAGE | 2026-10-29 | 1 | no determinado | no determinado |
 | EDINET_DB | 2026-10-29 | 2 | 0 | 102 |
@@ -158,7 +158,7 @@ Las incidencias son el último evento con empresa y ejercicio, no todos los inte
 
 ## 15. Pruebas y verificaciones
 
-Última suite completa registrada del backend: 113 pruebas superadas. Motor: 20 pruebas previamente superadas, sin modificación de sus fórmulas. Integración MySQL: 6 pruebas superadas con tablas temporales. Se comprueban rollback de informe/PCV/evidencia, preservación de originales, NULL sin convertir a cero, precisión, recálculo e idempotencia. Los nuevos pases exigen piloto real con dry-run, commit y repetición sin cambios antes de su primera recuperación efectiva. Una fase sin inserciones todavía no declara ese piloto superado.
+Última suite completa registrada del backend: 120 pruebas superadas. Motor: 20 pruebas previamente superadas, sin modificación de sus fórmulas. Integración MySQL: 6 pruebas superadas con tablas temporales. Se comprueban rollback de informe/PCV/evidencia, preservación de originales, NULL sin convertir a cero, precisión, recálculo e idempotencia. Los nuevos pases exigen piloto real con dry-run, commit y repetición sin cambios antes de su primera recuperación efectiva. Una fase sin inserciones todavía no declara ese piloto superado.
 
 ## 16. Backups e integridad
 
@@ -168,7 +168,7 @@ Se conservaron los volúmenes, backups y datos originales. El paquete privado co
 
 ## 17. Coordinador automático
 
-Propietario observado vivo al generar este informe: false. Estado persistido: RUNNING. Objetivo 85 certificado por el coordinador: false. Un proceso vivo no implica que todos sus jobs hayan terminado. Los checkpoints antiguos retirados se conservan sin forzar su firma ni marcarlos como recuperados.
+Propietario observado vivo al generar este informe: true. Estado persistido: RUNNING. Objetivo 85 certificado por el coordinador: false. Un proceso vivo no implica que todos sus jobs hayan terminado. Los checkpoints antiguos retirados se conservan sin forzar su firma ni marcarlos como recuperados.
 
 | Fase | Cursor | Barrido completo | Terminada | Espera a | Cola aplazada |
 |---|---:|---|---|---|---:|
@@ -180,7 +180,7 @@ Propietario observado vivo al generar este informe: false. Estado persistido: RU
 | jp-cached | 11.381 | true | true | — | 0 |
 | jp-prefetch | no determinado | false | false | — | 0 |
 | jp-identity-cached | 1642 | true | true | — | 0 |
-| jp-discover | 908 | false | false | — | 0 |
+| jp-discover | 1125 | false | false | — | 0 |
 | jp-identity-discover | no determinado | false | false | jp-discover | 0 |
 | jp-identity-existing | no determinado | false | false | jp-identity-discover | 0 |
 | jp-existing | no determinado | false | false | jp-identity-existing | 0 |

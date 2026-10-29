@@ -1,6 +1,7 @@
 // Private verification/backup tasks used by the recovery coordinator.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'../..'),hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const streamHash=async file=>{const h=crypto.createHash('sha256');for await(const b of fs.createReadStream(file))h.update(b);return h.digest('hex');};
 function run(executable,args,{capture=false,env={},label='maintenance'}={}){
  const logs=path.join(root,'private_backups/pcv-orchestrator');fs.mkdirSync(logs,{recursive:true});
  return new Promise((resolve,reject)=>{const out=fs.openSync(path.join(logs,label+'.out.log'),'a'),err=fs.openSync(path.join(logs,label+'.err.log'),'a');let text='',finished=false;
@@ -18,7 +19,7 @@ async function crearSnapshot(){
  const stamp=new Date().toISOString().replace(/\D/g,''),backup=object(await script('backup-pcv-consistente.cjs',[],{capture:true})),database='g2_recovery_auto_'+stamp;
  if(!backup.backup||!backup.sha256)throw Error('BACKUP_SIN_MANIFIESTO');
  await script('restaurar-db.cjs',[backup.backup,database]);await script('verificar-backup-pcv.cjs',[backup.backup,database]);
- const bundle=object(await script('backup-controles-pcv.cjs',[backup.backup],{capture:true}));if(!bundle.archive||!bundle.sha256||hash(bundle.archive)!==bundle.sha256)throw Error('PAQUETE_PRIVADO_INVALIDO');
+ const bundle=object(await script('backup-controles-pcv.cjs',[backup.backup],{capture:true}));if(!bundle.archive||!bundle.sha256||await streamHash(bundle.archive)!==bundle.sha256)throw Error('PAQUETE_PRIVADO_INVALIDO');
  const validation=path.join(root,'private_backups','bundle-validation-'+stamp),source=path.join(root,'private_backups','bundle-source-'+stamp+'.tar');fs.mkdirSync(validation);
  await run('git',['archive','--format=tar','--output',source,'HEAD'],{label:'source_archive'});
  await run('tar',['-xf',source,'-C',validation],{label:'extract_source'});await run('tar',['-xf',bundle.archive,'-C',validation],{label:'extract_private'});

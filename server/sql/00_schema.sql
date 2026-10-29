@@ -307,6 +307,24 @@ CREATE TABLE `pcv_import_evidence` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pcv_verification_evidence` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `informe_id` int NOT NULL,
+  `concept_code` varchar(80) NOT NULL,
+  `provider` varchar(30) NOT NULL,
+  `outcome` varchar(40) NOT NULL,
+  `evidence_hash` char(64) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `evidence_json` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_pcv_verification` (`informe_id`,`concept_code`,`provider`,`evidence_hash`),
+  KEY `ix_pcv_verification_outcome` (`informe_id`,`outcome`),
+  CONSTRAINT `fk_pcv_verification_report` FOREIGN KEY (`informe_id`) REFERENCES `informe_financiero` (`id`),
+  CONSTRAINT `ck_pcv_verification_json` CHECK (json_valid(`evidence_json`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rating_sintetico` (
   `id` int NOT NULL AUTO_INCREMENT,
   `perfil_empresa` enum('GRANDE_NO_FINANCIERA','PEQUEÑA_RIESGOSA','FINANCIERA') DEFAULT NULL,

@@ -1,6 +1,6 @@
 # Recuperación de Estados Unidos, Japón y Taiwán
 
-Generado: 2026-10-29T14:56:06.461Z. Presencia: 2026-10-29T14:46:59.621Z. Certificación US/JP: 2026-10-29T14:19:40.012Z. Inicial US/JP: 2026-10-29T08:12:14.053Z; inicial TW: 2026-10-29T12:57:52.586Z. La certificación de TW sigue sin medir.
+Generado: 2026-10-30T22:29:43.809Z. Presencia: 2026-10-30T21:55:18.741Z. Certificación US/JP: 2026-10-30T21:55:18.741Z. Inicial US/JP: 2026-10-29T08:12:14.053Z; inicial TW: 2026-10-29T12:57:52.586Z. La certificación de TW sigue sin medir.
 
 Objetivo por país y año: **NO ALCANZADO**. Se exigen PCV y KPI en las 12 combinaciones (24 celdas), con contraste de fuente. La presencia histórica se publica separada de su certificación.
 
@@ -12,10 +12,10 @@ Universos congelados: US 8.017 empresas × 22 PCV/17 KPI; JP 3.581 × 22/17; TW 
 | US-2023 | 35,1792 | 51,0336 | 15,8544 | 32,0694 | 42,7085 | 10,6391 |
 | US-2024 | 36,0801 | 52,1897 | 16,1096 | 32,7165 | 43,4144 | 10,6979 |
 | US-2025 | 37,1455 | 51,723 | 14,5775 | 33,5009 | 43,148 | 9,6471 |
-| JP-2022 | 53,2761 | 65,7574 | 12,4813 | 53,1482 | 63,6004 | 10,4522 |
-| JP-2023 | 63,0334 | 67,9076 | 4,8742 | 64,448 | 68,5103 | 4,0623 |
-| JP-2024 | 63,1629 | 65,6863 | 2,5234 | 64,5515 | 66,6278 | 2,0763 |
-| JP-2025 | 63,2632 | 63,3025 | 0,0393 | 64,6336 | 64,6714 | 0,0378 |
+| JP-2022 | 53,2761 | 82,2129 | 28,9368 | 53,1482 | 77,1917 | 24,0435 |
+| JP-2023 | 63,0334 | 83,8694 | 20,836 | 64,448 | 81,3476 | 16,8996 |
+| JP-2024 | 63,1629 | 83,104 | 19,9411 | 64,5515 | 80,7251 | 16,1736 |
+| JP-2025 | 63,2632 | 75,1136 | 11,8504 | 64,6336 | 74,0477 | 9,4141 |
 | TW-2022 | 45,7393 | 45,7393 | 0 | 45,4408 | 45,4408 | 0 |
 | TW-2023 | 56,7763 | 56,7763 | 0 | 56,7116 | 56,7116 | 0 |
 | TW-2024 | 56,9893 | 56,9893 | 0 | 56,9991 | 56,9991 | 0 |
@@ -27,10 +27,10 @@ Universos congelados: US 8.017 empresas × 22 PCV/17 KPI; JP 3.581 × 22/17; TW 
 | US-2023 | 16,6051 | 10,8732 | 59.908 | 57.639 |
 | US-2024 | 16,8642 | 10,9143 | 57.869 | 56.677 |
 | US-2025 | 15,4399 | 9,8841 | 58.692 | 57.040 |
-| JP-2022 | 40,5334 | 34,8128 | 15.160 | 13.028 |
-| JP-2023 | 9,6266 | 8,2675 | 13.466 | 10.039 |
-| JP-2024 | 6,7909 | 5,8774 | 15.216 | 11.185 |
-| JP-2025 | 5,354 | 4,7095 | 17.094 | 12.376 |
+| JP-2022 | 67,8137 | 58,1287 | 2196 | 4754 |
+| JP-2023 | 66,7234 | 57,1612 | 891 | 2224 |
+| JP-2024 | 65,8133 | 56,371 | 1494 | 2603 |
+| JP-2025 | 57,2605 | 49,1499 | 7789 | 6668 |
 | TW-2022 | no medido | no medido | 12.532 | 10.734 |
 | TW-2023 | no medido | no medido | 9009 | 7676 |
 | TW-2024 | no medido | no medido | 8941 | 7598 |
@@ -40,13 +40,13 @@ Lo certificado es la cota inferior efectivamente contrastada, no una afirmación
 
 Corrección de KPI terminada: 4390 de 4390; nuevos resultados retenidos como NULL: 4390; KPI iniciales modificados/restaurados: 0. Final: 2026-10-29T12:48:20.326Z. Se conservan filas y evidencia compensatoria; ambos componentes de deuda requieren prueba independiente.
 
-Última integridad registrada: 2026-10-29T14:03:32.636Z. Errores: 0. Se verifican los originales, el ledger aditivo y las tablas de valoración. Una nueva observación de contraste no se confunde con un cambio de un dato original.
+Última integridad registrada: 2026-10-30T01:27:31.359Z. Errores: 0. Se verifican los originales, el ledger aditivo y las tablas de valoración. Una nueva observación de contraste no se confunde con un cambio de un dato original.
 
-Paquete portable restaurado y verificado: 2026-10-29T11:49:52.127Z; todas las tablas true; SQL/configuración extraídos true; replay 533 true. Este paquete es anterior a la corrección de 4.390 KPI y a las claves complementarias nuevas; no se presenta como snapshot posterior. Los controles y checkpoints posteriores siguen conservados privadamente.
+Paquete portable restaurado y verificado: 2026-10-30T02:39:09.149Z; todas las tablas true; SQL/configuración extraídos true; replay 533 true. Este paquete es anterior a la corrección de 4.390 KPI y a las claves complementarias nuevas; no se presenta como snapshot posterior. Los controles y checkpoints posteriores siguen conservados privadamente.
 
 Copia SQL posterior a la corrección: 2026-10-29T14:20:25.524Z; 29 tablas restauradas en base nueva; integridad 0 errores; 4390 correcciones conservadas; replay 533 true. Del conjunto corregido, 4211 seguían en NULL y 179 se habían recalculado posteriormente: todos se verificaron de nuevo con ambos componentes de deuda atestados, misma cohorte y fórmulas originales. SHA-256 SQL: `89536709180e0406343f46b5ace1243c8e151e84eb48ab60d89c554742f27ad6`. Los trabajadores siguieron activos. Es una transacción SQL consistente; no declara alineación simultánea de checkpoints, caché ni configuración privada.
 
-Coordinador observado: RUNNING, actualizado 2026-10-29T14:56:05.955Z. Fases activas: us-complement, jp-prefetch, jp-discover. Los pasos US ya terminados no se repiten. El lote paralelo JP está implementado y probado; paso cargado en el coordinador: true; descargadores observados: 3, límite dinámico activo: 1. Sólo el escritor financiero del país puede persistir cifras. La pausa cooperativa para cargarlo fue autorizada expresamente por el usuario.
+Coordinador observado: MAINTENANCE, actualizado 2026-10-30T22:29:40.072Z. Fases activas: us-complement, jp-complement. Los pasos US ya terminados no se repiten. El lote paralelo JP está implementado y probado; paso cargado en el coordinador: true; descargadores observados: 3, límite dinámico activo: 2. Sólo el escritor financiero del país puede persistir cifras. La pausa cooperativa para cargarlo fue autorizada expresamente por el usuario.
 
 Taiwán: cola local 6384 empresa/año; identidades verificadas 990, retenidas 606. Informes oficiales locales contrastados 1, conceptos candidatos 14. Insertados PCV/KPI 0/0; nuevas solicitudes de esta preparación 0. Estado: HELD_SOURCE_USAGE_PUBLICATION_AND_NATIVE_UNITS.
 

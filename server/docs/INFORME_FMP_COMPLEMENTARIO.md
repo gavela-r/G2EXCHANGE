@@ -1,6 +1,6 @@
 # FMP: evaluación complementaria de dos cuentas
 
-Generado: 2026-10-29T14:56:06.469Z. Años solicitados: 2022–2025. Las dos claves permanecen exclusivamente en el .env privado; la primera se conserva. No se publican claves, fragmentos, respuestas financieras ni identidades privadas.
+Generado: 2026-10-30T22:29:43.819Z. Años solicitados: 2022–2025. Las dos claves permanecen exclusivamente en el .env privado; la primera se conserva. No se publican claves, fragmentos, respuestas financieras ni identidades privadas.
 
 | Cuenta | Momento del sondeo | Perfil | Resultados anuales | Balance anual | Flujo anual | Cierres 2022–2025 comprobados |
 |---|---|---|---|---|---|---|

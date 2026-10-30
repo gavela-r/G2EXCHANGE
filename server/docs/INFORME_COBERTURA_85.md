@@ -1,6 +1,6 @@
 # G2EXCHANGE: auditoría y recuperación hacia el 85 %
 
-Generado: 2026-10-29T14:56:06.399Z. Corte SQL actualizado: 2026-10-29T14:19:40.012Z. Corte inicial congelado: 2026-10-29T08:12:14.053Z.
+Generado: 2026-10-30T22:29:43.728Z. Corte SQL actualizado: 2026-10-30T21:55:18.741Z. Corte inicial congelado: 2026-10-29T08:12:14.053Z.
 Estado del objetivo: **NO ALCANZADO**. La intervención y los barridos pendientes se describen sin confundir procesamiento terminado con cobertura alcanzada.
 
 ## 1. Diagnóstico de la cobertura inicial
@@ -47,10 +47,10 @@ FinDataEngine se consulta [a la fecha de la presentación](https://asreported.io
 | Cuenta | Día del contador | Solicitudes locales | Saldo diario observado | Saldo mensual observado |
 |---|---|---:|---:|---:|
 | SEC_EDGAR | 2026-10-29 | 7 | no determinado | no determinado |
-| EDINET | 2026-10-29 | 2409 | no determinado | no determinado |
+| EDINET | 2026-10-30 | 1426 | no determinado | no determinado |
 | FINDATAENGINE | 2026-10-29 | 128 | no determinado | no determinado |
 | ALPHAVANTAGE | 2026-10-29 | 1 | no determinado | no determinado |
-| EDINET_DB | 2026-10-29 | 2 | 0 | 102 |
+| EDINET_DB | 2026-10-30 | 96 | 4 | 6 |
 
 ## 7. Correcciones implementadas
 
@@ -65,15 +65,15 @@ La tabla cuenta filas distintas del ledger posteriores a la copia inicial de est
 | US | SEC_EDGAR | 113.437 | 113.437 | 8291 | 2846 |
 | US | FINDATAENGINE | 27 | 27 | 19 | 11 |
 | US | ALPHAVANTAGE | 0 | 0 | 0 | 0 |
-| JP | EDINET | 14.410 | 14.410 | 928 | 744 |
-| JP | EDINET_DB | 0 | 0 | 0 | 0 |
+| JP | EDINET | 63.978 | 63.978 | 6165 | 2223 |
+| JP | EDINET_DB | 280 | 280 | 145 | 50 |
 
 ## 9. KPI calculados y recalculados
 
 | País | KPI distintos con operación confirmada | Operaciones de cálculo/recalculo | Informes |
 |---|---:|---:|---:|
 | US | 58.878 | 58.879 | 8229 |
-| JP | 9424 | 9424 | 937 |
+| JP | 41.590 | 41.590 | 4462 |
 
 Control de requisitos: 4390 resultados nuevos con deuda incompleta retirados del cálculo canónico mediante valor NULL, conservando filas y evidencia; 0 resultados iniciales restaurados. Ambos componentes requieren prueba independiente; un cero explícito sí es válido. Las operaciones revertidas no se cuentan como recuperación legítima.
 El conteo de KPI no equivale a nuevos slots: incluye recálculos de filas existentes. Su procedencia conserva todos los inputs; una operación que combina fuentes no se atribuye íntegramente a cada proveedor. Se distinguen inputs ausentes/denominador cero, cálculo ausente, discrepancia de resultado y resultado almacenado no reproducible. No se excluyen supuestos “no aplicables” sin prueba financiera.
@@ -86,10 +86,10 @@ El conteo de KPI no equivale a nuevos slots: incluye recálculos de filas existe
 | US-2023 | 35,1792 | 51,0336 | 15,8544 | 32,0694 | 42,7085 | 10,6391 |
 | US-2024 | 36,0801 | 52,1897 | 16,1096 | 32,7165 | 43,4144 | 10,6979 |
 | US-2025 | 37,1455 | 51,723 | 14,5775 | 33,5009 | 43,148 | 9,6471 |
-| JP-2022 | 53,2761 | 65,7295 | 12,4534 | 53,1482 | 63,5823 | 10,4341 |
-| JP-2023 | 63,0334 | 67,3428 | 4,3094 | 64,448 | 68,0487 | 3,6007 |
-| JP-2024 | 63,1629 | 64,6518 | 1,4889 | 64,5515 | 65,7753 | 1,2238 |
-| JP-2025 | 63,2632 | 63,3025 | 0,0393 | 64,6336 | 64,6714 | 0,0378 |
+| JP-2022 | 53,2761 | 82,2129 | 28,9368 | 53,1482 | 77,1917 | 24,0435 |
+| JP-2023 | 63,0334 | 83,8694 | 20,836 | 64,448 | 81,3476 | 16,8996 |
+| JP-2024 | 63,1629 | 83,104 | 19,9411 | 64,5515 | 80,7251 | 16,1736 |
+| JP-2025 | 63,2632 | 75,1136 | 11,8504 | 64,6336 | 74,0477 | 9,4141 |
 
 ## 11. Universo fijo y certificación de fuente
 
@@ -101,10 +101,10 @@ El universo se mantiene en US 8.017 y JP 3.581. Los denominadores por año son 1
 | US-2023 | 16,6051 | 10,8732 | 60.723 | 43.388 |
 | US-2024 | 16,8642 | 10,9143 | 62.305 | 44.294 |
 | US-2025 | 15,4399 | 9,8841 | 63.994 | 45.335 |
-| JP-2022 | 40,5334 | 34,8128 | 19.850 | 17.514 |
-| JP-2023 | 9,6266 | 8,2675 | 45.470 | 36.393 |
-| JP-2024 | 6,7909 | 5,8774 | 45.584 | 36.464 |
-| JP-2025 | 5,354 | 4,7095 | 45.653 | 36.503 |
+| JP-2022 | 67,8137 | 58,1287 | 11.344 | 11.605 |
+| JP-2023 | 66,7234 | 57,1612 | 13.508 | 14.724 |
+| JP-2024 | 65,8133 | 56,371 | 13.622 | 14.826 |
+| JP-2025 | 57,2605 | 49,1499 | 14.065 | 15.157 |
 
 La certificación inicial completa no estaba medida en el indicador heredado. No se presenta un cero de auditoría como cero de datos reales. El antes/después histórico está congelado y es comparable; el contraste retrospectivo de la calidad inicial se informa separadamente.
 
@@ -118,10 +118,10 @@ YES exige identidad oficial y evidencia anual del ejercicio. UNKNOWN no se convi
 | US-2023 | 5868 | 2149 | 69,6706 | 58,3063 | 22,6862 | 14,8552 |
 | US-2024 | 6052 | 1965 | 69,0838 | 57,4696 | 22,3397 | 14,458 |
 | US-2025 | 6200 | 1817 | 66,8306 | 55,7533 | 19,9648 | 12,7808 |
-| JP-2022 | 3443 | 138 | 68,3125 | 66,0795 | 42,158 | 36,2082 |
-| JP-2023 | 3441 | 140 | 69,9242 | 70,6566 | 10,0182 | 8,6039 |
-| JP-2024 | 2087 | 1494 | 69,7086 | 70,6446 | 11,6522 | 10,0848 |
-| JP-2025 | 286 | 3295 | 94,1831 | 96,4418 | 67,0375 | 58,9675 |
+| JP-2022 | 3500 | 81 | 84,0896 | 78,9529 | 69,3831 | 59,4739 |
+| JP-2023 | 3450 | 131 | 87 | 84,3819 | 69,2569 | 59,3316 |
+| JP-2024 | 3412 | 169 | 87,1163 | 84,6218 | 69,0731 | 59,1632 |
+| JP-2025 | 3352 | 229 | 80,0553 | 78,9151 | 61,1724 | 52,5077 |
 
 ## 13. Déficit individual hasta el 85 %
 
@@ -131,10 +131,10 @@ YES exige identidad oficial y evidencia anual del ejercicio. UNKNOWN no se convi
 | US-2023 | 33,9664 | 42,2915 | 86.364 | 78.082 | 59.908 | 57.639 | 120.631 | 101.027 |
 | US-2024 | 32,8103 | 41,5856 | 84.325 | 77.120 | 57.869 | 56.677 | 120.174 | 100.971 |
 | US-2025 | 33,277 | 41,852 | 85.148 | 77.483 | 58.692 | 57.040 | 122.686 | 102.375 |
-| JP-2022 | 19,2705 | 21,4177 | 26.999 | 22.170 | 15.182 | 13.039 | 35.032 | 30.553 |
-| JP-2023 | 17,6572 | 16,9513 | 25.728 | 19.451 | 13.911 | 10.320 | 59.381 | 46.713 |
-| JP-2024 | 20,3482 | 19,2247 | 27.848 | 20.835 | 16.031 | 11.704 | 61.615 | 48.168 |
-| JP-2025 | 21,6975 | 20,3286 | 28.911 | 21.507 | 17.094 | 12.376 | 62.747 | 48.879 |
+| JP-2022 | 2,7871 | 7,8083 | 14.013 | 13.885 | 2196 | 4754 | 13.540 | 16.359 |
+| JP-2023 | 1,1306 | 3,6524 | 12.708 | 11.355 | 891 | 2224 | 14.399 | 16.948 |
+| JP-2024 | 1,896 | 4,2749 | 13.311 | 11.734 | 1494 | 2603 | 15.116 | 17.429 |
+| JP-2025 | 9,8864 | 10,9523 | 19.606 | 15.799 | 7789 | 6668 | 21.854 | 21.825 |
 
 | País/año | Empresas sin anual registrado | Empresas con incidencia/déficit técnico observado | Identidad | Moneda | Dataset/etiqueta estándar | Índice anual/comparativo | Cuota | Déficit sin diagnóstico concluido |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -142,10 +142,10 @@ YES exige identidad oficial y evidencia anual del ejercicio. UNKNOWN no se convi
 | US-2023 | 2488 | 1 | 52 | 352 | 1029 | 1124 | 5251 | 101 |
 | US-2024 | 2351 | 1 | 53 | 315 | 1085 | 971 | 5417 | 84 |
 | US-2025 | 2385 | 1 | 56 | 200 | 1343 | 868 | 5370 | 91 |
-| JP-2022 | 890 | 525 | 0 | 0 | 0 | 0 | 48 | 2877 |
-| JP-2023 | 897 | 59 | 0 | 0 | 0 | 0 | 0 | 3511 |
-| JP-2024 | 1028 | 48 | 0 | 0 | 0 | 0 | 0 | 3521 |
-| JP-2025 | 1096 | 0 | 0 | 0 | 0 | 0 | 0 | 3570 |
+| JP-2022 | 112 | 10 | 72 | 0 | 0 | 0 | 2971 | 341 |
+| JP-2023 | 156 | 14 | 26 | 0 | 0 | 0 | 2872 | 499 |
+| JP-2024 | 196 | 10 | 36 | 0 | 0 | 0 | 2825 | 531 |
+| JP-2025 | 577 | 293 | 100 | 0 | 0 | 0 | 2470 | 552 |
 
 Las incidencias son el último evento con empresa y ejercicio, no todos los intentos acumulados. Un fallo de compañía sin año no se imputa artificialmente a cuatro años. Estas categorías no demuestran ausencia real. La principal acción US es completar el pase oficial, contrastar el periodo heredado y continuar mapeos/complementarios; JP debe terminar las fechas históricas, las nuevas identidades y los ZIP pendientes. Se conservan los conflictos por separado.
 
@@ -154,7 +154,7 @@ Las incidencias son el último evento con empresa y ejercicio, no todos los inte
 | País | Cuatro informes al inicio | Cuatro informes actuales | Cuatro años con 22 PCV presentes | Cuatro años con 17 KPI presentes | Cuatro años con ambos conjuntos certificados |
 |---|---:|---:|---:|---:|---:|
 | US | 2955 | 4957 | 78 | 225 | 0 |
-| JP | 1894 | 2368 | 15 | 1037 | 0 |
+| JP | 1894 | 2976 | 146 | 1073 | 0 |
 
 ## 15. Pruebas y verificaciones
 
@@ -162,13 +162,13 @@ Las incidencias son el último evento con empresa y ejercicio, no todos los inte
 
 ## 16. Backups e integridad
 
-Último paquete alineado validado: 2026-10-29T11:49:52.127Z. Restauración en base nueva: true. SQL y configuración extraídos: true. Replay 533 desde el paquete extraído: true. SHA-256 SQL: `1d4a1107c6d1e6d44578c81ecfc4242a5058541c0f10c3987fcf960624ba7187`. SHA-256 paquete privado: `1a7b7666d668a4ef796110ef6c18e73dbc4f9d19d3f37d34856abead55c8f952`.
+Último paquete alineado validado: 2026-10-30T02:39:09.149Z. Restauración en base nueva: true. SQL y configuración extraídos: true. Replay 533 desde el paquete extraído: true. SHA-256 SQL: `4b6b47a70da389360e76220be742475a010f8160e3f93f9516a578b03096aeab`. SHA-256 paquete privado: `6f09c62322973bd17981bd3780f8d8da0f3aae1be844ea6e3a7d23b03d63e99f`.
 
 Se conservaron los volúmenes, backups y datos originales. El paquete privado contiene SQL, configuración, fuentes observadas, checkpoints y código compilado; no se publica. Los hashes grandes se calculan en streaming para no fallar al superar 2 GB. La integridad de las tablas originales y el replay se comprueban antes de snapshots alineados. La automatización de valoraciones permanece detenida durante esta recuperación.
 
 ## 17. Coordinador automático
 
-Propietario observado vivo al generar este informe: true. Estado persistido: RUNNING. Objetivo 85 certificado por el coordinador: false. Un proceso vivo no implica que todos sus jobs hayan terminado. Los checkpoints antiguos retirados se conservan sin forzar su firma ni marcarlos como recuperados.
+Propietario observado vivo al generar este informe: true. Estado persistido: MAINTENANCE. Objetivo 85 certificado por el coordinador: false. Un proceso vivo no implica que todos sus jobs hayan terminado. Los checkpoints antiguos retirados se conservan sin forzar su firma ni marcarlos como recuperados.
 
 | Fase | Cursor | Barrido completo | Terminada | Espera a | Cola aplazada |
 |---|---:|---|---|---|---:|
@@ -178,13 +178,13 @@ Propietario observado vivo al generar este informe: true. Estado persistido: RUN
 | us-mapping | 8017 | true | true | — | 0 |
 | us-complement | 8017 | true | false | — | 5751 |
 | jp-cached | 11.381 | true | true | — | 0 |
-| jp-prefetch | no determinado | false | false | — | 0 |
+| jp-prefetch | no determinado | true | true | — | 0 |
 | jp-identity-cached | 1642 | true | true | — | 0 |
-| jp-discover | 1125 | false | false | — | 0 |
-| jp-identity-discover | no determinado | false | false | jp-discover | 0 |
-| jp-identity-existing | no determinado | false | false | jp-identity-discover | 0 |
-| jp-existing | no determinado | false | false | jp-identity-existing | 0 |
-| jp-complement | no determinado | false | false | jp-existing | 0 |
+| jp-discover | 1642 | true | true | — | 0 |
+| jp-identity-discover | 1642 | true | true | — | 0 |
+| jp-identity-existing | 2604 | true | true | — | 0 |
+| jp-existing | 10.860 | true | true | — | 0 |
+| jp-complement | 3581 | true | false | — | 3099 |
 
 La ejecución en segundo plano puede sobrevivir al cierre del IDE. No se ha instalado arranque automático de Windows: el equipo debe permanecer encendido y, tras reinicio, se reanuda el mismo coordinador. Las cuotas se esperan con checkpoints; no se contratan planes ni se crean cuentas adicionales. La auditoría y este informe se actualizan desde el mismo coordinador.
 

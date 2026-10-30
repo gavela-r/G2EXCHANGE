@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-29T21:46:37.725Z",
+  "provider": "ALPACA",
+  "feed": "sip",
+  "credentialsPresent": true,
+  "storedObservations": 0,
+  "corporateRedistributionAuthorized": false,
+  "status": "HTTP_200",
+  "barsReturned": 1,
+  "fields": [
+    "c",
+    "h",
+    "l",
+    "n",
+    "o",
+    "t",
+    "v",
+    "vw"
+  ],
+  "responseHash": "991ae3b2f29e9b1660ca8066d666d3d2e63a106511fd7a68ae24321964954b54"
+}

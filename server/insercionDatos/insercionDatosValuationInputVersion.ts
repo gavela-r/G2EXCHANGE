@@ -1,3 +1,4 @@
+import { fechaCivil as fechaCivilSQL } from "../src/capital/fecha";
 import { normalizarPartidas } from "../src/valoracion/datos";
 import { Request, Response } from "express";
 import conexion from "../conexion/bd";
@@ -196,41 +197,10 @@ function vivNumero(
 }
 
 
-function vivFecha(
-    valor: unknown
-): string | null {
-
-    if (!valor) {
-        return null;
-    }
-
-    // MySQL puede devolver DATE como objeto Date de JavaScript
-  if (
-    valor instanceof Date &&
-    Number.isFinite(valor.getTime())
-) {
-    const year = valor.getFullYear();
-    const month = String(valor.getMonth() + 1).padStart(2, "0");
-    const day = String(valor.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
+function vivFecha(valor: unknown): string | null {
+    if (valor == null) return null;
+    return fechaCivilSQL(valor);
 }
-
-    // Si ya viene como string YYYY-MM-DD
-    const s =
-        String(valor)
-            .trim();
-
-    const match =
-        s.match(
-            /^(\d{4}-\d{2}-\d{2})/
-        );
-
-    return match
-        ? match[1]
-        : null;
-}
-
 
 function vivHash(
     snapshotSinHash: Omit<

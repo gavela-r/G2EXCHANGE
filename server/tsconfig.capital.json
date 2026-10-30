@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {"rootDir":"..", "outDir":"./dist-capital", "target":"ES2022"},
+  "include":["src/capital/**/*.ts", "insercionDatos/listaSeguimiento.ts", "../valuation_engine/research/coste_capital/src/**/*.ts"],
+  "exclude":["node_modules","dist","dist-capital"]
+}

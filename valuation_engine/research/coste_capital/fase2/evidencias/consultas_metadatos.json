@@ -1,0 +1,1482 @@
+[
+  {
+    "label": "session_control",
+    "sql": "SET SESSION MAX_EXECUTION_TIME=2000",
+    "parameters": [],
+    "ms": 19,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION lock_wait_timeout=2",
+    "parameters": [],
+    "ms": 67,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION innodb_lock_wait_timeout=2",
+    "parameters": [],
+    "ms": 21,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 8,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "identity",
+    "sql": "SELECT DATABASE() schema_name,@@version mysql_version,@@session.transaction_read_only session_read_only,@@session.max_execution_time max_execution_time,@@session.transaction_isolation isolation_level,NOW() server_time",
+    "parameters": [],
+    "ms": 22,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 8,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "grants",
+    "sql": "SHOW GRANTS",
+    "parameters": [],
+    "ms": 37,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 7,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "tables",
+    "sql": "SELECT TABLE_NAME,TABLE_TYPE,ENGINE,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() ORDER BY TABLE_NAME LIMIT 150",
+    "parameters": [],
+    "ms": 76,
+    "rows": 29,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "columns",
+    "sql": "SELECT TABLE_NAME,COLUMN_NAME,ORDINAL_POSITION,COLUMN_TYPE,IS_NULLABLE,COLUMN_DEFAULT,COLUMN_KEY,EXTRA FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() ORDER BY TABLE_NAME,ORDINAL_POSITION LIMIT 1500",
+    "parameters": [],
+    "ms": 85,
+    "rows": 290,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "indexes",
+    "sql": "SELECT TABLE_NAME,INDEX_NAME,NON_UNIQUE,SEQ_IN_INDEX,COLUMN_NAME,INDEX_TYPE,CARDINALITY FROM information_schema.STATISTICS WHERE TABLE_SCHEMA=DATABASE() ORDER BY TABLE_NAME,INDEX_NAME,SEQ_IN_INDEX LIMIT 1000",
+    "parameters": [],
+    "ms": 68,
+    "rows": 115,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "relationships",
+    "sql": "SELECT TABLE_NAME,CONSTRAINT_NAME,COLUMN_NAME,REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME,ORDINAL_POSITION FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA=DATABASE() ORDER BY TABLE_NAME,CONSTRAINT_NAME,ORDINAL_POSITION LIMIT 1000",
+    "parameters": [],
+    "ms": 142,
+    "rows": 106,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "checks",
+    "sql": "SELECT tc.TABLE_NAME,tc.CONSTRAINT_NAME,tc.CONSTRAINT_TYPE,cc.CHECK_CLAUSE FROM information_schema.TABLE_CONSTRAINTS tc LEFT JOIN information_schema.CHECK_CONSTRAINTS cc ON cc.CONSTRAINT_SCHEMA=tc.CONSTRAINT_SCHEMA AND cc.CONSTRAINT_NAME=tc.CONSTRAINT_NAME WHERE tc.CONSTRAINT_SCHEMA=DATABASE() ORDER BY tc.TABLE_NAME,tc.CONSTRAINT_NAME LIMIT 500",
+    "parameters": [],
+    "ms": 51,
+    "rows": 97,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_ajustes_noticias",
+    "sql": "SHOW CREATE TABLE `ajustes_noticias`",
+    "parameters": [],
+    "ms": 51,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_classification_evidence",
+    "sql": "SHOW CREATE TABLE `classification_evidence`",
+    "parameters": [],
+    "ms": 17,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_coste_capital_referencia",
+    "sql": "SHOW CREATE TABLE `coste_capital_referencia`",
+    "parameters": [],
+    "ms": 13,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_cotizacion_diaria",
+    "sql": "SHOW CREATE TABLE `cotizacion_diaria`",
+    "parameters": [],
+    "ms": 9,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_empresa",
+    "sql": "SHOW CREATE TABLE `empresa`",
+    "parameters": [],
+    "ms": 6,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_evento_corporativo",
+    "sql": "SHOW CREATE TABLE `evento_corporativo`",
+    "parameters": [],
+    "ms": 15,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_financial_report_evidence",
+    "sql": "SHOW CREATE TABLE `financial_report_evidence`",
+    "parameters": [],
+    "ms": 14,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_informe_financiero",
+    "sql": "SHOW CREATE TABLE `informe_financiero`",
+    "parameters": [],
+    "ms": 14,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_instrumento",
+    "sql": "SHOW CREATE TABLE `instrumento`",
+    "parameters": [],
+    "ms": 8,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_kpi_financiero_informe",
+    "sql": "SHOW CREATE TABLE `kpi_financiero_informe`",
+    "parameters": [],
+    "ms": 9,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_lista_seguimiento",
+    "sql": "SHOW CREATE TABLE `lista_seguimiento`",
+    "parameters": [],
+    "ms": 10,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_mercado",
+    "sql": "SHOW CREATE TABLE `mercado`",
+    "parameters": [],
+    "ms": 7,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_model_version",
+    "sql": "SHOW CREATE TABLE `model_version`",
+    "parameters": [],
+    "ms": 9,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_noticia_empresa",
+    "sql": "SHOW CREATE TABLE `noticia_empresa`",
+    "parameters": [],
+    "ms": 12,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_pais",
+    "sql": "SHOW CREATE TABLE `pais`",
+    "parameters": [],
+    "ms": 10,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_partida_contable_valor",
+    "sql": "SHOW CREATE TABLE `partida_contable_valor`",
+    "parameters": [],
+    "ms": 7,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_pcv_import_evidence",
+    "sql": "SHOW CREATE TABLE `pcv_import_evidence`",
+    "parameters": [],
+    "ms": 9,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 7,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_pcv_verification_evidence",
+    "sql": "SHOW CREATE TABLE `pcv_verification_evidence`",
+    "parameters": [],
+    "ms": 18,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_rating_sintetico",
+    "sql": "SHOW CREATE TABLE `rating_sintetico`",
+    "parameters": [],
+    "ms": 11,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_sector",
+    "sql": "SHOW CREATE TABLE `sector`",
+    "parameters": [],
+    "ms": 13,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_taxonomia_concepto",
+    "sql": "SHOW CREATE TABLE `taxonomia_concepto`",
+    "parameters": [],
+    "ms": 8,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_valuation_execution",
+    "sql": "SHOW CREATE TABLE `valuation_execution`",
+    "parameters": [],
+    "ms": 16,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_valuation_input_snapshot",
+    "sql": "SHOW CREATE TABLE `valuation_input_snapshot`",
+    "parameters": [],
+    "ms": 14,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_valuation_input_snapshot_detalle",
+    "sql": "SHOW CREATE TABLE `valuation_input_snapshot_detalle`",
+    "parameters": [],
+    "ms": 9,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_valuation_input_version",
+    "sql": "SHOW CREATE TABLE `valuation_input_version`",
+    "parameters": [],
+    "ms": 13,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_valuation_run",
+    "sql": "SHOW CREATE TABLE `valuation_run`",
+    "parameters": [],
+    "ms": 8,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_valuation_run_parametros",
+    "sql": "SHOW CREATE TABLE `valuation_run_parametros`",
+    "parameters": [],
+    "ms": 6,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "ddl_valuation_run_resultado",
+    "sql": "SHOW CREATE TABLE `valuation_run_resultado`",
+    "parameters": [],
+    "ms": 8,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_empresa",
+    "sql": "SELECT COUNT(*) n FROM `empresa`",
+    "parameters": [],
+    "ms": 13,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_sector",
+    "sql": "SELECT COUNT(*) n FROM `sector`",
+    "parameters": [],
+    "ms": 6,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_pais",
+    "sql": "SELECT COUNT(*) n FROM `pais`",
+    "parameters": [],
+    "ms": 2,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_instrumento",
+    "sql": "SELECT COUNT(*) n FROM `instrumento`",
+    "parameters": [],
+    "ms": 10,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_cotizacion_diaria",
+    "sql": "SELECT COUNT(*) n FROM `cotizacion_diaria`",
+    "parameters": [],
+    "ms": 12,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_informe_financiero",
+    "sql": "SELECT COUNT(*) n FROM `informe_financiero`",
+    "parameters": [],
+    "ms": 41,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_valuation_input_version",
+    "sql": "SELECT COUNT(*) n FROM `valuation_input_version`",
+    "parameters": [],
+    "ms": 68,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_valuation_input_snapshot",
+    "sql": "SELECT COUNT(*) n FROM `valuation_input_snapshot`",
+    "parameters": [],
+    "ms": 9,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_coste_capital_referencia",
+    "sql": "SELECT COUNT(*) n FROM `coste_capital_referencia`",
+    "parameters": [],
+    "ms": 6,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_rating_sintetico",
+    "sql": "SELECT COUNT(*) n FROM `rating_sintetico`",
+    "parameters": [],
+    "ms": 24,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_valuation_execution",
+    "sql": "SELECT COUNT(*) n FROM `valuation_execution`",
+    "parameters": [],
+    "ms": 5,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_valuation_run",
+    "sql": "SELECT COUNT(*) n FROM `valuation_run`",
+    "parameters": [],
+    "ms": 7,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_valuation_run_parametros",
+    "sql": "SELECT COUNT(*) n FROM `valuation_run_parametros`",
+    "parameters": [],
+    "ms": 4,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_model_version",
+    "sql": "SELECT COUNT(*) n FROM `model_version`",
+    "parameters": [],
+    "ms": 11,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_taxonomia_concepto",
+    "sql": "SELECT COUNT(*) n FROM `taxonomia_concepto`",
+    "parameters": [],
+    "ms": 7,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "count_evento_corporativo",
+    "sql": "SELECT COUNT(*) n FROM `evento_corporativo`",
+    "parameters": [],
+    "ms": 8,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "quotes_totals",
+    "sql": "SELECT COUNT(*) filas,COUNT(DISTINCT instrumento_id) instrumentos,COUNT(DISTINCT fecha) fechas_globales,MIN(fecha) fecha_min,MAX(fecha) fecha_max,SUM(precio_cierre>0) precios_positivos,SUM(precio_cierre IS NULL) precios_null,SUM(fecha IS NULL) fechas_null FROM cotizacion_diaria",
+    "parameters": [],
+    "ms": 49,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "quotes_per_instrument",
+    "sql": "SELECT fechas_distintas,filas,COUNT(*) instrumentos FROM (SELECT instrumento_id,COUNT(DISTINCT fecha) fechas_distintas,COUNT(*) filas FROM cotizacion_diaria GROUP BY instrumento_id) x GROUP BY fechas_distintas,filas LIMIT 30",
+    "parameters": [],
+    "ms": 30,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "quotes_country",
+    "sql": "SELECT p.codigo_iso,COUNT(DISTINCT e.id) empresas_registradas,COUNT(DISTINCT i.id) instrumentos,COUNT(q.id) cotizaciones,COUNT(DISTINCT CASE WHEN q.precio_cierre>0 AND q.fecha IS NOT NULL THEN e.id END) empresas_con_precio,MIN(q.fecha) fecha_min,MAX(q.fecha) fecha_max FROM empresa e LEFT JOIN pais p ON p.id=e.pais_id LEFT JOIN instrumento i ON i.empresa_id=e.id LEFT JOIN cotizacion_diaria q ON q.instrumento_id=i.id GROUP BY p.codigo_iso LIMIT 15",
+    "parameters": [],
+    "ms": 140,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "quotes_dates",
+    "sql": "SELECT fecha,COUNT(*) filas FROM cotizacion_diaria GROUP BY fecha ORDER BY fecha DESC LIMIT 60",
+    "parameters": [],
+    "ms": 8,
+    "rows": 60,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "taxonomy",
+    "sql": "SELECT id,concepto_estandar,categoria,unidad_tipo,signo_esperado,activo FROM taxonomia_concepto ORDER BY id LIMIT 200",
+    "parameters": [],
+    "ms": 6,
+    "rows": 39,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "shape_financial_report_evidence",
+    "sql": "SELECT id,JSON_KEYS(evidence_json) root_keys FROM `financial_report_evidence` ORDER BY id DESC LIMIT 3",
+    "parameters": [],
+    "ms": 7,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "shape_pcv_import_evidence",
+    "sql": "SELECT id,JSON_KEYS(evidence_json) root_keys FROM `pcv_import_evidence` ORDER BY id DESC LIMIT 3",
+    "parameters": [],
+    "ms": 13,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "shape_pcv_verification_evidence",
+    "sql": "SELECT id,JSON_KEYS(evidence_json) root_keys FROM `pcv_verification_evidence` ORDER BY id DESC LIMIT 3",
+    "parameters": [],
+    "ms": 7,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "shape_classification_evidence",
+    "sql": "SELECT id,JSON_KEYS(evidence_json) root_keys FROM `classification_evidence` ORDER BY id DESC LIMIT 3",
+    "parameters": [],
+    "ms": 13,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 6,
+    "rows": null,
+    "outcome": "OK"
+  }
+]

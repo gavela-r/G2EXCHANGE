@@ -1,0 +1,43 @@
+G2EXCHANGE — módulo interno coste capital — pruebas locales 29/10/2026
+
+TypeScript aislado
+
+Pruebas A–H y validaciones
+✔ A. Grande, caja elevada, poco endeudada y líquida: identifica ventajas sin bonificación automática (26.4249ms)
+✔ B. Pequeña, ilíquida y débil: diagnóstico desfavorable y aviso de duplicidad sin coeficientes (1.8272ms)
+✔ C. Gran tamaño e iliquidez bursátil coexisten sin compensación (0.8905ms)
+✔ D. Pequeña con finanzas sólidas: no se penaliza tamaño (1.1374ms)
+✔ E. Información insuficiente: null y NO_ESTIMABLE, sin fabricar cero (1.5095ms)
+✔ F. Incorporación en Ke/Kd/valor y cobertura parcial (1.3961ms)
+✔ G. Ke +100 pb se pondera por patrimonio; Kd +100 pb por deuda y escudo fiscal (1.054ms)
+✔ G. Reducciones justificadas en referencia hipotética, positivas, cero y unidades (0.9431ms)
+✔ G. No duplicar riesgos ni aceptar reducción de otro riesgo/componente (0.5137ms)
+✔ H. API interna desactivada y registro sin calibraciones numéricas (0.9192ms)
+✔ Igualdad exacta es NEUTRAL y CERO incremental, tamaño no determina signo (1.1766ms)
+✔ Ratios: fórmulas, deuda financiera, denominadores y signos (2.9985ms)
+✔ Dato futuro, unidad equivocada, moneda mezclada, NaN y falta de validación no producen ratio (3.7376ms)
+✔ Mercado: Amihud real de la muestra, spread cotizado y turnover (0.6761ms)
+✔ Mercado: volumen monetario ausente no se reconstruye de precios/acciones (0.5265ms)
+✔ Mercado: días sin negociación confirmados y Amihud solo sesiones con importe positivo (0.5313ms)
+✔ Mercado: calendarios incompletos, duplicados y spread sin simultaneidad (0.7298ms)
+✔ Capitalización: precio × acciones, fecha/clase/dilución/splits explícitos (0.4301ms)
+✔ Volatilidad FCF: muestra completa, años bisiestos y rechazo de huecos/solapamiento (2.5114ms)
+✔ Bancos/seguros: ratios industriales NO_APLICABLE; WACC FCFF no se fuerza en modelos equity (1.3602ms)
+✔ Comparables: mediana/percentiles/dispersion y sin sesgo de información futura (1.329ms)
+✔ Comparables: duplicados, mezcla de periodos, controles de tamaño y ausencia de referencia (1.8879ms)
+✔ Funciones puras: no mutan observaciones, comparables ni bases hipotéticas (1.5482ms)
+✔ Comparables bursátiles: exigen mercado y sesiones comunes, conservan exclusiones y recalculan mediana (1.9005ms)
+✔ Mercado: datos de negociación contradictorios y fechas futuras no generan indicadores (0.4281ms)
+✔ Estadística sin observaciones no se interpreta como media cero (0.1963ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 297.8786
+
+Compatibilidad de archivos/manifiesto/DCF sintético
+OK: 298 archivos originales intactos; mismo manifiesto y resultado DCF sintético.
+Diferencias documentales concurrentes conservadas, ajenas al módulo: server/docs/RESULTADOS_PROVEEDORES_20261028.md

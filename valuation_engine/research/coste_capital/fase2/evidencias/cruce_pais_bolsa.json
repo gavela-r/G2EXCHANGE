@@ -1,0 +1,119 @@
+{
+  "cross": [
+    {
+      "key": "US:2:USD",
+      "instruments": 1569,
+      "companies": 1547,
+      "prices": 1564,
+      "isinPrefixes": {
+        "US": 1531,
+        "NU": 38
+      }
+    },
+    {
+      "key": "US:1:USD",
+      "instruments": 2548,
+      "companies": 2517,
+      "prices": 2545,
+      "isinPrefixes": {
+        "US": 2444,
+        "NU": 103,
+        "AG": 1
+      }
+    },
+    {
+      "key": "US:3:USD",
+      "instruments": 157,
+      "companies": 157,
+      "prices": 156,
+      "isinPrefixes": {
+        "US": 149,
+        "NU": 8
+      }
+    },
+    {
+      "key": "TW:4:TWD",
+      "instruments": 299,
+      "companies": 294,
+      "prices": 298,
+      "isinPrefixes": {
+        "NU": 299
+      }
+    },
+    {
+      "key": "JP:4:JPY",
+      "instruments": 2497,
+      "companies": 2489,
+      "prices": 2492,
+      "isinPrefixes": {
+        "JP": 2497
+      }
+    },
+    {
+      "key": "TW:5:TWD",
+      "instruments": 1303,
+      "companies": 1287,
+      "prices": 1145,
+      "isinPrefixes": {
+        "NU": 1303
+      }
+    },
+    {
+      "key": "TW:6:TWD",
+      "instruments": 44,
+      "companies": 44,
+      "prices": 41,
+      "isinPrefixes": {
+        "NU": 44
+      }
+    }
+  ],
+  "taiwanTokyo": {
+    "instruments": 299,
+    "companies": 294,
+    "edinetReports": 1176,
+    "companiesWithEdinetReports": 294
+  },
+  "examples": [
+    {
+      "instrumentId": 3604,
+      "companyId": 20309,
+      "ticker": "1301",
+      "currency": "TWD",
+      "isin": null,
+      "quoteDate": "2026-08-13"
+    },
+    {
+      "instrumentId": 3614,
+      "companyId": 20315,
+      "ticker": "1419",
+      "currency": "TWD",
+      "isin": null,
+      "quoteDate": "2026-08-13"
+    },
+    {
+      "instrumentId": 3620,
+      "companyId": 20318,
+      "ticker": "1434",
+      "currency": "TWD",
+      "isin": null,
+      "quoteDate": "2026-08-13"
+    },
+    {
+      "instrumentId": 3621,
+      "companyId": 20319,
+      "ticker": "1435",
+      "currency": "TWD",
+      "isin": null,
+      "quoteDate": "2026-08-13"
+    },
+    {
+      "instrumentId": 3622,
+      "companyId": 20328,
+      "ticker": "1444",
+      "currency": "TWD",
+      "isin": null,
+      "quoteDate": "2026-08-13"
+    }
+  ]
+}

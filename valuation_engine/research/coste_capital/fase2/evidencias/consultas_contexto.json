@@ -1,0 +1,820 @@
+[
+  {
+    "label": "session_control",
+    "sql": "SET SESSION MAX_EXECUTION_TIME=2000",
+    "parameters": [],
+    "ms": 7,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION lock_wait_timeout=2",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION innodb_lock_wait_timeout=2",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "identity",
+    "sql": "SELECT DATABASE() schema_name,@@version mysql_version,@@session.transaction_read_only session_read_only,@@session.max_execution_time max_execution_time,@@session.transaction_isolation isolation_level,NOW() server_time",
+    "parameters": [],
+    "ms": 5,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "grants",
+    "sql": "SHOW GRANTS",
+    "parameters": [],
+    "ms": 4,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 5,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "report_population",
+    "sql": "SELECT p.codigo_iso,f.tipo_periodo,YEAR(f.fecha_fin_periodo) ejercicio,COUNT(*) informes,COUNT(DISTINCT f.empresa_id) empresas,SUM(f.fecha_publicacion IS NULL) sin_publicacion,SUM(f.fecha_publicacion<f.fecha_fin_periodo) publicacion_anterior_cierre FROM informe_financiero f JOIN empresa e ON e.id=f.empresa_id JOIN pais p ON p.id=e.pais_id GROUP BY p.codigo_iso,f.tipo_periodo,YEAR(f.fecha_fin_periodo) ORDER BY p.codigo_iso,ejercicio LIMIT 300",
+    "parameters": [],
+    "ms": 252,
+    "rows": 34,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_context_ids_US",
+    "sql": "SELECT re.id FROM financial_report_evidence re JOIN empresa e ON e.id=re.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? ORDER BY re.id DESC LIMIT 2",
+    "parameters": [
+      "US"
+    ],
+    "ms": 15,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_context_US",
+    "sql": "SELECT re.id,re.informe_id,re.provider,JSON_EXTRACT(re.evidence_json,'$.context') context,JSON_KEYS(JSON_EXTRACT(re.evidence_json,'$.metadata')) metadata_keys,JSON_KEYS(JSON_EXTRACT(re.evidence_json,'$.identity')) identity_keys,f.fecha_fin_periodo,f.fecha_publicacion FROM financial_report_evidence re JOIN informe_financiero f ON f.id=re.informe_id WHERE re.id IN (?,?) LIMIT 2",
+    "parameters": [
+      10544,
+      10543
+    ],
+    "ms": 6,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_verified_ids_US",
+    "sql": "SELECT v.id FROM pcv_verification_evidence v JOIN informe_financiero f ON f.id=v.informe_id JOIN empresa e ON e.id=f.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? AND v.outcome IN ('INSERTED','NULL_FILLED','VERIFIED_EXISTING') ORDER BY v.id DESC LIMIT 2",
+    "parameters": [
+      "US"
+    ],
+    "ms": 440,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_verified_US",
+    "sql": "SELECT id,informe_id,concept_code,outcome,JSON_EXTRACT(evidence_json,'$.context') context,JSON_EXTRACT(evidence_json,'$.evidence.record_id') record_id,JSON_EXTRACT(evidence_json,'$.evidence.record_ids') record_ids,JSON_EXTRACT(evidence_json,'$.evidence.candidate.importe') amount,JSON_EXTRACT(evidence_json,'$.evidence.candidate.currency') currency,JSON_EXTRACT(evidence_json,'$.evidence.candidate.basis') basis,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.start') start,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.end') end,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.scale') scale,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.filed') filed FROM pcv_verification_evidence WHERE id IN (?,?) LIMIT 2",
+    "parameters": [
+      696868,
+      696829
+    ],
+    "ms": 7,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_context_ids_JP",
+    "sql": "SELECT re.id FROM financial_report_evidence re JOIN empresa e ON e.id=re.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? ORDER BY re.id DESC LIMIT 2",
+    "parameters": [
+      "JP"
+    ],
+    "ms": 2,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_context_JP",
+    "sql": "SELECT re.id,re.informe_id,re.provider,JSON_EXTRACT(re.evidence_json,'$.context') context,JSON_KEYS(JSON_EXTRACT(re.evidence_json,'$.metadata')) metadata_keys,JSON_KEYS(JSON_EXTRACT(re.evidence_json,'$.identity')) identity_keys,f.fecha_fin_periodo,f.fecha_publicacion FROM financial_report_evidence re JOIN informe_financiero f ON f.id=re.informe_id WHERE re.id IN (?,?) LIMIT 2",
+    "parameters": [
+      13152,
+      13151
+    ],
+    "ms": 4,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_verified_ids_JP",
+    "sql": "SELECT v.id FROM pcv_verification_evidence v JOIN informe_financiero f ON f.id=v.informe_id JOIN empresa e ON e.id=f.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? AND v.outcome IN ('INSERTED','NULL_FILLED','VERIFIED_EXISTING') ORDER BY v.id DESC LIMIT 2",
+    "parameters": [
+      "JP"
+    ],
+    "ms": 517,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_verified_JP",
+    "sql": "SELECT id,informe_id,concept_code,outcome,JSON_EXTRACT(evidence_json,'$.context') context,JSON_EXTRACT(evidence_json,'$.evidence.record_id') record_id,JSON_EXTRACT(evidence_json,'$.evidence.record_ids') record_ids,JSON_EXTRACT(evidence_json,'$.evidence.candidate.importe') amount,JSON_EXTRACT(evidence_json,'$.evidence.candidate.currency') currency,JSON_EXTRACT(evidence_json,'$.evidence.candidate.basis') basis,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.start') start,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.end') end,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.scale') scale,JSON_EXTRACT(evidence_json,'$.evidence.candidate.evidence.filed') filed FROM pcv_verification_evidence WHERE id IN (?,?) LIMIT 2",
+    "parameters": [
+      739112,
+      739111
+    ],
+    "ms": 5,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_context_ids_TW",
+    "sql": "SELECT re.id FROM financial_report_evidence re JOIN empresa e ON e.id=re.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? ORDER BY re.id DESC LIMIT 2",
+    "parameters": [
+      "TW"
+    ],
+    "ms": 7,
+    "rows": 0,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sample_verified_ids_TW",
+    "sql": "SELECT v.id FROM pcv_verification_evidence v JOIN informe_financiero f ON f.id=v.informe_id JOIN empresa e ON e.id=f.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? AND v.outcome IN ('INSERTED','NULL_FILLED','VERIFIED_EXISTING') ORDER BY v.id DESC LIMIT 2",
+    "parameters": [
+      "TW"
+    ],
+    "ms": 16,
+    "rows": 0,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "country_references",
+    "sql": "SELECT id,codigo_iso,interes_bono_10_ano,fecha_publicacion_bono10,tasa_impositiva,equity_risk_premium,prima_riesgo_mercado,riesgo_extra_por_pais,fecha_actualizacion_prima_mercado,fuente_prima_mercado FROM pais ORDER BY id LIMIT 10",
+    "parameters": [],
+    "ms": 5,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "sector_references",
+    "sql": "SELECT s.id,s.nombre_sector,s.sensibilidad_al_mercado,COUNT(e.id) empresas FROM sector s LEFT JOIN empresa e ON e.sector_id=s.id GROUP BY s.id ORDER BY empresas DESC LIMIT 100",
+    "parameters": [],
+    "ms": 17,
+    "rows": 46,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "credit_references",
+    "sql": "SELECT perfil_empresa,COUNT(*) filas,SUM(activo=1) activas,MIN(fecha_datos_mercado) fecha_min,MAX(fecha_datos_mercado) fecha_max,MIN(spread_credito_base) spread_min,MAX(spread_credito_base) spread_max,fuente_intervalos,fuente_spread_mercado FROM rating_sintetico GROUP BY perfil_empresa,fuente_intervalos,fuente_spread_mercado LIMIT 30",
+    "parameters": [],
+    "ms": 16,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "cost_references",
+    "sql": "SELECT pais_id,COUNT(*) filas,COUNT(DISTINCT sector_id) sectores,MIN(fecha_calculo) fecha_min,MAX(fecha_calculo) fecha_max,SUM(ke_referencia IS NULL) ke_null,SUM(equity_risk_premium IS NULL) erp_null FROM coste_capital_referencia GROUP BY pais_id LIMIT 10",
+    "parameters": [],
+    "ms": 6,
+    "rows": 3,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "events",
+    "sql": "SELECT tipo_evento,COUNT(*) filas,COUNT(DISTINCT instrumento_id) instrumentos,MIN(fecha) fecha_min,MAX(fecha) fecha_max FROM evento_corporativo GROUP BY tipo_evento LIMIT 30",
+    "parameters": [],
+    "ms": 12,
+    "rows": 5,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "snapshot_prices",
+    "sql": "SELECT COUNT(*) filas,COUNT(DISTINCT empresa_id) empresas,COUNT(DISTINCT fecha_precio) fechas,MIN(fecha_precio) fecha_min,MAX(fecha_precio) fecha_max FROM valuation_input_snapshot",
+    "parameters": [],
+    "ms": 9,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "markets",
+    "sql": "SELECT * FROM mercado LIMIT 20",
+    "parameters": [],
+    "ms": 3,
+    "rows": 6,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "probe_report_ids",
+    "sql": "SELECT id FROM informe_financiero WHERE tipo_periodo='ANUAL' AND fecha_fin_periodo>='2022-01-01' AND fecha_fin_periodo<'2027-01-01' ORDER BY id LIMIT 100",
+    "parameters": [],
+    "ms": 6,
+    "rows": 100,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "pcv_plan",
+    "sql": "EXPLAIN SELECT id,informe_id,concepto_estandar_id,concepto,importe,nivel_confianza FROM partida_contable_valor WHERE informe_id IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) AND concepto_estandar_id IN (1,3,4,5,9,10,12,13,14,15,16,17,18,19,20,22,23,24,25,26,34) ORDER BY informe_id,id LIMIT 10001",
+    "parameters": [
+      2,
+      6,
+      10,
+      14,
+      20,
+      24,
+      28,
+      32,
+      35,
+      39,
+      43,
+      46,
+      50,
+      54,
+      58,
+      64,
+      68,
+      72,
+      76,
+      80,
+      84,
+      88,
+      92,
+      96,
+      100,
+      105,
+      109,
+      113,
+      117,
+      122,
+      126,
+      130,
+      134,
+      137,
+      141,
+      145,
+      149,
+      153,
+      157,
+      161,
+      165,
+      169,
+      173,
+      177,
+      181,
+      185,
+      188,
+      192,
+      196,
+      203,
+      207,
+      211,
+      215,
+      219,
+      223,
+      227,
+      235,
+      239,
+      243,
+      247,
+      251,
+      255,
+      259,
+      263,
+      267,
+      271,
+      275,
+      279,
+      284,
+      288,
+      292,
+      299,
+      303,
+      307,
+      311,
+      315,
+      319,
+      323,
+      327,
+      331,
+      336,
+      340,
+      344,
+      348,
+      349,
+      353,
+      357,
+      361,
+      368,
+      372,
+      376,
+      380,
+      384,
+      388,
+      392,
+      396,
+      400,
+      404,
+      408,
+      412
+    ],
+    "ms": 94,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "pcv_probe",
+    "sql": "SELECT id,informe_id,concepto_estandar_id,concepto,importe,nivel_confianza FROM partida_contable_valor WHERE informe_id IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) AND concepto_estandar_id IN (1,3,4,5,9,10,12,13,14,15,16,17,18,19,20,22,23,24,25,26,34) ORDER BY informe_id,id LIMIT 10001",
+    "parameters": [
+      2,
+      6,
+      10,
+      14,
+      20,
+      24,
+      28,
+      32,
+      35,
+      39,
+      43,
+      46,
+      50,
+      54,
+      58,
+      64,
+      68,
+      72,
+      76,
+      80,
+      84,
+      88,
+      92,
+      96,
+      100,
+      105,
+      109,
+      113,
+      117,
+      122,
+      126,
+      130,
+      134,
+      137,
+      141,
+      145,
+      149,
+      153,
+      157,
+      161,
+      165,
+      169,
+      173,
+      177,
+      181,
+      185,
+      188,
+      192,
+      196,
+      203,
+      207,
+      211,
+      215,
+      219,
+      223,
+      227,
+      235,
+      239,
+      243,
+      247,
+      251,
+      255,
+      259,
+      263,
+      267,
+      271,
+      275,
+      279,
+      284,
+      288,
+      292,
+      299,
+      303,
+      307,
+      311,
+      315,
+      319,
+      323,
+      327,
+      331,
+      336,
+      340,
+      344,
+      348,
+      349,
+      353,
+      357,
+      361,
+      368,
+      372,
+      376,
+      380,
+      384,
+      388,
+      392,
+      396,
+      400,
+      404,
+      408,
+      412
+    ],
+    "ms": 58,
+    "rows": 4208,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  }
+]

@@ -1,0 +1,187 @@
+{
+  "at": "2026-10-30T07:48:15.819Z",
+  "database": "g2_capital_dev_20261029",
+  "scope": "Tres empresas reales seleccionadas; no es un recuento de las 13.194 empresas",
+  "checks": [
+    {
+      "url": "/session",
+      "status": 200
+    },
+    {
+      "url": "/runs/533/automatic-premiums",
+      "status": 201
+    },
+    {
+      "url": "/companies/11658/evaluations",
+      "status": 201
+    },
+    {
+      "url": "/companies/19630/evaluations",
+      "status": 201
+    }
+  ],
+  "methods": {
+    "total": 0,
+    "approved": 0
+  },
+  "results": [
+    {
+      "empresaId": 13,
+      "empresa": "ADVANCED MICRO DEVICES INC",
+      "mercado": "US",
+      "fecha": "2026-10-12",
+      "analysisId": 31,
+      "primas": [
+        {
+          "factor": "LIQUIDEZ_BURSATIL",
+          "primaCalculada": null,
+          "ajusteOperativo": 0,
+          "unidad": "FRACCION_ANUAL",
+          "estadoFinanciero": "NO_ESTIMABLE",
+          "estadoAplicacion": "BLOQUEADO",
+          "componente": "KE",
+          "formula": null,
+          "fuenteCoeficientes": null,
+          "metodologiaId": null,
+          "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+          "evidencia": []
+        },
+        {
+          "factor": "TAMANO_RESIDUAL",
+          "primaCalculada": null,
+          "ajusteOperativo": 0,
+          "unidad": "FRACCION_ANUAL",
+          "estadoFinanciero": "NO_ESTIMABLE",
+          "estadoAplicacion": "BLOQUEADO",
+          "componente": "KE",
+          "formula": null,
+          "fuenteCoeficientes": null,
+          "metodologiaId": null,
+          "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: CAPITALIZACION_NO_DISPONIBLE; ingresos/activos no se convierten en prima sin calibración residual.",
+          "evidencia": []
+        }
+      ],
+      "keBase": 0.13457725999999998,
+      "keAjustado": 0.13457725999999998,
+      "waccBase": 0.13436738433422765,
+      "waccAjustado": 0.13436738433422765,
+      "valorIntrinsecoOriginal": 10.52252575639995,
+      "valorIntrinsecoAjustado": 10.52252575639995,
+      "impacto": 0,
+      "moneda": "USD",
+      "nota": "Flujos congelados; sólo cambia tasa.",
+      "archivo": "AMD_US.xlsx"
+    },
+    {
+      "empresaId": 11658,
+      "empresa": "TOYOTA MOTOR CORPORATION",
+      "mercado": "JP",
+      "fecha": "2026-10-30",
+      "analysisId": 32,
+      "primas": [
+        {
+          "factor": "LIQUIDEZ_BURSATIL",
+          "primaCalculada": null,
+          "ajusteOperativo": 0,
+          "unidad": "FRACCION_ANUAL",
+          "estadoFinanciero": "NO_ESTIMABLE",
+          "estadoAplicacion": "BLOQUEADO",
+          "componente": "KE",
+          "formula": null,
+          "fuenteCoeficientes": null,
+          "metodologiaId": null,
+          "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+          "evidencia": []
+        },
+        {
+          "factor": "TAMANO_RESIDUAL",
+          "primaCalculada": null,
+          "ajusteOperativo": 0,
+          "unidad": "FRACCION_ANUAL",
+          "estadoFinanciero": "NO_ESTIMABLE",
+          "estadoAplicacion": "BLOQUEADO",
+          "componente": "KE",
+          "formula": null,
+          "fuenteCoeficientes": null,
+          "metodologiaId": null,
+          "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: CAPITALIZACION_NO_DISPONIBLE; ingresos/activos no se convierten en prima sin calibración residual.",
+          "evidencia": []
+        }
+      ],
+      "keBase": null,
+      "keAjustado": null,
+      "waccBase": null,
+      "waccAjustado": null,
+      "valorIntrinsecoOriginal": null,
+      "valorIntrinsecoAjustado": null,
+      "impacto": null,
+      "moneda": null,
+      "nota": "No hay ejecución congelada de este mercado en la copia; no se inventan Ke/WACC ni valor intrínseco.",
+      "archivo": "TOYOTA_JP.xlsx"
+    },
+    {
+      "empresaId": 19630,
+      "empresa": "GOGOLOOK",
+      "mercado": "TW",
+      "fecha": "2026-10-30",
+      "analysisId": 33,
+      "primas": [
+        {
+          "factor": "LIQUIDEZ_BURSATIL",
+          "primaCalculada": null,
+          "ajusteOperativo": 0,
+          "unidad": "FRACCION_ANUAL",
+          "estadoFinanciero": "NO_ESTIMABLE",
+          "estadoAplicacion": "BLOQUEADO",
+          "componente": "KE",
+          "formula": null,
+          "fuenteCoeficientes": null,
+          "metodologiaId": null,
+          "motivo": "Clasificación o familia sin resolver; no extrapolar calibraciones.",
+          "evidencia": []
+        },
+        {
+          "factor": "TAMANO_RESIDUAL",
+          "primaCalculada": null,
+          "ajusteOperativo": 0,
+          "unidad": "FRACCION_ANUAL",
+          "estadoFinanciero": "NO_ESTIMABLE",
+          "estadoAplicacion": "BLOQUEADO",
+          "componente": "KE",
+          "formula": null,
+          "fuenteCoeficientes": null,
+          "metodologiaId": null,
+          "motivo": "Clasificación o familia sin resolver; no extrapolar calibraciones.",
+          "evidencia": []
+        }
+      ],
+      "keBase": null,
+      "keAjustado": null,
+      "waccBase": null,
+      "waccAjustado": null,
+      "valorIntrinsecoOriginal": null,
+      "valorIntrinsecoAjustado": null,
+      "impacto": null,
+      "moneda": null,
+      "nota": "No hay ejecución congelada de este mercado en la copia; no se inventan Ke/WACC ni valor intrínseco.",
+      "archivo": "GOGOLOOK_TW.xlsx"
+    }
+  ],
+  "counts": {
+    "empresas": 3,
+    "conAlgunaPrimaEstimada": 0,
+    "conDosPrimasEstimadas": 0,
+    "conDosCerosProvisionales": 3
+  },
+  "frozen": {
+    "before": {
+      "n": 60,
+      "hash": "cb0a95e394950608f4b3b310a2604a65a4eae0134ffc8d229b9a9e0efc51087e"
+    },
+    "after": {
+      "n": 60,
+      "hash": "cb0a95e394950608f4b3b310a2604a65a4eae0134ffc8d229b9a9e0efc51087e"
+    },
+    "copyIdentical": true
+  }
+}

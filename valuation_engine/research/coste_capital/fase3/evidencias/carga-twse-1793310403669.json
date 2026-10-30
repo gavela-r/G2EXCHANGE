@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-29T21:46:43.667Z",
+  "database": "g2_capital_dev_20261029",
+  "proveedor": "TWSE_OPEN",
+  "descargadas": 1388,
+  "incorporadas": [
+    {
+      "instrumentoId": 7883,
+      "ticker": "6902",
+      "fecha": "2026-10-29",
+      "id": 6,
+      "inserted": true,
+      "revision": 1
+    },
+    {
+      "instrumentoId": 7884,
+      "ticker": "6598",
+      "fecha": "2026-10-29",
+      "id": 7,
+      "inserted": true,
+      "revision": 1
+    },
+    {
+      "instrumentoId": 7885,
+      "ticker": "6456",
+      "fecha": "2026-10-29",
+      "id": 8,
+      "inserted": true,
+      "revision": 1
+    },
+    {
+      "instrumentoId": 7886,
+      "ticker": "6781",
+      "fecha": "2026-10-29",
+      "id": 9,
+      "inserted": true,
+      "revision": 1
+    },
+    {
+      "instrumentoId": 7887,
+      "ticker": "6933",
+      "fecha": "2026-10-29",
+      "id": 10,
+      "inserted": true,
+      "revision": 1
+    }
+  ],
+  "licencia": "Open Government Data License v1.0",
+  "historicoAnteriorRecuperado": false
+}

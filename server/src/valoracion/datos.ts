@@ -7,6 +7,7 @@ import { obtenerMapeoSector } from './mapeoSectores';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {clasificacionVigente,perfilPorCapitalizacion} from './evidencia';
+import {identidadEstructural} from '../capital/historico';
 
 export type Db = Pick<PoolConnection,'query'>;
 export type PerfilRating = 'GRANDE_NO_FINANCIERA'|'PEQUEÑA_RIESGOSA'|'FINANCIERA';
@@ -94,6 +95,9 @@ export async function prepararInstrumento(db:Db,id:number,asOf:string,hip?:Hipot
   const [irs]=await db.query<RowDataPacket[]>(`SELECT i.id instrumento_id,i.empresa_id,i.mercado_id,i.ticker,i.isin,i.moneda,e.nombre_empresa,e.sector_id,e.pais_id,p.codigo_iso,s.nombre_sector FROM instrumento i JOIN empresa e ON e.id=i.empresa_id JOIN pais p ON p.id=e.pais_id JOIN sector s ON s.id=e.sector_id WHERE i.id=?`,[id]);
   if(irs.length!==1)throw new Pendiente('IDENTIDAD_PENDIENTE','Instrumento inexistente');
   const i=irs[0] as Instrumento & RowDataPacket;
+  const [marketRows]=await db.query<RowDataPacket[]>('SELECT nombre_bolsa FROM mercado WHERE id=?',[i.mercado_id]);
+  const identityBlock=identidadEstructural({...i,nombre_bolsa:marketRows[0]?.nombre_bolsa});
+  if(identityBlock)throw new Pendiente('IDENTIDAD_NO_CONCILIADA',identityBlock);
   const classification=hip?.sector_id?undefined:await clasificacionVigente(db,i.empresa_id,asOf);
   const sectorResuelto=hip?.sector_id??classification?.sector_id??i.sector_id;
   if(!hip?.sector_id&&!classification&&obtenerMapeoSector(i.sector_id).nombre.toLowerCase()!==i.nombre_sector.toLowerCase())throw new Pendiente('MAPEO_INCONSISTENTE','ID sector no corresponde al nombre verificado');

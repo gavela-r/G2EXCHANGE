@@ -1,0 +1,39 @@
+✔ issuer issued shares use exact fiscal-end standalone context with an explicit capital definition (28.9932ms)
+✔ issuer shares reject filing-date snapshots, classes, wrong units and non-integers (40.887ms)
+✔ Fuente TW: industria específica, categorías contradictorias y financieras amplias (1.4513ms)
+✔ Perfil rating: umbral documentado USD; no fabricar FX ni tamaños (0.5891ms)
+✔ Clasificación: último dictamen pendiente revoca uso del anterior; no ocultar errores DB (1.2528ms)
+✔ FRED: observations real, cero explícito, dato ausente no equivale a cero (3.0899ms)
+✔ Rating API: intereses cero permanece pendiente, perfil obligatorio; SQL coincide con esquema (0.8681ms)
+✔ Annual discovery covers historical 10-K/A, 20-F and 40-F, excluding interim/nonfinancial forms (17.951ms)
+✔ Exact legal identity, annual period, unit and instant facts remain mandatory without a ticker (10.5982ms)
+✔ One contradictory fact excludes its concept while independent fields survive (1.2981ms)
+✔ A comparative period remains explicitly bound to its later annual accession, never to FY labels (1.3698ms)
+✔ Subtotal labels and foreign currency do not become aggregate USD financial data (1.3139ms)
+{"instrumento_id":1,"state":"DATOS_PENDIENTES","code":"DATO_PENDIENTE","error":"Fixture sin datos"}
+{"instrumento_id":2,"state":"DATOS_PENDIENTES","code":"DATO_PENDIENTE","error":"Fixture sin datos"}
+{"instrumento_id":3,"state":"DATOS_PENDIENTES","code":"DATO_PENDIENTE","error":"Fixture sin datos"}
+{"instrumento_id":4,"state":"DATOS_PENDIENTES","code":"DATO_PENDIENTE","error":"Fixture sin datos"}
+✔ Rutas independientes del cwd: fuente y compilado (15.6128ms)
+✔ Fechas civiles y porcentajes: null no equivale a cero (2.5425ms)
+✔ Komatsu: reversión de reserva no se utiliza como depreciación (3.539ms)
+✔ Identidades contables trazables; no reconstruir cuando faltan componentes (3.4151ms)
+✔ Sectores desconocidos no entran en FCFF; BANK y PHARMA existentes (3.8976ms)
+✔ Primas cero reproducibles, sin aprobación ficticia ni sobrescritura (13.7131ms)
+✔ Huella determinista y sensible a cambios reales (1.0932ms)
+✔ Worker rechaza binarios recompilados después de cargar el motor (3.6114ms)
+✔ Validación: tres escenarios y bloqueo BANK no equivalen a calculado (10.9507ms)
+✔ CLI modo seguro predeterminado y opciones mutuamente exclusivas (20.5059ms)
+✔ Lotes acotados continúan tras errores y reanudan cursor (101.5427ms)
+✔ Escala de 10.000 instrumentos pendientes: páginas y conexiones acotadas (13354.1809ms)
+✔ Interrupción antes del primer instrumento conserva checkpoint reanudable (63.1753ms)
+✔ Checkpoint reintenta un bloqueo transitorio de Windows sin borrar el anterior (9.8845ms)
+✔ Reinicio con PID reutilizado recupera lock propio; lock de otro host permanece protegido (109.7205ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14012.9922

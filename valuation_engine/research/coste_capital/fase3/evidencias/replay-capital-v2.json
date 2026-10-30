@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-30T07:49:35.911Z",
+  "database": "g2_capital_dev_20261029",
+  "readOnly": true,
+  "results": [
+    {
+      "analysis": 2,
+      "status": "DEV_PRE_RELEASE_WITHOUT_EXACT_SNAPSHOT"
+    },
+    {
+      "analysis": 5,
+      "status": "DEV_PRE_RELEASE_WITHOUT_EXACT_SNAPSHOT"
+    },
+    {
+      "analysis": 9,
+      "status": "DEV_PRE_RELEASE_WITHOUT_EXACT_SNAPSHOT"
+    },
+    {
+      "analysis": 12,
+      "status": "DEV_PRE_RELEASE_WITHOUT_EXACT_SNAPSHOT"
+    },
+    {
+      "analysis": 15,
+      "status": "DEV_PRE_RELEASE_WITHOUT_EXACT_SNAPSHOT"
+    },
+    {
+      "analysis": 18,
+      "status": "EXACT_MATCH",
+      "sourceHash": "c310d1895467bfea2469ab7c99853e2b9dcbb6b68ac13b28af434c472dc000bf",
+      "compiledHash": "dad4ca3432947fa9a2163828feb789091166675c178e48177d3cb9f92314be19",
+      "nodeRecorded": "v24.19.0",
+      "nodeCurrent": "v24.19.0",
+      "resultHash": "2e91eb2d0519b10b550dfa86a85f8098cd1f20ea6fb09a85a97bb255a8a0e363"
+    },
+    {
+      "analysis": 25,
+      "status": "EXACT_MATCH",
+      "sourceHash": "7b03564429aa0b1291b4c7db05501fe2342d73e7dfacd5915efe3fa30aadeaf5",
+      "compiledHash": "b776018b865ac8f1cf34aedcd0e79cfc15876ac37aeaebeaa50037de79a2f3ad",
+      "nodeRecorded": "v24.19.0",
+      "nodeCurrent": "v24.19.0",
+      "resultHash": "0519b5d553304c8ba654a529e9bba0c888f6839951f81aa38712ff48ce42e3fa"
+    },
+    {
+      "analysis": 28,
+      "status": "EXACT_MATCH",
+      "sourceHash": "6127a52a83fde5a1a6016b80a81b70ec636d0f35cbb2f11b04c9875a5919d288",
+      "compiledHash": "28078ae95bd7a5879571025083e6b859c88924df6aa8f2678dccfdcf5bb147d2",
+      "nodeRecorded": "v24.19.0",
+      "nodeCurrent": "v24.19.0",
+      "resultHash": "0519b5d553304c8ba654a529e9bba0c888f6839951f81aa38712ff48ce42e3fa"
+    },
+    {
+      "analysis": 31,
+      "status": "EXACT_MATCH",
+      "sourceHash": "8f5ddd7e3153349cd9c72e87db45ba83c8e4af2480d9c0ba73495f06d2063eef",
+      "compiledHash": "1731d6a07b3ccaf8b8ad004309758411f652055a4662d405ba4b52c908893bba",
+      "nodeRecorded": "v24.19.0",
+      "nodeCurrent": "v24.19.0",
+      "resultHash": "0519b5d553304c8ba654a529e9bba0c888f6839951f81aa38712ff48ce42e3fa"
+    },
+    {
+      "analysis": 35,
+      "status": "EXACT_MATCH",
+      "sourceHash": "8f5ddd7e3153349cd9c72e87db45ba83c8e4af2480d9c0ba73495f06d2063eef",
+      "compiledHash": "1731d6a07b3ccaf8b8ad004309758411f652055a4662d405ba4b52c908893bba",
+      "nodeRecorded": "v24.19.0",
+      "nodeCurrent": "v24.19.0",
+      "resultHash": "22cf59f61eea71789420974a33a90494b01bf4def20610f6dfdbb5e93266721a"
+    }
+  ]
+}

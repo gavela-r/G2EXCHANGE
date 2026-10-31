@@ -1,5 +1,20 @@
 # G2EXCHANGE
 
+## Entrega para frontend (rama `entrega/frontend-handoff-20261031`)
+
+Arranque sin credenciales ni base de datos (modo mock con datos sintéticos):
+
+```bash
+npm run setup            # npm ci en valuation_engine, server y client
+npm run sectorial:build  # motor sectorial (TS) + UI de referencia
+npm run sectorial:mock   # http://127.0.0.1:3200 (API /api/sectorial + UI)
+npm run sectorial:test   # 39 regresión + 88 integración, sin MySQL ni Excel
+```
+
+Documentación: [FRONTEND_HANDOFF](FRONTEND_HANDOFF.md) · [API](API.md) · [ARCHITECTURE](ARCHITECTURE.md) · [DATA_MODEL](DATA_MODEL.md) · [VALUATION_MODELS](VALUATION_MODELS.md) · [RISK_PREMIUM](RISK_PREMIUM.md) · [PCV_KPI_STATUS](PCV_KPI_STATUS.md) · [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [DEPLOYMENT_PLAN](DEPLOYMENT_PLAN.md).
+
+Con MySQL (solo lectura): copiar `.env.example` a `.env`, completar `DB_*` y ejecutar `npm run sectorial:start`. La descarga de Excel exige Microsoft Excel en Windows para la validación nativa; sin él, la API devuelve 409 `EXCEL_NO_DISPONIBLE` y nunca entrega un archivo sin validar.
+
 Motor de valoración financiera reproducible con MySQL 8. La activación del 12/10/2026 está descrita en `server/docs/TERCERA_INTERVENCION.md`; la intervención posterior de proveedores figura debajo. Las valoraciones con hipótesis de sistema conservan `REVIEW`.
 
 La recuperación PCV/KPI US/JP de 2022–2025 del 28/10/2026 está documentada en [integración de proveedores](server/docs/INTEGRACION_PROVEEDORES_20261028.md) y [resultados medidos](server/docs/RESULTADOS_PROVEEDORES_20261028.md). La segunda página indica si el barrido sigue en curso o hay cuotas pendientes. Esta intervención continúa el trabajo local de Copilot en `g2-pcv-supplement-20261028`; Taiwán y el frontend quedan fuera.

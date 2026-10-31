@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-10-31T00:06:44.830Z",
+  "rule": "CONFLICT_PRESERVED con importe idéntico en candidato y todos los originales (tolerancia 0,000051); conflicto sólo por etiqueta",
+  "status": "PROPUESTA_NO_APLICADA",
+  "rows": [
+    {
+      "country": "US",
+      "year": 2022,
+      "conflictCells": 34304,
+      "conflictCellsExactAmount": 2,
+      "conflictCellsRealDisagreement": 34302,
+      "currentCertifiedCoverage": 18.5,
+      "potentialCertifiedCoverageIfApproved": 18.5
+    },
+    {
+      "country": "US",
+      "year": 2023,
+      "conflictCells": 40114,
+      "conflictCellsExactAmount": 3,
+      "conflictCellsRealDisagreement": 40111,
+      "currentCertifiedCoverage": 16.44,
+      "potentialCertifiedCoverageIfApproved": 16.44
+    },
+    {
+      "country": "US",
+      "year": 2024,
+      "conflictCells": 40214,
+      "conflictCellsExactAmount": 3,
+      "conflictCellsRealDisagreement": 40211,
+      "currentCertifiedCoverage": 16.64,
+      "potentialCertifiedCoverageIfApproved": 16.64
+    },
+    {
+      "country": "US",
+      "year": 2025,
+      "conflictCells": 41142,
+      "conflictCellsExactAmount": 2,
+      "conflictCellsRealDisagreement": 41140,
+      "currentCertifiedCoverage": 15.23,
+      "potentialCertifiedCoverageIfApproved": 15.23
+    },
+    {
+      "country": "JP",
+      "year": 2022,
+      "conflictCells": 4000,
+      "conflictCellsExactAmount": 1891,
+      "conflictCellsRealDisagreement": 2109,
+      "currentCertifiedCoverage": 68.19,
+      "potentialCertifiedCoverageIfApproved": 71.3
+    },
+    {
+      "country": "JP",
+      "year": 2023,
+      "conflictCells": 9093,
+      "conflictCellsExactAmount": 5408,
+      "conflictCellsRealDisagreement": 3685,
+      "currentCertifiedCoverage": 60.01,
+      "potentialCertifiedCoverageIfApproved": 68.89
+    },
+    {
+      "country": "JP",
+      "year": 2024,
+      "conflictCells": 9167,
+      "conflictCellsExactAmount": 5400,
+      "conflictCellsRealDisagreement": 3767,
+      "currentCertifiedCoverage": 58.99,
+      "potentialCertifiedCoverageIfApproved": 67.86
+    },
+    {
+      "country": "JP",
+      "year": 2025,
+      "conflictCells": 9065,
+      "conflictCellsExactAmount": 5329,
+      "conflictCellsRealDisagreement": 3736,
+      "currentCertifiedCoverage": 50.16,
+      "potentialCertifiedCoverageIfApproved": 58.92
+    }
+  ]
+}

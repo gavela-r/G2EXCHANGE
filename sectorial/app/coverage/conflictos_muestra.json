@@ -1,0 +1,410 @@
+{
+  "generatedAt": "2026-10-31T00:03:01.540Z",
+  "sampleSizePerCountry": 4000,
+  "countries": {
+    "US": {
+      "sampled": 4000,
+      "byType": {
+        "VALOR_DISTINTO": 3878,
+        "ORIGINALES_DUPLICADOS_DISTINTOS": 33,
+        "UNO_ES_CERO": 82,
+        "REDONDEO_MENOR_0_05PCT": 6,
+        "IGUALES_PRECISION_NUMERICA": 1
+      },
+      "byConcept": {
+        "EPS_DILUIDO": {
+          "VALOR_DISTINTO": 228,
+          "UNO_ES_CERO": 1
+        },
+        "CUENTAS_PAGAR": {
+          "VALOR_DISTINTO": 175,
+          "UNO_ES_CERO": 1
+        },
+        "CUENTAS_COBRAR": {
+          "VALOR_DISTINTO": 173,
+          "UNO_ES_CERO": 9
+        },
+        "INVENTARIOS": {
+          "VALOR_DISTINTO": 141,
+          "UNO_ES_CERO": 6
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "VALOR_DISTINTO": 137,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 20,
+          "REDONDEO_MENOR_0_05PCT": 1,
+          "UNO_ES_CERO": 2
+        },
+        "CAPEX": {
+          "VALOR_DISTINTO": 165,
+          "UNO_ES_CERO": 16
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "VALOR_DISTINTO": 266,
+          "REDONDEO_MENOR_0_05PCT": 1
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "VALOR_DISTINTO": 69,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 5,
+          "UNO_ES_CERO": 6
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "VALOR_DISTINTO": 30,
+          "UNO_ES_CERO": 9,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 4,
+          "IGUALES_PRECISION_NUMERICA": 1
+        },
+        "PATRIMONIO_NETO": {
+          "VALOR_DISTINTO": 258,
+          "UNO_ES_CERO": 2
+        },
+        "PASIVOS_TOTALES": {
+          "VALOR_DISTINTO": 253,
+          "REDONDEO_MENOR_0_05PCT": 2,
+          "UNO_ES_CERO": 1
+        },
+        "ACTIVOS_TOTALES": {
+          "VALOR_DISTINTO": 285,
+          "UNO_ES_CERO": 1
+        },
+        "EFECTIVO": {
+          "VALOR_DISTINTO": 188,
+          "UNO_ES_CERO": 3
+        },
+        "ACCIONES_EN_CIRCULACION": {
+          "VALOR_DISTINTO": 207,
+          "REDONDEO_MENOR_0_05PCT": 2,
+          "UNO_ES_CERO": 2
+        },
+        "DIVIDENDOS_PAGADOS": {
+          "VALOR_DISTINTO": 33,
+          "UNO_ES_CERO": 5
+        },
+        "IMPUESTO_BENEFICIOS": {
+          "VALOR_DISTINTO": 130,
+          "UNO_ES_CERO": 11
+        },
+        "BENEFICIO_ANTES_IMPUESTOS": {
+          "VALOR_DISTINTO": 202
+        },
+        "BENEFICIO_NETO": {
+          "VALOR_DISTINTO": 275
+        },
+        "EBIT": {
+          "VALOR_DISTINTO": 242
+        },
+        "BENEFICIO_BRUTO": {
+          "VALOR_DISTINTO": 123,
+          "UNO_ES_CERO": 1
+        },
+        "INGRESOS": {
+          "VALOR_DISTINTO": 200,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 4,
+          "UNO_ES_CERO": 4
+        },
+        "GASTO_INTERESES": {
+          "VALOR_DISTINTO": 98,
+          "UNO_ES_CERO": 2
+        }
+      },
+      "examples": {
+        "VALOR_DISTINTO": {
+          "concept": "EPS_DILUIDO",
+          "provider": "SEC_EDGAR",
+          "candidate": 2.54,
+          "candidateTag": "EarningsPerShareDiluted",
+          "originals": [
+            {
+              "importe": "2.8200",
+              "concepto": "EarningsPerShareDiluted"
+            },
+            {
+              "importe": "2.8200",
+              "concepto": "EarningsPerShareDiluted"
+            },
+            {
+              "importe": "2.8200",
+              "concepto": "EarningsPerShareDiluted"
+            }
+          ]
+        },
+        "ORIGINALES_DUPLICADOS_DISTINTOS": {
+          "concept": "DEUDA_LARGO_PLAZO",
+          "provider": "SEC_EDGAR",
+          "candidate": 59135000000,
+          "candidateTag": "LongTermDebtAndCapitalLeaseObligations",
+          "originals": [
+            {
+              "importe": "63128000000.0000",
+              "concepto": "LongTermDebt"
+            },
+            {
+              "importe": "63128000000.0000",
+              "concepto": "LongTermDebt"
+            },
+            {
+              "importe": "25000000.0000",
+              "concepto": "FinanceLeaseLiabilityNoncurrent"
+            }
+          ]
+        },
+        "UNO_ES_CERO": {
+          "concept": "DEUDA_CORTO_PLAZO",
+          "provider": "FINDATAENGINE",
+          "candidate": 0,
+          "candidateTag": "FINDATAENGINE:short_term_debt",
+          "originals": [
+            {
+              "importe": "1000000.0000",
+              "concepto": "ShortTermBorrowings"
+            },
+            {
+              "importe": "1000000.0000",
+              "concepto": "ShortTermBorrowings"
+            },
+            {
+              "importe": "1000000.0000",
+              "concepto": "ShortTermBorrowings"
+            }
+          ]
+        },
+        "REDONDEO_MENOR_0_05PCT": {
+          "concept": "FLUJO_CAJA_OPERATIVO",
+          "provider": "SEC_EDGAR",
+          "candidate": 23410000000,
+          "candidateTag": "NetCashProvidedByUsedInOperatingActivities",
+          "originals": [
+            {
+              "importe": "23416000000.0000",
+              "concepto": "NetCashProvidedByUsedInOperatingActivities"
+            },
+            {
+              "importe": "23416000000.0000",
+              "concepto": "NetCashProvidedByUsedInOperatingActivities"
+            },
+            {
+              "importe": "23416000000.0000",
+              "concepto": "NetCashProvidedByUsedInOperatingActivities"
+            }
+          ]
+        },
+        "IGUALES_PRECISION_NUMERICA": {
+          "concept": "DEUDA_CORTO_PLAZO",
+          "provider": "FINDATAENGINE",
+          "candidate": 0,
+          "candidateTag": "FINDATAENGINE:short_term_debt",
+          "originals": [
+            {
+              "importe": "0.0000",
+              "concepto": "LongTermDebtCurrent"
+            },
+            {
+              "importe": "0.0000",
+              "concepto": "LongTermDebtCurrent"
+            },
+            {
+              "importe": "0.0000",
+              "concepto": "LongTermDebtCurrent"
+            }
+          ]
+        }
+      }
+    },
+    "JP": {
+      "sampled": 4000,
+      "byType": {
+        "IGUALES_PRECISION_NUMERICA": 2360,
+        "VALOR_DISTINTO": 1058,
+        "ORIGINALES_DUPLICADOS_DISTINTOS": 472,
+        "SIGNO_INVERTIDO": 77,
+        "REDONDEO_MENOR_0_05PCT": 27,
+        "UNO_ES_CERO": 6
+      },
+      "byConcept": {
+        "CUENTAS_PAGAR": {
+          "IGUALES_PRECISION_NUMERICA": 165,
+          "VALOR_DISTINTO": 7,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 21,
+          "REDONDEO_MENOR_0_05PCT": 2
+        },
+        "CUENTAS_COBRAR": {
+          "IGUALES_PRECISION_NUMERICA": 20,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 88,
+          "VALOR_DISTINTO": 145,
+          "UNO_ES_CERO": 1
+        },
+        "GASTO_INTERESES": {
+          "IGUALES_PRECISION_NUMERICA": 16,
+          "VALOR_DISTINTO": 2,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 2
+        },
+        "INVENTARIOS": {
+          "VALOR_DISTINTO": 98,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 103,
+          "IGUALES_PRECISION_NUMERICA": 99,
+          "UNO_ES_CERO": 3,
+          "REDONDEO_MENOR_0_05PCT": 2
+        },
+        "EFECTIVO": {
+          "VALOR_DISTINTO": 525,
+          "REDONDEO_MENOR_0_05PCT": 23,
+          "IGUALES_PRECISION_NUMERICA": 408
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "IGUALES_PRECISION_NUMERICA": 831,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 10
+        },
+        "INGRESOS": {
+          "IGUALES_PRECISION_NUMERICA": 810,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 32,
+          "VALOR_DISTINTO": 6
+        },
+        "CAPEX": {
+          "SIGNO_INVERTIDO": 77
+        },
+        "EBIT": {
+          "IGUALES_PRECISION_NUMERICA": 1,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 53,
+          "VALOR_DISTINTO": 4
+        },
+        "DIVIDENDOS_PAGADOS": {
+          "VALOR_DISTINTO": 11
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "VALOR_DISTINTO": 4,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 49
+        },
+        "PATRIMONIO_NETO": {
+          "VALOR_DISTINTO": 58
+        },
+        "PASIVOS_TOTALES": {
+          "VALOR_DISTINTO": 58
+        },
+        "ACTIVOS_TOTALES": {
+          "VALOR_DISTINTO": 60,
+          "IGUALES_PRECISION_NUMERICA": 1
+        },
+        "IMPUESTO_BENEFICIOS": {
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 56,
+          "VALOR_DISTINTO": 1
+        },
+        "BENEFICIO_NETO": {
+          "VALOR_DISTINTO": 56,
+          "UNO_ES_CERO": 2
+        },
+        "BENEFICIO_BRUTO": {
+          "VALOR_DISTINTO": 18,
+          "IGUALES_PRECISION_NUMERICA": 1
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 30,
+          "IGUALES_PRECISION_NUMERICA": 1
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "VALOR_DISTINTO": 4,
+          "ORIGINALES_DUPLICADOS_DISTINTOS": 28,
+          "IGUALES_PRECISION_NUMERICA": 6
+        },
+        "EPS_DILUIDO": {
+          "IGUALES_PRECISION_NUMERICA": 1
+        },
+        "BENEFICIO_ANTES_IMPUESTOS": {
+          "VALOR_DISTINTO": 1
+        }
+      },
+      "examples": {
+        "IGUALES_PRECISION_NUMERICA": {
+          "concept": "CUENTAS_PAGAR",
+          "provider": "EDINET_DB",
+          "candidate": 59573000000,
+          "candidateTag": "EDINET_DB:trade_payables",
+          "originals": [
+            {
+              "importe": "59573000000.0000",
+              "concepto": "jpigp_cor:TradeAndOtherPayablesCLIFRS"
+            }
+          ]
+        },
+        "VALOR_DISTINTO": {
+          "concept": "INVENTARIOS",
+          "provider": "EDINET_DB",
+          "candidate": 9756000000,
+          "candidateTag": "EDINET_DB:inventories",
+          "originals": [
+            {
+              "importe": "2041000000.0000",
+              "concepto": "jppfs_cor:MerchandiseAndFinishedGoods"
+            }
+          ]
+        },
+        "ORIGINALES_DUPLICADOS_DISTINTOS": {
+          "concept": "CUENTAS_COBRAR",
+          "provider": "EDINET",
+          "candidate": 98551000000,
+          "candidateTag": "jppfs_cor:AccountsReceivableTrade",
+          "originals": [
+            {
+              "importe": "98551000000.0000",
+              "concepto": "jppfs_cor:AccountsReceivableTrade"
+            },
+            {
+              "importe": "99578000000.0000",
+              "concepto": "jppfs_cor:NotesAndAccountsReceivableTrade"
+            },
+            {
+              "importe": "99578000000.0000",
+              "concepto": "jppfs_cor:NotesAndAccountsReceivableTrade"
+            }
+          ]
+        },
+        "SIGNO_INVERTIDO": {
+          "concept": "CAPEX",
+          "provider": "EDINET",
+          "candidate": 8497000000,
+          "candidateTag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF",
+          "originals": [
+            {
+              "importe": "-8497000000.0000",
+              "concepto": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+            },
+            {
+              "importe": "-8497000000.0000",
+              "concepto": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+            }
+          ]
+        },
+        "REDONDEO_MENOR_0_05PCT": {
+          "concept": "EFECTIVO",
+          "provider": "EDINET",
+          "candidate": 8750000000,
+          "candidateTag": "jppfs_cor:CashAndCashEquivalents",
+          "originals": [
+            {
+              "importe": "8754000000.0000",
+              "concepto": "jppfs_cor:CashAndDeposits"
+            },
+            {
+              "importe": "8754000000.0000",
+              "concepto": "jppfs_cor:CashAndDeposits"
+            },
+            {
+              "importe": "8754000000.0000",
+              "concepto": "jppfs_cor:CashAndDeposits"
+            }
+          ]
+        },
+        "UNO_ES_CERO": {
+          "concept": "INVENTARIOS",
+          "provider": "EDINET_DB",
+          "candidate": 635000000,
+          "candidateTag": "EDINET_DB:inventories",
+          "originals": [
+            {
+              "importe": "0.0000",
+              "concepto": "jppfs_cor:FinishedGoods"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

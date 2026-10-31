@@ -1,0 +1,7 @@
+// Exportador portable (SheetJS) + validación nativa en Excel para los sectores indicados. Salida en qa_api_portable/.
+import fs from'node:fs';import path from'node:path';import{createRequire}from'node:module';import{root,buildCase,sha}from'./qa_fixtures.mjs';
+const require=createRequire(import.meta.url),{validateNative}=require('../native-qa.cjs'),store=require('../store.cjs'),{exportWorkbookPortable}=await import('../exporter-portable.mjs');
+const out=path.join(root,'qa_api_portable'),engineHash=store.engineHash(),rows=[];fs.mkdirSync(out,{recursive:true});
+for(const sector of process.argv.slice(2).map(Number)){const row={sector};try{const{snapshot,config,x}=buildCase(sector),file=path.join(out,'PORTABLE_SECTOR_'+String(sector).padStart(2,'0')+'.xlsx');for(const s of['','.qa.json','.validation.json','.native-input.json'])fs.rmSync(file+s,{force:true});
+ const run={id:sha({sector,portable:true,engineHash}),engineHash,snapshot,configuration:config,result:x.result};await exportWorkbookPortable(run,x,file);const v=await validateNative(run,x,file);Object.assign(row,{status:v.status,repairMode:v.repairMode,formulaChecks:v.formulaChecks,brokenReferences:v.brokenReferences,capitalMutation:v.capitalMutation});}catch(e){row.error=String(e.message).slice(0,800);}rows.push(row);console.log(JSON.stringify(row));}
+fs.writeFileSync(path.join(out,'qa_portable.json'),JSON.stringify({at:new Date().toISOString(),engineHash,exporter:'PORTABLE_SHEETJS',rows},null,2));

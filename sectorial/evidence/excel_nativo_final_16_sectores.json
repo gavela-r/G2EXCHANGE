@@ -1,0 +1,856 @@
+{
+  "at": "2026-10-30T23:24:10.544Z",
+  "engineHash": "3b76805dbd8d6fd8160009110a548d4126e748ae4463ca8488acdab928c7f424",
+  "events": false,
+  "tipo": "QA_SINTETICO_RUTA_API_NO_APROBACION_FINANCIERA",
+  "native": true,
+  "sectors": [
+    {
+      "sector": 1,
+      "name": "Defensa y aeroespacial",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "bookings",
+        "recognition"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "aefaca41f6f039a9b1f912c73f57a6f3530032375b7786f056bf319464da6f21",
+      "configurationHash": "eeb22142e5f5ecd4288eca5f4f9137125d179c46cff823298d34104a1ef29d26",
+      "resultHash": "deedf32240702e6a2963acc4e97abd30682290e8d612603e6c46ee58757a7bde",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        21.70333830168456,
+        26.02159698815966,
+        30.674062344960056
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 154.907,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 9.946
+      },
+      "file": "qa_api_final\\QA_SECTOR_01.xlsx",
+      "xlsxSha256": "159df25920cd7a7bcffe401ae6508a869245a3faeab1b8bd61f491494fa8ecf7"
+    },
+    {
+      "sector": 2,
+      "name": "Software y SaaS",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "churn",
+        "expansion",
+        "newArr"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "6713f5a5e919e2d82c85025124e3b04c17b664818797701cf606a05ebdebdf08",
+      "configurationHash": "7f40e7a4c0d0937ef8fb515bd5ccae88db60159af90dc373a2b1fd5e383934d1",
+      "resultHash": "4a5d77d4227319f40f3550c716cb9d437ae83c0a8b5f9d9ced3627fbc4e0ebb0",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        24.205935280626292,
+        28.405241004302294,
+        32.87115241646202
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2742
+        },
+        {
+          "scenario": 2,
+          "checked": 2742
+        },
+        {
+          "scenario": 3,
+          "checked": 2742
+        }
+      ],
+      "exportSeconds": 147.363,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8226,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 9.298
+      },
+      "file": "qa_api_final\\QA_SECTOR_02.xlsx",
+      "xlsxSha256": "e4a3cfea38bf6ebca288fc57827e62a05faada6cad5b66f3c403a1e3cd3bb642"
+    },
+    {
+      "sector": 3,
+      "name": "Semiconductores y hardware",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "capacity",
+        "utilization",
+        "asp"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "00e7d3cc493ee22831bcda9b49184e83991adff8f88f3ed5e167ad03bdd3cc3f",
+      "configurationHash": "82056608e45c33dc38a89701bd2c6f36f961b5a9bf59d37677b1ceb150431553",
+      "resultHash": "b2adc396d34106ca1061ba303be9b020aa147cffe23a2a1c542f73b4162a279d",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        22.64060420413368,
+        27.557688956376253,
+        32.89909776634218
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 109.675,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 7.257
+      },
+      "file": "qa_api_final\\QA_SECTOR_03.xlsx",
+      "xlsxSha256": "f5cac610541ed433fce959cdf3aa622d8b1209a3548923bf6ab34e3f919e0ef7"
+    },
+    {
+      "sector": 4,
+      "name": "Industria y fabricación",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "volume",
+        "price",
+        "aftermarketPerUnit",
+        "retirementRate"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "be09551f1de5ded686bab2ec800ec2ad324f73d60e4a2cbf9eba6d3e004b993a",
+      "configurationHash": "a6cfc17a1a17c546fb6dd9fc1929f189e93b8e1dec3cada6b87cfdda40eb044a",
+      "resultHash": "10413023fba9151f0d38d7a7689aa294958ec9163c1910756e9dfc903018a87e",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        23.99770607202546,
+        29.483430935436807,
+        35.50668660067529
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2752
+        },
+        {
+          "scenario": 2,
+          "checked": 2752
+        },
+        {
+          "scenario": 3,
+          "checked": 2752
+        }
+      ],
+      "exportSeconds": 121.9,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8256,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 9.224
+      },
+      "file": "qa_api_final\\QA_SECTOR_04.xlsx",
+      "xlsxSha256": "66b578ffbff94ac4f86f3f9ce2a7e9506c19231576c64480412b2fb2e2c74fff"
+    },
+    {
+      "sector": 5,
+      "name": "Automoción y componentes",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "vehicleProduction",
+        "share",
+        "contentPerVehicle",
+        "priceDown"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "a3889abd937673d9cf74c10c4db60d194e50b6d5f426580aa42ffa3c67a8d077",
+      "configurationHash": "3d4ec2ccc15c7b1a1997147b2ea5d39ff80e4b5571f82a747fe1615e2b007c50",
+      "resultHash": "113cc6fc1765e2a204d90654c57d65d3e706279d9aa4de52cfab222ba762e999",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        22.152802976469935,
+        26.977148786525987,
+        32.211935645984724
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2747
+        },
+        {
+          "scenario": 2,
+          "checked": 2747
+        },
+        {
+          "scenario": 3,
+          "checked": 2747
+        }
+      ],
+      "exportSeconds": 104.973,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8241,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 6.893
+      },
+      "file": "qa_api_final\\QA_SECTOR_05.xlsx",
+      "xlsxSha256": "fb86a9800ccc322d7bbac03ea038e661747e4f9ae87af5e78e2c88824e247f2d"
+    },
+    {
+      "sector": 6,
+      "name": "Retail",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "openings",
+        "closures",
+        "sameStoreGrowth",
+        "firstYearRamp"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "03cbcfec2d31cae339383c2d3353ca79f0f46770ee72a6125464021170749ee2",
+      "configurationHash": "6eab7c225c949850d4005cea593482725a1f62baae85641a99527ccafc9a6fb3",
+      "resultHash": "a59bfb4d65e354beee4fb5e13f911eef14cd7069442eed9ad17faefbd2229ba9",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        23.381657526732305,
+        28.34106897331839,
+        33.79318557577511
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2752
+        },
+        {
+          "scenario": 2,
+          "checked": 2752
+        },
+        {
+          "scenario": 3,
+          "checked": 2752
+        }
+      ],
+      "exportSeconds": 104.557,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8256,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 7.09
+      },
+      "file": "qa_api_final\\QA_SECTOR_06.xlsx",
+      "xlsxSha256": "e5489e6e79ee0e3d2f7a9391666c92fad07521876713cc386a882289402c7355"
+    },
+    {
+      "sector": 7,
+      "name": "Consumo básico",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "volumeGrowth",
+        "priceMix"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "0fcdf942c6a425178a0ea11fa9e4578906edcda8d863823a23c18403aca76576",
+      "configurationHash": "33ac67e80b16e9f366f76d6868b487f309931ffda43547c42755e03e6b4e0f29",
+      "resultHash": "76e40c801089095286ed8fa6d558690cefba08b7a8c5b263edbd3d59ed470a61",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        23.000583470389543,
+        27.341217259958686,
+        32.0099185031544
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 109.606,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 12.511
+      },
+      "file": "qa_api_final\\QA_SECTOR_07.xlsx",
+      "xlsxSha256": "781e3fc485263b215808c93b4e52e9e3a75190c044c95a97466e144f4d5f07c7"
+    },
+    {
+      "sector": 8,
+      "name": "Petróleo y gas",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "production",
+        "price",
+        "reserveAdditions"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "d48e2bbdf98fdd68304071e0c6fe7ba7d8c0a27f1a2a8e4b51c31de8791c9d34",
+      "configurationHash": "bfb7f2ce9bc79bdaed209a02ca2a1923ed667a31d32ff6efe581aa0595aca952",
+      "resultHash": "bdd689296e32024d0ab1e7160bd56fe8cf860bac69e9333bbcfe81c7fe78281a",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        7.956602966800132,
+        9.402688061351641,
+        11.042984650153725
+      ],
+      "identityChecks": 291,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2832
+        },
+        {
+          "scenario": 2,
+          "checked": 2832
+        },
+        {
+          "scenario": 3,
+          "checked": 2832
+        }
+      ],
+      "exportSeconds": 111.549,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8496,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 7.696
+      },
+      "file": "qa_api_final\\QA_SECTOR_08.xlsx",
+      "xlsxSha256": "06974a6311e7b496fcaa50bd28dac77d87937f245795b7cccb3bdcb38b9451c9"
+    },
+    {
+      "sector": 9,
+      "name": "Minería y materiales",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "production",
+        "price",
+        "reserveAdditions",
+        "gradeRecovery"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "aa0eafebed3c6dd54f43dfc69e9194495903c2d0b86808b03d6beb47ebe563ec",
+      "configurationHash": "68138300e36740e30e3050c03833fe8a484758f4262d79e1f8f1cdb62425793b",
+      "resultHash": "d020c8c58a96920eafcb6b4e92a321e0bb934b470d382689233258a463810639",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        7.956602966800132,
+        9.402688061351641,
+        11.04298465015373
+      ],
+      "identityChecks": 291,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2837
+        },
+        {
+          "scenario": 2,
+          "checked": 2837
+        },
+        {
+          "scenario": 3,
+          "checked": 2837
+        }
+      ],
+      "exportSeconds": 103.233,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8511,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 8.556
+      },
+      "file": "qa_api_final\\QA_SECTOR_09.xlsx",
+      "xlsxSha256": "914919f7d39a66102aec29ddac025e0a395a2c7939bd5d7739bc81955265f758"
+    },
+    {
+      "sector": 10,
+      "name": "Utilities e infraestructura",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "allowedReturn",
+        "regulatoryDepreciation",
+        "allowedOpex",
+        "eligibleInvestment",
+        "unregulatedRevenue"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "3c81a428c704d50a8c2abebc96cc17d25e9f426c6a5ecd542cdbd45672cbc0d9",
+      "configurationHash": "36bac0069aa12f2c13af6c2098d974a7227bbfd2568a074cc1835e81ac074fde",
+      "resultHash": "e30eebd06af440fc2c073120cc427054a013030f07d8dbf70fde1bb5feb5769b",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        21.402236425926002,
+        25.35210762370413,
+        29.567571208943136
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2762
+        },
+        {
+          "scenario": 2,
+          "checked": 2762
+        },
+        {
+          "scenario": 3,
+          "checked": 2762
+        }
+      ],
+      "exportSeconds": 148.874,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8286,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 9.309
+      },
+      "file": "qa_api_final\\QA_SECTOR_10.xlsx",
+      "xlsxSha256": "b289f5559fdcf0e441a73db8122796a8bf3a28a30d56d6c2a1bdc4faef5e66d8"
+    },
+    {
+      "sector": 11,
+      "name": "Telecomunicaciones",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "netAdds",
+        "arpu"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "4c32e8eeafb7c565e26437b0246db83ebf4dad2294bcc02ba4dae2f279200788",
+      "configurationHash": "d98e0b3e2876d0f9bd48ad5c8156c5708ea051122854bcb75e433d856471ea29",
+      "resultHash": "5ef9f1f6a4c1fe440ef8cd17ccc0aee2691de9115d409bd1391b52b2a2d72150",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        84.2047576363002,
+        106.46445238997758,
+        131.15063903229577
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 107.142,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 7.991
+      },
+      "file": "qa_api_final\\QA_SECTOR_11.xlsx",
+      "xlsxSha256": "2e1e8ffb6148570983a36c56c036107d1ede44bb489a67624d24349906e7d42a"
+    },
+    {
+      "sector": 12,
+      "name": "Farma y biotecnología",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "marketedSales",
+        "pipelineGrossSales",
+        "pipelineProbability",
+        "rdExpense"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "9675c104a0d17c8dada7ab0bcad27f25a61707370c062ea1659db5c20d3f9c08",
+      "configurationHash": "0f021c5392e0bb9f134f232e94df507e74914cb517727e68d67a5cbc9ce27b61",
+      "resultHash": "2ed2797259a651df51bb1b089553e780a56fa951f8fe8d523093f16902f7a9d5",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        22.104020783561108,
+        26.969739447412145,
+        32.252258855682975
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2742
+        },
+        {
+          "scenario": 2,
+          "checked": 2742
+        },
+        {
+          "scenario": 3,
+          "checked": 2742
+        }
+      ],
+      "exportSeconds": 104.306,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8226,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 10.019
+      },
+      "file": "qa_api_final\\QA_SECTOR_12.xlsx",
+      "xlsxSha256": "425ca325592d053628e8afb737ca680774aed68a15926b8ac3fa1761ec58ce59"
+    },
+    {
+      "sector": 13,
+      "name": "Banca",
+      "family": "BANK",
+      "method": "FCFE_CAPITAL_REQUERIDO",
+      "revenueDrivers": [
+        "operatingExpense",
+        "payout",
+        "equityIssue",
+        "loanGrowth",
+        "depositGrowth",
+        "loanYield",
+        "depositCost",
+        "provisionRate",
+        "writeoffs",
+        "fees",
+        "riskWeight",
+        "otherRiskWeight",
+        "cashYield",
+        "regulatoryTarget",
+        "regulatoryDeductions",
+        "otherAssets",
+        "wholesaleRate"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "475de9a33f757da22db7c9338fdbf6e1170f9210aef9257527899b828c3569e8",
+      "configurationHash": "30001fc17674bb5d84647a09635c6ce4a221d6fc9e1b44f2e2a5db8d01775e9f",
+      "resultHash": "29b857815b71f1def69e800c1e4561251678cfe0280e0cb5627532f87fab156b",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        2.8268790588262966,
+        3.345501939029492,
+        3.896117620607864
+      ],
+      "identityChecks": 78,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 312
+        },
+        {
+          "scenario": 2,
+          "checked": 312
+        },
+        {
+          "scenario": 3,
+          "checked": 312
+        }
+      ],
+      "exportSeconds": 31.423,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 936,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 6.113
+      },
+      "file": "qa_api_final\\QA_SECTOR_13.xlsx",
+      "xlsxSha256": "a02e1055bb7e6c3cbd1f34eb96d39327e97ab592ad532bb17b019c7dc66c82c4"
+    },
+    {
+      "sector": 14,
+      "name": "Seguros",
+      "family": "INSURANCE",
+      "method": "FCFE_CAPITAL_REQUERIDO",
+      "revenueDrivers": [
+        "operatingExpense",
+        "payout",
+        "equityIssue",
+        "insuranceRevenue",
+        "claimsIncurred",
+        "premiumsCash",
+        "claimsPaid",
+        "insuranceFinance",
+        "investmentYield",
+        "netInvestment",
+        "solvencyRequirement",
+        "cashYield",
+        "regulatoryTarget",
+        "regulatoryDeductions",
+        "otherAssets"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "4da1cf8707785c0688812da92470edb3034cb5bf94cc72ca108dfac4aef49c3d",
+      "configurationHash": "1fccaba5be47a44256b8c0154ca0958b74815f5be715f00694f44d56abaeb751",
+      "resultHash": "8c2507fa0807442253500c1693ce26dbcb805d80fdf4ae124815f69553a397bc",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        6.979171678641686,
+        9.544603302597885,
+        12.20423708498397
+      ],
+      "identityChecks": 78,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 287
+        },
+        {
+          "scenario": 2,
+          "checked": 287
+        },
+        {
+          "scenario": 3,
+          "checked": 287
+        }
+      ],
+      "exportSeconds": 20.621,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 861,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 6.951
+      },
+      "file": "qa_api_final\\QA_SECTOR_14.xlsx",
+      "xlsxSha256": "3caea12039ff8c778f6897dfa4fdb5dc6ec5c5e620684ef0f8106a83b0a7da38"
+    },
+    {
+      "sector": 15,
+      "name": "Inmobiliario y REIT",
+      "family": "REIT",
+      "method": "AFFO_EQUITY",
+      "revenueDrivers": [
+        "area",
+        "rent",
+        "occupancy",
+        "appraisal"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "4b66dd77eb61380c61f45ed956d39a7d25959810f4c33cb82edae04559ced9d2",
+      "configurationHash": "a3230ee1cef10b40856dc4888c5516a40afbdad693778e969078fd3170c1b869",
+      "resultHash": "c554f6780f0bf67df104760e59138bed2940d396323cf0363a51004e071647a6",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        56.359750636014134,
+        68.55447200763325,
+        81.54784028754759
+      ],
+      "identityChecks": 288,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2762
+        },
+        {
+          "scenario": 2,
+          "checked": 2762
+        },
+        {
+          "scenario": 3,
+          "checked": 2762
+        }
+      ],
+      "exportSeconds": 71.014,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8286,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 5.382
+      },
+      "file": "qa_api_final\\QA_SECTOR_15.xlsx",
+      "xlsxSha256": "04970d41913b7041c6a5992abd6771fc5fd7ea52e95ad728eef11397d1b0935c"
+    },
+    {
+      "sector": 16,
+      "name": "General no financiero",
+      "family": "FCFF",
+      "method": "FCFF",
+      "revenueDrivers": [
+        "volume",
+        "price"
+      ],
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "inputHash": "38b0184eb2d6ea57caaf5658f642ac42b667172458a53b5f5a98d5422fd3e658",
+      "configurationHash": "ee4e5fe811cb78eeefee1afa3e6220975dc756a35ef7f672a8740f1f7a4a2a66",
+      "resultHash": "f32d62ccbf5f2abd0ce89b66b7ba126f7c0383fd27749589ae9ac6c58ffe2af6",
+      "issues": [],
+      "missingInputs": 0,
+      "prices": [
+        22.648937351747854,
+        27.6578844125761,
+        33.101910300867786
+      ],
+      "identityChecks": 297,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2732
+        },
+        {
+          "scenario": 2,
+          "checked": 2732
+        },
+        {
+          "scenario": 3,
+          "checked": 2732
+        }
+      ],
+      "exportSeconds": 69.949,
+      "native": {
+        "status": "VALIDADO",
+        "openedNormally": true,
+        "repairMode": false,
+        "formulaChecks": 8196,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "excelVersion": "16.0",
+        "seconds": 6.669
+      },
+      "file": "qa_api_final\\QA_SECTOR_16.xlsx",
+      "xlsxSha256": "dc2b296a3ced831fa093f8ac07c6f8bcffb625c8ca7554b75d8b16926ac8bf78"
+    }
+  ],
+  "engineHashAtEnd": "3b76805dbd8d6fd8160009110a548d4126e748ae4463ca8488acdab928c7f424"
+}

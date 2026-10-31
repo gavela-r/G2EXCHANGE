@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: G2EXCHANGE — API sectorial
+  version: G2_SECTORIAL_DEV_0.3
+  description: |
+    Servicio de desarrollo (sólo 127.0.0.1). Tipos completos en contracts/api.d.ts; ejemplos reales en mocks/*.json.
+    Autenticación: sesión local. GET /session devuelve un token aleatorio por arranque; todo POST exige la cabecera
+    X-Sectorial-Token. Host debe ser 127.0.0.1/localhost; Origin, igual al Host o incluido en G2_SECTORIAL_CORS_ORIGINS.
+    Errores: {error, code} con códigos estables (ErrorCode). Un cálculo imposible devuelve null + estado/causa, nunca un número ficticio.
+servers: [{url: 'http://127.0.0.1:3200/api/sectorial'}]
+components:
+  securitySchemes:
+    sesionLocal: {type: apiKey, in: header, name: X-Sectorial-Token}
+  parameters:
+    id: {name: id, in: path, required: true, schema: {type: integer}, description: 'Empresa (en mock, negativos: -1..-16, -101, -102, -103)'}
+    run: {name: run, in: path, required: true, schema: {type: string, pattern: '^[a-f0-9]{64}$'}}
+    asOf: {name: asOf, in: query, schema: {type: string, format: date}, description: 'Fecha de valoración (por defecto, hoy). Sólo se usan informes publicados en esa fecha o antes'}
+  schemas:
+    Error: {type: object, required: [error, code], properties: {error: {type: string}, code: {type: string}}}
+  responses:
+    Error: {description: 'Error tipado', content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}}
+paths:
+  /health: {get: {summary: Estado del servicio, responses: {'200': {description: Health}}}}
+  /session: {get: {summary: 'Token de sesión, hash del motor, fuente de datos y capacidades de exportación', responses: {'200': {description: Session}}}}
+  /models: {get: {summary: 'Los 16 modelos sectoriales (drivers, constantes, históricos exigidos)', responses: {'200': {description: 'SectorModel[]'}}}}
+  /models/{n}: {get: {summary: Un modelo, parameters: [{name: n, in: path, required: true, schema: {type: integer, minimum: 1, maximum: 16}}], responses: {'200': {description: SectorModel}, '404': {$ref: '#/components/responses/Error'}}}}
+  /taxonomy: {get: {summary: 'Conceptos mapeados, derivados y ampliaciones sectoriales propuestas (migración 30, no ejecutada)', responses: {'200': {description: Taxonomy}}}}
+  /coverage: {get: {summary: 'Matriz de cobertura PCV/KPI por país y año (en mock, calculada sobre los datos mock)', responses: {'200': {description: CoverageResponse}, '404': {$ref: '#/components/responses/Error'}}}}
+  /companies:
+    get:
+      summary: Búsqueda por nombre o ticker
+      parameters:
+        - {name: q, in: query, schema: {type: string, maxLength: 100}}
+        - {name: limit, in: query, schema: {type: integer, minimum: 1, maximum: 40, default: 40}}
+        - {name: offset, in: query, schema: {type: integer, minimum: 0, maximum: 39, default: 0}}
+      responses: {'200': {description: 'CompanySummary[] (máx. 40 resultados por consulta)'}, '400': {$ref: '#/components/responses/Error'}}
+  /companies/{id}:
+    get: {summary: 'Históricos (4 cierres), clasificación, procedencia y evaluación sin hipótesis', parameters: [{$ref: '#/components/parameters/id'}, {$ref: '#/components/parameters/asOf'}], responses: {'200': {description: CompanyResponse}, '404': {$ref: '#/components/responses/Error'}, '503': {$ref: '#/components/responses/Error'}}}
+  /companies/{id}/pcv:
+    get: {summary: 'PCV por ejercicio con estado de certificación y observaciones', parameters: [{$ref: '#/components/parameters/id'}, {$ref: '#/components/parameters/asOf'}], responses: {'200': {description: PcvResponse}}}
+  /companies/{id}/kpis:
+    get: {summary: 'KPI derivados con estado CERTIFICADO / BLOQUEADO_DEPENDENCIA / NO_CALCULABLE y cadena de evidencia', parameters: [{$ref: '#/components/parameters/id'}, {$ref: '#/components/parameters/asOf'}], responses: {'200': {description: KpiResponse}}}
+  /companies/{id}/history:
+    get: {summary: 'Ejecuciones locales previas (máx. 50)', parameters: [{$ref: '#/components/parameters/id'}], responses: {'200': {description: 'RunSummary[]'}}}
+  /companies/{id}/evaluate:
+    post:
+      summary: 'Calcula tres escenarios con hipótesis citadas y guarda una ejecución inmutable'
+      security: [{sesionLocal: []}]
+      parameters: [{$ref: '#/components/parameters/id'}]
+      requestBody: {required: true, content: {application/json: {schema: {type: object, required: [configuration], properties: {asOf: {type: string, format: date}, configuration: {type: object}}}}}}
+      responses: {'201': {description: EvaluateResponse}, '400': {$ref: '#/components/responses/Error'}, '403': {$ref: '#/components/responses/Error'}, '409': {$ref: '#/components/responses/Error'}}
+  /examples/{sector}:
+    get: {summary: 'SÓLO MOCK: configuración QA completa del sector', parameters: [{name: sector, in: path, required: true, schema: {type: integer, minimum: 1, maximum: 16}}], responses: {'200': {description: Example}, '404': {$ref: '#/components/responses/Error'}}}
+  /runs/{run}: {get: {summary: Ejecución guardada, parameters: [{$ref: '#/components/parameters/run'}], responses: {'200': {description: RunResponse}, '404': {$ref: '#/components/responses/Error'}}}}
+  /runs/{run}/json: {get: {summary: 'Expediente completo (snapshot, configuración, resultado, versión)', parameters: [{$ref: '#/components/parameters/run'}], responses: {'200': {description: Dossier}}}}
+  /runs/{run}/capital: {get: {summary: 'Ke, Kd, WACC (null si no aplica) y diagnóstico de primas por escenario', parameters: [{$ref: '#/components/parameters/run'}], responses: {'200': {description: CapitalResponse}}}}
+  /runs/{run}/premium-simulation:
+    post:
+      summary: 'Simula una prima sobre Ke en los tres escenarios. Nunca aprueba ni persiste'
+      security: [{sesionLocal: []}]
+      parameters: [{$ref: '#/components/parameters/run'}]
+      requestBody: {required: true, content: {application/json: {schema: {type: object, required: [factor, premium, reason], properties: {factor: {type: string, enum: [LIQUIDEZ, TAMANO, OTRO]}, premium: {type: number, minimum: -0.05, maximum: 0.10}, reason: {type: string}}}}}}
+      responses: {'200': {description: PremiumSimulation}, '400': {$ref: '#/components/responses/Error'}}
+  /runs/{run}/export:
+    post: {summary: 'Encola la generación del XLSX y su validación nativa en Excel (máx. 4 en cola, 1 en curso)', security: [{sesionLocal: []}], parameters: [{$ref: '#/components/parameters/run'}], responses: {'200': {description: 'ExportJob COMPLETADO'}, '202': {description: 'ExportJob PENDIENTE'}, '409': {$ref: '#/components/responses/Error'}, '429': {$ref: '#/components/responses/Error'}}}
+  /runs/{run}/job: {get: {summary: Estado de la exportación, parameters: [{$ref: '#/components/parameters/run'}], responses: {'200': {description: ExportJob}}}}
+  /runs/{run}/xlsx: {get: {summary: 'Descarga, sólo si existe validación nativa vigente (sha256)', parameters: [{$ref: '#/components/parameters/run'}], responses: {'200': {description: XLSX, content: {application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: {}}}, '409': {$ref: '#/components/responses/Error'}}}}

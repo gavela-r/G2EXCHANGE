@@ -36,7 +36,7 @@ async function comprobar({conMysql=true}={}){
  const vivos=procesosRecuperadores();add('sin_recuperadores_vivos',vivos!==null&&vivos.length===0,vivos===null?'no se pudo listar procesos':vivos.length+' proceso(s)');
  const dist=['dist/src/pcv/seleccionObservaciones.js','dist/insercionDatos/insercionPartidaContable.js'].map(f=>path.join(root,'server',f));
  add('codigo_entrega_compilado',dist.every(fs.existsSync)&&fs.readFileSync(dist[1],'utf8').includes('identidad_observacion'),'server/dist con identidad de observación');
- if(conMysql){let ok=false,det;try{ok=await migracion33();det=ok?'índice único presente':'falta el índice';}catch(e){det='MySQL: '+e.code;}add('migracion_33',ok,det);}
+ if(conMysql){let ok=false,det;try{ok=await migracion33();det=ok?'índice único presente':'falta el índice';}catch(e){det='MySQL no disponible: '+(e.code??String(e.message).slice(0,80));}add('migracion_33',ok,det);}
  for(const t of TRABAJOS){const f=path.join(root,'private_backups',t,'checkpoint.json');let ok=false;try{JSON.parse(fs.readFileSync(f,'utf8'));ok=true;}catch{}add('checkpoint:'+t,ok,ok?'legible':'ausente o ilegible');}
  const env=leerEnv(path.join(root,'.env')),hf=path.join(root,'private_backups/credenciales-comprometidas.sha256.json');
  if(!env)add('credenciales_nuevas',false,'.env ausente: el propietario debe configurar credenciales nuevas');

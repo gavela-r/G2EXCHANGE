@@ -1,17 +1,19 @@
-# Informe de pruebas (31/10/2026, cierre definitivo)
+# Informe de pruebas (01/11/2026, congelación del backend)
 
 Entorno: Windows 11, Node 24.19.0, MySQL 8 (contenedor `mysql:8`), Microsoft Excel 365. Rama `entrega/frontend-handoff-20261031`.
 
 | Suite | Comando | Resultado |
 |---|---|---|
 | Motor de valoración | `npm --prefix valuation_engine test` | **20/20** |
-| Backend (unitarias, incluye guardián HTTP, conectores, selección de observaciones, perímetro de ROE, periodo SEC, identidad por país, FinMind trimestral, moneda SEC) | `npm --prefix server test` | **266/267**, 0 fallos, 1 omitida* |
+| Backend (unitarias, incluye guardián HTTP, conectores, selección de observaciones, perímetro de ROE, periodo SEC, identidad por país, FinMind trimestral, moneda SEC) | `npm --prefix server test` | **271/272**, 0 fallos, 1 omitida* (nuevas: participaciones no dominantes sin cero supuesto, bloqueo ADR 20-F, control de credenciales comprometidas en la transición) |
 | Regresión del motor sectorial | `node --test sectorial/app/engine/probar.cjs` | **39/39** |
-| Integración sectorial (API mock, bloqueos, transmisión, contratos, versiones, SSR, clasificación, reglas de corrección, adaptador con correcciones, **días de circulante, NWC y ΔNWC**) | `npm run sectorial:test` | **111/111** |
+| Integración sectorial (API mock, bloqueos, transmisión, contratos, versiones, SSR, clasificación, reglas de corrección, adaptador con correcciones, **días de circulante, NWC y ΔNWC**) | `npm run sectorial:test` | **113/113** (nuevas: réplica del perímetro = backend; ROE `PERIMETRO_INCOMPATIBLE` en la capa sectorial) |
 | Días de circulante (`sectorial/app/tests/circulante.test.cjs`, incluida arriba): fórmulas sobre ventas y convencionales, 365 días, saldos de cierre, activos contractuales sin doble cómputo, ausencia = NULL, división por cero, ΔNWC con signo, primer ejercicio sin saldo inicial, cambio de moneda o de base, ejercicios no consecutivos; motor (sectores 4, 6 y 16) con saldos = ingresos × días / 365, ΔNWC restado una vez en el FCFF (+10 días de cobro → −ingresos × 10 / 365 en FCFF), históricos con el mismo denominador; banca y seguros sin días | `node --test sectorial/app/tests/circulante.test.cjs` | **10/10** |
-| Validación nativa de Excel (16 plantillas, exportador portable, motor `07c927ce…`) | `npm run sectorial:qa:excel:portable` | **16/16 VALIDADO**, 118.293 comprobaciones de fórmulas (+672 por las filas de días históricos y drivers sobre ventas), 0 referencias rotas, 0 aperturas en modo reparación |
+| Validación nativa de Excel (16 plantillas, exportador portable, motor `53e83446…`) | `npm run sectorial:qa:excel:portable` | **16/16 VALIDADO**, 118.293 comprobaciones de fórmulas (+672 por las filas de días históricos y drivers sobre ventas), 0 referencias rotas, 0 aperturas en modo reparación |
 | Integración MySQL: idempotencia de recuperaciones (FinMind, SEC/EDINET verificada, «solo ausentes»); una recarga FinMind con otro importe no sobrescribe el existente | `npm run test:integration:mysql` contra la copia aislada | **2/2** |
 | Instalación limpia (clon nuevo del commit `8f9e8eb` sin `.env` ni datos privados): `setup`, `build`, `capital:build`, `npm test`, `sectorial:test` | ver `SETUP.md` | **todo con código 0**; 20/20, 266/267, 39/39, 111/111 |
+| Transición de recuperadores (worktree operativo) | `node server/scripts/transicion-recuperadores.cjs --comprobar` | código, migración 33 y checkpoints **OK**; rechaza las 20 variables comprometidas del `.env` antiguo; bloquea mientras quede un recuperador vivo o falte el `.env` nuevo (comportamiento esperado) |
+| Lotes de Taiwán | `sectorial/app/tools/verificar_lotes_tw.cjs` | huella `509253268`; 21.643 + 7.249 + 4.204 vigentes, 0 discrepancias |
 | Integridad de producción | `integracion_v02/tests/integridad_claude.cjs` | 228 archivos operativos sin cambios, 16 maestros, **60 valoraciones congeladas idénticas** (sha256 `cb0a95e3…`) |
 
 \* La omitida es la integración de Capital con escritura en un MySQL de desarrollo, opcional con `CAPITAL_DB_TESTS=1`. No es un fallo.

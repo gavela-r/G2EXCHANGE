@@ -12,7 +12,13 @@
 | Presentación Excel (inspección visual) | FUNCIONAL CON DEFECTOS MENORES | Capturas en `sectorial/evidence/capturas_excel/`. Pendiente: filas 71-74 visibles (ocultas en el maestro), "(0,00)" por residuos de coma flotante, NWC desagregado vacío en el bloque FCFF, tipo impositivo sin formato %, "####" con importes grandes en JPY, primer período parcial sin rótulo |
 | API sectorial + modo mock | COMPLETADO Y VERIFICADO | `api_mock.test.cjs` 12/12; prueba de humo `npm run sectorial:mock`; API real contra MySQL 24/24 (`sectorial/evidence/api_v3.json`) |
 | PCV/KPI: contratos de consulta, estados de certificación, cobertura | COMPLETADO Y VERIFICADO | `/companies/{id}/pcv`, `/kpis`, `/coverage`; `PCV_KPI_STATUS.md` |
-| Cobertura PCV/KPI ≥ 85 % | **BLOQUEADO POR FUENTES EXTERNAS / ESCRITURA NO AUTORIZADA** | US 15–18 % PCV / 10–13 % KPI; JP 50–68 % / 28–52 %; TW 0 % / 0 % (`PCV_KPI_STATUS.md`) |
+| Cobertura PCV/KPI ≥ 85 % | **NO ALCANZADA** — correcciones preparadas, no ejecutadas | Oficial: US 15–18,5 % PCV / 10–12,6 % KPI; JP 50–68 % / 28–52 %; TW 0 %. Tras aplicar la migración 31 (simulado): US 43–46 % / 29–31 %; JP 58–70 % / 48–58 %; TW 0 % (`PCV_KPI_STATUS.md`) |
+| Diagnóstico de conflictos SEC/EDINET y reglas versionadas | COMPLETADO Y VERIFICADO (diagnóstico); migración PREPARADA | `sectorial/app/tools/diagnostico_conflictos.cjs`, `correcciones.test.cjs` (8/8); `server/sql/31_*` no ejecutada |
+| Guardián HTTP global (FinMind, J-Quants, Eulerpool) | COMPLETADO Y VERIFICADO | `server/src/proveedores/guardiaHttp.ts`; `guardiaHttp.test.cjs` 14/14 |
+| Conectores J-Quants V2 y Eulerpool | COMPLETADO Y VERIFICADO (corroboración, no certifican) | `server/src/proveedores/conectores.ts`; `conectores.test.cjs` 4/4; llamadas reales registradas en `INFORME_INTEGRACION_PCV_KPI.md` |
+| Taiwán: anual de resultados desde 4 trimestres (FinMind) | IMPLEMENTADO Y PROBADO; datos guardados PENDIENTES DE REPROCESO | `server/src/pcv/finmindTrimestral.ts`; `finmindTrimestral.test.cjs` 5/5 |
+| Taiwán: identidad cruzada (documentos EDINET en empresas TW) | DETECTADO; cuarentena PREPARADA, no ejecutada | `server/sql/32_*`; `tools/cuarentena_identidad.cjs` |
+| Taiwán: verificación oficial | BLOQUEADO POR CONDICIONES DEL PROVEEDOR (descarga automatizada de MOPS no permitida); verificador manual IMPLEMENTADO Y PROBADO | `tools/verificar_mops_local.cjs` |
 | Taxonomía sectorial (banca, seguros, REIT, utilities, farma, energía/minería, fiscalidad) | IMPLEMENTADO PERO NO VERIFICADO con datos reales | Contrato `/taxonomy`; migración `server/sql/30_*` generada y no ejecutada |
 | Primas de liquidez y tamaño | PENDIENTE DE CALIBRACIÓN (conexión técnica y simulación verificadas) | `RISK_PREMIUM.md` |
 | Valoraciones de empresas reales | BLOQUEADO POR DATOS | Censo de las 40 empresas con más verificaciones: ninguna tiene los 4 históricos exigidos certificados (`sectorial/evidence/censo_real_2026-10-30.json`). AMD, Toyota y Microsoft siguen bloqueadas |

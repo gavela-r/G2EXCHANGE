@@ -53,10 +53,12 @@ async function main(out){
     for(const[k,v]of datos){const[t,fin,c]=k.split('|');if(t!==inf.ticker||fin!==inf.fin)continue;empresas.add(t);
      const valores=pcv.get(inf.id+'|'+c);const st=estado.get(inf.id+'|'+c)??(valores?'PENDIENTE':'AUSENTE');
      if(!valores){y.soloProveedor++;continue;}
-     const ok=valores.some(x=>coincide(c==='CAPEX'||c==='DIVIDENDOS_PAGADOS'?Math.abs(x):x,v.valor,v.exacto));
-     y.comparables++;ok?y.coinciden++:y.discrepan++;
-     const e=(y.porEstado[st]??={coinciden:0,discrepan:0});ok?e.coinciden++:e.discrepan++;
-     const pc=(y.porConcepto[c]??={coinciden:0,discrepan:0});ok?pc.coinciden++:pc.discrepan++;}
+     const norm=x=>c==='CAPEX'||c==='DIVIDENDOS_PAGADOS'?Math.abs(x):x,ok=valores.some(x=>coincide(norm(x),v.valor,v.exacto));
+     // J-Quants (決算短信) suele expresar el resumen en millones de yenes truncados: diferencia < 1 M se informa aparte.
+     const redondeo=!ok&&v.exacto&&valores.some(x=>Math.abs(norm(x)-v.valor)<1e6);
+     y.comparables++;ok?y.coinciden++:redondeo?(y.redondeoMillones=(y.redondeoMillones??0)+1):y.discrepan++;
+     const e=(y.porEstado[st]??={coinciden:0,redondeoMillones:0,discrepan:0});ok?e.coinciden++:redondeo?e.redondeoMillones++:e.discrepan++;
+     const pc=(y.porConcepto[c]??={coinciden:0,redondeoMillones:0,discrepan:0});ok?pc.coinciden++:redondeo?pc.redondeoMillones++:pc.discrepan++;}
    }
    result.countries[country]={provider:country==='JP'?'JQUANTS_FINS_SUMMARY':'EULERPOOL',providerCells:datos.size,companiesMatched:empresas.size,tolerance:country==='JP'?'exacta (yenes)':'max(0,5 M; 0,05 %) por redondeo a millones',byYear:porAnio};
    console.error(country,'informes',informes.length,'empresas',empresas.size);
@@ -65,4 +67,4 @@ async function main(out){
  }finally{conn.release();await pool.end();}
  fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify(result,null,2));return result;
 }
-if(require.main===module)main(path.resolve(process.argv[2]??path.join(__dirname,'../coverage/contraste_complementario.json'))).then(r=>{for(const[c,v]of Object.entries(r.countries))for(const[y,d]of Object.entries(v.byYear))console.log(c,y,'informes',d.informes,'comparables',d.comparables,'coinciden',d.coinciden,'discrepan',d.discrepan,JSON.stringify(d.porEstado));}).catch(e=>{console.error(e.stack);process.exitCode=1;});
+if(require.main===module)main(path.resolve(process.argv[2]??path.join(__dirname,'../coverage/contraste_complementario.json'))).then(r=>{for(const[c,v]of Object.entries(r.countries))for(const[y,d]of Object.entries(v.byYear))console.log(c,y,'informes',d.informes,'comparables',d.comparables,'coinciden',d.coinciden,'redondeo<1M',d.redondeoMillones??0,'discrepan',d.discrepan,JSON.stringify(d.porEstado));}).catch(e=>{console.error(e.stack);process.exitCode=1;});

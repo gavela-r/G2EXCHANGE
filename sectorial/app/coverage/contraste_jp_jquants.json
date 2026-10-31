@@ -1,0 +1,237 @@
+{
+  "generatedAt": "2026-10-31T10:52:01.115Z",
+  "source": "MYSQL_SOLO_LECTURA",
+  "nature": "CORROBORACION_NO_CERTIFICA",
+  "countries": {
+    "JP": {
+      "provider": "JQUANTS_FINS_SUMMARY",
+      "providerCells": 40254,
+      "companiesMatched": 2207,
+      "tolerance": "exacta (yenes)",
+      "byYear": {
+        "2022": {
+          "informes": 2207,
+          "comparables": 6,
+          "coinciden": 1,
+          "discrepan": 5,
+          "soloProveedor": 0,
+          "porEstado": {
+            "CONFLICTIVO": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 2
+            },
+            "CERTIFICADO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 3
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 1
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 1
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 1
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 1
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 0
+            },
+            "EFECTIVO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 1
+            }
+          }
+        },
+        "2023": {
+          "informes": 2218,
+          "comparables": 24,
+          "coinciden": 4,
+          "discrepan": 14,
+          "soloProveedor": 0,
+          "porEstado": {
+            "CONFLICTIVO": {
+              "coinciden": 3,
+              "redondeoMillones": 2,
+              "discrepan": 4
+            },
+            "CERTIFICADO": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 8
+            },
+            "PENDIENTE": {
+              "coinciden": 0,
+              "redondeoMillones": 4,
+              "discrepan": 2
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 1,
+              "redondeoMillones": 2,
+              "discrepan": 1
+            },
+            "EBIT": {
+              "coinciden": 1,
+              "redondeoMillones": 1,
+              "discrepan": 2
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 4
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 0,
+              "redondeoMillones": 1,
+              "discrepan": 3
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 2,
+              "redondeoMillones": 2,
+              "discrepan": 0
+            },
+            "EFECTIVO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 4
+            }
+          },
+          "redondeoMillones": 6
+        },
+        "2024": {
+          "informes": 2223,
+          "comparables": 3485,
+          "coinciden": 898,
+          "discrepan": 792,
+          "soloProveedor": 1,
+          "porEstado": {
+            "CONFLICTIVO": {
+              "coinciden": 456,
+              "redondeoMillones": 863,
+              "discrepan": 495
+            },
+            "CERTIFICADO": {
+              "coinciden": 432,
+              "redondeoMillones": 898,
+              "discrepan": 290
+            },
+            "PENDIENTE": {
+              "coinciden": 10,
+              "redondeoMillones": 34,
+              "discrepan": 7
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 209,
+              "redondeoMillones": 361,
+              "discrepan": 10
+            },
+            "EBIT": {
+              "coinciden": 206,
+              "redondeoMillones": 364,
+              "discrepan": 10
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 56,
+              "redondeoMillones": 204,
+              "discrepan": 321
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 174,
+              "redondeoMillones": 342,
+              "discrepan": 66
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 208,
+              "redondeoMillones": 358,
+              "discrepan": 15
+            },
+            "EFECTIVO": {
+              "coinciden": 45,
+              "redondeoMillones": 166,
+              "discrepan": 370
+            }
+          },
+          "redondeoMillones": 1795
+        },
+        "2025": {
+          "informes": 2226,
+          "comparables": 13055,
+          "coinciden": 5139,
+          "discrepan": 3027,
+          "soloProveedor": 1,
+          "porEstado": {
+            "CONFLICTIVO": {
+              "coinciden": 2440,
+              "redondeoMillones": 2277,
+              "discrepan": 1845
+            },
+            "CERTIFICADO": {
+              "coinciden": 2550,
+              "redondeoMillones": 2531,
+              "discrepan": 1113
+            },
+            "PENDIENTE": {
+              "coinciden": 149,
+              "redondeoMillones": 81,
+              "discrepan": 69
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 1188,
+              "redondeoMillones": 970,
+              "discrepan": 28
+            },
+            "EBIT": {
+              "coinciden": 1098,
+              "redondeoMillones": 994,
+              "discrepan": 18
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 333,
+              "redondeoMillones": 599,
+              "discrepan": 1257
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 1043,
+              "redondeoMillones": 960,
+              "discrepan": 187
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 1190,
+              "redondeoMillones": 946,
+              "discrepan": 54
+            },
+            "EFECTIVO": {
+              "coinciden": 287,
+              "redondeoMillones": 420,
+              "discrepan": 1483
+            }
+          },
+          "redondeoMillones": 4889
+        }
+      }
+    }
+  }
+}

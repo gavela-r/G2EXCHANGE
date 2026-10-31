@@ -1,5 +1,49 @@
 # Estado PCV / KPI 2022–2025 (Estados Unidos, Japón, Taiwán)
 
+## Actualización 31/10/2026 — diagnóstico de conflictos y correcciones preparadas
+
+Mismo universo congelado que el 30/10 (sha256 idéntico por país), mismos denominadores y misma regla de certificación. MySQL sólo lectura. Datos: `sectorial/app/coverage/cobertura_tras_correcciones.json`, `diagnostico_conflictos.json`.
+
+- **Oficial 31/10**: cobertura certificada vigente en MySQL. No cambia: no se ha escrito en la base.
+- **Tras correcciones** (escenario SIMULADO, no persistido): cobertura que resultaría de aplicar la migración preparada `server/sql/31_pcv_resolucion_conflictos.sql` + datos privados, con las tres reglas versionadas descritas abajo. Requiere copia verificada, pausa de los recuperadores que escriben PCV y aprobación.
+
+| País | Año | Universo | Con informe (fuente del país) | PCV cert. 30/10 | PCV cert. oficial 31/10 | **PCV tras correcciones** | KPI cert. 30/10 | KPI cert. oficial 31/10 | **KPI tras correcciones** |
+|---|---|---|---|---|---|---|---|---|---|
+| US | 2022 | 8017 | 5256 | 18.5 % | 18.5 % | **43.19 %** | 12.58 % | 12.58 % | **29.44 %** |
+| US | 2023 | 8017 | 5529 | 16.44 % | 16.44 % | **45.34 %** | 11.08 % | 11.08 % | **30.96 %** |
+| US | 2024 | 8017 | 5666 | 16.64 % | 16.64 % | **45.62 %** | 11.09 % | 11.09 % | **31.06 %** |
+| US | 2025 | 8017 | 5632 | 15.23 % | 15.23 % | **44.89 %** | 10.04 % | 10.04 % | **30.46 %** |
+| JP | 2022 | 3581 | 3469 | 68.19 % | 68.2 % | **70.29 %** | 52.33 % | 52.34 % | **58.08 %** |
+| JP | 2023 | 3581 | 3425 | 60.01 % | 60.01 % | **67.52 %** | 35.35 % | 35.36 % | **55.7 %** |
+| JP | 2024 | 3581 | 3385 | 58.99 % | 59 % | **66.48 %** | 34.53 % | 34.54 % | **54.9 %** |
+| JP | 2025 | 3581 | 3004 | 50.16 % | 50.16 % | **57.58 %** | 27.68 % | 27.68 % | **47.82 %** |
+| TW | 2022 | 1596 | 820 | 0 % | 0 % | **0 %** | 0 % | 0 % | **0 %** |
+| TW | 2023 | 1596 | 824 | 0 % | 0 % | **0 %** | 0 % | 0 % | **0 %** |
+| TW | 2024 | 1596 | 825 | 0 % | 0 % | **0 %** | 0 % | 0 % | **0 %** |
+| TW | 2025 | 1596 | 825 | 0 % | 0 % | **0 %** | 0 % | 0 % | **0 %** |
+
+**El objetivo del 85 % sigue sin alcanzarse en ninguna combinación.** Techos actuales: en EE. UU. la cobertura bruta es del 48–52 % (entre un 29 % y un 34 % del universo no tiene informe anual); en Japón, 78–87 %; en Taiwán no hay ninguna verificación oficial (ver abajo).
+
+### Causas probadas de los conflictos (por celda, 2022–2025)
+
+| País | Celdas en conflicto | Causa principal (probada) | Regla | Celdas que la regla resuelve |
+|---|---|---|---|---|
+| US | 201.910 | El PCV guardado es el **comparativo de 1–3 ejercicios anteriores** del mismo 10-K (p. ej. Apple FY2023: GrossProfit guardado 152.836 M$ = FY2021; la SEC da 169.148 M$). Probado contra los candidatos SEC de MySQL y contra `companyfacts` de la SEC (10-K, tag, unidad y fecha de cierre). | `US_PERIODO_V1` | 198.602 (≈98 %) |
+| US | 3.308 restantes | Sin explicar (≈600/año), reexpresiones del mismo cierre (≈30, requieren decidir versión), redondeos y coincidencias con cierres lejanos o posteriores (excluidas a propósito) | — | 0 (siguen en conflicto) |
+| JP | 31.165 | El mismo importe aparece además en la sección «主要な経営指標等の推移» del MISMO documento (`jpcrp_cor:<tag>SummaryOfBusinessResults`) y el verificador exige un tag exacto | `JP_RESUMEN_MISMO_DOC_V1` | 14.420 |
+| JP | — | CAPEX con el mismo tag y signo opuesto (forma canónica en valor absoluto, `pcv-complementos-politica.cjs`) | `JP_SIGNO_CANONICO_V1` | 496 |
+| JP | 16.249 restantes | Conceptos distintos: `CashAndDeposits` (現金及び預金) frente a `CashAndCashEquivalents`, resumen redondeado, sin explicar | — | 0 (no se certifican aunque coincida el importe) |
+
+Las reglas no certifican por coincidencia de importes: exigen contexto verificado de la fuente primaria (fecha de cierre = cierre del informe, no comparativo), relación de tag definida y, en EE. UU., que **todos** los originales distintos estén probados como valores de cierres anteriores (1–3 ejercicios; coincidencias con cierres lejanos o posteriores no se corrigen). Pruebas: `sectorial/app/tests/correcciones.test.cjs`.
+
+### Taiwán: tres defectos de datos detectados
+
+1. **Identidad cruzada**: 1.444 informes (294 empresas; 964 anuales 2022–2025) son documentos **EDINET de emisores japoneses** asignados por colisión de código bursátil a empresas de Taiwán (TSMC 2330 y MediaTek 2454 sólo tienen esos documentos). La medición usa ya sólo informes de la fuente del país; cuarentena preparada en `server/sql/32_informe_identidad_cuarentena.sql` (no ejecutada, no borra nada).
+2. **Resultados trimestrales guardados como anuales**: FinMind `TaiwanStockFinancialStatements` publica el trimestre aislado y la ingesta guardaba la fila del 31-12 (sólo el T4). INGRESOS, BENEFICIO_BRUTO, EBIT y BENEFICIO_NETO valen el 21–34 % del anual en las 10 empresas de la muestra (contraste con Eulerpool); flujos, inventarios y antes de impuestos sí cuadran (1,000). Validación real: Hon Hai 2024, suma T1–T4 de FinMind = 6.859.615.493.000 TWD = anual. Corregido en el código (`server/src/pcv/finmindTrimestral.ts`); los PCV ya guardados requieren reprocesar Taiwán.
+3. **Sin verificación oficial automatizable**: las condiciones de TWSE (sección 6) prohíben la descarga automatizada desde su web (MOPS) sin consentimiento y la Open Data de TWSE/TPEx sólo publica el último periodo (2026 T2). Verificador preparado para archivos MOPS descargados manualmente (`sectorial/app/tools/verificar_mops_local.cjs`), probado con el informe consolidado de TSMC 2022: 14 conceptos extraídos; ingresos, beneficio bruto, EBIT, inventarios y flujo operativo coinciden con Eulerpool.
+
+## Medición del 30/10/2026 (referencia)
+
 Medición reproducible con `npm run sectorial:coverage` (MySQL **sólo lectura**, `START TRANSACTION WITH CONSISTENT SNAPSHOT, READ ONLY`). Datos: `sectorial/app/coverage/cobertura_actual.json`.
 
 **Resultado: no se alcanza el objetivo del 85 % en ninguna de las 12 combinaciones país-año, ni en PCV ni en KPI.** Todas las cifras son mediciones; ninguna se ha ajustado.

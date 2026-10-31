@@ -4,6 +4,7 @@ const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex'
 const parse=x=>{try{return typeof x==='string'?JSON.parse(x):x;}catch{return null;}};
 const date=x=>{if(typeof x!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(x)||!Number.isFinite(Date.parse(x))||new Date(x+'T00:00:00Z').toISOString().slice(0,10)!==x)throw Error('Fecha civil inválida');return x;};
 const MAP={INGRESOS:'revenue',COSTE_VENTAS:'cogs',BENEFICIO_BRUTO:'grossProfit',GASTOS_OPERATIVOS:'opex',EBITDA:'ebitda',EBIT:'ebit',DEPRECIACION_AMORTIZACION:'da',BENEFICIO_ANTES_IMPUESTOS:'preTax',IMPUESTO_BENEFICIOS:'taxExpense',BENEFICIO_NETO:'netIncome',EFECTIVO:'cash',ACTIVOS_TOTALES:'assets',PASIVOS_TOTALES:'liabilities',PATRIMONIO_NETO:'equity',INVENTARIOS:'inventory',CUENTAS_COBRAR:'receivables',CUENTAS_PAGAR:'payables',DEUDA_CORTO_PLAZO:'shortDebt',DEUDA_LARGO_PLAZO:'longDebt',DEUDA_TOTAL:'totalDebtReported',CAPEX:'capex',FLUJO_CAJA_OPERATIVO:'cfo',FLUJO_CAJA_INVERSION:'cfi',FLUJO_CAJA_FINANCIACION:'cff',DIVIDENDOS_PAGADOS:'dividends',ACCIONES_EN_CIRCULACION:'shares',GASTO_INTERESES:'interest',ACTIVOS_CORRIENTES:'currentAssets',PASIVOS_CORRIENTES:'currentLiabilities',INMOVILIZADO_MATERIAL:'PPE',INMOVILIZADO_INTANGIBLE:'INTANGIBLE',DERECHOS_USO:'ROU',PASIVO_ARRENDAMIENTOS:'leaseDebt',ACTIVOS_CONTRACTUALES:'contractAssets',PASIVOS_CONTRACTUALES:'contractLiabilities'};
+const FUENTES_PAIS={US:['SEC_EDGAR'],JP:['EDINET'],TW:['FINMIND','MOPS']};
 const flow=new Set(['revenue','cogs','grossProfit','opex','ebitda','ebit','da','preTax','taxExpense','netIncome','capex','cfo','cfi','cff','dividends','interest']);
 function observe(row,proofs,report,context){
  const result={value:null,rawValue:row.importe,recordId:row.id,concept:row.concepto,code:row.concepto_estandar,reportId:report.id,document:report.identificador_fuente,provider:report.fuente,periodEnd:report.fecha_fin_periodo,publication:report.fecha_publicacion,validation:'PENDIENTE',reason:'Sin atestación compatible por registro/importe/contexto',currency:context?.currency??null,unit:row.unidad_tipo??null,scale:null,basis:context?.basis??null,norm:null};
@@ -61,7 +62,10 @@ async function loadCompany(db,id,asOf){
  const cl=classes[0],accepted=cl?.status==='ACCEPTED'&&cl.confidence==='HIGH',sectorId=accepted?cl.sector_id:company.sector_id,sectorName=accepted?cl.nombre_sector:company.nombre_sector,m=MAPEO_SECTORES[sectorId];
  const resolved=(!cl||accepted)&&m&&m.clasificacion!=='REVISAR'&&m.nombre.toLowerCase()===sectorName?.toLowerCase();
  const classification={sectorId,sectorName,model:resolved?Number(m.plantilla):null,status:resolved?'RESUELTO':'BLOQUEADO',method:m?.clasificacion??'SIN_MAPEO',evidence:accepted?cl:null,reason:resolved?null:'Clasificación pendiente, contradictoria o sin mapeo acreditado'};
- const[reports]=await db.query(`SELECT id,empresa_id,fecha_fin_periodo,fecha_publicacion,fuente,identificador_fuente FROM informe_financiero WHERE empresa_id=? AND tipo_periodo='ANUAL' AND fecha_fin_periodo<=? AND fecha_publicacion<=? AND EXISTS(SELECT 1 FROM partida_contable_valor p WHERE p.informe_id=informe_financiero.id) ORDER BY fecha_fin_periodo DESC,fecha_publicacion DESC,id DESC LIMIT 24`,[id,asOf,asOf]);
+ // Sólo informes de la fuente del país de la empresa: hubo documentos EDINET de emisores japoneses asignados a empresas
+ // de Taiwán por colisión de código bursátil (identidad cruzada, migración 32); nunca se valoran con ellos.
+ const fuentes=FUENTES_PAIS[company.codigo_iso];if(!fuentes)throw Error('País sin fuente primaria acreditada');
+ const[reports]=await db.query(`SELECT id,empresa_id,fecha_fin_periodo,fecha_publicacion,fuente,identificador_fuente FROM informe_financiero WHERE empresa_id=? AND tipo_periodo='ANUAL' AND fuente IN (?) AND fecha_fin_periodo<=? AND fecha_publicacion<=? AND EXISTS(SELECT 1 FROM partida_contable_valor p WHERE p.informe_id=informe_financiero.id) ORDER BY fecha_fin_periodo DESC,fecha_publicacion DESC,id DESC LIMIT 24`,[id,fuentes,asOf,asOf]);
  const periods=[],issues=[],years=new Set();
  for(const report of reports){const year=Number(report.fecha_fin_periodo.slice(0,4));if(years.has(year))continue;years.add(year);if(periods.length===4)break;
   const duplicates=reports.filter(x=>x.fecha_fin_periodo===report.fecha_fin_periodo);if(duplicates.length>1){issues.push({code:'INFORME_AMBIGUO',periodEnd:report.fecha_fin_periodo,reports:duplicates.map(x=>x.id)});}
@@ -77,4 +81,4 @@ async function loadCompany(db,id,asOf){
  if(periods.some(p=>p.issues.length))issues.push({code:'CONTEXTO_FINANCIERO_INCOMPLETO'});
  const result={version:'MYSQL_SECTORIAL_READONLY_0.2',readAt:new Date().toISOString(),asOf,company,instruments,classification,periods,issues,source:'MYSQL_SOLO_LECTURA',immutableHistory:true};result.inputHash=hash({asOf,company,classification,periods,issues});return result;
 }
-module.exports={MAP,flow,hash,date,observe,mapPeriod,search,loadCompany};
+module.exports={MAP,FUENTES_PAIS,flow,hash,date,observe,mapPeriod,search,loadCompany};

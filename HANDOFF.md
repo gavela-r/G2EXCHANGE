@@ -75,6 +75,8 @@ Leyenda: **IMPL** implementado · **PROB** probado · **MYSQL** aplicado en MySQ
 | Checkpoints de recuperadores | `private_backups/pcv-*` | operativos |
 | Exportador corporativo de Excel | `@oai/artifact-tool` (entorno Codex) | privado; el exportador portable del repositorio basta para validar |
 
+**Claves expuestas en el historial de `main` (anterior a esta entrega)**: el escaneo del 31/10/2026 encontró 16 credenciales del `.env` escritas en versiones antiguas de `server/insercionDatos/*.ts` en la rama `main`, también en `origin/main` (GitHub). Afecta a las claves de Finnhub (2), FRED, Alpaca (clave y secreto), Twelve Data, FinMind (5 tokens), Alpha Vantage, J-Quants y EDINET (3). La rama `entrega/frontend-handoff-20261031` no contiene ninguna (880 blobs, 0 coincidencias) y no se ha publicado. **Acción obligatoria: revocar y regenerar esas 16 claves** antes de seguir usándolas, y, si el repositorio es o fue público, valorar con el propietario la reescritura del historial de `main` (no se ha hecho: exige `push --force`).
+
 Comprobación tras transferir: el sha256 del volcado (`.sha256`), la restauración (`SETUP.md` §4) y `npm run sectorial:coverage`.
 
 **Espacio en disco**: las carpetas `G2EXCHANGE/private_backups/bundle-validation-*` (≈ 34 GB) son validaciones de Codex con copias de volcados del propio `private_backups`. Los tamaños coinciden con los originales, pero falta comparar su sha256 con los archivos `.sha256` del principal. Hasta entonces se conservan. `pcv-recovery-controls-2026-10-30T02-20-10-655Z.tar` (30 GB) tiene su propio manifiesto y no es redundante.

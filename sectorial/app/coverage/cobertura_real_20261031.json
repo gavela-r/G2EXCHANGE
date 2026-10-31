@@ -1,0 +1,2442 @@
+{
+  "generatedAt": "2026-10-31T14:13:36.087Z",
+  "source": "MYSQL_SOLO_LECTURA",
+  "database": "2GB",
+  "snapshotAt": "2026-10-31 14:07:33.556136",
+  "definition": {
+    "core": [
+      "INGRESOS",
+      "BENEFICIO_BRUTO",
+      "EBIT",
+      "BENEFICIO_NETO",
+      "GASTO_INTERESES",
+      "EFECTIVO",
+      "ACTIVOS_TOTALES",
+      "PASIVOS_TOTALES",
+      "PATRIMONIO_NETO",
+      "DEUDA_CORTO_PLAZO",
+      "DEUDA_LARGO_PLAZO",
+      "FLUJO_CAJA_OPERATIVO",
+      "CAPEX",
+      "DEPRECIACION_AMORTIZACION",
+      "INVENTARIOS",
+      "CUENTAS_COBRAR",
+      "CUENTAS_PAGAR"
+    ],
+    "kpis": [
+      {
+        "code": "MARGEN_BRUTO",
+        "inputs": [
+          "BENEFICIO_BRUTO",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "MARGEN_EBIT",
+        "inputs": [
+          "EBIT",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "MARGEN_NETO",
+        "inputs": [
+          "BENEFICIO_NETO",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "ROA",
+        "inputs": [
+          "BENEFICIO_NETO",
+          "ACTIVOS_TOTALES"
+        ]
+      },
+      {
+        "code": "ROE",
+        "inputs": [
+          "BENEFICIO_NETO",
+          "PATRIMONIO_NETO"
+        ]
+      },
+      {
+        "code": "DEUDA_TOTAL",
+        "inputs": [
+          "DEUDA_CORTO_PLAZO",
+          "DEUDA_LARGO_PLAZO"
+        ]
+      },
+      {
+        "code": "DEUDA_NETA",
+        "inputs": [
+          "DEUDA_CORTO_PLAZO",
+          "DEUDA_LARGO_PLAZO",
+          "EFECTIVO"
+        ]
+      },
+      {
+        "code": "DEUDA_SOBRE_PATRIMONIO",
+        "inputs": [
+          "DEUDA_CORTO_PLAZO",
+          "DEUDA_LARGO_PLAZO",
+          "PATRIMONIO_NETO"
+        ]
+      },
+      {
+        "code": "DEUDA_SOBRE_ACTIVOS",
+        "inputs": [
+          "DEUDA_CORTO_PLAZO",
+          "DEUDA_LARGO_PLAZO",
+          "ACTIVOS_TOTALES"
+        ]
+      },
+      {
+        "code": "COBERTURA_INTERESES",
+        "inputs": [
+          "EBIT",
+          "GASTO_INTERESES"
+        ]
+      },
+      {
+        "code": "EBITDA",
+        "inputs": [
+          "EBIT",
+          "DEPRECIACION_AMORTIZACION"
+        ]
+      },
+      {
+        "code": "MARGEN_EBITDA",
+        "inputs": [
+          "EBIT",
+          "DEPRECIACION_AMORTIZACION",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "FCF",
+        "inputs": [
+          "FLUJO_CAJA_OPERATIVO",
+          "CAPEX"
+        ]
+      },
+      {
+        "code": "MARGEN_FCF",
+        "inputs": [
+          "FLUJO_CAJA_OPERATIVO",
+          "CAPEX",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "CAPITAL_CIRCULANTE_OPERATIVO",
+        "inputs": [
+          "INVENTARIOS",
+          "CUENTAS_COBRAR",
+          "CUENTAS_PAGAR"
+        ]
+      },
+      {
+        "code": "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS",
+        "inputs": [
+          "INVENTARIOS",
+          "CUENTAS_COBRAR",
+          "CUENTAS_PAGAR",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "PASIVO_SOBRE_ACTIVOS",
+        "inputs": [
+          "PASIVOS_TOTALES",
+          "ACTIVOS_TOTALES"
+        ]
+      }
+    ],
+    "certifiedOutcomes": [
+      "INSERTED",
+      "NULL_FILLED",
+      "VERIFIED_EXISTING"
+    ],
+    "conflictPrecedence": "CONFLICT_PRESERVED",
+    "report": "último informe ANUAL por empresa y año de cierre, de la fuente del país",
+    "sourcesByCountry": {
+      "US": [
+        "SEC_EDGAR"
+      ],
+      "JP": [
+        "EDINET"
+      ],
+      "TW": [
+        "FINMIND",
+        "MOPS"
+      ]
+    },
+    "ledger": null,
+    "universe": "todas las empresas del país (sin exclusiones)",
+    "notApplicable": "no se aplican exclusiones (0)",
+    "target": {
+      "minimum": 85,
+      "excellent": 90
+    }
+  },
+  "universe": {
+    "US": {
+      "companies": 8017,
+      "sha256": "9e0113d347d1ead0c3d43ef54480da2e8b2e82ba377e7e8dddfa2548d506bd08"
+    },
+    "JP": {
+      "companies": 3581,
+      "sha256": "32a2836f6fed34a44dc59a60f178c54bce3f86be6e621d0a343b201158522278"
+    },
+    "TW": {
+      "companies": 1596,
+      "sha256": "e7cb71fbb1d118e90f30a58504b63bca11b45851372dc9e81554fabd0064268e"
+    }
+  },
+  "matrix": [
+    {
+      "country": "US",
+      "year": 2022,
+      "companies": 8017,
+      "companiesWithReport": 5256,
+      "companiesWithPcv": 5221,
+      "companiesAllCoreCertified": 15,
+      "pcv": {
+        "expected": 136289,
+        "present": 65800,
+        "certified": 58792,
+        "conflict": 730,
+        "presentUnverified": 6278,
+        "absent": 70489,
+        "absentNoReport": 46937,
+        "absentInReport": 23552,
+        "notApplicable": 0,
+        "grossCoverage": 48.28,
+        "certifiedCoverage": 43.14,
+        "certifiedOfPresent": 89.35
+      },
+      "kpi": {
+        "expected": 136289,
+        "certified": 39936,
+        "blockedByInputs": 49416,
+        "noReport": 46937,
+        "byKpi": {
+          "MARGEN_BRUTO": 2047,
+          "MARGEN_EBIT": 3335,
+          "MARGEN_NETO": 3552,
+          "ROA": 4638,
+          "ROE": 4469,
+          "DEUDA_TOTAL": 171,
+          "DEUDA_NETA": 154,
+          "DEUDA_SOBRE_PATRIMONIO": 156,
+          "DEUDA_SOBRE_ACTIVOS": 170,
+          "COBERTURA_INTERESES": 2296,
+          "EBITDA": 2641,
+          "MARGEN_EBITDA": 2261,
+          "FCF": 3814,
+          "MARGEN_FCF": 3022,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 1489,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 1346,
+          "PASIVO_SOBRE_ACTIVOS": 4375
+        },
+        "certifiedCoverage": 29.3
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 4423,
+          "certified": 3860,
+          "conflict": 101,
+          "presentUnverified": 462,
+          "absentInReport": 833,
+          "certifiedCoverage": 48.15
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 2263,
+          "certified": 2244,
+          "conflict": 2,
+          "presentUnverified": 17,
+          "absentInReport": 2993,
+          "certifiedCoverage": 27.99
+        },
+        "EBIT": {
+          "present": 4209,
+          "certified": 4187,
+          "conflict": 1,
+          "presentUnverified": 21,
+          "absentInReport": 1047,
+          "certifiedCoverage": 52.23
+        },
+        "BENEFICIO_NETO": {
+          "present": 5003,
+          "certified": 4789,
+          "conflict": 7,
+          "presentUnverified": 207,
+          "absentInReport": 253,
+          "certifiedCoverage": 59.74
+        },
+        "GASTO_INTERESES": {
+          "present": 3431,
+          "certified": 3015,
+          "conflict": 11,
+          "presentUnverified": 405,
+          "absentInReport": 1825,
+          "certifiedCoverage": 37.61
+        },
+        "EFECTIVO": {
+          "present": 4749,
+          "certified": 4296,
+          "conflict": 8,
+          "presentUnverified": 445,
+          "absentInReport": 507,
+          "certifiedCoverage": 53.59
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 5067,
+          "certified": 5028,
+          "conflict": 13,
+          "presentUnverified": 26,
+          "absentInReport": 189,
+          "certifiedCoverage": 62.72
+        },
+        "PASIVOS_TOTALES": {
+          "present": 4427,
+          "certified": 4398,
+          "conflict": 4,
+          "presentUnverified": 25,
+          "absentInReport": 829,
+          "certifiedCoverage": 54.86
+        },
+        "PATRIMONIO_NETO": {
+          "present": 4946,
+          "certified": 4738,
+          "conflict": 23,
+          "presentUnverified": 185,
+          "absentInReport": 310,
+          "certifiedCoverage": 59.1
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 1970,
+          "certified": 240,
+          "conflict": 45,
+          "presentUnverified": 1685,
+          "absentInReport": 3286,
+          "certifiedCoverage": 2.99
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 2658,
+          "certified": 1556,
+          "conflict": 178,
+          "presentUnverified": 924,
+          "absentInReport": 2598,
+          "certifiedCoverage": 19.41
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 5154,
+          "certified": 5079,
+          "conflict": 4,
+          "presentUnverified": 71,
+          "absentInReport": 102,
+          "certifiedCoverage": 63.35
+        },
+        "CAPEX": {
+          "present": 4109,
+          "certified": 3878,
+          "conflict": 9,
+          "presentUnverified": 222,
+          "absentInReport": 1147,
+          "certifiedCoverage": 48.37
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 4071,
+          "certified": 3102,
+          "conflict": 307,
+          "presentUnverified": 662,
+          "absentInReport": 1185,
+          "certifiedCoverage": 38.69
+        },
+        "INVENTARIOS": {
+          "present": 2397,
+          "certified": 2304,
+          "conflict": 7,
+          "presentUnverified": 86,
+          "absentInReport": 2859,
+          "certifiedCoverage": 28.74
+        },
+        "CUENTAS_COBRAR": {
+          "present": 3374,
+          "certified": 3039,
+          "conflict": 5,
+          "presentUnverified": 330,
+          "absentInReport": 1882,
+          "certifiedCoverage": 37.91
+        },
+        "CUENTAS_PAGAR": {
+          "present": 3549,
+          "certified": 3039,
+          "conflict": 5,
+          "presentUnverified": 505,
+          "absentInReport": 1707,
+          "certifiedCoverage": 37.91
+        }
+      },
+      "companiesWithFourYears": 4957
+    },
+    {
+      "country": "US",
+      "year": 2023,
+      "companies": 8017,
+      "companiesWithReport": 5529,
+      "companiesWithPcv": 5498,
+      "companiesAllCoreCertified": 12,
+      "pcv": {
+        "expected": 136289,
+        "present": 69742,
+        "certified": 61711,
+        "conflict": 804,
+        "presentUnverified": 7227,
+        "absent": 66547,
+        "absentNoReport": 42296,
+        "absentInReport": 24251,
+        "notApplicable": 0,
+        "grossCoverage": 51.17,
+        "certifiedCoverage": 45.28,
+        "certifiedOfPresent": 88.48
+      },
+      "kpi": {
+        "expected": 136289,
+        "certified": 41976,
+        "blockedByInputs": 52017,
+        "noReport": 42296,
+        "byKpi": {
+          "MARGEN_BRUTO": 2205,
+          "MARGEN_EBIT": 3570,
+          "MARGEN_NETO": 3791,
+          "ROA": 4903,
+          "ROE": 4719,
+          "DEUDA_TOTAL": 177,
+          "DEUDA_NETA": 160,
+          "DEUDA_SOBRE_PATRIMONIO": 160,
+          "DEUDA_SOBRE_ACTIVOS": 177,
+          "COBERTURA_INTERESES": 2309,
+          "EBITDA": 2732,
+          "MARGEN_EBITDA": 2361,
+          "FCF": 3960,
+          "MARGEN_FCF": 3183,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 1522,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 1373,
+          "PASIVO_SOBRE_ACTIVOS": 4674
+        },
+        "certifiedCoverage": 30.8
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 4724,
+          "certified": 4120,
+          "conflict": 103,
+          "presentUnverified": 501,
+          "absentInReport": 805,
+          "certifiedCoverage": 51.39
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 2435,
+          "certified": 2410,
+          "conflict": 1,
+          "presentUnverified": 24,
+          "absentInReport": 3094,
+          "certifiedCoverage": 30.06
+        },
+        "EBIT": {
+          "present": 4442,
+          "certified": 4415,
+          "conflict": 0,
+          "presentUnverified": 27,
+          "absentInReport": 1087,
+          "certifiedCoverage": 55.07
+        },
+        "BENEFICIO_NETO": {
+          "present": 5262,
+          "certified": 5033,
+          "conflict": 9,
+          "presentUnverified": 220,
+          "absentInReport": 267,
+          "certifiedCoverage": 62.78
+        },
+        "GASTO_INTERESES": {
+          "present": 3492,
+          "certified": 3033,
+          "conflict": 17,
+          "presentUnverified": 442,
+          "absentInReport": 2037,
+          "certifiedCoverage": 37.83
+        },
+        "EFECTIVO": {
+          "present": 4972,
+          "certified": 4442,
+          "conflict": 6,
+          "presentUnverified": 524,
+          "absentInReport": 557,
+          "certifiedCoverage": 55.41
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 5342,
+          "certified": 5306,
+          "conflict": 5,
+          "presentUnverified": 31,
+          "absentInReport": 187,
+          "certifiedCoverage": 66.18
+        },
+        "PASIVOS_TOTALES": {
+          "present": 4717,
+          "certified": 4687,
+          "conflict": 0,
+          "presentUnverified": 30,
+          "absentInReport": 812,
+          "certifiedCoverage": 58.46
+        },
+        "PATRIMONIO_NETO": {
+          "present": 5220,
+          "certified": 5005,
+          "conflict": 20,
+          "presentUnverified": 195,
+          "absentInReport": 309,
+          "certifiedCoverage": 62.43
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 2282,
+          "certified": 265,
+          "conflict": 52,
+          "presentUnverified": 1965,
+          "absentInReport": 3247,
+          "certifiedCoverage": 3.31
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 2868,
+          "certified": 1606,
+          "conflict": 197,
+          "presentUnverified": 1065,
+          "absentInReport": 2661,
+          "certifiedCoverage": 20.03
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 5425,
+          "certified": 5329,
+          "conflict": 3,
+          "presentUnverified": 93,
+          "absentInReport": 104,
+          "certifiedCoverage": 66.47
+        },
+        "CAPEX": {
+          "present": 4308,
+          "certified": 4034,
+          "conflict": 15,
+          "presentUnverified": 259,
+          "absentInReport": 1221,
+          "certifiedCoverage": 50.32
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 4349,
+          "certified": 3211,
+          "conflict": 371,
+          "presentUnverified": 767,
+          "absentInReport": 1180,
+          "certifiedCoverage": 40.05
+        },
+        "INVENTARIOS": {
+          "present": 2556,
+          "certified": 2459,
+          "conflict": 1,
+          "presentUnverified": 96,
+          "absentInReport": 2973,
+          "certifiedCoverage": 30.67
+        },
+        "CUENTAS_COBRAR": {
+          "present": 3600,
+          "certified": 3183,
+          "conflict": 4,
+          "presentUnverified": 413,
+          "absentInReport": 1929,
+          "certifiedCoverage": 39.7
+        },
+        "CUENTAS_PAGAR": {
+          "present": 3748,
+          "certified": 3173,
+          "conflict": 0,
+          "presentUnverified": 575,
+          "absentInReport": 1781,
+          "certifiedCoverage": 39.58
+        }
+      },
+      "companiesWithFourYears": 4957
+    },
+    {
+      "country": "US",
+      "year": 2024,
+      "companies": 8017,
+      "companiesWithReport": 5666,
+      "companiesWithPcv": 5632,
+      "companiesAllCoreCertified": 9,
+      "pcv": {
+        "expected": 136289,
+        "present": 71097,
+        "certified": 62078,
+        "conflict": 813,
+        "presentUnverified": 8206,
+        "absent": 65192,
+        "absentNoReport": 39967,
+        "absentInReport": 25225,
+        "notApplicable": 0,
+        "grossCoverage": 52.17,
+        "certifiedCoverage": 45.55,
+        "certifiedOfPresent": 87.31
+      },
+      "kpi": {
+        "expected": 136289,
+        "certified": 42055,
+        "blockedByInputs": 54267,
+        "noReport": 39967,
+        "byKpi": {
+          "MARGEN_BRUTO": 2271,
+          "MARGEN_EBIT": 3661,
+          "MARGEN_NETO": 3910,
+          "ROA": 5142,
+          "ROE": 4879,
+          "DEUDA_TOTAL": 173,
+          "DEUDA_NETA": 152,
+          "DEUDA_SOBRE_PATRIMONIO": 154,
+          "DEUDA_SOBRE_ACTIVOS": 173,
+          "COBERTURA_INTERESES": 1157,
+          "EBITDA": 2809,
+          "MARGEN_EBITDA": 2424,
+          "FCF": 4012,
+          "MARGEN_FCF": 3223,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 1574,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 1419,
+          "PASIVO_SOBRE_ACTIVOS": 4922
+        },
+        "certifiedCoverage": 30.86
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 4840,
+          "certified": 4218,
+          "conflict": 125,
+          "presentUnverified": 497,
+          "absentInReport": 826,
+          "certifiedCoverage": 52.61
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 2511,
+          "certified": 2489,
+          "conflict": 0,
+          "presentUnverified": 22,
+          "absentInReport": 3155,
+          "certifiedCoverage": 31.05
+        },
+        "EBIT": {
+          "present": 4561,
+          "certified": 4530,
+          "conflict": 0,
+          "presentUnverified": 31,
+          "absentInReport": 1105,
+          "certifiedCoverage": 56.5
+        },
+        "BENEFICIO_NETO": {
+          "present": 5417,
+          "certified": 5185,
+          "conflict": 1,
+          "presentUnverified": 231,
+          "absentInReport": 249,
+          "certifiedCoverage": 64.68
+        },
+        "GASTO_INTERESES": {
+          "present": 2649,
+          "certified": 1438,
+          "conflict": 3,
+          "presentUnverified": 1208,
+          "absentInReport": 3017,
+          "certifiedCoverage": 17.94
+        },
+        "EFECTIVO": {
+          "present": 5143,
+          "certified": 4602,
+          "conflict": 2,
+          "presentUnverified": 539,
+          "absentInReport": 523,
+          "certifiedCoverage": 57.4
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 5585,
+          "certified": 5546,
+          "conflict": 3,
+          "presentUnverified": 36,
+          "absentInReport": 81,
+          "certifiedCoverage": 69.18
+        },
+        "PASIVOS_TOTALES": {
+          "present": 4966,
+          "certified": 4931,
+          "conflict": 1,
+          "presentUnverified": 34,
+          "absentInReport": 700,
+          "certifiedCoverage": 61.51
+        },
+        "PATRIMONIO_NETO": {
+          "present": 5391,
+          "certified": 5155,
+          "conflict": 22,
+          "presentUnverified": 214,
+          "absentInReport": 275,
+          "certifiedCoverage": 64.3
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 2354,
+          "certified": 268,
+          "conflict": 50,
+          "presentUnverified": 2036,
+          "absentInReport": 3312,
+          "certifiedCoverage": 3.34
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 2936,
+          "certified": 1660,
+          "conflict": 207,
+          "presentUnverified": 1069,
+          "absentInReport": 2730,
+          "certifiedCoverage": 20.71
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 5561,
+          "certified": 5463,
+          "conflict": 0,
+          "presentUnverified": 98,
+          "absentInReport": 105,
+          "certifiedCoverage": 68.14
+        },
+        "CAPEX": {
+          "present": 4378,
+          "certified": 4085,
+          "conflict": 3,
+          "presentUnverified": 290,
+          "absentInReport": 1288,
+          "certifiedCoverage": 50.95
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 4483,
+          "certified": 3302,
+          "conflict": 389,
+          "presentUnverified": 792,
+          "absentInReport": 1183,
+          "certifiedCoverage": 41.19
+        },
+        "INVENTARIOS": {
+          "present": 2645,
+          "certified": 2541,
+          "conflict": 3,
+          "presentUnverified": 101,
+          "absentInReport": 3021,
+          "certifiedCoverage": 31.7
+        },
+        "CUENTAS_COBRAR": {
+          "present": 3778,
+          "certified": 3350,
+          "conflict": 4,
+          "presentUnverified": 424,
+          "absentInReport": 1888,
+          "certifiedCoverage": 41.79
+        },
+        "CUENTAS_PAGAR": {
+          "present": 3899,
+          "certified": 3315,
+          "conflict": 0,
+          "presentUnverified": 584,
+          "absentInReport": 1767,
+          "certifiedCoverage": 41.35
+        }
+      },
+      "companiesWithFourYears": 4957
+    },
+    {
+      "country": "US",
+      "year": 2025,
+      "companies": 8017,
+      "companiesWithReport": 5632,
+      "companiesWithPcv": 5598,
+      "companiesAllCoreCertified": 4,
+      "pcv": {
+        "expected": 136289,
+        "present": 70395,
+        "certified": 61078,
+        "conflict": 825,
+        "presentUnverified": 8492,
+        "absent": 65894,
+        "absentNoReport": 40545,
+        "absentInReport": 25349,
+        "notApplicable": 0,
+        "grossCoverage": 51.65,
+        "certifiedCoverage": 44.82,
+        "certifiedOfPresent": 86.76
+      },
+      "kpi": {
+        "expected": 136289,
+        "certified": 41218,
+        "blockedByInputs": 54526,
+        "noReport": 40545,
+        "byKpi": {
+          "MARGEN_BRUTO": 2200,
+          "MARGEN_EBIT": 3562,
+          "MARGEN_NETO": 3842,
+          "ROA": 5182,
+          "ROE": 4901,
+          "DEUDA_TOTAL": 168,
+          "DEUDA_NETA": 149,
+          "DEUDA_SOBRE_PATRIMONIO": 149,
+          "DEUDA_SOBRE_ACTIVOS": 168,
+          "COBERTURA_INTERESES": 954,
+          "EBITDA": 2719,
+          "MARGEN_EBITDA": 2345,
+          "FCF": 3866,
+          "MARGEN_FCF": 3107,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 1571,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 1409,
+          "PASIVO_SOBRE_ACTIVOS": 4926
+        },
+        "certifiedCoverage": 30.24
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 4749,
+          "certified": 4110,
+          "conflict": 129,
+          "presentUnverified": 510,
+          "absentInReport": 883,
+          "certifiedCoverage": 51.27
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 2436,
+          "certified": 2413,
+          "conflict": 0,
+          "presentUnverified": 23,
+          "absentInReport": 3196,
+          "certifiedCoverage": 30.1
+        },
+        "EBIT": {
+          "present": 4529,
+          "certified": 4496,
+          "conflict": 0,
+          "presentUnverified": 33,
+          "absentInReport": 1103,
+          "certifiedCoverage": 56.08
+        },
+        "BENEFICIO_NETO": {
+          "present": 5425,
+          "certified": 5205,
+          "conflict": 4,
+          "presentUnverified": 216,
+          "absentInReport": 207,
+          "certifiedCoverage": 64.92
+        },
+        "GASTO_INTERESES": {
+          "present": 2512,
+          "certified": 1194,
+          "conflict": 4,
+          "presentUnverified": 1314,
+          "absentInReport": 3120,
+          "certifiedCoverage": 14.89
+        },
+        "EFECTIVO": {
+          "present": 5090,
+          "certified": 4527,
+          "conflict": 2,
+          "presentUnverified": 561,
+          "absentInReport": 542,
+          "certifiedCoverage": 56.47
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 5575,
+          "certified": 5524,
+          "conflict": 1,
+          "presentUnverified": 50,
+          "absentInReport": 57,
+          "certifiedCoverage": 68.9
+        },
+        "PASIVOS_TOTALES": {
+          "present": 4975,
+          "certified": 4931,
+          "conflict": 0,
+          "presentUnverified": 44,
+          "absentInReport": 657,
+          "certifiedCoverage": 61.51
+        },
+        "PATRIMONIO_NETO": {
+          "present": 5393,
+          "certified": 5139,
+          "conflict": 20,
+          "presentUnverified": 234,
+          "absentInReport": 239,
+          "certifiedCoverage": 64.1
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 2420,
+          "certified": 263,
+          "conflict": 53,
+          "presentUnverified": 2104,
+          "absentInReport": 3212,
+          "certifiedCoverage": 3.28
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 2939,
+          "certified": 1650,
+          "conflict": 200,
+          "presentUnverified": 1089,
+          "absentInReport": 2693,
+          "certifiedCoverage": 20.58
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 5523,
+          "certified": 5410,
+          "conflict": 1,
+          "presentUnverified": 112,
+          "absentInReport": 109,
+          "certifiedCoverage": 67.48
+        },
+        "CAPEX": {
+          "present": 4242,
+          "certified": 3943,
+          "conflict": 1,
+          "presentUnverified": 298,
+          "absentInReport": 1390,
+          "certifiedCoverage": 49.18
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 4397,
+          "certified": 3196,
+          "conflict": 407,
+          "presentUnverified": 794,
+          "absentInReport": 1235,
+          "certifiedCoverage": 39.87
+        },
+        "INVENTARIOS": {
+          "present": 2571,
+          "certified": 2471,
+          "conflict": 1,
+          "presentUnverified": 99,
+          "absentInReport": 3061,
+          "certifiedCoverage": 30.82
+        },
+        "CUENTAS_COBRAR": {
+          "present": 3716,
+          "certified": 3292,
+          "conflict": 2,
+          "presentUnverified": 422,
+          "absentInReport": 1916,
+          "certifiedCoverage": 41.06
+        },
+        "CUENTAS_PAGAR": {
+          "present": 3903,
+          "certified": 3314,
+          "conflict": 0,
+          "presentUnverified": 589,
+          "absentInReport": 1729,
+          "certifiedCoverage": 41.34
+        }
+      },
+      "companiesWithFourYears": 4957
+    },
+    {
+      "country": "JP",
+      "year": 2022,
+      "companies": 3581,
+      "companiesWithReport": 3470,
+      "companiesWithPcv": 3470,
+      "companiesAllCoreCertified": 3,
+      "pcv": {
+        "expected": 60877,
+        "present": 52000,
+        "certified": 44506,
+        "conflict": 903,
+        "presentUnverified": 6591,
+        "absent": 8877,
+        "absentNoReport": 1887,
+        "absentInReport": 6990,
+        "notApplicable": 0,
+        "grossCoverage": 85.42,
+        "certifiedCoverage": 73.11,
+        "certifiedOfPresent": 85.59
+      },
+      "kpi": {
+        "expected": 60877,
+        "certified": 35141,
+        "blockedByInputs": 23849,
+        "noReport": 1887,
+        "byKpi": {
+          "MARGEN_BRUTO": 3059,
+          "MARGEN_EBIT": 3201,
+          "MARGEN_NETO": 3218,
+          "ROA": 3338,
+          "ROE": 3337,
+          "DEUDA_TOTAL": 56,
+          "DEUDA_NETA": 54,
+          "DEUDA_SOBRE_PATRIMONIO": 54,
+          "DEUDA_SOBRE_ACTIVOS": 54,
+          "COBERTURA_INTERESES": 2791,
+          "EBITDA": 3165,
+          "MARGEN_EBITDA": 3130,
+          "FCF": 3030,
+          "MARGEN_FCF": 2912,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 203,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 201,
+          "PASIVO_SOBRE_ACTIVOS": 3338
+        },
+        "certifiedCoverage": 57.72
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 3426,
+          "certified": 3275,
+          "conflict": 27,
+          "presentUnverified": 124,
+          "absentInReport": 44,
+          "certifiedCoverage": 91.45
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 3174,
+          "certified": 3074,
+          "conflict": 31,
+          "presentUnverified": 69,
+          "absentInReport": 296,
+          "certifiedCoverage": 85.84
+        },
+        "EBIT": {
+          "present": 3353,
+          "certified": 3239,
+          "conflict": 46,
+          "presentUnverified": 68,
+          "absentInReport": 117,
+          "certifiedCoverage": 90.45
+        },
+        "BENEFICIO_NETO": {
+          "present": 3449,
+          "certified": 3338,
+          "conflict": 48,
+          "presentUnverified": 63,
+          "absentInReport": 21,
+          "certifiedCoverage": 93.21
+        },
+        "GASTO_INTERESES": {
+          "present": 3027,
+          "certified": 2796,
+          "conflict": 7,
+          "presentUnverified": 224,
+          "absentInReport": 443,
+          "certifiedCoverage": 78.08
+        },
+        "EFECTIVO": {
+          "present": 3462,
+          "certified": 3352,
+          "conflict": 47,
+          "presentUnverified": 63,
+          "absentInReport": 8,
+          "certifiedCoverage": 93.61
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 3462,
+          "certified": 3351,
+          "conflict": 48,
+          "presentUnverified": 63,
+          "absentInReport": 8,
+          "certifiedCoverage": 93.58
+        },
+        "PASIVOS_TOTALES": {
+          "present": 3449,
+          "certified": 3338,
+          "conflict": 48,
+          "presentUnverified": 63,
+          "absentInReport": 21,
+          "certifiedCoverage": 93.21
+        },
+        "PATRIMONIO_NETO": {
+          "present": 3461,
+          "certified": 3349,
+          "conflict": 49,
+          "presentUnverified": 63,
+          "absentInReport": 9,
+          "certifiedCoverage": 93.52
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 1795,
+          "certified": 69,
+          "conflict": 22,
+          "presentUnverified": 1704,
+          "absentInReport": 1675,
+          "certifiedCoverage": 1.93
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 1735,
+          "certified": 63,
+          "conflict": 17,
+          "presentUnverified": 1655,
+          "absentInReport": 1735,
+          "certifiedCoverage": 1.76
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 3470,
+          "certified": 3402,
+          "conflict": 4,
+          "presentUnverified": 64,
+          "absentInReport": 0,
+          "certifiedCoverage": 95
+        },
+        "CAPEX": {
+          "present": 3303,
+          "certified": 3034,
+          "conflict": 2,
+          "presentUnverified": 267,
+          "absentInReport": 167,
+          "certifiedCoverage": 84.72
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 3410,
+          "certified": 3297,
+          "conflict": 40,
+          "presentUnverified": 73,
+          "absentInReport": 60,
+          "certifiedCoverage": 92.07
+        },
+        "INVENTARIOS": {
+          "present": 2022,
+          "certified": 461,
+          "conflict": 78,
+          "presentUnverified": 1483,
+          "absentInReport": 1448,
+          "certifiedCoverage": 12.87
+        },
+        "CUENTAS_COBRAR": {
+          "present": 2991,
+          "certified": 2308,
+          "conflict": 343,
+          "presentUnverified": 340,
+          "absentInReport": 479,
+          "certifiedCoverage": 64.45
+        },
+        "CUENTAS_PAGAR": {
+          "present": 3011,
+          "certified": 2760,
+          "conflict": 46,
+          "presentUnverified": 205,
+          "absentInReport": 459,
+          "certifiedCoverage": 77.07
+        }
+      },
+      "companiesWithFourYears": 3084
+    },
+    {
+      "country": "JP",
+      "year": 2023,
+      "companies": 3581,
+      "companiesWithReport": 3430,
+      "companiesWithPcv": 3430,
+      "companiesAllCoreCertified": 3,
+      "pcv": {
+        "expected": 60877,
+        "present": 52958,
+        "certified": 43225,
+        "conflict": 2273,
+        "presentUnverified": 7460,
+        "absent": 7919,
+        "absentNoReport": 2567,
+        "absentInReport": 5352,
+        "notApplicable": 0,
+        "grossCoverage": 86.99,
+        "certifiedCoverage": 71,
+        "certifiedOfPresent": 81.62
+      },
+      "kpi": {
+        "expected": 60877,
+        "certified": 33664,
+        "blockedByInputs": 24646,
+        "noReport": 2567,
+        "byKpi": {
+          "MARGEN_BRUTO": 2950,
+          "MARGEN_EBIT": 3024,
+          "MARGEN_NETO": 3026,
+          "ROA": 3247,
+          "ROE": 3240,
+          "DEUDA_TOTAL": 36,
+          "DEUDA_NETA": 32,
+          "DEUDA_SOBRE_PATRIMONIO": 32,
+          "DEUDA_SOBRE_ACTIVOS": 32,
+          "COBERTURA_INTERESES": 2784,
+          "EBITDA": 2999,
+          "MARGEN_EBITDA": 2873,
+          "FCF": 3001,
+          "MARGEN_FCF": 2806,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 169,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 163,
+          "PASIVO_SOBRE_ACTIVOS": 3250
+        },
+        "certifiedCoverage": 55.3
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 3395,
+          "certified": 3146,
+          "conflict": 153,
+          "presentUnverified": 96,
+          "absentInReport": 35,
+          "certifiedCoverage": 87.85
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 3189,
+          "certified": 3006,
+          "conflict": 104,
+          "presentUnverified": 79,
+          "absentInReport": 241,
+          "certifiedCoverage": 83.94
+        },
+        "EBIT": {
+          "present": 3355,
+          "certified": 3160,
+          "conflict": 131,
+          "presentUnverified": 64,
+          "absentInReport": 75,
+          "certifiedCoverage": 88.24
+        },
+        "BENEFICIO_NETO": {
+          "present": 3418,
+          "certified": 3250,
+          "conflict": 146,
+          "presentUnverified": 22,
+          "absentInReport": 12,
+          "certifiedCoverage": 90.76
+        },
+        "GASTO_INTERESES": {
+          "present": 3032,
+          "certified": 2787,
+          "conflict": 10,
+          "presentUnverified": 235,
+          "absentInReport": 398,
+          "certifiedCoverage": 77.83
+        },
+        "EFECTIVO": {
+          "present": 3426,
+          "certified": 3259,
+          "conflict": 145,
+          "presentUnverified": 22,
+          "absentInReport": 4,
+          "certifiedCoverage": 91.01
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 3426,
+          "certified": 3257,
+          "conflict": 149,
+          "presentUnverified": 20,
+          "absentInReport": 4,
+          "certifiedCoverage": 90.95
+        },
+        "PASIVOS_TOTALES": {
+          "present": 3419,
+          "certified": 3252,
+          "conflict": 147,
+          "presentUnverified": 20,
+          "absentInReport": 11,
+          "certifiedCoverage": 90.81
+        },
+        "PATRIMONIO_NETO": {
+          "present": 3425,
+          "certified": 3249,
+          "conflict": 156,
+          "presentUnverified": 20,
+          "absentInReport": 5,
+          "certifiedCoverage": 90.73
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 2244,
+          "certified": 43,
+          "conflict": 55,
+          "presentUnverified": 2146,
+          "absentInReport": 1186,
+          "certifiedCoverage": 1.2
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 2187,
+          "certified": 40,
+          "conflict": 46,
+          "presentUnverified": 2101,
+          "absentInReport": 1243,
+          "certifiedCoverage": 1.12
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 3430,
+          "certified": 3382,
+          "conflict": 28,
+          "presentUnverified": 20,
+          "absentInReport": 0,
+          "certifiedCoverage": 94.44
+        },
+        "CAPEX": {
+          "present": 3291,
+          "certified": 3027,
+          "conflict": 0,
+          "presentUnverified": 264,
+          "absentInReport": 139,
+          "certifiedCoverage": 84.53
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 3371,
+          "certified": 3210,
+          "conflict": 131,
+          "presentUnverified": 30,
+          "absentInReport": 59,
+          "certifiedCoverage": 89.64
+        },
+        "INVENTARIOS": {
+          "present": 2376,
+          "certified": 384,
+          "conflict": 178,
+          "presentUnverified": 1814,
+          "absentInReport": 1054,
+          "certifiedCoverage": 10.72
+        },
+        "CUENTAS_COBRAR": {
+          "present": 2989,
+          "certified": 2029,
+          "conflict": 631,
+          "presentUnverified": 329,
+          "absentInReport": 441,
+          "certifiedCoverage": 56.66
+        },
+        "CUENTAS_PAGAR": {
+          "present": 2985,
+          "certified": 2744,
+          "conflict": 63,
+          "presentUnverified": 178,
+          "absentInReport": 445,
+          "certifiedCoverage": 76.63
+        }
+      },
+      "companiesWithFourYears": 3084
+    },
+    {
+      "country": "JP",
+      "year": 2024,
+      "companies": 3581,
+      "companiesWithReport": 3385,
+      "companiesWithPcv": 3385,
+      "companiesAllCoreCertified": 4,
+      "pcv": {
+        "expected": 60877,
+        "present": 52362,
+        "certified": 42586,
+        "conflict": 2370,
+        "presentUnverified": 7406,
+        "absent": 8515,
+        "absentNoReport": 3332,
+        "absentInReport": 5183,
+        "notApplicable": 0,
+        "grossCoverage": 86.01,
+        "certifiedCoverage": 69.95,
+        "certifiedOfPresent": 81.33
+      },
+      "kpi": {
+        "expected": 60877,
+        "certified": 33181,
+        "blockedByInputs": 24364,
+        "noReport": 3332,
+        "byKpi": {
+          "MARGEN_BRUTO": 2900,
+          "MARGEN_EBIT": 2970,
+          "MARGEN_NETO": 2973,
+          "ROA": 3192,
+          "ROE": 3187,
+          "DEUDA_TOTAL": 30,
+          "DEUDA_NETA": 28,
+          "DEUDA_SOBRE_PATRIMONIO": 27,
+          "DEUDA_SOBRE_ACTIVOS": 28,
+          "COBERTURA_INTERESES": 2746,
+          "EBITDA": 2991,
+          "MARGEN_EBITDA": 2866,
+          "FCF": 2959,
+          "MARGEN_FCF": 2763,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 166,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 161,
+          "PASIVO_SOBRE_ACTIVOS": 3194
+        },
+        "certifiedCoverage": 54.5
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 3349,
+          "certified": 3095,
+          "conflict": 159,
+          "presentUnverified": 95,
+          "absentInReport": 36,
+          "certifiedCoverage": 86.43
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 3154,
+          "certified": 2955,
+          "conflict": 117,
+          "presentUnverified": 82,
+          "absentInReport": 231,
+          "certifiedCoverage": 82.52
+        },
+        "EBIT": {
+          "present": 3316,
+          "certified": 3105,
+          "conflict": 147,
+          "presentUnverified": 64,
+          "absentInReport": 69,
+          "certifiedCoverage": 86.71
+        },
+        "BENEFICIO_NETO": {
+          "present": 3379,
+          "certified": 3200,
+          "conflict": 159,
+          "presentUnverified": 20,
+          "absentInReport": 6,
+          "certifiedCoverage": 89.36
+        },
+        "GASTO_INTERESES": {
+          "present": 2997,
+          "certified": 2752,
+          "conflict": 10,
+          "presentUnverified": 235,
+          "absentInReport": 388,
+          "certifiedCoverage": 76.85
+        },
+        "EFECTIVO": {
+          "present": 3381,
+          "certified": 3204,
+          "conflict": 157,
+          "presentUnverified": 20,
+          "absentInReport": 4,
+          "certifiedCoverage": 89.47
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 3381,
+          "certified": 3197,
+          "conflict": 165,
+          "presentUnverified": 19,
+          "absentInReport": 4,
+          "certifiedCoverage": 89.28
+        },
+        "PASIVOS_TOTALES": {
+          "present": 3380,
+          "certified": 3197,
+          "conflict": 164,
+          "presentUnverified": 19,
+          "absentInReport": 5,
+          "certifiedCoverage": 89.28
+        },
+        "PATRIMONIO_NETO": {
+          "present": 3380,
+          "certified": 3190,
+          "conflict": 171,
+          "presentUnverified": 19,
+          "absentInReport": 5,
+          "certifiedCoverage": 89.08
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 2247,
+          "certified": 39,
+          "conflict": 58,
+          "presentUnverified": 2150,
+          "absentInReport": 1138,
+          "certifiedCoverage": 1.09
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 2180,
+          "certified": 36,
+          "conflict": 52,
+          "presentUnverified": 2092,
+          "absentInReport": 1205,
+          "certifiedCoverage": 1.01
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 3385,
+          "certified": 3335,
+          "conflict": 32,
+          "presentUnverified": 18,
+          "absentInReport": 0,
+          "certifiedCoverage": 93.13
+        },
+        "CAPEX": {
+          "present": 3250,
+          "certified": 2988,
+          "conflict": 2,
+          "presentUnverified": 260,
+          "absentInReport": 135,
+          "certifiedCoverage": 83.44
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 3334,
+          "certified": 3220,
+          "conflict": 87,
+          "presentUnverified": 27,
+          "absentInReport": 51,
+          "certifiedCoverage": 89.92
+        },
+        "INVENTARIOS": {
+          "present": 2360,
+          "certified": 387,
+          "conflict": 181,
+          "presentUnverified": 1792,
+          "absentInReport": 1025,
+          "certifiedCoverage": 10.81
+        },
+        "CUENTAS_COBRAR": {
+          "present": 2944,
+          "certified": 1982,
+          "conflict": 643,
+          "presentUnverified": 319,
+          "absentInReport": 441,
+          "certifiedCoverage": 55.35
+        },
+        "CUENTAS_PAGAR": {
+          "present": 2945,
+          "certified": 2704,
+          "conflict": 66,
+          "presentUnverified": 175,
+          "absentInReport": 440,
+          "certifiedCoverage": 75.51
+        }
+      },
+      "companiesWithFourYears": 3084
+    },
+    {
+      "country": "JP",
+      "year": 2025,
+      "companies": 3581,
+      "companiesWithReport": 3113,
+      "companiesWithPcv": 3113,
+      "companiesAllCoreCertified": 1,
+      "pcv": {
+        "expected": 60877,
+        "present": 48989,
+        "certified": 37138,
+        "conflict": 2335,
+        "presentUnverified": 9516,
+        "absent": 11888,
+        "absentNoReport": 7956,
+        "absentInReport": 3932,
+        "notApplicable": 0,
+        "grossCoverage": 80.47,
+        "certifiedCoverage": 61,
+        "certifiedOfPresent": 75.81
+      },
+      "kpi": {
+        "expected": 60877,
+        "certified": 28867,
+        "blockedByInputs": 24054,
+        "noReport": 7956,
+        "byKpi": {
+          "MARGEN_BRUTO": 2519,
+          "MARGEN_EBIT": 2576,
+          "MARGEN_NETO": 2578,
+          "ROA": 2792,
+          "ROE": 2786,
+          "DEUDA_TOTAL": 22,
+          "DEUDA_NETA": 18,
+          "DEUDA_SOBRE_PATRIMONIO": 18,
+          "DEUDA_SOBRE_ACTIVOS": 18,
+          "COBERTURA_INTERESES": 2388,
+          "EBITDA": 2622,
+          "MARGEN_EBITDA": 2500,
+          "FCF": 2576,
+          "MARGEN_FCF": 2378,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 144,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 139,
+          "PASIVO_SOBRE_ACTIVOS": 2793
+        },
+        "certifiedCoverage": 47.42
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 3081,
+          "certified": 2702,
+          "conflict": 155,
+          "presentUnverified": 224,
+          "absentInReport": 32,
+          "certifiedCoverage": 75.45
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 2896,
+          "certified": 2573,
+          "conflict": 116,
+          "presentUnverified": 207,
+          "absentInReport": 217,
+          "certifiedCoverage": 71.85
+        },
+        "EBIT": {
+          "present": 3047,
+          "certified": 2705,
+          "conflict": 149,
+          "presentUnverified": 193,
+          "absentInReport": 66,
+          "certifiedCoverage": 75.54
+        },
+        "BENEFICIO_NETO": {
+          "present": 3109,
+          "certified": 2795,
+          "conflict": 164,
+          "presentUnverified": 150,
+          "absentInReport": 4,
+          "certifiedCoverage": 78.05
+        },
+        "GASTO_INTERESES": {
+          "present": 2763,
+          "certified": 2391,
+          "conflict": 7,
+          "presentUnverified": 365,
+          "absentInReport": 350,
+          "certifiedCoverage": 66.77
+        },
+        "EFECTIVO": {
+          "present": 3110,
+          "certified": 2796,
+          "conflict": 164,
+          "presentUnverified": 150,
+          "absentInReport": 3,
+          "certifiedCoverage": 78.08
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 3110,
+          "certified": 2793,
+          "conflict": 167,
+          "presentUnverified": 150,
+          "absentInReport": 3,
+          "certifiedCoverage": 77.99
+        },
+        "PASIVOS_TOTALES": {
+          "present": 3110,
+          "certified": 2794,
+          "conflict": 166,
+          "presentUnverified": 150,
+          "absentInReport": 3,
+          "certifiedCoverage": 78.02
+        },
+        "PATRIMONIO_NETO": {
+          "present": 3110,
+          "certified": 2787,
+          "conflict": 173,
+          "presentUnverified": 150,
+          "absentInReport": 3,
+          "certifiedCoverage": 77.83
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 2336,
+          "certified": 29,
+          "conflict": 62,
+          "presentUnverified": 2245,
+          "absentInReport": 777,
+          "certifiedCoverage": 0.81
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 2276,
+          "certified": 27,
+          "conflict": 52,
+          "presentUnverified": 2197,
+          "absentInReport": 837,
+          "certifiedCoverage": 0.75
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 3113,
+          "certified": 2938,
+          "conflict": 27,
+          "presentUnverified": 148,
+          "absentInReport": 0,
+          "certifiedCoverage": 82.04
+        },
+        "CAPEX": {
+          "present": 2990,
+          "certified": 2601,
+          "conflict": 0,
+          "presentUnverified": 389,
+          "absentInReport": 123,
+          "certifiedCoverage": 72.63
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 3068,
+          "certified": 2856,
+          "conflict": 55,
+          "presentUnverified": 157,
+          "absentInReport": 45,
+          "certifiedCoverage": 79.75
+        },
+        "INVENTARIOS": {
+          "present": 2413,
+          "certified": 341,
+          "conflict": 185,
+          "presentUnverified": 1887,
+          "absentInReport": 700,
+          "certifiedCoverage": 9.52
+        },
+        "CUENTAS_COBRAR": {
+          "present": 2735,
+          "certified": 1650,
+          "conflict": 634,
+          "presentUnverified": 451,
+          "absentInReport": 378,
+          "certifiedCoverage": 46.08
+        },
+        "CUENTAS_PAGAR": {
+          "present": 2722,
+          "certified": 2360,
+          "conflict": 59,
+          "presentUnverified": 303,
+          "absentInReport": 391,
+          "certifiedCoverage": 65.9
+        }
+      },
+      "companiesWithFourYears": 3084
+    },
+    {
+      "country": "TW",
+      "year": 2022,
+      "companies": 1596,
+      "companiesWithReport": 820,
+      "companiesWithPcv": 703,
+      "companiesAllCoreCertified": 0,
+      "pcv": {
+        "expected": 27132,
+        "present": 11060,
+        "certified": 0,
+        "conflict": 0,
+        "presentUnverified": 11060,
+        "absent": 16072,
+        "absentNoReport": 13192,
+        "absentInReport": 2880,
+        "notApplicable": 0,
+        "grossCoverage": 40.76,
+        "certifiedCoverage": 0,
+        "certifiedOfPresent": 0
+      },
+      "kpi": {
+        "expected": 27132,
+        "certified": 0,
+        "blockedByInputs": 13940,
+        "noReport": 13192,
+        "byKpi": {
+          "MARGEN_BRUTO": 0,
+          "MARGEN_EBIT": 0,
+          "MARGEN_NETO": 0,
+          "ROA": 0,
+          "ROE": 0,
+          "DEUDA_TOTAL": 0,
+          "DEUDA_NETA": 0,
+          "DEUDA_SOBRE_PATRIMONIO": 0,
+          "DEUDA_SOBRE_ACTIVOS": 0,
+          "COBERTURA_INTERESES": 0,
+          "EBITDA": 0,
+          "MARGEN_EBITDA": 0,
+          "FCF": 0,
+          "MARGEN_FCF": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 0,
+          "PASIVO_SOBRE_ACTIVOS": 0
+        },
+        "certifiedCoverage": 0
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 698,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 698,
+          "absentInReport": 122,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 684,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 684,
+          "absentInReport": 136,
+          "certifiedCoverage": 0
+        },
+        "EBIT": {
+          "present": 686,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 686,
+          "absentInReport": 134,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_NETO": {
+          "present": 703,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 703,
+          "absentInReport": 117,
+          "certifiedCoverage": 0
+        },
+        "GASTO_INTERESES": {
+          "present": 138,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 138,
+          "absentInReport": 682,
+          "certifiedCoverage": 0
+        },
+        "EFECTIVO": {
+          "present": 697,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 697,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 697,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 697,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "PASIVOS_TOTALES": {
+          "present": 697,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 697,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "PATRIMONIO_NETO": {
+          "present": 697,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 697,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 601,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 601,
+          "absentInReport": 219,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 667,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 667,
+          "absentInReport": 153,
+          "certifiedCoverage": 0
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 699,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 699,
+          "absentInReport": 121,
+          "certifiedCoverage": 0
+        },
+        "CAPEX": {
+          "present": 677,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 677,
+          "absentInReport": 143,
+          "certifiedCoverage": 0
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 699,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 699,
+          "absentInReport": 121,
+          "certifiedCoverage": 0
+        },
+        "INVENTARIOS": {
+          "present": 667,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 667,
+          "absentInReport": 153,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_COBRAR": {
+          "present": 677,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 677,
+          "absentInReport": 143,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_PAGAR": {
+          "present": 676,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 676,
+          "absentInReport": 144,
+          "certifiedCoverage": 0
+        }
+      },
+      "companiesWithFourYears": 814
+    },
+    {
+      "country": "TW",
+      "year": 2023,
+      "companies": 1596,
+      "companiesWithReport": 824,
+      "companiesWithPcv": 702,
+      "companiesAllCoreCertified": 0,
+      "pcv": {
+        "expected": 27132,
+        "present": 11076,
+        "certified": 0,
+        "conflict": 0,
+        "presentUnverified": 11076,
+        "absent": 16056,
+        "absentNoReport": 13124,
+        "absentInReport": 2932,
+        "notApplicable": 0,
+        "grossCoverage": 40.82,
+        "certifiedCoverage": 0,
+        "certifiedOfPresent": 0
+      },
+      "kpi": {
+        "expected": 27132,
+        "certified": 0,
+        "blockedByInputs": 14008,
+        "noReport": 13124,
+        "byKpi": {
+          "MARGEN_BRUTO": 0,
+          "MARGEN_EBIT": 0,
+          "MARGEN_NETO": 0,
+          "ROA": 0,
+          "ROE": 0,
+          "DEUDA_TOTAL": 0,
+          "DEUDA_NETA": 0,
+          "DEUDA_SOBRE_PATRIMONIO": 0,
+          "DEUDA_SOBRE_ACTIVOS": 0,
+          "COBERTURA_INTERESES": 0,
+          "EBITDA": 0,
+          "MARGEN_EBITDA": 0,
+          "FCF": 0,
+          "MARGEN_FCF": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 0,
+          "PASIVO_SOBRE_ACTIVOS": 0
+        },
+        "certifiedCoverage": 0
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 697,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 697,
+          "absentInReport": 127,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 683,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 683,
+          "absentInReport": 141,
+          "certifiedCoverage": 0
+        },
+        "EBIT": {
+          "present": 685,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 685,
+          "absentInReport": 139,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_NETO": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 122,
+          "certifiedCoverage": 0
+        },
+        "GASTO_INTERESES": {
+          "present": 136,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 136,
+          "absentInReport": 688,
+          "certifiedCoverage": 0
+        },
+        "EFECTIVO": {
+          "present": 699,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 699,
+          "absentInReport": 125,
+          "certifiedCoverage": 0
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 699,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 699,
+          "absentInReport": 125,
+          "certifiedCoverage": 0
+        },
+        "PASIVOS_TOTALES": {
+          "present": 699,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 699,
+          "absentInReport": 125,
+          "certifiedCoverage": 0
+        },
+        "PATRIMONIO_NETO": {
+          "present": 699,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 699,
+          "absentInReport": 125,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 600,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 600,
+          "absentInReport": 224,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 668,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 668,
+          "absentInReport": 156,
+          "certifiedCoverage": 0
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "CAPEX": {
+          "present": 681,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 681,
+          "absentInReport": 143,
+          "certifiedCoverage": 0
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "INVENTARIOS": {
+          "present": 669,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 669,
+          "absentInReport": 155,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_COBRAR": {
+          "present": 679,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 679,
+          "absentInReport": 145,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_PAGAR": {
+          "present": 678,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 678,
+          "absentInReport": 146,
+          "certifiedCoverage": 0
+        }
+      },
+      "companiesWithFourYears": 814
+    },
+    {
+      "country": "TW",
+      "year": 2024,
+      "companies": 1596,
+      "companiesWithReport": 825,
+      "companiesWithPcv": 702,
+      "companiesAllCoreCertified": 0,
+      "pcv": {
+        "expected": 27132,
+        "present": 11105,
+        "certified": 0,
+        "conflict": 0,
+        "presentUnverified": 11105,
+        "absent": 16027,
+        "absentNoReport": 13107,
+        "absentInReport": 2920,
+        "notApplicable": 0,
+        "grossCoverage": 40.93,
+        "certifiedCoverage": 0,
+        "certifiedOfPresent": 0
+      },
+      "kpi": {
+        "expected": 27132,
+        "certified": 0,
+        "blockedByInputs": 14025,
+        "noReport": 13107,
+        "byKpi": {
+          "MARGEN_BRUTO": 0,
+          "MARGEN_EBIT": 0,
+          "MARGEN_NETO": 0,
+          "ROA": 0,
+          "ROE": 0,
+          "DEUDA_TOTAL": 0,
+          "DEUDA_NETA": 0,
+          "DEUDA_SOBRE_PATRIMONIO": 0,
+          "DEUDA_SOBRE_ACTIVOS": 0,
+          "COBERTURA_INTERESES": 0,
+          "EBITDA": 0,
+          "MARGEN_EBITDA": 0,
+          "FCF": 0,
+          "MARGEN_FCF": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 0,
+          "PASIVO_SOBRE_ACTIVOS": 0
+        },
+        "certifiedCoverage": 0
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 697,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 697,
+          "absentInReport": 128,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 683,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 683,
+          "absentInReport": 142,
+          "certifiedCoverage": 0
+        },
+        "EBIT": {
+          "present": 685,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 685,
+          "absentInReport": 140,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_NETO": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "GASTO_INTERESES": {
+          "present": 129,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 129,
+          "absentInReport": 696,
+          "certifiedCoverage": 0
+        },
+        "EFECTIVO": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "PASIVOS_TOTALES": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "PATRIMONIO_NETO": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 611,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 611,
+          "absentInReport": 214,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 671,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 671,
+          "absentInReport": 154,
+          "certifiedCoverage": 0
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "CAPEX": {
+          "present": 682,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 682,
+          "absentInReport": 143,
+          "certifiedCoverage": 0
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 702,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 702,
+          "absentInReport": 123,
+          "certifiedCoverage": 0
+        },
+        "INVENTARIOS": {
+          "present": 671,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 671,
+          "absentInReport": 154,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_COBRAR": {
+          "present": 681,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 681,
+          "absentInReport": 144,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_PAGAR": {
+          "present": 681,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 681,
+          "absentInReport": 144,
+          "certifiedCoverage": 0
+        }
+      },
+      "companiesWithFourYears": 814
+    },
+    {
+      "country": "TW",
+      "year": 2025,
+      "companies": 1596,
+      "companiesWithReport": 825,
+      "companiesWithPcv": 701,
+      "companiesAllCoreCertified": 0,
+      "pcv": {
+        "expected": 27132,
+        "present": 11080,
+        "certified": 0,
+        "conflict": 0,
+        "presentUnverified": 11080,
+        "absent": 16052,
+        "absentNoReport": 13107,
+        "absentInReport": 2945,
+        "notApplicable": 0,
+        "grossCoverage": 40.84,
+        "certifiedCoverage": 0,
+        "certifiedOfPresent": 0
+      },
+      "kpi": {
+        "expected": 27132,
+        "certified": 0,
+        "blockedByInputs": 14025,
+        "noReport": 13107,
+        "byKpi": {
+          "MARGEN_BRUTO": 0,
+          "MARGEN_EBIT": 0,
+          "MARGEN_NETO": 0,
+          "ROA": 0,
+          "ROE": 0,
+          "DEUDA_TOTAL": 0,
+          "DEUDA_NETA": 0,
+          "DEUDA_SOBRE_PATRIMONIO": 0,
+          "DEUDA_SOBRE_ACTIVOS": 0,
+          "COBERTURA_INTERESES": 0,
+          "EBITDA": 0,
+          "MARGEN_EBITDA": 0,
+          "FCF": 0,
+          "MARGEN_FCF": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO": 0,
+          "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS": 0,
+          "PASIVO_SOBRE_ACTIVOS": 0
+        },
+        "certifiedCoverage": 0
+      },
+      "byConcept": {
+        "INGRESOS": {
+          "present": 696,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 696,
+          "absentInReport": 129,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_BRUTO": {
+          "present": 682,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 682,
+          "absentInReport": 143,
+          "certifiedCoverage": 0
+        },
+        "EBIT": {
+          "present": 684,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 684,
+          "absentInReport": 141,
+          "certifiedCoverage": 0
+        },
+        "BENEFICIO_NETO": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 124,
+          "certifiedCoverage": 0
+        },
+        "GASTO_INTERESES": {
+          "present": 129,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 129,
+          "absentInReport": 696,
+          "certifiedCoverage": 0
+        },
+        "EFECTIVO": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 124,
+          "certifiedCoverage": 0
+        },
+        "ACTIVOS_TOTALES": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 124,
+          "certifiedCoverage": 0
+        },
+        "PASIVOS_TOTALES": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 124,
+          "certifiedCoverage": 0
+        },
+        "PATRIMONIO_NETO": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 124,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_CORTO_PLAZO": {
+          "present": 601,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 601,
+          "absentInReport": 224,
+          "certifiedCoverage": 0
+        },
+        "DEUDA_LARGO_PLAZO": {
+          "present": 668,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 668,
+          "absentInReport": 157,
+          "certifiedCoverage": 0
+        },
+        "FLUJO_CAJA_OPERATIVO": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 124,
+          "certifiedCoverage": 0
+        },
+        "CAPEX": {
+          "present": 681,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 681,
+          "absentInReport": 144,
+          "certifiedCoverage": 0
+        },
+        "DEPRECIACION_AMORTIZACION": {
+          "present": 701,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 701,
+          "absentInReport": 124,
+          "certifiedCoverage": 0
+        },
+        "INVENTARIOS": {
+          "present": 670,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 670,
+          "absentInReport": 155,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_COBRAR": {
+          "present": 681,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 681,
+          "absentInReport": 144,
+          "certifiedCoverage": 0
+        },
+        "CUENTAS_PAGAR": {
+          "present": 681,
+          "certified": 0,
+          "conflict": 0,
+          "presentUnverified": 681,
+          "absentInReport": 144,
+          "certifiedCoverage": 0
+        }
+      },
+      "companiesWithFourYears": 814
+    }
+  ]
+}

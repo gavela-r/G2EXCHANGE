@@ -1,0 +1,139 @@
+{
+  "generatedAt": "2026-10-31T14:43:22.397Z",
+  "engineHash": "684a9340d161c8da43819d30dfbcc6c5c83a5abd79f4def093c2ae956183fc79",
+  "exporter": "portable (SheetJS) + Microsoft Excel nativo",
+  "sectors": 16,
+  "validated": 16,
+  "formulaChecks": 117621,
+  "brokenReferences": 0,
+  "results": [
+    {
+      "sector": 1,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8211,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 2,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8226,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 3,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8211,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 4,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8256,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 5,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8241,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 6,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8256,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 7,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8211,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 8,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8496,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 9,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8511,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 10,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8286,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 11,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8211,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 12,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8226,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 13,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 936,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 14,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 861,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 15,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8286,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    },
+    {
+      "sector": 16,
+      "status": "VALIDADO",
+      "repairMode": false,
+      "formulaChecks": 8196,
+      "brokenReferences": 0,
+      "capitalMutation": true
+    }
+  ]
+}

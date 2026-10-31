@@ -4,6 +4,8 @@
 
 Motor de valoración (CAPM, WACC, DCF y 16 modelos sectoriales con Excel) sobre datos financieros certificados de EE. UU. (SEC), Japón (EDINET) y Taiwán (recuperados de FinMind, sin certificar). El estado exacto, las limitaciones y la transferencia privada de datos están en **[HANDOFF](HANDOFF.md)**.
 
+El capital circulante se proyecta por días de cobro, inventario y pago (metodología G2 sobre ventas, o convencional declarada) y los históricos de DSO, DPO, DIO, CCC, NWC y ΔNWC se derivan de PCV certificados ([VALUATION_ENGINE](VALUATION_ENGINE.md) §4 bis).
+
 Arranque sin credenciales ni base de datos (modo mock con datos sintéticos):
 
 ```bash

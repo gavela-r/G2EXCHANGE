@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-31T17:35:29.727Z",
+  "generatedAt": "2026-10-31T22:17:05.546Z",
   "source": "MYSQL_SOLO_LECTURA",
   "database": "2GB",
-  "snapshotAt": "2026-10-31 17:26:58.469244",
+  "snapshotAt": "2026-10-31 22:10:32.959625",
   "definition": {
     "core": [
       "INGRESOS",
@@ -152,6 +152,78 @@
         ]
       }
     ],
+    "derivedIndicators": [
+      {
+        "code": "DSO",
+        "method": "SOBRE_VENTAS",
+        "inputs": [
+          "CUENTAS_COBRAR",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "DPO_SOBRE_VENTAS",
+        "method": "SOBRE_VENTAS",
+        "inputs": [
+          "CUENTAS_PAGAR",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "DIAS_INVENTARIO_SOBRE_VENTAS",
+        "method": "SOBRE_VENTAS",
+        "inputs": [
+          "INVENTARIOS",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "CCC_SOBRE_VENTAS",
+        "method": "SOBRE_VENTAS",
+        "inputs": [
+          "CUENTAS_COBRAR",
+          "INVENTARIOS",
+          "CUENTAS_PAGAR",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS",
+        "method": "SOBRE_VENTAS",
+        "inputs": [
+          "INVENTARIOS",
+          "ACTIVOS_CONTRACTUALES",
+          "INGRESOS"
+        ]
+      },
+      {
+        "code": "DIO_SOBRE_COSTE",
+        "method": "CONVENCIONAL",
+        "inputs": [
+          "INVENTARIOS",
+          "COSTE_VENTAS"
+        ]
+      },
+      {
+        "code": "DPO_SOBRE_COSTE",
+        "method": "CONVENCIONAL",
+        "inputs": [
+          "CUENTAS_PAGAR",
+          "COSTE_VENTAS"
+        ]
+      },
+      {
+        "code": "CCC_CONVENCIONAL",
+        "method": "CONVENCIONAL",
+        "inputs": [
+          "CUENTAS_COBRAR",
+          "INGRESOS",
+          "INVENTARIOS",
+          "CUENTAS_PAGAR",
+          "COSTE_VENTAS"
+        ]
+      }
+    ],
     "certifiedOutcomes": [
       "INSERTED",
       "NULL_FILLED",
@@ -240,6 +312,53 @@
           "PASIVO_SOBRE_ACTIVOS": 4617
         },
         "certifiedCoverage": 30.76
+      },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 8017,
+        "byIndicator": {
+          "DSO": {
+            "certified": 2839,
+            "coverage": 35.41
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2473,
+            "coverage": 30.85
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 2226,
+            "coverage": 27.77
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 1358,
+            "coverage": 16.94
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 1542,
+            "coverage": 19.23
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 1470,
+            "coverage": 18.34
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 952,
+            "coverage": 11.87
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 1501,
+            "coverage": 18.72
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": null,
+          "coverage": null,
+          "note": "2022 sin saldo inicial de 2021 en la ventana"
+        }
       },
       "byConcept": {
         "INGRESOS": {
@@ -428,6 +547,53 @@
         },
         "certifiedCoverage": 32.31
       },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 8017,
+        "byIndicator": {
+          "DSO": {
+            "certified": 2993,
+            "coverage": 37.33
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2617,
+            "coverage": 32.64
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 2371,
+            "coverage": 29.57
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 1386,
+            "coverage": 17.29
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 1639,
+            "coverage": 20.44
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 1567,
+            "coverage": 19.55
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 980,
+            "coverage": 12.22
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 1535,
+            "coverage": 19.15
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 1383,
+          "coverage": 17.25,
+          "note": "cota superior"
+        }
+      },
       "byConcept": {
         "INGRESOS": {
           "present": 5000,
@@ -614,6 +780,53 @@
           "PASIVO_SOBRE_ACTIVOS": 5188
         },
         "certifiedCoverage": 32.26
+      },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 8017,
+        "byIndicator": {
+          "DSO": {
+            "certified": 3126,
+            "coverage": 38.99
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2744,
+            "coverage": 34.23
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 2443,
+            "coverage": 30.47
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 1436,
+            "coverage": 17.91
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 1696,
+            "coverage": 21.16
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 1657,
+            "coverage": 20.67
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 1016,
+            "coverage": 12.67
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 1591,
+            "coverage": 19.85
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 1451,
+          "coverage": 18.1,
+          "note": "cota superior"
+        }
       },
       "byConcept": {
         "INGRESOS": {
@@ -802,6 +1015,53 @@
         },
         "certifiedCoverage": 31.11
       },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 8017,
+        "byIndicator": {
+          "DSO": {
+            "certified": 3008,
+            "coverage": 37.52
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2714,
+            "coverage": 33.85
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 2319,
+            "coverage": 28.93
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 1419,
+            "coverage": 17.7
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 1592,
+            "coverage": 19.86
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 1629,
+            "coverage": 20.32
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 994,
+            "coverage": 12.4
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 1581,
+            "coverage": 19.72
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 1467,
+          "coverage": 18.3,
+          "note": "cota superior"
+        }
+      },
       "byConcept": {
         "INGRESOS": {
           "present": 4905,
@@ -988,6 +1248,53 @@
           "PASIVO_SOBRE_ACTIVOS": 3338
         },
         "certifiedCoverage": 57.72
+      },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 3581,
+        "byIndicator": {
+          "DSO": {
+            "certified": 2294,
+            "coverage": 64.06
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2744,
+            "coverage": 76.63
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 451,
+            "coverage": 12.59
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 201,
+            "coverage": 5.61
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 410,
+            "coverage": 11.45
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 2662,
+            "coverage": 74.34
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 195,
+            "coverage": 5.45
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 203,
+            "coverage": 5.67
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": null,
+          "coverage": null,
+          "note": "2022 sin saldo inicial de 2021 en la ventana"
+        }
       },
       "byConcept": {
         "INGRESOS": {
@@ -1176,6 +1483,53 @@
         },
         "certifiedCoverage": 55.3
       },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 3581,
+        "byIndicator": {
+          "DSO": {
+            "certified": 1977,
+            "coverage": 55.21
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2647,
+            "coverage": 73.92
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 356,
+            "coverage": 9.94
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 163,
+            "coverage": 4.55
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 330,
+            "coverage": 9.22
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 2606,
+            "coverage": 72.77
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 163,
+            "coverage": 4.55
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 169,
+            "coverage": 4.72
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 156,
+          "coverage": 4.36,
+          "note": "cota superior"
+        }
+      },
       "byConcept": {
         "INGRESOS": {
           "present": 3395,
@@ -1362,6 +1716,53 @@
           "PASIVO_SOBRE_ACTIVOS": 3194
         },
         "certifiedCoverage": 54.5
+      },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 3581,
+        "byIndicator": {
+          "DSO": {
+            "certified": 1932,
+            "coverage": 53.95
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2609,
+            "coverage": 72.86
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 356,
+            "coverage": 9.94
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 161,
+            "coverage": 4.5
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 328,
+            "coverage": 9.16
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 2567,
+            "coverage": 71.68
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 161,
+            "coverage": 4.5
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 166,
+            "coverage": 4.64
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 161,
+          "coverage": 4.5,
+          "note": "cota superior"
+        }
       },
       "byConcept": {
         "INGRESOS": {
@@ -1550,6 +1951,53 @@
         },
         "certifiedCoverage": 47.42
       },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 3581,
+        "byIndicator": {
+          "DSO": {
+            "certified": 1604,
+            "coverage": 44.79
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 2269,
+            "coverage": 63.36
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 311,
+            "coverage": 8.68
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 139,
+            "coverage": 3.88
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 285,
+            "coverage": 7.96
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 2232,
+            "coverage": 62.33
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 139,
+            "coverage": 3.88
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 144,
+            "coverage": 4.02
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 135,
+          "coverage": 3.77,
+          "note": "cota superior"
+        }
+      },
       "byConcept": {
         "INGRESOS": {
           "present": 3081,
@@ -1736,6 +2184,53 @@
           "PASIVO_SOBRE_ACTIVOS": 0
         },
         "certifiedCoverage": 0
+      },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 1596,
+        "byIndicator": {
+          "DSO": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 0,
+            "coverage": 0
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": null,
+          "coverage": null,
+          "note": "2022 sin saldo inicial de 2021 en la ventana"
+        }
       },
       "byConcept": {
         "INGRESOS": {
@@ -1924,6 +2419,53 @@
         },
         "certifiedCoverage": 0
       },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 1596,
+        "byIndicator": {
+          "DSO": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 0,
+            "coverage": 0
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 0,
+          "coverage": 0,
+          "note": "cota superior"
+        }
+      },
       "byConcept": {
         "INGRESOS": {
           "present": 697,
@@ -2111,6 +2653,53 @@
         },
         "certifiedCoverage": 0
       },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 1596,
+        "byIndicator": {
+          "DSO": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 0,
+            "coverage": 0
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 0,
+          "coverage": 0,
+          "note": "cota superior"
+        }
+      },
       "byConcept": {
         "INGRESOS": {
           "present": 697,
@@ -2297,6 +2886,53 @@
           "PASIVO_SOBRE_ACTIVOS": 0
         },
         "certifiedCoverage": 0
+      },
+      "derivedIndicators": {
+        "nature": "DERIVADO_DE_PCV_CERTIFICADOS_NO_PERSISTIDO",
+        "expected": 1596,
+        "byIndicator": {
+          "DSO": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_INVENTARIO_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DIO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "DPO_SOBRE_COSTE": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CCC_CONVENCIONAL": {
+            "certified": 0,
+            "coverage": 0
+          },
+          "CAPITAL_CIRCULANTE_OPERATIVO": {
+            "certified": 0,
+            "coverage": 0
+          }
+        },
+        "DELTA_NWC": {
+          "certifiedUpperBound": 0,
+          "coverage": 0,
+          "note": "cota superior"
+        }
       },
       "byConcept": {
         "INGRESOS": {

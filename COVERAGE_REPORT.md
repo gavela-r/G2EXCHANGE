@@ -1,6 +1,6 @@
 # Informe de cobertura PCV/KPI 2022–2025
 
-Medido directamente en MySQL operativo, en solo lectura, el 2026-10-31 17:26 UTC, después de todas las escrituras verificadas (`npm run sectorial:coverage`; datos en `sectorial/app/coverage/cobertura_final_entrega.json`).
+Medido directamente en MySQL operativo, en solo lectura, el 2026-10-31 22:10 UTC, después de todas las escrituras verificadas (incluido el lote 3 de Taiwán, que no cambia la cobertura certificada) (`npm run sectorial:coverage`; datos en `sectorial/app/coverage/cobertura_final_entrega.json`).
 
 ## Definición
 - **Universo**: todas las empresas del país, sin exclusiones, congelado con sha256 por país (US `9e0113d3`, JP `32a2836f`, TW `e7cb71fb`).
@@ -40,6 +40,28 @@ Medido directamente en MySQL operativo, en solo lectura, el 2026-10-31 17:26 UTC
   - **Toyota y Sony**: 6 de 10, porque faltan conceptos IFRS en el verificador EDINET.
   - **Taiwán**: sin fecha de publicación, así que el DCF queda bloqueado.
 
+## Indicadores de capital circulante derivados (aparte de la cobertura KPI oficial)
+Porcentaje del universo de empresas con el indicador certificado en el último informe anual de cada año (todas sus entradas certificadas). Se derivan al vuelo de PCV certificados (`VALUATION_ENGINE.md` §4 bis); **no** forman parte de los 17 KPI de la tabla anterior. ΔNWC es una cota superior (NWC certificado en el año y en el anterior, sin comprobar aquí el contexto); 2022 no tiene saldo de 2021 en la ventana.
+
+| País | Año | DSO | DPO s/ventas | Días inventario s/ventas | CCC s/ventas | DIO s/coste | CCC convencional | NWC | ΔNWC |
+|---|---|---|---|---|---|---|---|---|---|
+| US | 2022 | 35,41 % | 30,85 % | 27,77 % | 16,94 % | 19,23 % | 11,87 % | 18,72 % | — |
+| US | 2023 | 37,33 % | 32,64 % | 29,57 % | 17,29 % | 20,44 % | 12,22 % | 19,15 % | 17,25 % |
+| US | 2024 | 38,99 % | 34,23 % | 30,47 % | 17,91 % | 21,16 % | 12,67 % | 19,85 % | 18,1 % |
+| US | 2025 | 37,52 % | 33,85 % | 28,93 % | 17,7 % | 19,86 % | 12,4 % | 19,72 % | 18,3 % |
+| JP | 2022 | 64,06 % | 76,63 % | 12,59 % | 5,61 % | 11,45 % | 5,45 % | 5,67 % | — |
+| JP | 2023 | 55,21 % | 73,92 % | 9,94 % | 4,55 % | 9,22 % | 4,55 % | 4,72 % | 4,36 % |
+| JP | 2024 | 53,95 % | 72,86 % | 9,94 % | 4,5 % | 9,16 % | 4,5 % | 4,64 % | 4,5 % |
+| JP | 2025 | 44,79 % | 63,36 % | 8,68 % | 3,88 % | 7,96 % | 3,88 % | 4,02 % | 3,77 % |
+| TW | 2022 | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | — |
+| TW | 2023 | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % |
+| TW | 2024 | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % |
+| TW | 2025 | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % | 0 % |
+
+- **Limitante**: el inventario certificado. En Japón solo el 9–13 % de las empresas lo tiene (muchas no tienen existencias o usan etiquetas sin verificar), así que CCC y NWC quedan en el 4–6 %; sin inventario no se calculan (no se usa cero).
+- **Activos contractuales**: 0 % certificados en los tres países, así que la métrica ampliada no se puede calcular hoy.
+- **Taiwán**: 0 % (sin evidencia primaria).
+
 ## Por qué no se llega al 65–70 % en todos los casos
 - **EE. UU.**: la cobertura bruta es del 50,6–54,5 %.
   - 879 empresas no tienen datos XBRL en la SEC (ADR sin informe anual, emisores de 6-K, fondos).
@@ -52,6 +74,6 @@ Medido directamente en MySQL operativo, en solo lectura, el 2026-10-31 17:26 UTC
 | Estado | Situación |
 |---|---|
 | Recuperado (FinMind) | 820–825 empresas con informe anual al año |
-| Normalizado | 28.892 PCV de resultados corregidos de T4 a anual (lotes 1 y 2); el EPS sigue siendo trimestral y no se deriva |
+| Normalizado | 33.096 PCV de resultados de 2.598 informes y 666 empresas corregidos de T4 a anual (lotes 1–3; descarga FinMind 906/906); el EPS sigue siendo trimestral y no se deriva |
 | Contrastado (Eulerpool) | `sectorial/app/coverage/contraste_tw_eulerpool.json` |
 | Certificado | **0** (sin documento primario MOPS incorporado) |

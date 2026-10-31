@@ -26,8 +26,8 @@ npm run sectorial:build         # motor sectorial y cliente de referencia
 
 ## 3. Comprobación sin base de datos
 ```bash
-npm test                        # valuation_engine (20) + server (259; 1 omitida si no hay MySQL de desarrollo)
-npm run sectorial:test          # regresión (39) + integración sectorial (101)
+npm test                        # valuation_engine (20) + server (267; 1 omitida si no hay MySQL de desarrollo)
+npm run sectorial:test          # regresión (39) + integración sectorial (111, incluye días de circulante)
 npm run sectorial:mock          # API sectorial en http://127.0.0.1:3200 con datos sintéticos
 ```
 O todo de una vez: `npm run verify`.
@@ -52,7 +52,8 @@ O todo de una vez: `npm run verify`.
 | Backend en local | `npm --prefix server start` | 3000 |
 | API sectorial (datos reales, solo lectura) | `npm run sectorial:start` | 3200 |
 | API sectorial con mocks | `npm run sectorial:mock` | 3200 |
-| Cobertura PCV/KPI (MySQL, solo lectura) | `npm run sectorial:coverage` | — |
+| Cobertura PCV/KPI e indicadores derivados (MySQL, solo lectura) | `npm run sectorial:coverage` | — |
+| Días de circulante con empresas reales (solo lectura) | `G2_PROJECT_ROOT=<proyecto con .env> node sectorial/app/tools/circulante_casos_reales.cjs <asOf> <salida.json> "<nombre exacto>"` | — |
 
 ## 6. Validación nativa de Excel (Windows)
 ```bash

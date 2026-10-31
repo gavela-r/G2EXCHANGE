@@ -1,10 +1,10 @@
 {
- "generado": "2026-10-31T17:45:53.318Z",
+ "generado": "2026-10-31T22:17:41.319Z",
  "rama": "entrega/frontend-handoff-20261031",
- "commit": "f94216cdbf6bb199b09b08b1e3ca26d84f66a6cf",
- "archivos": 652,
- "bytes": 16776398,
- "sha256DelInventario": "cccea554bcd122bc9e332fdef6d43266c37a8fe62478fe27183ced35b2830367",
+ "commit": "70edb280511dd074dec7753ceeb49571eb8fd88d",
+ "archivos": 655,
+ "bytes": 16840352,
+ "sha256DelInventario": "8b62f32dd6b3d48ba865f54e75b69f605e98a5d7c49de6f74c0bc91daf1bf700",
  "paquetes": [
   {
    "paquete": "client/package.json",
@@ -107,8 +107,8 @@
   },
   {
    "archivo": "API.md",
-   "bytes": 3150,
-   "sha256": "ea1d53d745ef07af810f818ab16cffa0c7377dd47f31146650a1ba96ed4fabc1"
+   "bytes": 3370,
+   "sha256": "5a58573cc932be6a59eda80be5fb50b629e0b8887d1652b168fef626b3c166cb"
   },
   {
    "archivo": "ARCHITECTURE.md",
@@ -117,13 +117,13 @@
   },
   {
    "archivo": "COVERAGE_REPORT.md",
-   "bytes": 5031,
-   "sha256": "ecd64afaad5ec1a01bb7868083443aaa8333e86ae619b89edb129dd0230626ba"
+   "bytes": 7219,
+   "sha256": "f66d55bf1f497cc796be3f46a744097b884a2c156da49f2e3655bc5999ddffb8"
   },
   {
    "archivo": "DATABASE.md",
-   "bytes": 7013,
-   "sha256": "b423224b56a75ca610585b8fec7482ab8a5c668c4ca7ff5de3b81b6393f32b46"
+   "bytes": 8477,
+   "sha256": "1005ca6acf14e28a76e5ea871117427ed1617b4fe95426a138a5bdf049e48530"
   },
   {
    "archivo": "DATA_SOURCES.md",
@@ -142,18 +142,18 @@
   },
   {
    "archivo": "HANDOFF.md",
-   "bytes": 7601,
-   "sha256": "f072c2eac23e1c0d79046b1da0447a95b82c1f96c7baea7a35989561a2eb23d7"
+   "bytes": 9894,
+   "sha256": "40ac55b56a740ea770d413c061dc41f8a2ef007a66dba8688c8e60f2509e71ac"
   },
   {
    "archivo": "OPERATIONS.md",
-   "bytes": 4820,
-   "sha256": "b8981ff8cbee2877c1891e891e3dc288fb6ed196a51015ac2cc6086b1c37598a"
+   "bytes": 4871,
+   "sha256": "c0d0fab3326e0712efd1669fb765e6e6992ca68ca90b9e27a43172cf77b7a63d"
   },
   {
    "archivo": "README.md",
-   "bytes": 9047,
-   "sha256": "4b4afb3e96ceeb5129fe6d27667d4ab441880b9540f3f2d9826b01f1fe5ed528"
+   "bytes": 9312,
+   "sha256": "ceb4ba724de264cda60c13f6243b935afb9a13a98aba70553ce2510f0b40cd55"
   },
   {
    "archivo": "RISK_PREMIUM.md",
@@ -162,18 +162,18 @@
   },
   {
    "archivo": "SETUP.md",
-   "bytes": 4206,
-   "sha256": "3831c32feeae0b0987dbfda277192ba01c40e9a7c4d5972e7a65ee1fcdfd5d22"
+   "bytes": 4456,
+   "sha256": "57caddb2d1e561078fc01f245b2573e4f1910c20214f1ce048bdefea5d23cacf"
   },
   {
    "archivo": "TEST_REPORT.md",
-   "bytes": 3748,
-   "sha256": "866e4b3ee4b5ad45a3b79327a4ab364aa85d0341e1b72f6709faad73e74d06d6"
+   "bytes": 5702,
+   "sha256": "b94c7de1255714eb6be841c8623bd2b2d11afc0cd5539f9a7d09a3cd83919d21"
   },
   {
    "archivo": "VALUATION_ENGINE.md",
-   "bytes": 4666,
-   "sha256": "1234e061c7a7304801e6185e7c97b94a4b0ab285e2195344581d515031100eae"
+   "bytes": 8635,
+   "sha256": "1ed4d5e6833fd7bc119135a55c316fb182e74bcef467a3f12b1dbf92903b144d"
   },
   {
    "archivo": "VALUATION_MODELS.md",
@@ -367,8 +367,8 @@
   },
   {
    "archivo": "sectorial/app/contracts/api.d.ts",
-   "bytes": 9690,
-   "sha256": "197e63a36d866182db90ad82ee3336c427238a87b764274e5e2cec1a32fe0932"
+   "bytes": 9900,
+   "sha256": "bddb8b8f3f47cf62f78ae7a65c4ea69e7860305639254d00070bf994cba9a60d"
   },
   {
    "archivo": "sectorial/app/contracts/openapi.yaml",
@@ -386,14 +386,19 @@
    "sha256": "99aadcdd3fbaf5d603b6eb228682f98ac30865a545e1ca486bef4baf64a95a41"
   },
   {
+   "archivo": "sectorial/app/coverage/circulante_casos_reales_20261031.json",
+   "bytes": 20001,
+   "sha256": "05243f05d1c59843a324d3009dece94ce544eba3009a1205fbdcf285d1490a17"
+  },
+  {
    "archivo": "sectorial/app/coverage/cobertura_actual.json",
    "bytes": 66313,
    "sha256": "b354ed0265eb658bf3debb34261476c70469eb6c1fd3edbd784eda405bb67302"
   },
   {
    "archivo": "sectorial/app/coverage/cobertura_final_entrega.json",
-   "bytes": 66421,
-   "sha256": "d6248c9cc816f283384a6dd60d8058e660a4e372de1b9ef3b28e2a07df7ce19c"
+   "bytes": 83170,
+   "sha256": "13e8a0dbb4616e69a6bb37547a21c2eeab6673dc06c3e5314fdf5b3f4cdf9c0a"
   },
   {
    "archivo": "sectorial/app/coverage/cobertura_real_20261031.json",
@@ -442,8 +447,8 @@
   },
   {
    "archivo": "sectorial/app/engine/evidencias/pruebas_ts.json",
-   "bytes": 9300,
-   "sha256": "692c20c9cbaf45797489b31f132086f4e88bc0884f0bd21033f0dd833fde9615"
+   "bytes": 8925,
+   "sha256": "e3b78064a3f2f73407077bab36e3b3c64e4e1e6aff689986b899961b009a4a0a"
   },
   {
    "archivo": "sectorial/app/engine/probar.cjs",
@@ -492,8 +497,8 @@
   },
   {
    "archivo": "sectorial/app/engine/src/plan.ts",
-   "bytes": 44432,
-   "sha256": "d307826e0c7e2c19cb5481c685723d6a4346dead12140bc9b91f6e7382311a7c"
+   "bytes": 46030,
+   "sha256": "1c3da71ed752be252f64afd3f4a450a220185a04ebae35168c8be81a0f8d73e8"
   },
   {
    "archivo": "sectorial/app/engine/tsconfig.json",
@@ -537,8 +542,8 @@
   },
   {
    "archivo": "sectorial/app/evidencias/transmision_sectorial.json",
-   "bytes": 46215,
-   "sha256": "0f16ea826af0f6bdba533de979499927c7cfe94821fd29fabd1dd3d5c406e3cf"
+   "bytes": 43703,
+   "sha256": "70cd44f6022767c9f795e551aaf14f92cf066de3c6bdf2a8ceec097ebdbb78ad"
   },
   {
    "archivo": "sectorial/app/export-worker.mjs",
@@ -557,8 +562,8 @@
   },
   {
    "archivo": "sectorial/app/kpi.cjs",
-   "bytes": 4123,
-   "sha256": "85948e59ba89ad8e706814e555bc5bfbbf0061c73e2ae4110d9277fdca425cf1"
+   "bytes": 7699,
+   "sha256": "a3d9862e3e07d859b73a6543f006e53d7817a3ccda7d66df0e887c128669704b"
   },
   {
    "archivo": "sectorial/app/mock.cjs",
@@ -672,8 +677,8 @@
   },
   {
    "archivo": "sectorial/app/server.cjs",
-   "bytes": 17464,
-   "sha256": "c87feb3382235db5563a3e0064cca5e4b1fbb4c445e78ceb5af7676282a4cf1f"
+   "bytes": 17485,
+   "sha256": "bf95f46bc4a8132e1e0530f4e98e3902dfd1527f6c59dae72a6ef9adb9e9e62d"
   },
   {
    "archivo": "sectorial/app/store.cjs",
@@ -724,6 +729,11 @@
    "archivo": "sectorial/app/tests/censo_real.cjs",
    "bytes": 2668,
    "sha256": "0af4093adc1ff68e0976b773b239690c84494ba59ba5439029f9040bc4e89599"
+  },
+  {
+   "archivo": "sectorial/app/tests/circulante.test.cjs",
+   "bytes": 7489,
+   "sha256": "80a1b86bb915be344582ce7c0bf7999f75ff06f906a90271fa8d6c7aaddf63ee"
   },
   {
    "archivo": "sectorial/app/tests/clasificacion.test.cjs",
@@ -811,14 +821,19 @@
    "sha256": "5d8c7795f4cbfd285169611ceffe6a1bce2b31a5a0b7b7c505103ec2f43b9a55"
   },
   {
+   "archivo": "sectorial/app/tools/circulante_casos_reales.cjs",
+   "bytes": 1911,
+   "sha256": "cef251e31e93695258838bc7d1dc54aee402088b40521259e7a2f40d87d50763"
+  },
+  {
    "archivo": "sectorial/app/tools/clasificar_conflictos.cjs",
    "bytes": 2970,
    "sha256": "0ad5f01ae7da49090499b9597aca944f00bcb1bc0018797799f52f43bece1926"
   },
   {
    "archivo": "sectorial/app/tools/cobertura_mysql.cjs",
-   "bytes": 9791,
-   "sha256": "f9e08a7e06563b4bdac76451c2d6d23f3a46b55305cf0b7380b48309c627b385"
+   "bytes": 11671,
+   "sha256": "86772d97b20b51a139cce810971673b5b2b98bde8d82875cff94331da2eb2b96"
   },
   {
    "archivo": "sectorial/app/tools/contraste_complementario.cjs",
@@ -897,8 +912,8 @@
   },
   {
    "archivo": "sectorial/app/workflow.cjs",
-   "bytes": 14500,
-   "sha256": "cd1b22252b63535db3603c5553e019b95d9285e9b84a5e51aaa638eec9b440f3"
+   "bytes": 14869,
+   "sha256": "904cbb6f41280260c4c813b379856a31b30ed01d8cf97238cca9f1d6502b02fb"
   },
   {
    "archivo": "sectorial/evidence/api_v3.json",
@@ -1242,8 +1257,8 @@
   },
   {
    "archivo": "server/insercionDatos/insercionPartidaContable.ts",
-   "bytes": 138973,
-   "sha256": "8bcb0547d70e76ff0b54690dd954ffe7dec55241b73b3f2687ecea86a34ae2f7"
+   "bytes": 139056,
+   "sha256": "6464f6931ef51f579f4e8948f51528b72703e60e962e8a1822b2fcf3903cafef"
   },
   {
    "archivo": "server/insercionDatos/insercionaDatosValuationInputSnapshotCompleto.ts",
@@ -2347,8 +2362,8 @@
   },
   {
    "archivo": "server/tests/pcvIdempotencia.integration.cjs",
-   "bytes": 3197,
-   "sha256": "49ab767c13a88e552d487b1dc52c075b8dd82a732a3961ca9bd8be696d4e47b4"
+   "bytes": 3497,
+   "sha256": "2b40074472a3add6cc7a0ec7b36c5d92ce5fd51e58a9dd32370ea6e92684be45"
   },
   {
    "archivo": "server/tests/pcvImportacion.test.cjs",

@@ -24,20 +24,25 @@ async function restaurar(file){
 }
 
 async function recalcular(ledger,snapshot,aplicar){
- if(!/^[0-9a-f]{64}$/.test(ledger||''))throw Error('--ledger <sha256> obligatorio');
- const[ids]=await pool.query('SELECT DISTINCT informe_id FROM pcv_correccion_auditoria WHERE ledger_sha256=? AND revertido_en IS NULL ORDER BY informe_id',[ledger]);
- const out=aplicar?fs.createWriteStream(snapshot,{flags:'wx'}):null;const t={informes:ids.length,kpiAntes:0,kpiDespues:0,cambiados:0,nuevos:0,eliminados:0,iguales:0};
+ // --informes <archivo>: lista explícita de informes (p. ej. todos los corregidos y todos los que tenían contradicciones).
+ const lista=arg('--informes');if(!lista&&!/^[0-9a-f]{64}$/.test(ledger||''))throw Error('--ledger <sha256> o --informes <archivo> obligatorio');
+ const[ids]=lista?[fs.readFileSync(lista,'utf8').split(String.fromCharCode(10)).map(Number).filter(n=>Number.isSafeInteger(n)&&n>0).map(informe_id=>({informe_id}))]:await pool.query('SELECT DISTINCT informe_id FROM pcv_correccion_auditoria WHERE ledger_sha256=? AND revertido_en IS NULL ORDER BY informe_id',[ledger]);
+ const out=aplicar?fs.createWriteStream(snapshot,{flags:'wx'}):null;const t={informes:ids.length,kpiAntes:0,kpiDespues:0,cambiados:0,nuevos:0,eliminados:0,iguales:0,informesConConceptoSinResolver:0,resueltasPorCriterio:{},eliminadosPorMotivo:{}};
+ const exclusiones=arg('--exclusiones')?fs.createWriteStream(arg('--exclusiones')):null;
  for(let i=0;i<ids.length;i+=200){const lote=ids.slice(i,i+200).map(r=>r.informe_id),c=await pool.getConnection();
   try{if(aplicar)await c.beginTransaction();
    for(const id of lote){
     const[antes]=await c.query('SELECT kpi,valor,unidad,nivel_confianza FROM kpi_financiero_informe WHERE informe_id=? ORDER BY kpi',[id]);
     // Un informe con importes contradictorios para el mismo concepto no se recalcula (la fórmula lo rechaza): se
     // conserva tal cual y se cuenta aparte; nunca se calculan KPI con datos incompatibles.
-    let partidas;try{partidas=await K.kpiCargarPartidas(id);}catch(e){t.incompatibles=(t.incompatibles??0)+1;continue;}
+    let diag;try{diag=await K.kpiCargarPartidasConDiagnostico(id);}catch(e){t.incompatibles=(t.incompatibles??0)+1;continue;}
+    const partidas=diag.valores;for(const r of diag.resueltas)t.resueltasPorCriterio[r.criterio]=(t.resueltasPorCriterio[r.criterio]??0)+1;if(diag.sinResolver.length)t.informesConConceptoSinResolver++;
     const nuevos=K.kpiCalcularInforme(id,partidas).filter(k=>k.valor!==null&&Number.isFinite(Number(k.valor)));
+    const sinPolitica=new Set(K.kpiCalcularInforme.originalFormula?K.kpiCalcularInforme.originalFormula(id,partidas).filter(k=>k.valor!==null).map(k=>k.kpi):[]);
     const previo=new Map(antes.map(k=>[k.kpi,k])),actual=new Set(nuevos.map(k=>k.kpi));t.kpiAntes+=antes.length;t.kpiDespues+=nuevos.length;
     for(const k of nuevos){const p=previo.get(k.kpi);if(!p)t.nuevos++;else if(Number(p.valor)!==Number(k.valor))t.cambiados++;else t.iguales++;}
     const eliminar=antes.filter(k=>!actual.has(k.kpi)).map(k=>k.kpi);t.eliminados+=eliminar.length;
+    for(const kpi of eliminar){const motivo=kpi==='ROE'&&partidas.BENEFICIO_NETO!==undefined&&partidas.PATRIMONIO_NETO!==undefined?'PERIMETRO_INCOMPATIBLE':sinPolitica.has(kpi)?'PRERREQUISITO_DEUDA_V2':diag.sinResolver.length?'ENTRADA_SIN_RESOLVER:'+diag.sinResolver.map(x=>x.concepto).join(','):'ENTRADA_AUSENTE_O_NULA';const m=motivo.split(':')[0];t.eliminadosPorMotivo[m]=(t.eliminadosPorMotivo[m]??0)+1;exclusiones?.write(JSON.stringify({informe_id:id,kpi,motivo,politica:'SELECCION_OBSERVACIONES_V1'})+String.fromCharCode(10));}
     if(aplicar){out.write(JSON.stringify({informe_id:id,antes})+'\n');
      if(eliminar.length)await c.query('DELETE FROM kpi_financiero_informe WHERE informe_id=? AND kpi IN (?)',[id,eliminar]);
      if(nuevos.length)await c.query('INSERT INTO kpi_financiero_informe(informe_id,kpi,valor,unidad,nivel_confianza) VALUES ? ON DUPLICATE KEY UPDATE valor=VALUES(valor),unidad=VALUES(unidad),nivel_confianza=VALUES(nivel_confianza),fecha_calculo=CURRENT_TIMESTAMP',[nuevos.map(k=>[k.informeId,k.kpi,k.valor,k.unidad,k.nivelConfianza])]);}
@@ -45,7 +50,7 @@ async function recalcular(ledger,snapshot,aplicar){
    if(aplicar)await c.commit();
   }catch(e){if(aplicar)await c.rollback();throw e;}finally{c.release();}
  }
- if(out)await new Promise(r=>out.end(r));
+ if(out)await new Promise(r=>out.end(r));if(exclusiones)await new Promise(r=>exclusiones.end(r));
  return{aplicado:!!aplicar,...t};
 }
 (async()=>{const r=arg('--restaurar')?await restaurar(arg('--restaurar')):await recalcular(arg('--ledger'),arg('--snapshot'),process.argv.includes('--aplicar'));console.log(JSON.stringify(r));})()

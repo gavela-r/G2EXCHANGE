@@ -1,3 +1,4 @@
+import {identidadObservacion} from './seleccionObservaciones';
 import type {Pool,RowDataPacket,ResultSetHeader} from 'mysql2/promise';
 import {createHash} from 'node:crypto';
 import type {DatoPcv,InformePcv} from './normalizarProveedores';
@@ -26,7 +27,7 @@ export async function persistirRecuperacion(pool:Pool,informe:InformePcv,datos:D
    if(old.some(p=>p.importe!==null)||old.length>1)continue;
    let id:number,before:unknown=null;
    if(old.length===1){id=old[0].id;before=old[0];await c.query('UPDATE partida_contable_valor SET concepto=?,importe=?,nivel_confianza=? WHERE id=? AND importe IS NULL',[d.concepto,d.importe,'ALTA',id]);}
-   else{const [r]=await c.query<ResultSetHeader>('INSERT INTO partida_contable_valor(informe_id,concepto,concepto_estandar_id,importe,nivel_confianza) VALUES(?,?,?,?,?)',[informe.id,d.concepto,t.id,d.importe,'ALTA']);id=r.insertId;}
+   else{const [r]=await c.query<ResultSetHeader>('INSERT INTO partida_contable_valor(informe_id,concepto,concepto_estandar_id,importe,nivel_confianza,identidad_observacion) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)',[informe.id,d.concepto,t.id,d.importe,'ALTA',identidadObservacion(informe.id,t.id,d.concepto)]);id=r.insertId;}
    const [stored]=await c.query<RowDataPacket[]>('SELECT importe,concepto FROM partida_contable_valor WHERE id=?',[id]);
    await record('PCV',id,d.provider,d.codigo,before,stored[0],{...d,persistence_precision:'MYSQL_DECIMAL_24_4'});
    result.pcv++;result.byProvider[d.provider]=(result.byProvider[d.provider]||0)+1;

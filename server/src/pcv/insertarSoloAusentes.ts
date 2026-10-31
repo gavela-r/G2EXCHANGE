@@ -1,3 +1,4 @@
+import { identidadObservacion } from "./seleccionObservaciones";
 import type { Pool, PoolConnection, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
 
 export interface PcvPendiente {
@@ -47,8 +48,8 @@ export async function insertarSoloPCVAusentes(pool: Pick<Pool, 'getConnection'>,
         continue;
       }
       await connection.query<ResultSetHeader>(
-        `INSERT INTO partida_contable_valor (informe_id,concepto_estandar_id,concepto,importe,nivel_confianza) VALUES (?,?,?,?,?)`,
-        [row.informeId, row.conceptoEstandarId, row.conceptoOriginal, row.importe, row.nivelConfianza]
+        `INSERT INTO partida_contable_valor (informe_id,concepto_estandar_id,concepto,importe,nivel_confianza,identidad_observacion) VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE id=id`,
+        [row.informeId, row.conceptoEstandarId, row.conceptoOriginal, row.importe, row.nivelConfianza, identidadObservacion(row.informeId, row.conceptoEstandarId, row.conceptoOriginal)]
       );
       inserted++;
     }

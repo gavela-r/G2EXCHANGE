@@ -1,3 +1,4 @@
+import {identidadObservacion} from './seleccionObservaciones';
 import type {Pool,RowDataPacket,ResultSetHeader} from 'mysql2/promise';
 import {createHash} from 'node:crypto';
 import type {DatoPcv,InformePcv} from './normalizarProveedores';
@@ -44,7 +45,7 @@ export async function persistirRecuperacionVerificada(pool:Pool,i:InformePcv,dat
    }else if(old.length>1){result.conflicts++;await verify(code,d.provider,'AMBIGUOUS_EMPTY_ROWS',{candidate:d,originals:old});}
    else{let id:number,before:unknown=null;
     if(old.length){id=old[0].id;before=old[0];await c.query('UPDATE partida_contable_valor SET concepto=?,importe=?,nivel_confianza=? WHERE id=? AND importe IS NULL',[d.concepto,d.importe,'ALTA',id]);}
-    else{const [r]=await c.query<ResultSetHeader>('INSERT INTO partida_contable_valor(informe_id,concepto,concepto_estandar_id,importe,nivel_confianza) VALUES(?,?,?,?,?)',[i.id,d.concepto,t.id,d.importe,'ALTA']);id=r.insertId;}
+    else{const [r]=await c.query<ResultSetHeader>('INSERT INTO partida_contable_valor(informe_id,concepto,concepto_estandar_id,importe,nivel_confianza,identidad_observacion) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)',[i.id,d.concepto,t.id,d.importe,'ALTA',identidadObservacion(i.id,t.id,d.concepto)]);id=r.insertId;}
     const [[saved]]=await c.query<RowDataPacket[]>('SELECT importe,concepto FROM partida_contable_valor WHERE id=?',[id]);
     await record('PCV',id,d.provider,code,before,saved,{...d,context:ctx,persistence_precision:'MYSQL_DECIMAL_24_4'});
     await verify(code,d.provider,before?'NULL_FILLED':'INSERTED',{candidate:d,record_id:id});

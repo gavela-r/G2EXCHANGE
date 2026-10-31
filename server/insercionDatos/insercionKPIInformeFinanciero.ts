@@ -1,3 +1,8 @@
+import { seleccionarObservaciones, perimetroDeEtiqueta } from "../src/pcv/seleccionObservaciones";
+
+// Perímetro de beneficio y patrimonio de cada conjunto de partidas cargado (ver kpiCalcularInforme: ROE).
+const PERIMETROS = new WeakMap<object, { beneficio: string | null; patrimonio: string | null }>();
+export function kpiRegistrarPerimetros(valores: object, perimetros: { beneficio: string | null; patrimonio: string | null }) { PERIMETROS.set(valores, perimetros); }
 import { normalizarPartidas } from "../src/valoracion/datos";
 //
 // Si el archivo ya tiene estos imports, NO repetir:
@@ -274,6 +279,13 @@ Promise<KpiInformeBase[]> {
 export async function kpiCargarPartidas(
     informeId: number
 ): Promise<KpiPartidas> {
+    return (await kpiCargarPartidasConDiagnostico(informeId)).valores;
+}
+
+// Igual que kpiCargarPartidas, devolviendo también los conceptos resueltos y sin resolver por SELECCION_OBSERVACIONES_V1.
+export async function kpiCargarPartidasConDiagnostico(
+    informeId: number
+): Promise<{ valores: KpiPartidas; sinResolver: { concepto: string; motivo: string }[]; resueltas: { concepto: string; criterio: string }[] }> {
 
     const db =
         conexion as any;
@@ -284,7 +296,7 @@ export async function kpiCargarPartidas(
         `
         SELECT
 
-            tc.concepto_estandar, pcv.concepto, tc.signo_esperado, tc.alias_sec, tc.alias_edinet, tc.alias_finmind,
+            pcv.id, tc.concepto_estandar, pcv.concepto, tc.signo_esperado, tc.alias_sec, tc.alias_edinet, tc.alias_finmind,
 
             pcv.importe
 
@@ -303,7 +315,23 @@ export async function kpiCargarPartidas(
     );
 
     const [meta]: any = await db.query("SELECT fuente FROM informe_financiero WHERE id=?",[informeId]);
-    return normalizarPartidas(rows,meta[0]?.fuente??"").valores;
+    // SELECCION_OBSERVACIONES_V1: con varias filas para un concepto, la observación la decide la evidencia primaria o
+    // la etiqueta del estado principal; un concepto sin resolver se excluye (sólo bloquea los KPI que lo usan).
+    const [prov]: any = await db.query(
+        "SELECT concept_code, JSON_EXTRACT(evidence_json,'$.evidence.record_id') rid, JSON_EXTRACT(evidence_json,'$.evidence.record_ids') rids FROM pcv_verification_evidence WHERE informe_id=? AND outcome IN ('INSERTED','NULL_FILLED','VERIFIED_EXISTING')",
+        [informeId]
+    );
+    const certificadas = new Map<string, Set<number>>();
+    for (const p of prov) {
+        const s = certificadas.get(p.concept_code) ?? certificadas.set(p.concept_code, new Set()).get(p.concept_code)!;
+        const lista = [p.rid, ...(Array.isArray(p.rids) ? p.rids : typeof p.rids === "string" ? JSON.parse(p.rids) : [])];
+        for (const id of lista) if (Number.isInteger(Number(id)) && id !== null) s.add(Number(id));
+    }
+    const seleccion = seleccionarObservaciones<any>(rows, certificadas);
+    const valores = normalizarPartidas(seleccion.filas, meta[0]?.fuente ?? "").valores;
+    const per = (c: string) => { const p = new Set(seleccion.filas.filter((f: any) => f.concepto_estandar === c && f.importe !== null).map((f: any) => perimetroDeEtiqueta(c, f.concepto))); return p.size === 1 ? [...p][0] : null; };
+    PERIMETROS.set(valores, { beneficio: per("BENEFICIO_NETO"), patrimonio: per("PATRIMONIO_NETO") });
+    return { valores, sinResolver: seleccion.sinResolver, resueltas: seleccion.resueltas };
 }
 
 
@@ -741,6 +769,10 @@ export function kpiCalcularInforme(
     );
 
 
+    // ROE exige beneficio y patrimonio del MISMO perímetro (dominante/dominante o total/total); si consta que difieren,
+    // no se calcula (PERIMETRO_INCOMPATIBLE). Margen neto usa BENEFICIO_NETO tal como lo define la taxonomía del país.
+    const perimetros = PERIMETROS.get(p);
+    if (perimetros?.beneficio && perimetros?.patrimonio && perimetros.beneficio !== perimetros.patrimonio) return resultado.filter(k => k.kpi !== "ROE");
     return resultado;
 }
 

@@ -6,6 +6,7 @@ import iconv from "iconv-lite";
 import { insertarSoloPCVAusentes } from "../src/pcv/insertarSoloAusentes";
 import { finmindJson, ErrorProveedor } from "../src/proveedores/guardiaHttp";
 import { anualDesdeTrimestres } from "../src/pcv/finmindTrimestral";
+import { identidadObservacion } from "../src/pcv/seleccionObservaciones";
 
 // ============================================================================
 // .ENV
@@ -3916,7 +3917,9 @@ async function twOptGuardarPartidas(partidas: TWOPTPartida[]): Promise<number> {
         p.conceptoEstandarId,
         p.conceptoOriginal,
         p.importe,
-        p.nivelConfianza
+        p.nivelConfianza,
+        // Identidad de observación (migración 33): repetir la carga actualiza la misma fila, no crea otra.
+        identidadObservacion(p.informeId, p.conceptoEstandarId, p.conceptoOriginal)
     ]);
 
     const [resultado]: any = await db.query(
@@ -3926,7 +3929,8 @@ async function twOptGuardarPartidas(partidas: TWOPTPartida[]): Promise<number> {
             concepto_estandar_id,
             concepto,
             importe,
-            nivel_confianza
+            nivel_confianza,
+            identidad_observacion
         )
         VALUES ?
         ON DUPLICATE KEY UPDATE

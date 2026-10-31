@@ -1,10 +1,10 @@
 {
- "generado": "2026-10-31T22:30:52.938Z",
+ "generado": "2026-10-31T23:25:01.812Z",
  "rama": "entrega/frontend-handoff-20261031",
- "commit": "aa14ccd1063014124e5a9a0c44ea11691421af94",
- "archivos": 655,
- "bytes": 16841096,
- "sha256DelInventario": "19d1e343022833cdfc2297e68d25cc04e6822e830ac68b4d783ed0e93f9a31c8",
+ "commit": "e2b4017ae999220ffc61688ada47da2e263f3f50",
+ "archivos": 660,
+ "bytes": 16860916,
+ "sha256DelInventario": "906b8b0e3009a3c057ac06eb438f40f42eff509e76578b1d46224570f8d97a8f",
  "paquetes": [
   {
    "paquete": "client/package.json",
@@ -122,8 +122,8 @@
   },
   {
    "archivo": "DATABASE.md",
-   "bytes": 8477,
-   "sha256": "1005ca6acf14e28a76e5ea871117427ed1617b4fe95426a138a5bdf049e48530"
+   "bytes": 8780,
+   "sha256": "3e253bc21066b920b6424ae3b348cb8f81ff9afe4611bdc7f5394bc3f97cb576"
   },
   {
    "archivo": "DATA_SOURCES.md",
@@ -142,13 +142,13 @@
   },
   {
    "archivo": "HANDOFF.md",
-   "bytes": 10638,
-   "sha256": "327afecd7ac25b61a7855c59d8a0425edcbcc43ac8ad8361064b1683b3d52439"
+   "bytes": 12899,
+   "sha256": "5986fa9faabfafba682123da12a1e8ac3dd6e97bc7d179c5a7a568c88c46cdcc"
   },
   {
    "archivo": "OPERATIONS.md",
-   "bytes": 4871,
-   "sha256": "c0d0fab3326e0712efd1669fb765e6e6992ca68ca90b9e27a43172cf77b7a63d"
+   "bytes": 5036,
+   "sha256": "936d118127c899b4b59044350b77923cf97588706b5b85f73db2bba696d60342"
   },
   {
    "archivo": "README.md",
@@ -167,13 +167,13 @@
   },
   {
    "archivo": "TEST_REPORT.md",
-   "bytes": 5702,
-   "sha256": "b94c7de1255714eb6be841c8623bd2b2d11afc0cd5539f9a7d09a3cd83919d21"
+   "bytes": 6394,
+   "sha256": "35ff9b21e282e10f3549b2799c28875d689264c5434cf7dccc35603720819483"
   },
   {
    "archivo": "VALUATION_ENGINE.md",
-   "bytes": 8635,
-   "sha256": "1ed4d5e6833fd7bc119135a55c316fb182e74bcef467a3f12b1dbf92903b144d"
+   "bytes": 9475,
+   "sha256": "b2048d804086c535db77832f1cfd247c6af569b4f37be3d63753c6dfd66e1dbe"
   },
   {
    "archivo": "VALUATION_MODELS.md",
@@ -327,8 +327,8 @@
   },
   {
    "archivo": "sectorial/app/adapter.cjs",
-   "bytes": 13582,
-   "sha256": "2b365bc6f81b1307ed64e14c21669fa8b57dbc64698c44e2b923a4dfd2f761ef"
+   "bytes": 14660,
+   "sha256": "bef701b8ada3d9e16f58683e0fc59ad3bf783aa42b092fc0fc35775ea2151f26"
   },
   {
    "archivo": "sectorial/app/build-client.mjs",
@@ -448,7 +448,7 @@
   {
    "archivo": "sectorial/app/engine/evidencias/pruebas_ts.json",
    "bytes": 8925,
-   "sha256": "e3b78064a3f2f73407077bab36e3b3c64e4e1e6aff689986b899961b009a4a0a"
+   "sha256": "203bd6584dbc21719e5e74bbb71cd2b778794fd765fbb1b7d3532d4335a69c72"
   },
   {
    "archivo": "sectorial/app/engine/probar.cjs",
@@ -543,7 +543,7 @@
   {
    "archivo": "sectorial/app/evidencias/transmision_sectorial.json",
    "bytes": 43703,
-   "sha256": "70cd44f6022767c9f795e551aaf14f92cf066de3c6bdf2a8ceec097ebdbb78ad"
+   "sha256": "135ff2ab67cf3729a55716442c20cc92e0ad8f0f0aa26caa569167f990dedfa5"
   },
   {
    "archivo": "sectorial/app/export-worker.mjs",
@@ -562,8 +562,8 @@
   },
   {
    "archivo": "sectorial/app/kpi.cjs",
-   "bytes": 7699,
-   "sha256": "a3d9862e3e07d859b73a6543f006e53d7817a3ccda7d66df0e887c128669704b"
+   "bytes": 8097,
+   "sha256": "ad548061067087285b942d4e0a213079a233a9f776ecba7b1be5ebfb3a558543"
   },
   {
    "archivo": "sectorial/app/mock.cjs",
@@ -766,6 +766,11 @@
    "sha256": "fd31f087c66cc6e3b1828b876bcdb7c4043eef446c7691519561f7a23ad24c4d"
   },
   {
+   "archivo": "sectorial/app/tests/perimetro.test.cjs",
+   "bytes": 1971,
+   "sha256": "a6d7a235cf42b41ee93b8f37562385652085d367784a15bcf7772e8a23e30a42"
+  },
+  {
    "archivo": "sectorial/app/tests/preparar_excel_nativo.cjs",
    "bytes": 1491,
    "sha256": "619ec29a446771a97016891b4d9720429fd9f7b2ecdd043f08bae23db06d6ee9"
@@ -874,6 +879,11 @@
    "archivo": "sectorial/app/tools/reasignar_identidad.cjs",
    "bytes": 10578,
    "sha256": "23c86206850634c1a441afb31916d50fbe147c8ce5c66d60969a09e1dd3e9679"
+  },
+  {
+   "archivo": "sectorial/app/tools/verificar_lotes_tw.cjs",
+   "bytes": 1567,
+   "sha256": "c8184880c80cb0bdd7a018f881a5de7f68561bf3529eabdf052da51de5ae2ba1"
   },
   {
    "archivo": "sectorial/app/tools/verificar_migracion_31.cjs",
@@ -1806,6 +1816,11 @@
    "sha256": "898d231c9955d061877c1b3be6811804e698e846ad59f7c0de3f80fd11ad3496"
   },
   {
+   "archivo": "server/scripts/transicion-recuperadores.cjs",
+   "bytes": 5177,
+   "sha256": "27cbf3a2df3254ac96db566f8d93dfc68e0ee8b073b72bb533216c344ee5d9a2"
+  },
+  {
    "archivo": "server/scripts/verificar-backup-pcv.cjs",
    "bytes": 1334,
    "sha256": "f298c7f6322518f8cdf0092179be403ac375389d7f5b64762265cae93ee2be8a"
@@ -2127,8 +2142,8 @@
   },
   {
    "archivo": "server/src/valoracion/datos.ts",
-   "bytes": 20798,
-   "sha256": "54fd66121e35c2236d46a195e5b34bab955d14649d5fe4e58f005c6d6eb7d106"
+   "bytes": 23019,
+   "sha256": "a9c24a641f09d9dfb0aabc3257718be414b9c9b2745b9b295d750be590cd27f1"
   },
   {
    "archivo": "server/src/valoracion/evidencia.ts",
@@ -2341,6 +2356,11 @@
    "sha256": "6fd3d4a563aacfba279513393d6ff2ba0a067f9eb3c308c7bd5661e153a37e71"
   },
   {
+   "archivo": "server/tests/minoritarios.test.cjs",
+   "bytes": 1674,
+   "sha256": "0daabb1576faba06cb4982025607f6ff50ab976ecb01304c143b2b92af7ca2e5"
+  },
+  {
    "archivo": "server/tests/mopsAnualVerificado.test.cjs",
    "bytes": 4136,
    "sha256": "815feef87d22585ff878d4bea412da38b86424bd3306c5397ccb6d5eeef4dea6"
@@ -2429,6 +2449,11 @@
    "archivo": "server/tests/seleccionObservaciones.test.cjs",
    "bytes": 4393,
    "sha256": "8d1fae195366ed0e6ef3e1e029254f15c7acffb9cd4c944c68a6f2f93c40ef2b"
+  },
+  {
+   "archivo": "server/tests/transicionRecuperadores.test.cjs",
+   "bytes": 1329,
+   "sha256": "2f2020b45ce263c5e53d1c3be9eaa0788ad9d90a07bdd32708b8b48f61349053"
   },
   {
    "archivo": "server/tests/valoracion.test.cjs",
@@ -3212,13 +3237,13 @@
   },
   {
    "archivo": "valuation_engine/src/reportes/excel.ts",
-   "bytes": 8919,
-   "sha256": "3bf5d0fbf7e26224ee03ff7c0191cbdbe0df0af27b89880c1f1bc80d40156150"
+   "bytes": 9052,
+   "sha256": "5e19f44b6659139167c306284f6942698f7bc0c69a958bef82f8f38eeb7b9432"
   },
   {
    "archivo": "valuation_engine/src/reportes/pdf.ts",
-   "bytes": 4772,
-   "sha256": "a385599ab2e0a1243f064e2d2b657022a356e237847aee54d2cdceb6dc54fc16"
+   "bytes": 4783,
+   "sha256": "10e15ad605055694cc2583f53302a3edeffd838d843b4c665fd6df9e51e2ede4"
   },
   {
    "archivo": "valuation_engine/src/riesgo.ts",

@@ -1,0 +1,307 @@
+{
+  "generatedAt": "2026-10-31T11:08:05.622Z",
+  "source": "MYSQL_SOLO_LECTURA",
+  "nature": "CORROBORACION_NO_CERTIFICA",
+  "countries": {
+    "TW": {
+      "provider": "EULERPOOL",
+      "providerCells": 50944,
+      "companiesMatched": 183,
+      "tolerance": "max(0,5 M; 0,05 %) por redondeo a millones",
+      "byYear": {
+        "2022": {
+          "informes": 182,
+          "comparables": 1722,
+          "coinciden": 570,
+          "discrepan": 1152,
+          "soloProveedor": 277,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 570,
+              "redondeoMillones": 0,
+              "discrepan": 1152
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 174
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 172
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 172
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 101,
+              "redondeoMillones": 0,
+              "discrepan": 73
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 174
+            },
+            "INVENTARIOS": {
+              "coinciden": 149,
+              "redondeoMillones": 0,
+              "discrepan": 22
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 71,
+              "redondeoMillones": 0,
+              "discrepan": 97
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 102,
+              "redondeoMillones": 0,
+              "discrepan": 69
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 104,
+              "redondeoMillones": 0,
+              "discrepan": 70
+            },
+            "CAPEX": {
+              "coinciden": 43,
+              "redondeoMillones": 0,
+              "discrepan": 128
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 1
+            }
+          },
+          "trimestreComoAnual": 415,
+          "resultadosComparables": 692
+        },
+        "2023": {
+          "informes": 183,
+          "comparables": 1857,
+          "coinciden": 584,
+          "discrepan": 1273,
+          "soloProveedor": 151,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 584,
+              "redondeoMillones": 0,
+              "discrepan": 1273
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 174
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 172
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 173
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 91,
+              "redondeoMillones": 0,
+              "discrepan": 84
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 175
+            },
+            "INVENTARIOS": {
+              "coinciden": 122,
+              "redondeoMillones": 0,
+              "discrepan": 50
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 71,
+              "redondeoMillones": 0,
+              "discrepan": 99
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 95,
+              "redondeoMillones": 0,
+              "discrepan": 76
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 106,
+              "redondeoMillones": 0,
+              "discrepan": 69
+            },
+            "CAPEX": {
+              "coinciden": 43,
+              "redondeoMillones": 0,
+              "discrepan": 130
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "coinciden": 54,
+              "redondeoMillones": 0,
+              "discrepan": 71
+            }
+          },
+          "trimestreComoAnual": 433,
+          "resultadosComparables": 696
+        },
+        "2024": {
+          "informes": 182,
+          "comparables": 1845,
+          "coinciden": 598,
+          "discrepan": 1247,
+          "soloProveedor": 150,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 598,
+              "redondeoMillones": 0,
+              "discrepan": 1247
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 174
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 171
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 172
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 93,
+              "redondeoMillones": 0,
+              "discrepan": 81
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 174
+            },
+            "INVENTARIOS": {
+              "coinciden": 150,
+              "redondeoMillones": 0,
+              "discrepan": 22
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 73,
+              "redondeoMillones": 0,
+              "discrepan": 96
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 101,
+              "redondeoMillones": 0,
+              "discrepan": 70
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 89,
+              "redondeoMillones": 0,
+              "discrepan": 85
+            },
+            "CAPEX": {
+              "coinciden": 40,
+              "redondeoMillones": 0,
+              "discrepan": 132
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "coinciden": 51,
+              "redondeoMillones": 0,
+              "discrepan": 70
+            }
+          },
+          "trimestreComoAnual": 452,
+          "resultadosComparables": 692
+        },
+        "2025": {
+          "informes": 182,
+          "comparables": 1277,
+          "coinciden": 377,
+          "discrepan": 900,
+          "soloProveedor": 69,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 377,
+              "redondeoMillones": 0,
+              "discrepan": 900
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "redondeoMillones": 0,
+              "discrepan": 174
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 171
+            },
+            "EBIT": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 171
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 104,
+              "redondeoMillones": 0,
+              "discrepan": 70
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 1,
+              "redondeoMillones": 0,
+              "discrepan": 173
+            },
+            "INVENTARIOS": {
+              "coinciden": 135,
+              "redondeoMillones": 0,
+              "discrepan": 37
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 103,
+              "redondeoMillones": 0,
+              "discrepan": 68
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 4,
+              "redondeoMillones": 0,
+              "discrepan": 13
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 15,
+              "redondeoMillones": 0,
+              "discrepan": 3
+            },
+            "CAPEX": {
+              "coinciden": 5,
+              "redondeoMillones": 0,
+              "discrepan": 13
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "coinciden": 8,
+              "redondeoMillones": 0,
+              "discrepan": 7
+            }
+          },
+          "trimestreComoAnual": 454,
+          "resultadosComparables": 692
+        }
+      }
+    }
+  }
+}

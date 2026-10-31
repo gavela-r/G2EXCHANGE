@@ -56,6 +56,17 @@ Rama `entrega/frontend-handoff-20261031` (worktree `G2EXCHANGE_entrega`). Contin
 - **Cuadran** (cociente 1,000): flujos, beneficio antes de impuestos, inventarios y cuentas a pagar.
 - **Valen el 21–34 % del anual**: INGRESOS, BENEFICIO_BRUTO, EBIT y BENEFICIO_NETO. Es el error trimestral explicado en §4.
 
+**Eulerpool frente a los PCV de Taiwán, ampliación PARCIAL**: 183 empresas con informe de FinMind de las 906 previstas. La descarga sigue y se puede reanudar con `server/scripts/eulerpool-taiwan.cjs`. Resultado en `sectorial/app/coverage/contraste_tw_eulerpool.json`:
+
+| Año | Celdas comparables | Coinciden | Discrepan | Resultados con valor en el rango del trimestre aislado (15–45 % del anual) |
+|---|---|---|---|---|
+| 2022 | 1.722 | 570 | 1.152 | 415 de 692 |
+| 2023 | 1.857 | 584 | 1.273 | 433 de 696 |
+| 2024 | 1.845 | 598 | 1.247 | 452 de 692 |
+| 2025 | 1.277 | 377 | 900 | 454 de 692 |
+
+Entre el 60 % y el 66 % de las celdas de resultados de Taiwán caen en el rango del trimestre aislado, lo que confirma el defecto a gran escala. El resto de discrepancias incluye diferencias de definición (beneficio con o sin minoritarios, CAPEX) y los agregados de Eulerpool excluidos.
+
 **PCV nuevos certificados por J-Quants o Eulerpool: 0**, por diseño. La política del proyecto reserva la certificación a la fuente primaria (SEC, EDINET o MOPS).
 
 ## 4. Correcciones realizadas sobre FinMind

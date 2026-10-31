@@ -28,6 +28,7 @@ function cargarEulerpool(dir){
  for(const[k,info]of Object.entries(ck.done)){const ep=k.split('_').slice(1).join('_');for(const r of conectores.filasEulerpool(ep,JSON.parse(fs.readFileSync(path.join(dir,'raw',k+'.json'),'utf8'))))out.set(info.ticker+'|'+r.fin+'|'+r.codigo,{valor:r.importe,exacto:false,fuente:'EULERPOOL',doc:null});}
  return out;
 }
+const TRIMESTRALES=new Set(['INGRESOS','BENEFICIO_BRUTO','EBIT','BENEFICIO_NETO']);
 const coincide=(a,b,exacto)=>exacto?a===b:Math.abs(a-b)<=Math.max(0.5e6,Math.abs(b)*0.0005);
 
 const OPCIONES={jquants:arg('--jquants'),eulerpool:arg('--eulerpool')};
@@ -57,6 +58,8 @@ async function main(out){
      // J-Quants (決算短信) suele expresar el resumen en millones de yenes truncados: diferencia < 1 M se informa aparte.
      const redondeo=!ok&&v.exacto&&valores.some(x=>Math.abs(norm(x)-v.valor)<1e6);
      y.comparables++;ok?y.coinciden++:redondeo?(y.redondeoMillones=(y.redondeoMillones??0)+1):y.discrepan++;
+     // Taiwán: resultados de FinMind guardados como trimestre aislado (finmindTrimestral.ts) → 15-45 % del anual.
+     if(!ok&&country==='TW'&&TRIMESTRALES.has(c)&&v.valor>0){const r=valores[0]/v.valor;if(r>=0.15&&r<=0.45)y.trimestreComoAnual=(y.trimestreComoAnual??0)+1;if(TRIMESTRALES.has(c))y.resultadosComparables=(y.resultadosComparables??0)+1;}else if(country==='TW'&&TRIMESTRALES.has(c))y.resultadosComparables=(y.resultadosComparables??0)+1;
      const e=(y.porEstado[st]??={coinciden:0,redondeoMillones:0,discrepan:0});ok?e.coinciden++:redondeo?e.redondeoMillones++:e.discrepan++;
      const pc=(y.porConcepto[c]??={coinciden:0,redondeoMillones:0,discrepan:0});ok?pc.coinciden++:redondeo?pc.redondeoMillones++:pc.discrepan++;}
    }
@@ -67,4 +70,4 @@ async function main(out){
  }finally{conn.release();await pool.end();}
  fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify(result,null,2));return result;
 }
-if(require.main===module)main(path.resolve(process.argv[2]??path.join(__dirname,'../coverage/contraste_complementario.json'))).then(r=>{for(const[c,v]of Object.entries(r.countries))for(const[y,d]of Object.entries(v.byYear))console.log(c,y,'informes',d.informes,'comparables',d.comparables,'coinciden',d.coinciden,'redondeo<1M',d.redondeoMillones??0,'discrepan',d.discrepan,JSON.stringify(d.porEstado));}).catch(e=>{console.error(e.stack);process.exitCode=1;});
+if(require.main===module)main(path.resolve(process.argv[2]??path.join(__dirname,'../coverage/contraste_complementario.json'))).then(r=>{for(const[c,v]of Object.entries(r.countries))for(const[y,d]of Object.entries(v.byYear))console.log(c,y,'informes',d.informes,'comparables',d.comparables,'coinciden',d.coinciden,'redondeo<1M',d.redondeoMillones??0,'discrepan',d.discrepan,...(d.resultadosComparables?['trimestre-como-anual',d.trimestreComoAnual??0,'de',d.resultadosComparables]:[]),JSON.stringify(d.porEstado));}).catch(e=>{console.error(e.stack);process.exitCode=1;});

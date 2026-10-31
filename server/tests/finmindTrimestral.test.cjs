@@ -1,6 +1,6 @@
 // FinMind TaiwanStockFinancialStatements es trimestre aislado: el anual es la suma de T1-T4.
 // Cifras SINTÉTICAS. La validación real (Hon Hai 2317, 2024: T4 = 2,1305 billones; suma T1-T4 = 6.859.615.493.000,
-// igual al anual de un tercero) está registrada en PCV_KPI_STATUS.md, no en esta prueba.
+// igual al anual de un tercero) está registrada en docs/historico/INFORME_INTEGRACION_PCV_KPI.md, no en esta prueba.
 const test=require('node:test'),assert=require('node:assert/strict');
 const T=require('../dist/src/pcv/finmindTrimestral.js');
 const D='TaiwanStockFinancialStatements';

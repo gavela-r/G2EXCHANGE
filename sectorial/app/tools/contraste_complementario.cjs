@@ -10,7 +10,7 @@ const{database}=require('../runtime.cjs');
 // Conectores compilados de este mismo repositorio (npm --prefix server run build).
 const conectores=require(path.resolve(__dirname,'../../../server/dist/src/proveedores/conectores'));
 // Sólo informes de la fuente del país: hay documentos EDINET (Japón) asignados por colisión de código bursátil a
-// empresas de Taiwán (ver PCV_KPI_STATUS.md, «identidad cruzada»); nunca se usan para una empresa taiwanesa.
+// empresas de Taiwán (ver DATABASE.md §5, «identidad cruzada»); nunca se usan para una empresa taiwanesa.
 const FUENTES_PAIS={US:['SEC_EDGAR'],JP:['EDINET'],TW:['FINMIND','MOPS']};
 const YEARS=[2022,2023,2024,2025],CERT=['INSERTED','NULL_FILLED','VERIFIED_EXISTING'];
 const arg=(k)=>{const i=process.argv.indexOf(k);return i>=0?process.argv.splice(i,2)[1]:null;};

@@ -11,7 +11,7 @@ const{database}=require('../runtime.cjs'),{KPIS}=require('../kpi.cjs'),{MAP}=req
 const CORE=['INGRESOS','BENEFICIO_BRUTO','EBIT','BENEFICIO_NETO','GASTO_INTERESES','EFECTIVO','ACTIVOS_TOTALES','PASIVOS_TOTALES','PATRIMONIO_NETO','DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO','FLUJO_CAJA_OPERATIVO','CAPEX','DEPRECIACION_AMORTIZACION','INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR'];
 const YEARS=[2022,2023,2024,2025],COUNTRIES=['US','JP','TW'],CERT=['INSERTED','NULL_FILLED','VERIFIED_EXISTING'];
 // Sólo informes de la fuente del país. Hay documentos EDINET (Japón) asignados a empresas de Taiwán por colisión de
-// código bursátil («identidad cruzada», PCV_KPI_STATUS.md): no son informes de esas empresas y no se eligen.
+// código bursátil («identidad cruzada», DATABASE.md §5): no son informes de esas empresas y no se eligen.
 const FUENTES_PAIS={US:['SEC_EDGAR'],JP:['EDINET'],TW:['FINMIND','MOPS']};
 // --ledger <ndjson>: registro de correcciones (tools/diagnostico_conflictos.cjs). Se mide APARTE como escenario
 // «tras corregir» (simulado, no persistido): la cobertura oficial no cambia.

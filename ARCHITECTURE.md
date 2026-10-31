@@ -26,3 +26,24 @@ valuation_engine/ (motor TS)       ├─ workflow.cjs ─ registry.cjs (16 mode
 
 - `server/src/pcv/*` y `server/scripts/recuperar-*`: recuperación y verificación de PCV. En el equipo original siguen en ejecución; no se han modificado.
 - `server/src/capital/*` y `valuation_engine/research/coste_capital`: módulo Capital v2, versionado en esta rama (antes sólo existía sin commit).
+
+## Capa de datos financieros y certificación (estado de entrega, 31/10/2026)
+```
+Proveedores (SEC · EDINET · FinMind · MOPS manual · J-Quants/Eulerpool solo para contraste)
+   │  guardián HTTP compartido (server/src/proveedores/guardiaHttp.ts)
+   ▼
+Recuperadores (server/scripts/recuperar-*.cjs; coordinador recuperar-pcv-plan.cjs)
+   │  identidad empresarial por país (src/pcv/mercados.ts; vinculador EDINET solo JP)
+   ▼
+informe_financiero ──► partida_contable_valor (ORIGINAL; identidad_observacion, migración 33)
+   │                         │
+   │                         ├─ normalización (src/valoracion/datos.ts)
+   │                         ├─ certificación (pcv_verification_evidence; reglas versionadas, migración 31)
+   │                         └─ selección SELECCION_OBSERVACIONES_V1 (src/pcv/seleccionObservaciones.ts)
+   ▼
+KPI (insercionKPIInformeFinanciero.ts; perímetro de ROE) ──► kpi_financiero_informe
+   ▼
+Adaptador DCF (sectorial/app/adapter.cjs: fuente del país, publicación ≤ fecha de valoración,
+prueba certificadora por fila) ──► motor sectorial / valuation_engine ──► Excel ──► API / UI
+```
+Detalles en `DATABASE.md`, `DATA_SOURCES.md` y `VALUATION_ENGINE.md`.

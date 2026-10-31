@@ -1,17 +1,31 @@
 # G2EXCHANGE
 
-## Entrega para frontend (rama `entrega/frontend-handoff-20261031`)
+## Versión de entrega (rama `entrega/frontend-handoff-20261031`, 31/10/2026)
+
+Motor de valoración (CAPM, WACC, DCF y 16 modelos sectoriales con Excel) sobre datos financieros certificados de EE. UU. (SEC), Japón (EDINET) y Taiwán (recuperados de FinMind, sin certificar). El estado exacto, las limitaciones y la transferencia privada de datos están en **[HANDOFF](HANDOFF.md)**.
 
 Arranque sin credenciales ni base de datos (modo mock con datos sintéticos):
 
 ```bash
 npm run setup            # npm ci en valuation_engine, server y client
+npm run build && npm --prefix server run capital:build
 npm run sectorial:build  # motor sectorial (TS) + UI de referencia
+npm run verify           # build + pruebas del backend + pruebas sectoriales
 npm run sectorial:mock   # http://127.0.0.1:3200 (API /api/sectorial + UI)
-npm run sectorial:test   # 39 regresión + 88 integración, sin MySQL ni Excel
 ```
 
-Documentación: [FRONTEND_HANDOFF](FRONTEND_HANDOFF.md) · [API](API.md) · [ARCHITECTURE](ARCHITECTURE.md) · [DATA_MODEL](DATA_MODEL.md) · [VALUATION_MODELS](VALUATION_MODELS.md) · [RISK_PREMIUM](RISK_PREMIUM.md) · [PCV_KPI_STATUS](PCV_KPI_STATUS.md) · [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [DEPLOYMENT_PLAN](DEPLOYMENT_PLAN.md).
+| Documento | Contenido |
+|---|---|
+| [HANDOFF](HANDOFF.md) | estado por módulo, migraciones, procesos, transferencia privada y decisiones pendientes |
+| [SETUP](SETUP.md) | instalación desde cero, variables, construcción, pruebas y errores frecuentes |
+| [ARCHITECTURE](ARCHITECTURE.md) | arquitectura del sistema |
+| [DATABASE](DATABASE.md) | esquema, capas de observación, selección, certificación, identidad y migraciones |
+| [DATA_SOURCES](DATA_SOURCES.md) | SEC, EDINET, FinMind, MOPS, J-Quants, Eulerpool… límites y restricciones |
+| [VALUATION_ENGINE](VALUATION_ENGINE.md) · [VALUATION_MODELS](VALUATION_MODELS.md) · [RISK_PREMIUM](RISK_PREMIUM.md) | CAPM, WACC, DCF, KPI y los 16 modelos |
+| [OPERATIONS](OPERATIONS.md) | recuperadores, pausas, migraciones, copias de seguridad y monitorización |
+| [API](API.md) · [FRONTEND_HANDOFF](FRONTEND_HANDOFF.md) · [DEPLOYMENT_PLAN](DEPLOYMENT_PLAN.md) | API, frontend y despliegue |
+| [COVERAGE_REPORT](COVERAGE_REPORT.md) · [TEST_REPORT](TEST_REPORT.md) | cobertura real y pruebas |
+| [docs/historico/](docs/historico/) | informes de las intervenciones anteriores (referencia) |
 
 Con MySQL (solo lectura): copiar `.env.example` a `.env`, completar `DB_*` y ejecutar `npm run sectorial:start`. La descarga de Excel exige Microsoft Excel en Windows para la validación nativa; sin él, la API devuelve 409 `EXCEL_NO_DISPONIBLE` y nunca entrega un archivo sin validar.
 

@@ -31,7 +31,10 @@ async function recalcular(ledger,snapshot,aplicar){
   try{if(aplicar)await c.beginTransaction();
    for(const id of lote){
     const[antes]=await c.query('SELECT kpi,valor,unidad,nivel_confianza FROM kpi_financiero_informe WHERE informe_id=? ORDER BY kpi',[id]);
-    const nuevos=K.kpiCalcularInforme(id,await K.kpiCargarPartidas(id)).filter(k=>k.valor!==null&&Number.isFinite(Number(k.valor)));
+    // Un informe con importes contradictorios para el mismo concepto no se recalcula (la fórmula lo rechaza): se
+    // conserva tal cual y se cuenta aparte; nunca se calculan KPI con datos incompatibles.
+    let partidas;try{partidas=await K.kpiCargarPartidas(id);}catch(e){t.incompatibles=(t.incompatibles??0)+1;continue;}
+    const nuevos=K.kpiCalcularInforme(id,partidas).filter(k=>k.valor!==null&&Number.isFinite(Number(k.valor)));
     const previo=new Map(antes.map(k=>[k.kpi,k])),actual=new Set(nuevos.map(k=>k.kpi));t.kpiAntes+=antes.length;t.kpiDespues+=nuevos.length;
     for(const k of nuevos){const p=previo.get(k.kpi);if(!p)t.nuevos++;else if(Number(p.valor)!==Number(k.valor))t.cambiados++;else t.iguales++;}
     const eliminar=antes.filter(k=>!actual.has(k.kpi)).map(k=>k.kpi);t.eliminados+=eliminar.length;

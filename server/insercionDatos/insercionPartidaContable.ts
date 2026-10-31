@@ -5,6 +5,7 @@ import { parse } from "csv-parse/sync";
 import iconv from "iconv-lite";
 import { insertarSoloPCVAusentes } from "../src/pcv/insertarSoloAusentes";
 import { finmindJson, ErrorProveedor } from "../src/proveedores/guardiaHttp";
+import { anualDesdeTrimestres } from "../src/pcv/finmindTrimestral";
 
 // ============================================================================
 // .ENV
@@ -3858,7 +3859,8 @@ function twOptBuscarConcepto(
 function twOptExtraerPartidas(
     informe: TWOPTInforme,
     factsFecha: TWOPTFact[],
-    taxonomiaIds: Map<string, number>
+    taxonomiaIds: Map<string, number>,
+    porFecha: Map<string, TWOPTFact[]> = new Map()
 ): TWOPTPartida[] {
     const out: TWOPTPartida[] = [];
 
@@ -3871,11 +3873,16 @@ function twOptExtraerPartidas(
 
         if (!encontrado) continue;
 
+        // TaiwanStockFinancialStatements es trimestre aislado: anual = suma T1-T4 (src/pcv/finmindTrimestral.ts).
+        const importe = anualDesdeTrimestres(def.codigo, encontrado.fact, porFecha, informe.fecha_fin_periodo);
+
+        if (importe === null) continue;
+
         out.push({
             informeId: informe.informe_id,
             conceptoEstandarId: conceptoId,
             conceptoOriginal: encontrado.fact.type || encontrado.fact.origin_name,
-            importe: encontrado.fact.value,
+            importe,
             nivelConfianza: encontrado.nivel
         });
     }
@@ -4047,7 +4054,8 @@ export async function ejecutarCargaPartidasContablesTaiwanOptimizado() {
                     const partidas = twOptExtraerPartidas(
                         informe,
                         factsFecha,
-                        taxonomiaIds
+                        taxonomiaIds,
+                        porFecha
                     );
 
                     // ================================================================

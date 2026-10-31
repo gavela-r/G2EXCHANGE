@@ -7,7 +7,7 @@
 | `G2EXCHANGE_entrega/` | worktree de **entrega**, rama `entrega/frontend-handoff-20261031`. Es la fuente de verdad del código: contiene todo lo de la rama operativa más las correcciones posteriores. |
 | `sectoriales_auditoria_20261030/` | entorno aislado del módulo sectorial (Codex y Claude), checkpoints y bundles Git |
 
-Al cerrar la entrega los vigilantes US y JP están **detenidos con `stop.request`** porque el árbol operativo ejecuta el código anterior (sin identidad de observación ni selección de observaciones en el recálculo de KPI). El procedimiento para reanudarlos con el código entregado está en `HANDOFF.md` §3.
+Al congelar el backend el coordinador y los vigilantes US/JP están **detenidos** con su parada segura. La reanudación se hace desde el worktree operativo `G2EXCHANGE_operativo/` con el código de entrega, tras rotar las credenciales y pasar `node server/scripts/transicion-recuperadores.cjs --comprobar` (`HANDOFF.md` §3).
 
 ## 2. Recuperadores
 | Proceso | Comando | Estado y checkpoint |
@@ -42,6 +42,7 @@ Al cerrar la entrega los vigilantes US y JP están **detenidos con `stop.request
 | Qué comprobar | Cómo |
 |---|---|
 | Cobertura | `npm run sectorial:coverage` (MySQL, solo lectura) |
+| Integridad de los lotes de Taiwán | `G2_PROJECT_ROOT=<proyecto> node sectorial/app/tools/verificar_lotes_tw.cjs` (sale con 1 si hay discrepancias) |
 | Integridad de las 60 valoraciones | `node sectoriales_auditoria_20261030/integracion_v02/tests/integridad_claude.cjs` |
 | Conflictos nuevos tras una reparación | contar `CONFLICT_PRESERVED` posteriores a la fecha de aplicación en celdas de `pcv_correccion_auditoria` |
 | Guardián de proveedores | `private_backups/provider-guard/<proveedor>.json` (totales y circuito) |

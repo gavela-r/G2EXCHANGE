@@ -63,7 +63,7 @@ ROE solo se calcula si los dos perímetros coinciden. Definición efectiva por p
 - **EE. UU.**: BENEFICIO_NETO es el atribuible a la dominante.
 - **Japón y Taiwán**: es el consolidado.
 
-El margen neto usa BENEFICIO_NETO tal como lo define el país.
+El margen neto usa BENEFICIO_NETO tal como lo define el país. Las salidas de KPI sectoriales (`kpi.cjs`) incluyen `perimeter` en MARGEN_NETO, ROA y ROE. El EPS es el diluido declarado (atribuible a la dominante por definición). Un concepto separado para el beneficio atribuible en EDINET queda pendiente (requiere descargar documentos con una clave EDINET nueva).
 
 ## 7. Migraciones
 | Nº | Contenido | Estado en la base operativa |

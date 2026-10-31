@@ -14,17 +14,18 @@ Garantías del adaptador (`sectorial/app/adapter.cjs`):
 - **Contexto**: si cambia entre cierres o es incompleto, se emite `CONTEXTO_CAMBIA_ENTRE_CIERRES` o `CONTEXTO_FINANCIERO_INCOMPLETO`.
 - **Bloqueo explícito**: si falta información, la ejecución queda `BLOQUEADO` con sus `issues` y `requiredInputs`. Nunca produce una valoración aparentemente precisa.
 - **Moneda**: no se convierte ninguna moneda sin tipo de cambio acreditado. Los emisores extranjeros (20-F/40-F) se valoran en su moneda de presentación. Para un ADR faltan el ratio de representación y el tipo de cambio, así que su valoración en USD no está implementada.
+- **ADR (motor del backend)**: un emisor con informes 20-F queda `ADR_RATIO_PENDIENTE` (el precio negociado es el del ADS y las acciones del informe son ordinarias); una moneda de presentación distinta de la del instrumento queda `FX_PENDIENTE`.
 
 ## 2. Coste de capital
 - **CAPM**: Ke = Rf + β · ERP (+ primas autorizadas). Rf y ERP salen de `coste_capital_referencia`; β es sectorial (`insercionDatos/betaSectorial.ts`).
 - **WACC** = E/(D+E)·Ke + D/(D+E)·Kd·(1−t) (`valuation_engine/src/wacc.ts`). Banca, seguros y REIT descuentan con Ke.
-- **Primas de liquidez y tamaño**: `NO_ESTIMABLE` (ajuste 0) hasta que haya una calibración aprobada (`RISK_PREMIUM.md`).
+- **Primas de liquidez y tamaño**: `NO_ESTIMABLE` hasta que haya una calibración aprobada (`RISK_PREMIUM.md`). El ajuste operativo es 0 (`SYSTEM_DEFAULT_ZERO`), la valoración queda en `REVIEW` con aviso obligatorio y el Excel (`premium_policy_status`) y el PDF lo rotulan como no estimable; no es una prima real del 0 %.
 
 ## 3. DCF
 - **Proyecciones** en tres escenarios a partir de hipótesis citadas: `valuation_engine/src/proyecciones.ts` y `sectorial/app/engine/src/plan.ts`.
 - **FCFF** = EBIT·(1−t) + D&A − CAPEX − ΔNWC, descontado con WACC.
 - **Valor terminal**: Gordon.
-- **Puente de valor**: EV → equity (deuda neta y otras partidas) → valor por acción.
+- **Puente de valor**: EV → equity (deuda neta y otras partidas) → valor por acción. Participaciones no dominantes (motor del backend): patrimonio total − patrimonio de la dominante del mismo informe FY0 cuando ambos están declarados; si no, aviso `NO_ESTIMABLE` en `data_quality_warnings` (nunca un cero supuesto). En el motor sectorial se declaran como otra partida del perímetro contable.
 - **Familias de modelo**: FCFF (general), FCFE con capital requerido (banca y seguros) y AFFO/NAV (REIT).
 
 ## 4. KPI (`server/insercionDatos/insercionKPIInformeFinanciero.ts`)
@@ -37,7 +38,7 @@ Todas las entradas de un KPI deben estar en el mismo informe. Los valores ausent
 | EBITDA / MARGEN_EBITDA | EBIT + D&A; / ingresos | D&A válido (sin reservas ni reversiones) |
 | MARGEN_NETO | beneficio neto / ingresos | perímetro de BENEFICIO_NETO según el país (`DATABASE.md` §6) |
 | ROA | beneficio neto / activos totales | |
-| ROE | beneficio neto / patrimonio neto | **solo si ambos tienen el mismo perímetro** (dominante/dominante o total/total) |
+| ROE | beneficio neto / patrimonio neto | **solo si ambos tienen el mismo perímetro** (dominante/dominante o total/total); en el backend y en la capa sectorial (`kpi.cjs`, causa `PERIMETRO_INCOMPATIBLE`) |
 | DEUDA_TOTAL / DEUDA_NETA | deuda CP + deuda LP; − efectivo | política `BOTH_VERIFIED_DEBT_COMPONENTS_REQUIRED_V2`: los dos componentes verificados |
 | DEUDA_SOBRE_PATRIMONIO / DEUDA_SOBRE_ACTIVOS / PASIVO_SOBRE_ACTIVOS | cocientes respectivos | misma política de deuda |
 | COBERTURA_INTERESES | EBIT / gasto por intereses | |

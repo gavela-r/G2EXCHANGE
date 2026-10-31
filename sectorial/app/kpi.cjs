@@ -40,6 +40,10 @@ function kpisForPeriod(period){
   const blocked=evidence.filter(e=>e.validation!=='VALIDADO'||typeof e.value!=='number');
   if(blocked.length)return{...base,status:'BLOQUEADO_DEPENDENCIA',value:null,cause:blocked.map(e=>e.field+':'+e.validation).join(', ')};
   const v=Object.fromEntries(evidence.map(e=>[e.field,e.value]));
+  // ROE sólo con beneficio y patrimonio del mismo perímetro (dominante/dominante o total/total), como el backend.
+  const pn=period.fields?.netIncome?.perimeter??null,pe=period.fields?.equity?.perimeter??null;
+  if(k.inputs.includes('netIncome'))base.perimeter=pn;
+  if(k.code==='ROE'&&pn&&pe&&pn!==pe)return{...base,status:'NO_CALCULABLE',value:null,cause:'PERIMETRO_INCOMPATIBLE:'+pn+'/'+pe};
   const dens=k.dens??(k.den?[k.den]:[]),zero=dens.find(d=>v[d]===0);
   if(zero)return{...base,status:'NO_CALCULABLE',value:null,cause:'DIVISION_POR_CERO:'+zero};
   const value=k.f(v);if(!Number.isFinite(value))return{...base,status:'NO_CALCULABLE',value:null,cause:'RESULTADO_NO_FINITO'};

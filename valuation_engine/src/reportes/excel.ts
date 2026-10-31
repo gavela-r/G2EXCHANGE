@@ -29,7 +29,7 @@ export function escribirExcel(data:ModeloInput,r:Resultado,output:string,root:st
     sector_beta:data.sector_beta,synthetic_rating:data.synthetic_rating??'NOT_PROVIDED',
     interest_coverage:data.interest_coverage??0,credit_spread:data.credit_spread,
     spread_credito_optimista:data.spread_credito_optimista,spread_credito_pesimista:data.spread_credito_pesimista,
-    terminal_growth_max:data.terminal_growth_max,premium_policy_status:'REVIEW',country_risk_premium:0,size_premium:0
+    terminal_growth_max:data.terminal_growth_max,premium_policy_status:r.premium_methodology==='SYSTEM_DEFAULT_ZERO'?'NO_ESTIMABLE: primas sin calibrar (ajuste operativo 0, no es una prima real del 0 %)':'REVIEW',country_risk_premium:0,size_premium:0
   };
   for(let row=4;row<=46;row++){
     const key=String(con[`A${row}`]?.v??'');const v=values[key];

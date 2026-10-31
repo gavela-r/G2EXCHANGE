@@ -4,6 +4,13 @@ const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex'
 const parse=x=>{try{return typeof x==='string'?JSON.parse(x):x;}catch{return null;}};
 const date=x=>{if(typeof x!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(x)||!Number.isFinite(Date.parse(x))||new Date(x+'T00:00:00Z').toISOString().slice(0,10)!==x)throw Error('Fecha civil inválida');return x;};
 const MAP={INGRESOS:'revenue',COSTE_VENTAS:'cogs',BENEFICIO_BRUTO:'grossProfit',GASTOS_OPERATIVOS:'opex',EBITDA:'ebitda',EBIT:'ebit',DEPRECIACION_AMORTIZACION:'da',BENEFICIO_ANTES_IMPUESTOS:'preTax',IMPUESTO_BENEFICIOS:'taxExpense',BENEFICIO_NETO:'netIncome',EFECTIVO:'cash',ACTIVOS_TOTALES:'assets',PASIVOS_TOTALES:'liabilities',PATRIMONIO_NETO:'equity',INVENTARIOS:'inventory',CUENTAS_COBRAR:'receivables',CUENTAS_PAGAR:'payables',DEUDA_CORTO_PLAZO:'shortDebt',DEUDA_LARGO_PLAZO:'longDebt',DEUDA_TOTAL:'totalDebtReported',CAPEX:'capex',FLUJO_CAJA_OPERATIVO:'cfo',FLUJO_CAJA_INVERSION:'cfi',FLUJO_CAJA_FINANCIACION:'cff',DIVIDENDOS_PAGADOS:'dividends',ACCIONES_EN_CIRCULACION:'shares',GASTO_INTERESES:'interest',ACTIVOS_CORRIENTES:'currentAssets',PASIVOS_CORRIENTES:'currentLiabilities',INMOVILIZADO_MATERIAL:'PPE',INMOVILIZADO_INTANGIBLE:'INTANGIBLE',DERECHOS_USO:'ROU',PASIVO_ARRENDAMIENTOS:'leaseDebt',ACTIVOS_CONTRACTUALES:'contractAssets',PASIVOS_CONTRACTUALES:'contractLiabilities'};
+// Perímetro de BENEFICIO_NETO y PATRIMONIO_NETO por etiqueta XBRL; réplica de server/src/pcv/seleccionObservaciones.ts
+// (perimetroDeEtiqueta), comprobada por sectorial/app/tests/perimetro.test.cjs.
+function perimeter(code,tag){const t=String(tag??'').split(':').pop();
+ if(/AttributableToOwnersOfParent|AttributableToParent$/.test(t))return'DOMINANTE';if(/IncludingPortionAttributableToNoncontrollingInterest/.test(t))return'TOTAL';
+ if(code==='BENEFICIO_NETO'){if(['NetIncomeLoss','NetIncomeLossAvailableToCommonStockholdersBasic'].includes(t))return'DOMINANTE';if(['ProfitLoss','ProfitLossIFRS','IncomeAfterTaxes','NetIncome'].includes(t))return'TOTAL';}
+ if(code==='PATRIMONIO_NETO'){if(['StockholdersEquity','PartnersCapital','MembersEquity'].includes(t))return'DOMINANTE';if(['NetAssets','Equity','EquityIFRS','NetAssetsSummaryOfBusinessResults'].includes(t))return'TOTAL';}
+ return null;}
 const FUENTES_PAIS={US:['SEC_EDGAR'],JP:['EDINET'],TW:['FINMIND','MOPS']};
 const flow=new Set(['revenue','cogs','grossProfit','opex','ebitda','ebit','da','preTax','taxExpense','netIncome','capex','cfo','cfi','cff','dividends','interest']);
 function observe(row,proofs,report,context){
@@ -46,7 +53,7 @@ function mapPeriod(raw,proofs,report,reportEvidence){
  const fields={};
  for(const [code,key]of Object.entries(MAP)){
   const all=observations.filter(x=>x.code===code),valid=all.filter(x=>x.validation==='VALIDADO'),values=new Set(valid.map(x=>[x.value,x.norm,x.currency,x.basis].join('|')));
-  fields[key]=valid.length&&values.size===1?{...valid[0],allRecordIds:valid.map(x=>x.recordId)}:{value:null,validation:values.size>1||all.some(x=>x.validation==='CONFLICTIVO')?'CONFLICTIVO':'PENDIENTE',code,reason:values.size>1?'Totales atestados incompatibles':all.length?all.map(x=>x.reason).filter(Boolean).join('; '):'Concepto ausente',recordIds:all.map(x=>x.recordId)};
+  fields[key]=valid.length&&values.size===1?{...valid[0],allRecordIds:valid.map(x=>x.recordId),...(['BENEFICIO_NETO','PATRIMONIO_NETO'].includes(code)?{perimeter:new Set(valid.map(x=>perimeter(code,x.concept))).size===1?perimeter(code,valid[0].concept):null}:{})}:{value:null,validation:values.size>1||all.some(x=>x.validation==='CONFLICTIVO')?'CONFLICTIVO':'PENDIENTE',code,reason:values.size>1?'Totales atestados incompatibles':all.length?all.map(x=>x.reason).filter(Boolean).join('; '):'Concepto ausente',recordIds:all.map(x=>x.recordId)};
  }
  const derive=(key,deps,fn)=>{if(fields[key]?.value!=null||fields[key]?.validation==='CONFLICTIVO'||!deps.every(k=>fields[k]?.validation==='VALIDADO'))return;const inputs=deps.map(k=>fields[k]);if(new Set(inputs.map(x=>[x.norm,x.currency,x.basis].join('|'))).size!==1)return;fields[key]={...inputs[0],value:fn(...inputs.map(x=>x.value)),recordId:null,code:key,validation:'VALIDADO',derivation:{rule:deps.join(' / '),inputs:deps,records:inputs.flatMap(x=>x.allRecordIds??[x.recordId])},reason:null};};
  derive('ebitda',['ebit','da'],(a,b)=>a+b);derive('cogs',['revenue','grossProfit'],(a,b)=>a-b);derive('debt',['shortDebt','longDebt'],(a,b)=>a+b);derive('liabilitiesEquity',['liabilities','equity'],(a,b)=>a+b);derive('balanceDifference',['assets','liabilitiesEquity'],(a,b)=>a-b);
@@ -81,4 +88,4 @@ async function loadCompany(db,id,asOf){
  if(periods.some(p=>p.issues.length))issues.push({code:'CONTEXTO_FINANCIERO_INCOMPLETO'});
  const result={version:'MYSQL_SECTORIAL_READONLY_0.2',readAt:new Date().toISOString(),asOf,company,instruments,classification,periods,issues,source:'MYSQL_SOLO_LECTURA',immutableHistory:true};result.inputHash=hash({asOf,company,classification,periods,issues});return result;
 }
-module.exports={MAP,FUENTES_PAIS,flow,hash,date,observe,mapPeriod,search,loadCompany};
+module.exports={perimeter,MAP,FUENTES_PAIS,flow,hash,date,observe,mapPeriod,search,loadCompany};

@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {clasificacionVigente,perfilPorCapitalizacion} from './evidencia';
 import {identidadEstructural} from '../capital/historico';
+import {perimetroDeEtiqueta} from '../pcv/seleccionObservaciones';
 
 export type Db = Pick<PoolConnection,'query'>;
 export type PerfilRating = 'GRANDE_NO_FINANCIERA'|'PEQUEÑA_RIESGOSA'|'FINANCIERA';
@@ -44,6 +45,21 @@ export function serializar(value:unknown):string {
 export function huella(value:unknown):string { return crypto.createHash('sha256').update(serializar(value)).digest('hex'); }
 export function primasCero(fecha:string):Ajustes {
   return Object.fromEntries(['CONSERVATIVE','BASE','OPTIMISTIC'].map(s=>[s,Object.fromEntries(['prima_iliquidez','prima_tamano','prima_concentracion_clientes','otros_ajustes_wacc'].map(f=>[f,{value:0,source:'SYSTEM_DEFAULT_ZERO_V1',reference_date:fecha}]))])) as Ajustes;
+}
+// Participaciones no dominantes = patrimonio TOTAL − patrimonio de la DOMINANTE, sólo si el mismo informe declara ambos
+// perímetros con un único valor cada uno y total ≥ dominante. En otro caso null: nunca se supone cero.
+export function minoritariosDesdePatrimonio(rows:{concepto_estandar:string;concepto:string;importe:unknown}[]):{valor:number;etiquetas:string[]}|null {
+  const por:Record<string,Map<number,string>>={TOTAL:new Map(),DOMINANTE:new Map()};
+  for(const r of rows){if(r.concepto_estandar!=='PATRIMONIO_NETO')continue;const v=Number(r.importe);if(r.importe===null||r.importe===''||!Number.isFinite(v))continue;const k=perimetroDeEtiqueta('PATRIMONIO_NETO',r.concepto);if(k)por[k].set(v,r.concepto);}
+  if(por.TOTAL.size!==1||por.DOMINANTE.size!==1)return null;
+  const [[total,tt]]=[...por.TOTAL],[[dom,td]]=[...por.DOMINANTE];
+  return total>=dom?{valor:total-dom,etiquetas:[tt,td]}:null;
+}
+// Emisor extranjero (20-F): el instrumento negociado suele ser un ADS con ratio de representación distinto de 1 y las
+// acciones del informe son ordinarias. Sin ratio ni tipo de cambio acreditados no se compara con el precio.
+export function bloqueoEmisorExtranjero(tipos:unknown[]):string|null {
+  const f=tipos.map(t=>String(t??'')).find(t=>/^20-F/.test(t));
+  return f?`Informe ${f}: ratio de representación ADS/acciones ordinarias y tipo de cambio no acreditados`:null;
 }
 export interface Partida { concepto_estandar:string; concepto:string; importe:unknown; signo_esperado:string; alias_sec?:string; alias_edinet?:string; alias_finmind?:string; }
 export function normalizarPartidas(rows:Partida[],fuente:string):{valores:Record<string,number>; calidad:Record<string,unknown>; advertencias:string[]} {
@@ -109,8 +125,9 @@ export async function prepararInstrumento(db:Db,id:number,asOf:string,hip?:Hipot
   const [reports]=await db.query<RowDataPacket[]>(`SELECT x.* FROM (SELECT inf.*,ROW_NUMBER() OVER(PARTITION BY YEAR(inf.fecha_fin_periodo) ORDER BY inf.fecha_fin_periodo DESC,inf.id DESC) rn FROM informe_financiero inf WHERE inf.empresa_id=? AND inf.tipo_periodo='ANUAL' AND inf.fecha_publicacion<=? AND inf.fecha_fin_periodo<=? AND EXISTS(SELECT 1 FROM partida_contable_valor pc WHERE pc.informe_id=inf.id)) x WHERE rn=1 ORDER BY fecha_fin_periodo DESC LIMIT 4`,[i.empresa_id,asOf,asOf]);
   if(reports.length!==4)throw new Pendiente('EJERCICIOS_PENDIENTES',`Ejercicios ${reports.length}/4`);
   reports.reverse();
+  const adr=bloqueoEmisorExtranjero(reports.map(r=>r.tipo_documento));if(adr)throw new Pendiente('ADR_RATIO_PENDIENTE',adr);
   const financieras:ModeloInput['financials']=[],versiones:number[]=[],traces:unknown[]=[];
-  let ultimo:Record<string,number>={};
+  let ultimo:Record<string,number>={},ultimasPartidas:any[]=[];
   let coberturaObservada:{ebit:number;intereses:number;informe_id:number;fecha:string}|undefined;
   for(const r of reports) {
     const [vs]=await db.query<RowDataPacket[]>('SELECT id,moneda,hash_inputs,fecha_fin_periodo FROM valuation_input_version WHERE empresa_id=? AND informe_id=? ORDER BY id DESC LIMIT 1',[i.empresa_id,r.id]);
@@ -127,7 +144,7 @@ export async function prepararInstrumento(db:Db,id:number,asOf:string,hip?:Hipot
     for(const k of Object.keys(f))if(!['fiscal_year','period_end_date'].includes(k)&&(f as any)[k]!==undefined)(f as any)[k]/=1e6;
     if(financieras.length && f.fiscal_year!==financieras[financieras.length-1].fiscal_year+1)throw new Pendiente('PERIODOS_INCONSISTENTES','Cierres anuales no consecutivos');
     const prev=financieras[financieras.length-1];if(prev?.nwc_balance!==undefined&&f.nwc_balance!==undefined)f.change_nwc=f.nwc_balance-prev.nwc_balance;
-    financieras.push(f);versiones.push(Number(vs[0].id));ultimo=p;
+    financieras.push(f);versiones.push(Number(vs[0].id));ultimo=p;ultimasPartidas=parts as any[];
     const [kpis]=await db.query<RowDataPacket[]>('SELECT kpi,unidad,valor,nivel_confianza FROM kpi_financiero_informe WHERE informe_id=? ORDER BY kpi,id',[r.id]);
     traces.push({informe_id:r.id,fecha:fechaCivil(r.fecha_fin_periodo),fuente:r.fuente,version_id:vs[0].id,hash_version:vs[0].hash_inputs,fecha_version:vs[0].fecha_fin_periodo,calidad:n.calidad,advertencias:n.advertencias,kpis});
   }
@@ -159,6 +176,9 @@ export async function prepararInstrumento(db:Db,id:number,asOf:string,hip?:Hipot
     'Moneda financiera basada en metadata VIV; unidades originales pendientes de verificación. Sin conversión FX.',
     `Perfil de rating: ${hip?.perfil_rating?hip.source:automaticProfile?.criterion}; requiere revisión de su evidencia.`
   ];
+  const nci=minoritariosDesdePatrimonio(ultimasPartidas);
+  if(nci){input.minority_interest_fy0=nci.valor/1e6;input.data_quality_warnings.push(`Participaciones no dominantes FY0 derivadas como ${nci.etiquetas[0]} − ${nci.etiquetas[1]} del informe ${reports[3].id}.`);}
+  else input.data_quality_warnings.push('NO_ESTIMABLE: participaciones no dominantes no acreditadas (el informe FY0 no declara a la vez el patrimonio total y el de la dominante). El puente EV → patrimonio no las descuenta; si existen, el valor por acción está sobrestimado. Revisión obligatoria.');
   if(coberturaObservada.informe_id!==reports[3].id)input.data_quality_warnings.push(`Cobertura de intereses tomada del informe ${coberturaObservada.informe_id} (${coberturaObservada.fecha}), anterior al último cierre; no se fabrican intereses ausentes.`);
   const manifest=manifiestoMotor();
   try { cargarMotor().validarEntrada(input); }

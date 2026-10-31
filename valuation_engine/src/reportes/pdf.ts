@@ -47,7 +47,7 @@ export function escribirPdf(r:Resultado,outPath:string):void {
     text(215,y-6,`Max compra: ${num(x.max_buy_price)} | ${x.decision}`,8);
   });
   line(40,112,515,55,[0.98,0.95,0.86]);
-  text(48,151,`ESTADO: ${r.validation_status}   |   PRIMAS: ${r.premium_methodology}`,10,[0.32,0.24,0.10],true);
+  text(48,151,`ESTADO: ${r.validation_status}   |   PRIMAS: ${r.premium_methodology==='SYSTEM_DEFAULT_ZERO'?'NO_ESTIMABLE (ajuste operativo 0)':r.premium_methodology}`,10,[0.32,0.24,0.10],true);
   text(48,135,'ERP TOTAL incluye riesgo pais. No se suma otra vez al CAPM.',9,[0.32,0.24,0.10]);
   text(48,120,'Primas automaticas DRAFT requieren revision financiera.',9,[0.32,0.24,0.10]);
   text(40,84,`Run ${r.valuation_run_id}  /  Snapshot ${r.input_snapshot_id}  |  G2EXCHANGE TS v1.5`,9,[0.3,0.4,0.5]);

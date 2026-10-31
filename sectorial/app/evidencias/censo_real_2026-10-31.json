@@ -1,0 +1,1314 @@
+{
+  "at": "2026-10-31T15:06:52.145Z",
+  "asOf": "2026-10-31",
+  "scanned": 40,
+  "historyComplete": [],
+  "calculable": 0,
+  "companies": [
+    {
+      "id": 1,
+      "name": "NVIDIA CORP",
+      "country": "US",
+      "verified": 231,
+      "model": 3,
+      "classification": "RESUELTO",
+      "periods": [
+        "2023-01-29",
+        "2024-01-28",
+        "2025-01-26",
+        "2026-01-25"
+      ],
+      "currencies": [
+        "USD",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 76,
+        "PENDIENTE": 73
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "revenue:3/4",
+        "netIncome:3/4",
+        "cash:3/4",
+        "assets:3/4",
+        "liabilities:3/4",
+        "equity:3/4",
+        "ebit:3/4",
+        "da:3/4",
+        "inventory:3/4",
+        "receivables:3/4",
+        "payables:3/4",
+        "debt:3/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 1,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CALENDARIO_PENDIENTE",
+        "HISTORICO_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 1949,
+      "name": "ESTABLISHMENT LABS HOLDINGS INC.",
+      "country": "US",
+      "verified": 156,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 90,
+        "PENDIENTE": 58
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 3518,
+      "name": "Verano Holdings Corp.",
+      "country": "US",
+      "verified": 148,
+      "model": 12,
+      "classification": "RESUELTO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 86,
+        "PENDIENTE": 62
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "debt:0/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 0,
+      "blockCodes": [
+        "HISTORICO_PENDIENTE",
+        "PUENTE_FECHA_VALORACION_PENDIENTE",
+        "NOTA_APERTURA_PENDIENTE",
+        "COHORTES_PENDIENTES",
+        "PERIMETRO_CONTABLE_PENDIENTE",
+        "POLITICA_TERMINAL_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10630,
+      "name": "ITO EN",
+      "country": "JP",
+      "verified": 144,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-04-30",
+        "2023-04-30",
+        "2024-04-30",
+        "2025-04-30"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 76,
+        "VALIDADO": 72
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 5349,
+      "name": "Arena Group Holdings, Inc.",
+      "country": "US",
+      "verified": 144,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 85,
+        "PENDIENTE": 63
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10633,
+      "name": "MARUSAN-AI  CO.",
+      "country": "JP",
+      "verified": 144,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-09-20",
+        "2023-09-20",
+        "2024-09-20",
+        "2025-09-20"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 72,
+        "VALIDADO": 76
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 3768,
+      "name": "Agora, Inc.",
+      "country": "US",
+      "verified": 142,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 83,
+        "PENDIENTE": 65
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 3694,
+      "name": "INNOVATIVE SOLUTIONS & SUPPORT INC",
+      "country": "US",
+      "verified": 140,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-09-30",
+        "2023-09-30",
+        "2024-09-30",
+        "2025-09-30"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "PENDIENTE": 70,
+        "VALIDADO": 78
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 4674,
+      "name": "NCS Multistage Holdings, Inc.",
+      "country": "US",
+      "verified": 138,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 78,
+        "PENDIENTE": 68,
+        "CONFLICTIVO": 2
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10432,
+      "name": "SAKATA SEED CORPORATION",
+      "country": "JP",
+      "verified": 138,
+      "model": 7,
+      "classification": "RESUELTO",
+      "periods": [
+        "2023-05-31",
+        "2024-05-31",
+        "2025-05-31",
+        "2026-05-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 54,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 6
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "revenue:3/4",
+        "netIncome:3/4",
+        "cash:3/4",
+        "assets:3/4",
+        "liabilities:3/4",
+        "equity:3/4",
+        "ebit:3/4",
+        "da:3/4",
+        "inventory:0/4",
+        "receivables:0/4",
+        "payables:3/4",
+        "debt:0/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "HISTORICO_PENDIENTE",
+        "PUENTE_FECHA_VALORACION_PENDIENTE",
+        "NOTA_APERTURA_PENDIENTE",
+        "COHORTES_PENDIENTES",
+        "PERIMETRO_CONTABLE_PENDIENTE",
+        "POLITICA_TERMINAL_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 4018,
+      "name": "Cresco Labs Inc.",
+      "country": "US",
+      "verified": 138,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 80,
+        "PENDIENTE": 68
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10578,
+      "name": "MIKIKOGYO CO.",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 57,
+        "VALIDADO": 54
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CUATRO_EJERCICIOS_NO_DISPONIBLES",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 2414,
+      "name": "SkyWater Technology, Inc",
+      "country": "US",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-01-02",
+        "2023-12-31",
+        "2024-12-29",
+        "2025-12-28"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 90,
+        "PENDIENTE": 58
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10513,
+      "name": "TSUZUKI DENKI CO.",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31",
+        "2026-03-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 60,
+        "PENDIENTE": 86
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 2442,
+      "name": "HELIX ENERGY SOLUTIONS GROUP INC",
+      "country": "US",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 82,
+        "PENDIENTE": 66
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10443,
+      "name": "Mitsui Mining and Smelting Company",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-03-31",
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 76,
+        "VALIDADO": 72
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10608,
+      "name": "Fujiya Co.",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 57,
+        "VALIDADO": 54
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CUATRO_EJERCICIOS_NO_DISPONIBLES",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10600,
+      "name": "Nippon Beet Sugar Manufacturing Co.",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-03-31",
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 76,
+        "VALIDADO": 72
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10610,
+      "name": "Meito  Sangyo  Co.",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-03-31",
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 76,
+        "VALIDADO": 72
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10607,
+      "name": "EZAKI GLICO CO.",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 57,
+        "VALIDADO": 54
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CUATRO_EJERCICIOS_NO_DISPONIBLES",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10549,
+      "name": "SAITA CORPORATION",
+      "country": "JP",
+      "verified": 136,
+      "model": 4,
+      "classification": "RESUELTO",
+      "periods": [
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 76,
+        "VALIDADO": 72
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "revenue:0/4",
+        "payables:0/4",
+        "debt:0/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 0,
+      "blockCodes": [
+        "HISTORICO_PENDIENTE",
+        "PUENTE_FECHA_VALORACION_PENDIENTE",
+        "NOTA_APERTURA_PENDIENTE",
+        "COHORTES_PENDIENTES",
+        "PERIMETRO_CONTABLE_PENDIENTE",
+        "POLITICA_TERMINAL_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10635,
+      "name": "The Nisshin OilliO Group",
+      "country": "JP",
+      "verified": 136,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31",
+        "2026-03-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 60,
+        "PENDIENTE": 86
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10436,
+      "name": "HOB Co.",
+      "country": "JP",
+      "verified": 134,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "VALIDADO": 80,
+        "PENDIENTE": 68
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 4246,
+      "name": "ICTS INTERNATIONAL N V",
+      "country": "US",
+      "verified": 134,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 73,
+        "PENDIENTE": 69
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 1906,
+      "name": "Cushman & Wakefield Ltd.",
+      "country": "US",
+      "verified": 132,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 78,
+        "PENDIENTE": 74
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 3309,
+      "name": "Horizon Kinetics Holding Corp",
+      "country": "US",
+      "verified": 132,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 76,
+        "PENDIENTE": 72
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10505,
+      "name": "YAMATO CORPORATION",
+      "country": "JP",
+      "verified": 132,
+      "model": 4,
+      "classification": "RESUELTO",
+      "periods": [
+        "2022-03-20",
+        "2023-03-20",
+        "2024-03-20",
+        "2025-03-20"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "CONFLICTIVO": 1,
+        "PENDIENTE": 75,
+        "VALIDADO": 72
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "revenue:1/4",
+        "receivables:2/4",
+        "payables:3/4",
+        "debt:0/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 0,
+      "blockCodes": [
+        "HISTORICO_PENDIENTE",
+        "PUENTE_FECHA_VALORACION_PENDIENTE",
+        "NOTA_APERTURA_PENDIENTE",
+        "COHORTES_PENDIENTES",
+        "PERIMETRO_CONTABLE_PENDIENTE",
+        "POLITICA_TERMINAL_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 2845,
+      "name": "Talkspace, Inc.",
+      "country": "US",
+      "verified": 131,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 77,
+        "PENDIENTE": 71
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 4175,
+      "name": "AstroNova, Inc.",
+      "country": "US",
+      "verified": 131,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-01-31",
+        "2023-01-31",
+        "2024-01-31",
+        "2025-01-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 87,
+        "PENDIENTE": 61
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10591,
+      "name": "s foods inc.",
+      "country": "JP",
+      "verified": 130,
+      "model": 7,
+      "classification": "RESUELTO",
+      "periods": [
+        "2023-02-28",
+        "2024-02-29",
+        "2025-02-28",
+        "2026-02-28"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "revenue:3/4",
+        "netIncome:3/4",
+        "cash:3/4",
+        "assets:3/4",
+        "liabilities:3/4",
+        "equity:3/4",
+        "ebit:3/4",
+        "da:3/4",
+        "inventory:0/4",
+        "receivables:3/4",
+        "payables:3/4",
+        "debt:0/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 1,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CALENDARIO_PENDIENTE",
+        "HISTORICO_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10583,
+      "name": "mbs",
+      "country": "JP",
+      "verified": 130,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-05-31",
+        "2024-05-31",
+        "2025-05-31",
+        "2026-05-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10596,
+      "name": "NITTO FUJI FLOUR MILLING CO.",
+      "country": "JP",
+      "verified": 130,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31",
+        "2026-03-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10444,
+      "name": "NIHON SEIKO CO.",
+      "country": "JP",
+      "verified": 130,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31",
+        "2026-03-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10581,
+      "name": "DAI-ICHI CUTTER KOGYO K.K.",
+      "country": "JP",
+      "verified": 130,
+      "model": 4,
+      "classification": "RESUELTO",
+      "periods": [
+        "2022-06-30",
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "PENDIENTE": 94,
+        "VALIDADO": 52
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "revenue:0/4",
+        "netIncome:3/4",
+        "cash:3/4",
+        "assets:3/4",
+        "liabilities:3/4",
+        "equity:3/4",
+        "ebit:3/4",
+        "da:3/4",
+        "inventory:0/4",
+        "receivables:2/4",
+        "payables:2/4",
+        "debt:0/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "HISTORICO_PENDIENTE",
+        "PUENTE_FECHA_VALORACION_PENDIENTE",
+        "NOTA_APERTURA_PENDIENTE",
+        "COHORTES_PENDIENTES",
+        "PERIMETRO_CONTABLE_PENDIENTE",
+        "POLITICA_TERMINAL_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10619,
+      "name": "COMO CO.",
+      "country": "JP",
+      "verified": 130,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31",
+        "2026-03-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10435,
+      "name": "AXYZ Co.",
+      "country": "JP",
+      "verified": 130,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30",
+        "2026-06-30"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10589,
+      "name": "ROKKO BUTTER CO.",
+      "country": "JP",
+      "verified": 130,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "JPY"
+      ],
+      "validation": {
+        "VALIDADO": 77,
+        "PENDIENTE": 68,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 3298,
+      "name": "Dingdong (Cayman) Ltd",
+      "country": "US",
+      "verified": 130,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2022-12-31",
+        "2023-12-31",
+        "2024-12-31",
+        "2025-12-31"
+      ],
+      "currencies": [
+        "USD"
+      ],
+      "validation": {
+        "VALIDADO": 77,
+        "PENDIENTE": 71
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10441,
+      "name": "MITSUBISHI MATERIALS CORPORATION",
+      "country": "JP",
+      "verified": 128,
+      "model": 9,
+      "classification": "RESUELTO",
+      "periods": [
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31",
+        "2026-03-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": [
+        "revenue:3/4",
+        "netIncome:3/4",
+        "cash:3/4",
+        "assets:3/4",
+        "liabilities:3/4",
+        "equity:3/4",
+        "ebit:3/4",
+        "da:3/4",
+        "inventory:0/4",
+        "receivables:3/4",
+        "payables:3/4",
+        "debt:0/4",
+        "leaseDebt:0/4",
+        "contractAssets:0/4",
+        "contractLiabilities:0/4"
+      ],
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "HISTORICO_PENDIENTE",
+        "PUENTE_FECHA_VALORACION_PENDIENTE",
+        "NOTA_APERTURA_PENDIENTE",
+        "COHORTES_PENDIENTES",
+        "PERIMETRO_CONTABLE_PENDIENTE",
+        "POLITICA_TERMINAL_PENDIENTE"
+      ],
+      "status": "BLOQUEADO"
+    },
+    {
+      "id": 10592,
+      "name": "TAKIZAWA HAM CO.",
+      "country": "JP",
+      "verified": 128,
+      "model": null,
+      "classification": "BLOQUEADO",
+      "periods": [
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31",
+        "2026-03-31"
+      ],
+      "currencies": [
+        "JPY",
+        null
+      ],
+      "validation": {
+        "VALIDADO": 57,
+        "PENDIENTE": 86,
+        "CONFLICTIVO": 3
+      },
+      "historyComplete": false,
+      "missingHistory": null,
+      "calendarIssues": 0,
+      "blockCodes": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "status": "BLOQUEADO"
+    }
+  ]
+}

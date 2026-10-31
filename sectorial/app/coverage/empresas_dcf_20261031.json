@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-10-31T15:12:55.037Z",
+  "source": "MYSQL_SOLO_LECTURA",
+  "conceptosDcf": [
+    "INGRESOS",
+    "EBIT",
+    "BENEFICIO_NETO",
+    "EFECTIVO",
+    "ACTIVOS_TOTALES",
+    "PASIVOS_TOTALES",
+    "PATRIMONIO_NETO",
+    "FLUJO_CAJA_OPERATIVO",
+    "CAPEX"
+  ],
+  "regla": "9 conceptos certificados (sin conflicto sin resolver) en los 4 ejercicios 2022-2025, informe de la fuente del país",
+  "resultado": {
+    "US": {
+      "empresasConCuatroInformes": 5183,
+      "empresasDcfCompletas": 1322,
+      "empresasTresDeCuatro": 444
+    },
+    "JP": {
+      "empresasConCuatroInformes": 3084,
+      "empresasDcfCompletas": 2195,
+      "empresasTresDeCuatro": 436
+    },
+    "TW": {
+      "empresasConCuatroInformes": 814,
+      "empresasDcfCompletas": 0,
+      "empresasTresDeCuatro": 0
+    }
+  }
+}

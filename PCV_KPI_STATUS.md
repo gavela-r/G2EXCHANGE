@@ -1,5 +1,7 @@
 # Estado PCV / KPI 2022–2025 (Estados Unidos, Japón, Taiwán)
 
+> **Vigente (31/10/2026, tarde): reparaciones APLICADAS en MySQL operativo y cobertura medida tras las escrituras. Ver `INFORME_REPARACION_PCV_KPI.md`.** EE. UU. 45,5–47,8 % PCV / 30,8–32,3 % KPI; Japón 61,0–73,1 % / 47,4–57,7 %; Taiwán 0 %. Las secciones siguientes son la medición y el escenario simulado de la mañana del 31/10, que se conservan como referencia.
+
 ## Actualización 31/10/2026 — diagnóstico de conflictos y correcciones preparadas
 
 Mismo universo congelado que el 30/10 (sha256 idéntico por país), mismos denominadores y misma regla de certificación. MySQL sólo lectura. Datos: `sectorial/app/coverage/cobertura_tras_correcciones.json`, `diagnostico_conflictos.json`.

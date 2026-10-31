@@ -1,10 +1,10 @@
 {
- "generado": "2026-10-31T22:17:41.319Z",
+ "generado": "2026-10-31T22:30:52.938Z",
  "rama": "entrega/frontend-handoff-20261031",
- "commit": "70edb280511dd074dec7753ceeb49571eb8fd88d",
+ "commit": "aa14ccd1063014124e5a9a0c44ea11691421af94",
  "archivos": 655,
- "bytes": 16840352,
- "sha256DelInventario": "8b62f32dd6b3d48ba865f54e75b69f605e98a5d7c49de6f74c0bc91daf1bf700",
+ "bytes": 16841096,
+ "sha256DelInventario": "19d1e343022833cdfc2297e68d25cc04e6822e830ac68b4d783ed0e93f9a31c8",
  "paquetes": [
   {
    "paquete": "client/package.json",
@@ -142,8 +142,8 @@
   },
   {
    "archivo": "HANDOFF.md",
-   "bytes": 9894,
-   "sha256": "40ac55b56a740ea770d413c061dc41f8a2ef007a66dba8688c8e60f2509e71ac"
+   "bytes": 10638,
+   "sha256": "327afecd7ac25b61a7855c59d8a0425edcbcc43ac8ad8361064b1683b3d52439"
   },
   {
    "archivo": "OPERATIONS.md",

@@ -3,6 +3,7 @@ import * as cheerio from "cheerio";
 import { translate } from "@vitalets/google-translate-api";
 import pinyin from "pinyin";
 import conexion from "../conexion/bd";
+import { normalizarMercado, normalizarNombreMercado } from "../src/pcv/mercados";
 import { finmindJson } from "../src/proveedores/guardiaHttp";
 
 // ============================================================================
@@ -98,32 +99,7 @@ function normalizarTicker(ticker: unknown): string {
     return String(ticker || "").trim().toUpperCase();
 }
 
-function normalizarMercado(mercado: unknown): string {
-    return String(mercado || "").trim().toUpperCase();
-}
-
-function normalizarNombreMercado(nombre: unknown): string {
-    const mercado = normalizarMercado(nombre);
-
-    const equivalencias: Record<string, string> = {
-        // Estados Unidos
-        "NASDAQ": "NASDAQ STOCK MARKET",
-        "NYSE": "NEW YORK STOCK EXCHANGE",
-        "NYSE MKT": "NYSE AMERICAN",
-        "NYSE AMERICAN": "NYSE AMERICAN",
-
-        // Japón
-        "TSE": "TOKYO STOCK EXCHANGE",
-        "TOKYO": "TOKYO STOCK EXCHANGE",
-
-        // Taiwán
-        "TWSE": "TAIWAN STOCK EXCHANGE",
-        "TPEX": "TAIPEI EXCHANGE"
-    };
-
-    return equivalencias[mercado] || mercado;
-}
-
+// Resolución de mercado dependiente del país (src/pcv/mercados.ts).
 function normalizarIsin(isin: unknown): string | null {
     const valor = String(isin || "").trim().toUpperCase();
     return valor.length === 12 ? valor : null;
@@ -609,8 +585,10 @@ export async function ejecutarCargaInstrumentos(): Promise<void> {
         );
 
         const mapaEmpresas = new Map<string, number[]>();
+        const paisDeEmpresa = new Map<number, number>();
 
         for (const empresa of empresasRaw) {
+            paisDeEmpresa.set(Number(empresa.id), Number(empresa.pais_id));
             const nombreNormalizado = aplicarAlias(
                 normalizarNombre(String(empresa.nombre_empresa || ""))
             );
@@ -732,7 +710,8 @@ export async function ejecutarCargaInstrumentos(): Promise<void> {
 
             for (const item of datos) {
                 const nombreMercadoBD = normalizarNombreMercado(
-                    item.mercado_nombre
+                    item.mercado_nombre,
+                    carga.pais
                 );
 
                 const mercadoId = mapaMercados.get(nombreMercadoBD);
@@ -754,9 +733,18 @@ export async function ejecutarCargaInstrumentos(): Promise<void> {
                 const claveInstrumento = `${item.ticker}|${mercadoId}`;
                 const existente = mapaInstrumentos.get(claveInstrumento);
 
-                // Conserva empresa_id si el instrumento ya está enlazado.
+                // Conserva empresa_id sólo si la empresa enlazada es del MISMO país: un ticker que coincide entre
+                // países (2330 en Tokio y en Taiwán) nunca puede mezclar empresas.
                 let empresaId: number | null =
-                    existente?.empresa_id || null;
+                    existente?.empresa_id &&
+                    paisDeEmpresa.get(Number(existente.empresa_id)) === Number(paisIdBD)
+                        ? existente.empresa_id
+                        : null;
+
+                if (existente?.empresa_id && !empresaId) {
+                    console.warn("[CONFLICTO PAIS]", { ticker: item.ticker, mercadoId, empresaEnlazada: existente.empresa_id, paisIdBD });
+                    continue;
+                }
 
                 let nombreNormalizado = "";
 

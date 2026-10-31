@@ -32,9 +32,11 @@ async function main(out){
     const reportIds=reports.map(r=>Number(r.informe_id)),key=(i,c)=>i+'|'+c,present=new Set(),cert=new Set(),conflict=new Set(),resolved=new Set(),reportsWithPcv=new Set();
     for(let k=0;k<reportIds.length;k+=2000){const chunk=reportIds.slice(k,k+2000);if(!chunk.length)continue;
      for(const r of await q(`SELECT DISTINCT p.informe_id,t.concepto_estandar c FROM partida_contable_valor p JOIN taxonomia_concepto t ON t.id=p.concepto_estandar_id WHERE p.informe_id IN (?) AND p.importe IS NOT NULL AND t.concepto_estandar IN (?)`,[chunk,CORE])){present.add(key(r.informe_id,r.c));reportsWithPcv.add(Number(r.informe_id));}
-     for(const r of await q(`SELECT DISTINCT informe_id,concept_code c,outcome FROM pcv_verification_evidence WHERE informe_id IN (?) AND concept_code IN (?) AND outcome IN (?)`,[chunk,CORE,[...CERT,'CONFLICT_PRESERVED','CONFLICT_RESOLVED']]))(r.outcome==='CONFLICT_PRESERVED'?conflict:r.outcome==='CONFLICT_RESOLVED'?resolved:cert).add(key(r.informe_id,r.c));
-     // Un conflicto deja de bloquear sólo si una regla versionada lo resolvió (migración 31, CONFLICT_RESOLVED).
-     for(const k of resolved)conflict.delete(k);}
+     for(const r of await q(`SELECT DISTINCT informe_id,concept_code c,outcome FROM pcv_verification_evidence WHERE informe_id IN (?) AND concept_code IN (?) AND outcome IN (?)`,[chunk,CORE,CERT]))cert.add(key(r.informe_id,r.c));
+     // Un conflicto deja de bloquear sólo si TODOS los CONFLICT_PRESERVED de la celda tienen un CONFLICT_RESOLVED de una
+     // regla versionada que los referencia (resolves = evidence_hash, migración 31). La certificación sigue exigiendo una
+     // prueba certificadora (cert).
+     for(const r of await q(`SELECT c.informe_id,c.concept_code c,COUNT(*) n,SUM(EXISTS(SELECT 1 FROM pcv_verification_evidence x WHERE x.informe_id=c.informe_id AND x.concept_code=c.concept_code AND x.outcome='CONFLICT_RESOLVED' AND JSON_UNQUOTE(JSON_EXTRACT(x.evidence_json,'$.resolves'))=c.evidence_hash AND JSON_UNQUOTE(JSON_EXTRACT(x.evidence_json,'$.correction.rule')) IN ('US_PERIODO_V1','JP_RESUMEN_MISMO_DOC_V1','JP_SIGNO_CANONICO_V1'))) resueltos FROM pcv_verification_evidence c WHERE c.informe_id IN (?) AND c.concept_code IN (?) AND c.outcome='CONFLICT_PRESERVED' GROUP BY c.informe_id,c.concept_code`,[chunk,CORE]))if(Number(r.resueltos)<Number(r.n))conflict.add(key(r.informe_id,r.c));else resolved.add(key(r.informe_id,r.c));}
     const byConcept=Object.fromEntries(CORE.map(c=>[c,{present:0,certified:0,conflict:0,presentUnverified:0,absentInReport:0}]));let presentN=0,certN=0,conflictN=0,unverified=0,absentInReport=0,companiesComplete=0;
     const kpi={expected:ids.length*KPIS.length,certified:0,blockedByInputs:0,noReport:(ids.length-reports.length)*KPIS.length,byKpi:Object.fromEntries(KPIS.map(k=>[k.code,0]))};
     const corr={pcv:0,kpi:0,byRule:{}},corregida=k=>LEDGER?.cells.has(k)&&conflict.has(k)&&present.has(k);

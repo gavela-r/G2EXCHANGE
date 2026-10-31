@@ -71,7 +71,10 @@ function decidir(country,c){
  const anos=c=>Math.round((Date.parse(c.fin)-Date.parse(c.end))/31557600000);
  const porMysql=c.otroPeriodo&&c.offsets.every(o=>o>=1&&o<=3);
  const porSec=c.sec?.causa==='SEC_OTRO_PERIODO'&&c.sec.prueba.every(p=>{const o=anos({fin:c.fin,end:p.end});return o>=1&&o<=3;});
- if(country==='US'&&(porMysql||porSec))return{regla:'US_PERIODO_V1',valor:c.cand.importe,accion:'CORREGIR_VALOR_A_CANDIDATO_PRIMARIO'};
+ // Cada fila que se corrige debe tener EXACTAMENTE el tag del candidato: si no, se escribiría el valor de un concepto
+ // bajo la etiqueta de otro.
+ const mismaEtiqueta=c.origs.filter(o=>o.importe!==null&&o.importe!==c.cand.importe).every(o=>o.tag===c.cand.tag||o.tag==='us-gaap:'+c.cand.tag);
+ if(country==='US'&&(porMysql||porSec)&&mismaEtiqueta)return{regla:'US_PERIODO_V1',valor:c.cand.importe,accion:'CORREGIR_VALOR_A_CANDIDATO_PRIMARIO'};
  if(country!=='JP')return null;
  const origs=c.origs.filter(o=>o.importe!==null),exactos=origs.filter(o=>o.tag===c.cand.tag&&o.importe===c.cand.importe);
  const resumen=o=>o.tag==='jpcrp_cor:'+localTag(c.cand.tag)+'SummaryOfBusinessResults'&&o.importe===c.cand.importe;
@@ -87,7 +90,7 @@ async function main(out,ledgerFile){
   await conn.query('SET SESSION MAX_EXECUTION_TIME=900000');await conn.query('START TRANSACTION WITH CONSISTENT SNAPSHOT, READ ONLY');
   const q=async(sql,p=[])=>{if(!/^\s*SELECT\b/i.test(sql))throw Error('Sólo SELECT');return(await conn.query({sql,timeout:900000},p))[0];};
   for(const country of Object.keys(PROVIDER)){
-   const rows=await q(`SELECT v.id,v.informe_id,i.empresa_id,YEAR(i.fecha_fin_periodo) y,DATE_FORMAT(i.fecha_fin_periodo,'%Y-%m-%d') fin,v.concept_code c,v.outcome,
+   const rows=await q(`SELECT v.id,v.evidence_hash eh,v.informe_id,i.empresa_id,YEAR(i.fecha_fin_periodo) y,DATE_FORMAT(i.fecha_fin_periodo,'%Y-%m-%d') fin,v.concept_code c,v.outcome,
      JSON_UNQUOTE(JSON_EXTRACT(v.evidence_json,'$.evidence.candidate.importe')) ci,
      JSON_UNQUOTE(JSON_EXTRACT(v.evidence_json,'$.evidence.candidate.concepto')) ct,
      JSON_UNQUOTE(JSON_EXTRACT(v.evidence_json,'$.evidence.candidate.identifier')) ca,
@@ -104,7 +107,7 @@ async function main(out,ledgerFile){
    const cells=new Map(),certified=new Set();
    for(const r of rows){const key=r.informe_id+'|'+r.c;if(r.outcome!=='CONFLICT_PRESERVED'){certified.add(key);continue;}
     if(cells.has(key)||!YEARS.includes(Number(r.y)))continue;const oi=js(r.oi),ot=js(r.ot),oid=js(r.oid);
-    cells.set(key,{informe:r.informe_id,empresa:r.empresa_id,cik:r.cik,year:Number(r.y),fin:r.fin,concept:r.c,cand:{importe:num(r.ci),tag:r.ct,accn:r.ca,end:r.ce,comparative:r.cc==='true'},origs:oi.map((v,i)=>({id:oid[i]??null,importe:num(v),tag:ot[i]}))});}
+    cells.set(key,{evidenceId:Number(r.id),evidenceHash:r.eh,informe:r.informe_id,empresa:r.empresa_id,cik:r.cik,year:Number(r.y),fin:r.fin,concept:r.c,cand:{importe:num(r.ci),tag:r.ct,accn:r.ca,end:r.ce,comparative:r.cc==='true'},origs:oi.map((v,i)=>({id:oid[i]??null,importe:num(v),tag:ot[i]}))});}
    for(const c of cells.values())c.causa=clasificar(c,lookup);
    // Prueba SEC companyfacts para US (agrupado por CIK: cada archivo se lee una vez).
    const dir=process.env.G2_SEC_COMPANYFACTS_DIR;
@@ -119,7 +122,7 @@ async function main(out,ledgerFile){
     if(c.cand.end===c.fin&&!c.cand.comparative)y.contextOk++;
     for(const o of c.offsets??[])y.offsets[o]=(y.offsets[o]??0)+1;
     for(const p of c.sec?.prueba??[])if(p?.tipo==='OTRO_PERIODO'){const o=Math.round((Date.parse(c.fin)-Date.parse(p.end))/31557600000);y.offsets['sec_'+o]=(y.offsets['sec_'+o]??0)+1;if(p.mismaPresentacion)y.offsets.sec_misma_presentacion=(y.offsets.sec_misma_presentacion??0)+1;}
-    const d=decidir(country,c);if(d){y.certifiableByRule[d.regla]=(y.certifiableByRule[d.regla]??0)+1;ledger?.write(JSON.stringify({country,informe_id:c.informe,concept:c.concept,year:c.year,fin:c.fin,rule:d.regla,ruleVersion:REGLAS[d.regla],action:d.accion,value:d.valor,candidate:c.cand,originals:c.origs,cause:t,secProof:c.sec?.prueba??null})+'\n');}
+    const d=decidir(country,c);if(d){y.certifiableByRule[d.regla]=(y.certifiableByRule[d.regla]??0)+1;ledger?.write(JSON.stringify({country,evidence_id:c.evidenceId,evidence_hash:c.evidenceHash,informe_id:c.informe,concept:c.concept,year:c.year,fin:c.fin,rule:d.regla,ruleVersion:REGLAS[d.regla],action:d.accion,value:d.valor,candidate:c.cand,originals:c.origs,cause:t,secProof:c.sec?.prueba??null})+'\n');}
     if(!y.examples[t])y.examples[t]={informe:c.informe,concept:c.concept,fin:c.fin,candidate:c.cand,originals:c.origs.slice(0,4),offsets:c.offsets??null,sec:c.sec??null};
    }
    result.countries[country]={provider:PROVIDER[country],evidenceRows:rows.length,conflictCells:cells.size,cellsAlsoWithVerifiedEvidence:[...cells.keys()].filter(k=>certified.has(k)).length,byYear};

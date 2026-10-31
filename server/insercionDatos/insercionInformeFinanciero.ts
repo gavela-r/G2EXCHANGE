@@ -574,22 +574,33 @@ async function jpCargarEmpresas(): Promise<Map<string, number>> {
             ON i.empresa_id = e.id
         INNER JOIN mercado m
             ON m.id = i.mercado_id
+        INNER JOIN pais p
+            ON p.id = e.pais_id
         WHERE UPPER(m.nombre_bolsa) = 'TOKYO STOCK EXCHANGE'
+          AND p.codigo_iso = 'JP'
           AND i.ticker IS NOT NULL
           AND TRIM(i.ticker) <> ''
         ORDER BY e.id
         `
     );
 
+    // Sólo empresas japonesas. Un ticker asociado a más de una empresa es ambiguo y se descarta (antes se
+    // sobrescribía en silencio y ganaba la última).
     const mapa = new Map<string, number>();
+    const ambiguos = new Set<string>();
 
     for (const row of rows) {
         const ticker = jpNormalizarTicker(row.ticker);
 
         if (!ticker) continue;
 
+        const previo = mapa.get(ticker);
+        if (previo !== undefined && previo !== Number(row.empresa_id)) ambiguos.add(ticker);
         mapa.set(ticker, Number(row.empresa_id));
     }
+
+    for (const t of ambiguos) mapa.delete(t);
+    if (ambiguos.size) console.warn(`[JP] Tickers ambiguos descartados: ${ambiguos.size}`);
 
     console.log(`[JP] Empresas/tickers cargados desde BD: ${mapa.size}`);
 

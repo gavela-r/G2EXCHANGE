@@ -16,9 +16,9 @@ Base `http://127.0.0.1:3200/api/sectorial` · Especificación: `sectorial/app/co
 | GET | `/companies?q=&limit=1..40&offset=0..39` | Búsqueda por nombre o ticker |
 | GET | `/companies/{id}?asOf=` | Snapshot (4 cierres publicados ≤ asOf, clasificación, procedencia) + evaluación sin hipótesis |
 | GET | `/companies/{id}/pcv?asOf=` | PCV con estado de certificación y observaciones |
-| GET | `/companies/{id}/kpis?asOf=` | KPI con `CERTIFICADO` / `BLOQUEADO_DEPENDENCIA` / `NO_CALCULABLE` y cadena de evidencia |
+| GET | `/companies/{id}/kpis?asOf=` | KPI con `CERTIFICADO` / `BLOQUEADO_DEPENDENCIA` / `NO_CALCULABLE` y cadena de evidencia; incluye días operativos (unidad `DIAS`, campo `method`: `SOBRE_VENTAS` o `CONVENCIONAL`) y `DELTA_NWC` (`VALUATION_ENGINE.md` §4 bis) |
 | GET | `/companies/{id}/history` | Ejecuciones locales previas |
-| POST | `/companies/{id}/evaluate` | `{asOf, configuration}` → ejecución inmutable (id = sha256 de entradas + configuración + motor) |
+| POST | `/companies/{id}/evaluate` | `{asOf, configuration}` → ejecución inmutable (id = sha256 de entradas + configuración + motor). `configuration.workingCapitalDays`: `SOBRE_VENTAS` (por defecto) o `CONVENCIONAL` |
 | GET | `/examples/{sector}` | **Sólo mock**: configuración completa de ejemplo |
 | GET | `/runs/{id}` · `/runs/{id}/json` | Resultado · expediente completo |
 | GET | `/runs/{id}/capital` | Ke, Kd, WACC (null en banca, seguros y REIT), tasa de descuento, diagnóstico de primas |

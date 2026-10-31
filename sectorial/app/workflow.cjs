@@ -16,6 +16,8 @@ function declaredClassification(snapshot,item){
  date(item.referenceDate);if(item.referenceDate>snapshot.asOf)throw Error('Clasificación declarada con fuente posterior a la valoración');
  return{model:item.model,source:item.source,reviewer:item.reviewer,reason:item.reason,referenceDate:item.referenceDate};
 }
+// Metodología G2 por defecto: días de cobro, inventario y pago sobre VENTAS. La convencional debe declararse.
+function workingCapitalDays(config){const x=config.workingCapitalDays??'SOBRE_VENTAS';if(!['SOBRE_VENTAS','CONVENCIONAL'].includes(x))throw Error('Metodología de días de circulante desconocida');return x;}
 function buildEntry(snapshot,config={}){
  const issues=[...snapshot.issues.map(x=>({...x,kind:'DATOS'}))],notices=[],declared=declaredClassification(snapshot,config.classification);
  if(declared)notices.push({code:'CLASIFICACION_DECLARADA_POR_ANALISTA',model:declared.model,message:'La clasificación acreditada no estaba resuelta; se aplica el modelo declarado con fuente y responsable. Requiere revisión.'});
@@ -69,7 +71,7 @@ function buildEntry(snapshot,config={}){
  for(const key of Object.keys(config.constants??{}))if(!validConstants.has(key))throw Error('Constante no admitida en este modelo: '+key);
  for(const scenario of config.scenarios??[])for(const key of Object.keys(scenario))if(!validDrivers.has(key))throw Error('Driver no admitido en este modelo: '+key);
  if(!config.terminalSource)issues.push({code:'POLITICA_TERMINAL_PENDIENTE',kind:'METODO',message:'Falta la justificación de continuidad o liquidación'});
- const entry={sector:m.id,empresaId:String(snapshot.company.id),tipo:'EMPRESA',moneda:snapshot.periods.at(-1).currency??'DESCONOCIDA',escala:1,norma:snapshot.periods.at(-1).norm??'NO_ACREDITADA',perimetro:snapshot.periods.at(-1).basis??'NO_ACREDITADO',asOf:snapshot.asOf,historicos:histories,activos:assets,escenarios:scenarios,constantes:constants,leasing:'FINANCIACION',terminal:[8,9].includes(m.id)?'FINITO':'CONTINUIDAD_ACREDITADA',terminalFuente:config.terminalSource??'PENDIENTE: política terminal documentada',fechaEventos:'SEGMENTOS_ACT_ACT_FISCAL',periodosFuturos:calendar.periods,aperturaValoracion:opening,contabilidadCompleta:![13,14].includes(m.id),otrasPartidas:ledger,evidenciaEntrada:{version:snapshot.version,hash:snapshot.inputHash,empresaId:String(snapshot.company.id),asOf:snapshot.asOf,elegible:issues.length===0}};
+ const entry={sector:m.id,empresaId:String(snapshot.company.id),tipo:'EMPRESA',moneda:snapshot.periods.at(-1).currency??'DESCONOCIDA',escala:1,norma:snapshot.periods.at(-1).norm??'NO_ACREDITADA',perimetro:snapshot.periods.at(-1).basis??'NO_ACREDITADO',asOf:snapshot.asOf,historicos:histories,activos:assets,escenarios:scenarios,constantes:constants,leasing:'FINANCIACION',terminal:[8,9].includes(m.id)?'FINITO':'CONTINUIDAD_ACREDITADA',terminalFuente:config.terminalSource??'PENDIENTE: política terminal documentada',fechaEventos:'SEGMENTOS_ACT_ACT_FISCAL',periodosFuturos:calendar.periods,aperturaValoracion:opening,contabilidadCompleta:![13,14].includes(m.id),metodoDiasCirculante:workingCapitalDays(config),otrasPartidas:ledger,evidenciaEntrada:{version:snapshot.version,hash:snapshot.inputHash,empresaId:String(snapshot.company.id),asOf:snapshot.asOf,elegible:issues.length===0}};
  return{entry,model:m,calendar,issues,notices,classification:declared?{...snapshot.classification,declared}:snapshot.classification};
 }
 function evaluate(snapshot,config={}){

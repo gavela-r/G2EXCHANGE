@@ -3918,7 +3918,7 @@ async function twOptGuardarPartidas(partidas: TWOPTPartida[]): Promise<number> {
         p.conceptoOriginal,
         p.importe,
         p.nivelConfianza,
-        // Identidad de observación (migración 33): repetir la carga actualiza la misma fila, no crea otra.
+        // Identidad de observación (migración 33): repetir la carga no crea otra fila ni sobrescribe la existente.
         identidadObservacion(p.informeId, p.conceptoEstandarId, p.conceptoOriginal)
     ]);
 
@@ -3933,15 +3933,14 @@ async function twOptGuardarPartidas(partidas: TWOPTPartida[]): Promise<number> {
             identidad_observacion
         )
         VALUES ?
-        ON DUPLICATE KEY UPDATE
-            concepto = VALUES(concepto),
-            importe = VALUES(importe),
-            nivel_confianza = VALUES(nivel_confianza)
+        ON DUPLICATE KEY UPDATE id = id
         `,
         [valores]
     );
 
-    return Number(resultado?.affectedRows || valores.length);
+    // Un importe ya registrado (original o corregido con auditoría) nunca se sustituye aquí: las discrepancias
+    // se corrigen con el procedimiento auditado (sectorial/app/tools/correccion_tw_trimestral.cjs).
+    return Number(resultado?.affectedRows ?? 0);
 }
 
 // ============================================================================

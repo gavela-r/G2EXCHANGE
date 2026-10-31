@@ -61,7 +61,7 @@ function createApp(pool,options={}){
     if(parts.length===5&&parts[4]==='kpis'&&req.method==='GET')return send(200,kpisForSnapshot(await source.load(id,asOfParam(url.searchParams.get('asOf')))));
     if(parts.length===5&&parts[4]==='evaluate'&&req.method==='POST'){
      const input=await body(req);if(Object.keys(input).some(x=>!['asOf','configuration'].includes(x)))fail(400,'CAMPO_NO_ADMITIDO','El cliente no puede sustituir históricos, resultados o evidencia');
-     const config=input.configuration??{},allowed=['companyId','inputHash','scenarios','constants','assets','calendar','terminalSource','valuationBridge','accountingPolicy','classification'];if(Object.keys(config).some(x=>!allowed.includes(x)))fail(400,'CAMPO_CONFIGURACION_NO_ADMITIDO','Campo de configuración no admitido');
+     const config=input.configuration??{},allowed=['companyId','inputHash','scenarios','constants','assets','calendar','terminalSource','valuationBridge','accountingPolicy','classification','workingCapitalDays'];if(Object.keys(config).some(x=>!allowed.includes(x)))fail(400,'CAMPO_CONFIGURACION_NO_ADMITIDO','Campo de configuración no admitido');
      const snapshot=await source.load(id,asOfParam(input.asOf));if(config.inputHash!==snapshot.inputHash)fail(409,'DATOS_CAMBIADOS','Los datos cambiaron o falta su hash; volver a cargar antes de calcular');
      let evaluated;try{evaluated=evaluate(snapshot,config);}catch(e){fail(400,'CONFIGURACION_RECHAZADA',e.message);}const run=store.save(snapshot,config,evaluated.result);return send(201,{id:run.id,result:run.result});
     }

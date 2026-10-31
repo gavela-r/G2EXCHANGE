@@ -11,9 +11,12 @@ test('repetir una carga FinMind, SEC/EDINET verificada o «sólo ausentes» no c
   await c.query(row['Create Table'].replace('CREATE TABLE','CREATE TEMPORARY TABLE').replace(/\n  CONSTRAINT [^\n]+/g,'').replace(/,\s*\) ENGINE/,'\n) ENGINE'));
   const [[{n:n0}]]=await c.query('SELECT COUNT(*) n FROM partida_contable_valor');
   const filas=[[1,7,'Revenue',6859615493000,'ALTA'],[1,8,'GrossProfit',428945918000,'ALTA'],[2,7,'Revenue',5000,'ALTA']];
-  // FinMind (twOptGuardarPartidas): INSERT … VALUES ? ON DUPLICATE KEY UPDATE, dos veces.
-  const tw=()=>c.query('INSERT INTO partida_contable_valor(informe_id,concepto_estandar_id,concepto,importe,nivel_confianza,identidad_observacion) VALUES ? ON DUPLICATE KEY UPDATE concepto=VALUES(concepto),importe=VALUES(importe),nivel_confianza=VALUES(nivel_confianza)',[filas.map(f=>[...f,identidadObservacion(f[0],f[1],f[2])])]);
-  await tw();await tw();
+  // FinMind (twOptGuardarPartidas): INSERT … VALUES ? ON DUPLICATE KEY UPDATE id = id, dos veces; la segunda con otro
+  // importe no sustituye el registrado (original o corregido con auditoría).
+  const tw=f=>c.query('INSERT INTO partida_contable_valor(informe_id,concepto_estandar_id,concepto,importe,nivel_confianza,identidad_observacion) VALUES ? ON DUPLICATE KEY UPDATE id = id',[f.map(x=>[...x,identidadObservacion(x[0],x[1],x[2])])]);
+  await tw(filas);await tw(filas.map(f=>f[0]===1&&f[1]===7?[1,7,'Revenue',1,'ALTA']:f));
+  const [[{r}]]=await c.query('SELECT importe r FROM partida_contable_valor WHERE informe_id=1 AND concepto_estandar_id=7');
+  assert.equal(Number(r),6859615493000,'una recarga no sobrescribe el importe existente');
   // Ruta verificada (persistirRecuperacionVerificada / persistirRecuperacion) y «sólo ausentes».
   const ver=()=>c.query('INSERT INTO partida_contable_valor(informe_id,concepto,concepto_estandar_id,importe,nivel_confianza,identidad_observacion) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)',[3,'NetIncomeLoss',9,112010000000,'ALTA',identidadObservacion(3,9,'NetIncomeLoss')]);
   const [a]=await ver(),[b]=await ver();assert.equal(a.insertId,b.insertId,'la segunda ejecución devuelve la misma fila');

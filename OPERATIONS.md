@@ -7,7 +7,7 @@
 | `G2EXCHANGE_entrega/` | worktree de **entrega**, rama `entrega/frontend-handoff-20261031`. Es la fuente de verdad del código: contiene todo lo de la rama operativa más las correcciones posteriores. |
 | `sectoriales_auditoria_20261030/` | entorno aislado del módulo sectorial (Codex y Claude), checkpoints y bundles Git |
 
-Los recuperadores activos se ejecutan desde el árbol operativo, con su código de antes de esta entrega. Para que usen el código corregido (identidad de observación, selección de observaciones, perímetros, guardián FinMind), hay que pasar el árbol operativo a la rama de entrega tras una pausa segura (§3). Esto no se ha hecho para no interrumpir recuperaciones en curso.
+Al cerrar la entrega los vigilantes US y JP están **detenidos con `stop.request`** porque el árbol operativo ejecuta el código anterior (sin identidad de observación ni selección de observaciones en el recálculo de KPI). El procedimiento para reanudarlos con el código entregado está en `HANDOFF.md` §3.
 
 ## 2. Recuperadores
 | Proceso | Comando | Estado y checkpoint |
@@ -16,7 +16,7 @@ Los recuperadores activos se ejecutan desde el árbol operativo, con su código 
 | SEC complementos (US) | `recuperar-pcv-watch.cjs --job complement-sec-v5 --country US --directory private_backups/pcv-us-complementos-v5 --write` | `checkpoint.json` y `journal.jsonl` del directorio |
 | Identidad EDINET (JP) | `recuperar-pcv-watch.cjs --job complement-identity-jp --country JP --directory private_backups/pcv-jp-complementos-identidad-v5 --write` | ídem |
 | Auditoría estructural | `server/scripts/auditar-cobertura-estructural.cjs --after` | solo lectura; mantiene una transacción larga (ver §4) |
-| FinMind trimestral (TW) | `server/scripts/finmind-tw-trimestral.cjs --file <tickers> --dir private_backups/finmind-tw-trimestral` | se puede reanudar; no escribe en MySQL |
+| FinMind trimestral (TW) | `server/scripts/finmind-tw-trimestral.cjs --file <tickers> --dir private_backups/finmind-tw-trimestral` | terminada (906/906); se puede reanudar; no escribe en MySQL |
 
 ## 3. Pausas seguras
 - **Pausar**: crear `stop.request` en el directorio del trabajo. El vigilante termina el informe en curso y sale; el coordinador no lo relanza mientras exista el archivo.
@@ -34,7 +34,7 @@ Los recuperadores activos se ejecutan desde el árbol operativo, con su código 
 | Elemento | Ubicación | Verificación |
 |---|---|---|
 | Volcado completo previo a las reparaciones | `private_backups/g2-2026-10-31T11-14-50-485Z.sql` (sha256 `5b43bb22…`) | restaurado en aislado: 29/29 tablas con `CHECKSUM` idéntico |
-| Rollbacks de datos | `private_backups/reparacion-aislada/`, `reparacion-produccion-32/`, `reparacion-tw-lote1/` | probados en la copia aislada |
+| Rollbacks de datos | `private_backups/reparacion-aislada/`, `reparacion-produccion-32/`, `reparacion-tw-lote1/`, `reparacion-tw-lote2/`, `reparacion-tw-lote3/` (con `ensayo.log` y `aplicacion_produccion.log`) | probados en la copia aislada |
 | Snapshots de KPI | `private_backups/reparacion-aislada/kpi_*snapshot*.ndjson` | `recalcular-kpi-correcciones.cjs --restaurar <archivo>` (probado) |
 | Bundles Git | `sectoriales_auditoria_20261030/checkpoints/*.bundle` | `git bundle verify` |
 

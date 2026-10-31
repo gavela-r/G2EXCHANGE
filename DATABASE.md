@@ -47,7 +47,8 @@ La selección nunca elige por el valor: ni el mayor, ni el menor, ni el más rec
 - **Migración 33**:
   - `identidad_observacion` = `SHA2(CONCAT_WS('|', informe_id, concepto_estandar_id, concepto), 256)`, con índice único;
   - los duplicados históricos conservan `NULL` y solo la fila más antigua de cada grupo recibe la identidad.
-- **Cargadores** (SEC/EDINET verificados, «solo ausentes» y FinMind): escriben la identidad. Repetir una recuperación actualiza la misma observación y nunca toca otro informe ni otro período (`server/tests/pcvIdempotencia.integration.cjs`).
+- **Cargadores** (SEC/EDINET verificados, «solo ausentes» y FinMind): escriben la identidad. Repetir una recuperación devuelve la misma observación y **nunca sobrescribe su importe** ni toca otro informe u otro período (`server/tests/pcvIdempotencia.integration.cjs`). El cargador FinMind (`twOptGuardarPartidas`) actualizaba antes importe y etiqueta al repetir; desde esta entrega usa `ON DUPLICATE KEY UPDATE id = id`: una discrepancia se corrige solo con el procedimiento auditado.
+- **Alcance de la identidad**: no incluye contexto XBRL, dimensiones ni unidad porque la tabla no los guarda. Los cargadores solo persisten hechos sin dimensiones del contexto consolidado (o individual) del informe, en la moneda de presentación; el perímetro dominante/total va en la etiqueta (`concepto`) y sí distingue identidades. Si llegara un segundo valor con la misma identidad, se conserva el primero y no se sobrescribe.
 - **Identidad empresarial**:
   - el mercado «TSE» se resuelve según el país (`server/src/pcv/mercados.ts`);
   - un instrumento no puede enlazarse con una empresa de otro país;
@@ -71,6 +72,10 @@ El margen neto usa BENEFICIO_NETO tal como lo define el país.
 | 30 | taxonomía sectorial (25 conceptos inactivos) | preparada, **no aplicada** |
 | 31 | auditoría de correcciones, `CONFLICT_RESOLVED`, `CAJA_Y_DEPOSITOS` | **aplicada y verificada** (31/10/2026); datos en `private_backups/reparacion-aislada/31_datos_b071eb37281c.sql` + rollback |
 | 32 | cuarentena y reasignación de identidad cruzada | **aplicada y verificada** |
-| 33 | identidad de observación e índice único | ver `HANDOFF.md` (estado exacto en el momento de la entrega) |
+| 33 | identidad de observación e índice único | **aplicada y verificada** |
+| Taiwán lotes 1–3 (`TW_ANUAL_TRIMESTRAL_V1`) | 33.096 PCV de resultados de 2.598 informes (666 empresas) corregidos de T4 aislado a suma T1–T4 | **aplicados y verificados**; auditoría en `pcv_correccion_auditoria` |
 
 Procedimiento obligatorio para cualquier migración con datos (`OPERATIONS.md`): copia, restauración en un MySQL aislado, ensayo, rollback, reaplicación, pausa de los escritores incompatibles, aplicación y verificación.
+
+## 8. Indicadores derivados no persistidos
+Los días operativos (DSO, DPO, días de inventario, CCC; variantes sobre ventas y convencional) y `DELTA_NWC` se calculan al vuelo desde los PCV certificados (`sectorial/app/kpi.cjs`) y **no se guardan** en `kpi_financiero_informe`: no hubo migración ni escritura masiva. Conceptos que usan: `CUENTAS_COBRAR`, `INVENTARIOS`, `CUENTAS_PAGAR`, `INGRESOS`, `COSTE_VENTAS` (o ingresos − `BENEFICIO_BRUTO`) y `ACTIVOS_CONTRACTUALES` (solo la métrica ampliada). Fórmulas en `VALUATION_ENGINE.md` §4 bis; disponibilidad por país en `COVERAGE_REPORT.md`.

@@ -70,6 +70,8 @@ export interface Configuration {
   valuationBridge?: { asOf: ISODate; currency: string; basis: string; norm: string; source: string; reviewer: string; balances: Record<string, Cited> };
   accountingPolicy?: { source: string; referenceDate: ISODate; reviewer: string; scope: 'PERIMETRO_COMPLETO'; lines: unknown[] };
   classification?: DeclaredClassification;
+  /** Días de circulante: SOBRE_VENTAS (G2, por defecto: DSO, DIO y DPO sobre ingresos) o CONVENCIONAL (DIO sobre coste, DPO sobre compras). */
+  workingCapitalDays?: 'SOBRE_VENTAS' | 'CONVENCIONAL';
 }
 export interface EvaluateRequest { asOf: ISODate; configuration: Configuration; }
 export interface EvaluateResponse { id: Hash; result: ValuationResult; }
@@ -89,7 +91,7 @@ export type ExportJobStatus = 'NO_SOLICITADO' | 'PENDIENTE' | 'GENERANDO' | 'COM
 export interface ExportJob { id: Hash; status: ExportJobStatus; code?: string; error?: string; createdAt?: string; finishedAt?: string; url?: string; }
 
 export type KpiStatus = 'CERTIFICADO' | 'BLOQUEADO_DEPENDENCIA' | 'NO_CALCULABLE';
-export interface Kpi { code: string; unit: 'PORCENTAJE' | 'MONEDA' | 'VECES'; periodEnd: ISODate; status: KpiStatus; value: number | null; cause: string | null; warnings: string[]; inputs: { field: string; validation: Validation | 'AUSENTE'; value: number | null; recordIds: number[]; verificationId: number | null; reason: string | null }[]; }
+export interface Kpi { code: string; unit: 'PORCENTAJE' | 'MONEDA' | 'VECES' | 'DIAS'; periodEnd: ISODate; status: KpiStatus; value: number | null; cause: string | null; warnings: string[]; inputs: { field: string; validation: Validation | 'AUSENTE'; value: number | null; recordIds: number[]; verificationId: number | null; reason: string | null }[]; }
 export interface KpiResponse { company: Snapshot['company']; asOf: ISODate; inputHash: Hash; definitions: { code: string; unit: string; inputs: string[] }[]; periods: { periodEnd: ISODate; kpis: Kpi[] }[]; }
 export interface PcvResponse { company: Snapshot['company']; asOf: ISODate; inputHash: Hash; periods: Omit<Period, 'reportId' | 'issues' | 'periodStart'>[]; issues: Issue[]; }
 

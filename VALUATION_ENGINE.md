@@ -44,6 +44,34 @@ Todas las entradas de un KPI deben estar en el mismo informe. Los valores ausent
 | FCF / MARGEN_FCF | flujo operativo − CAPEX; / ingresos | CAPEX en valor absoluto (salida de caja con alias exacto) |
 | CAPITAL_CIRCULANTE_OPERATIVO (/ ingresos) | inventarios + cuentas a cobrar − cuentas a pagar | |
 
+## 4 bis. Capital circulante y días operativos
+Saldos de **cierre** (no medios: no se inventa el saldo de 2021 para promediar 2022) y **365 días** por ejercicio anual. Dos metodologías, nunca mezcladas en una misma serie:
+
+| Indicador | Fórmula | Metodología |
+|---|---|---|
+| DSO | cuentas a cobrar / ingresos × 365 | común |
+| DPO_SOBRE_VENTAS | cuentas a pagar / ingresos × 365 | **SOBRE_VENTAS** (G2 original) |
+| DIAS_INVENTARIO_SOBRE_VENTAS | inventarios / ingresos × 365 | SOBRE_VENTAS |
+| CCC_SOBRE_VENTAS | DSO + días de inventario − DPO (sobre ventas) | SOBRE_VENTAS |
+| DIAS_ACTIVOS_OPERATIVOS_AMPLIADOS_SOBRE_VENTAS | (inventarios + activos contractuales) / ingresos × 365 | SOBRE_VENTAS, métrica ampliada aparte (el DIO nunca incluye activos contractuales) |
+| DIO_SOBRE_COSTE | inventarios / coste de ventas × 365 | **CONVENCIONAL** |
+| DPO_SOBRE_COSTE | cuentas a pagar / coste de ventas × 365 | CONVENCIONAL |
+| CCC_CONVENCIONAL | DSO + DIO − DPO (sobre coste) | CONVENCIONAL |
+| CAPITAL_CIRCULANTE_OPERATIVO (NWC) | cuentas a cobrar + inventarios − cuentas a pagar | — |
+| DELTA_NWC | NWC(t) − NWC(t−1) | positivo = consumo de caja |
+
+**Históricos** (`sectorial/app/kpi.cjs`, endpoint `/api/companies/:id/kpis`): se derivan al vuelo de PCV certificados; no se guardan en `kpi_financiero_informe` ni requieren migración. Un indicador es `CERTIFICADO` solo si todas sus entradas están validadas; si falta una, `BLOQUEADO_DEPENDENCIA` (nunca cero); denominador cero: `NO_CALCULABLE`. El coste de ventas puede ser el declarado o el derivado ingresos − beneficio bruto (con la derivación registrada). `DELTA_NWC` exige los dos cierres certificados, ejercicios consecutivos y el mismo contexto (moneda, base consolidada/individual y norma); el primer ejercicio de la ventana queda `SALDO_INICIAL_NO_DISPONIBLE`.
+
+**Proyección** (motor sectorial, modelos no financieros 1–12, 15 y 16; `sectorial/app/engine/src/plan.ts`). Los drivers `dso`, `dio` y `dpo` son hipótesis citadas por escenario (conservador, base y optimista) en `S_Inputs`, separadas de los históricos de `S_Historico`. `configuration.workingCapitalDays` fija la metodología:
+- `SOBRE_VENTAS` (por defecto en el flujo empresarial): cuentas a cobrar = ingresos × DSO / (365 × fracción anual); inventarios = ingresos × días de inventario / (365 × fracción); cuentas a pagar = ingresos × DPO / (365 × fracción). `S_Historico` muestra DSO, días de inventario, DPO y CCC históricos con la misma fórmula.
+- `CONVENCIONAL`: inventarios = coste de ventas × DIO / días del período; cuentas a pagar = compras × DPO / días (compras = coste + variación de existencias). Es la convención de los casos sintéticos.
+
+Activos y pasivos contractuales se proyectan aparte (`contractAssetRate`, `contractLiabilityRate` sobre ingresos). NWC = existencias + clientes + activos contractuales − proveedores − pasivos contractuales; ΔNWC = NWC(t) − NWC(t−1), con la apertura igual al saldo histórico del último cierre (o el del puente a fecha de valoración). FCFF = NOPAT + D&A + deterioro − ganancias por bajas + cobros por bajas − CAPEX − altas ROU − ΔNWC: el circulante se resta **una sola vez** (prueba de sensibilidad: +10 días de cobro reducen el FCFF exactamente en ingresos × 10 / 365). Deuda financiera y proveedores van en partidas distintas.
+
+**No se aplica** a banca (13) ni seguros (14): conservan sus métodos prudenciales. El REIT (15) usa clientes y proveedores en el NAV. Una empresa sin inventario certificado queda bloqueada (`HISTORICO_PENDIENTE`): la ausencia no se convierte en cero; para declarar inventario nulo hace falta evidencia.
+
+**Motor del backend** (`valuation_engine/src/modelo.ts`): proyecta NWC como ratio NWC / ingresos ponderado de los históricos (equivale a CCC sobre ventas / 365), ΔNWC = saldo proyectado − saldo anterior y FCFF = NOPAT + D&A − CAPEX − ΔNWC. No usa días por componente.
+
 EPS: se usa el EPS diluido declarado (`EPS_DILUIDO`) y no se deriva de los trimestres.
 
 **Recálculo**: `server/scripts/recalcular-kpi-correcciones.cjs` usa la fórmula sin cambios y la política vigente, guarda un snapshot reversible y registra la causa de cada KPI retirado:

@@ -25,7 +25,10 @@ Leyenda: **IMPL** implementado · **PROB** probado · **MYSQL** aplicado en MySQ
 | Corrección del periodo SEC (582.430 PCV), equivalencias JP, efectivo JP | IMPL · PROB · MYSQL · VERIF | migración 31 |
 | Identidad cruzada TW/JP (112 instrumentos, 298 informes, 1.160 en cuarentena) | IMPL · PROB · MYSQL · VERIF | migración 32 |
 | Emisores extranjeros SEC en su moneda (1.188 informes) | IMPL · PROB · MYSQL · VERIF | |
-| Taiwán: anual = suma T1–T4 (28.892 PCV, lotes 1 y 2) | IMPL · PROB · MYSQL · VERIF | quedan unas 200 empresas cuya descarga de FinMind seguía en curso (§4) |
+| Taiwán: anual = suma T1–T4 (33.096 PCV de 2.598 informes y 666 empresas, lotes 1–3) | IMPL · PROB · MYSQL · VERIF | descarga FinMind completa (906/906, 0 fallidas); **sigue 0 % certificado** (normalizado ≠ certificado) |
+| Días operativos (DSO, DPO, DIO, CCC sobre ventas y convencionales), NWC y ΔNWC históricos | IMPL · PROB · VERIF (Apple, Microsoft, ASML con datos reales) | derivados al vuelo de PCV certificados (`kpi.cjs`); sin migración; `VALUATION_ENGINE.md` §4 bis |
+| Proyección del circulante por días (metodología `SOBRE_VENTAS` por defecto o `CONVENCIONAL`) en los modelos 1–12, 15 y 16 | IMPL · PROB (motor + Excel 16/16) | ΔNWC restado una vez en el FCFF; banca y seguros no aplican |
+| Cargador FinMind sin sobrescritura de importes | IMPL · PROB (integración MySQL aislado) | antes `ON DUPLICATE KEY UPDATE importe`; ahora conserva la fila existente |
 | `SELECCION_OBSERVACIONES_V1` (contradicciones) | IMPL · PROB · MYSQL (vía KPI) · VERIF | ningún informe queda bloqueado entero |
 | Perímetro de ROE (dominante/total) | IMPL · PROB · MYSQL (vía KPI) | |
 | KPI recalculados (25.950 + 906 informes) con la causa de cada retirada | IMPL · PROB · MYSQL · VERIF | snapshots reversibles |
@@ -43,25 +46,24 @@ Leyenda: **IMPL** implementado · **PROB** probado · **MYSQL** aplicado en MySQ
 | 31 (registro `b071eb37…`) | sí (aplicar, rollback, reaplicar, idempotencia) | sí, verificada | `private_backups/reparacion-aislada/31_datos_b071eb37281c.rollback.sql` |
 | KPI (snapshots) | sí (restauración con hash idéntico) | sí | `server/scripts/recalcular-kpi-correcciones.cjs --restaurar <snapshot>` |
 | 32 (lote `57747083…`) | sí | sí, verificada | `private_backups/reparacion-produccion-32/32_datos_57747083e27c.rollback.sql` |
-| Taiwán lote 1 (`0314c499…`) y lote 2 (`defddff2…`) | sí | sí, verificados | `private_backups/reparacion-tw-lote*/…rollback.sql` |
+| Taiwán lote 1 (`0314c499…`), lote 2 (`defddff2…`) y lote 3 (`d60c9f8a…`, 4.204 PCV, 507 informes, 134 empresas) | sí (lote 3: aplicar, rollback con huella restaurada, reaplicar e idempotencia) | sí, verificados (lote 3: huella `509253268` idéntica a la del ensayo, 4.204 auditadas, 0 discrepancias; lotes 1 y 2 intactos) | `private_backups/reparacion-tw-lote*/…rollback.sql` |
+| KPI del lote 3 | simulación previa | sí: 507 informes, 5.813 cambiados, 1 nuevo, 436 retirados (`PRERREQUISITO_DEUDA_V2`) | `private_backups/reparacion-tw-lote3/kpi_snapshot.ndjson` |
 | 33 (identidad de observación) | sí | sí, verificada | `server/sql/33_pcv_identidad_observacion.rollback.sql` |
 | 30 (taxonomía sectorial) | — | **no** | — |
 
 **Incidente durante la migración 33**: el `ALTER` esperó unos 35 minutos por el bloqueo de metadatos que retenía la auditoría estructural de Codex (proceso 7180, con una transacción de solo lectura abierta). Mientras tanto quedaron en espera las consultas a `partida_contable_valor`. No se canceló nada: la auditoría terminó, la migración completó y se verificó que no hubo cambios parciales. Lección: `OPERATIONS.md` §4.5.
 
 ## 3. Procesos al cerrar la entrega
-- **Recuperadores activos**: el coordinador (`recuperar-pcv-plan.cjs`), el vigilante SEC de EE. UU. y el de identidad de Japón. Se ejecutan desde el árbol operativo `G2EXCHANGE/` con su código anterior.
-- **Pausas**: ninguna pausa propia vigente.
-- **Para que los recuperadores usen el código entregado** (identidad de observación, selección de observaciones, cargador FinMind corregido):
-  1. pausarlos (`OPERATIONS.md` §3);
-  2. hacer `git checkout entrega/frontend-handoff-20261031` en el árbol operativo, conservando antes sus cambios locales sin commit;
-  3. `npm run build`;
-  4. reanudarlos.
-- **Descarga FinMind de Taiwán** (`finmind-tw-trimestral.cjs`): al cerrar iba por unas 700 de 906 empresas, con checkpoint en `G2EXCHANGE/private_backups/finmind-tw-trimestral`. No escribe en MySQL. Para aplicar el lote 3:
-  1. generar con `node sectorial/app/tools/correccion_tw_trimestral.cjs <cache> <dir>`;
-  2. ensayarlo en la copia aislada;
-  3. aplicarlo;
-  4. recalcular sus KPI con `--ledger`.
+- **Vigilantes US (`pcv-us-complementos-v5`) y JP (`pcv-jp-complementos-identidad-v5`): DETENIDOS con su parada segura** (`stop.request` con motivo `entrega-codigo-anterior`, 31/10/2026 ~22:15 UTC). Estaban inactivos desde el 30/10 y el 31/10 esperando cuota (FinDataEngine mensual, EDINET DB diaria) y no habían escrito nada desde la migración 33 (0 filas nuevas sin identidad). Motivo: ejecutan el código anterior del árbol operativo, que inserta PCV sin `identidad_observacion` y recalcula KPI sin `SELECCION_OBSERVACIONES_V1` ni el control de perímetro de ROE; al renovarse la cuota habrían reintroducido esas inconsistencias. Checkpoints y journals intactos.
+- **Coordinador** (`recuperar-pcv-plan.cjs`, PID 22200): sigue en ejecución; no relanza un vigilante mientras exista su `stop.request`.
+- **Por qué no se ha hecho la transición automática**: el árbol operativo `G2EXCHANGE/` tiene 51 cambios de Codex sin commit y Codex sigue activo (auditoría estructural en curso). Cambiarlo de rama no es demostrablemente seguro.
+- **Procedimiento para reanudar con el código entregado** (siguiente desarrollador):
+  1. comprobar que no queda ningún `recuperar-pcv-watch` vivo y que no hay transacciones largas (`information_schema.innodb_trx`);
+  2. en `G2EXCHANGE/`, conservar los cambios sin commit en una rama propia (`git switch -c codex-wip-<fecha> && git add -A && git commit`), sin descartarlos;
+  3. `git switch entrega/frontend-handoff-20261031` (o un clon nuevo con el `.env` y `private_backups/` existentes);
+  4. `npm run setup && npm run build`;
+  5. renombrar cada `stop.request` a `stop.request.previous-entrega-<epoch>`; el coordinador relanza los vigilantes con el código nuevo.
+- **Descarga FinMind de Taiwán**: terminada (906/906, 0 fallidas, 31/10 19:16 UTC); su resultado ya está aplicado como lote 3.
 
 ## 4. Transferencia privada (no está en Git)
 | Elemento | Ubicación original | Motivo |
@@ -84,3 +86,6 @@ Comprobación tras transferir: el sha256 del volcado (`.sha256`), la restauraci�
 4. Valoración de ADR (ratio de representación y tipo de cambio).
 5. Calibración de primas.
 6. Liberar espacio de `bundle-validation-*` después de verificar su sha256.
+7. Reanudar los vigilantes US/JP con el código entregado (§3).
+8. Persistir los días operativos en `kpi_financiero_informe` si se quieren consultar por SQL (hoy se derivan al vuelo).
+9. Aceptar inventario nulo con evidencia en empresas sin existencias (hoy bloquea con `HISTORICO_PENDIENTE`).

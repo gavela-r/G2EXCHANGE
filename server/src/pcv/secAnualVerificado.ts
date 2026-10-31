@@ -50,16 +50,21 @@ export function extraerAnualSecVerificado(body:any,submission:any,i:InformePcv,c
  const starts=new Map<string,number>(),currencies=new Set<string>();
  for(const [code,def]of Object.entries(TAGS_SEC_SEGUROS))for(const tag of def.tags)for(const {unit,fact:f}of rawFacts(body,tag))if(valid(f)){
   if(/^[A-Z]{3}$/.test(unit))currencies.add(unit);
-  const days=(Date.parse(f.end)-Date.parse(f.start))/86400000;if(!def.balance&&unit==='USD'&&date(f.start)&&days>=350&&days<=380)starts.set(f.start,(starts.get(f.start)||0)+(['INGRESOS','FLUJO_CAJA_OPERATIVO','BENEFICIO_NETO'].includes(code)?10:1));
+  const days=(Date.parse(f.end)-Date.parse(f.start))/86400000;if(!def.balance&&/^[A-Z]{3}$/.test(unit)&&date(f.start)&&days>=350&&days<=380){const k=unit+'|'+f.start;starts.set(k,(starts.get(k)||0)+(['INGRESOS','FLUJO_CAJA_OPERATIVO','BENEFICIO_NETO'].includes(code)?10:1));}
  }
- const ranked=[...starts].sort((a,b)=>b[1]-a[1]);if(!ranked.length)throw Error(currencies.size&&!currencies.has('USD')?'SEC_MONEDA_NO_SOPORTADA_'+[...currencies].sort().join('_'):'SEC_PERIODO_ANUAL_SIN_FACTS_ESTANDAR');
+ // Moneda de presentación: USD si el documento presenta en USD; si no, la ÚNICA moneda ISO de los hechos anuales del
+ // documento (emisores extranjeros 20-F/40-F). Varias monedas sin USD → ambiguo, no se extrae nada.
+ const monedasAnuales=new Set([...starts.keys()].map(k=>k.split('|')[0])),cur=monedasAnuales.has('USD')?'USD':monedasAnuales.size===1?[...monedasAnuales][0]:null;
+ if(!cur&&monedasAnuales.size>1)throw Error('SEC_MONEDA_AMBIGUA_'+[...monedasAnuales].sort().join('_'));
+ for(const k of [...starts.keys()])if(!k.startsWith(cur+'|'))starts.delete(k);
+ const ranked=[...starts].map(([k,n])=>[k.split('|')[1],n] as [string,number]).sort((a,b)=>b[1]-a[1]);if(!ranked.length)throw Error('SEC_PERIODO_ANUAL_SIN_FACTS_ESTANDAR');
  if(ranked.length>1&&ranked[0][1]===ranked[1][1])throw Error('SEC_INICIO_ANUAL_AMBIGUO');const start=ranked[0][0],rows:DatoPcv[]=[],pending:{code:string;reason:string}[]=[];
- for(const [code,def]of Object.entries(TAGS_SEC_SEGUROS)){const unit=code==='ACCIONES_EN_CIRCULACION'?'shares':code==='EPS_DILUIDO'?'USD/shares':'USD',safePreferred=(preferredTags[code]||[]).map(t=>t.startsWith('us-gaap:')?t.slice(8):t).filter(t=>def.tags.includes(t)),tags=[...new Set([...safePreferred,...def.tags])];let found=false;
+ for(const [code,def]of Object.entries(TAGS_SEC_SEGUROS)){const unit=code==='ACCIONES_EN_CIRCULACION'?'shares':code==='EPS_DILUIDO'?cur+'/shares':cur!,safePreferred=(preferredTags[code]||[]).map(t=>t.startsWith('us-gaap:')?t.slice(8):t).filter(t=>def.tags.includes(t)),tags=[...new Set([...safePreferred,...def.tags])];let found=false;
   for(const tag of tags){const facts=rawFacts(body,tag).filter(x=>x.unit===unit&&valid(x.fact)&&(def.balance?!x.fact.start:x.fact.start===start));if(!facts.length)continue;
    if(new Set(facts.map(x=>Number(x.fact.val))).size>1){pending.push({code,reason:'SEC_FACTS_CONTRADICTORIOS_MISMO_CONTEXTO'});found=true;break;}
    const f=facts[0].fact,reportedAmount=Number(f.val),amount=['CAPEX','DIVIDENDOS_PAGADOS'].includes(code)?Math.abs(reportedAmount):reportedAmount;
    rows.push({codigo:code,concepto:tag,importe:amount,provider:'SEC_EDGAR',identifier:i.accession,currency:unit,basis:'consolidated',evidence:{cik,tag,unit,start:def.balance?null:start,end:i.end,filed:filing.filed,accession:filing.accession,filingEnd:filing.end,comparative:i.end!==filing.end,reportedAmount,identityPolicy:'OFFICIAL_LEGAL_NAME_CIK_ANNUAL_INDEX_V1',...hashes,indexHash:filing.indexHash}});found=true;break;
-  }if(!found)pending.push({code,reason:'SIN_TAG_TOTAL_ESTANDAR_USD_CONTEXTO_EXACTO'});
+  }if(!found)pending.push({code,reason:'SIN_TAG_TOTAL_ESTANDAR_CONTEXTO_EXACTO_'+cur});
  }
- return {rows,start,currencies:[...currencies],pending,context:{currency:'USD' as const,basis:'consolidated' as const,start,identity:{cik,...hashes,indexHash:filing.indexHash,sourceAccession:filing.accession}}};
+ return {rows,start,currencies:[...currencies],pending,context:{currency:cur!,basis:'consolidated' as const,start,identity:{cik,...hashes,indexHash:filing.indexHash,sourceAccession:filing.accession}}};
 }

@@ -21,5 +21,10 @@ test('A comparative period remains explicitly bound to its later annual accessio
 });
 test('Subtotal labels and foreign currency do not become aggregate USD financial data',()=>{
  const b=body();delete b.facts['us-gaap'].Revenues;b.facts['us-gaap'].SalesRevenueGoodsNet=f(99);assert.ok(!extract(b,sub,i,cik,filing,{}).rows.some(x=>x.codigo==='INGRESOS'));
- const foreign=body();for(const v of Object.values(foreign.facts['us-gaap'])){v.units.CNY=v.units.USD;delete v.units.USD;}assert.throws(()=>extract(foreign,sub,i,cik,filing,{}),/MONEDA_NO_SOPORTADA_CNY/);
+ // Un emisor extranjero que presenta sólo en CNY conserva su moneda: nunca se etiqueta como USD.
+ const foreign=body();for(const v of Object.values(foreign.facts['us-gaap'])){v.units.CNY=v.units.USD;delete v.units.USD;}
+ const r=extract(foreign,sub,i,cik,filing,{});assert.equal(r.context.currency,'CNY');assert.ok(r.rows.length&&r.rows.every(x=>x.currency==='CNY'&&x.evidence.unit==='CNY'));
+ // Varias monedas sin USD: ambiguo, no se extrae nada.
+ const mixed=body();mixed.facts['us-gaap'].Revenues.units={CNY:mixed.facts['us-gaap'].Revenues.units.USD};mixed.facts['us-gaap'].NetIncomeLoss.units={EUR:mixed.facts['us-gaap'].NetIncomeLoss.units.USD};mixed.facts['us-gaap'].GrossProfit.units={EUR:mixed.facts['us-gaap'].GrossProfit.units.USD};mixed.facts['us-gaap'].Assets.units={EUR:mixed.facts['us-gaap'].Assets.units.USD};
+ assert.throws(()=>extract(mixed,sub,i,cik,filing,{}),/MONEDA_AMBIGUA_CNY_EUR/);
 });

@@ -3,7 +3,7 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const {clasificar,pruebaSec,decidir,REGLAS}=require('../tools/diagnostico_conflictos.cjs');
 const celda=(o)=>({informe:1,empresa:7,year:2024,fin:'2024-09-28',concept:'INGRESOS',cand:{importe:391035e6,tag:'RevenueFromContractWithCustomerExcludingAssessedTax',accn:'A-24',end:'2024-09-28',comparative:false},origs:[],...o});
 
-test('reglas con versión fechada',()=>{assert.deepEqual(Object.keys(REGLAS).sort(),['JP_RESUMEN_MISMO_DOC_V1','JP_SIGNO_CANONICO_V1','US_PERIODO_V1']);});
+test('reglas con versión fechada',()=>{assert.deepEqual(Object.keys(REGLAS).sort(),['JP_EFECTIVO_EQUIVALENTES_V1','JP_RESUMEN_MISMO_DOC_V1','JP_SIGNO_CANONICO_V1','US_PERIODO_V1']);});
 
 test('US: original igual al candidato primario de 2 ejercicios antes → corrección por periodo',()=>{
  const c=celda({origs:[{importe:394328e6,tag:'RevenueFromContractWithCustomerExcludingAssessedTax'}]});
@@ -44,8 +44,14 @@ test('JP_RESUMEN_MISMO_DOC_V1: fila exacta + misma cifra en «SummaryOfBusinessR
 test('JP: sin fila exacta, otro concepto o importe distinto → sigue en conflicto',()=>{
  assert.equal(decidir('JP',jp({origs:[{importe:213370e6,tag:'jpcrp_cor:NetSalesSummaryOfBusinessResults'}]})),null,'falta la fila atestada exacta');
  assert.equal(decidir('JP',jp({origs:[{importe:213370e6,tag:'jppfs_cor:NetSales'},{importe:213000e6,tag:'jpcrp_cor:NetSalesSummaryOfBusinessResults'}]})),null,'resumen redondeado: no idéntico');
- const caja=jp({concept:'EFECTIVO',cand:{importe:3796236e3,tag:'jppfs_cor:CashAndCashEquivalents',end:'2024-01-20',comparative:false},origs:[{importe:3796236e3,tag:'jppfs_cor:CashAndDeposits'}]});
- assert.equal(decidir('JP',caja),null,'«現金及び預金» y «現金及び現金同等物» son conceptos distintos aunque coincida el importe');
+ // «現金及び預金» y «現金及び現金同等物» son conceptos distintos: nunca se equiparan; se reclasifica la fila y EFECTIVO
+ // toma el valor primario de EDINET (aunque los importes difieran o coincidan).
+ const caja=jp({concept:'EFECTIVO',cand:{importe:33713e6,tag:'jppfs_cor:CashAndCashEquivalents',end:'2024-01-20',comparative:false},origs:[{id:5,importe:32367e6,tag:'jppfs_cor:CashAndDeposits'}]});
+ assert.deepEqual(decidir('JP',caja),{regla:'JP_EFECTIVO_EQUIVALENTES_V1',valor:33713e6,accion:'RECLASIFICAR_CAJA_Y_RECUPERAR_EFECTIVO'});
+ const mixta=jp({concept:'EFECTIVO',cand:{importe:1,tag:'jppfs_cor:CashAndCashEquivalents',end:'2024-01-20',comparative:false},origs:[{id:5,importe:2,tag:'jppfs_cor:CashAndDeposits'},{id:6,importe:3,tag:'jppfs_cor:Cash'}]});
+ assert.equal(decidir('JP',mixta),null,'filas con otro concepto: no se reclasifica');
+ const ifrs=jp({concept:'EFECTIVO',cand:{importe:1,tag:'jpigp_cor:CashAndCashEquivalentsIFRS',end:'2024-01-20',comparative:false},origs:[{id:5,importe:2,tag:'jppfs_cor:CashAndDeposits'}]});
+ assert.equal(decidir('JP',ifrs),null,'sólo JGAAP con el tag exacto');
 });
 test('JP_SIGNO_CANONICO_V1: CAPEX con el mismo tag y signo opuesto; no aplica a otros conceptos',()=>{
  const t='jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF';

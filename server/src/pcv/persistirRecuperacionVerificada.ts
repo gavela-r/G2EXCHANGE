@@ -4,7 +4,9 @@ import type {DatoPcv,InformePcv} from './normalizarProveedores';
 import {normalizarPartidas,type Partida} from '../valoracion/datos';
 import {kpiCalcularInforme} from '../../insercionDatos/insercionKPIInformeFinanciero';
 
-export interface ContextoPcvVerificado {currency:'USD'|'JPY';basis:'consolidated'|'standalone';start:string;identity:Record<string,unknown>}
+// currency: JPY para EDINET; para la SEC, la moneda de presentación del propio documento (USD salvo emisores
+// extranjeros 20-F/40-F que presentan en su moneda, p. ej. EUR o CAD).
+export interface ContextoPcvVerificado {currency:string;basis:'consolidated'|'standalone';start:string;identity:Record<string,unknown>}
 const digest=(x:unknown)=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const equal=(a:number,b:number)=>Math.abs(a-b)<=0.000051;
 const DEBT=new Set(['DEUDA_TOTAL','DEUDA_NETA','DEUDA_SOBRE_PATRIMONIO','DEUDA_SOBRE_ACTIVOS']);
@@ -13,7 +15,7 @@ const DEBT=new Set(['DEUDA_TOTAL','DEUDA_NETA','DEUDA_SOBRE_PATRIMONIO','DEUDA_S
 // calculate only from stored values attested in the same official context.
 export async function persistirRecuperacionVerificada(pool:Pool,i:InformePcv,datos:DatoPcv[],ctx:ContextoPcvVerificado,write:boolean){
  const c=await pool.getConnection(),result={pcv:0,kpiNew:0,kpiUpdated:0,conflicts:0,verified:0,rejected:0,precisionPending:0,byProvider:{} as Record<string,number>};
- if(ctx.currency!==(i.country==='US'?'USD':'JPY')||!['consolidated','standalone'].includes(ctx.basis)||!/^\d{4}-\d{2}-\d{2}$/.test(ctx.start)||!ctx.identity||!Object.keys(ctx.identity).length)throw Error('CONTEXTO_GLOBAL_NO_VERIFICADO');
+ if(!(i.country==='US'?/^[A-Z]{3}$/.test(ctx.currency):ctx.currency==='JPY')||!['consolidated','standalone'].includes(ctx.basis)||!/^\d{4}-\d{2}-\d{2}$/.test(ctx.start)||!ctx.identity||!Object.keys(ctx.identity).length)throw Error('CONTEXTO_GLOBAL_NO_VERIFICADO');
  try{await c.beginTransaction();
   const [meta]=await c.query<RowDataPacket[]>("SELECT f.*,e.nombre_empresa,p.codigo_iso FROM informe_financiero f JOIN empresa e ON e.id=f.empresa_id JOIN pais p ON p.id=e.pais_id WHERE f.id=? FOR UPDATE",[i.id]);
   if(meta.length!==1||meta[0].empresa_id!==i.empresa_id||meta[0].fecha_fin_periodo!==i.end||meta[0].identificador_fuente!==i.accession||meta[0].codigo_iso!==i.country||meta[0].nombre_empresa!==i.nombre_empresa||meta[0].tipo_periodo!=='ANUAL')throw Error('INFORME_CAMBIO_DESDE_SELECCION');

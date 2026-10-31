@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-10-31T11:44:57.451Z",
+  "source": "MYSQL_SOLO_LECTURA + SEC submissions (bulk local)",
+  "universo": 8017,
+  "porAnio": {
+    "2022": {
+      "conInforme": 5256,
+      "sinInforme": 2761,
+      "causas": {
+        "SIN_CIK": 2238,
+        "SIN_ANUAL_operating_NUNCA_ANUAL": 124,
+        "ANUAL_DISPONIBLE:10-K": 4,
+        "SIN_ANUAL_operating_CON_ANUALES_OTROS_AÑOS": 255,
+        "ANUAL_DISPONIBLE:20-F": 70,
+        "SIN_ANUAL_other_CON_ANUALES_OTROS_AÑOS": 39,
+        "SIN_ANUAL_other_NUNCA_ANUAL": 29,
+        "ANUAL_DISPONIBLE:40-F": 2
+      }
+    },
+    "2023": {
+      "conInforme": 5529,
+      "sinInforme": 2488,
+      "causas": {
+        "SIN_CIK": 2106,
+        "SIN_ANUAL_operating_NUNCA_ANUAL": 124,
+        "ANUAL_DISPONIBLE:10-K": 1,
+        "ANUAL_DISPONIBLE:20-F": 73,
+        "SIN_ANUAL_operating_CON_ANUALES_OTROS_AÑOS": 124,
+        "SIN_ANUAL_other_CON_ANUALES_OTROS_AÑOS": 29,
+        "SIN_ANUAL_other_NUNCA_ANUAL": 29,
+        "ANUAL_DISPONIBLE:40-F": 2
+      }
+    },
+    "2024": {
+      "conInforme": 5666,
+      "sinInforme": 2351,
+      "causas": {
+        "SIN_CIK": 2046,
+        "SIN_ANUAL_operating_NUNCA_ANUAL": 124,
+        "ANUAL_DISPONIBLE:10-K": 1,
+        "ANUAL_DISPONIBLE:20-F": 73,
+        "SIN_ANUAL_operating_CON_ANUALES_OTROS_AÑOS": 51,
+        "SIN_ANUAL_other_CON_ANUALES_OTROS_AÑOS": 22,
+        "SIN_ANUAL_other_NUNCA_ANUAL": 29,
+        "ANUAL_DISPONIBLE:40-F": 3,
+        "ANUAL_DISPONIBLE:10-KT": 2
+      }
+    },
+    "2025": {
+      "conInforme": 5632,
+      "sinInforme": 2385,
+      "causas": {
+        "SIN_CIK": 2067,
+        "SIN_ANUAL_operating_NUNCA_ANUAL": 124,
+        "ANUAL_DISPONIBLE:20-F": 104,
+        "SIN_ANUAL_operating_CON_ANUALES_OTROS_AÑOS": 46,
+        "SIN_ANUAL_other_CON_ANUALES_OTROS_AÑOS": 6,
+        "SIN_ANUAL_other_NUNCA_ANUAL": 29,
+        "ANUAL_DISPONIBLE:10-KT": 3,
+        "ANUAL_DISPONIBLE:40-F": 6
+      }
+    }
+  }
+}

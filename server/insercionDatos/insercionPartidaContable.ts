@@ -339,9 +339,16 @@ export const JP_PCV_CONCEPTOS: JPPCVConceptoDef[] = [
         ]
     },
     {
+        // EFECTIVO = efectivo y equivalentes (現金及び現金同等物). «現金及び預金» (CashAndDeposits) incluye depósitos a
+        // plazo y no es equivalente: se guarda aparte como CAJA_Y_DEPOSITOS.
         codigo: "EFECTIVO",
         categoria: "BALANCE",
-        aliases: ["CashAndDeposits", "CashAndCashEquivalents", "CashAndCashEquivalentsAtEndOfPeriod"]
+        aliases: ["CashAndCashEquivalents", "CashAndCashEquivalentsAtEndOfPeriod"]
+    },
+    {
+        codigo: "CAJA_Y_DEPOSITOS",
+        categoria: "BALANCE",
+        aliases: ["CashAndDeposits"]
     },
     {
         codigo: "ACTIVOS_TOTALES",
@@ -2956,10 +2963,10 @@ const TWOPT_CONCEPTOS: TWOPTConcepto[] = [
         codigo: "EFECTIVO",
         categoria: "BALANCE",
         datasets: ["TaiwanStockBalanceSheet"],
+        // Sin «CashAndDeposits»: no es efectivo y equivalentes.
         aliases: [
             "CashAndCashEquivalents",
-            "CashAndCashEquivalentsAtCarryingValue",
-            "CashAndDeposits"
+            "CashAndCashEquivalentsAtCarryingValue"
         ]
     },
 

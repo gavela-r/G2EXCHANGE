@@ -19,7 +19,7 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const q=v=>v===null||v===undefined?'NULL':typeof v==='number'?(Number.isFinite(v)?String(v):'NULL'):"'"+String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"'";
-const REGLAS_VALIDAS=new Set(['US_PERIODO_V1','JP_RESUMEN_MISMO_DOC_V1','JP_SIGNO_CANONICO_V1']);
+const REGLAS_VALIDAS=new Set(['JP_EFECTIVO_EQUIVALENTES_V1','US_PERIODO_V1','JP_RESUMEN_MISMO_DOC_V1','JP_SIGNO_CANONICO_V1']);
 
 const ESQUEMA=`-- 31_pcv_resolucion_conflictos.sql
 -- Auditoría de correcciones de PCV derivadas de reglas versionadas (sectorial/app/tools/diagnostico_conflictos.cjs).
@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS pcv_correccion_auditoria (
   accion VARCHAR(60) NOT NULL,
   importe_anterior DECIMAL(24,4) NULL,
   importe_nuevo DECIMAL(24,4) NULL,
+  concepto_anterior_id BIGINT UNSIGNED NULL,
+  concepto_nuevo_id BIGINT UNSIGNED NULL,
   conflicto_evidence_hash CHAR(64) CHARACTER SET ascii NOT NULL,
   aplicado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   revertido_en TIMESTAMP NULL,
@@ -45,11 +47,18 @@ CREATE TABLE IF NOT EXISTS pcv_correccion_auditoria (
   KEY ix_pcv_correccion_pcv (pcv_id),
   CONSTRAINT fk_pcv_correccion_informe FOREIGN KEY (informe_id) REFERENCES informe_financiero(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- Concepto independiente para «現金及び預金» (no equivale a efectivo y equivalentes). EFECTIVO pasa a
+-- definirse como efectivo y equivalentes también en EDINET.
+INSERT IGNORE INTO taxonomia_concepto(concepto_estandar,categoria,alias_edinet,descripcion,unidad_tipo,activo,signo_esperado)
+VALUES('CAJA_Y_DEPOSITOS','BALANCE','CashAndDeposits','Caja y depósitos (現金及び預金); incluye depósitos a plazo. No equivale a efectivo y equivalentes.','MONEDA',1,'POSITIVO');
+UPDATE taxonomia_concepto SET alias_edinet='CashAndCashEquivalents' WHERE concepto_estandar='EFECTIVO' AND alias_edinet='CashAndDeposits';
 -- Semántica: una celda con CONFLICT_PRESERVED deja de bloquear sólo si un CONFLICT_RESOLVED de una regla versionada
 -- referencia ese conflicto (resolves = evidence_hash) y además existe una prueba certificadora para el valor vigente.
 `;
 const ESQUEMA_ROLLBACK=`-- Rollback del esquema 31 (sólo tras revertir los datos: no deben quedar correcciones sin revertido_en).
 DROP TABLE IF EXISTS pcv_correccion_auditoria;
+UPDATE taxonomia_concepto SET alias_edinet='CashAndDeposits' WHERE concepto_estandar='EFECTIVO' AND alias_edinet='CashAndCashEquivalents';
+DELETE t FROM taxonomia_concepto t WHERE t.concepto_estandar='CAJA_Y_DEPOSITOS' AND NOT EXISTS (SELECT 1 FROM partida_contable_valor p WHERE p.concepto_estandar_id=t.id);
 `;
 
 function sentencias(r,L){
@@ -60,7 +69,20 @@ function sentencias(r,L){
  const corr=`JSON_OBJECT('ledgerSha256',${q(L)},'rule',${q(r.rule)},'ruleVersion',${q(r.ruleVersion)},'action',${q(r.action)},'resolves',v.evidence_hash)`;
  const fuente=`FROM pcv_verification_evidence v WHERE v.id=${r.evidence_id} AND v.informe_id=${r.informe_id} AND v.concept_code=${q(r.concept)} AND v.outcome='CONFLICT_PRESERVED' AND ${limpia}`;
  const out=[];
- if(r.rule==='US_PERIODO_V1'){
+ if(r.rule==='JP_EFECTIVO_EQUIVALENTES_V1'){
+  const tcC=`(SELECT id FROM taxonomia_concepto WHERE concepto_estandar='CAJA_Y_DEPOSITOS')`,caja='jppfs_cor:CashAndDeposits';
+  // La celda debe seguir teniendo sólo filas «CashAndDeposits» (si otro proceso la cambió, no se toca).
+  const intacta=`NOT EXISTS (SELECT 1 FROM partida_contable_valor x WHERE x.informe_id=${r.informe_id} AND x.concepto_estandar_id=${tc} AND x.importe IS NOT NULL AND x.concepto<>${q(caja)})`;
+  const auditada=id=>`EXISTS (SELECT 1 FROM pcv_correccion_auditoria a WHERE a.ledger_sha256=${q(L)} AND a.pcv_id=${id} AND a.accion='RECLASIFICADO' AND a.revertido_en IS NULL)`;
+  for(const o of r.originals.filter(o=>o.id!==null&&o.importe!==null)){
+   out.push(`INSERT INTO pcv_correccion_auditoria(ledger_sha256,informe_id,concept_code,pcv_id,regla,version_regla,accion,importe_anterior,importe_nuevo,concepto_anterior_id,concepto_nuevo_id,conflicto_evidence_hash) SELECT ${q(L)},${r.informe_id},${q(r.concept)},p.id,${q(r.rule)},${q(r.ruleVersion)},'RECLASIFICADO',p.importe,p.importe,p.concepto_estandar_id,${tcC},${q(r.evidence_hash)} FROM partida_contable_valor p WHERE p.id=${o.id} AND p.informe_id=${r.informe_id} AND p.concepto_estandar_id=${tc} AND p.concepto=${q(caja)} AND ${intacta} AND NOT ${auditada(o.id)};`);
+   out.push(`UPDATE partida_contable_valor SET concepto_estandar_id=${tcC} WHERE id=${o.id} AND informe_id=${r.informe_id} AND concepto_estandar_id=${tc} AND concepto=${q(caja)} AND ${auditada(o.id)};`);
+  }
+  out.push(`INSERT INTO partida_contable_valor(informe_id,concepto,concepto_estandar_id,importe,nivel_confianza) SELECT ${r.informe_id},${q(r.candidate.tag)},${tc},${q(r.value)},'ALTA' FROM DUAL WHERE EXISTS (SELECT 1 FROM pcv_correccion_auditoria a WHERE a.ledger_sha256=${q(L)} AND a.informe_id=${r.informe_id} AND a.concept_code=${q(r.concept)} AND a.accion='RECLASIFICADO' AND a.revertido_en IS NULL) AND NOT EXISTS (SELECT 1 FROM partida_contable_valor x WHERE x.informe_id=${r.informe_id} AND x.concepto_estandar_id=${tc} AND x.importe IS NOT NULL);`);
+  out.push(`SET @g2_n=ROW_COUNT(),@g2_id=LAST_INSERT_ID();`);
+  out.push(`INSERT INTO pcv_correccion_auditoria(ledger_sha256,informe_id,concept_code,pcv_id,regla,version_regla,accion,importe_anterior,importe_nuevo,concepto_anterior_id,concepto_nuevo_id,conflicto_evidence_hash) SELECT ${q(L)},${r.informe_id},${q(r.concept)},@g2_id,${q(r.rule)},${q(r.ruleVersion)},'INSERTADO',NULL,${q(r.value)},NULL,${tc},${q(r.evidence_hash)} FROM DUAL WHERE @g2_n=1;`);
+  out.push(`INSERT IGNORE INTO pcv_verification_evidence(informe_id,concept_code,provider,outcome,evidence_hash,evidence_json) SELECT v.informe_id,v.concept_code,v.provider,'INSERTED',SHA2(CONCAT('PCV_CORRECTION_V1|IN|',v.evidence_hash,'|',${q(L)}),256),JSON_SET(JSON_REMOVE(v.evidence_json,'$.evidence.originals','$.evidence.matching_ids'),'$.outcome','INSERTED','$.evidence.record_id',@g2_id,'$.correction',${corr}) FROM pcv_verification_evidence v WHERE @g2_n=1 AND v.id=${r.evidence_id} AND v.informe_id=${r.informe_id} AND v.outcome='CONFLICT_PRESERVED';`);
+ }else if(r.rule==='US_PERIODO_V1'){
   for(const o of r.originals.filter(o=>o.id!==null&&o.importe!==null&&o.importe!==r.value)){
    out.push(`INSERT IGNORE INTO pcv_correccion_auditoria(ledger_sha256,informe_id,concept_code,pcv_id,regla,version_regla,accion,importe_anterior,importe_nuevo,conflicto_evidence_hash) SELECT ${q(L)},${r.informe_id},${q(r.concept)},${o.id},${q(r.rule)},${q(r.ruleVersion)},${q(r.action)},p.importe,${q(r.value)},${q(r.evidence_hash)} FROM partida_contable_valor p WHERE p.id=${o.id} AND p.informe_id=${r.informe_id} AND p.importe=${q(o.importe)};`);
    out.push(`UPDATE partida_contable_valor SET importe=${q(r.value)} WHERE id=${o.id} AND informe_id=${r.informe_id} AND importe=${q(o.importe)};`);
@@ -95,9 +117,11 @@ function generar(ledgerFile,dirPrivado,repoSql){
  const down=`-- Rollback de los datos de la migración 31 para el registro ${L}.
 SET autocommit=0;
 START TRANSACTION;
-UPDATE partida_contable_valor p JOIN pcv_correccion_auditoria a ON a.pcv_id=p.id AND a.informe_id=p.informe_id SET p.importe=a.importe_anterior WHERE a.ledger_sha256='${L}' AND a.revertido_en IS NULL AND a.pcv_id<>0 AND p.importe=a.importe_nuevo;
+UPDATE partida_contable_valor p JOIN pcv_correccion_auditoria a ON a.pcv_id=p.id AND a.informe_id=p.informe_id SET p.importe=a.importe_anterior WHERE a.ledger_sha256='${L}' AND a.revertido_en IS NULL AND a.accion='CORREGIR_VALOR_A_CANDIDATO_PRIMARIO' AND p.importe=a.importe_nuevo;
+DELETE p FROM partida_contable_valor p JOIN pcv_correccion_auditoria a ON a.pcv_id=p.id AND a.informe_id=p.informe_id WHERE a.ledger_sha256='${L}' AND a.revertido_en IS NULL AND a.accion='INSERTADO' AND p.importe=a.importe_nuevo AND p.concepto_estandar_id=a.concepto_nuevo_id;
+UPDATE partida_contable_valor p JOIN pcv_correccion_auditoria a ON a.pcv_id=p.id AND a.informe_id=p.informe_id SET p.concepto_estandar_id=a.concepto_anterior_id WHERE a.ledger_sha256='${L}' AND a.revertido_en IS NULL AND a.accion='RECLASIFICADO' AND p.concepto_estandar_id=a.concepto_nuevo_id;
 UPDATE pcv_correccion_auditoria SET revertido_en=CURRENT_TIMESTAMP WHERE ledger_sha256='${L}' AND revertido_en IS NULL;
-DELETE FROM pcv_verification_evidence WHERE outcome IN ('VERIFIED_EXISTING','CONFLICT_RESOLVED') AND JSON_UNQUOTE(JSON_EXTRACT(evidence_json,'$.correction.ledgerSha256'))='${L}';
+DELETE FROM pcv_verification_evidence WHERE outcome IN ('VERIFIED_EXISTING','CONFLICT_RESOLVED','INSERTED') AND JSON_UNQUOTE(JSON_EXTRACT(evidence_json,'$.correction.ledgerSha256'))='${L}';
 COMMIT;
 `;
  fs.writeFileSync(rollback,down);

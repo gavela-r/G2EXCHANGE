@@ -24,7 +24,7 @@
 const fs=require('node:fs'),path=require('node:path');
 const{database}=require('../runtime.cjs');
 const YEARS=[2022,2023,2024,2025],PROVIDER={US:'SEC_EDGAR',JP:'EDINET'};
-const REGLAS={US_PERIODO_V1:'2026-10-31',JP_RESUMEN_MISMO_DOC_V1:'2026-10-31',JP_SIGNO_CANONICO_V1:'2026-10-31'};
+const REGLAS={JP_EFECTIVO_EQUIVALENTES_V1:'2026-10-31',US_PERIODO_V1:'2026-10-31',JP_RESUMEN_MISMO_DOC_V1:'2026-10-31',JP_SIGNO_CANONICO_V1:'2026-10-31'};
 const ABSOLUTOS=new Set(['CAPEX','DIVIDENDOS_PAGADOS']);
 const num=v=>v===null||v===undefined||v===''?null:Number(v);
 const localTag=t=>String(t??'').split(':').pop();
@@ -76,6 +76,11 @@ function decidir(country,c){
  const mismaEtiqueta=c.origs.filter(o=>o.importe!==null&&o.importe!==c.cand.importe).every(o=>o.tag===c.cand.tag||o.tag==='us-gaap:'+c.cand.tag);
  if(country==='US'&&(porMysql||porSec)&&mismaEtiqueta)return{regla:'US_PERIODO_V1',valor:c.cand.importe,accion:'CORREGIR_VALOR_A_CANDIDATO_PRIMARIO'};
  if(country!=='JP')return null;
+ // EFECTIVO = efectivo y equivalentes (definición autorizada). Si TODAS las filas guardadas son «現金及び預金»
+ // (jppfs_cor:CashAndDeposits) y el candidato verificado es «現金及び現金同等物», las filas se reclasifican a
+ // CAJA_Y_DEPOSITOS (sin cambiar importe ni tag) y EFECTIVO toma el valor primario de EDINET.
+ const filas=c.origs.filter(o=>o.importe!==null);
+ if(c.concept==='EFECTIVO'&&c.cand.tag==='jppfs_cor:CashAndCashEquivalents'&&filas.length&&filas.every(o=>o.tag==='jppfs_cor:CashAndDeposits'&&o.id!==null))return{regla:'JP_EFECTIVO_EQUIVALENTES_V1',valor:c.cand.importe,accion:'RECLASIFICAR_CAJA_Y_RECUPERAR_EFECTIVO'};
  const origs=c.origs.filter(o=>o.importe!==null),exactos=origs.filter(o=>o.tag===c.cand.tag&&o.importe===c.cand.importe);
  const resumen=o=>o.tag==='jpcrp_cor:'+localTag(c.cand.tag)+'SummaryOfBusinessResults'&&o.importe===c.cand.importe;
  if(exactos.length&&origs.every(o=>exactos.includes(o)||resumen(o)))return{regla:'JP_RESUMEN_MISMO_DOC_V1',valor:c.cand.importe,accion:'EQUIVALENCIA_DEFINIDA_SIN_CAMBIO_DE_VALOR'};

@@ -1,4 +1,5 @@
 import conexion from "../conexion/bd";
+import { finmindJson } from "../src/proveedores/guardiaHttp";
 import { normalizarSectorJP, normalizarSectorTW } from "./insercionDatosSector"; 
 import { translate } from "@vitalets/google-translate-api";
 import pinyin from "pinyin";
@@ -65,14 +66,14 @@ async function getEmpresasTaiwan(): Promise<Empresa[]> {
     const url = "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInfo";
 
     try {
-        const res = await fetch(url);
-
-        if (!res.ok) {
-            console.error(`  Error FinMind: ${res.status}. Saltando Taiwán por ahora.`);
+        // Guardián FinMind global: sin reintentos de 4xx, límite por hora compartido.
+        let json: any;
+        try {
+            json = await finmindJson(url);
+        } catch (error: any) {
+            console.error(`  Error FinMind: ${error?.message}. Saltando Taiwán por ahora.`);
             return [];
         }
-
-        const json = await res.json();
         
         // La API de FinMind devuelve los datos dentro de un array llamado "data"
         const data = json.data || [];

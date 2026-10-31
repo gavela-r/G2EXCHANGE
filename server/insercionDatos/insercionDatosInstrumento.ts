@@ -3,6 +3,7 @@ import * as cheerio from "cheerio";
 import { translate } from "@vitalets/google-translate-api";
 import pinyin from "pinyin";
 import conexion from "../conexion/bd";
+import { finmindJson } from "../src/proveedores/guardiaHttp";
 
 // ============================================================================
 // CARGA DE INSTRUMENTOS
@@ -311,15 +312,10 @@ async function descargarTaiwan(): Promise<InstrumentoRaw[]> {
     // 1. FINMIND - FUENTE PRINCIPAL
     // =========================================================================
 
-    const responseFinMind = await fetch(
+    // Guardián FinMind global (límite compartido, sin reintentos de 4xx).
+    const jsonFinMind: any = await finmindJson(
         "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockInfo"
     );
-
-    if (!responseFinMind.ok) {
-        throw new Error(`FinMind respondió HTTP ${responseFinMind.status}`);
-    }
-
-    const jsonFinMind: any = await responseFinMind.json();
 
     if (!Array.isArray(jsonFinMind.data)) {
         throw new Error(

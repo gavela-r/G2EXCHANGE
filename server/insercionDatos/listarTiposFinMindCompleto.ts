@@ -10,6 +10,7 @@
 // (en PowerShell:  $env:FINMIND_TOKEN="tu_token"  antes de ejecutar).
 
 import * as fs from "fs";
+import { finmindJson } from "../src/proveedores/guardiaHttp";
 
 // ============================================================================
 // 1. CONFIGURACION
@@ -60,9 +61,8 @@ async function pedirDataset(dataset: string, idEmpresa: string): Promise<any[]> 
         `https://api.finmindtrade.com/api/v4/data` +
         `?dataset=${dataset}&data_id=${idEmpresa}&start_date=${FECHA_INICIO}`;
 
-    const headers: Record<string, string> = TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {};
-    const respuesta = await fetch(url, { headers });
-    const json: any = await respuesta.json();
+    // Guardián FinMind global (límite compartido, sin reintentos de 4xx).
+    const json: any = await finmindJson(url);
 
     if (!json.data) {
         throw new Error(json.msg ?? "respuesta sin datos");

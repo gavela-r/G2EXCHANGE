@@ -4,6 +4,7 @@ import AdmZip from "adm-zip";
 import { parse } from "csv-parse/sync";
 import iconv from "iconv-lite";
 import { insertarSoloPCVAusentes } from "../src/pcv/insertarSoloAusentes";
+import { finmindJson, ErrorProveedor } from "../src/proveedores/guardiaHttp";
 
 // ============================================================================
 // .ENV
@@ -3290,141 +3291,14 @@ function twOptStartDate(): string {
     return d.toISOString().slice(0, 10);
 }
 
+// Todas las peticiones FinMind pasan por el guardián global compartido entre procesos
+// (src/proveedores/guardiaHttp.ts): 120 peticiones/hora por defecto, un único token, sin reintentos ante
+// 400/401/402, pausa >= 35 min ante bloqueo de IP (403), Retry-After en 429 y backoff limitado en 5xx.
+// El antiguo cambio de token ante 402/429 se eliminó: multiplicaba los 4xx desde la misma IP, que es
+// exactamente lo que la política de FinMind castiga con el bloqueo de IP.
 async function twOptFetch(url: string): Promise<any> {
-    const tokenState = await twOptReservarToken();
-
-    const headers = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${tokenState.token}`
-    };
-
-    const controller = new AbortController();
-    const timeout = setTimeout(
-        () => controller.abort(),
-        TWOPT_TIMEOUT_MS
-    );
-
-    try {
-        const response = await fetch(url, {
-            method: "GET",
-            headers,
-            signal: controller.signal
-        });
-
-        tokenState.requests++;
-
-
-        // ============================================================
-        // 402 = CUOTA TOTAL DEL TOKEN AGOTADA
-        // Se desactiva este token y se prueba la misma petición
-        // automáticamente con otro token disponible.
-        // ============================================================
-
-        if (response.status === 402) {
-
-            tokenState.quotaExhausted = true;
-            tokenState.errores++;
-
-            console.warn(
-                `[TWOPT] Token ${tokenState.id} agotado (HTTP 402). ` +
-                `Se desactiva para esta ejecución.`
-            );
-
-            const quedanTokens = TWOPT_TOKEN_STATES.some(
-                t => !t.quotaExhausted
-            );
-
-            if (quedanTokens) {
-                return twOptFetch(url);
-            }
-
-            throw new Error(
-                "FINMIND_QUOTA_EXHAUSTED: todos los tokens FinMind han agotado su cuota."
-            );
-        }
-
-
-        // ============================================================
-        // 429 = RATE LIMIT TEMPORAL
-        // NO significa que la cuota esté agotada.
-        // Ponemos el token en cooldown durante 60 segundos.
-        // ============================================================
-
-        if (response.status === 429) {
-
-            tokenState.errores++;
-
-            tokenState.cooldownUntil = Math.max(
-                tokenState.cooldownUntil,
-                Date.now() + 60000
-            );
-
-            tokenState.rateLimits++;
-
-            console.warn(
-                `[TWOPT] Token ${tokenState.id} rate limit (HTTP 429). ` +
-                `Cooldown 60 segundos.`
-            );
-
-            // Intentar la misma petición con otro token disponible.
-            return twOptFetch(url);
-        }
-
-
-        // ============================================================
-        // RESTO DE ERRORES HTTP
-        // ============================================================
-
-        if (!response.ok) {
-
-            const cuerpo = await response.text().catch(() => "");
-
-            console.error(
-                `\n[TWOPT ERROR REAL]` +
-                `\nToken: ${tokenState.id}` +
-                `\nHTTP: ${response.status} ${response.statusText}` +
-                `\nURL: ${url}` +
-                `\nRespuesta FinMind: ${cuerpo.slice(0, 1000)}\n`
-            );
-
-            tokenState.errores++;
-
-            throw new Error(
-                `FinMind HTTP ${response.status}: ${cuerpo.slice(0, 300)}`
-            );
-        }
-
-
-        // ============================================================
-        // RESPUESTA CORRECTA
-        // ============================================================
-
-        return await response.json();
-
-
-    } catch (error) {
-
-        // ============================================================
-        // TIMEOUT
-        // ============================================================
-
-        if (
-            error instanceof Error &&
-            error.name === "AbortError"
-        ) {
-            tokenState.errores++;
-
-            throw new Error(
-                `FinMind timeout (${TWOPT_TIMEOUT_MS}ms) para ${url}`
-            );
-        }
-
-        throw error;
-
-    } finally {
-
-        clearTimeout(timeout);
-    }
+    await twOptReservarToken();
+    return finmindJson(url);
 }
 
 
@@ -4275,9 +4149,10 @@ export async function ejecutarCargaPartidasContablesTaiwanOptimizado() {
             ? error.message
             : String(error);
 
-    // Si todos los tokens FinMind están agotados,
-    // activar parada global de todos los workers.
-    if (mensaje.includes("FINMIND_QUOTA_EXHAUSTED")) {
+    // Cuota agotada, credencial rechazada, límite del proveedor, bloqueo de IP o circuito abierto: se detienen
+    // todos los workers. La empresa no se marca como error y sigue pendiente (los informes pendientes se
+    // recalculan desde MySQL al reanudar, que actúa como checkpoint).
+    if (mensaje.includes("FINMIND_QUOTA_EXHAUSTED") || (error instanceof ErrorProveedor && ["CIRCUITO_ABIERTO", "LIMITE_GLOBAL", "BLOQUEO_IP", "HTTP_401", "HTTP_402", "HTTP_429", "LOCK_NO_DISPONIBLE"].includes(error.codigo))) {
 
         detenerPorCuota = true;
 

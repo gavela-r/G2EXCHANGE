@@ -1,5 +1,6 @@
 import { existsSync } from "fs";
 import conexion from "../conexion/bd";
+import { finmindJson } from "../src/proveedores/guardiaHttp";
 import { Request, Response } from "express";
 
 // ============================================================================
@@ -734,16 +735,8 @@ async function ecCargarTWSEDividendos() {
 
 async function ecFetchFinMindEvento(dataset:string):Promise<any[]> {
     const url = `https://api.finmindtrade.com/api/v4/data?dataset=${dataset}`;
-    const headers:Record<string,string> = {Accept:"application/json"};
-    if (EC_FINMIND_TOKEN) headers.Authorization = `Bearer ${EC_FINMIND_TOKEN}`;
-
-    const r = await fetch(url,{headers});
-    if (!r.ok) {
-        const body = await r.text();
-        throw new Error(`FinMind ${dataset} HTTP ${r.status}: ${body.slice(0,200)}`);
-    }
-
-    const json = await r.json();
+    // Guardián FinMind global: un único token, límite compartido y sin reintentos de 4xx.
+    const json = await finmindJson(url);
     if (json?.status && Number(json.status)!==200) {
         throw new Error(`FinMind ${dataset} status ${json.status}: ${json?.msg || ""}`);
     }

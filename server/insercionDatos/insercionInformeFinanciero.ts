@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import conexion from "../conexion/bd";
+import { finmindJson } from "../src/proveedores/guardiaHttp";
 
 // ============================================================================
 // INFORME_FINANCIERO - ESTADOS UNIDOS + JAPON
@@ -486,88 +487,14 @@ async function jpFetchEdinet(url: string, intento = 0): Promise<any> {
 //   Se cuenta aparte (intentosLimite) de los errores normales (intento).
 // ============================================================================
 
-async function twFetchFinMind(
-    url: string,
-    intento = 0,
-    intentosLimite = 0
-): Promise<any> {
+// FinMind pasa por el guardián global (src/proveedores/guardiaHttp.ts). La versión anterior reintentaba los 402
+// y cualquier error (incluidos los 4xx), justo lo que provoca el bloqueo de IP según la política de FinMind.
+async function twFetchFinMind(url: string): Promise<any> {
     await twEsperarTurno();
-
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), TW_TIMEOUT_MS);
-
-    // Gestion comun del cupo agotado (HTTP 402/429 o status 402/429 en el JSON).
-    const gestionarLimite = (estado: number): Promise<any> => {
-        if (intentosLimite >= TW_MAX_RETRIES_LIMITE) {
-            const err: any = new Error(
-                `FinMind: cupo agotado (${estado}) tras ${intentosLimite} esperas`
-            );
-            err.esLimite = true;
-            throw err;
-        }
-
-        twBloquearTemporalmente(estado, intentosLimite);
-
-        return twFetchFinMind(url, intento, intentosLimite + 1);
-    };
-
     try {
-        const headers: Record<string, string> = { "Accept": "application/json" };
-
-        if (TW_FINMIND_TOKEN) {
-            headers.Authorization = `Bearer ${TW_FINMIND_TOKEN}`;
-        }
-
-        const response = await fetch(url, { headers, signal: controller.signal });
-
-        clearTimeout(timeout);
-
-        if (response.status === 402 || response.status === 429) {
-            return gestionarLimite(response.status);
-        }
-
-        if (response.status >= 500 && intento < TW_MAX_RETRIES) {
-            const espera = Math.min(2000 * Math.pow(2, intento), 30000);
-
-            await twDormir(espera);
-
-            return twFetchFinMind(url, intento + 1, intentosLimite);
-        }
-
-        if (!response.ok) {
-            const texto = await response.text();
-
-            throw new Error(
-                `FinMind HTTP ${response.status}: ${texto.slice(0, 300)}`
-            );
-        }
-
-        const json = await response.json();
-        const statusJson = Number(json?.status);
-
-        if (statusJson === 402 || statusJson === 429) {
-            return gestionarLimite(statusJson);
-        }
-
-        if (json?.status && statusJson !== 200) {
-            throw new Error(`FinMind status ${json.status}: ${json?.msg || ""}`);
-        }
-
-        return json;
-    } catch (error) {
-        clearTimeout(timeout);
-
-        // Cupo agotado definitivamente: no reintentar mas.
-        if ((error as any)?.esLimite) {
-            throw error;
-        }
-
-        if (intento < TW_MAX_RETRIES) {
-            await twDormir(2000 * Math.pow(2, intento));
-
-            return twFetchFinMind(url, intento + 1, intentosLimite);
-        }
-
+        return await finmindJson(url);
+    } catch (error: any) {
+        if (["CIRCUITO_ABIERTO", "LIMITE_GLOBAL", "BLOQUEO_IP", "HTTP_401", "HTTP_402", "HTTP_429"].includes(error?.codigo)) error.esLimite = true;
         throw error;
     }
 }

@@ -1,0 +1,2964 @@
+{
+  "generatedAt": "2026-10-31T10:25:51.734Z",
+  "source": "MYSQL_SOLO_LECTURA",
+  "rules": {
+    "US_PERIODO_V1": "2026-10-31",
+    "JP_RESUMEN_MISMO_DOC_V1": "2026-10-31",
+    "JP_SIGNO_CANONICO_V1": "2026-10-31"
+  },
+  "secCompanyfacts": "LOCAL_BULK",
+  "countries": {
+    "US": {
+      "provider": "SEC_EDGAR",
+      "evidenceRows": 641606,
+      "conflictCells": 201910,
+      "cellsAlsoWithVerifiedEvidence": 44,
+      "byYear": {
+        "2022": {
+          "cells": 44104,
+          "byCause": {
+            "SEC_OTRO_PERIODO": 43354,
+            "SIN_EXPLICAR": 521,
+            "ORIGINAL_DE_OTRO_PERIODO": 127,
+            "REDONDEO_MENOR_0_05PCT": 76,
+            "SIGNO": 5,
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 12,
+            "DUPLICADOS_UNO_COINCIDE": 7,
+            "MISMO_IMPORTE_MISMA_ETIQUETA": 1,
+            "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "SEC_OTRO_PERIODO": 2097,
+              "SIN_EXPLICAR": 68,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "ORIGINAL_DE_OTRO_PERIODO": 5,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 1,
+              "DUPLICADOS_UNO_COINCIDE": 1
+            },
+            "BENEFICIO_BRUTO": {
+              "SEC_OTRO_PERIODO": 1073,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "EBIT": {
+              "SEC_OTRO_PERIODO": 2256,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "BENEFICIO_NETO": {
+              "SEC_OTRO_PERIODO": 2687,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "SEC_OTRO_PERIODO": 2396,
+              "ORIGINAL_DE_OTRO_PERIODO": 1,
+              "SIN_EXPLICAR": 1,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "SEC_OTRO_PERIODO": 2280,
+              "SIGNO": 3,
+              "ORIGINAL_DE_OTRO_PERIODO": 22,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "SEC_OTRO_PERIODO": 466,
+              "ORIGINAL_DE_OTRO_PERIODO": 11
+            },
+            "ACCIONES_EN_CIRCULACION": {
+              "SEC_OTRO_PERIODO": 2071,
+              "REDONDEO_MENOR_0_05PCT": 33,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 5,
+              "ORIGINAL_DE_OTRO_PERIODO": 2
+            },
+            "GASTO_INTERESES": {
+              "SEC_OTRO_PERIODO": 1813,
+              "ORIGINAL_DE_OTRO_PERIODO": 8,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "EFECTIVO": {
+              "SEC_OTRO_PERIODO": 2485,
+              "ORIGINAL_DE_OTRO_PERIODO": 2,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "ACTIVOS_TOTALES": {
+              "SEC_OTRO_PERIODO": 2922,
+              "REDONDEO_MENOR_0_05PCT": 11
+            },
+            "PASIVOS_TOTALES": {
+              "SEC_OTRO_PERIODO": 2527,
+              "REDONDEO_MENOR_0_05PCT": 4
+            },
+            "PATRIMONIO_NETO": {
+              "SEC_OTRO_PERIODO": 2760,
+              "REDONDEO_MENOR_0_05PCT": 7,
+              "ORIGINAL_DE_OTRO_PERIODO": 1,
+              "SIN_EXPLICAR": 2
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "SEC_OTRO_PERIODO": 993,
+              "SIN_EXPLICAR": 160,
+              "ORIGINAL_DE_OTRO_PERIODO": 7,
+              "REDONDEO_MENOR_0_05PCT": 3,
+              "DUPLICADOS_UNO_COINCIDE": 2,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "SEC_OTRO_PERIODO": 2830,
+              "REDONDEO_MENOR_0_05PCT": 3
+            },
+            "CAPEX": {
+              "SEC_OTRO_PERIODO": 2315,
+              "ORIGINAL_DE_OTRO_PERIODO": 15,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "SIN_EXPLICAR": 1
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "SEC_OTRO_PERIODO": 1819,
+              "SIN_EXPLICAR": 266,
+              "ORIGINAL_DE_OTRO_PERIODO": 10,
+              "DUPLICADOS_UNO_COINCIDE": 4,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "INVENTARIOS": {
+              "SEC_OTRO_PERIODO": 1281,
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "ORIGINAL_DE_OTRO_PERIODO": 5
+            },
+            "CUENTAS_COBRAR": {
+              "SEC_OTRO_PERIODO": 1760,
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "ORIGINAL_DE_OTRO_PERIODO": 7,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "CUENTAS_PAGAR": {
+              "SEC_OTRO_PERIODO": 1895,
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "ORIGINAL_DE_OTRO_PERIODO": 2
+            },
+            "EPS_DILUIDO": {
+              "SEC_OTRO_PERIODO": 2487,
+              "ORIGINAL_DE_OTRO_PERIODO": 21,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 4,
+              "SIGNO": 2
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "SEC_OTRO_PERIODO": 141,
+              "SIN_EXPLICAR": 23,
+              "ORIGINAL_DE_OTRO_PERIODO": 8
+            }
+          },
+          "offsets": {
+            "sec_2": 18697,
+            "sec_1": 23728,
+            "sec_3": 1286,
+            "sec_7": 13,
+            "sec_misma_presentacion": 4952,
+            "sec_11": 14,
+            "-1": 41,
+            "sec_9": 22,
+            "sec_12": 17,
+            "-2": 36,
+            "sec_13": 12,
+            "sec_4": 59,
+            "sec_10": 17,
+            "sec_6": 27,
+            "-3": 50,
+            "sec_16": 1,
+            "sec_5": 24,
+            "sec_0": 3,
+            "sec_8": 23,
+            "sec_14": 1
+          },
+          "contextOk": 44104,
+          "certifiableByRule": {
+            "US_PERIODO_V1": 43245
+          },
+          "examples": {
+            "SEC_OTRO_PERIODO": {
+              "informe": 32,
+              "concept": "INGRESOS",
+              "fin": "2022-09-24",
+              "candidate": {
+                "importe": 394328000000,
+                "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+                "accn": "0000320193-22-000108",
+                "end": "2022-09-24",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58183,
+                  "importe": 274515000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 989407,
+                  "importe": 274515000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 1507339,
+                  "importe": 274515000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 274515000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2020-09-26",
+                    "accn": "0000320193-20-000096",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "SIN_EXPLICAR": {
+              "informe": 92,
+              "concept": "DEUDA_LARGO_PLAZO",
+              "fin": "2022-10-30",
+              "candidate": {
+                "importe": 39075000000,
+                "tag": "LongTermDebtAndCapitalLeaseObligations",
+                "accn": "0001730168-22-000118",
+                "end": "2022-10-30",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 989780,
+                  "importe": 39440000000,
+                  "tag": "LongTermDebtAndCapitalLeaseObligations"
+                },
+                {
+                  "id": 1508025,
+                  "importe": 39000000,
+                  "tag": "FinanceLeaseLiabilityNoncurrent"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": null,
+                "prueba": [
+                  {
+                    "valor": 39440000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2021-10-31",
+                    "accn": "0001730168-22-000118",
+                    "mismaPresentacion": true
+                  },
+                  null
+                ]
+              }
+            },
+            "ORIGINAL_DE_OTRO_PERIODO": {
+              "informe": 279,
+              "concept": "EPS_DILUIDO",
+              "fin": "2022-12-31",
+              "candidate": {
+                "importe": 6.63,
+                "tag": "EarningsPerShareDiluted",
+                "accn": "0001551152-23-000011",
+                "end": "2022-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 59660,
+                  "importe": 2.72,
+                  "tag": "EarningsPerShareDiluted"
+                },
+                {
+                  "id": 990903,
+                  "importe": 2.72,
+                  "tag": "EarningsPerShareDiluted"
+                },
+                {
+                  "id": 1510112,
+                  "importe": 2.72,
+                  "tag": "EarningsPerShareDiluted"
+                }
+              ],
+              "offsets": [
+                -1
+              ],
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 2.72,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2020-12-31",
+                    "accn": "0001551152-21-000008",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 1050,
+              "concept": "ACTIVOS_TOTALES",
+              "fin": "2022-10-01",
+              "candidate": {
+                "importe": 203631000000,
+                "tag": "Assets",
+                "accn": "0001744489-22-000213",
+                "end": "2022-10-01",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 64143,
+                  "importe": 203609000000,
+                  "tag": "Assets"
+                },
+                {
+                  "id": 995516,
+                  "importe": 203609000000,
+                  "tag": "Assets"
+                },
+                {
+                  "id": 1519561,
+                  "importe": 203609000000,
+                  "tag": "Assets"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIGNO": {
+              "informe": 8006,
+              "concept": "IMPUESTO_BENEFICIOS",
+              "fin": "2022-12-31",
+              "candidate": {
+                "importe": 18250000,
+                "tag": "IncomeTaxExpenseBenefit",
+                "accn": "0000950170-23-004283",
+                "end": "2022-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 101419,
+                  "importe": -18250000,
+                  "tag": "IncomeTaxExpenseBenefit"
+                },
+                {
+                  "id": 1033640,
+                  "importe": -18250000,
+                  "tag": "IncomeTaxExpenseBenefit"
+                },
+                {
+                  "id": 1607165,
+                  "importe": -18250000,
+                  "tag": "IncomeTaxExpenseBenefit"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": {
+              "informe": 12334,
+              "concept": "ACCIONES_EN_CIRCULACION",
+              "fin": "2022-12-31",
+              "candidate": {
+                "importe": 43217000,
+                "tag": "CommonStockSharesOutstanding",
+                "accn": "0000920371-23-000072",
+                "end": "2022-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 124099,
+                  "importe": 43326000,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1056818,
+                  "importe": 43326000,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1659324,
+                  "importe": 43326000,
+                  "tag": "CommonStockSharesOutstanding"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_MISMO_PERIODO_OTRA_PRESENTACION",
+                "prueba": [
+                  {
+                    "valor": 43326000,
+                    "tipo": "MISMO_PERIODO",
+                    "accn": "0000920371-24-000063"
+                  }
+                ]
+              }
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 12879,
+              "concept": "DEUDA_LARGO_PLAZO",
+              "fin": "2022-12-31",
+              "candidate": {
+                "importe": 67225000,
+                "tag": "LongTermDebtAndCapitalLeaseObligations",
+                "accn": "0001193125-23-048874",
+                "end": "2022-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 127020,
+                  "importe": 0,
+                  "tag": "LongTermDebt"
+                },
+                {
+                  "id": 1059803,
+                  "importe": 0,
+                  "tag": "LongTermDebt"
+                },
+                {
+                  "id": 1665900,
+                  "importe": 67225000,
+                  "tag": "FinanceLeaseLiabilityNoncurrent"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_MISMA_ETIQUETA": {
+              "informe": 15587,
+              "concept": "INGRESOS",
+              "fin": "2022-12-31",
+              "candidate": {
+                "importe": 13102000,
+                "tag": "Revenues",
+                "accn": "0001193125-23-080486",
+                "end": "2022-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 141396,
+                  "importe": 13102000,
+                  "tag": "Revenues"
+                },
+                {
+                  "id": 1074471,
+                  "importe": 13102000,
+                  "tag": "RevenueFromContractWithCustomerIncludingAssessedTax"
+                },
+                {
+                  "id": 1696400,
+                  "importe": 13102000,
+                  "tag": "RevenueFromContractWithCustomerIncludingAssessedTax"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_OTRA_ETIQUETA": {
+              "informe": 44063,
+              "concept": "DEUDA_LARGO_PLAZO",
+              "fin": "2022-12-31",
+              "candidate": {
+                "importe": 6437000,
+                "tag": "LongTermDebtAndCapitalLeaseObligations",
+                "accn": "0001692427-23-000008",
+                "end": "2022-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 2320631,
+                  "importe": 6437000,
+                  "tag": "FinanceLeaseLiabilityNoncurrent"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            }
+          }
+        },
+        "2023": {
+          "cells": 51766,
+          "byCause": {
+            "SEC_OTRO_PERIODO": 27743,
+            "ORIGINAL_DE_OTRO_PERIODO": 23376,
+            "SIN_EXPLICAR": 597,
+            "REDONDEO_MENOR_0_05PCT": 26,
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 9,
+            "SIGNO": 3,
+            "DUPLICADOS_UNO_COINCIDE": 9,
+            "MISMO_IMPORTE_MISMA_ETIQUETA": 2,
+            "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "SEC_OTRO_PERIODO": 1921,
+              "ORIGINAL_DE_OTRO_PERIODO": 575,
+              "SIN_EXPLICAR": 73,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "DUPLICADOS_UNO_COINCIDE": 2
+            },
+            "BENEFICIO_BRUTO": {
+              "SEC_OTRO_PERIODO": 998,
+              "ORIGINAL_DE_OTRO_PERIODO": 375
+            },
+            "EBIT": {
+              "SEC_OTRO_PERIODO": 1886,
+              "ORIGINAL_DE_OTRO_PERIODO": 786
+            },
+            "BENEFICIO_NETO": {
+              "SEC_OTRO_PERIODO": 2253,
+              "ORIGINAL_DE_OTRO_PERIODO": 915,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "SEC_OTRO_PERIODO": 2185,
+              "ORIGINAL_DE_OTRO_PERIODO": 637,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "SEC_OTRO_PERIODO": 2144,
+              "ORIGINAL_DE_OTRO_PERIODO": 590,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "SEC_OTRO_PERIODO": 455,
+              "ORIGINAL_DE_OTRO_PERIODO": 101,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "ACCIONES_EN_CIRCULACION": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1854,
+              "SEC_OTRO_PERIODO": 604,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 5,
+              "REDONDEO_MENOR_0_05PCT": 7
+            },
+            "GASTO_INTERESES": {
+              "SEC_OTRO_PERIODO": 1668,
+              "ORIGINAL_DE_OTRO_PERIODO": 440
+            },
+            "EFECTIVO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1995,
+              "SEC_OTRO_PERIODO": 858,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "ACTIVOS_TOTALES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2644,
+              "SEC_OTRO_PERIODO": 729,
+              "REDONDEO_MENOR_0_05PCT": 3
+            },
+            "PASIVOS_TOTALES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2517,
+              "SEC_OTRO_PERIODO": 394
+            },
+            "PATRIMONIO_NETO": {
+              "SEC_OTRO_PERIODO": 2244,
+              "ORIGINAL_DE_OTRO_PERIODO": 957,
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "SIN_EXPLICAR": 2
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1037,
+              "SIN_EXPLICAR": 183,
+              "SEC_OTRO_PERIODO": 147,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1,
+              "DUPLICADOS_UNO_COINCIDE": 1
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "SEC_OTRO_PERIODO": 2370,
+              "ORIGINAL_DE_OTRO_PERIODO": 926,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "CAPEX": {
+              "SEC_OTRO_PERIODO": 1972,
+              "ORIGINAL_DE_OTRO_PERIODO": 725
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "SEC_OTRO_PERIODO": 1628,
+              "ORIGINAL_DE_OTRO_PERIODO": 491,
+              "SIN_EXPLICAR": 313,
+              "REDONDEO_MENOR_0_05PCT": 5,
+              "DUPLICADOS_UNO_COINCIDE": 4,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "INVENTARIOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1372,
+              "SEC_OTRO_PERIODO": 206
+            },
+            "CUENTAS_COBRAR": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1735,
+              "SEC_OTRO_PERIODO": 318,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "CUENTAS_PAGAR": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1930,
+              "SEC_OTRO_PERIODO": 286
+            },
+            "EPS_DILUIDO": {
+              "SEC_OTRO_PERIODO": 2448,
+              "ORIGINAL_DE_OTRO_PERIODO": 621,
+              "SIGNO": 3,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 153,
+              "SIN_EXPLICAR": 26,
+              "SEC_OTRO_PERIODO": 29,
+              "DUPLICADOS_UNO_COINCIDE": 2
+            }
+          },
+          "offsets": {
+            "1": 23111,
+            "2": 162,
+            "sec_2": 22430,
+            "sec_1": 27418,
+            "sec_3": 1494,
+            "sec_misma_presentacion": 5581,
+            "sec_7": 33,
+            "sec_8": 20,
+            "sec_6": 33,
+            "sec_5": 40,
+            "sec_4": 84,
+            "-1": 54,
+            "sec_14": 5,
+            "sec_13": 13,
+            "sec_12": 19,
+            "sec_15": 3,
+            "sec_10": 16,
+            "sec_11": 19,
+            "sec_9": 25,
+            "-2": 49
+          },
+          "contextOk": 51766,
+          "certifiableByRule": {
+            "US_PERIODO_V1": 50879
+          },
+          "examples": {
+            "SEC_OTRO_PERIODO": {
+              "informe": 28,
+              "concept": "INGRESOS",
+              "fin": "2023-09-30",
+              "candidate": {
+                "importe": 383285000000,
+                "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+                "accn": "0000320193-23-000106",
+                "end": "2023-09-30",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58161,
+                  "importe": 365817000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 989385,
+                  "importe": 365817000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 1507317,
+                  "importe": 365817000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 365817000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2021-09-25",
+                    "accn": "0000320193-21-000105",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "ORIGINAL_DE_OTRO_PERIODO": {
+              "informe": 28,
+              "concept": "ACCIONES_EN_CIRCULACION",
+              "fin": "2023-09-30",
+              "candidate": {
+                "importe": 15550061000,
+                "tag": "CommonStockSharesOutstanding",
+                "accn": "0000320193-23-000106",
+                "end": "2023-09-30",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58168,
+                  "importe": 15943425000,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 989392,
+                  "importe": 15943425000,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1507324,
+                  "importe": 15943425000,
+                  "tag": "CommonStockSharesOutstanding"
+                }
+              ],
+              "offsets": [
+                1
+              ],
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 15943425000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2022-09-24",
+                    "accn": "0000320193-22-000108",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "SIN_EXPLICAR": {
+              "informe": 43,
+              "concept": "DEUDA_LARGO_PLAZO",
+              "fin": "2023-12-31",
+              "candidate": {
+                "importe": 13253000000,
+                "tag": "LongTermDebtAndCapitalLeaseObligations",
+                "accn": "0001652044-24-000022",
+                "end": "2023-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58275,
+                  "importe": 14862000000,
+                  "tag": "LongTermDebt"
+                },
+                {
+                  "id": 989499,
+                  "importe": 14862000000,
+                  "tag": "LongTermDebt"
+                },
+                {
+                  "id": 1507434,
+                  "importe": 14701000000,
+                  "tag": "LongTermDebtAndCapitalLeaseObligations"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": null,
+                "prueba": [
+                  null,
+                  {
+                    "valor": 14701000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2022-12-31",
+                    "accn": "0001652044-23-000016",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 2032,
+              "concept": "DEPRECIACION_AMORTIZACION",
+              "fin": "2023-12-31",
+              "candidate": {
+                "importe": 1262107000,
+                "tag": "DepreciationAndAmortization",
+                "accn": "0001558370-24-001532",
+                "end": "2023-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 1530735,
+                  "importe": 1262715000,
+                  "tag": "DepreciationAndAmortization"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": {
+              "informe": 4575,
+              "concept": "IMPUESTO_BENEFICIOS",
+              "fin": "2023-12-31",
+              "candidate": {
+                "importe": 26000000,
+                "tag": "IncomeTaxExpenseBenefit",
+                "accn": "0001051470-24-000062",
+                "end": "2023-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 83229,
+                  "importe": 21000000,
+                  "tag": "IncomeTaxExpenseBenefit"
+                },
+                {
+                  "id": 1015016,
+                  "importe": 21000000,
+                  "tag": "IncomeTaxExpenseBenefit"
+                },
+                {
+                  "id": 1564804,
+                  "importe": 21000000,
+                  "tag": "IncomeTaxExpenseBenefit"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_MISMO_PERIODO_OTRA_PRESENTACION",
+                "prueba": [
+                  {
+                    "valor": 21000000,
+                    "tipo": "MISMO_PERIODO",
+                    "accn": "0001051470-26-000016"
+                  }
+                ]
+              }
+            },
+            "SIGNO": {
+              "informe": 18725,
+              "concept": "EPS_DILUIDO",
+              "fin": "2023-12-31",
+              "candidate": {
+                "importe": -18.39,
+                "tag": "EarningsPerShareDiluted",
+                "accn": "0001685040-24-000007",
+                "end": "2023-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 157643,
+                  "importe": 18.39,
+                  "tag": "EarningsPerShareDiluted"
+                },
+                {
+                  "id": 1091043,
+                  "importe": 18.39,
+                  "tag": "EarningsPerShareDiluted"
+                },
+                {
+                  "id": 1738755,
+                  "importe": 18.39,
+                  "tag": "EarningsPerShareDiluted"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 30248,
+              "concept": "DEPRECIACION_AMORTIZACION",
+              "fin": "2023-12-31",
+              "candidate": {
+                "importe": 339000000,
+                "tag": "DepreciationAndAmortization",
+                "accn": "0000950170-24-022978",
+                "end": "2023-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 216837,
+                  "importe": 79000000,
+                  "tag": "Depreciation"
+                },
+                {
+                  "id": 1151650,
+                  "importe": 79000000,
+                  "tag": "Depreciation"
+                },
+                {
+                  "id": 1893875,
+                  "importe": 339000000,
+                  "tag": "DepreciationAndAmortization"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_MISMA_ETIQUETA": {
+              "informe": 34308,
+              "concept": "DEPRECIACION_AMORTIZACION",
+              "fin": "2023-12-31",
+              "candidate": {
+                "importe": 4800000,
+                "tag": "DepreciationAndAmortization",
+                "accn": "0001655759-24-000018",
+                "end": "2023-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 237237,
+                  "importe": 4800000,
+                  "tag": "Depreciation"
+                },
+                {
+                  "id": 1172491,
+                  "importe": 4800000,
+                  "tag": "Depreciation"
+                },
+                {
+                  "id": 1949889,
+                  "importe": 4800000,
+                  "tag": "DepreciationAndAmortization"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_OTRA_ETIQUETA": {
+              "informe": 44059,
+              "concept": "DEUDA_LARGO_PLAZO",
+              "fin": "2023-12-31",
+              "candidate": {
+                "importe": 6344000,
+                "tag": "LongTermDebtAndCapitalLeaseObligations",
+                "accn": "0001692427-24-000008",
+                "end": "2023-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 2320611,
+                  "importe": 6344000,
+                  "tag": "FinanceLeaseLiabilityNoncurrent"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            }
+          }
+        },
+        "2024": {
+          "cells": 52352,
+          "byCause": {
+            "ORIGINAL_DE_OTRO_PERIODO": 42871,
+            "SEC_OTRO_PERIODO": 8809,
+            "SIN_EXPLICAR": 642,
+            "DUPLICADOS_UNO_COINCIDE": 11,
+            "REDONDEO_MENOR_0_05PCT": 8,
+            "MISMO_IMPORTE_OTRA_ETIQUETA": 2,
+            "SIGNO": 1,
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 8
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2109,
+              "SEC_OTRO_PERIODO": 500,
+              "SIN_EXPLICAR": 75,
+              "DUPLICADOS_UNO_COINCIDE": 2,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 2
+            },
+            "BENEFICIO_BRUTO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1148,
+              "SEC_OTRO_PERIODO": 276
+            },
+            "EBIT": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2297,
+              "SEC_OTRO_PERIODO": 487
+            },
+            "BENEFICIO_NETO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2803,
+              "SEC_OTRO_PERIODO": 478
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2398,
+              "SEC_OTRO_PERIODO": 552
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2422,
+              "SEC_OTRO_PERIODO": 434,
+              "SIGNO": 1
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 497,
+              "SEC_OTRO_PERIODO": 76
+            },
+            "ACCIONES_EN_CIRCULACION": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2029,
+              "SEC_OTRO_PERIODO": 515,
+              "REDONDEO_MENOR_0_05PCT": 4,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 6
+            },
+            "EFECTIVO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2549,
+              "SEC_OTRO_PERIODO": 404
+            },
+            "ACTIVOS_TOTALES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 3151,
+              "SEC_OTRO_PERIODO": 337,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "PASIVOS_TOTALES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2721,
+              "SEC_OTRO_PERIODO": 311
+            },
+            "PATRIMONIO_NETO": {
+              "SEC_OTRO_PERIODO": 1569,
+              "ORIGINAL_DE_OTRO_PERIODO": 1731,
+              "SIN_EXPLICAR": 2
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1107,
+              "SEC_OTRO_PERIODO": 109,
+              "SIN_EXPLICAR": 189,
+              "DUPLICADOS_UNO_COINCIDE": 1,
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2944,
+              "SEC_OTRO_PERIODO": 465
+            },
+            "CAPEX": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2402,
+              "SEC_OTRO_PERIODO": 363
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1811,
+              "SEC_OTRO_PERIODO": 378,
+              "SIN_EXPLICAR": 347,
+              "DUPLICADOS_UNO_COINCIDE": 7,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "INVENTARIOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1452,
+              "SEC_OTRO_PERIODO": 171,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "CUENTAS_COBRAR": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1853,
+              "SEC_OTRO_PERIODO": 277
+            },
+            "CUENTAS_PAGAR": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2034,
+              "SEC_OTRO_PERIODO": 265
+            },
+            "EPS_DILUIDO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2565,
+              "SEC_OTRO_PERIODO": 650
+            },
+            "GASTO_INTERESES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 684,
+              "SEC_OTRO_PERIODO": 168
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 164,
+              "SIN_EXPLICAR": 29,
+              "SEC_OTRO_PERIODO": 24,
+              "DUPLICADOS_UNO_COINCIDE": 1
+            }
+          },
+          "offsets": {
+            "1": 24670,
+            "2": 18107,
+            "3": 12,
+            "sec_2": 21863,
+            "sec_1": 28584,
+            "sec_3": 1485,
+            "sec_11": 21,
+            "sec_misma_presentacion": 5336,
+            "sec_7": 21,
+            "sec_4": 85,
+            "sec_8": 22,
+            "sec_6": 40,
+            "sec_5": 40,
+            "sec_10": 24,
+            "-1": 82,
+            "sec_13": 16,
+            "sec_9": 28,
+            "sec_15": 5,
+            "sec_12": 9,
+            "sec_14": 9,
+            "sec_0": 1
+          },
+          "contextOk": 52352,
+          "certifiableByRule": {
+            "US_PERIODO_V1": 51566
+          },
+          "examples": {
+            "ORIGINAL_DE_OTRO_PERIODO": {
+              "informe": 24,
+              "concept": "INGRESOS",
+              "fin": "2024-09-28",
+              "candidate": {
+                "importe": 391035000000,
+                "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+                "accn": "0000320193-24-000123",
+                "end": "2024-09-28",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58140,
+                  "importe": 394328000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 989364,
+                  "importe": 394328000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 1507296,
+                  "importe": 394328000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                }
+              ],
+              "offsets": [
+                2
+              ],
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 394328000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2022-09-24",
+                    "accn": "0000320193-22-000108",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "SEC_OTRO_PERIODO": {
+              "informe": 24,
+              "concept": "PATRIMONIO_NETO",
+              "fin": "2024-09-28",
+              "candidate": {
+                "importe": 56950000000,
+                "tag": "StockholdersEquity",
+                "accn": "0000320193-24-000123",
+                "end": "2024-09-28",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58151,
+                  "importe": 63090000000,
+                  "tag": "StockholdersEquity"
+                },
+                {
+                  "id": 989375,
+                  "importe": 63090000000,
+                  "tag": "StockholdersEquity"
+                },
+                {
+                  "id": 1507307,
+                  "importe": 63090000000,
+                  "tag": "StockholdersEquity"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 63090000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2021-09-25",
+                    "accn": "0000320193-21-000105",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "SIN_EXPLICAR": {
+              "informe": 84,
+              "concept": "DEUDA_LARGO_PLAZO",
+              "fin": "2024-11-03",
+              "candidate": {
+                "importe": 66295000000,
+                "tag": "LongTermDebtAndCapitalLeaseObligations",
+                "accn": "0001730168-24-000139",
+                "end": "2024-11-03",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 989736,
+                  "importe": 37621000000,
+                  "tag": "LongTermDebtAndCapitalLeaseObligations"
+                },
+                {
+                  "id": 1507981,
+                  "importe": 4000000,
+                  "tag": "FinanceLeaseLiabilityNoncurrent"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": null,
+                "prueba": [
+                  {
+                    "valor": 37621000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2023-10-29",
+                    "accn": "0001730168-23-000096",
+                    "mismaPresentacion": false
+                  },
+                  null
+                ]
+              }
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 1901,
+              "concept": "DEPRECIACION_AMORTIZACION",
+              "fin": "2024-12-31",
+              "candidate": {
+                "importe": 45000000,
+                "tag": "DepreciationAndAmortization",
+                "accn": "0001035002-25-000005",
+                "end": "2024-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 68740,
+                  "importe": 1700000000,
+                  "tag": "Depreciation"
+                },
+                {
+                  "id": 1000270,
+                  "importe": 1700000000,
+                  "tag": "Depreciation"
+                },
+                {
+                  "id": 1529348,
+                  "importe": 45000000,
+                  "tag": "DepreciationAndAmortization"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 7859,
+              "concept": "DEUDA_LARGO_PLAZO",
+              "fin": "2024-12-30",
+              "candidate": {
+                "importe": 914359000,
+                "tag": "LongTermDebtNoncurrent",
+                "accn": "0000950170-25-024839",
+                "end": "2024-12-30",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 100574,
+                  "importe": 914336000,
+                  "tag": "LongTermDebtNoncurrent"
+                },
+                {
+                  "id": 1032776,
+                  "importe": 914336000,
+                  "tag": "LongTermDebtNoncurrent"
+                },
+                {
+                  "id": 1605201,
+                  "importe": 914336000,
+                  "tag": "LongTermDebtNoncurrent"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_OTRA_ETIQUETA": {
+              "informe": 11261,
+              "concept": "INGRESOS",
+              "fin": "2024-12-31",
+              "candidate": {
+                "importe": 1039000,
+                "tag": "Revenues",
+                "accn": "0000950170-25-029050",
+                "end": "2024-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 2320006,
+                  "importe": 1039000,
+                  "tag": "RevenueFromContractWithCustomerIncludingAssessedTax"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIGNO": {
+              "informe": 33621,
+              "concept": "IMPUESTO_BENEFICIOS",
+              "fin": "2024-12-31",
+              "candidate": {
+                "importe": 608500,
+                "tag": "IncomeTaxExpenseBenefit",
+                "accn": "0001410578-25-000590",
+                "end": "2024-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 233608,
+                  "importe": -608500,
+                  "tag": "IncomeTaxExpenseBenefit"
+                },
+                {
+                  "id": 1168792,
+                  "importe": -608500,
+                  "tag": "IncomeTaxExpenseBenefit"
+                },
+                {
+                  "id": 1940246,
+                  "importe": -608500,
+                  "tag": "IncomeTaxExpenseBenefit"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": {
+              "informe": 40434,
+              "concept": "ACCIONES_EN_CIRCULACION",
+              "fin": "2024-12-31",
+              "candidate": {
+                "importe": 3520894,
+                "tag": "CommonStockSharesOutstanding",
+                "accn": "0000950170-25-047778",
+                "end": "2024-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 268730,
+                  "importe": 3549581,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1204666,
+                  "importe": 3549581,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 2008070,
+                  "importe": 3549581,
+                  "tag": "CommonStockSharesOutstanding"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_MISMO_PERIODO_OTRA_PRESENTACION",
+                "prueba": [
+                  {
+                    "valor": 3549581,
+                    "tipo": "MISMO_PERIODO",
+                    "accn": "0000880641-26-000004"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "2025": {
+          "cells": 53688,
+          "byCause": {
+            "ORIGINAL_DE_OTRO_PERIODO": 45498,
+            "SIN_EXPLICAR": 650,
+            "SEC_OTRO_PERIODO": 7510,
+            "REDONDEO_MENOR_0_05PCT": 10,
+            "DUPLICADOS_UNO_COINCIDE": 17,
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1,
+            "MISMO_IMPORTE_MISMA_ETIQUETA": 2
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2205,
+              "SIN_EXPLICAR": 72,
+              "SEC_OTRO_PERIODO": 476,
+              "DUPLICADOS_UNO_COINCIDE": 3,
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2
+            },
+            "BENEFICIO_BRUTO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1183,
+              "SEC_OTRO_PERIODO": 277
+            },
+            "EBIT": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2359,
+              "SEC_OTRO_PERIODO": 485
+            },
+            "BENEFICIO_NETO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2977,
+              "SEC_OTRO_PERIODO": 420
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2507,
+              "SEC_OTRO_PERIODO": 593
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2495,
+              "SEC_OTRO_PERIODO": 416
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 517,
+              "SEC_OTRO_PERIODO": 64,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "ACCIONES_EN_CIRCULACION": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2175,
+              "SEC_OTRO_PERIODO": 480,
+              "REDONDEO_MENOR_0_05PCT": 4,
+              "SEC_MISMO_PERIODO_OTRA_PRESENTACION": 1
+            },
+            "EFECTIVO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2700,
+              "SEC_OTRO_PERIODO": 340
+            },
+            "ACTIVOS_TOTALES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 3255,
+              "SEC_OTRO_PERIODO": 332
+            },
+            "PASIVOS_TOTALES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2843,
+              "SEC_OTRO_PERIODO": 309
+            },
+            "PATRIMONIO_NETO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2777,
+              "SEC_OTRO_PERIODO": 613,
+              "SIN_EXPLICAR": 3,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1119,
+              "SIN_EXPLICAR": 188,
+              "SEC_OTRO_PERIODO": 128,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "DUPLICADOS_UNO_COINCIDE": 2
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 3071,
+              "SEC_OTRO_PERIODO": 421
+            },
+            "CAPEX": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2443,
+              "SEC_OTRO_PERIODO": 342
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1892,
+              "SEC_OTRO_PERIODO": 367,
+              "SIN_EXPLICAR": 357,
+              "DUPLICADOS_UNO_COINCIDE": 10
+            },
+            "INVENTARIOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1467,
+              "SEC_OTRO_PERIODO": 178
+            },
+            "CUENTAS_COBRAR": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1909,
+              "SEC_OTRO_PERIODO": 296,
+              "SIN_EXPLICAR": 1
+            },
+            "CUENTAS_PAGAR": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2098,
+              "SEC_OTRO_PERIODO": 278
+            },
+            "EPS_DILUIDO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 2750,
+              "SEC_OTRO_PERIODO": 558,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "ORIGINAL_DE_OTRO_PERIODO": 168,
+              "SEC_OTRO_PERIODO": 23,
+              "SIN_EXPLICAR": 29,
+              "DUPLICADOS_UNO_COINCIDE": 2
+            },
+            "GASTO_INTERESES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 588,
+              "SEC_OTRO_PERIODO": 114
+            }
+          },
+          "offsets": {
+            "1": 25587,
+            "2": 18753,
+            "3": 1160,
+            "sec_1": 29447,
+            "sec_3": 1510,
+            "sec_2": 22302,
+            "sec_misma_presentacion": 5675,
+            "sec_12": 21,
+            "sec_5": 45,
+            "sec_16": 6,
+            "sec_13": 17,
+            "sec_10": 19,
+            "sec_6": 37,
+            "sec_7": 24,
+            "sec_11": 20,
+            "sec_8": 24,
+            "sec_14": 23,
+            "sec_15": 10,
+            "sec_4": 72,
+            "sec_9": 21,
+            "sec_17": 2,
+            "sec_0": 1
+          },
+          "contextOk": 53688,
+          "certifiableByRule": {
+            "US_PERIODO_V1": 52912
+          },
+          "examples": {
+            "ORIGINAL_DE_OTRO_PERIODO": {
+              "informe": 20,
+              "concept": "INGRESOS",
+              "fin": "2025-09-27",
+              "candidate": {
+                "importe": 416161000000,
+                "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+                "accn": "0000320193-25-000079",
+                "end": "2025-09-27",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58119,
+                  "importe": 391035000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 989343,
+                  "importe": 391035000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                },
+                {
+                  "id": 1507275,
+                  "importe": 391035000000,
+                  "tag": "RevenueFromContractWithCustomerExcludingAssessedTax"
+                }
+              ],
+              "offsets": [
+                1
+              ],
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 391035000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2024-09-28",
+                    "accn": "0000320193-24-000123",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "SIN_EXPLICAR": {
+              "informe": 35,
+              "concept": "INGRESOS",
+              "fin": "2025-12-31",
+              "candidate": {
+                "importe": 402836000000,
+                "tag": "Revenues",
+                "accn": "0001652044-26-000018",
+                "end": "2025-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58225,
+                  "importe": 307394000000,
+                  "tag": "Revenues"
+                },
+                {
+                  "id": 989449,
+                  "importe": 307394000000,
+                  "tag": "Revenues"
+                },
+                {
+                  "id": 1507382,
+                  "importe": 236000000,
+                  "tag": "RevenueNotFromContractWithCustomer"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": null,
+                "prueba": [
+                  {
+                    "valor": 307394000000,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2023-12-31",
+                    "accn": "0001652044-26-000018",
+                    "mismaPresentacion": true
+                  },
+                  null
+                ]
+              }
+            },
+            "SEC_OTRO_PERIODO": {
+              "informe": 35,
+              "concept": "DIVIDENDOS_PAGADOS",
+              "fin": "2025-12-31",
+              "candidate": {
+                "importe": 10049000000,
+                "tag": "PaymentsOfDividends",
+                "accn": "0001652044-26-000018",
+                "end": "2025-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 58230,
+                  "importe": 0,
+                  "tag": "PaymentsOfDividends"
+                },
+                {
+                  "id": 989454,
+                  "importe": 0,
+                  "tag": "PaymentsOfDividends"
+                },
+                {
+                  "id": 1507387,
+                  "importe": 0,
+                  "tag": "PaymentsOfDividends"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_OTRO_PERIODO",
+                "prueba": [
+                  {
+                    "valor": 0,
+                    "tipo": "OTRO_PERIODO",
+                    "end": "2013-12-31",
+                    "accn": "0001652044-16-000012",
+                    "mismaPresentacion": false
+                  }
+                ]
+              }
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 4922,
+              "concept": "ACCIONES_EN_CIRCULACION",
+              "fin": "2025-12-31",
+              "candidate": {
+                "importe": 68938230,
+                "tag": "CommonStockSharesOutstanding",
+                "accn": "0001811074-26-000018",
+                "end": "2025-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 85122,
+                  "importe": 68915409,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1016962,
+                  "importe": 68915409,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1569392,
+                  "importe": 68915409,
+                  "tag": "CommonStockSharesOutstanding"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 8663,
+              "concept": "INGRESOS",
+              "fin": "2025-12-31",
+              "candidate": {
+                "importe": 1594752000,
+                "tag": "Revenues",
+                "accn": "0001575965-26-000032",
+                "end": "2025-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 104904,
+                  "importe": 1594752000,
+                  "tag": "Revenues"
+                },
+                {
+                  "id": 1037193,
+                  "importe": 1594752000,
+                  "tag": "Revenues"
+                },
+                {
+                  "id": 1615803,
+                  "importe": 1440392000,
+                  "tag": "RevenueNotFromContractWithCustomer"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SEC_MISMO_PERIODO_OTRA_PRESENTACION": {
+              "informe": 13755,
+              "concept": "ACCIONES_EN_CIRCULACION",
+              "fin": "2025-03-31",
+              "candidate": {
+                "importe": 34143945,
+                "tag": "CommonStockSharesOutstanding",
+                "accn": "0000950170-25-075321",
+                "end": "2025-03-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 131779,
+                  "importe": 32973121,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1064662,
+                  "importe": 32973121,
+                  "tag": "CommonStockSharesOutstanding"
+                },
+                {
+                  "id": 1676156,
+                  "importe": 32973121,
+                  "tag": "CommonStockSharesOutstanding"
+                }
+              ],
+              "offsets": null,
+              "sec": {
+                "causa": "SEC_MISMO_PERIODO_OTRA_PRESENTACION",
+                "prueba": [
+                  {
+                    "valor": 32973121,
+                    "tipo": "MISMO_PERIODO",
+                    "accn": "0001193125-26-230979"
+                  }
+                ]
+              }
+            },
+            "MISMO_IMPORTE_MISMA_ETIQUETA": {
+              "informe": 46481,
+              "concept": "INGRESOS",
+              "fin": "2025-12-31",
+              "candidate": {
+                "importe": 6547000,
+                "tag": "Revenues",
+                "accn": "0001213900-26-037888",
+                "end": "2025-12-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 359696,
+                  "importe": 6547000,
+                  "tag": "Revenues"
+                },
+                {
+                  "id": 1297906,
+                  "importe": 6547000,
+                  "tag": "RevenueFromContractWithCustomerIncludingAssessedTax"
+                },
+                {
+                  "id": 2107554,
+                  "importe": 6547000,
+                  "tag": "RevenueFromContractWithCustomerIncludingAssessedTax"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            }
+          }
+        }
+      }
+    },
+    "JP": {
+      "provider": "EDINET",
+      "evidenceRows": 311963,
+      "conflictCells": 31165,
+      "cellsAlsoWithVerifiedEvidence": 18495,
+      "byYear": {
+        "2022": {
+          "cells": 3921,
+          "byCause": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": 1174,
+            "MISMO_IMPORTE_OTRA_ETIQUETA": 647,
+            "DUPLICADOS_UNO_COINCIDE": 313,
+            "SIN_EXPLICAR": 1615,
+            "SIGNO": 111,
+            "REDONDEO_MENOR_0_05PCT": 59,
+            "ORIGINAL_DE_OTRO_PERIODO": 2
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 587,
+              "DUPLICADOS_UNO_COINCIDE": 19,
+              "SIN_EXPLICAR": 3,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 2
+            },
+            "EFECTIVO": {
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 640,
+              "SIN_EXPLICAR": 1180,
+              "REDONDEO_MENOR_0_05PCT": 51
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 576,
+              "DUPLICADOS_UNO_COINCIDE": 4
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "DUPLICADOS_UNO_COINCIDE": 38,
+              "SIN_EXPLICAR": 2
+            },
+            "EBIT": {
+              "DUPLICADOS_UNO_COINCIDE": 43,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "SIN_EXPLICAR": 1
+            },
+            "BENEFICIO_NETO": {
+              "SIN_EXPLICAR": 48
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "DUPLICADOS_UNO_COINCIDE": 45,
+              "SIN_EXPLICAR": 2
+            },
+            "ACTIVOS_TOTALES": {
+              "SIN_EXPLICAR": 46,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "PASIVOS_TOTALES": {
+              "SIN_EXPLICAR": 47,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "PATRIMONIO_NETO": {
+              "SIN_EXPLICAR": 48,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "CUENTAS_COBRAR": {
+              "DUPLICADOS_UNO_COINCIDE": 135,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 5,
+              "SIN_EXPLICAR": 177,
+              "REDONDEO_MENOR_0_05PCT": 3,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+            },
+            "BENEFICIO_BRUTO": {
+              "SIN_EXPLICAR": 29,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "DUPLICADOS_UNO_COINCIDE": 17,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 3
+            },
+            "INVENTARIOS": {
+              "SIN_EXPLICAR": 24,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+            },
+            "CAPEX": {
+              "SIGNO": 111,
+              "SIN_EXPLICAR": 1
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 3,
+              "DUPLICADOS_UNO_COINCIDE": 12
+            },
+            "CUENTAS_PAGAR": {
+              "SIN_EXPLICAR": 3
+            },
+            "EPS_DILUIDO": {
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1,
+              "SIN_EXPLICAR": 2
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "SIN_EXPLICAR": 2
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1
+            },
+            "GASTO_INTERESES": {
+              "ORIGINAL_DE_OTRO_PERIODO": 1
+            }
+          },
+          "offsets": {
+            "-1": 2
+          },
+          "contextOk": 3921,
+          "certifiableByRule": {
+            "JP_RESUMEN_MISMO_DOC_V1": 1163,
+            "JP_SIGNO_CANONICO_V1": 110
+          },
+          "examples": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": {
+              "informe": 58784,
+              "concept": "INGRESOS",
+              "fin": "2022-05-31",
+              "candidate": {
+                "importe": 26615102000,
+                "tag": "jppfs_cor:NetSales",
+                "accn": "S100P30O",
+                "end": "2022-05-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 737267,
+                  "importe": 26615102000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 988624,
+                  "importe": 26615102000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 1988642,
+                  "importe": 26615102000,
+                  "tag": "jpcrp_cor:NetSalesSummaryOfBusinessResults"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_OTRA_ETIQUETA": {
+              "informe": 58784,
+              "concept": "EFECTIVO",
+              "fin": "2022-05-31",
+              "candidate": {
+                "importe": 2144793000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100P30O",
+                "end": "2022-05-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 737275,
+                  "importe": 2144793000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 988632,
+                  "importe": 2144793000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1988651,
+                  "importe": 2144793000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 58784,
+              "concept": "DEPRECIACION_AMORTIZACION",
+              "fin": "2022-05-31",
+              "candidate": {
+                "importe": 120003000,
+                "tag": "jppfs_cor:DepreciationAndAmortizationOpeCF",
+                "accn": "S100P30O",
+                "end": "2022-05-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 737280,
+                  "importe": -318000,
+                  "tag": "jppfs_cor:ReversalOfReserveForSpecialDepreciation"
+                },
+                {
+                  "id": 988638,
+                  "importe": 120003000,
+                  "tag": "jppfs_cor:DepreciationAndAmortizationOpeCF"
+                },
+                {
+                  "id": 1988657,
+                  "importe": 120003000,
+                  "tag": "jppfs_cor:DepreciationAndAmortizationOpeCF"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIN_EXPLICAR": {
+              "informe": 58809,
+              "concept": "EFECTIVO",
+              "fin": "2022-05-31",
+              "candidate": {
+                "importe": 10188000000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100P3N9",
+                "end": "2022-05-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 737362,
+                  "importe": 10374000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 988612,
+                  "importe": 10374000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1988670,
+                  "importe": 10374000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIGNO": {
+              "informe": 59334,
+              "concept": "CAPEX",
+              "fin": "2022-07-31",
+              "candidate": {
+                "importe": 68134000,
+                "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF",
+                "accn": "S100PFGS",
+                "end": "2022-07-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 987143,
+                  "importe": -68134000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                },
+                {
+                  "id": 1986772,
+                  "importe": -68134000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 61478,
+              "concept": "EFECTIVO",
+              "fin": "2022-08-31",
+              "candidate": {
+                "importe": 7806382000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100POUY",
+                "end": "2022-08-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 735831,
+                  "importe": 7807795000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 986863,
+                  "importe": 7807795000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1985358,
+                  "importe": 7807795000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "ORIGINAL_DE_OTRO_PERIODO": {
+              "informe": 192491,
+              "concept": "DIVIDENDOS_PAGADOS",
+              "fin": "2022-03-31",
+              "candidate": {
+                "importe": 279611000,
+                "tag": "jppfs_cor:CashDividendsPaidFinCF",
+                "accn": "S100R5U4@2022-03-31",
+                "end": "2022-03-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 2375255,
+                  "importe": 279000000,
+                  "tag": "jppfs_cor:CashDividendsPaidFinCF"
+                }
+              ],
+              "offsets": [
+                -1
+              ],
+              "sec": null
+            }
+          }
+        },
+        "2023": {
+          "cells": 9052,
+          "byCause": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": 4497,
+            "SIN_EXPLICAR": 2340,
+            "SIGNO": 129,
+            "DUPLICADOS_UNO_COINCIDE": 1194,
+            "MISMO_IMPORTE_OTRA_ETIQUETA": 835,
+            "REDONDEO_MENOR_0_05PCT": 57
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2162,
+              "DUPLICADOS_UNO_COINCIDE": 139,
+              "SIN_EXPLICAR": 4
+            },
+            "EFECTIVO": {
+              "SIN_EXPLICAR": 1509,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 831,
+              "REDONDEO_MENOR_0_05PCT": 54
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2287,
+              "DUPLICADOS_UNO_COINCIDE": 28
+            },
+            "CAPEX": {
+              "SIGNO": 129
+            },
+            "CUENTAS_COBRAR": {
+              "DUPLICADOS_UNO_COINCIDE": 539,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 34,
+              "SIN_EXPLICAR": 12,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "DUPLICADOS_UNO_COINCIDE": 130
+            },
+            "EBIT": {
+              "DUPLICADOS_UNO_COINCIDE": 128,
+              "SIN_EXPLICAR": 1,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "BENEFICIO_NETO": {
+              "SIN_EXPLICAR": 146
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "DUPLICADOS_UNO_COINCIDE": 144,
+              "SIN_EXPLICAR": 3
+            },
+            "ACTIVOS_TOTALES": {
+              "SIN_EXPLICAR": 149
+            },
+            "PASIVOS_TOTALES": {
+              "SIN_EXPLICAR": 145,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "PATRIMONIO_NETO": {
+              "SIN_EXPLICAR": 156
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "DUPLICADOS_UNO_COINCIDE": 37,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 7
+            },
+            "BENEFICIO_BRUTO": {
+              "SIN_EXPLICAR": 103
+            },
+            "INVENTARIOS": {
+              "SIN_EXPLICAR": 96,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 2
+            },
+            "CUENTAS_PAGAR": {
+              "SIN_EXPLICAR": 10,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "DUPLICADOS_UNO_COINCIDE": 46,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 7
+            },
+            "GASTO_INTERESES": {
+              "SIN_EXPLICAR": 3,
+              "DUPLICADOS_UNO_COINCIDE": 3
+            },
+            "EPS_DILUIDO": {
+              "SIN_EXPLICAR": 2
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "SIN_EXPLICAR": 1
+            }
+          },
+          "offsets": {},
+          "contextOk": 9052,
+          "certifiableByRule": {
+            "JP_RESUMEN_MISMO_DOC_V1": 4442,
+            "JP_SIGNO_CANONICO_V1": 129
+          },
+          "examples": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": {
+              "informe": 64680,
+              "concept": "INGRESOS",
+              "fin": "2023-01-20",
+              "candidate": {
+                "importe": 160130000000,
+                "tag": "jppfs_cor:NetSales",
+                "accn": "S100QLQO",
+                "end": "2023-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 726063,
+                  "importe": 160130000000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 975634,
+                  "importe": 160130000000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 1966493,
+                  "importe": 160130000000,
+                  "tag": "jpcrp_cor:NetSalesSummaryOfBusinessResults"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIN_EXPLICAR": {
+              "informe": 64680,
+              "concept": "EFECTIVO",
+              "fin": "2023-01-20",
+              "candidate": {
+                "importe": 29156000000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100QLQO",
+                "end": "2023-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 726071,
+                  "importe": 27180000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 975642,
+                  "importe": 27180000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1966502,
+                  "importe": 27180000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIGNO": {
+              "informe": 64680,
+              "concept": "CAPEX",
+              "fin": "2023-01-20",
+              "candidate": {
+                "importe": 8497000000,
+                "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF",
+                "accn": "S100QLQO",
+                "end": "2023-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 975649,
+                  "importe": -8497000000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                },
+                {
+                  "id": 1966509,
+                  "importe": -8497000000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 64680,
+              "concept": "CUENTAS_COBRAR",
+              "fin": "2023-01-20",
+              "candidate": {
+                "importe": 18196000000,
+                "tag": "jppfs_cor:AccountsReceivableTrade",
+                "accn": "S100QLQO",
+                "end": "2023-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 726078,
+                  "importe": 18196000000,
+                  "tag": "jppfs_cor:AccountsReceivableTrade"
+                },
+                {
+                  "id": 975652,
+                  "importe": 18818000000,
+                  "tag": "jppfs_cor:NotesAndAccountsReceivableTrade"
+                },
+                {
+                  "id": 1966512,
+                  "importe": 18818000000,
+                  "tag": "jppfs_cor:NotesAndAccountsReceivableTrade"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_OTRA_ETIQUETA": {
+              "informe": 64682,
+              "concept": "EFECTIVO",
+              "fin": "2023-01-20",
+              "candidate": {
+                "importe": 4206885000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100QLBW",
+                "end": "2023-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 726053,
+                  "importe": 4206885000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 975662,
+                  "importe": 4206885000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1966372,
+                  "importe": 4206885000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 64697,
+              "concept": "EFECTIVO",
+              "fin": "2023-01-31",
+              "candidate": {
+                "importe": 332747000000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100QMOJ",
+                "end": "2023-01-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 725810,
+                  "importe": 332903000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 975546,
+                  "importe": 332903000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1965405,
+                  "importe": 332903000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            }
+          }
+        },
+        "2024": {
+          "cells": 9150,
+          "byCause": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": 4489,
+            "SIN_EXPLICAR": 2438,
+            "SIGNO": 128,
+            "DUPLICADOS_UNO_COINCIDE": 1186,
+            "MISMO_IMPORTE_OTRA_ETIQUETA": 834,
+            "REDONDEO_MENOR_0_05PCT": 75
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2160,
+              "DUPLICADOS_UNO_COINCIDE": 140,
+              "SIN_EXPLICAR": 5,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "EFECTIVO": {
+              "SIN_EXPLICAR": 1515,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 827,
+              "REDONDEO_MENOR_0_05PCT": 55
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2278,
+              "DUPLICADOS_UNO_COINCIDE": 29,
+              "SIN_EXPLICAR": 1,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "CAPEX": {
+              "SIGNO": 128,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+            },
+            "CUENTAS_COBRAR": {
+              "DUPLICADOS_UNO_COINCIDE": 546,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 37,
+              "SIN_EXPLICAR": 14,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 1
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "DUPLICADOS_UNO_COINCIDE": 83,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "SIN_EXPLICAR": 2
+            },
+            "BENEFICIO_BRUTO": {
+              "SIN_EXPLICAR": 115,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "EBIT": {
+              "DUPLICADOS_UNO_COINCIDE": 138,
+              "SIN_EXPLICAR": 7,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "BENEFICIO_NETO": {
+              "SIN_EXPLICAR": 159
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "DUPLICADOS_UNO_COINCIDE": 155,
+              "SIN_EXPLICAR": 5
+            },
+            "ACTIVOS_TOTALES": {
+              "SIN_EXPLICAR": 162,
+              "REDONDEO_MENOR_0_05PCT": 3
+            },
+            "PASIVOS_TOTALES": {
+              "SIN_EXPLICAR": 163,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "PATRIMONIO_NETO": {
+              "SIN_EXPLICAR": 169,
+              "REDONDEO_MENOR_0_05PCT": 2
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "DUPLICADOS_UNO_COINCIDE": 41,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 9
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "DUPLICADOS_UNO_COINCIDE": 51,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 5
+            },
+            "INVENTARIOS": {
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "SIN_EXPLICAR": 98,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 2
+            },
+            "GASTO_INTERESES": {
+              "SIN_EXPLICAR": 3,
+              "DUPLICADOS_UNO_COINCIDE": 3
+            },
+            "CUENTAS_PAGAR": {
+              "SIN_EXPLICAR": 12,
+              "REDONDEO_MENOR_0_05PCT": 1,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 3
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "SIN_EXPLICAR": 5,
+              "REDONDEO_MENOR_0_05PCT": 1
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "SIN_EXPLICAR": 1
+            },
+            "EPS_DILUIDO": {
+              "SIN_EXPLICAR": 2
+            }
+          },
+          "offsets": {},
+          "contextOk": 9150,
+          "certifiableByRule": {
+            "JP_RESUMEN_MISMO_DOC_V1": 4429,
+            "JP_SIGNO_CANONICO_V1": 128
+          },
+          "examples": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": {
+              "informe": 75785,
+              "concept": "INGRESOS",
+              "fin": "2024-01-20",
+              "candidate": {
+                "importe": 213370000000,
+                "tag": "jppfs_cor:NetSales",
+                "accn": "S100TA5Q",
+                "end": "2024-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 680419,
+                  "importe": 213370000000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 924064,
+                  "importe": 213370000000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 1871919,
+                  "importe": 213370000000,
+                  "tag": "jpcrp_cor:NetSalesSummaryOfBusinessResults"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIN_EXPLICAR": {
+              "informe": 75785,
+              "concept": "EFECTIVO",
+              "fin": "2024-01-20",
+              "candidate": {
+                "importe": 33713000000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100TA5Q",
+                "end": "2024-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 680427,
+                  "importe": 32367000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 924072,
+                  "importe": 32367000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1871928,
+                  "importe": 32367000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIGNO": {
+              "informe": 75785,
+              "concept": "CAPEX",
+              "fin": "2024-01-20",
+              "candidate": {
+                "importe": 10912000000,
+                "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF",
+                "accn": "S100TA5Q",
+                "end": "2024-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 924079,
+                  "importe": -10912000000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                },
+                {
+                  "id": 1871935,
+                  "importe": -10912000000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 75785,
+              "concept": "CUENTAS_COBRAR",
+              "fin": "2024-01-20",
+              "candidate": {
+                "importe": 21811000000,
+                "tag": "jppfs_cor:AccountsReceivableTrade",
+                "accn": "S100TA5Q",
+                "end": "2024-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 680434,
+                  "importe": 21811000000,
+                  "tag": "jppfs_cor:AccountsReceivableTrade"
+                },
+                {
+                  "id": 924082,
+                  "importe": 22191000000,
+                  "tag": "jppfs_cor:NotesAndAccountsReceivableTrade"
+                },
+                {
+                  "id": 1871938,
+                  "importe": 22191000000,
+                  "tag": "jppfs_cor:NotesAndAccountsReceivableTrade"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_OTRA_ETIQUETA": {
+              "informe": 75786,
+              "concept": "EFECTIVO",
+              "fin": "2024-01-20",
+              "candidate": {
+                "importe": 3796236000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100TA7H",
+                "end": "2024-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 680344,
+                  "importe": 3796236000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 923973,
+                  "importe": 3796236000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1871964,
+                  "importe": 3796236000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 76469,
+              "concept": "EFECTIVO",
+              "fin": "2024-02-29",
+              "candidate": {
+                "importe": 4516537000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100THB0",
+                "end": "2024-02-29",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 679011,
+                  "importe": 4518538000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 922643,
+                  "importe": 4518538000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1868520,
+                  "importe": 4518538000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            }
+          }
+        },
+        "2025": {
+          "cells": 9042,
+          "byCause": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": 4460,
+            "SIN_EXPLICAR": 2446,
+            "DUPLICADOS_UNO_COINCIDE": 1153,
+            "SIGNO": 129,
+            "MISMO_IMPORTE_OTRA_ETIQUETA": 793,
+            "REDONDEO_MENOR_0_05PCT": 61
+          },
+          "byConcept": {
+            "INGRESOS": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2142,
+              "DUPLICADOS_UNO_COINCIDE": 140,
+              "SIN_EXPLICAR": 3
+            },
+            "EFECTIVO": {
+              "SIN_EXPLICAR": 1529,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 791,
+              "REDONDEO_MENOR_0_05PCT": 59
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 2253,
+              "DUPLICADOS_UNO_COINCIDE": 27
+            },
+            "CUENTAS_COBRAR": {
+              "DUPLICADOS_UNO_COINCIDE": 532,
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 45,
+              "SIN_EXPLICAR": 13
+            },
+            "CAPEX": {
+              "SIGNO": 129
+            },
+            "BENEFICIO_BRUTO": {
+              "SIN_EXPLICAR": 116
+            },
+            "EBIT": {
+              "DUPLICADOS_UNO_COINCIDE": 146,
+              "SIN_EXPLICAR": 2
+            },
+            "BENEFICIO_NETO": {
+              "SIN_EXPLICAR": 164
+            },
+            "IMPUESTO_BENEFICIOS": {
+              "DUPLICADOS_UNO_COINCIDE": 163,
+              "SIN_EXPLICAR": 1
+            },
+            "ACTIVOS_TOTALES": {
+              "SIN_EXPLICAR": 167
+            },
+            "PASIVOS_TOTALES": {
+              "SIN_EXPLICAR": 166
+            },
+            "PATRIMONIO_NETO": {
+              "SIN_EXPLICAR": 173
+            },
+            "DEUDA_CORTO_PLAZO": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 9,
+              "DUPLICADOS_UNO_COINCIDE": 51
+            },
+            "DEUDA_LARGO_PLAZO": {
+              "MISMO_IMPORTE_MISMA_ETIQUETA": 11,
+              "DUPLICADOS_UNO_COINCIDE": 39
+            },
+            "INVENTARIOS": {
+              "REDONDEO_MENOR_0_05PCT": 2,
+              "SIN_EXPLICAR": 101,
+              "MISMO_IMPORTE_OTRA_ETIQUETA": 2
+            },
+            "DEPRECIACION_AMORTIZACION": {
+              "DUPLICADOS_UNO_COINCIDE": 54
+            },
+            "GASTO_INTERESES": {
+              "SIN_EXPLICAR": 2,
+              "DUPLICADOS_UNO_COINCIDE": 1
+            },
+            "CUENTAS_PAGAR": {
+              "SIN_EXPLICAR": 9
+            }
+          },
+          "offsets": {},
+          "contextOk": 9042,
+          "certifiableByRule": {
+            "JP_RESUMEN_MISMO_DOC_V1": 4386,
+            "JP_SIGNO_CANONICO_V1": 129
+          },
+          "examples": {
+            "MISMO_IMPORTE_MISMA_ETIQUETA": {
+              "informe": 82072,
+              "concept": "INGRESOS",
+              "fin": "2025-01-20",
+              "candidate": {
+                "importe": 19890018000,
+                "tag": "jppfs_cor:NetSales",
+                "accn": "S100VLI7",
+                "end": "2025-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 634638,
+                  "importe": 19890018000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 872221,
+                  "importe": 19890018000,
+                  "tag": "jppfs_cor:NetSales"
+                },
+                {
+                  "id": 1778007,
+                  "importe": 19890018000,
+                  "tag": "jpcrp_cor:NetSalesSummaryOfBusinessResults"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIN_EXPLICAR": {
+              "informe": 82072,
+              "concept": "EFECTIVO",
+              "fin": "2025-01-20",
+              "candidate": {
+                "importe": 3432682000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100VLI7",
+                "end": "2025-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 634646,
+                  "importe": 3649382000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 872229,
+                  "importe": 3649382000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1778016,
+                  "importe": 3649382000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "DUPLICADOS_UNO_COINCIDE": {
+              "informe": 82072,
+              "concept": "CUENTAS_COBRAR",
+              "fin": "2025-01-20",
+              "candidate": {
+                "importe": 2656338000,
+                "tag": "jppfs_cor:AccountsReceivableTrade",
+                "accn": "S100VLI7",
+                "end": "2025-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 634654,
+                  "importe": 2656338000,
+                  "tag": "jppfs_cor:AccountsReceivableTrade"
+                },
+                {
+                  "id": 872239,
+                  "importe": 2656338000,
+                  "tag": "jppfs_cor:AccountsReceivableTrade"
+                },
+                {
+                  "id": 1778026,
+                  "importe": 2772338000,
+                  "tag": "jppfs_cor:NotesAndAccountsReceivableTradeAndContractAssets"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "SIGNO": {
+              "informe": 82106,
+              "concept": "CAPEX",
+              "fin": "2025-01-20",
+              "candidate": {
+                "importe": 10799000000,
+                "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF",
+                "accn": "S100VMJ0",
+                "end": "2025-01-20",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 872256,
+                  "importe": -10799000000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                },
+                {
+                  "id": 1777982,
+                  "importe": -10799000000,
+                  "tag": "jppfs_cor:PurchaseOfPropertyPlantAndEquipmentAndIntangibleAssetsInvCF"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "MISMO_IMPORTE_OTRA_ETIQUETA": {
+              "informe": 82110,
+              "concept": "EFECTIVO",
+              "fin": "2025-01-31",
+              "candidate": {
+                "importe": 25472000000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100VNBN",
+                "end": "2025-01-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 634530,
+                  "importe": 25472000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 872115,
+                  "importe": 25472000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1777622,
+                  "importe": 25472000000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            },
+            "REDONDEO_MENOR_0_05PCT": {
+              "informe": 82118,
+              "concept": "EFECTIVO",
+              "fin": "2025-01-31",
+              "candidate": {
+                "importe": 17204147000,
+                "tag": "jppfs_cor:CashAndCashEquivalents",
+                "accn": "S100VNG9",
+                "end": "2025-01-31",
+                "comparative": false
+              },
+              "originals": [
+                {
+                  "id": 634548,
+                  "importe": 17207221000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 872007,
+                  "importe": 17207221000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                },
+                {
+                  "id": 1777754,
+                  "importe": 17207221000,
+                  "tag": "jppfs_cor:CashAndDeposits"
+                }
+              ],
+              "offsets": null,
+              "sec": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

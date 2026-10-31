@@ -1,0 +1,279 @@
+{
+  "generatedAt": "2026-10-31T10:27:43.111Z",
+  "source": "MYSQL_SOLO_LECTURA",
+  "nature": "CORROBORACION_NO_CERTIFICA",
+  "countries": {
+    "TW": {
+      "provider": "EULERPOOL",
+      "providerCells": 3636,
+      "companiesMatched": 6,
+      "tolerance": "max(0,5 M; 0,05 %) por redondeo a millones",
+      "byYear": {
+        "2022": {
+          "informes": 6,
+          "comparables": 66,
+          "coinciden": 22,
+          "discrepan": 44,
+          "soloProveedor": 12,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 22,
+              "discrepan": 44
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 6,
+              "discrepan": 0
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "INVENTARIOS": {
+              "coinciden": 4,
+              "discrepan": 1
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 1,
+              "discrepan": 4
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 4,
+              "discrepan": 1
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "PATRIMONIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 6,
+              "discrepan": 0
+            },
+            "CAPEX": {
+              "coinciden": 1,
+              "discrepan": 4
+            }
+          }
+        },
+        "2023": {
+          "informes": 6,
+          "comparables": 72,
+          "coinciden": 21,
+          "discrepan": 51,
+          "soloProveedor": 5,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 21,
+              "discrepan": 51
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 5,
+              "discrepan": 1
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "INVENTARIOS": {
+              "coinciden": 4,
+              "discrepan": 1
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 1,
+              "discrepan": 4
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 3,
+              "discrepan": 2
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "PATRIMONIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 5,
+              "discrepan": 1
+            },
+            "CAPEX": {
+              "coinciden": 1,
+              "discrepan": 4
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "coinciden": 2,
+              "discrepan": 4
+            }
+          }
+        },
+        "2024": {
+          "informes": 6,
+          "comparables": 72,
+          "coinciden": 22,
+          "discrepan": 50,
+          "soloProveedor": 4,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 22,
+              "discrepan": 50
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 4,
+              "discrepan": 2
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "INVENTARIOS": {
+              "coinciden": 4,
+              "discrepan": 1
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 1,
+              "discrepan": 4
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 4,
+              "discrepan": 1
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "PATRIMONIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 5,
+              "discrepan": 1
+            },
+            "CAPEX": {
+              "coinciden": 1,
+              "discrepan": 4
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "coinciden": 3,
+              "discrepan": 3
+            }
+          }
+        },
+        "2025": {
+          "informes": 6,
+          "comparables": 57,
+          "coinciden": 18,
+          "discrepan": 39,
+          "soloProveedor": 3,
+          "porEstado": {
+            "PENDIENTE": {
+              "coinciden": 18,
+              "discrepan": 39
+            }
+          },
+          "porConcepto": {
+            "INGRESOS": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "BENEFICIO_BRUTO": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "EBIT": {
+              "coinciden": 0,
+              "discrepan": 5
+            },
+            "BENEFICIO_ANTES_IMPUESTOS": {
+              "coinciden": 6,
+              "discrepan": 0
+            },
+            "BENEFICIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "INVENTARIOS": {
+              "coinciden": 5,
+              "discrepan": 0
+            },
+            "CUENTAS_PAGAR": {
+              "coinciden": 4,
+              "discrepan": 1
+            },
+            "ACTIVOS_TOTALES": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "PATRIMONIO_NETO": {
+              "coinciden": 0,
+              "discrepan": 6
+            },
+            "CUENTAS_COBRAR": {
+              "coinciden": 0,
+              "discrepan": 1
+            },
+            "FLUJO_CAJA_OPERATIVO": {
+              "coinciden": 2,
+              "discrepan": 0
+            },
+            "CAPEX": {
+              "coinciden": 0,
+              "discrepan": 2
+            },
+            "DIVIDENDOS_PAGADOS": {
+              "coinciden": 1,
+              "discrepan": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

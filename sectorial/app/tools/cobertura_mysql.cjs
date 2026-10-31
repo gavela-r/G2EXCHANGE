@@ -1,0 +1,49 @@
+// Cobertura PCV/KPI 2022-2025 por país (US, JP, TW) y ejercicio. MySQL SÓLO LECTURA (START TRANSACTION READ ONLY).
+// Universo congelado: todas las empresas del país en el momento de la consulta (lista ordenada + sha256). Denominador =
+// universo × 17 conceptos núcleo (mismos CORE y KPI que server/scripts/auditar-pcv-kpi-2022-2025.cjs). No se excluye
+// ninguna empresa por falta de datos; las exclusiones por no aplicabilidad (no implementadas) se contarían aparte.
+// Celda certificada = existe PCV no nulo + prueba INSERTED/NULL_FILLED/VERIFIED_EXISTING y NO hay CONFLICT_PRESERVED
+// (misma precedencia que adapter.cjs). KPI certificado = todas sus entradas certificadas en el mismo informe y sin
+// división por cero; un cálculo con entradas no certificadas nunca cuenta.
+// Uso: G2_PROJECT_ROOT=<proyecto con .env> node tools/cobertura_mysql.cjs [salida.json]
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const{database}=require('../runtime.cjs'),{KPIS}=require('../kpi.cjs'),{MAP}=require('../adapter.cjs');
+const CORE=['INGRESOS','BENEFICIO_BRUTO','EBIT','BENEFICIO_NETO','GASTO_INTERESES','EFECTIVO','ACTIVOS_TOTALES','PASIVOS_TOTALES','PATRIMONIO_NETO','DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO','FLUJO_CAJA_OPERATIVO','CAPEX','DEPRECIACION_AMORTIZACION','INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR'];
+const YEARS=[2022,2023,2024,2025],COUNTRIES=['US','JP','TW'],CERT=['INSERTED','NULL_FILLED','VERIFIED_EXISTING'];
+const codeOf=Object.fromEntries(Object.entries(MAP).map(([c,f])=>[f,c])),pct=(n,d)=>d?Number((100*n/d).toFixed(2)):null;
+async function main(out){
+ const pool=database(),conn=await pool.getConnection();
+ try{
+  await conn.query('SET SESSION MAX_EXECUTION_TIME=180000');await conn.query('START TRANSACTION WITH CONSISTENT SNAPSHOT, READ ONLY');
+  const q=async(sql,params=[])=>{if(!/^\s*(SELECT|WITH)\b/i.test(sql))throw Error('Sólo SELECT');return(await conn.query({sql,timeout:200000},params))[0];};
+  const[[meta]]=await conn.query('SELECT UTC_TIMESTAMP(6) at,DATABASE() db');const matrix=[],universe={};
+  for(const country of COUNTRIES){
+   const ids=(await q('SELECT e.id FROM empresa e JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? ORDER BY e.id',[country])).map(r=>Number(r.id));
+   universe[country]={companies:ids.length,sha256:crypto.createHash('sha256').update(ids.join(',')).digest('hex')};
+   const years=new Map();
+   for(const year of YEARS){
+    const reports=await q(`WITH ranked AS (SELECT inf.id informe_id,inf.empresa_id,ROW_NUMBER() OVER(PARTITION BY inf.empresa_id ORDER BY inf.fecha_fin_periodo DESC,inf.fecha_publicacion DESC,inf.id DESC) rn FROM informe_financiero inf JOIN empresa e ON e.id=inf.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? AND inf.tipo_periodo='ANUAL' AND YEAR(inf.fecha_fin_periodo)=?) SELECT informe_id,empresa_id FROM ranked WHERE rn=1`,[country,year]);
+    const reportIds=reports.map(r=>Number(r.informe_id)),key=(i,c)=>i+'|'+c,present=new Set(),cert=new Set(),conflict=new Set(),reportsWithPcv=new Set();
+    for(let k=0;k<reportIds.length;k+=2000){const chunk=reportIds.slice(k,k+2000);if(!chunk.length)continue;
+     for(const r of await q(`SELECT DISTINCT p.informe_id,t.concepto_estandar c FROM partida_contable_valor p JOIN taxonomia_concepto t ON t.id=p.concepto_estandar_id WHERE p.informe_id IN (?) AND p.importe IS NOT NULL AND t.concepto_estandar IN (?)`,[chunk,CORE])){present.add(key(r.informe_id,r.c));reportsWithPcv.add(Number(r.informe_id));}
+     for(const r of await q(`SELECT DISTINCT informe_id,concept_code c,outcome FROM pcv_verification_evidence WHERE informe_id IN (?) AND concept_code IN (?) AND outcome IN (?)`,[chunk,CORE,[...CERT,'CONFLICT_PRESERVED']]))(r.outcome==='CONFLICT_PRESERVED'?conflict:cert).add(key(r.informe_id,r.c));}
+    const byConcept=Object.fromEntries(CORE.map(c=>[c,{present:0,certified:0,conflict:0,presentUnverified:0,absentInReport:0}]));let presentN=0,certN=0,conflictN=0,unverified=0,absentInReport=0,companiesComplete=0;
+    const kpi={expected:ids.length*KPIS.length,certified:0,blockedByInputs:0,noReport:(ids.length-reports.length)*KPIS.length,byKpi:Object.fromEntries(KPIS.map(k=>[k.code,0]))};
+    for(const id of reportIds){let all=true;const certified=c=>present.has(key(id,c))&&cert.has(key(id,c))&&!conflict.has(key(id,c));
+     for(const c of CORE){const s=byConcept[c],k=key(id,c);if(present.has(k)){presentN++;s.present++;if(conflict.has(k)){conflictN++;s.conflict++;all=false;}else if(cert.has(k)){certN++;s.certified++;}else{unverified++;s.presentUnverified++;all=false;}}else{absentInReport++;s.absentInReport++;all=false;}}
+     if(all)companiesComplete++;
+     for(const k of KPIS){if(k.inputs.every(f=>certified(codeOf[f]))){kpi.certified++;kpi.byKpi[k.code]++;}else kpi.blockedByInputs++;}}
+    const expected=ids.length*CORE.length,noReport=(ids.length-reports.length)*CORE.length;
+    years.set(year,new Set(reports.map(r=>Number(r.empresa_id))));
+    matrix.push({country,year,companies:ids.length,companiesWithReport:reports.length,companiesWithPcv:reportsWithPcv.size,companiesAllCoreCertified:companiesComplete,pcv:{expected,present:presentN,certified:certN,conflict:conflictN,presentUnverified:unverified,absent:expected-presentN,absentNoReport:noReport,absentInReport,notApplicable:0,grossCoverage:pct(presentN,expected),certifiedCoverage:pct(certN,expected),certifiedOfPresent:pct(certN,presentN)},kpi:{...kpi,certifiedCoverage:pct(kpi.certified,kpi.expected)},byConcept:Object.fromEntries(Object.entries(byConcept).map(([c,s])=>[c,{...s,certifiedCoverage:pct(s.certified,ids.length)}]))});
+    console.error(country,year,'pcv',pct(certN,expected),'kpi',pct(kpi.certified,kpi.expected));
+   }
+   const four=[...years.get(2022)].filter(id=>YEARS.every(y=>years.get(y).has(id))).length;for(const row of matrix.filter(r=>r.country===country))row.companiesWithFourYears=four;
+  }
+  await conn.rollback();
+  const result={generatedAt:new Date().toISOString(),source:'MYSQL_SOLO_LECTURA',database:meta.db,snapshotAt:meta.at,definition:{core:CORE,kpis:KPIS.map(k=>({code:k.code,inputs:k.inputs.map(f=>codeOf[f])})),certifiedOutcomes:CERT,conflictPrecedence:'CONFLICT_PRESERVED',report:'último informe ANUAL por empresa y año de cierre',universe:'todas las empresas del país (sin exclusiones)',notApplicable:'no se aplican exclusiones (0)',target:{minimum:85,excellent:90}},universe,matrix};
+  fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify(result,null,2));return result;
+ }finally{conn.release();await pool.end();}
+}
+if(require.main===module)main(path.resolve(process.argv[2]??path.join(__dirname,'../coverage/cobertura_actual.json'))).then(r=>{for(const m of r.matrix)console.log([m.country,m.year,'univ',m.companies,'inf',m.companiesWithReport,'PCV bruta',m.pcv.grossCoverage+'%','cert',m.pcv.certifiedCoverage+'%','confl',m.pcv.conflict,'sinVerif',m.pcv.presentUnverified,'KPI cert',m.kpi.certifiedCoverage+'%'].join(' '));}).catch(e=>{console.error(e.message);process.exitCode=1;});
+module.exports={main,CORE};

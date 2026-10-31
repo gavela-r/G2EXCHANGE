@@ -1,0 +1,14 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+(async()=>{const base='http://127.0.0.1:3200/api/sectorial',results=[],session=await(await fetch(base+'/session')).json(),request=async(url,body,token=session.token)=>{const r=await fetch(base+url,{headers:{'Content-Type':'application/json',...(token?{'X-Sectorial-Token':token}:{})},...(body?{method:'POST',body:JSON.stringify(body)}:{})});return{status:r.status,data:await r.json()};};
+ const catalog=await request('/models');assert.equal(catalog.data.length,16);results.push({case:'16_MODELOS',status:'PASS'});
+ const search=await request('/companies?q=Toyota');assert.ok(search.data.some(x=>x.id===11658));results.push({case:'BUSQUEDA_REAL',status:'PASS'});
+ const info=await request('/companies/11658?asOf=2026-10-30');assert.equal(info.status,200);assert.equal(info.data.snapshot.periods.length,4);assert.equal(info.data.result.model.id,5);assert.equal(info.data.result.status,'BLOQUEADO');results.push({case:'MYSQL_TOYOTA_4H_MODELO_05',status:'PASS'});
+ const configuration={companyId:11658,inputHash:info.data.snapshot.inputHash,scenarios:[{},{},{}],constants:{}};
+ const unauth=await request('/companies/11658/evaluate',{asOf:'2026-10-30',configuration},'');assert.equal(unauth.status,403);results.push({case:'ESCRITURA_LOCAL_REQUIERE_SESION',status:'PASS'});
+ const inject=await request('/companies/11658/evaluate',{asOf:'2026-10-30',configuration,historicos:[{fake:1}]});assert.equal(inject.status,400);results.push({case:'HISTORIA_CLIENTE_RECHAZADA',status:'PASS'});
+ const stale=await request('/companies/11658/evaluate',{asOf:'2026-10-30',configuration:{...configuration,inputHash:'0'.repeat(64)}});assert.equal(stale.status,409);results.push({case:'HASH_OBSOLETO_RECHAZADO',status:'PASS'});
+ const saved=await request('/companies/11658/evaluate',{asOf:'2026-10-30',configuration});assert.equal(saved.status,201);assert.ok(saved.data.result.scenarios.every(x=>x.valuePerShare===null));results.push({case:'VALORACION_BLOQUEADA_SIN_CEROS_FICTICIOS',status:'PASS'});
+ const replay=await request('/companies/11658/evaluate',{asOf:'2026-10-30',configuration});assert.equal(replay.data.id,saved.data.id);results.push({case:'IDEMPOTENCIA_LOCAL',status:'PASS'});
+ const queued=await request('/runs/'+saved.data.id+'/export',{});assert.ok([200,202].includes(queued.status));results.push({case:'EXPORTACION_DESDE_API',status:'SOLICITADA',job:saved.data.id});
+ const result={at:new Date().toISOString(),service:'http://127.0.0.1:3200',company:11658,run:saved.data.id,results,failures:0};fs.writeFileSync(path.join(__dirname,'../evidencias/api_real.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+})().catch(e=>{console.error(e.message);process.exitCode=1;});

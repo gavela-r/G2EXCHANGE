@@ -1,0 +1,3378 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/sectorial/companies/-4/evaluate",
+    "body": {
+      "asOf": "2026-03-31",
+      "configuration": "<ver example_configuration_sector04>"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "84a557acd01d96a1efdcde6c1d8db7f7f566385f2a22879e8444953edf830f85",
+      "result": {
+        "version": "G2_SECTORIAL_DEV_0.2",
+        "source": "QA_SINTETICO_NO_EMPRESA",
+        "company": {
+          "id": -4,
+          "nombre_empresa": "QA SINTÉTICO SECTOR 04 (no es empresa)",
+          "sector_id": null,
+          "nombre_sector": "Industria y fabricación",
+          "codigo_iso": "US"
+        },
+        "asOf": "2026-03-31",
+        "inputHash": "be09551f1de5ded686bab2ec800ec2ad324f73d60e4a2cbf9eba6d3e004b993a",
+        "configurationHash": "a6cfc17a1a17c546fb6dd9fc1929f189e93b8e1dec3cada6b87cfdda40eb044a",
+        "model": {
+          "id": 4,
+          "name": "Industria y fabricación",
+          "family": "FCFF",
+          "method": "FCFF",
+          "revenueDrivers": [
+            "volume",
+            "price",
+            "aftermarketPerUnit",
+            "retirementRate"
+          ],
+          "drivers": [
+            "volume",
+            "price",
+            "aftermarketPerUnit",
+            "retirementRate",
+            "cogsRate",
+            "opexRate",
+            "dio",
+            "dso",
+            "dpo",
+            "contractAssetRate",
+            "contractLiabilityRate",
+            "debtIssue",
+            "debtRepay",
+            "equityIssue",
+            "payout",
+            "leasePayment",
+            "leaseRate",
+            "tax.adjustments",
+            "tax.nolLimit",
+            "tax.payable",
+            "tax.receivable",
+            "tax.dta",
+            "tax.dtl",
+            "tax.oci",
+            "tax.operatingPaid",
+            "rf",
+            "beta",
+            "erp",
+            "kd",
+            "weightEquity",
+            "tax",
+            "terminalG",
+            "terminalNOPAT",
+            "terminalROIC"
+          ],
+          "constants": [
+            "installedBase",
+            "shares",
+            "nol",
+            "capexPayableOpening"
+          ],
+          "openingExtras": [
+            "taxPayable",
+            "taxReceivable",
+            "deferredTaxAsset",
+            "deferredTaxLiability"
+          ],
+          "requiredHistory": [
+            "revenue",
+            "netIncome",
+            "cash",
+            "assets",
+            "liabilities",
+            "equity",
+            "ebit",
+            "da",
+            "inventory",
+            "receivables",
+            "payables",
+            "debt",
+            "leaseDebt",
+            "contractAssets",
+            "contractLiabilities"
+          ],
+          "descriptions": {
+            "rdExpense": "I+D reconocida como gasto del período; el desarrollo capitalizado se declara como cohorte INTANGIBLE. En este modelo opexRate excluye la I+D",
+            "riskWeight": "Ponderación de riesgo de préstamos netos (puede superar 100 %)",
+            "otherRiskWeight": "Ponderación de riesgo de otros activos; requiere el desglose prudencial del emisor",
+            "cashYield": "Rendimiento anual de la tesorería (puede ser negativo)",
+            "aftermarketPerUnit": "Ingreso anual de servicio/recambios por unidad instalada, misma moneda",
+            "retirementRate": "Fracción anual de la base instalada que deja de generar posventa",
+            "installedBase": "Unidades instaladas que generan posventa a fecha de valoración",
+            "vehicleProduction": "Producción de vehículos de los programas/mercado servido (fuente de previsión identificada)",
+            "share": "Cuota de contenido adjudicada sobre esa producción",
+            "contentPerVehicle": "Contenido por vehículo antes de reducciones contractuales",
+            "priceDown": "Reducción anual de precio pactada con OEM",
+            "volumeGrowth": "Crecimiento orgánico de volumen sobre la base de ingresos acreditada",
+            "priceMix": "Efecto precio/mix sobre la base de ingresos acreditada",
+            "cogsRate": "Coste directo EXCLUYENDO D&A / ingresos; exige conciliación del reparto de D&A",
+            "opexRate": "Opex EXCLUYENDO D&A / ingresos",
+            "rf": "Tipo libre de riesgo anual, misma moneda y fecha",
+            "beta": "Beta apalancada con evidencia",
+            "erp": "Prima de mercado anual, sin primas incrementales inventadas",
+            "kd": "Coste de deuda antes de impuesto",
+            "weightEquity": "Peso de equity a valor de mercado, no residual contable",
+            "tax": "Tipo fiscal aplicable; aclarar diferencia devengo/caja",
+            "terminalNOPAT": "NOPAT normalizado año 6 con calendario y reinversión acreditados",
+            "terminalROIC": "ROIC incremental de continuidad justificado",
+            "terminalNetIncome": "Beneficio normalizado año 6",
+            "terminalROE": "ROE incremental de continuidad justificado",
+            "terminalAFFO": "AFFO normalizado del año 6",
+            "terminalEquityGrowthInvestment": "Reinversión de crecimiento financiada por equity, año 6"
+          },
+          "scope": "Estados integrados sujetos a datos y políticas acreditadas"
+        },
+        "calendar": {
+          "periods": [
+            {
+              "start": "2026-04-01",
+              "end": "2026-12-31",
+              "fiscalStart": "2026-01-01",
+              "fiscalEnd": "2026-12-31"
+            },
+            {
+              "start": "2027-01-01",
+              "end": "2027-12-31",
+              "fiscalStart": "2027-01-01",
+              "fiscalEnd": "2027-12-31"
+            },
+            {
+              "start": "2028-01-01",
+              "end": "2028-12-31",
+              "fiscalStart": "2028-01-01",
+              "fiscalEnd": "2028-12-31"
+            },
+            {
+              "start": "2029-01-01",
+              "end": "2029-12-31",
+              "fiscalStart": "2029-01-01",
+              "fiscalEnd": "2029-12-31"
+            },
+            {
+              "start": "2030-01-01",
+              "end": "2030-12-31",
+              "fiscalStart": "2030-01-01",
+              "fiscalEnd": "2030-12-31"
+            }
+          ],
+          "issues": [],
+          "policy": "PERIODO_PARCIAL_DESDE_VALORACION_ACT_ACT_FISCAL"
+        },
+        "status": "CALCULADO_PENDIENTE_REVISION",
+        "financialApproval": "PENDIENTE",
+        "issues": [],
+        "scenarios": [
+          {
+            "id": 1,
+            "name": "Conservador",
+            "status": "CALCULADO_PENDIENTE_REVISION",
+            "valuePerShare": 23.99770607202546,
+            "rawCalculatedValue": 23.99770607202546,
+            "states": {
+              "installedBase": [
+                454.86301369863014,
+                497.7767123287671,
+                539.7990410958903,
+                581.0191369863013,
+                621.5172232876712
+              ],
+              "aftermarketRevenue": [
+                136.86591058359917,
+                202.4359417808219,
+                220.48484760273965,
+                238.1738628424657,
+                255.53897655821916
+              ],
+              "revenue": [
+                986.8659105835992,
+                1086.4359417808218,
+                1138.4848476027396,
+                1190.1738628424657,
+                1241.5389765582192
+              ],
+              "ke": [
+                0.0975,
+                0.0975,
+                0.0975,
+                0.0975,
+                0.0975
+              ],
+              "kd": [
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045
+              ],
+              "wacc": [
+                0.08475000000000002,
+                0.08475000000000002,
+                0.08475000000000002,
+                0.08475000000000002,
+                0.08475000000000002
+              ],
+              "da": [
+                40.44032534246575,
+                58.016609589041096,
+                62.521482240437166,
+                67.02910958904111,
+                71.53535958904114
+              ],
+              "impair": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "gain": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capex": [
+                25.5,
+                25.5,
+                25.5,
+                25.5,
+                25.5
+              ],
+              "leaseNew": [
+                5,
+                5,
+                5,
+                5,
+                5
+              ],
+              "disposal": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexMaintenance": [
+                10.2,
+                10.2,
+                10.2,
+                10.2,
+                10.2
+              ],
+              "capexGrowth": [
+                15.299999999999999,
+                15.299999999999999,
+                15.299999999999999,
+                15.299999999999999,
+                15.299999999999999
+              ],
+              "assets.PPE": [
+                290.99529109589037,
+                269.4327910958904,
+                245.2140410958904,
+                218.3390410958904,
+                188.8077910958904
+              ],
+              "assets.INTANGIBLE": [
+                29.089041095890412,
+                25.63904109589041,
+                21.33904109589041,
+                16.18904109589041,
+                10.18904109589041
+              ],
+              "assets.ROU": [
+                29.975342465753425,
+                27.471232876712328,
+                23.96850063627517,
+                19.464391047234074,
+                13.96028145819298
+              ],
+              "assets.AGOTABLE": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "assets.NO_DEPRECIABLE": [
+                40,
+                40,
+                40,
+                40,
+                40
+              ],
+              "fixedAssets": [
+                390.05967465753423,
+                362.54306506849315,
+                330.52158282805595,
+                293.9924732390149,
+                252.9571136499738
+              ],
+              "cogs": [
+                557.5792394797336,
+                613.8363071061644,
+                643.2439388955479,
+                672.4482325059932,
+                701.469521755394
+              ],
+              "opex": [
+                202.30751166963785,
+                222.7193680650685,
+                233.38939375856162,
+                243.9856418827055,
+                254.51549019443496
+              ],
+              "ebitda": [
+                226.97915943422777,
+                249.88026660958892,
+                261.8515149486301,
+                273.73998845376695,
+                285.5539646083903
+              ],
+              "ebit": [
+                186.53883409176203,
+                191.8636570205478,
+                199.33003270819293,
+                206.71087886472583,
+                214.01860501934914
+              ],
+              "inventory": [
+                91.24023918759276,
+                75.67844882130794,
+                79.08736953633786,
+                82.90457661032794,
+                86.48254377806228
+              ],
+              "receivables": [
+                107.65809933639264,
+                89.29610480390316,
+                93.3184301313721,
+                97.82250927472322,
+                102.04429944314131
+              ],
+              "purchases": [
+                578.8194786673264,
+                598.2745167398796,
+                646.6528596105778,
+                676.2654395799833,
+                705.0474889231283
+              ],
+              "payables": [
+                94.71591469101705,
+                73.75987192683446,
+                79.5064991324481,
+                83.37519118109384,
+                86.92366301791994
+              ],
+              "contractAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "contractLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "nwc": [
+                104.18242383296834,
+                91.21468169837665,
+                92.89930053526187,
+                97.35189470395733,
+                101.60318020328366
+              ],
+              "deltaNwc": [
+                44.18242383296834,
+                -12.967742134591688,
+                1.684618836885221,
+                4.452594168695455,
+                4.251285499326329
+              ],
+              "debt": [
+                75,
+                70,
+                65,
+                60,
+                55
+              ],
+              "leaseDebt": [
+                28.046966731898237,
+                26.31170254403131,
+                24.507027788649705,
+                22.630166043052835,
+                20.67822982763209
+              ],
+              "interest": [
+                2.7123287671232874,
+                3.375,
+                3.15,
+                2.925,
+                2.6999999999999997
+              ],
+              "leaseInterest": [
+                0.9041095890410958,
+                1.1218786692759295,
+                1.0524681017612525,
+                0.9802811115459882,
+                0.9052066417221134
+              ],
+              "leasePrincipal": [
+                6.953033268101761,
+                6.735264187866927,
+                6.804674755381605,
+                6.876861745596869,
+                6.951936215420743
+              ],
+              "preTax": [
+                182.92239573559763,
+                187.36677835127188,
+                195.12756460643166,
+                202.80559775317982,
+                210.41339837762703
+              ],
+              "taxPaid": [
+                45.73059893389941,
+                46.84169458781797,
+                48.781891151607915,
+                50.701399438294956,
+                52.60334959440676
+              ],
+              "nol": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "netIncome": [
+                137.19179680169822,
+                140.5250837634539,
+                146.34567345482375,
+                152.10419831488485,
+                157.81004878322028
+              ],
+              "dividends": [
+                34.297949200424554,
+                35.13127094086347,
+                36.58641836370594,
+                38.026049578721214,
+                39.45251219580507
+              ],
+              "equity": [
+                652.8938476012737,
+                758.287660423864,
+                868.046915514982,
+                982.1250642511455,
+                1100.4826008385608
+              ],
+              "cfo": [
+                133.44969831119562,
+                211.50943548708665,
+                207.1825368583757,
+                214.68071373523054,
+                225.0941228729351
+              ],
+              "cfi": [
+                -25.5,
+                -25.5,
+                -25.5,
+                -25.5,
+                -25.5
+              ],
+              "cff": [
+                -46.25098246852632,
+                -46.8665351287304,
+                -48.39109311908754,
+                -49.90291132431808,
+                -51.404448411225815
+              ],
+              "cash": [
+                261.6987158426693,
+                400.84161620102554,
+                534.1330599403136,
+                673.410862351226,
+                821.6005368129354
+              ],
+              "taxExpense": [
+                45.73059893389941,
+                46.84169458781797,
+                48.781891151607915,
+                50.701399438294956,
+                52.60334959440676
+              ],
+              "deferredTax": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "taxAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "taxLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "operatingCashTax": [
+                46.63470852294051,
+                47.96591425513695,
+                49.83250817704823,
+                51.67771971618146,
+                53.504651254837285
+              ],
+              "otherAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "otherLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "otherOCI": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "noncashRecognitionBalance": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexAdvance": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "assets": [
+                850.656729024189,
+                928.3592348947298,
+                1037.0604424360795,
+                1148.130421475292,
+                1263.0844936841127
+              ],
+              "capexPayable": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexCreditChange": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "liabilitiesEquity": [
+                850.656729024189,
+                928.3592348947298,
+                1037.0604424360797,
+                1148.1304214752922,
+                1263.0844936841129
+              ],
+              "balanceDifference": [
+                0,
+                0,
+                -2.2737367544323206e-13,
+                -2.2737367544323206e-13,
+                -2.2737367544323206e-13
+              ],
+              "nopat": [
+                139.9041255688215,
+                143.89774276541084,
+                149.4975245311447,
+                155.03315914854437,
+                160.51395376451185
+              ],
+              "fcff": [
+                105.66202707831891,
+                184.3820944890436,
+                179.83438793469665,
+                187.10967456889006,
+                197.29802785422663
+              ],
+              "taxShield": [
+                0.9041095890410986,
+                1.1242196673189824,
+                1.0506170254403173,
+                0.9763202778865008,
+                0.9013016604305264
+              ],
+              "cashFcffBridge": [
+                105.66202707831891,
+                184.3820944890436,
+                179.83438793469665,
+                187.10967456889006,
+                197.29802785422666
+              ],
+              "valuationPV": [
+                99.38039122882762,
+                159.871426152036,
+                143.74580768759674,
+                137.87611288805348,
+                134.02501758441386
+              ],
+              "valuationFactor": [
+                1.063208000812027,
+                1.1533148788808465,
+                1.2510583148659984,
+                1.3570855070508918,
+                1.472098503773455
+              ],
+              "terminalPV": [
+                1634.871851661618,
+                1634.871851661618,
+                1634.871851661618,
+                1634.871851661618,
+                1634.871851661618
+              ],
+              "explicitPV": [
+                674.8987555409277,
+                674.8987555409277,
+                674.8987555409277,
+                674.8987555409277,
+                674.8987555409277
+              ],
+              "valuationFlow": [
+                105.66202707831891,
+                184.3820944890436,
+                179.83438793469665,
+                187.10967456889006,
+                197.29802785422663
+              ],
+              "valuationRate": [
+                0.08475000000000002,
+                0.08475000000000002,
+                0.08475000000000002,
+                0.08475000000000002,
+                0.08475000000000002
+              ],
+              "terminal": [
+                2406.6924066924057,
+                2406.6924066924057,
+                2406.6924066924057,
+                2406.6924066924057,
+                2406.6924066924057
+              ],
+              "enterprise": [
+                2309.7706072025458,
+                2309.7706072025458,
+                2309.7706072025458,
+                2309.7706072025458,
+                2309.7706072025458
+              ],
+              "equityValue": [
+                2399.7706072025458,
+                2399.7706072025458,
+                2399.7706072025458,
+                2399.7706072025458,
+                2399.7706072025458
+              ],
+              "price": [
+                23.99770607202546,
+                23.99770607202546,
+                23.99770607202546,
+                23.99770607202546,
+                23.99770607202546
+              ]
+            },
+            "capital": {
+              "rates": {
+                "version": "G2_CAPITAL_v2.0.0",
+                "pesoPatrimonio": 0.8,
+                "pesoDeuda": 0.19999999999999996,
+                "impuesto": 0.25,
+                "keBase": 0.0975,
+                "kdBase": 0.045,
+                "waccBase": 0.08475000000000002,
+                "keAjustado": 0.0975,
+                "kdAjustado": 0.045,
+                "waccAjustado": 0.08475000000000002,
+                "ajustesAprobados": [],
+                "deltaWacc": 0,
+                "familia": "FCFF",
+                "waccAplicable": true
+              },
+              "premiums": {
+                "version": "PRIMAS_AUTOMATICAS_1",
+                "primas": [
+                  {
+                    "factor": "LIQUIDEZ_BURSATIL",
+                    "primaCalculada": null,
+                    "ajusteOperativo": 0,
+                    "unidad": "FRACCION_ANUAL",
+                    "estadoFinanciero": "NO_ESTIMABLE",
+                    "estadoAplicacion": "BLOQUEADO",
+                    "componente": "KE",
+                    "formula": null,
+                    "fuenteCoeficientes": null,
+                    "metodologiaId": null,
+                    "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+                    "evidencia": []
+                  },
+                  {
+                    "factor": "TAMANO_RESIDUAL",
+                    "primaCalculada": null,
+                    "ajusteOperativo": 0,
+                    "unidad": "FRACCION_ANUAL",
+                    "estadoFinanciero": "NO_ESTIMABLE",
+                    "estadoAplicacion": "BLOQUEADO",
+                    "componente": "KE",
+                    "formula": null,
+                    "fuenteCoeficientes": null,
+                    "metodologiaId": null,
+                    "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: NO_CONCILIADA; ingresos/activos no se convierten en prima sin calibración residual.",
+                    "evidencia": []
+                  }
+                ],
+                "ajusteOperativoKe": 0,
+                "ajusteOperativoKd": 0,
+                "estimadas": 0,
+                "provisionales": 2,
+                "advertencia": "Cero operativo por falta de datos/metodología no equivale a riesgo cero. Las primas no nulas calculadas requieren aprobación individual."
+              }
+            },
+            "warnings": []
+          },
+          {
+            "id": 2,
+            "name": "Base",
+            "status": "CALCULADO_PENDIENTE_REVISION",
+            "valuePerShare": 29.483430935436807,
+            "rawCalculatedValue": 29.483430935436807,
+            "states": {
+              "installedBase": [
+                469.86301369863014,
+                526.8767123287671,
+                582.1890410958904,
+                635.9701369863013,
+                688.3731232876712
+              ],
+              "aftermarketRevenue": [
+                163.8440607993995,
+                249.1849315068493,
+                277.2664383561644,
+                304.53979452054796,
+                331.08581506849316
+              ],
+              "revenue": [
+                1163.8440607993996,
+                1289.1849315068494,
+                1357.2664383561644,
+                1424.539794520548,
+                1491.085815068493
+              ],
+              "ke": [
+                0.0955,
+                0.0955,
+                0.0955,
+                0.0955,
+                0.0955
+              ],
+              "kd": [
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045
+              ],
+              "wacc": [
+                0.08315,
+                0.08315,
+                0.08315,
+                0.08315,
+                0.08315
+              ],
+              "da": [
+                40.906506849315065,
+                59.25410958904109,
+                64.37773224043715,
+                69.5041095890411,
+                74.6291095890411
+              ],
+              "impair": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "gain": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capex": [
+                30,
+                30,
+                30,
+                30,
+                30
+              ],
+              "leaseNew": [
+                5,
+                5,
+                5,
+                5,
+                5
+              ],
+              "disposal": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexMaintenance": [
+                12,
+                12,
+                12,
+                12,
+                12
+              ],
+              "capexGrowth": [
+                18,
+                18,
+                18,
+                18,
+                18
+              ],
+              "assets.PPE": [
+                294.39212328767127,
+                275.6421232876712,
+                253.7671232876712,
+                228.7671232876712,
+                200.6421232876712
+              ],
+              "assets.INTANGIBLE": [
+                29.726027397260275,
+                26.726027397260275,
+                22.726027397260275,
+                17.726027397260275,
+                11.726027397260275
+              ],
+              "assets.ROU": [
+                29.975342465753425,
+                27.471232876712328,
+                23.96850063627517,
+                19.464391047234074,
+                13.96028145819298
+              ],
+              "assets.AGOTABLE": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "assets.NO_DEPRECIABLE": [
+                40,
+                40,
+                40,
+                40,
+                40
+              ],
+              "fixedAssets": [
+                394.093493150685,
+                369.8393835616439,
+                340.4616513212067,
+                305.9575417321656,
+                266.3284321431245
+              ],
+              "cogs": [
+                640.1142334396699,
+                709.0517123287672,
+                746.4965410958905,
+                783.4968869863014,
+                820.0971982876713
+              ],
+              "opex": [
+                232.76881215987993,
+                257.8369863013699,
+                271.4532876712329,
+                284.9079589041096,
+                298.2171630136986
+              ],
+              "ebitda": [
+                290.9610151998498,
+                322.2962328767123,
+                339.316609589041,
+                356.13494863013693,
+                372.77145376712315
+              ],
+              "ebit": [
+                250.05450835053472,
+                263.0421232876712,
+                274.9388773486038,
+                286.63083904109584,
+                298.14234417808206
+              ],
+              "inventory": [
+                104.74596547194598,
+                87.41733439669731,
+                91.78236161015046,
+                96.5955066147495,
+                101.10787376149374
+              ],
+              "receivables": [
+                126.96480663266179,
+                105.96040532933007,
+                111.25134740624299,
+                117.08546256333271,
+                122.55499849878024
+              ],
+              "purchases": [
+                674.8601989116158,
+                691.7230812535186,
+                750.8615683093436,
+                788.3100319909005,
+                824.6095654344156
+              ],
+              "payables": [
+                110.43166891280987,
+                85.28092782577626,
+                92.31904528393568,
+                97.18890805367266,
+                101.66419299876355
+              ],
+              "contractAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "contractLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "nwc": [
+                121.2791031917979,
+                108.09681190025113,
+                110.71466373245778,
+                116.49206112440953,
+                121.9986792615104
+              ],
+              "deltaNwc": [
+                61.2791031917979,
+                -13.182291291546775,
+                2.6178518322066537,
+                5.777397391951752,
+                5.5066181371008724
+              ],
+              "debt": [
+                75,
+                70,
+                65,
+                60,
+                55
+              ],
+              "leaseDebt": [
+                28.046966731898237,
+                26.31170254403131,
+                24.507027788649705,
+                22.630166043052835,
+                20.67822982763209
+              ],
+              "interest": [
+                2.7123287671232874,
+                3.375,
+                3.15,
+                2.925,
+                2.6999999999999997
+              ],
+              "leaseInterest": [
+                0.9041095890410958,
+                1.1218786692759295,
+                1.0524681017612525,
+                0.9802811115459882,
+                0.9052066417221134
+              ],
+              "leasePrincipal": [
+                6.953033268101761,
+                6.735264187866927,
+                6.804674755381605,
+                6.876861745596869,
+                6.951936215420743
+              ],
+              "preTax": [
+                246.43806999437032,
+                258.54524461839526,
+                270.7364092468426,
+                282.72555792954984,
+                294.53713753636
+              ],
+              "taxPaid": [
+                61.60951749859258,
+                64.63631115459881,
+                67.68410231171065,
+                70.68138948238746,
+                73.63428438409
+              ],
+              "nol": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "netIncome": [
+                184.82855249577773,
+                193.90893346379644,
+                203.05230693513192,
+                212.04416844716238,
+                220.90285315226998
+              ],
+              "dividends": [
+                46.20713812394443,
+                48.47723336594911,
+                50.76307673378298,
+                53.011042111790594,
+                55.225713288067496
+              ],
+              "equity": [
+                688.6214143718333,
+                834.0531144696806,
+                986.3423446710297,
+                1145.3754710064013,
+                1311.0526108706038
+              ],
+              "cfo": [
+                164.4559561532949,
+                266.3453343443843,
+                264.8121873433624,
+                275.7708806442517,
+                290.0253446042102
+              ],
+              "cfi": [
+                -30,
+                -30,
+                -30,
+                -30,
+                -30
+              ],
+              "cff": [
+                -58.160171392046195,
+                -60.212497553816036,
+                -62.567751489164586,
+                -64.88790385738746,
+                -67.17764950348824
+              ],
+              "cash": [
+                276.2957847612487,
+                452.4286215518169,
+                624.6730574060147,
+                805.5560341928789,
+                998.4037292936009
+              ],
+              "taxExpense": [
+                61.60951749859258,
+                64.63631115459881,
+                67.68410231171065,
+                70.68138948238746,
+                73.63428438409
+              ],
+              "deferredTax": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "taxAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "taxLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "operatingCashTax": [
+                62.51362708763368,
+                65.7605308219178,
+                68.73471933715095,
+                71.65770976027396,
+                74.53558604452051
+              ],
+              "otherAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "otherLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "otherOCI": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "noncashRecognitionBalance": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexAdvance": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "assets": [
+                902.1000500165414,
+                1015.6457448394881,
+                1168.168417743615,
+                1325.1945451031268,
+                1488.3950336969992
+              ],
+              "capexPayable": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexCreditChange": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "liabilitiesEquity": [
+                902.1000500165414,
+                1015.6457448394882,
+                1168.168417743615,
+                1325.194545103127,
+                1488.3950336969995
+              ],
+              "balanceDifference": [
+                0,
+                -1.1368683772161603e-13,
+                0,
+                -2.2737367544323206e-13,
+                -2.2737367544323206e-13
+              ],
+              "nopat": [
+                187.54088126290105,
+                197.2815924657534,
+                206.20415801145285,
+                214.97312928082187,
+                223.60675813356153
+              ],
+              "fcff": [
+                132.16828492041822,
+                234.71799334634125,
+                232.96403841968333,
+                243.6998414779112,
+                257.72924958550175
+              ],
+              "taxShield": [
+                0.9041095890410986,
+                1.1242196673189824,
+                1.050617025440303,
+                0.9763202778865008,
+                0.9013016604305193
+              ],
+              "cashFcffBridge": [
+                132.1682849204182,
+                234.71799334634125,
+                232.96403841968328,
+                243.6998414779112,
+                257.72924958550175
+              ],
+              "valuationPV": [
+                124.4491700910062,
+                204.04338982415126,
+                186.97193749995563,
+                180.57357026179858,
+                176.30882187677395
+              ],
+              "valuationFactor": [
+                1.0620262459264875,
+                1.150333728275275,
+                1.2459839777813642,
+                1.3495875455338846,
+                1.4618057499450272
+              ],
+              "terminalPV": [
+                1985.9962039899954,
+                1985.9962039899954,
+                1985.9962039899954,
+                1985.9962039899954,
+                1985.9962039899954
+              ],
+              "explicitPV": [
+                872.3468895536855,
+                872.3468895536855,
+                872.3468895536855,
+                872.3468895536855,
+                872.3468895536855
+              ],
+              "valuationFlow": [
+                132.16828492041822,
+                234.71799334634125,
+                232.96403841968333,
+                243.6998414779112,
+                257.72924958550175
+              ],
+              "valuationRate": [
+                0.08315,
+                0.08315,
+                0.08315,
+                0.08315,
+                0.08315
+              ],
+              "terminal": [
+                2903.1406703615726,
+                2903.1406703615726,
+                2903.1406703615726,
+                2903.1406703615726,
+                2903.1406703615726
+              ],
+              "enterprise": [
+                2858.343093543681,
+                2858.343093543681,
+                2858.343093543681,
+                2858.343093543681,
+                2858.343093543681
+              ],
+              "equityValue": [
+                2948.343093543681,
+                2948.343093543681,
+                2948.343093543681,
+                2948.343093543681,
+                2948.343093543681
+              ],
+              "price": [
+                29.483430935436807,
+                29.483430935436807,
+                29.483430935436807,
+                29.483430935436807,
+                29.483430935436807
+              ]
+            },
+            "capital": {
+              "rates": {
+                "version": "G2_CAPITAL_v2.0.0",
+                "pesoPatrimonio": 0.8,
+                "pesoDeuda": 0.19999999999999996,
+                "impuesto": 0.25,
+                "keBase": 0.0955,
+                "kdBase": 0.045,
+                "waccBase": 0.08315,
+                "keAjustado": 0.0955,
+                "kdAjustado": 0.045,
+                "waccAjustado": 0.08315,
+                "ajustesAprobados": [],
+                "deltaWacc": 0,
+                "familia": "FCFF",
+                "waccAplicable": true
+              },
+              "premiums": {
+                "version": "PRIMAS_AUTOMATICAS_1",
+                "primas": [
+                  {
+                    "factor": "LIQUIDEZ_BURSATIL",
+                    "primaCalculada": null,
+                    "ajusteOperativo": 0,
+                    "unidad": "FRACCION_ANUAL",
+                    "estadoFinanciero": "NO_ESTIMABLE",
+                    "estadoAplicacion": "BLOQUEADO",
+                    "componente": "KE",
+                    "formula": null,
+                    "fuenteCoeficientes": null,
+                    "metodologiaId": null,
+                    "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+                    "evidencia": []
+                  },
+                  {
+                    "factor": "TAMANO_RESIDUAL",
+                    "primaCalculada": null,
+                    "ajusteOperativo": 0,
+                    "unidad": "FRACCION_ANUAL",
+                    "estadoFinanciero": "NO_ESTIMABLE",
+                    "estadoAplicacion": "BLOQUEADO",
+                    "componente": "KE",
+                    "formula": null,
+                    "fuenteCoeficientes": null,
+                    "metodologiaId": null,
+                    "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: NO_CONCILIADA; ingresos/activos no se convierten en prima sin calibración residual.",
+                    "evidencia": []
+                  }
+                ],
+                "ajusteOperativoKe": 0,
+                "ajusteOperativoKd": 0,
+                "estimadas": 0,
+                "provisionales": 2,
+                "advertencia": "Cero operativo por falta de datos/metodología no equivale a riesgo cero. Las primas no nulas calculadas requieren aprobación individual."
+              }
+            },
+            "warnings": []
+          },
+          {
+            "id": 3,
+            "name": "Optimista",
+            "status": "CALCULADO_PENDIENTE_REVISION",
+            "valuePerShare": 35.50668660067529,
+            "rawCalculatedValue": 35.50668660067529,
+            "states": {
+              "installedBase": [
+                484.86301369863014,
+                555.9767123287671,
+                624.5790410958904,
+                690.9211369863012,
+                755.2290232876711
+              ],
+              "aftermarketRevenue": [
+                191.66981375492585,
+                299.2414212328767,
+                339.409779109589,
+                378.2063011986301,
+                415.768171078767
+              ],
+              "revenue": [
+                1341.6698137549256,
+                1495.2414212328767,
+                1581.409779109589,
+                1666.20630119863,
+                1749.7681710787667
+              ],
+              "ke": [
+                0.0935,
+                0.0935,
+                0.0935,
+                0.0935,
+                0.0935
+              ],
+              "kd": [
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045
+              ],
+              "wacc": [
+                0.08155000000000001,
+                0.08155000000000001,
+                0.08155000000000001,
+                0.08155000000000001,
+                0.08155000000000001
+              ],
+              "da": [
+                41.372688356164375,
+                60.49160958904109,
+                66.23398224043714,
+                71.97910958904106,
+                77.72285958904106
+              ],
+              "impair": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "gain": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capex": [
+                34.5,
+                34.5,
+                34.5,
+                34.5,
+                34.5
+              ],
+              "leaseNew": [
+                5,
+                5,
+                5,
+                5,
+                5
+              ],
+              "disposal": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexMaintenance": [
+                13.799999999999999,
+                13.799999999999999,
+                13.799999999999999,
+                13.799999999999999,
+                13.799999999999999
+              ],
+              "capexGrowth": [
+                20.7,
+                20.7,
+                20.7,
+                20.7,
+                20.7
+              ],
+              "assets.PPE": [
+                297.78895547945206,
+                281.851455479452,
+                262.32020547945206,
+                239.19520547945206,
+                212.47645547945206
+              ],
+              "assets.INTANGIBLE": [
+                30.363013698630137,
+                27.813013698630137,
+                24.113013698630134,
+                19.26301369863014,
+                13.263013698630136
+              ],
+              "assets.ROU": [
+                29.975342465753425,
+                27.471232876712328,
+                23.96850063627517,
+                19.464391047234074,
+                13.96028145819298
+              ],
+              "assets.AGOTABLE": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "assets.NO_DEPRECIABLE": [
+                40,
+                40,
+                40,
+                40,
+                40
+              ],
+              "fixedAssets": [
+                398.12731164383564,
+                377.13570205479454,
+                350.40171981435736,
+                317.9226102253163,
+                279.69975063627516
+              ],
+              "cogs": [
+                717.7933503588853,
+                799.9541603595891,
+                846.0542318236302,
+                891.4203711412671,
+                936.1259715271402
+              ],
+              "opex": [
+                261.6256136822105,
+                291.57207714041095,
+                308.3749069263699,
+                324.9102287337328,
+                341.20479336035953
+              ],
+              "ebitda": [
+                362.25084971382984,
+                403.7151837328767,
+                426.9806403595889,
+                449.87570132363004,
+                472.437406191267
+              ],
+              "ebit": [
+                320.8781613576655,
+                343.2235741438356,
+                360.7466581191518,
+                377.896591734589,
+                394.71454660222594
+              ],
+              "inventory": [
+                117.45709369509032,
+                98.62448552378497,
+                104.02306128979059,
+                109.90114164755347,
+                115.41279101019538
+              ],
+              "receivables": [
+                146.36397968235553,
+                122.89655516982549,
+                129.6237523860319,
+                136.94846311221616,
+                143.816562006474
+              ],
+              "purchases": [
+                765.2504440539756,
+                781.1215521882838,
+                851.4528075896358,
+                897.29845149903,
+                941.6376208897822
+              ],
+              "payables": [
+                125.22279993610509,
+                96.30265711910349,
+                104.68682060528307,
+                110.62583648618177,
+                116.09230942476768
+              ],
+              "contractAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "contractLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "nwc": [
+                138.59827344134072,
+                125.21838357450699,
+                128.95999307053944,
+                136.2237682735879,
+                143.13704359190172
+              ],
+              "deltaNwc": [
+                78.59827344134072,
+                -13.379889866833736,
+                3.741609496032453,
+                7.2637752030484535,
+                6.913275318313822
+              ],
+              "debt": [
+                75,
+                70,
+                65,
+                60,
+                55
+              ],
+              "leaseDebt": [
+                28.046966731898237,
+                26.31170254403131,
+                24.507027788649705,
+                22.630166043052835,
+                20.67822982763209
+              ],
+              "interest": [
+                2.7123287671232874,
+                3.375,
+                3.15,
+                2.925,
+                2.6999999999999997
+              ],
+              "leaseInterest": [
+                0.9041095890410958,
+                1.1218786692759295,
+                1.0524681017612525,
+                0.9802811115459882,
+                0.9052066417221134
+              ],
+              "leasePrincipal": [
+                6.953033268101761,
+                6.735264187866927,
+                6.804674755381605,
+                6.876861745596869,
+                6.951936215420743
+              ],
+              "preTax": [
+                317.26172300150114,
+                338.7266954745597,
+                356.5441900173906,
+                373.991310623043,
+                391.10933996050386
+              ],
+              "taxPaid": [
+                79.31543075037528,
+                84.68167386863992,
+                89.13604750434764,
+                93.49782765576074,
+                97.77733499012596
+              ],
+              "nol": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "netIncome": [
+                237.94629225112584,
+                254.04502160591977,
+                267.40814251304295,
+                280.49348296728226,
+                293.3320049703779
+              ],
+              "dividends": [
+                59.48657306278146,
+                63.51125540147994,
+                66.85203562826074,
+                70.12337074182057,
+                73.33300124259448
+              ],
+              "equity": [
+                728.4597191883445,
+                918.9934853927844,
+                1119.5495922775667,
+                1329.9197045030285,
+                1549.918708230812
+              ],
+              "cfo": [
+                200.72070716594948,
+                327.9165210617946,
+                329.90051525744764,
+                345.20881735327487,
+                364.1415892411052
+              ],
+              "cfi": [
+                -34.5,
+                -34.5,
+                -34.5,
+                -34.5,
+                -34.5
+              ],
+              "cff": [
+                -71.43960633088322,
+                -75.24651958934687,
+                -78.65671038364235,
+                -82.00023248741743,
+                -85.28493745801522
+              ],
+              "cash": [
+                294.78110083506624,
+                512.9511023075139,
+                729.6949071813192,
+                958.4034920471765,
+                1202.7601438302665
+              ],
+              "taxExpense": [
+                79.31543075037528,
+                84.68167386863992,
+                89.13604750434764,
+                93.49782765576074,
+                97.77733499012596
+              ],
+              "deferredTax": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "taxAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "taxLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "operatingCashTax": [
+                80.21954033941637,
+                85.8058935359589,
+                90.18666452978795,
+                94.47414793364725,
+                98.67863665055648
+              ],
+              "otherAssets": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "otherLiabilities": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "otherOCI": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "noncashRecognitionBalance": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexAdvance": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "assets": [
+                956.7294858563478,
+                1111.607845055919,
+                1313.743440671499,
+                1523.1757070322624,
+                1741.6892474832111
+              ],
+              "capexPayable": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "capexCreditChange": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "liabilitiesEquity": [
+                956.7294858563478,
+                1111.6078450559191,
+                1313.7434406714997,
+                1523.175707032263,
+                1741.6892474832116
+              ],
+              "balanceDifference": [
+                0,
+                -2.2737367544323206e-13,
+                -6.821210263296962e-13,
+                -6.821210263296962e-13,
+                -4.547473508864641e-13
+              ],
+              "nopat": [
+                240.6586210182491,
+                257.4176806078767,
+                270.55999358936384,
+                283.4224438009417,
+                296.03590995166945
+              ],
+              "fcff": [
+                163.93303593307274,
+                291.7891800637516,
+                293.55236633376853,
+                308.6377781869343,
+                327.3454942223967
+              ],
+              "taxShield": [
+                0.9041095890410844,
+                1.1242196673189824,
+                1.050617025440303,
+                0.9763202778865008,
+                0.9013016604305193
+              ],
+              "cashFcffBridge": [
+                163.9330359330728,
+                291.78918006375153,
+                293.55236633376853,
+                308.6377781869344,
+                327.3454942223967
+              ],
+              "valuationPV": [
+                154.53075718942887,
+                254.3144473963814,
+                236.55973940503458,
+                229.96287511583327,
+                225.51135352578936
+              ],
+              "valuationFactor": [
+                1.0608440605265284,
+                1.1473558936624668,
+                1.240922766790641,
+                1.3421200184224178,
+                1.451569905924766
+              ],
+              "terminalPV": [
+                2359.789487435061,
+                2359.789487435061,
+                2359.789487435061,
+                2359.789487435061,
+                2359.789487435061
+              ],
+              "explicitPV": [
+                1100.8791726324675,
+                1100.8791726324675,
+                1100.8791726324675,
+                1100.8791726324675,
+                1100.8791726324675
+              ],
+              "valuationFlow": [
+                163.93303593307274,
+                291.7891800637516,
+                293.55236633376853,
+                308.6377781869343,
+                327.3454942223967
+              ],
+              "valuationRate": [
+                0.08155000000000001,
+                0.08155000000000001,
+                0.08155000000000001,
+                0.08155000000000001,
+                0.08155000000000001
+              ],
+              "terminal": [
+                3425.3994042783634,
+                3425.3994042783634,
+                3425.3994042783634,
+                3425.3994042783634,
+                3425.3994042783634
+              ],
+              "enterprise": [
+                3460.6686600675284,
+                3460.6686600675284,
+                3460.6686600675284,
+                3460.6686600675284,
+                3460.6686600675284
+              ],
+              "equityValue": [
+                3550.6686600675284,
+                3550.6686600675284,
+                3550.6686600675284,
+                3550.6686600675284,
+                3550.6686600675284
+              ],
+              "price": [
+                35.50668660067529,
+                35.50668660067529,
+                35.50668660067529,
+                35.50668660067529,
+                35.50668660067529
+              ]
+            },
+            "capital": {
+              "rates": {
+                "version": "G2_CAPITAL_v2.0.0",
+                "pesoPatrimonio": 0.8,
+                "pesoDeuda": 0.19999999999999996,
+                "impuesto": 0.25,
+                "keBase": 0.0935,
+                "kdBase": 0.045,
+                "waccBase": 0.08155000000000001,
+                "keAjustado": 0.0935,
+                "kdAjustado": 0.045,
+                "waccAjustado": 0.08155000000000001,
+                "ajustesAprobados": [],
+                "deltaWacc": 0,
+                "familia": "FCFF",
+                "waccAplicable": true
+              },
+              "premiums": {
+                "version": "PRIMAS_AUTOMATICAS_1",
+                "primas": [
+                  {
+                    "factor": "LIQUIDEZ_BURSATIL",
+                    "primaCalculada": null,
+                    "ajusteOperativo": 0,
+                    "unidad": "FRACCION_ANUAL",
+                    "estadoFinanciero": "NO_ESTIMABLE",
+                    "estadoAplicacion": "BLOQUEADO",
+                    "componente": "KE",
+                    "formula": null,
+                    "fuenteCoeficientes": null,
+                    "metodologiaId": null,
+                    "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+                    "evidencia": []
+                  },
+                  {
+                    "factor": "TAMANO_RESIDUAL",
+                    "primaCalculada": null,
+                    "ajusteOperativo": 0,
+                    "unidad": "FRACCION_ANUAL",
+                    "estadoFinanciero": "NO_ESTIMABLE",
+                    "estadoAplicacion": "BLOQUEADO",
+                    "componente": "KE",
+                    "formula": null,
+                    "fuenteCoeficientes": null,
+                    "metodologiaId": null,
+                    "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: NO_CONCILIADA; ingresos/activos no se convierten en prima sin calibración residual.",
+                    "evidencia": []
+                  }
+                ],
+                "ajusteOperativoKe": 0,
+                "ajusteOperativoKd": 0,
+                "estimadas": 0,
+                "provisionales": 2,
+                "advertencia": "Cero operativo por falta de datos/metodología no equivale a riesgo cero. Las primas no nulas calculadas requieren aprobación individual."
+              }
+            },
+            "warnings": []
+          }
+        ],
+        "requiredInputs": [],
+        "history": [
+          {
+            "reportId": -40,
+            "fiscalYear": 2022,
+            "periodStart": "2022-01-01",
+            "periodEnd": "2022-12-31",
+            "publication": "2023-03-01",
+            "document": "QA-4-2022",
+            "provider": "QA_SINTETICO",
+            "currency": "USD",
+            "basis": "consolidated",
+            "norm": "QA_NO_CERTIFICA_NORMA",
+            "fields": {
+              "revenue": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "revenue",
+                "reason": null,
+                "recordIds": []
+              },
+              "cogs": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "cogs",
+                "reason": null,
+                "recordIds": []
+              },
+              "opex": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "opex",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebitda": {
+                "value": 250,
+                "validation": "VALIDADO",
+                "code": "ebitda",
+                "reason": null,
+                "recordIds": []
+              },
+              "da": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "da",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebit": {
+                "value": 190,
+                "validation": "VALIDADO",
+                "code": "ebit",
+                "reason": null,
+                "recordIds": []
+              },
+              "preTax": {
+                "value": 185.20000000000002,
+                "validation": "VALIDADO",
+                "code": "preTax",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPaid": {
+                "value": 46.300000000000004,
+                "validation": "VALIDADO",
+                "code": "taxPaid",
+                "reason": null,
+                "recordIds": []
+              },
+              "netIncome": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "netIncome",
+                "reason": null,
+                "recordIds": []
+              },
+              "inventory": {
+                "value": 70,
+                "validation": "VALIDADO",
+                "code": "inventory",
+                "reason": null,
+                "recordIds": []
+              },
+              "receivables": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "receivables",
+                "reason": null,
+                "recordIds": []
+              },
+              "payables": {
+                "value": 90,
+                "validation": "VALIDADO",
+                "code": "payables",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractAssets": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractLiabilities": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractLiabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "cash": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "cash",
+                "reason": null,
+                "recordIds": []
+              },
+              "debt": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "debt",
+                "reason": null,
+                "recordIds": []
+              },
+              "leaseDebt": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "leaseDebt",
+                "reason": null,
+                "recordIds": []
+              },
+              "PPE": {
+                "value": 300,
+                "validation": "VALIDADO",
+                "code": "PPE",
+                "reason": null,
+                "recordIds": []
+              },
+              "INTANGIBLE": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "INTANGIBLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "ROU": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "ROU",
+                "reason": null,
+                "recordIds": []
+              },
+              "AGOTABLE": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "AGOTABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "NO_DEPRECIABLE": {
+                "value": 40,
+                "validation": "VALIDADO",
+                "code": "NO_DEPRECIABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "nol": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "nol",
+                "reason": null,
+                "recordIds": []
+              },
+              "dividends": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "dividends",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfo": {
+                "value": 198.9,
+                "validation": "VALIDADO",
+                "code": "cfo",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfi": {
+                "value": -60,
+                "validation": "VALIDADO",
+                "code": "cfi",
+                "reason": null,
+                "recordIds": []
+              },
+              "cff": {
+                "value": -138.9,
+                "validation": "VALIDADO",
+                "code": "cff",
+                "reason": null,
+                "recordIds": []
+              },
+              "loans": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "loans",
+                "reason": null,
+                "recordIds": []
+              },
+              "allowance": {
+                "value": 20,
+                "validation": "VALIDADO",
+                "code": "allowance",
+                "reason": null,
+                "recordIds": []
+              },
+              "deposits": {
+                "value": 800,
+                "validation": "VALIDADO",
+                "code": "deposits",
+                "reason": null,
+                "recordIds": []
+              },
+              "wholesale": {
+                "value": 100,
+                "validation": "VALIDADO",
+                "code": "wholesale",
+                "reason": null,
+                "recordIds": []
+              },
+              "otherAssets": {
+                "value": 50,
+                "validation": "VALIDADO",
+                "code": "otherAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "insuranceLiability": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "insuranceLiability",
+                "reason": null,
+                "recordIds": []
+              },
+              "investments": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "investments",
+                "reason": null,
+                "recordIds": []
+              },
+              "fixedAssets": {
+                "value": 400,
+                "validation": "VALIDADO",
+                "code": "fixedAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "assets": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "assets",
+                "reason": null,
+                "recordIds": []
+              },
+              "equity": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "equity",
+                "reason": null,
+                "recordIds": []
+              },
+              "capex": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "capex",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexMaintenance": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexMaintenance",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexGrowth": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexGrowth",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilitiesEquity": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "liabilitiesEquity",
+                "reason": null,
+                "recordIds": []
+              },
+              "balanceDifference": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "balanceDifference",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilities": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "liabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPayable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxPayable",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxReceivable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxReceivable",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxAsset": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxAsset",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxLiability": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxLiability",
+                "reason": null,
+                "recordIds": []
+              }
+            },
+            "observations": [],
+            "issues": [],
+            "rawRecords": 0,
+            "validatedRecords": 0
+          },
+          {
+            "reportId": -41,
+            "fiscalYear": 2023,
+            "periodStart": "2023-01-01",
+            "periodEnd": "2023-12-31",
+            "publication": "2024-03-01",
+            "document": "QA-4-2023",
+            "provider": "QA_SINTETICO",
+            "currency": "USD",
+            "basis": "consolidated",
+            "norm": "QA_NO_CERTIFICA_NORMA",
+            "fields": {
+              "revenue": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "revenue",
+                "reason": null,
+                "recordIds": []
+              },
+              "cogs": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "cogs",
+                "reason": null,
+                "recordIds": []
+              },
+              "opex": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "opex",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebitda": {
+                "value": 250,
+                "validation": "VALIDADO",
+                "code": "ebitda",
+                "reason": null,
+                "recordIds": []
+              },
+              "da": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "da",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebit": {
+                "value": 190,
+                "validation": "VALIDADO",
+                "code": "ebit",
+                "reason": null,
+                "recordIds": []
+              },
+              "preTax": {
+                "value": 185.20000000000002,
+                "validation": "VALIDADO",
+                "code": "preTax",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPaid": {
+                "value": 46.300000000000004,
+                "validation": "VALIDADO",
+                "code": "taxPaid",
+                "reason": null,
+                "recordIds": []
+              },
+              "netIncome": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "netIncome",
+                "reason": null,
+                "recordIds": []
+              },
+              "inventory": {
+                "value": 70,
+                "validation": "VALIDADO",
+                "code": "inventory",
+                "reason": null,
+                "recordIds": []
+              },
+              "receivables": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "receivables",
+                "reason": null,
+                "recordIds": []
+              },
+              "payables": {
+                "value": 90,
+                "validation": "VALIDADO",
+                "code": "payables",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractAssets": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractLiabilities": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractLiabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "cash": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "cash",
+                "reason": null,
+                "recordIds": []
+              },
+              "debt": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "debt",
+                "reason": null,
+                "recordIds": []
+              },
+              "leaseDebt": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "leaseDebt",
+                "reason": null,
+                "recordIds": []
+              },
+              "PPE": {
+                "value": 300,
+                "validation": "VALIDADO",
+                "code": "PPE",
+                "reason": null,
+                "recordIds": []
+              },
+              "INTANGIBLE": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "INTANGIBLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "ROU": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "ROU",
+                "reason": null,
+                "recordIds": []
+              },
+              "AGOTABLE": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "AGOTABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "NO_DEPRECIABLE": {
+                "value": 40,
+                "validation": "VALIDADO",
+                "code": "NO_DEPRECIABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "nol": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "nol",
+                "reason": null,
+                "recordIds": []
+              },
+              "dividends": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "dividends",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfo": {
+                "value": 198.9,
+                "validation": "VALIDADO",
+                "code": "cfo",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfi": {
+                "value": -60,
+                "validation": "VALIDADO",
+                "code": "cfi",
+                "reason": null,
+                "recordIds": []
+              },
+              "cff": {
+                "value": -138.9,
+                "validation": "VALIDADO",
+                "code": "cff",
+                "reason": null,
+                "recordIds": []
+              },
+              "loans": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "loans",
+                "reason": null,
+                "recordIds": []
+              },
+              "allowance": {
+                "value": 20,
+                "validation": "VALIDADO",
+                "code": "allowance",
+                "reason": null,
+                "recordIds": []
+              },
+              "deposits": {
+                "value": 800,
+                "validation": "VALIDADO",
+                "code": "deposits",
+                "reason": null,
+                "recordIds": []
+              },
+              "wholesale": {
+                "value": 100,
+                "validation": "VALIDADO",
+                "code": "wholesale",
+                "reason": null,
+                "recordIds": []
+              },
+              "otherAssets": {
+                "value": 50,
+                "validation": "VALIDADO",
+                "code": "otherAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "insuranceLiability": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "insuranceLiability",
+                "reason": null,
+                "recordIds": []
+              },
+              "investments": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "investments",
+                "reason": null,
+                "recordIds": []
+              },
+              "fixedAssets": {
+                "value": 400,
+                "validation": "VALIDADO",
+                "code": "fixedAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "assets": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "assets",
+                "reason": null,
+                "recordIds": []
+              },
+              "equity": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "equity",
+                "reason": null,
+                "recordIds": []
+              },
+              "capex": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "capex",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexMaintenance": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexMaintenance",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexGrowth": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexGrowth",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilitiesEquity": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "liabilitiesEquity",
+                "reason": null,
+                "recordIds": []
+              },
+              "balanceDifference": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "balanceDifference",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilities": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "liabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPayable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxPayable",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxReceivable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxReceivable",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxAsset": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxAsset",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxLiability": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxLiability",
+                "reason": null,
+                "recordIds": []
+              }
+            },
+            "observations": [],
+            "issues": [],
+            "rawRecords": 0,
+            "validatedRecords": 0
+          },
+          {
+            "reportId": -42,
+            "fiscalYear": 2024,
+            "periodStart": "2024-01-01",
+            "periodEnd": "2024-12-31",
+            "publication": "2025-03-01",
+            "document": "QA-4-2024",
+            "provider": "QA_SINTETICO",
+            "currency": "USD",
+            "basis": "consolidated",
+            "norm": "QA_NO_CERTIFICA_NORMA",
+            "fields": {
+              "revenue": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "revenue",
+                "reason": null,
+                "recordIds": []
+              },
+              "cogs": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "cogs",
+                "reason": null,
+                "recordIds": []
+              },
+              "opex": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "opex",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebitda": {
+                "value": 250,
+                "validation": "VALIDADO",
+                "code": "ebitda",
+                "reason": null,
+                "recordIds": []
+              },
+              "da": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "da",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebit": {
+                "value": 190,
+                "validation": "VALIDADO",
+                "code": "ebit",
+                "reason": null,
+                "recordIds": []
+              },
+              "preTax": {
+                "value": 185.20000000000002,
+                "validation": "VALIDADO",
+                "code": "preTax",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPaid": {
+                "value": 46.300000000000004,
+                "validation": "VALIDADO",
+                "code": "taxPaid",
+                "reason": null,
+                "recordIds": []
+              },
+              "netIncome": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "netIncome",
+                "reason": null,
+                "recordIds": []
+              },
+              "inventory": {
+                "value": 70,
+                "validation": "VALIDADO",
+                "code": "inventory",
+                "reason": null,
+                "recordIds": []
+              },
+              "receivables": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "receivables",
+                "reason": null,
+                "recordIds": []
+              },
+              "payables": {
+                "value": 90,
+                "validation": "VALIDADO",
+                "code": "payables",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractAssets": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractLiabilities": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractLiabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "cash": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "cash",
+                "reason": null,
+                "recordIds": []
+              },
+              "debt": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "debt",
+                "reason": null,
+                "recordIds": []
+              },
+              "leaseDebt": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "leaseDebt",
+                "reason": null,
+                "recordIds": []
+              },
+              "PPE": {
+                "value": 300,
+                "validation": "VALIDADO",
+                "code": "PPE",
+                "reason": null,
+                "recordIds": []
+              },
+              "INTANGIBLE": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "INTANGIBLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "ROU": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "ROU",
+                "reason": null,
+                "recordIds": []
+              },
+              "AGOTABLE": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "AGOTABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "NO_DEPRECIABLE": {
+                "value": 40,
+                "validation": "VALIDADO",
+                "code": "NO_DEPRECIABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "nol": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "nol",
+                "reason": null,
+                "recordIds": []
+              },
+              "dividends": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "dividends",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfo": {
+                "value": 198.9,
+                "validation": "VALIDADO",
+                "code": "cfo",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfi": {
+                "value": -60,
+                "validation": "VALIDADO",
+                "code": "cfi",
+                "reason": null,
+                "recordIds": []
+              },
+              "cff": {
+                "value": -138.9,
+                "validation": "VALIDADO",
+                "code": "cff",
+                "reason": null,
+                "recordIds": []
+              },
+              "loans": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "loans",
+                "reason": null,
+                "recordIds": []
+              },
+              "allowance": {
+                "value": 20,
+                "validation": "VALIDADO",
+                "code": "allowance",
+                "reason": null,
+                "recordIds": []
+              },
+              "deposits": {
+                "value": 800,
+                "validation": "VALIDADO",
+                "code": "deposits",
+                "reason": null,
+                "recordIds": []
+              },
+              "wholesale": {
+                "value": 100,
+                "validation": "VALIDADO",
+                "code": "wholesale",
+                "reason": null,
+                "recordIds": []
+              },
+              "otherAssets": {
+                "value": 50,
+                "validation": "VALIDADO",
+                "code": "otherAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "insuranceLiability": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "insuranceLiability",
+                "reason": null,
+                "recordIds": []
+              },
+              "investments": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "investments",
+                "reason": null,
+                "recordIds": []
+              },
+              "fixedAssets": {
+                "value": 400,
+                "validation": "VALIDADO",
+                "code": "fixedAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "assets": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "assets",
+                "reason": null,
+                "recordIds": []
+              },
+              "equity": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "equity",
+                "reason": null,
+                "recordIds": []
+              },
+              "capex": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "capex",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexMaintenance": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexMaintenance",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexGrowth": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexGrowth",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilitiesEquity": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "liabilitiesEquity",
+                "reason": null,
+                "recordIds": []
+              },
+              "balanceDifference": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "balanceDifference",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilities": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "liabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPayable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxPayable",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxReceivable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxReceivable",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxAsset": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxAsset",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxLiability": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxLiability",
+                "reason": null,
+                "recordIds": []
+              }
+            },
+            "observations": [],
+            "issues": [],
+            "rawRecords": 0,
+            "validatedRecords": 0
+          },
+          {
+            "reportId": -43,
+            "fiscalYear": 2025,
+            "periodStart": "2025-01-01",
+            "periodEnd": "2025-12-31",
+            "publication": "2026-03-01",
+            "document": "QA-4-2025",
+            "provider": "QA_SINTETICO",
+            "currency": "USD",
+            "basis": "consolidated",
+            "norm": "QA_NO_CERTIFICA_NORMA",
+            "fields": {
+              "revenue": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "revenue",
+                "reason": null,
+                "recordIds": []
+              },
+              "cogs": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "cogs",
+                "reason": null,
+                "recordIds": []
+              },
+              "opex": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "opex",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebitda": {
+                "value": 250,
+                "validation": "VALIDADO",
+                "code": "ebitda",
+                "reason": null,
+                "recordIds": []
+              },
+              "da": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "da",
+                "reason": null,
+                "recordIds": []
+              },
+              "ebit": {
+                "value": 190,
+                "validation": "VALIDADO",
+                "code": "ebit",
+                "reason": null,
+                "recordIds": []
+              },
+              "preTax": {
+                "value": 185.20000000000002,
+                "validation": "VALIDADO",
+                "code": "preTax",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPaid": {
+                "value": 46.300000000000004,
+                "validation": "VALIDADO",
+                "code": "taxPaid",
+                "reason": null,
+                "recordIds": []
+              },
+              "netIncome": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "netIncome",
+                "reason": null,
+                "recordIds": []
+              },
+              "inventory": {
+                "value": 70,
+                "validation": "VALIDADO",
+                "code": "inventory",
+                "reason": null,
+                "recordIds": []
+              },
+              "receivables": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "receivables",
+                "reason": null,
+                "recordIds": []
+              },
+              "payables": {
+                "value": 90,
+                "validation": "VALIDADO",
+                "code": "payables",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractAssets": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "contractLiabilities": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "contractLiabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "cash": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "cash",
+                "reason": null,
+                "recordIds": []
+              },
+              "debt": {
+                "value": 80,
+                "validation": "VALIDADO",
+                "code": "debt",
+                "reason": null,
+                "recordIds": []
+              },
+              "leaseDebt": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "leaseDebt",
+                "reason": null,
+                "recordIds": []
+              },
+              "PPE": {
+                "value": 300,
+                "validation": "VALIDADO",
+                "code": "PPE",
+                "reason": null,
+                "recordIds": []
+              },
+              "INTANGIBLE": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "INTANGIBLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "ROU": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "ROU",
+                "reason": null,
+                "recordIds": []
+              },
+              "AGOTABLE": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "AGOTABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "NO_DEPRECIABLE": {
+                "value": 40,
+                "validation": "VALIDADO",
+                "code": "NO_DEPRECIABLE",
+                "reason": null,
+                "recordIds": []
+              },
+              "nol": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "nol",
+                "reason": null,
+                "recordIds": []
+              },
+              "dividends": {
+                "value": 138.9,
+                "validation": "VALIDADO",
+                "code": "dividends",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfo": {
+                "value": 198.9,
+                "validation": "VALIDADO",
+                "code": "cfo",
+                "reason": null,
+                "recordIds": []
+              },
+              "cfi": {
+                "value": -60,
+                "validation": "VALIDADO",
+                "code": "cfi",
+                "reason": null,
+                "recordIds": []
+              },
+              "cff": {
+                "value": -138.9,
+                "validation": "VALIDADO",
+                "code": "cff",
+                "reason": null,
+                "recordIds": []
+              },
+              "loans": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "loans",
+                "reason": null,
+                "recordIds": []
+              },
+              "allowance": {
+                "value": 20,
+                "validation": "VALIDADO",
+                "code": "allowance",
+                "reason": null,
+                "recordIds": []
+              },
+              "deposits": {
+                "value": 800,
+                "validation": "VALIDADO",
+                "code": "deposits",
+                "reason": null,
+                "recordIds": []
+              },
+              "wholesale": {
+                "value": 100,
+                "validation": "VALIDADO",
+                "code": "wholesale",
+                "reason": null,
+                "recordIds": []
+              },
+              "otherAssets": {
+                "value": 50,
+                "validation": "VALIDADO",
+                "code": "otherAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "insuranceLiability": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "insuranceLiability",
+                "reason": null,
+                "recordIds": []
+              },
+              "investments": {
+                "value": 1000,
+                "validation": "VALIDADO",
+                "code": "investments",
+                "reason": null,
+                "recordIds": []
+              },
+              "fixedAssets": {
+                "value": 400,
+                "validation": "VALIDADO",
+                "code": "fixedAssets",
+                "reason": null,
+                "recordIds": []
+              },
+              "assets": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "assets",
+                "reason": null,
+                "recordIds": []
+              },
+              "equity": {
+                "value": 550,
+                "validation": "VALIDADO",
+                "code": "equity",
+                "reason": null,
+                "recordIds": []
+              },
+              "capex": {
+                "value": 60,
+                "validation": "VALIDADO",
+                "code": "capex",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexMaintenance": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexMaintenance",
+                "reason": null,
+                "recordIds": []
+              },
+              "capexGrowth": {
+                "value": 30,
+                "validation": "VALIDADO",
+                "code": "capexGrowth",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilitiesEquity": {
+                "value": 750,
+                "validation": "VALIDADO",
+                "code": "liabilitiesEquity",
+                "reason": null,
+                "recordIds": []
+              },
+              "balanceDifference": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "balanceDifference",
+                "reason": null,
+                "recordIds": []
+              },
+              "liabilities": {
+                "value": 200,
+                "validation": "VALIDADO",
+                "code": "liabilities",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxPayable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxPayable",
+                "reason": null,
+                "recordIds": []
+              },
+              "taxReceivable": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "taxReceivable",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxAsset": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxAsset",
+                "reason": null,
+                "recordIds": []
+              },
+              "deferredTaxLiability": {
+                "value": 0,
+                "validation": "VALIDADO",
+                "code": "deferredTaxLiability",
+                "reason": null,
+                "recordIds": []
+              }
+            },
+            "observations": [],
+            "issues": [],
+            "rawRecords": 0,
+            "validatedRecords": 0
+          }
+        ],
+        "classification": {
+          "sectorId": null,
+          "sectorName": "Industria y fabricación",
+          "model": 4,
+          "status": "RESUELTO",
+          "method": "QA_FORZADO",
+          "evidence": null,
+          "reason": null
+        },
+        "notices": [],
+        "capitalModule": {
+          "version": "G2_CAPITAL_v2.0.0",
+          "modified": false
+        },
+        "resultHash": "10413023fba9151f0d38d7a7689aa294958ec9163c1910756e9dfc903018a87e"
+      }
+    }
+  }
+}

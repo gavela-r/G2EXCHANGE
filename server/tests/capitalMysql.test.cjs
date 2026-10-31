@@ -1,4 +1,6 @@
 const {test,before,after}=require('node:test'),assert=require('node:assert/strict'),path=require('node:path'),crypto=require('node:crypto');
+// Integración con escritura en un esquema MySQL de DESARROLLO: opcional. Activar sólo con CAPITAL_DB_TESTS=1 y un MySQL de desarrollo.
+if(process.env.CAPITAL_DB_TESTS!=='1'){test('Capital MySQL (integración) omitida: definir CAPITAL_DB_TESTS=1 con un MySQL de desarrollo',{skip:true},()=>{});return;}
 const dev=process.env.CAPITAL_DB_NAME||'g2_capital_dev_20261029';
 process.env.CAPITAL_DB_NAME='g2_capital_dev_pruebas_20261029';
 const {options,target,migrate,checkTarget}=require('../scripts/capital-dev.cjs');checkTarget();

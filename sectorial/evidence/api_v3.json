@@ -1,0 +1,196 @@
+{
+  "at": "2026-10-30T23:23:53.157Z",
+  "service": "http://127.0.0.1:3200",
+  "engineHash": "3b76805dbd8d6fd8160009110a548d4126e748ae4463ca8488acdab928c7f424",
+  "companies": {
+    "4": {
+      "name": "MICROSOFT CORP",
+      "model": null,
+      "periods": [
+        "2023-06-30",
+        "2024-06-30",
+        "2025-06-30",
+        "2026-06-30"
+      ],
+      "currency": [
+        "USD",
+        null
+      ],
+      "validation": {
+        "CONFLICTIVO": 53,
+        "PENDIENTE": 87
+      },
+      "issues": [
+        "CONTEXTO_CAMBIA_ENTRE_CIERRES",
+        "CONTEXTO_FINANCIERO_INCOMPLETO",
+        "CLASIFICACION_NO_RESUELTA"
+      ],
+      "requiredInputs": 0,
+      "inputHash": "a3c9799722c22e8e4439d0556f54e98b6bc6a9892ce81bf0dc15f458a3721d54"
+    },
+    "13": {
+      "name": "ADVANCED MICRO DEVICES INC",
+      "model": 3,
+      "periods": [
+        "2022-12-31",
+        "2023-12-30",
+        "2024-12-28",
+        "2025-12-27"
+      ],
+      "currency": [
+        "USD"
+      ],
+      "validation": {
+        "CONFLICTIVO": 72,
+        "PENDIENTE": 68
+      },
+      "issues": [
+        "CALENDARIO_PENDIENTE",
+        "HISTORICO_PENDIENTE"
+      ],
+      "requiredInputs": 0,
+      "inputHash": "5d10f53ea37e2a0d6b137a0dd08f6f35181f66b7f8d2d865133b22cf9433374a"
+    },
+    "11658": {
+      "name": "TOYOTA MOTOR CORPORATION",
+      "model": 5,
+      "periods": [
+        "2022-03-31",
+        "2023-03-31",
+        "2024-03-31",
+        "2025-03-31"
+      ],
+      "currency": [
+        "JPY"
+      ],
+      "validation": {
+        "PENDIENTE": 84,
+        "VALIDADO": 68
+      },
+      "issues": [
+        "HISTORICO_PENDIENTE",
+        "PUENTE_FECHA_VALORACION_PENDIENTE",
+        "NOTA_APERTURA_PENDIENTE",
+        "COHORTES_PENDIENTES",
+        "PERIMETRO_CONTABLE_PENDIENTE",
+        "POLITICA_TERMINAL_PENDIENTE"
+      ],
+      "requiredInputs": 653,
+      "inputHash": "6e61b53c5201aa3849bc7964d06818b28db706ba34217e41fcca47baf64fcf4d"
+    }
+  },
+  "results": [
+    {
+      "case": "16_MODELOS_Y_FAMILIAS",
+      "status": "PASS"
+    },
+    {
+      "case": "HOST_AJENO_RECHAZADO",
+      "status": "PASS"
+    },
+    {
+      "case": "ORIGEN_AJENO_RECHAZADO",
+      "status": "PASS"
+    },
+    {
+      "case": "TRAVERSAL_RECHAZADO",
+      "status": "PASS"
+    },
+    {
+      "case": "UI_COMPILADA_SERVIDA",
+      "status": "PASS",
+      "bundle": "assets/index-Cc3RDUr_.js"
+    },
+    {
+      "case": "EMPRESA_REAL_BLOQUEADA_11658",
+      "status": "PASS",
+      "model": 5
+    },
+    {
+      "case": "EMPRESA_REAL_BLOQUEADA_13",
+      "status": "PASS",
+      "model": 3
+    },
+    {
+      "case": "EMPRESA_REAL_BLOQUEADA_4",
+      "status": "PASS",
+      "model": null
+    },
+    {
+      "case": "LOOK_AHEAD_FECHA_ANTERIOR",
+      "status": "PASS",
+      "periods": [
+        "2022-03-31",
+        "2023-03-31",
+        "2024-03-31"
+      ]
+    },
+    {
+      "case": "CLASIFICACION_DECLARADA_EMPRESA_REAL_SIGUE_BLOQUEADA",
+      "status": "PASS",
+      "run": "52e1b1de4aa494e36fb55e493afe1d3fbd28a82a889b7c519ee9de29a4640750"
+    },
+    {
+      "case": "CLASIFICACION_RESUELTA_NO_SUSTITUIBLE",
+      "status": "PASS"
+    },
+    {
+      "case": "AMD_CONFLICTOS_VISIBLES_Y_NO_USADOS",
+      "status": "PASS",
+      "conflicts": 72
+    },
+    {
+      "case": "ESCRITURA_LOCAL_REQUIERE_SESION",
+      "status": "PASS"
+    },
+    {
+      "case": "HISTORIA_CLIENTE_RECHAZADA",
+      "status": "PASS"
+    },
+    {
+      "case": "CAMPO_CONFIG_NO_ADMITIDO",
+      "status": "PASS"
+    },
+    {
+      "case": "HASH_OBSOLETO_RECHAZADO",
+      "status": "PASS"
+    },
+    {
+      "case": "HIPOTESIS_SIN_FUENTE_RECHAZADA",
+      "status": "PASS"
+    },
+    {
+      "case": "HIPOTESIS_FUTURA_RECHAZADA",
+      "status": "PASS"
+    },
+    {
+      "case": "RUN_BLOQUEADO_PERSISTIDO",
+      "status": "PASS",
+      "run": "3d21024e87c0c1487319a6049041c8bd9d52320f123e5d4457cdb3975db0fa28"
+    },
+    {
+      "case": "IDEMPOTENCIA_LOCAL",
+      "status": "PASS"
+    },
+    {
+      "case": "DESCARGA_SIN_VALIDACION_RECHAZADA",
+      "status": "PASS"
+    },
+    {
+      "case": "EXPORTACION_API_VALIDADA_EXCEL_Y_DESCARGADA",
+      "status": "PASS",
+      "seconds": 103.718,
+      "formulaChecks": 3111,
+      "sha256": "06cb8ae624dcde6c68370027ec6889501b8cf4bab8c50767c87fd1df6afe4b02"
+    },
+    {
+      "case": "EXPEDIENTE_TRAZABLE",
+      "status": "PASS"
+    },
+    {
+      "case": "HISTORIAL_LOCAL",
+      "status": "PASS"
+    }
+  ],
+  "failures": 0
+}

@@ -1,0 +1,216 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/runs/<id>/capital"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "84a557acd01d96a1efdcde6c1d8db7f7f566385f2a22879e8444953edf830f85",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "model": {
+        "id": 4,
+        "family": "FCFF",
+        "method": "FCFF"
+      },
+      "capitalModule": {
+        "version": "G2_CAPITAL_v2.0.0",
+        "modified": false
+      },
+      "scenarios": [
+        {
+          "id": 1,
+          "name": "Conservador",
+          "status": "CALCULADO_PENDIENTE_REVISION",
+          "ke": 0.0975,
+          "kd": 0.045,
+          "wacc": 0.08475000000000002,
+          "discountRate": 0.08475000000000002,
+          "rates": {
+            "version": "G2_CAPITAL_v2.0.0",
+            "pesoPatrimonio": 0.8,
+            "pesoDeuda": 0.19999999999999996,
+            "impuesto": 0.25,
+            "keBase": 0.0975,
+            "kdBase": 0.045,
+            "waccBase": 0.08475000000000002,
+            "keAjustado": 0.0975,
+            "kdAjustado": 0.045,
+            "waccAjustado": 0.08475000000000002,
+            "ajustesAprobados": [],
+            "deltaWacc": 0,
+            "familia": "FCFF",
+            "waccAplicable": true
+          },
+          "premiums": {
+            "version": "PRIMAS_AUTOMATICAS_1",
+            "primas": [
+              {
+                "factor": "LIQUIDEZ_BURSATIL",
+                "primaCalculada": null,
+                "ajusteOperativo": 0,
+                "unidad": "FRACCION_ANUAL",
+                "estadoFinanciero": "NO_ESTIMABLE",
+                "estadoAplicacion": "BLOQUEADO",
+                "componente": "KE",
+                "formula": null,
+                "fuenteCoeficientes": null,
+                "metodologiaId": null,
+                "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+                "evidencia": []
+              },
+              {
+                "factor": "TAMANO_RESIDUAL",
+                "primaCalculada": null,
+                "ajusteOperativo": 0,
+                "unidad": "FRACCION_ANUAL",
+                "estadoFinanciero": "NO_ESTIMABLE",
+                "estadoAplicacion": "BLOQUEADO",
+                "componente": "KE",
+                "formula": null,
+                "fuenteCoeficientes": null,
+                "metodologiaId": null,
+                "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: NO_CONCILIADA; ingresos/activos no se convierten en prima sin calibración residual.",
+                "evidencia": []
+              }
+            ],
+            "ajusteOperativoKe": 0,
+            "ajusteOperativoKd": 0,
+            "estimadas": 0,
+            "provisionales": 2,
+            "advertencia": "Cero operativo por falta de datos/metodología no equivale a riesgo cero. Las primas no nulas calculadas requieren aprobación individual."
+          },
+          "warnings": []
+        },
+        {
+          "id": 2,
+          "name": "Base",
+          "status": "CALCULADO_PENDIENTE_REVISION",
+          "ke": 0.0955,
+          "kd": 0.045,
+          "wacc": 0.08315,
+          "discountRate": 0.08315,
+          "rates": {
+            "version": "G2_CAPITAL_v2.0.0",
+            "pesoPatrimonio": 0.8,
+            "pesoDeuda": 0.19999999999999996,
+            "impuesto": 0.25,
+            "keBase": 0.0955,
+            "kdBase": 0.045,
+            "waccBase": 0.08315,
+            "keAjustado": 0.0955,
+            "kdAjustado": 0.045,
+            "waccAjustado": 0.08315,
+            "ajustesAprobados": [],
+            "deltaWacc": 0,
+            "familia": "FCFF",
+            "waccAplicable": true
+          },
+          "premiums": {
+            "version": "PRIMAS_AUTOMATICAS_1",
+            "primas": [
+              {
+                "factor": "LIQUIDEZ_BURSATIL",
+                "primaCalculada": null,
+                "ajusteOperativo": 0,
+                "unidad": "FRACCION_ANUAL",
+                "estadoFinanciero": "NO_ESTIMABLE",
+                "estadoAplicacion": "BLOQUEADO",
+                "componente": "KE",
+                "formula": null,
+                "fuenteCoeficientes": null,
+                "metodologiaId": null,
+                "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+                "evidencia": []
+              },
+              {
+                "factor": "TAMANO_RESIDUAL",
+                "primaCalculada": null,
+                "ajusteOperativo": 0,
+                "unidad": "FRACCION_ANUAL",
+                "estadoFinanciero": "NO_ESTIMABLE",
+                "estadoAplicacion": "BLOQUEADO",
+                "componente": "KE",
+                "formula": null,
+                "fuenteCoeficientes": null,
+                "metodologiaId": null,
+                "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: NO_CONCILIADA; ingresos/activos no se convierten en prima sin calibración residual.",
+                "evidencia": []
+              }
+            ],
+            "ajusteOperativoKe": 0,
+            "ajusteOperativoKd": 0,
+            "estimadas": 0,
+            "provisionales": 2,
+            "advertencia": "Cero operativo por falta de datos/metodología no equivale a riesgo cero. Las primas no nulas calculadas requieren aprobación individual."
+          },
+          "warnings": []
+        },
+        {
+          "id": 3,
+          "name": "Optimista",
+          "status": "CALCULADO_PENDIENTE_REVISION",
+          "ke": 0.0935,
+          "kd": 0.045,
+          "wacc": 0.08155000000000001,
+          "discountRate": 0.08155000000000001,
+          "rates": {
+            "version": "G2_CAPITAL_v2.0.0",
+            "pesoPatrimonio": 0.8,
+            "pesoDeuda": 0.19999999999999996,
+            "impuesto": 0.25,
+            "keBase": 0.0935,
+            "kdBase": 0.045,
+            "waccBase": 0.08155000000000001,
+            "keAjustado": 0.0935,
+            "kdAjustado": 0.045,
+            "waccAjustado": 0.08155000000000001,
+            "ajustesAprobados": [],
+            "deltaWacc": 0,
+            "familia": "FCFF",
+            "waccAplicable": true
+          },
+          "premiums": {
+            "version": "PRIMAS_AUTOMATICAS_1",
+            "primas": [
+              {
+                "factor": "LIQUIDEZ_BURSATIL",
+                "primaCalculada": null,
+                "ajusteOperativo": 0,
+                "unidad": "FRACCION_ANUAL",
+                "estadoFinanciero": "NO_ESTIMABLE",
+                "estadoAplicacion": "BLOQUEADO",
+                "componente": "KE",
+                "formula": null,
+                "fuenteCoeficientes": null,
+                "metodologiaId": null,
+                "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Requiere precios ajustados, importe monetario y calendario completos; un ratio de caja no sustituye ese riesgo.",
+                "evidencia": []
+              },
+              {
+                "factor": "TAMANO_RESIDUAL",
+                "primaCalculada": null,
+                "ajusteOperativo": 0,
+                "unidad": "FRACCION_ANUAL",
+                "estadoFinanciero": "NO_ESTIMABLE",
+                "estadoAplicacion": "BLOQUEADO",
+                "componente": "KE",
+                "formula": null,
+                "fuenteCoeficientes": null,
+                "metodologiaId": null,
+                "motivo": "No existe metodología calibrada, validada y aprobada aplicable. El 0 operativo no estima el riesgo. Capitalización: NO_CONCILIADA; ingresos/activos no se convierten en prima sin calibración residual.",
+                "evidencia": []
+              }
+            ],
+            "ajusteOperativoKe": 0,
+            "ajusteOperativoKd": 0,
+            "estimadas": 0,
+            "provisionales": 2,
+            "advertencia": "Cero operativo por falta de datos/metodología no equivale a riesgo cero. Las primas no nulas calculadas requieren aprobación individual."
+          },
+          "warnings": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+const fs=require('node:fs'),path=require('node:path'),store=require('../store.cjs');
+const id=process.argv[2]??require('../evidencias/api_real.json').run,run=store.load(id),archive=store.archivedEngine(run.engineHash),{evaluate}=require(path.join(archive,'workflow.cjs')),x=evaluate(run.snapshot,run.configuration);
+const cases=[];if(x.plan)for(const scenario of[1,2,3]){const values=x.plan.grafo.evaluar({'control.case':scenario});cases.push({scenario,nodes:x.plan.grafo.nodos.filter(n=>n.expr!==undefined).map(n=>({id:n.id,sheet:n.hoja,row:n.fila,col:n.columna,value:values.get(n.id)})),price:x.plan.salida.price?values.get(x.plan.salida.price[0].ref):null});}
+const cash=x.plan?.grafo.indice.get('hist.cash.3'),capitalInputs={};for(const key of['rf','beta','erp','kd','weightEquity','tax']){const n=x.plan?.grafo.indice.get('case.2.'+key+'.0');if(n)capitalInputs[key]={sheet:n.hoja,row:n.fila,col:n.columna,original:n.valor??null};}
+const firstCash=run.snapshot.periods.at(-1)?.fields.cash?.value??null;
+const result={id,file:path.join(store.root,'exports',id+'.xlsx'),runEngineHash:run.engineHash,cases,mutation:{cash:cash?{sheet:cash.hoja,row:cash.fila,col:cash.columna,value:firstCash}:null,capitalInputs},company:run.snapshot.company.id,status:run.result.status};
+fs.writeFileSync(path.join(__dirname,'../evidencias/native_'+id+'.json'),JSON.stringify(result));console.log(JSON.stringify({id,cases:cases.length,nodes:cases.reduce((s,x)=>s+x.nodes.length,0),company:result.company}));

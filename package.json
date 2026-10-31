@@ -13,6 +13,15 @@
     "test": "npm --prefix valuation_engine test && npm --prefix server test",
     "valuation": "node server/dist/valoracionAutomatica.js",
     "valuation:dev": "node server/node_modules/ts-node/dist/bin.js --project server/tsconfig.json server/valoracionAutomatica.ts",
-    "valuation:watch": "node server/dist/src/valoracion/watch.js"
+    "valuation:watch": "node server/dist/src/valoracion/watch.js",
+    "setup": "npm --prefix valuation_engine ci && npm --prefix server ci && npm --prefix client ci",
+    "sectorial:build": "node server/node_modules/typescript/bin/tsc -p sectorial/app/engine/tsconfig.json && node sectorial/app/build-client.mjs",
+    "sectorial:start": "node sectorial/app/server.cjs",
+    "sectorial:mock": "node sectorial/app/server.cjs --mock",
+    "sectorial:test": "npm run sectorial:build && node --test sectorial/app/engine/probar.cjs && node --test \"sectorial/app/tests/*.test.cjs\" \"sectorial/app/tests/*.test.mjs\"",
+    "sectorial:mocks": "node sectorial/app/tools/generar_mocks.cjs",
+    "sectorial:coverage": "node sectorial/app/tools/cobertura_mysql.cjs",
+    "sectorial:taxonomy:sql": "node sectorial/app/tools/generar_migracion_taxonomia.cjs",
+    "sectorial:qa:excel": "node sectorial/app/tests/qa_api_final.mjs"
   }
 }

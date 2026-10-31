@@ -1,0 +1,87 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/sectorial/runs/<id>/premium-simulation",
+    "body": {
+      "factor": "LIQUIDEZ",
+      "premium": 0.01,
+      "reason": "Sensibilidad"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": "SIMULACION_NO_APROBADA",
+      "runId": "84a557acd01d96a1efdcde6c1d8db7f7f566385f2a22879e8444953edf830f85",
+      "runStatus": "CALCULADO_PENDIENTE_REVISION",
+      "factor": "LIQUIDEZ",
+      "premium": 0.01,
+      "reason": "Sensibilidad",
+      "method": "KE_MAS_PRIMA_VIA_RF",
+      "approved": false,
+      "persisted": false,
+      "scenarios": [
+        {
+          "scenario": 1,
+          "status": "SIMULADO",
+          "base": {
+            "ke": 0.0975,
+            "wacc": 0.08475000000000002,
+            "discountRate": 0.08475000000000002,
+            "valuePerShare": 23.99770607202546
+          },
+          "simulated": {
+            "ke": 0.10750000000000001,
+            "wacc": 0.09275000000000003,
+            "discountRate": 0.09275000000000003,
+            "valuePerShare": 21.56219856375813
+          },
+          "delta": {
+            "ke": 0.010000000000000009,
+            "valuePerShare": -2.435507508267328
+          }
+        },
+        {
+          "scenario": 2,
+          "status": "SIMULADO",
+          "base": {
+            "ke": 0.0955,
+            "wacc": 0.08315,
+            "discountRate": 0.08315,
+            "valuePerShare": 29.483430935436807
+          },
+          "simulated": {
+            "ke": 0.10550000000000001,
+            "wacc": 0.09115000000000001,
+            "discountRate": 0.09115000000000001,
+            "valuePerShare": 26.464150811569617
+          },
+          "delta": {
+            "ke": 0.010000000000000009,
+            "valuePerShare": -3.0192801238671905
+          }
+        },
+        {
+          "scenario": 3,
+          "status": "SIMULADO",
+          "base": {
+            "ke": 0.0935,
+            "wacc": 0.08155000000000001,
+            "discountRate": 0.08155000000000001,
+            "valuePerShare": 35.50668660067529
+          },
+          "simulated": {
+            "ke": 0.10350000000000001,
+            "wacc": 0.08955000000000002,
+            "discountRate": 0.08955000000000002,
+            "valuePerShare": 31.844340696983842
+          },
+          "delta": {
+            "ke": 0.010000000000000009,
+            "valuePerShare": -3.6623459036914454
+          }
+        }
+      ]
+    }
+  }
+}

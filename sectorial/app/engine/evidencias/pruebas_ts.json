@@ -1,0 +1,376 @@
+{
+  "at": "2026-10-30T23:58:14.513Z",
+  "tipo": "PRUEBA_SINTETICA_NO_APROBACION_FINANCIERA",
+  "checks": 2214,
+  "sectors": [
+    {
+      "sector": 1,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 21.33506908745553,
+          "maxBalance": 1.1368683772161603e-13,
+          "firstRevenue": 897.5
+        },
+        {
+          "scenario": 2,
+          "price": 25.57762472033707,
+          "maxBalance": 1.1368683772161603e-13,
+          "firstRevenue": 950
+        },
+        {
+          "scenario": 3,
+          "price": 30.15106672429816,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1002.5
+        }
+      ]
+    },
+    {
+      "sector": 2,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 24.21543865768243,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 947.5
+        },
+        {
+          "scenario": 2,
+          "price": 28.380399727814535,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 953.5
+        },
+        {
+          "scenario": 3,
+          "price": 32.81041597727662,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 959.5
+        }
+      ]
+    },
+    {
+      "sector": 3,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 22.58537502091305,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 850
+        },
+        {
+          "scenario": 2,
+          "price": 27.508030608439803,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1000
+        },
+        {
+          "scenario": 3,
+          "price": 32.860977178706264,
+          "maxBalance": 4.547473508864641e-13,
+          "firstRevenue": 1150
+        }
+      ]
+    },
+    {
+      "sector": 4,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 23.63696933771809,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1029.5625
+        },
+        {
+          "scenario": 2,
+          "price": 29.04247428516653,
+          "maxBalance": 4.547473508864641e-13,
+          "firstRevenue": 1215
+        },
+        {
+          "scenario": 3,
+          "price": 34.98141929308408,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1401.5624999999998
+        }
+      ]
+    },
+    {
+      "sector": 5,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 21.752393247653757,
+          "maxBalance": 0,
+          "firstRevenue": 833
+        },
+        {
+          "scenario": 2,
+          "price": 26.48563313254096,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 980
+        },
+        {
+          "scenario": 3,
+          "price": 31.623953526683053,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1127
+        }
+      ]
+    },
+    {
+      "sector": 6,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 23.384866065022997,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1020
+        },
+        {
+          "scenario": 2,
+          "price": 28.332569052864095,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1055.75
+        },
+        {
+          "scenario": 3,
+          "price": 33.77997780384532,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1092
+        }
+      ]
+    },
+    {
+      "sector": 7,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 22.985627142317888,
+          "maxBalance": 4.547473508864641e-13,
+          "firstRevenue": 1009.8000000000001
+        },
+        {
+          "scenario": 2,
+          "price": 27.293714888548276,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1030.2
+        },
+        {
+          "scenario": 3,
+          "price": 31.92823476320946,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1050.6
+        }
+      ]
+    },
+    {
+      "sector": 8,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 7.847603800715766,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 850
+        },
+        {
+          "scenario": 2,
+          "price": 9.27052318038248,
+          "maxBalance": 1.1368683772161603e-13,
+          "firstRevenue": 1000
+        },
+        {
+          "scenario": 3,
+          "price": 10.884914024074753,
+          "maxBalance": 6.821210263296962e-13,
+          "firstRevenue": 1149.9999999999998
+        }
+      ]
+    },
+    {
+      "sector": 9,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 7.847603800715766,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 850
+        },
+        {
+          "scenario": 2,
+          "price": 9.27052318038248,
+          "maxBalance": 1.1368683772161603e-13,
+          "firstRevenue": 1000
+        },
+        {
+          "scenario": 3,
+          "price": 10.884914024074758,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1150
+        }
+      ]
+    },
+    {
+      "sector": 10,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 21.038510784250462,
+          "maxBalance": 1.1368683772161603e-13,
+          "firstRevenue": 630
+        },
+        {
+          "scenario": 2,
+          "price": 24.920613806103166,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 660
+        },
+        {
+          "scenario": 3,
+          "price": 29.066080196155426,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 690
+        }
+      ]
+    },
+    {
+      "sector": 11,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 86.28639566608814,
+          "maxBalance": 9.094947017729282e-13,
+          "firstRevenue": 9435
+        },
+        {
+          "scenario": 2,
+          "price": 109.18035935449501,
+          "maxBalance": 1.8189894035458565e-12,
+          "firstRevenue": 11100
+        },
+        {
+          "scenario": 3,
+          "price": 134.5872798811515,
+          "maxBalance": 3.637978807091713e-12,
+          "firstRevenue": 12765
+        }
+      ]
+    },
+    {
+      "sector": 12,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 21.73008173921877,
+          "maxBalance": 1.1368683772161603e-13,
+          "firstRevenue": 786.25
+        },
+        {
+          "scenario": 2,
+          "price": 26.51107729423644,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 925
+        },
+        {
+          "scenario": 3,
+          "price": 31.704331332813826,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1063.75
+        }
+      ]
+    },
+    {
+      "sector": 13,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 2.828816391958712,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 58.25
+        },
+        {
+          "scenario": 2,
+          "price": 3.337320627920613,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 60.5
+        },
+        {
+          "scenario": 3,
+          "price": 3.8775811658357564,
+          "maxBalance": 0,
+          "firstRevenue": 62.75
+        }
+      ]
+    },
+    {
+      "sector": 14,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 6.8882921864160105,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 95
+        },
+        {
+          "scenario": 2,
+          "price": 9.399861762507632,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 140
+        },
+        {
+          "scenario": 3,
+          "price": 12.005848373556654,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 185
+        }
+      ]
+    },
+    {
+      "sector": 15,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 56.22863647192975,
+          "maxBalance": 4.547473508864641e-13,
+          "firstRevenue": 917.9999999999999
+        },
+        {
+          "scenario": 2,
+          "price": 68.41513645348687,
+          "maxBalance": 4.547473508864641e-13,
+          "firstRevenue": 1080
+        },
+        {
+          "scenario": 3,
+          "price": 81.40550781737615,
+          "maxBalance": 4.547473508864641e-13,
+          "firstRevenue": 1242
+        }
+      ]
+    },
+    {
+      "sector": 16,
+      "cases": [
+        {
+          "scenario": 1,
+          "price": 22.261104403247156,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 850
+        },
+        {
+          "scenario": 2,
+          "price": 27.182818114141845,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1000
+        },
+        {
+          "scenario": 3,
+          "price": 32.534816471447456,
+          "maxBalance": 2.2737367544323206e-13,
+          "firstRevenue": 1149.9999999999998
+        }
+      ]
+    }
+  ],
+  "features": []
+}

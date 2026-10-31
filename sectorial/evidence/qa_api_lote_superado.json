@@ -1,0 +1,648 @@
+{
+  "at": "2026-10-30T22:53:46.533Z",
+  "engineHash": "ebbcdbec60a8b518894ada6357c20812036f3e77fd6bf39ee5b2a90547eefa01",
+  "tipo": "QA_SINTETICO_RUTA_API_NO_APROBACION_FINANCIERA",
+  "native": true,
+  "sectors": [
+    {
+      "sector": 1,
+      "name": "Defensa y aeroespacial",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        21.70333830168456,
+        26.02159698815966,
+        30.674062344960056
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 91.19,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 5.964
+      },
+      "file": "qa_api\\QA_SECTOR_01.xlsx"
+    },
+    {
+      "sector": 2,
+      "name": "Software y SaaS",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        24.205935280626292,
+        28.405241004302294,
+        32.87115241646202
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2742
+        },
+        {
+          "scenario": 2,
+          "checked": 2742
+        },
+        {
+          "scenario": 3,
+          "checked": 2742
+        }
+      ],
+      "exportSeconds": 72.752,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8226,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 5.672
+      },
+      "file": "qa_api\\QA_SECTOR_02.xlsx"
+    },
+    {
+      "sector": 3,
+      "name": "Semiconductores y hardware",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        22.64060420413368,
+        27.557688956376253,
+        32.89909776634218
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 75.554,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 6.207
+      },
+      "file": "qa_api\\QA_SECTOR_03.xlsx"
+    },
+    {
+      "sector": 4,
+      "name": "Industria y fabricación",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        22.75130685057309,
+        27.760263391267483,
+        33.20429882128304
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2732
+        },
+        {
+          "scenario": 2,
+          "checked": 2732
+        },
+        {
+          "scenario": 3,
+          "checked": 2732
+        }
+      ],
+      "exportSeconds": 75.844,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8196,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 6.092
+      },
+      "file": "qa_api\\QA_SECTOR_04.xlsx"
+    },
+    {
+      "sector": 5,
+      "name": "Automoción y componentes",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        22.75130685057309,
+        27.760263391267483,
+        33.20429882128304
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2732
+        },
+        {
+          "scenario": 2,
+          "checked": 2732
+        },
+        {
+          "scenario": 3,
+          "checked": 2732
+        }
+      ],
+      "exportSeconds": 87.169,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8196,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 6.287
+      },
+      "file": "qa_api\\QA_SECTOR_05.xlsx"
+    },
+    {
+      "sector": 6,
+      "name": "Retail",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        23.381657526732305,
+        28.34106897331839,
+        33.79318557577511
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2752
+        },
+        {
+          "scenario": 2,
+          "checked": 2752
+        },
+        {
+          "scenario": 3,
+          "checked": 2752
+        }
+      ],
+      "exportSeconds": 82.514,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8256,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 6.735
+      },
+      "file": "qa_api\\QA_SECTOR_06.xlsx"
+    },
+    {
+      "sector": 7,
+      "name": "Consumo básico",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        22.648937351747854,
+        27.6578844125761,
+        33.101910300867786
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2732
+        },
+        {
+          "scenario": 2,
+          "checked": 2732
+        },
+        {
+          "scenario": 3,
+          "checked": 2732
+        }
+      ],
+      "exportSeconds": 74.24,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8196,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 6.408
+      },
+      "file": "qa_api\\QA_SECTOR_07.xlsx"
+    },
+    {
+      "sector": 8,
+      "name": "Petróleo y gas",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        7.956602966800132,
+        9.402688061351641,
+        11.042984650153725
+      ],
+      "identityChecks": 231,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2832
+        },
+        {
+          "scenario": 2,
+          "checked": 2832
+        },
+        {
+          "scenario": 3,
+          "checked": 2832
+        }
+      ],
+      "exportSeconds": 86.843,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8496,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 9.142
+      },
+      "file": "qa_api\\QA_SECTOR_08.xlsx"
+    },
+    {
+      "sector": 9,
+      "name": "Minería y materiales",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        7.956602966800132,
+        9.402688061351641,
+        11.04298465015373
+      ],
+      "identityChecks": 231,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2837
+        },
+        {
+          "scenario": 2,
+          "checked": 2837
+        },
+        {
+          "scenario": 3,
+          "checked": 2837
+        }
+      ],
+      "exportSeconds": 91.091,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8511,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 9.327
+      },
+      "file": "qa_api\\QA_SECTOR_09.xlsx"
+    },
+    {
+      "sector": 10,
+      "name": "Utilities e infraestructura",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        21.40718343623603,
+        25.357504747533724,
+        29.573423286872572
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2752
+        },
+        {
+          "scenario": 2,
+          "checked": 2752
+        },
+        {
+          "scenario": 3,
+          "checked": 2752
+        }
+      ],
+      "exportSeconds": 94.764,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8256,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 9.429
+      },
+      "file": "qa_api\\QA_SECTOR_10.xlsx"
+    },
+    {
+      "sector": 11,
+      "name": "Telecomunicaciones",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        84.2047576363002,
+        106.46445238997758,
+        131.15063903229577
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 134.954,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 14.735
+      },
+      "file": "qa_api\\QA_SECTOR_11.xlsx"
+    },
+    {
+      "sector": 12,
+      "name": "Farma y biotecnología",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        22.104020783561108,
+        26.969739447412145,
+        32.252258855682975
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2737
+        },
+        {
+          "scenario": 2,
+          "checked": 2737
+        },
+        {
+          "scenario": 3,
+          "checked": 2737
+        }
+      ],
+      "exportSeconds": 148.989,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8211,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 13.112
+      },
+      "file": "qa_api\\QA_SECTOR_12.xlsx"
+    },
+    {
+      "sector": 13,
+      "name": "Banca",
+      "family": "BANK",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        2.8268790588262966,
+        3.345501939029492,
+        3.896117620607864
+      ],
+      "identityChecks": 75,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 302
+        },
+        {
+          "scenario": 2,
+          "checked": 302
+        },
+        {
+          "scenario": 3,
+          "checked": 302
+        }
+      ],
+      "exportSeconds": 46.302,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 906,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 9.212
+      },
+      "file": "qa_api\\QA_SECTOR_13.xlsx"
+    },
+    {
+      "sector": 14,
+      "name": "Seguros",
+      "family": "INSURANCE",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        6.979171678641686,
+        9.544603302597885,
+        12.20423708498397
+      ],
+      "identityChecks": 75,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 282
+        },
+        {
+          "scenario": 2,
+          "checked": 282
+        },
+        {
+          "scenario": 3,
+          "checked": 282
+        }
+      ],
+      "exportSeconds": 51.704,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 846,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 8.574
+      },
+      "file": "qa_api\\QA_SECTOR_14.xlsx"
+    },
+    {
+      "sector": 15,
+      "name": "Inmobiliario y REIT",
+      "family": "REIT",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        56.359750636014134,
+        68.55447200763325,
+        81.54784028754759
+      ],
+      "identityChecks": 225,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2762
+        },
+        {
+          "scenario": 2,
+          "checked": 2762
+        },
+        {
+          "scenario": 3,
+          "checked": 2762
+        }
+      ],
+      "exportSeconds": 156.785,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8286,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 11.769
+      },
+      "file": "qa_api\\QA_SECTOR_15.xlsx"
+    },
+    {
+      "sector": 16,
+      "name": "General no financiero",
+      "family": "FCFF",
+      "status": "CALCULADO_PENDIENTE_REVISION",
+      "issues": [],
+      "missingInputs": 0,
+      "missingIds": [],
+      "prices": [
+        22.648937351747854,
+        27.6578844125761,
+        33.101910300867786
+      ],
+      "identityChecks": 234,
+      "identityFailures": [],
+      "tsExcelArtifactChecks": [
+        {
+          "scenario": 1,
+          "checked": 2732
+        },
+        {
+          "scenario": 2,
+          "checked": 2732
+        },
+        {
+          "scenario": 3,
+          "checked": 2732
+        }
+      ],
+      "exportSeconds": 147.42,
+      "native": {
+        "status": "VALIDADO",
+        "repairMode": false,
+        "formulaChecks": 8196,
+        "brokenReferences": 0,
+        "capitalMutation": true,
+        "seconds": 9.302
+      },
+      "file": "qa_api\\QA_SECTOR_16.xlsx"
+    }
+  ]
+}

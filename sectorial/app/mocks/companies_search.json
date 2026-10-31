@@ -1,0 +1,51 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/companies?q=QA&limit=5"
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "id": -1,
+        "nombre_empresa": "QA SINTÉTICO SECTOR 01 (no es empresa)",
+        "sector_id": null,
+        "nombre_sector": "Defensa y aeroespacial",
+        "codigo_iso": "US",
+        "ticker": "QA001"
+      },
+      {
+        "id": -2,
+        "nombre_empresa": "QA SINTÉTICO SECTOR 02 (no es empresa)",
+        "sector_id": null,
+        "nombre_sector": "Software y SaaS",
+        "codigo_iso": "US",
+        "ticker": "QA002"
+      },
+      {
+        "id": -3,
+        "nombre_empresa": "QA SINTÉTICO SECTOR 03 (no es empresa)",
+        "sector_id": null,
+        "nombre_sector": "Semiconductores y hardware",
+        "codigo_iso": "US",
+        "ticker": "QA003"
+      },
+      {
+        "id": -4,
+        "nombre_empresa": "QA SINTÉTICO SECTOR 04 (no es empresa)",
+        "sector_id": null,
+        "nombre_sector": "Industria y fabricación",
+        "codigo_iso": "US",
+        "ticker": "QA004"
+      },
+      {
+        "id": -5,
+        "nombre_empresa": "QA SINTÉTICO SECTOR 05 (no es empresa)",
+        "sector_id": null,
+        "nombre_sector": "Automoción y componentes",
+        "codigo_iso": "US",
+        "ticker": "QA005"
+      }
+    ]
+  }
+}

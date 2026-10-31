@@ -1,0 +1,609 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/taxonomy"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "existing": [
+        {
+          "code": "INGRESOS",
+          "field": "revenue",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "COSTE_VENTAS",
+          "field": "cogs",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "field": "grossProfit",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "GASTOS_OPERATIVOS",
+          "field": "opex",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "EBITDA",
+          "field": "ebitda",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "EBIT",
+          "field": "ebit",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "field": "da",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "field": "preTax",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "field": "taxExpense",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "field": "netIncome",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "EFECTIVO",
+          "field": "cash",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "field": "assets",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "field": "liabilities",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "field": "equity",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "INVENTARIOS",
+          "field": "inventory",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "field": "receivables",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "field": "payables",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "DEUDA_CORTO_PLAZO",
+          "field": "shortDebt",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "DEUDA_LARGO_PLAZO",
+          "field": "longDebt",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "DEUDA_TOTAL",
+          "field": "totalDebtReported",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "CAPEX",
+          "field": "capex",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "field": "cfo",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "FLUJO_CAJA_INVERSION",
+          "field": "cfi",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "FLUJO_CAJA_FINANCIACION",
+          "field": "cff",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "field": "dividends",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "field": "shares",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "field": "interest",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "ACTIVOS_CORRIENTES",
+          "field": "currentAssets",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "PASIVOS_CORRIENTES",
+          "field": "currentLiabilities",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "INMOVILIZADO_MATERIAL",
+          "field": "PPE",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "INMOVILIZADO_INTANGIBLE",
+          "field": "INTANGIBLE",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "DERECHOS_USO",
+          "field": "ROU",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "PASIVO_ARRENDAMIENTOS",
+          "field": "leaseDebt",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "ACTIVOS_CONTRACTUALES",
+          "field": "contractAssets",
+          "status": "MAPEADO"
+        },
+        {
+          "code": "PASIVOS_CONTRACTUALES",
+          "field": "contractLiabilities",
+          "status": "MAPEADO"
+        }
+      ],
+      "derived": [
+        {
+          "field": "debt",
+          "from": [
+            "shortDebt",
+            "longDebt"
+          ]
+        },
+        {
+          "field": "liabilitiesEquity",
+          "from": [
+            "liabilities",
+            "equity"
+          ]
+        },
+        {
+          "field": "balanceDifference",
+          "from": [
+            "assets",
+            "liabilitiesEquity"
+          ]
+        }
+      ],
+      "proposed": [
+        {
+          "code": "PRESTAMOS_BRUTOS",
+          "field": "loans",
+          "sectors": [
+            13
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:FinancingReceivableExcludingAccruedInterestBeforeAllowanceForCreditLoss",
+            "us-gaap:LoansAndLeasesReceivableGrossCarryingAmount",
+            "ifrs-full:LoansAndAdvancesToCustomers"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "PROVISION_INSOLVENCIAS",
+          "field": "allowance",
+          "sectors": [
+            13
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:FinancingReceivableAllowanceForCreditLossExcludingAccruedInterest",
+            "us-gaap:FinancingReceivableAllowanceForCreditLosses",
+            "ifrs-full:LossAllowance"
+          ],
+          "note": "ifrs-full:LossAllowance exige contexto de préstamos a coste amortizado",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "DEPOSITOS_CLIENTES",
+          "field": "deposits",
+          "sectors": [
+            13
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:Deposits",
+            "ifrs-full:DepositsFromCustomers"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "FINANCIACION_MAYORISTA",
+          "field": "wholesale",
+          "sectors": [
+            13
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:LongTermDebt",
+            "us-gaap:ShortTermBorrowings",
+            "ifrs-full:DebtSecuritiesIssued"
+          ],
+          "note": "Requiere desglose explícito; la deuda total no equivale por sí sola a financiación mayorista",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "OTROS_ACTIVOS_FINANCIEROS",
+          "field": "otherAssets",
+          "sectors": [
+            13,
+            14
+          ],
+          "unit": "MONEDA",
+          "xbrl": [],
+          "note": "Partida residual SÓLO si el emisor la reporta; no se calcula por diferencia",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "CET1",
+          "field": "cet1",
+          "sectors": [
+            13
+          ],
+          "unit": "MONEDA",
+          "xbrl": [],
+          "note": "REGULATORIA (Pilar 3 / FR Y-9C / FSA); no XBRL financiero",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "ACTIVOS_PONDERADOS_RIESGO",
+          "field": "rwa",
+          "sectors": [
+            13
+          ],
+          "unit": "MONEDA",
+          "xbrl": [],
+          "note": "REGULATORIA",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "INVERSIONES_SEGUROS",
+          "field": "investments",
+          "sectors": [
+            14
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:Investments",
+            "ifrs-full:FinancialAssets"
+          ],
+          "note": "ifrs-full:FinancialAssets requiere perímetro de inversiones de la actividad aseguradora",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "PASIVO_CONTRATOS_SEGURO",
+          "field": "insuranceLiability",
+          "sectors": [
+            14
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "ifrs-full:InsuranceContractsIssuedThatAreLiabilities",
+            "us-gaap:LiabilityForFuturePolicyBenefits",
+            "us-gaap:LiabilityForClaimsAndClaimsAdjustmentExpense"
+          ],
+          "note": "US GAAP: suma de componentes declarados, nunca un único tag parcial",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "INGRESO_SEGUROS",
+          "field": "insuranceRevenue",
+          "sectors": [
+            14
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "ifrs-full:InsuranceRevenue",
+            "us-gaap:PremiumsEarnedNet"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "GASTO_SERVICIO_SEGUROS",
+          "field": "claimsIncurred",
+          "sectors": [
+            14
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "ifrs-full:InsuranceServiceExpensesFromInsuranceContractsIssued",
+            "us-gaap:PolicyholderBenefitsAndClaimsIncurredNet"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "REQUISITO_SOLVENCIA",
+          "field": "solvencyRequirement",
+          "sectors": [
+            14
+          ],
+          "unit": "MONEDA",
+          "xbrl": [],
+          "note": "REGULATORIA (SCR / RBC / ESR)",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "PROPIEDADES_INVERSION",
+          "field": "investmentProperty",
+          "sectors": [
+            15
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "ifrs-full:InvestmentProperty",
+            "us-gaap:RealEstateInvestmentPropertyNet"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "INGRESOS_ARRENDAMIENTO",
+          "field": "rentalRevenue",
+          "sectors": [
+            15
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:OperatingLeaseLeaseIncome",
+            "ifrs-full:IncomeFromSubleasingRightofuseAssets"
+          ],
+          "note": "Para arrendador: ifrs-full:LeaseIncome... según desglose",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "BASE_ACTIVOS_REGULADOS",
+          "field": "rab",
+          "sectors": [
+            10
+          ],
+          "unit": "MONEDA",
+          "xbrl": [],
+          "note": "REGULATORIA (decisión tarifaria)",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "INMOVILIZADO_REGULADO",
+          "field": "regulatedPPE",
+          "sectors": [
+            10
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:PublicUtilitiesPropertyPlantAndEquipmentNet"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "GASTO_I_D",
+          "field": "rdExpense",
+          "sectors": [
+            12
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:ResearchAndDevelopmentExpense",
+            "ifrs-full:ResearchAndDevelopmentExpense"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "OBLIGACIONES_DESEMPENO_PENDIENTES",
+          "field": "backlog",
+          "sectors": [
+            1,
+            4
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:RevenueRemainingPerformanceObligation",
+            "ifrs-full:RevenueFromContractsWithCustomersAllocatedToRemainingPerformanceObligations"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "RESERVAS_PROBADAS",
+          "field": "reserves",
+          "sectors": [
+            8,
+            9
+          ],
+          "unit": "UNIDADES",
+          "xbrl": [
+            "us-gaap:ProvedDevelopedAndUndevelopedReservesNet"
+          ],
+          "note": "Unidad física declarada (bbl, boe, t); nunca mezclar unidades",
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "ACTIVOS_AGOTABLES",
+          "field": "AGOTABLE",
+          "sectors": [
+            8,
+            9
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:OilAndGasPropertySuccessfulEffortMethodNet",
+            "us-gaap:OilAndGasPropertyFullCostMethodNet",
+            "us-gaap:MineralPropertiesNet"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "AGOTAMIENTO",
+          "field": "depletion",
+          "sectors": [
+            8,
+            9
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:DepletionOfOilAndGasProperties",
+            "us-gaap:Depletion"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "PASIVO_IMPUESTO_CORRIENTE",
+          "field": "taxPayable",
+          "sectors": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            15,
+            16
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:AccruedIncomeTaxesCurrent",
+            "ifrs-full:CurrentTaxLiabilities"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "ACTIVO_IMPUESTO_CORRIENTE",
+          "field": "taxReceivable",
+          "sectors": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            15,
+            16
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:IncomeTaxesReceivable",
+            "ifrs-full:CurrentTaxAssets"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "ACTIVO_IMPUESTO_DIFERIDO",
+          "field": "deferredTaxAsset",
+          "sectors": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            15,
+            16
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:DeferredIncomeTaxAssetsNet",
+            "ifrs-full:DeferredTaxAssets"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        },
+        {
+          "code": "PASIVO_IMPUESTO_DIFERIDO",
+          "field": "deferredTaxLiability",
+          "sectors": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            15,
+            16
+          ],
+          "unit": "MONEDA",
+          "xbrl": [
+            "us-gaap:DeferredIncomeTaxLiabilitiesNet",
+            "ifrs-full:DeferredTaxLiabilities"
+          ],
+          "note": null,
+          "status": "PROPUESTO_PENDIENTE_MIGRACION"
+        }
+      ],
+      "migration": "server/sql/30_taxonomia_sectorial.sql (no ejecutada; rollback 30_taxonomia_sectorial.rollback.sql)"
+    }
+  }
+}

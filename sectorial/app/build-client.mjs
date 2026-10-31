@@ -1,0 +1,3 @@
+import path from'node:path';import{createRequire}from'node:module';import{pathToFileURL,fileURLToPath}from'node:url';
+const root=path.dirname(fileURLToPath(import.meta.url)),project=createRequire(import.meta.url)('./env.cjs').project,req=createRequire(path.join(project,'client/package.json')),{build}=await import(pathToFileURL(req.resolve('vite')).href);
+await build({root:path.join(root,'client'),configFile:false,resolve:{alias:{react:path.dirname(req.resolve('react/package.json')),'react-dom':path.dirname(req.resolve('react-dom/package.json'))}},build:{outDir:path.join(root,'public'),emptyOutDir:true},server:{host:'127.0.0.1'}});

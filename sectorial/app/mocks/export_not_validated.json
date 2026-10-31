@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/runs/<id>/xlsx"
+  },
+  "response": {
+    "status": 409,
+    "body": {
+      "error": "Excel no disponible: generación o validación nativa pendiente/fallida",
+      "code": "EXCEL_NO_DISPONIBLE"
+    }
+  }
+}

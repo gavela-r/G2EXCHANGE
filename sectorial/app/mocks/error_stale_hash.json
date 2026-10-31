@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/sectorial/companies/-4/evaluate"
+  },
+  "response": {
+    "status": 409,
+    "body": {
+      "error": "Los datos cambiaron o falta su hash; volver a cargar antes de calcular",
+      "code": "DATOS_CAMBIADOS"
+    }
+  }
+}

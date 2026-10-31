@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/sectorial/companies/-4/evaluate",
+    "headers": "sin X-Sectorial-Token"
+  },
+  "response": {
+    "status": 403,
+    "body": {
+      "error": "Sesión local requerida",
+      "code": "SESION_LOCAL_REQUERIDA"
+    }
+  }
+}

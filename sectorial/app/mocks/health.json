@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/health"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": "OK",
+      "version": "G2_SECTORIAL_DEV_0.3",
+      "mode": "MOCK_SINTETICO"
+    }
+  }
+}

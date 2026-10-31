@@ -1,0 +1,47 @@
+✔ Sector 1: tres escenarios, estados y valoración independientes (82.7622ms)
+✔ Sector 2: tres escenarios, estados y valoración independientes (37.1634ms)
+✔ Sector 3: tres escenarios, estados y valoración independientes (40.6774ms)
+✔ Sector 4: tres escenarios, estados y valoración independientes (37.4077ms)
+✔ Sector 5: tres escenarios, estados y valoración independientes (38.1947ms)
+✔ Sector 6: tres escenarios, estados y valoración independientes (44.6377ms)
+✔ Sector 7: tres escenarios, estados y valoración independientes (37.2522ms)
+✔ Sector 8: tres escenarios, estados y valoración independientes (33.4636ms)
+✔ Sector 9: tres escenarios, estados y valoración independientes (31.3037ms)
+✔ Sector 10: tres escenarios, estados y valoración independientes (30.1414ms)
+✔ Sector 11: tres escenarios, estados y valoración independientes (42.2652ms)
+✔ Sector 12: tres escenarios, estados y valoración independientes (29.0727ms)
+✔ Sector 13: tres escenarios, estados y valoración independientes (14.0486ms)
+✔ Sector 14: tres escenarios, estados y valoración independientes (6.4371ms)
+✔ Sector 15: tres escenarios, estados y valoración independientes (27.8478ms)
+✔ Sector 16: tres escenarios, estados y valoración independientes (33.5703ms)
+✔ Cohorte fraccionaria 150 / 1,5: D&A 100 y 50; saldo nunca -50 (3.05ms)
+✔ Residual 30 conserva saldo 30 (2.3482ms)
+✔ Puesta en servicio a mitad de año y año bisiesto (1.5364ms)
+✔ Deterioro a cierre reduce la base futura sin reescribir D&A anterior (1.2868ms)
+✔ Disposición total con residual: ganancia y cese de D&A (2.0989ms)
+✔ Saldo decreciente: D&A independiente 60,42 y cierre final 0 (2.6872ms)
+✔ Agotamiento: 300 / 1000 unidades; producción 100 => 30 (10.1404ms)
+✔ Producción superior a reservas se bloquea (3.4221ms)
+✔ Suelo no depreciable mantiene su valor (1.7701ms)
+✔ Vida o apertura ausentes no producen D&A cero (2.3529ms)
+✔ Vida cero editada se bloquea; no se congela activo positivo (1.6352ms)
+✔ Obra en curso: inversión en 2026, puesta en servicio en 2028 (12.8908ms)
+✔ Fechas imposibles, tasas fuera de dominio y activo negativo bloquean (40.268ms)
+✔ Historia sintética conserva balance y caja de cada año (5.6377ms)
+✔ Inputs seleccionados: blanco distinto de cero; blanco no seleccionado no bloquea (38.9299ms)
+✔ NWC inicial ausente bloquea; cero conocido se usa como cero (18.5338ms)
+✔ Inversión extraordinaria viaja a activos, D&A y FCFF (23.0732ms)
+✔ Caja insuficiente bloquea valoración y conserva el déficit visible (10.3816ms)
+✔ Terminal: tasa no superior a g bloquea (17.0046ms)
+✔ Ventana 2026 desplaza todo a 2023–2026 / 2027–2031 (21.8748ms)
+✔ Procedencia: cero válido, NULL, escala, moneda y asOf (1.5365ms)
+✔ Salvaguardas: no empresas reales, fechas de eventos no soportadas ni métodos inventados (4.8951ms)
+✔ Grafo: ciclo, referencias desconocidas y fórmulas bajo límite Excel (508.2525ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1705.1939

@@ -1,0 +1,2513 @@
+{
+  "at": "2026-10-30T23:58:18.541Z",
+  "matrix": [
+    {
+      "sector": 1,
+      "model": "Defensa y aeroespacial",
+      "driver": "bookings",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "backlog"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 1,
+      "model": "Defensa y aeroespacial",
+      "driver": "recognition",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "backlog"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 2,
+      "model": "Software y SaaS",
+      "driver": "churn",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "arr"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 2,
+      "model": "Software y SaaS",
+      "driver": "expansion",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "arr"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 2,
+      "model": "Software y SaaS",
+      "driver": "newArr",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "arr"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 3,
+      "model": "Semiconductores y hardware",
+      "driver": "capacity",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 3,
+      "model": "Semiconductores y hardware",
+      "driver": "utilization",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 3,
+      "model": "Semiconductores y hardware",
+      "driver": "asp",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 4,
+      "model": "Industria y fabricación",
+      "driver": "volume",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "installedBase"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 4,
+      "model": "Industria y fabricación",
+      "driver": "price",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 4,
+      "model": "Industria y fabricación",
+      "driver": "aftermarketPerUnit",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 4,
+      "model": "Industria y fabricación",
+      "driver": "retirementRate",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "installedBase"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 5,
+      "model": "Automoción y componentes",
+      "driver": "vehicleProduction",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 5,
+      "model": "Automoción y componentes",
+      "driver": "share",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 5,
+      "model": "Automoción y componentes",
+      "driver": "contentPerVehicle",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 5,
+      "model": "Automoción y componentes",
+      "driver": "priceDown",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "priceDownFactor"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 6,
+      "model": "Retail",
+      "driver": "openings",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "stores"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 6,
+      "model": "Retail",
+      "driver": "closures",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "stores"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 6,
+      "model": "Retail",
+      "driver": "sameStoreGrowth",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 6,
+      "model": "Retail",
+      "driver": "firstYearRamp",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 7,
+      "model": "Consumo básico",
+      "driver": "volumeGrowth",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "annualRevenue"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 7,
+      "model": "Consumo básico",
+      "driver": "priceMix",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "annualRevenue"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 8,
+      "model": "Petróleo y gas",
+      "driver": "production",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "fixedAssets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "reserves"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 8,
+      "model": "Petróleo y gas",
+      "driver": "price",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 8,
+      "model": "Petróleo y gas",
+      "driver": "reserveAdditions",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "fixedAssets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash"
+      ],
+      "valoracion": [],
+      "otros": [
+        "reserves"
+      ],
+      "priceExempt": "Horizonte finito con liquidación explícita; las reservas sólo limitan la producción"
+    },
+    {
+      "sector": 9,
+      "model": "Minería y materiales",
+      "driver": "production",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "fixedAssets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "reserves"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 9,
+      "model": "Minería y materiales",
+      "driver": "price",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 9,
+      "model": "Minería y materiales",
+      "driver": "reserveAdditions",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "fixedAssets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash"
+      ],
+      "valoracion": [],
+      "otros": [
+        "reserves"
+      ],
+      "priceExempt": "Horizonte finito con liquidación explícita; las reservas sólo limitan la producción"
+    },
+    {
+      "sector": 9,
+      "model": "Minería y materiales",
+      "driver": "gradeRecovery",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 10,
+      "model": "Utilities e infraestructura",
+      "driver": "allowedReturn",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 10,
+      "model": "Utilities e infraestructura",
+      "driver": "regulatoryDepreciation",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "rab"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 10,
+      "model": "Utilities e infraestructura",
+      "driver": "allowedOpex",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 10,
+      "model": "Utilities e infraestructura",
+      "driver": "eligibleInvestment",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "rab"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 10,
+      "model": "Utilities e infraestructura",
+      "driver": "unregulatedRevenue",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 11,
+      "model": "Telecomunicaciones",
+      "driver": "netAdds",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "subscribers"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 11,
+      "model": "Telecomunicaciones",
+      "driver": "arpu",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 12,
+      "model": "Farma y biotecnología",
+      "driver": "marketedSales",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 12,
+      "model": "Farma y biotecnología",
+      "driver": "pipelineGrossSales",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 12,
+      "model": "Farma y biotecnología",
+      "driver": "pipelineProbability",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 12,
+      "model": "Farma y biotecnología",
+      "driver": "rdExpense",
+      "ingresos": [],
+      "costes": [
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "operatingExpense",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "payout",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": "FCFE = beneficio − Δcapital requerido; el payout sólo fija el dividendo efectivo, limitado por el capital"
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "equityIssue",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": "Aportaciones de capital no crean valor en FCFE distribuible"
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "loanGrowth",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "loans",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "depositGrowth",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "deposits",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "loanYield",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "depositCost",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "provisionRate",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "writeoffs",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "loans",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "fees",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "riskWeight",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "otherRiskWeight",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "cashYield",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "regulatoryTarget",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "regulatoryDeductions",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "otherAssets",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 13,
+      "model": "Banca",
+      "driver": "wholesaleRate",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "operatingExpense",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "payout",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": "FCFE = beneficio − Δcapital requerido; el payout sólo fija el dividendo efectivo, limitado por el capital"
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "equityIssue",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": "Aportaciones de capital no crean valor en FCFE distribuible"
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "insuranceRevenue",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "insuranceLiability",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "claimsIncurred",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "insuranceLiability",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "premiumsCash",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "insuranceLiability",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "claimsPaid",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "insuranceLiability",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "insuranceFinance",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "insuranceLiability",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "investmentYield",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "netInvestment",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "investments",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "solvencyRequirement",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "cashYield",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "regulatoryTarget",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "regulatoryDeductions",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "required"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 14,
+      "model": "Seguros",
+      "driver": "otherAssets",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [],
+      "resultado": [
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 15,
+      "model": "Inmobiliario y REIT",
+      "driver": "area",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow",
+        "affo"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "nav"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 15,
+      "model": "Inmobiliario y REIT",
+      "driver": "rent",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow",
+        "affo"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "nav"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 15,
+      "model": "Inmobiliario y REIT",
+      "driver": "occupancy",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow",
+        "affo"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [
+        "nav"
+      ],
+      "priceExempt": null
+    },
+    {
+      "sector": 15,
+      "model": "Inmobiliario y REIT",
+      "driver": "appraisal",
+      "ingresos": [],
+      "costes": [],
+      "resultado": [],
+      "balance": [],
+      "flujos": [],
+      "valoracion": [],
+      "otros": [
+        "nav"
+      ],
+      "priceExempt": "La tasación externa alimenta el NAV, no el AFFO descontado"
+    },
+    {
+      "sector": 16,
+      "model": "General no financiero",
+      "driver": "volume",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    },
+    {
+      "sector": 16,
+      "model": "General no financiero",
+      "driver": "price",
+      "ingresos": [
+        "revenue"
+      ],
+      "costes": [
+        "cogs",
+        "opex",
+        "ebitda"
+      ],
+      "resultado": [
+        "ebit",
+        "netIncome"
+      ],
+      "balance": [
+        "assets",
+        "receivables",
+        "inventory",
+        "payables",
+        "nwc",
+        "equity"
+      ],
+      "flujos": [
+        "cfo",
+        "cff",
+        "cash",
+        "fcff",
+        "valuationFlow"
+      ],
+      "valoracion": [
+        "price"
+      ],
+      "otros": [],
+      "priceExempt": null
+    }
+  ]
+}

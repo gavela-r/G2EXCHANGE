@@ -1,0 +1,2620 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/companies/-102/kpis"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "company": {
+        "id": -102,
+        "nombre_empresa": "QA SINTÉTICO — HISTÓRICO CONFLICTIVO (no es empresa)",
+        "sector_id": null,
+        "nombre_sector": "General no financiero",
+        "codigo_iso": "US"
+      },
+      "asOf": "2026-03-31",
+      "inputHash": "a373d5f868ea129bd023a447b653c7b5f65a62c730cbd50a1c0c54232d4a2237",
+      "definitions": [
+        {
+          "code": "MARGEN_BRUTO",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "grossProfit",
+            "revenue"
+          ]
+        },
+        {
+          "code": "MARGEN_EBIT",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "ebit",
+            "revenue"
+          ]
+        },
+        {
+          "code": "MARGEN_NETO",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "netIncome",
+            "revenue"
+          ]
+        },
+        {
+          "code": "ROA",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "netIncome",
+            "assets"
+          ]
+        },
+        {
+          "code": "ROE",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "netIncome",
+            "equity"
+          ]
+        },
+        {
+          "code": "DEUDA_TOTAL",
+          "unit": "MONEDA",
+          "inputs": [
+            "shortDebt",
+            "longDebt"
+          ]
+        },
+        {
+          "code": "DEUDA_NETA",
+          "unit": "MONEDA",
+          "inputs": [
+            "shortDebt",
+            "longDebt",
+            "cash"
+          ]
+        },
+        {
+          "code": "DEUDA_SOBRE_PATRIMONIO",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "shortDebt",
+            "longDebt",
+            "equity"
+          ]
+        },
+        {
+          "code": "DEUDA_SOBRE_ACTIVOS",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "shortDebt",
+            "longDebt",
+            "assets"
+          ]
+        },
+        {
+          "code": "COBERTURA_INTERESES",
+          "unit": "VECES",
+          "inputs": [
+            "ebit",
+            "interest"
+          ]
+        },
+        {
+          "code": "EBITDA",
+          "unit": "MONEDA",
+          "inputs": [
+            "ebit",
+            "da"
+          ]
+        },
+        {
+          "code": "MARGEN_EBITDA",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "ebit",
+            "da",
+            "revenue"
+          ]
+        },
+        {
+          "code": "FCF",
+          "unit": "MONEDA",
+          "inputs": [
+            "cfo",
+            "capex"
+          ]
+        },
+        {
+          "code": "MARGEN_FCF",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "cfo",
+            "capex",
+            "revenue"
+          ]
+        },
+        {
+          "code": "CAPITAL_CIRCULANTE_OPERATIVO",
+          "unit": "MONEDA",
+          "inputs": [
+            "inventory",
+            "receivables",
+            "payables"
+          ]
+        },
+        {
+          "code": "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "inventory",
+            "receivables",
+            "payables",
+            "revenue"
+          ]
+        },
+        {
+          "code": "PASIVO_SOBRE_ACTIVOS",
+          "unit": "PORCENTAJE",
+          "inputs": [
+            "liabilities",
+            "assets"
+          ]
+        }
+      ],
+      "periods": [
+        {
+          "periodEnd": "2022-12-31",
+          "kpis": [
+            {
+              "code": "MARGEN_BRUTO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "grossProfit",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "grossProfit:AUSENTE"
+            },
+            {
+              "code": "MARGEN_EBIT",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 19,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_NETO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 13.860000000000003,
+              "cause": null
+            },
+            {
+              "code": "ROA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 18.48,
+              "cause": null
+            },
+            {
+              "code": "ROE",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 25.66666666666667,
+              "cause": null
+            },
+            {
+              "code": "DEUDA_TOTAL",
+              "unit": "MONEDA",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_NETA",
+              "unit": "MONEDA",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "cash",
+                  "validation": "VALIDADO",
+                  "value": 200,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_SOBRE_PATRIMONIO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "COBERTURA_INTERESES",
+              "unit": "VECES",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "interest",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "interest:AUSENTE"
+            },
+            {
+              "code": "EBITDA",
+              "unit": "MONEDA",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 250,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_EBITDA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 25,
+              "cause": null
+            },
+            {
+              "code": "FCF",
+              "unit": "MONEDA",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 138.60000000000002,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_FCF",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 13.860000000000003,
+              "cause": null
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO",
+              "unit": "MONEDA",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 60,
+              "cause": null
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 6,
+              "cause": null
+            },
+            {
+              "code": "PASIVO_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2022-12-31",
+              "fiscalYear": 2022,
+              "currency": "USD",
+              "publication": "2023-03-01",
+              "document": "QA-16-2022",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "liabilities",
+                  "validation": "VALIDADO",
+                  "value": 210,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 28.000000000000004,
+              "cause": null
+            }
+          ]
+        },
+        {
+          "periodEnd": "2023-12-31",
+          "kpis": [
+            {
+              "code": "MARGEN_BRUTO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "grossProfit",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "grossProfit:AUSENTE"
+            },
+            {
+              "code": "MARGEN_EBIT",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 19,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_NETO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 13.860000000000003,
+              "cause": null
+            },
+            {
+              "code": "ROA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 18.48,
+              "cause": null
+            },
+            {
+              "code": "ROE",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 25.66666666666667,
+              "cause": null
+            },
+            {
+              "code": "DEUDA_TOTAL",
+              "unit": "MONEDA",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_NETA",
+              "unit": "MONEDA",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "cash",
+                  "validation": "VALIDADO",
+                  "value": 200,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_SOBRE_PATRIMONIO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "COBERTURA_INTERESES",
+              "unit": "VECES",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "interest",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "interest:AUSENTE"
+            },
+            {
+              "code": "EBITDA",
+              "unit": "MONEDA",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 250,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_EBITDA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 25,
+              "cause": null
+            },
+            {
+              "code": "FCF",
+              "unit": "MONEDA",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 138.60000000000002,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_FCF",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 13.860000000000003,
+              "cause": null
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO",
+              "unit": "MONEDA",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 60,
+              "cause": null
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 6,
+              "cause": null
+            },
+            {
+              "code": "PASIVO_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2023-12-31",
+              "fiscalYear": 2023,
+              "currency": "USD",
+              "publication": "2024-03-01",
+              "document": "QA-16-2023",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "liabilities",
+                  "validation": "VALIDADO",
+                  "value": 210,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 28.000000000000004,
+              "cause": null
+            }
+          ]
+        },
+        {
+          "periodEnd": "2024-12-31",
+          "kpis": [
+            {
+              "code": "MARGEN_BRUTO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "grossProfit",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "revenue",
+                  "validation": "CONFLICTIVO",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Importe heredado difiere del candidato oficial; conflicto conservado"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "grossProfit:AUSENTE, revenue:CONFLICTIVO"
+            },
+            {
+              "code": "MARGEN_EBIT",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "CONFLICTIVO",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Importe heredado difiere del candidato oficial; conflicto conservado"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "revenue:CONFLICTIVO"
+            },
+            {
+              "code": "MARGEN_NETO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "CONFLICTIVO",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Importe heredado difiere del candidato oficial; conflicto conservado"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "revenue:CONFLICTIVO"
+            },
+            {
+              "code": "ROA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 18.48,
+              "cause": null
+            },
+            {
+              "code": "ROE",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 25.66666666666667,
+              "cause": null
+            },
+            {
+              "code": "DEUDA_TOTAL",
+              "unit": "MONEDA",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_NETA",
+              "unit": "MONEDA",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "cash",
+                  "validation": "CONFLICTIVO",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Importe heredado difiere del candidato oficial; conflicto conservado"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE, cash:CONFLICTIVO"
+            },
+            {
+              "code": "DEUDA_SOBRE_PATRIMONIO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "COBERTURA_INTERESES",
+              "unit": "VECES",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "interest",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "interest:AUSENTE"
+            },
+            {
+              "code": "EBITDA",
+              "unit": "MONEDA",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 250,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_EBITDA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "CONFLICTIVO",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Importe heredado difiere del candidato oficial; conflicto conservado"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "revenue:CONFLICTIVO"
+            },
+            {
+              "code": "FCF",
+              "unit": "MONEDA",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 138.60000000000002,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_FCF",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "CONFLICTIVO",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Importe heredado difiere del candidato oficial; conflicto conservado"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "revenue:CONFLICTIVO"
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO",
+              "unit": "MONEDA",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 60,
+              "cause": null
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "CONFLICTIVO",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Importe heredado difiere del candidato oficial; conflicto conservado"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "revenue:CONFLICTIVO"
+            },
+            {
+              "code": "PASIVO_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2024-12-31",
+              "fiscalYear": 2024,
+              "currency": "USD",
+              "publication": "2025-03-01",
+              "document": "QA-16-2024",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "liabilities",
+                  "validation": "VALIDADO",
+                  "value": 210,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 28.000000000000004,
+              "cause": null
+            }
+          ]
+        },
+        {
+          "periodEnd": "2025-12-31",
+          "kpis": [
+            {
+              "code": "MARGEN_BRUTO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "grossProfit",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "grossProfit:AUSENTE"
+            },
+            {
+              "code": "MARGEN_EBIT",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 19,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_NETO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 13.860000000000003,
+              "cause": null
+            },
+            {
+              "code": "ROA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 18.48,
+              "cause": null
+            },
+            {
+              "code": "ROE",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "netIncome",
+                  "validation": "VALIDADO",
+                  "value": 138.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 25.66666666666667,
+              "cause": null
+            },
+            {
+              "code": "DEUDA_TOTAL",
+              "unit": "MONEDA",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_NETA",
+              "unit": "MONEDA",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "cash",
+                  "validation": "VALIDADO",
+                  "value": 200,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_SOBRE_PATRIMONIO",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "equity",
+                  "validation": "VALIDADO",
+                  "value": 540,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "DEUDA_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "shortDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "longDebt",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "shortDebt:AUSENTE, longDebt:AUSENTE"
+            },
+            {
+              "code": "COBERTURA_INTERESES",
+              "unit": "VECES",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "interest",
+                  "validation": "AUSENTE",
+                  "value": null,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": "Concepto ausente"
+                }
+              ],
+              "warnings": [],
+              "status": "BLOQUEADO_DEPENDENCIA",
+              "value": null,
+              "cause": "interest:AUSENTE"
+            },
+            {
+              "code": "EBITDA",
+              "unit": "MONEDA",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 250,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_EBITDA",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "ebit",
+                  "validation": "VALIDADO",
+                  "value": 190,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "da",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 25,
+              "cause": null
+            },
+            {
+              "code": "FCF",
+              "unit": "MONEDA",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 138.60000000000002,
+              "cause": null
+            },
+            {
+              "code": "MARGEN_FCF",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "cfo",
+                  "validation": "VALIDADO",
+                  "value": 198.60000000000002,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "capex",
+                  "validation": "VALIDADO",
+                  "value": 60,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 13.860000000000003,
+              "cause": null
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO",
+              "unit": "MONEDA",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 60,
+              "cause": null
+            },
+            {
+              "code": "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "inventory",
+                  "validation": "VALIDADO",
+                  "value": 70,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "receivables",
+                  "validation": "VALIDADO",
+                  "value": 80,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "payables",
+                  "validation": "VALIDADO",
+                  "value": 90,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "revenue",
+                  "validation": "VALIDADO",
+                  "value": 1000,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 6,
+              "cause": null
+            },
+            {
+              "code": "PASIVO_SOBRE_ACTIVOS",
+              "unit": "PORCENTAJE",
+              "periodEnd": "2025-12-31",
+              "fiscalYear": 2025,
+              "currency": "USD",
+              "publication": "2026-03-01",
+              "document": "QA-16-2025",
+              "provider": "QA_SINTETICO",
+              "inputs": [
+                {
+                  "field": "liabilities",
+                  "validation": "VALIDADO",
+                  "value": 210,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                },
+                {
+                  "field": "assets",
+                  "validation": "VALIDADO",
+                  "value": 750,
+                  "recordIds": [],
+                  "verificationId": null,
+                  "reason": null
+                }
+              ],
+              "warnings": [],
+              "status": "CERTIFICADO",
+              "value": 28.000000000000004,
+              "cause": null
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

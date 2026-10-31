@@ -1,0 +1,2357 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/examples/4"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "companyId": -4,
+      "asOf": "2026-03-31",
+      "configuration": {
+        "companyId": -4,
+        "inputHash": "be09551f1de5ded686bab2ec800ec2ad324f73d60e4a2cbf9eba6d3e004b993a",
+        "scenarios": [
+          {
+            "volume": {
+              "values": [
+                85,
+                88.39999999999999,
+                91.8,
+                95.2,
+                98.6
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "price": {
+              "values": [
+                10,
+                10,
+                10,
+                10,
+                10
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "aftermarketPerUnit": {
+              "values": [
+                0.425,
+                0.425,
+                0.425,
+                0.425,
+                0.425
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "retirementRate": {
+              "values": [
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "cogsRate": {
+              "values": [
+                0.5650000000000001,
+                0.5650000000000001,
+                0.5650000000000001,
+                0.5650000000000001,
+                0.5650000000000001
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "opexRate": {
+              "values": [
+                0.20500000000000002,
+                0.20500000000000002,
+                0.20500000000000002,
+                0.20500000000000002,
+                0.20500000000000002
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dio": {
+              "values": [
+                45,
+                45,
+                45,
+                45,
+                45
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dso": {
+              "values": [
+                30,
+                30,
+                30,
+                30,
+                30
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dpo": {
+              "values": [
+                45,
+                45,
+                45,
+                45,
+                45
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractAssetRate": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractLiabilityRate": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "debtIssue": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "debtRepay": {
+              "values": [
+                5,
+                5,
+                5,
+                5,
+                5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "equityIssue": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "payout": {
+              "values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "leasePayment": {
+              "values": [
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "leaseRate": {
+              "values": [
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.adjustments": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.nolLimit": {
+              "values": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.payable": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.receivable": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.dta": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.dtl": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.oci": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.operatingPaid": {
+              "values": [
+                46.63470852294051,
+                47.96591425513695,
+                49.83250817704823,
+                51.67771971618146,
+                53.504651254837285
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "rf": {
+              "values": [
+                0.037000000000000005,
+                0.037000000000000005,
+                0.037000000000000005,
+                0.037000000000000005,
+                0.037000000000000005
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "beta": {
+              "values": [
+                1.1,
+                1.1,
+                1.1,
+                1.1,
+                1.1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "erp": {
+              "values": [
+                0.055,
+                0.055,
+                0.055,
+                0.055,
+                0.055
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "kd": {
+              "values": [
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "weightEquity": {
+              "values": [
+                0.8,
+                0.8,
+                0.8,
+                0.8,
+                0.8
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax": {
+              "values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalG": {
+              "values": [
+                0.02,
+                0.02,
+                0.02,
+                0.02,
+                0.02
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalNOPAT": {
+              "values": [
+                187,
+                187,
+                187,
+                187,
+                187
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalROIC": {
+              "values": [
+                0.12,
+                0.12,
+                0.12,
+                0.12,
+                0.12
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_0": {
+              "values": [
+                11.049999999999999,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_0": {
+              "values": [
+                4.25,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_0": {
+              "values": [
+                5,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_1": {
+              "values": [
+                0,
+                11.049999999999999,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_1": {
+              "values": [
+                0,
+                4.25,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_1": {
+              "values": [
+                0,
+                5,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_2": {
+              "values": [
+                0,
+                0,
+                11.049999999999999,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_2": {
+              "values": [
+                0,
+                0,
+                4.25,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_2": {
+              "values": [
+                0,
+                0,
+                5,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                11.049999999999999,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                4.25,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                5,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                11.049999999999999
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                4.25
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_0": {
+              "values": [
+                10.2,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_1": {
+              "values": [
+                0,
+                10.2,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_2": {
+              "values": [
+                0,
+                0,
+                10.2,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_3": {
+              "values": [
+                0,
+                0,
+                0,
+                10.2,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                10.2
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            }
+          },
+          {
+            "volume": {
+              "values": [
+                100,
+                104,
+                108,
+                112,
+                116
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "price": {
+              "values": [
+                10,
+                10,
+                10,
+                10,
+                10
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "aftermarketPerUnit": {
+              "values": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "retirementRate": {
+              "values": [
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "cogsRate": {
+              "values": [
+                0.55,
+                0.55,
+                0.55,
+                0.55,
+                0.55
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "opexRate": {
+              "values": [
+                0.2,
+                0.2,
+                0.2,
+                0.2,
+                0.2
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dio": {
+              "values": [
+                45,
+                45,
+                45,
+                45,
+                45
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dso": {
+              "values": [
+                30,
+                30,
+                30,
+                30,
+                30
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dpo": {
+              "values": [
+                45,
+                45,
+                45,
+                45,
+                45
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractAssetRate": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractLiabilityRate": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "debtIssue": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "debtRepay": {
+              "values": [
+                5,
+                5,
+                5,
+                5,
+                5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "equityIssue": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "payout": {
+              "values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "leasePayment": {
+              "values": [
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "leaseRate": {
+              "values": [
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.adjustments": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.nolLimit": {
+              "values": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.payable": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.receivable": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.dta": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.dtl": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.oci": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.operatingPaid": {
+              "values": [
+                62.51362708763368,
+                65.7605308219178,
+                68.73471933715095,
+                71.65770976027396,
+                74.53558604452051
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "rf": {
+              "values": [
+                0.035,
+                0.035,
+                0.035,
+                0.035,
+                0.035
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "beta": {
+              "values": [
+                1.1,
+                1.1,
+                1.1,
+                1.1,
+                1.1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "erp": {
+              "values": [
+                0.055,
+                0.055,
+                0.055,
+                0.055,
+                0.055
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "kd": {
+              "values": [
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "weightEquity": {
+              "values": [
+                0.8,
+                0.8,
+                0.8,
+                0.8,
+                0.8
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax": {
+              "values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalG": {
+              "values": [
+                0.02,
+                0.02,
+                0.02,
+                0.02,
+                0.02
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalNOPAT": {
+              "values": [
+                220,
+                220,
+                220,
+                220,
+                220
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalROIC": {
+              "values": [
+                0.12,
+                0.12,
+                0.12,
+                0.12,
+                0.12
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_0": {
+              "values": [
+                13,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_0": {
+              "values": [
+                5,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_0": {
+              "values": [
+                5,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_1": {
+              "values": [
+                0,
+                13,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_1": {
+              "values": [
+                0,
+                5,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_1": {
+              "values": [
+                0,
+                5,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_2": {
+              "values": [
+                0,
+                0,
+                13,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_2": {
+              "values": [
+                0,
+                0,
+                5,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_2": {
+              "values": [
+                0,
+                0,
+                5,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                13,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                5,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                5,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                13
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_0": {
+              "values": [
+                12,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_1": {
+              "values": [
+                0,
+                12,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_2": {
+              "values": [
+                0,
+                0,
+                12,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_3": {
+              "values": [
+                0,
+                0,
+                0,
+                12,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                12
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            }
+          },
+          {
+            "volume": {
+              "values": [
+                114.99999999999999,
+                119.6,
+                124.19999999999999,
+                128.79999999999998,
+                133.39999999999998
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "price": {
+              "values": [
+                10,
+                10,
+                10,
+                10,
+                10
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "aftermarketPerUnit": {
+              "values": [
+                0.575,
+                0.575,
+                0.575,
+                0.575,
+                0.575
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "retirementRate": {
+              "values": [
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "cogsRate": {
+              "values": [
+                0.535,
+                0.535,
+                0.535,
+                0.535,
+                0.535
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "opexRate": {
+              "values": [
+                0.195,
+                0.195,
+                0.195,
+                0.195,
+                0.195
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dio": {
+              "values": [
+                45,
+                45,
+                45,
+                45,
+                45
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dso": {
+              "values": [
+                30,
+                30,
+                30,
+                30,
+                30
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "dpo": {
+              "values": [
+                45,
+                45,
+                45,
+                45,
+                45
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractAssetRate": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractLiabilityRate": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "debtIssue": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "debtRepay": {
+              "values": [
+                5,
+                5,
+                5,
+                5,
+                5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "equityIssue": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "payout": {
+              "values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "leasePayment": {
+              "values": [
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857,
+                7.857142857142857
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "leaseRate": {
+              "values": [
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.adjustments": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.nolLimit": {
+              "values": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.payable": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.receivable": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.dta": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.dtl": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.oci": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax.operatingPaid": {
+              "values": [
+                80.21954033941637,
+                85.8058935359589,
+                90.18666452978795,
+                94.47414793364725,
+                98.67863665055648
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "rf": {
+              "values": [
+                0.033,
+                0.033,
+                0.033,
+                0.033,
+                0.033
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "beta": {
+              "values": [
+                1.1,
+                1.1,
+                1.1,
+                1.1,
+                1.1
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "erp": {
+              "values": [
+                0.055,
+                0.055,
+                0.055,
+                0.055,
+                0.055
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "kd": {
+              "values": [
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "weightEquity": {
+              "values": [
+                0.8,
+                0.8,
+                0.8,
+                0.8,
+                0.8
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "tax": {
+              "values": [
+                0.25,
+                0.25,
+                0.25,
+                0.25,
+                0.25
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalG": {
+              "values": [
+                0.02,
+                0.02,
+                0.02,
+                0.02,
+                0.02
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalNOPAT": {
+              "values": [
+                252.99999999999997,
+                252.99999999999997,
+                252.99999999999997,
+                252.99999999999997,
+                252.99999999999997
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "terminalROIC": {
+              "values": [
+                0.12,
+                0.12,
+                0.12,
+                0.12,
+                0.12
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_0": {
+              "values": [
+                14.95,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_0": {
+              "values": [
+                5.75,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_0": {
+              "values": [
+                5,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_1": {
+              "values": [
+                0,
+                14.95,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_1": {
+              "values": [
+                0,
+                5.75,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_1": {
+              "values": [
+                0,
+                5,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_2": {
+              "values": [
+                0,
+                0,
+                14.95,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_2": {
+              "values": [
+                0,
+                0,
+                5.75,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_2": {
+              "values": [
+                0,
+                0,
+                5,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                14.95,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                5.75,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_3": {
+              "values": [
+                0,
+                0,
+                0,
+                5,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                14.95
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.INT_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                5.75
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.ROU_nuevo_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                5
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_0": {
+              "values": [
+                13.799999999999999,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_1": {
+              "values": [
+                0,
+                13.799999999999999,
+                0,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_2": {
+              "values": [
+                0,
+                0,
+                13.799999999999999,
+                0,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_3": {
+              "values": [
+                0,
+                0,
+                0,
+                13.799999999999999,
+                0
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "capex.PPE_mant_4": {
+              "values": [
+                0,
+                0,
+                0,
+                0,
+                13.799999999999999
+              ],
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            }
+          }
+        ],
+        "constants": {
+          "installedBase": {
+            "value": 400,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          "shares": {
+            "value": 100,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          "nol": {
+            "value": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          "capexPayableOpening": {
+            "value": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          }
+        },
+        "terminalSource": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor) — política terminal QA",
+        "valuationBridge": {
+          "asOf": "2026-03-31",
+          "currency": "USD",
+          "basis": "consolidated",
+          "norm": "QA_NO_CERTIFICA_NORMA",
+          "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+          "reviewer": "QA_ARNES",
+          "balances": {
+            "cash": {
+              "value": 200,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "assets": {
+              "value": 750,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "liabilities": {
+              "value": 200,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "equity": {
+              "value": 550,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "inventory": {
+              "value": 70,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "receivables": {
+              "value": 80,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "payables": {
+              "value": 90,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "debt": {
+              "value": 80,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "leaseDebt": {
+              "value": 30,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractAssets": {
+              "value": 0,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "contractLiabilities": {
+              "value": 0,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "taxPayable": {
+              "value": 0,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "taxReceivable": {
+              "value": 0,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "deferredTaxAsset": {
+              "value": 0,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            },
+            "deferredTaxLiability": {
+              "value": 0,
+              "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+              "referenceDate": "2026-03-31"
+            }
+          }
+        },
+        "assets": [
+          {
+            "id": "PPE_apertura",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 300,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2020-01-01",
+            "fechaAdquisicion": "2020-01-01",
+            "financiacion": "APERTURA",
+            "adicionAnio": null,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "INT_apertura",
+            "clase": "INTANGIBLE",
+            "metodo": "LINEAL",
+            "neto": 30,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2020-01-01",
+            "fechaAdquisicion": "2020-01-01",
+            "financiacion": "APERTURA",
+            "adicionAnio": null,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "ROU_apertura",
+            "clase": "ROU",
+            "metodo": "LINEAL",
+            "neto": 30,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2020-01-01",
+            "fechaAdquisicion": "2020-01-01",
+            "financiacion": "APERTURA",
+            "adicionAnio": null,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "SUELO",
+            "clase": "NO_DEPRECIABLE",
+            "metodo": "NINGUNO",
+            "neto": 40,
+            "residual": 0,
+            "vida": 0,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2020-01-01",
+            "fechaAdquisicion": "2020-01-01",
+            "financiacion": "APERTURA",
+            "adicionAnio": null,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_nuevo_0",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2026-01-01",
+            "fechaAdquisicion": "2026-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 0,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "INT_nuevo_0",
+            "clase": "INTANGIBLE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2026-01-01",
+            "fechaAdquisicion": "2026-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 0,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "ROU_nuevo_0",
+            "clase": "ROU",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2026-07-01",
+            "fechaAdquisicion": "2026-07-01",
+            "financiacion": "LEASE",
+            "adicionAnio": 0,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_nuevo_1",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2027-01-01",
+            "fechaAdquisicion": "2027-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 1,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "INT_nuevo_1",
+            "clase": "INTANGIBLE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2027-01-01",
+            "fechaAdquisicion": "2027-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 1,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "ROU_nuevo_1",
+            "clase": "ROU",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2027-07-01",
+            "fechaAdquisicion": "2027-07-01",
+            "financiacion": "LEASE",
+            "adicionAnio": 1,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_nuevo_2",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2028-01-01",
+            "fechaAdquisicion": "2028-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 2,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "INT_nuevo_2",
+            "clase": "INTANGIBLE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2028-01-01",
+            "fechaAdquisicion": "2028-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 2,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "ROU_nuevo_2",
+            "clase": "ROU",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2028-07-01",
+            "fechaAdquisicion": "2028-07-01",
+            "financiacion": "LEASE",
+            "adicionAnio": 2,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_nuevo_3",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2029-01-01",
+            "fechaAdquisicion": "2029-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 3,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "INT_nuevo_3",
+            "clase": "INTANGIBLE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2029-01-01",
+            "fechaAdquisicion": "2029-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 3,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "ROU_nuevo_3",
+            "clase": "ROU",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2029-07-01",
+            "fechaAdquisicion": "2029-07-01",
+            "financiacion": "LEASE",
+            "adicionAnio": 3,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_nuevo_4",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2030-01-01",
+            "fechaAdquisicion": "2030-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 4,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "INT_nuevo_4",
+            "clase": "INTANGIBLE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2030-01-01",
+            "fechaAdquisicion": "2030-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 4,
+            "tipoCapex": "CRECIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "ROU_nuevo_4",
+            "clase": "ROU",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 5,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2030-07-01",
+            "fechaAdquisicion": "2030-07-01",
+            "financiacion": "LEASE",
+            "adicionAnio": 4,
+            "tipoCapex": "NO_APLICABLE",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_mant_0",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2026-01-01",
+            "fechaAdquisicion": "2026-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 0,
+            "tipoCapex": "MANTENIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_mant_1",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2027-01-01",
+            "fechaAdquisicion": "2027-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 1,
+            "tipoCapex": "MANTENIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_mant_2",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2028-01-01",
+            "fechaAdquisicion": "2028-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 2,
+            "tipoCapex": "MANTENIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_mant_3",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2029-01-01",
+            "fechaAdquisicion": "2029-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 3,
+            "tipoCapex": "MANTENIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          },
+          {
+            "id": "PPE_mant_4",
+            "clase": "PPE",
+            "metodo": "LINEAL",
+            "neto": 0,
+            "residual": 0,
+            "vida": 8,
+            "tasaDecreciente": 0,
+            "reservas": 1,
+            "fechaServicio": "2030-01-01",
+            "fechaAdquisicion": "2030-01-01",
+            "financiacion": "CAJA",
+            "adicionAnio": 4,
+            "tipoCapex": "MANTENIMIENTO",
+            "pagoPendienteApertura": 0,
+            "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+            "referenceDate": "2026-03-31"
+          }
+        ],
+        "accountingPolicy": {
+          "source": "QA sintético del arnés tests/qa_fixtures.mjs (no es evidencia de emisor)",
+          "referenceDate": "2026-03-31",
+          "reviewer": "QA_ARNES",
+          "scope": "PERIMETRO_COMPLETO",
+          "lines": []
+        }
+      },
+      "note": "Configuración QA sintética completa: enviar como {asOf, configuration} a POST /api/sectorial/companies/-4/evaluate"
+    }
+  }
+}

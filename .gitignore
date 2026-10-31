@@ -51,3 +51,12 @@ valuation_engine/research/coste_capital/fase3/evidencias/*.local.json
 *.njsproj
 *.sln
 *.sw?
+
+# Módulo sectorial: datos locales de ejecución, compilados y artefactos de QA regenerables
+sectorial/app/data/
+sectorial/app/public/
+sectorial/app/tests/.ssr/
+sectorial/app/qa_api*/
+*.ndjson
+*.draft.xlsx
+*.native-input.json

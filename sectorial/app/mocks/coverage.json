@@ -1,0 +1,112 @@
+{
+  "generatedAt": "2026-10-30T23:55:49.322Z",
+  "source": "MOCK_SINTETICO",
+  "warning": "Cobertura calculada sobre los expedientes MOCK sintéticos. No representa la base de datos real.",
+  "definition": {
+    "core": [
+      "INGRESOS",
+      "BENEFICIO_BRUTO",
+      "EBIT",
+      "BENEFICIO_NETO",
+      "GASTO_INTERESES",
+      "EFECTIVO",
+      "ACTIVOS_TOTALES",
+      "PASIVOS_TOTALES",
+      "PATRIMONIO_NETO",
+      "DEUDA_CORTO_PLAZO",
+      "DEUDA_LARGO_PLAZO",
+      "FLUJO_CAJA_OPERATIVO",
+      "CAPEX",
+      "DEPRECIACION_AMORTIZACION",
+      "INVENTARIOS",
+      "CUENTAS_COBRAR",
+      "CUENTAS_PAGAR"
+    ]
+  },
+  "matrix": [
+    {
+      "country": "US",
+      "year": 2022,
+      "companies": 19,
+      "companiesWithReport": 19,
+      "pcv": {
+        "expected": 323,
+        "present": 244,
+        "certified": 244,
+        "conflict": 0,
+        "absent": 79,
+        "notApplicable": 0,
+        "grossCoverage": 75.54,
+        "certifiedCoverage": 75.54
+      },
+      "kpi": {
+        "expected": 323,
+        "certified": 207,
+        "certifiedCoverage": 64.09
+      }
+    },
+    {
+      "country": "US",
+      "year": 2023,
+      "companies": 19,
+      "companiesWithReport": 19,
+      "pcv": {
+        "expected": 323,
+        "present": 244,
+        "certified": 244,
+        "conflict": 0,
+        "absent": 79,
+        "notApplicable": 0,
+        "grossCoverage": 75.54,
+        "certifiedCoverage": 75.54
+      },
+      "kpi": {
+        "expected": 323,
+        "certified": 207,
+        "certifiedCoverage": 64.09
+      }
+    },
+    {
+      "country": "US",
+      "year": 2024,
+      "companies": 19,
+      "companiesWithReport": 19,
+      "pcv": {
+        "expected": 323,
+        "present": 244,
+        "certified": 242,
+        "conflict": 2,
+        "absent": 79,
+        "notApplicable": 0,
+        "grossCoverage": 75.54,
+        "certifiedCoverage": 74.92
+      },
+      "kpi": {
+        "expected": 323,
+        "certified": 202,
+        "certifiedCoverage": 62.54
+      }
+    },
+    {
+      "country": "US",
+      "year": 2025,
+      "companies": 19,
+      "companiesWithReport": 19,
+      "pcv": {
+        "expected": 323,
+        "present": 244,
+        "certified": 244,
+        "conflict": 0,
+        "absent": 79,
+        "notApplicable": 0,
+        "grossCoverage": 75.54,
+        "certifiedCoverage": 75.54
+      },
+      "kpi": {
+        "expected": 323,
+        "certified": 207,
+        "certifiedCoverage": 64.09
+      }
+    }
+  ]
+}

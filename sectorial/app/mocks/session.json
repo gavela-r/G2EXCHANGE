@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/sectorial/session"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "version": "G2_SECTORIAL_DEV_0.3",
+      "mode": "MOCK_SINTETICO",
+      "dataSource": "MOCK_SINTETICO",
+      "databaseWrites": false,
+      "token": "<token de sesión local; cambia en cada arranque>",
+      "engineHash": "3b76805dbd8d6fd8160009110a548d4126e748ae4463ca8488acdab928c7f424",
+      "buildStale": false,
+      "capabilities": {
+        "xlsxGenerator": "PORTABLE_SHEETJS",
+        "nativeValidation": "MICROSOFT_EXCEL_COM_SI_INSTALADO",
+        "downloadPolicy": "SOLO_XLSX_CON_VALIDACION_NATIVA_VIGENTE"
+      }
+    }
+  }
+}

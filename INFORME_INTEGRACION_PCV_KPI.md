@@ -203,8 +203,13 @@ La diferencia de 0,01 pp en Japón es la variación natural entre las dos medici
 - **Autor**: la identidad configurada en el repositorio.
 - **Carpeta original**: el árbol de trabajo de `G2EXCHANGE` no se ha modificado salvo el `.env` local, que está en `.gitignore`.
 
+Commits nuevos sobre `7d67677`, más este de cierre, «Record the new commits in the integration report»:
 ```
-<rellenado al cerrar: git log --oneline 7d67677..HEAD>
+dbb1239 Measure the Taiwan quarterly-as-annual defect against Eulerpool (partial run)
+77396e9 Document provider integration, conflict causes and before/after coverage
+b86e536 Diagnose verification conflicts and prepare versioned, reversible corrections
+ed9b15c Add J-Quants V2 and Eulerpool connectors; derive Taiwan annual income from four quarters
+7ec485d Route every FinMind request through a shared, persistent provider guard
 ```
 
 ## 18. Secretos

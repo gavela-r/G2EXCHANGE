@@ -1,13 +1,13 @@
 # Informe de cobertura PCV/KPI 2022–2025
 
-Medido directamente en MySQL operativo, en solo lectura, el 2026-10-31 22:10 UTC, después de todas las escrituras verificadas (incluido el lote 3 de Taiwán, que no cambia la cobertura certificada) (`npm run sectorial:coverage`; datos en `sectorial/app/coverage/cobertura_final_entrega.json`).
+Medido directamente en MySQL operativo, en solo lectura, el 2026-11-01 04:12 UTC, después de todas las escrituras verificadas (lote 3 de Taiwán y las dos pasadas de la reparación global de KPI persistidos, que no cambian la cobertura certificada: ésta se mide desde PCV certificados con el mismo criterio que la API) (`npm run sectorial:coverage`; datos en `sectorial/app/coverage/cobertura_final_entrega.json`).
 
 ## Definición
 - **Universo**: todas las empresas del país, sin exclusiones, congelado con sha256 por país (US `9e0113d3`, JP `32a2836f`, TW `e7cb71fb`).
 - **Denominador**: universo × 17 conceptos núcleo (PCV) y universo × 17 KPI.
 - **Informe**: el último informe anual de cada empresa y año, de la fuente primaria del país (SEC_EDGAR / EDINET / FINMIND·MOPS).
 - **Celda certificada**: PCV no nulo, prueba primaria (`INSERTED`/`NULL_FILLED`/`VERIFIED_EXISTING`) y sin conflicto sin resolver.
-- **KPI certificado**: todas sus entradas certificadas en el mismo informe. Esta medición no aplica la comprobación de perímetro de ROE del cálculo operativo, que retiró 1.183 ROE, así que la cifra de KPI es una cota superior de, como mucho, 1.183 celdas en total.
+- **KPI certificado**: todas sus entradas certificadas en el mismo informe y, para el ROE, beneficio y patrimonio de perímetro conocido e igual: el mismo criterio que la API sectorial (`kpi.cjs`).
 
 ## Matriz
 | País | Año | Universo | Informe anual válido | PCV esperados | PCV presentes | PCV certificados | Cobertura PCV (30/10 → final) | KPI esperados | KPI certificados | Cobertura KPI (30/10 → final) |

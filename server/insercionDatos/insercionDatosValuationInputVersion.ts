@@ -2,6 +2,7 @@ import { fechaCivil as fechaCivilSQL } from "../src/capital/fecha";
 import { normalizarPartidas } from "../src/valoracion/datos";
 import { Request, Response } from "express";
 import conexion from "../conexion/bd";
+import { kpiSincronizarInforme } from "./insercionKPIInformeFinanciero";
 import crypto from "crypto";
 
 
@@ -364,66 +365,13 @@ async function vivCargarPartidas(
 // 6. CARGAR KPI DEL INFORME
 // ============================================================================
 
+// KPI calculados con las reglas vigentes (kpiSincronizarInforme sin escribir), nunca leídos de la tabla persistida.
 async function vivCargarKpis(
     informeId: number
 ): Promise<VIVKpis> {
-
-    const db =
-        conexion as any;
-
-    const [rows]:
-        any =
-        await db.query(
-        `
-        SELECT
-
-            kpi,
-
-            valor
-
-        FROM kpi_financiero_informe
-
-        WHERE informe_id = ?
-        `,
-        [
-            informeId
-        ]
-    );
-
-    const kpis:
-        VIVKpis =
-        {};
-
-    for (
-        const row
-        of rows
-    ) {
-
-        const codigo =
-            String(
-                row.kpi ||
-                ""
-            )
-            .trim()
-            .toUpperCase();
-
-        const valor =
-            vivNumero(
-                row.valor
-            );
-
-        if (
-            valor === null
-        ) {
-            continue;
-        }
-
-        (kpis as any)[
-            codigo
-        ] =
-            valor;
-    }
-
+    const sync = await kpiSincronizarInforme(conexion as any, informeId, false);
+    const kpis: VIVKpis = {};
+    for (const k of sync.vigentes) { const valor = vivNumero(k.valor); if (valor !== null) (kpis as any)[String(k.kpi).trim().toUpperCase()] = valor; }
     return kpis;
 }
 

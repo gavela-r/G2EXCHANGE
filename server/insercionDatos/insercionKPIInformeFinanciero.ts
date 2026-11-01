@@ -368,7 +368,18 @@ export function kpiValoresDeFilas(filas: any[], fuente: string, certificadas: Ma
 //
 // ============================================================================
 
-export function kpiCalcularInforme(
+// Requisito de deuda (BOTH_VERIFIED_DEBT_COMPONENTS_REQUIRED_V2): un KPI de deuda exige los dos componentes. Es una
+// condición de elegibilidad, no un cambio de fórmula; vive aquí para que TODOS los escritores la apliquen.
+export const KPI_DEUDA = new Set(["DEUDA_TOTAL", "DEUDA_NETA", "DEUDA_SOBRE_PATRIMONIO", "DEUDA_SOBRE_ACTIVOS"]);
+export const kpiDeudaCompleta = (v: KpiPartidas) => Number.isFinite(v.DEUDA_CORTO_PLAZO) && Number.isFinite(v.DEUDA_LARGO_PLAZO);
+export function kpiCalcularInforme(informeId: number, p: KpiPartidas): KpiCalculado[] {
+    return kpiCalcularInformeSinRequisitos(informeId, p).filter(k => !KPI_DEUDA.has(k.kpi) || kpiDeudaCompleta(p));
+}
+(kpiCalcularInforme as any).pcvPrerequisitesV2 = true;
+(kpiCalcularInforme as any).originalFormula = (id: number, p: KpiPartidas) => kpiCalcularInformeSinRequisitos(id, p);
+
+// Fórmulas sin el requisito de deuda (sólo para clasificar la causa de una exclusión).
+export function kpiCalcularInformeSinRequisitos(
     informeId: number,
     p: KpiPartidas
 ): KpiCalculado[] {
@@ -789,80 +800,12 @@ export function kpiCalcularInforme(
 // 7. GUARDAR KPI
 // ============================================================================
 
-export async function kpiGuardar(
-    kpis:
-        KpiCalculado[]
-): Promise<number> {
-
-    if (
-        kpis.length === 0
-    ) {
-
-        return 0;
-    }
-
-    const db =
-        conexion as any;
-
-    const valores =
-        kpis.map(
-            k => [
-
-                k.informeId,
-
-                k.kpi,
-
-                k.valor,
-
-                k.unidad,
-
-                k.nivelConfianza
-            ]
-        );
-
-    const [resultado]:
-        any =
-        await db.query(
-        `
-        INSERT INTO
-            kpi_financiero_informe
-        (
-            informe_id,
-
-            kpi,
-
-            valor,
-
-            unidad,
-
-            nivel_confianza
-        )
-
-        VALUES ?
-
-        ON DUPLICATE KEY UPDATE
-
-            valor =
-                VALUES(valor),
-
-            unidad =
-                VALUES(unidad),
-
-            nivel_confianza =
-                VALUES(nivel_confianza),
-
-            fecha_calculo =
-                CURRENT_TIMESTAMP
-        `,
-        [
-            valores
-        ]
-    );
-
-    return Number(
-        resultado?.affectedRows ||
-        valores.length
-    );
+// Compatibilidad: no escribe los valores recibidos; vuelve a sincronizar cada informe con el escritor único
+// (kpiSincronizarInforme) para que nunca se persista un KPI calculado con reglas antiguas.
+export async function kpiGuardar(kpis: KpiCalculado[]): Promise<number> {
+    let n = 0;
+    for (const id of new Set(kpis.map(k => k.informeId))) { const r = await kpiSincronizarInforme(conexion as any, id, true); n += r.escribir.length + r.eliminados.length; }
+    return n;
 }
 
 
@@ -931,38 +874,14 @@ ejecutarCalculoKpiFinancieroInforme() {
 
         try {
 
-            const partidas =
-                await kpiCargarPartidas(
-                    informe.informe_id
-                );
-
-
-            const kpis =
-                kpiCalcularInforme(
-                    informe.informe_id,
-                    partidas
-                );
-
-
-            if (
-                kpis.length ===
-                0
-            ) {
-
+            // Escritura única (kpiSincronizarInforme): reglas vigentes; retira con causa lo que ya no es calculable.
+            const sync = await kpiSincronizarInforme(conexion as any, informe.informe_id, true);
+            if (sync.iguales + sync.escribir.length === 0) {
                 sinKpi++;
-
             } else {
-
-                kpisCalculados +=
-                    kpis.length;
-
-
-                operacionesBD +=
-                    await kpiGuardar(
-                        kpis
-                    );
+                kpisCalculados += sync.iguales + sync.escribir.length;
+                operacionesBD += sync.escribir.length + sync.eliminados.length;
             }
-
 
             procesados++;
 
@@ -1392,3 +1311,84 @@ ejecutarCalculoKpiFinancieroInforme()
 // spread credito
 //
 // ============================================================================
+
+
+// ============================================================================
+// SINCRONIZACIÓN ÚNICA DE KPI PERSISTIDOS
+// ============================================================================
+// Única escritura de kpi_financiero_informe: PCV del informe → SELECCION_OBSERVACIONES (con evidencia primaria) →
+// normalización → perímetro → fórmulas con requisitos vigentes. Escribe sólo cambios reales (DECIMAL(30,10): media
+// unidad de la décima cifra decimal), retira con causa los KPI que ya no son calculables y nunca guarda un valor que
+// la columna redondearía a cero. Idempotente: una segunda ejecución no cambia nada.
+export interface SincronizacionKpi {
+    informeId: number; antes: { kpi: string; valor: string | null; unidad: string | null; nivel_confianza: string | null }[];
+    escribir: KpiCalculado[]; vigentes: KpiCalculado[]; nuevos: number; cambiados: number; iguales: number;
+    eliminados: { kpi: string; motivo: string }[]; pendientes: { kpi: string; motivo: string }[];
+    sinResolver: number; error: string | null;
+}
+const kpiIgual = (a: number, b: number) => Math.abs(a - b) <= 5e-11 + Math.abs(b) * 1e-14;
+const KPI_ENTRADAS: Record<string, string[]> = {
+    MARGEN_BRUTO: ["BENEFICIO_BRUTO", "INGRESOS"], MARGEN_EBIT: ["EBIT", "INGRESOS"], MARGEN_NETO: ["BENEFICIO_NETO", "INGRESOS"],
+    ROA: ["BENEFICIO_NETO", "ACTIVOS_TOTALES"], ROE: ["BENEFICIO_NETO", "PATRIMONIO_NETO"], EBITDA: ["EBIT", "DEPRECIACION_AMORTIZACION"],
+    MARGEN_EBITDA: ["EBIT", "DEPRECIACION_AMORTIZACION", "INGRESOS"], COBERTURA_INTERESES: ["EBIT", "GASTO_INTERESES"],
+    FCF: ["FLUJO_CAJA_OPERATIVO", "CAPEX"], MARGEN_FCF: ["FLUJO_CAJA_OPERATIVO", "CAPEX", "INGRESOS"],
+    CAPITAL_CIRCULANTE_OPERATIVO: ["INVENTARIOS", "CUENTAS_COBRAR", "CUENTAS_PAGAR"],
+    CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS: ["INVENTARIOS", "CUENTAS_COBRAR", "CUENTAS_PAGAR", "INGRESOS"],
+    PASIVO_SOBRE_ACTIVOS: ["PASIVOS_TOTALES", "ACTIVOS_TOTALES"]
+};
+export async function kpiSincronizarInforme(db: { query: (sql: string, params?: unknown[]) => Promise<any> }, informeId: number, aplicar: boolean): Promise<SincronizacionKpi> {
+    const [antes]: any = await db.query("SELECT kpi,valor,unidad,nivel_confianza FROM kpi_financiero_informe WHERE informe_id=? ORDER BY kpi" + (aplicar ? " FOR UPDATE" : ""), [informeId]);
+    const r: SincronizacionKpi = { informeId, antes, escribir: [], vigentes: [], nuevos: 0, cambiados: 0, iguales: 0, eliminados: [], pendientes: [], sinResolver: 0, error: null };
+    const [rows]: any = await db.query("SELECT pcv.id,tc.concepto_estandar,pcv.concepto,tc.signo_esperado,tc.alias_sec,tc.alias_edinet,tc.alias_finmind,pcv.importe FROM partida_contable_valor pcv JOIN taxonomia_concepto tc ON tc.id=pcv.concepto_estandar_id WHERE pcv.informe_id=?", [informeId]);
+    const [meta]: any = await db.query("SELECT fuente FROM informe_financiero WHERE id=?", [informeId]);
+    const [prov]: any = await db.query("SELECT concept_code, JSON_EXTRACT(evidence_json,'$.evidence.record_id') rid, JSON_EXTRACT(evidence_json,'$.evidence.record_ids') rids FROM pcv_verification_evidence WHERE informe_id=? AND outcome IN ('INSERTED','NULL_FILLED','VERIFIED_EXISTING')", [informeId]);
+    const certificadas = new Map<string, Set<number>>();
+    for (const x of prov) {
+        const set = certificadas.get(x.concept_code) ?? certificadas.set(x.concept_code, new Set()).get(x.concept_code)!;
+        for (const id of [x.rid, ...(Array.isArray(x.rids) ? x.rids : typeof x.rids === "string" ? JSON.parse(x.rids) : [])]) if (id !== null && Number.isInteger(Number(id))) set.add(Number(id));
+    }
+    // Conflicto con la evidencia primaria sin resolver (CONFLICT_PRESERVED sin CONFLICT_RESOLVED de una regla versionada,
+    // mismo criterio que cobertura_mysql.cjs y el adaptador): sin filas certificadas el concepto no alimenta ningún KPI;
+    // con filas certificadas sólo se usan éstas. Nunca se calcula con un original que la fuente primaria contradice.
+    const [preservados]: any = await db.query("SELECT concept_code, evidence_hash FROM pcv_verification_evidence WHERE informe_id=? AND outcome='CONFLICT_PRESERVED'", [informeId]);
+    const [resueltos]: any = await db.query("SELECT JSON_UNQUOTE(JSON_EXTRACT(evidence_json,'$.resolves')) resuelve FROM pcv_verification_evidence WHERE informe_id=? AND outcome='CONFLICT_RESOLVED' AND JSON_UNQUOTE(JSON_EXTRACT(evidence_json,'$.correction.rule')) IN ('JP_EFECTIVO_EQUIVALENTES_V1','US_PERIODO_V1','JP_RESUMEN_MISMO_DOC_V1','JP_SIGNO_CANONICO_V1')", [informeId]);
+    const hashesResueltos = new Set<string>(resueltos.map((x: any) => String(x.resuelve)));
+    const enConflicto = new Set<string>(preservados.filter((x: any) => !hashesResueltos.has(String(x.evidence_hash))).map((x: any) => String(x.concept_code)));
+    const filasUsables = rows.filter((f: any) => !enConflicto.has(f.concepto_estandar) || certificadas.get(f.concepto_estandar)?.has(Number(f.id)));
+    const excluidosPorConflicto = [...enConflicto].filter(c => !filasUsables.some((f: any) => f.concepto_estandar === c));
+    let valores: KpiPartidas | null = null, sinResolver: string[] = [];
+    try { const v = kpiValoresDeFilas(filasUsables, meta[0]?.fuente ?? "", certificadas); valores = v.valores; sinResolver = v.seleccion.sinResolver.map(x => x.concepto); }
+    catch (e: any) { r.error = String(e?.message ?? e).slice(0, 200); }
+    r.sinResolver = sinResolver.length;
+    // BOTH_VERIFIED_DEBT_COMPONENTS_REQUIRED_V2: los KPI de deuda exigen los DOS componentes con evidencia primaria
+    // (record_id certificado de una fila usable no nula), no sólo presentes.
+    const componenteVerificado = (c: string) => filasUsables.some((f: any) => f.concepto_estandar === c && f.importe !== null && certificadas.get(c)?.has(Number(f.id)));
+    const deudaVerificada = componenteVerificado("DEUDA_CORTO_PLAZO") && componenteVerificado("DEUDA_LARGO_PLAZO");
+    const calculados = valores ? kpiCalcularInforme(informeId, valores).filter(k => k.valor !== null && Number.isFinite(Number(k.valor)) && (!KPI_DEUDA.has(k.kpi) || deudaVerificada)) : [];
+    const sinRequisitos = new Set(valores ? kpiCalcularInformeSinRequisitos(informeId, valores).filter(k => k.valor !== null).map(k => k.kpi) : []);
+    const previo = new Map<string, any>(antes.map((k: any) => [k.kpi, k])), validos = new Set<string>();
+    for (const k of calculados) {
+        if (k.valor !== 0 && Math.abs(k.valor as number) < 5e-11) { r.pendientes.push({ kpi: k.kpi, motivo: "PRECISION_DECIMAL_30_10" }); continue; }
+        validos.add(k.kpi); r.vigentes.push(k); const p = previo.get(k.kpi);
+        if (!p || p.valor === null) { r.nuevos++; r.escribir.push(k); }
+        else if (!kpiIgual(Number(p.valor), Number(k.valor)) || p.unidad !== k.unidad || String(p.nivel_confianza ?? "").toLowerCase() !== String(k.nivelConfianza ?? "").toLowerCase()) { r.cambiados++; r.escribir.push(k); }
+        else r.iguales++;
+    }
+    for (const k of antes) {
+        if (validos.has(k.kpi)) continue;
+        if (r.pendientes.some(x => x.kpi === k.kpi)) { r.eliminados.push({ kpi: k.kpi, motivo: "PRECISION_DECIMAL_30_10" }); continue; }
+        const entradas = KPI_ENTRADAS[k.kpi] ?? [];
+        const motivo = r.error ? "NORMALIZACION_RECHAZADA"
+            : KPI_DEUDA.has(k.kpi) && (sinRequisitos.has(k.kpi) || !deudaVerificada) ? "PRERREQUISITO_DEUDA_V2"
+            : k.kpi === "ROE" && valores?.BENEFICIO_NETO !== undefined && valores?.PATRIMONIO_NETO !== undefined ? "PERIMETRO_DESCONOCIDO_O_INCOMPATIBLE"
+            : entradas.some(c => excluidosPorConflicto.includes(c)) || (KPI_DEUDA.has(k.kpi) && excluidosPorConflicto.some(c => c.startsWith("DEUDA_"))) ? "ENTRADA_EN_CONFLICTO:" + excluidosPorConflicto.join(",")
+            : entradas.some(c => sinResolver.includes(c)) || (KPI_DEUDA.has(k.kpi) && sinResolver.some(c => c.startsWith("DEUDA_"))) ? "ENTRADA_SIN_RESOLVER:" + sinResolver.join(",")
+            : "ENTRADA_AUSENTE_O_NULA";
+        r.eliminados.push({ kpi: k.kpi, motivo });
+    }
+    if (aplicar) {
+        if (r.eliminados.length) await db.query("DELETE FROM kpi_financiero_informe WHERE informe_id=? AND kpi IN (?)", [informeId, r.eliminados.map(x => x.kpi)]);
+        if (r.escribir.length) await db.query("INSERT INTO kpi_financiero_informe(informe_id,kpi,valor,unidad,nivel_confianza,fecha_calculo) VALUES ? ON DUPLICATE KEY UPDATE valor=VALUES(valor),unidad=VALUES(unidad),nivel_confianza=VALUES(nivel_confianza),fecha_calculo=CURRENT_TIMESTAMP", [r.escribir.map(k => [k.informeId, k.kpi, k.valor, k.unidad, k.nivelConfianza, new Date()])]);
+    }
+    return r;
+}

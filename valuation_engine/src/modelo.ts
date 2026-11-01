@@ -622,6 +622,8 @@ export function valorar(dataOriginal:ModeloInput,options:{root?:string}={}):Resu
     currency: data.valuation_currency,
     premium_methodology: prem.method,
     minority_interest_status: minorityStatus,
+    // El valor por acción es provisional mientras falte una entrada del puente EV → patrimonio (minoritarios).
+    fair_value_provisional: minorityStatus === 'NO_ESTIMABLE',
 
     wacc_scenarios: wacc,
     valuations: values,

@@ -3,7 +3,7 @@ import type {Pool,RowDataPacket,ResultSetHeader} from 'mysql2/promise';
 import {createHash} from 'node:crypto';
 import type {DatoPcv,InformePcv} from './normalizarProveedores';
 import {normalizarPartidas,type Partida} from '../valoracion/datos';
-import {kpiCalcularInforme,kpiValoresDeFilas} from '../../insercionDatos/insercionKPIInformeFinanciero';
+import {kpiCalcularInforme,kpiValoresDeFilas,kpiSincronizarInforme} from '../../insercionDatos/insercionKPIInformeFinanciero';
 
 // currency: JPY para EDINET; para la SEC, la moneda de presentación del propio documento (USD salvo emisores
 // extranjeros 20-F/40-F que presentan en su moneda, p. ej. EUR o CAD).
@@ -64,6 +64,9 @@ export async function persistirRecuperacionVerificada(pool:Pool,i:InformePcv,dat
    else{const [r]=await c.query<ResultSetHeader>('INSERT INTO kpi_financiero_informe(informe_id,kpi,valor,unidad,nivel_confianza,fecha_calculo) VALUES(?,?,?,?,?,CURRENT_TIMESTAMP)',[i.id,k.kpi,k.valor,k.unidad,k.nivelConfianza]);id=r.insertId;result.kpiNew++;}
    await record('KPI',id,'FORMULA_EXISTENTE',k.kpi,old||null,k,{context:ctx,formulaHash:digest(kpiCalcularInforme.toString()),inputsHash:digest(inputEvidence),inputs:inputEvidence});
   }
+  // Estado final del informe con las reglas vigentes (selección, evidencia, perímetro, deuda V2): mismo escritor que el
+  // recálculo global; retira con causa los KPI que ya no son calculables.
+  if(write){const sync=await kpiSincronizarInforme(c as any,i.id,true);(result as any).kpiSincronizacion={escritos:sync.escribir.length,iguales:sync.iguales,eliminados:sync.eliminados};}
   if(write)await c.commit();else await c.rollback();return result;
  }catch(e){await c.rollback();throw e;}finally{c.release();}
 }

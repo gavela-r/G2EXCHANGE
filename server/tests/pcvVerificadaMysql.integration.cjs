@@ -19,7 +19,10 @@ test('Per-field conflicts preserve originals, attest a coherent subset, commit i
  const r=await persist(p,i,rows,ctx,true);assert.equal(r.pcv,2);assert.equal(r.conflicts,1);assert.equal(r.kpiUpdated,1);
  assert.equal((await c.query('SELECT importe FROM partida_contable_valor WHERE id=1'))[0][0].importe,'100.0000');
  assert.equal(Number((await c.query("SELECT valor FROM kpi_financiero_informe WHERE kpi='ROA'"))[0][0].valor),5);
- assert.equal(Number((await c.query("SELECT valor FROM kpi_financiero_informe WHERE kpi='MARGEN_NETO'"))[0][0].valor),50);
+ // INGRESOS queda en conflicto sin resolver con la SEC (100 guardado frente a 200 oficial): ningún KPI que lo use es
+ // válido, así que el MARGEN_NETO previo (calculado con 100) se retira; ROA (sin ingresos) sí se recalcula.
+ assert.equal((await c.query("SELECT COUNT(*) n FROM kpi_financiero_informe WHERE kpi='MARGEN_NETO'"))[0][0].n,0);
+ assert.equal(r.kpiSincronizacion.eliminados.find(e=>e.kpi==='MARGEN_NETO').motivo,'ENTRADA_EN_CONFLICTO:INGRESOS');
  assert.equal((await c.query("SELECT COUNT(*) n FROM kpi_financiero_informe WHERE kpi='MARGEN_BRUTO'"))[0][0].n,0);
  const again=await persist(p,i,rows,ctx,true);assert.equal(again.pcv,0);assert.equal(again.kpiUpdated,0);assert.equal(again.kpiNew,0);
  const [[count]]=await c.query('SELECT COUNT(*) n FROM pcv_verification_evidence');await persist(p,i,rows,ctx,true);assert.equal((await c.query('SELECT COUNT(*) n FROM pcv_verification_evidence'))[0][0].n,count.n);

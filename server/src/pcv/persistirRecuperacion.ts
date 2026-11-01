@@ -3,7 +3,7 @@ import type {Pool,RowDataPacket,ResultSetHeader} from 'mysql2/promise';
 import {createHash} from 'node:crypto';
 import type {DatoPcv,InformePcv} from './normalizarProveedores';
 import {normalizarPartidas} from '../valoracion/datos';
-import {kpiCalcularInforme,kpiValoresDeFilas} from '../../insercionDatos/insercionKPIInformeFinanciero';
+import {kpiCalcularInforme,kpiValoresDeFilas,kpiSincronizarInforme} from '../../insercionDatos/insercionKPIInformeFinanciero';
 
 export async function persistirRecuperacion(pool:Pool,informe:InformePcv,datos:DatoPcv[],write:boolean){
  const c=await pool.getConnection();const result={pcv:0,kpiNew:0,kpiUpdated:0,kpiSkipped:false,precisionPending:0,byProvider:{} as Record<string,number>};
@@ -42,6 +42,9 @@ export async function persistirRecuperacion(pool:Pool,informe:InformePcv,datos:D
    else{const [r]=await c.query<ResultSetHeader>('INSERT INTO kpi_financiero_informe(informe_id,kpi,valor,unidad,nivel_confianza,fecha_calculo) VALUES(?,?,?,?,?,CURRENT_TIMESTAMP)',[informe.id,k.kpi,k.valor,k.unidad,k.nivelConfianza]);id=r.insertId;result.kpiNew++;}
    await record('KPI',id,'FORMULA_EXISTENTE',k.kpi,old||null,k,{formulaHash:createHash('sha256').update(kpiCalcularInforme.toString()).digest('hex'),inputsHash:createHash('sha256').update(JSON.stringify(parts)).digest('hex')});
   }
+  // Estado final del informe con las reglas vigentes (selección, evidencia, perímetro, deuda V2): mismo escritor que el
+  // recálculo global; retira con causa los KPI que ya no son calculables.
+  if(write){const sync=await kpiSincronizarInforme(c as any,informe.id,true);(result as any).kpiSincronizacion={escritos:sync.escribir.length,iguales:sync.iguales,eliminados:sync.eliminados};}
   if(write)await c.commit();else await c.rollback();return result;
  }catch(e){await c.rollback();throw e;}finally{c.release();}
 }

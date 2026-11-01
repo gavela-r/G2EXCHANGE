@@ -62,6 +62,26 @@ Leyenda: **IMPL** implementado · **PROB** probado · **MYSQL** aplicado en MySQ
 
 Snapshots reversibles en `private_backups/congelacion-20261101/` (`--restaurar <archivo>`).
 
+### KPI persistidos: reparación global (01/11/2026)
+- **Escritor único** `kpiSincronizarInforme` (`server/insercionDatos/insercionKPIInformeFinanciero.ts`): PCV → `SELECCION_OBSERVACIONES_V2` con evidencia primaria → normalización → perímetro → fórmulas. El requisito de deuda V2 vive ahora dentro de `kpiCalcularInforme` (antes sólo lo aplicaban los scripts). Lo usan el recálculo global, el motor universal, `calcularYGuardarKpis`, `kpiGuardar` y los recuperadores (`persistirRecuperacion*`). Lectores: `/api/valoracion` (trazas) y las versiones de entrada (VIV) calculan con las reglas vigentes y no leen la tabla; la traza marca `kpis_persistidos_obsoletos`.
+- **Producción, dos pasadas** (cada una ensayada antes con la tabla de producción copiada en la copia aislada: aplicar, verificar con 0 cambios, restaurar a la huella de partida, reaplicar a la misma huella final, idempotencia con 0 cambios; la 1.ª además con interrupción + reanudación). La 2.ª pasada añade dos defectos reales detectados por `pcvVerificadaMysql`: (a) entradas con conflicto preservado sin resolver frente a la fuente primaria se usaban en el cálculo; (b) los KPI de deuda sólo exigían que los dos componentes existieran, no que estuvieran certificados.
+
+| Concepto | 1.ª pasada | 2.ª pasada (conflictos + deuda verificada) |
+|---|---|---|
+| Informes examinados | 61.180 (universo sha256 `637845228ec5…`) | 61.180 (mismo universo) |
+| Informes con cambios | 7.987 | 26.401 |
+| KPI antes → después | 719.189 → 690.775 (huella `4195699981` → `1119425869`) | 690.775 → **582.574** (huella → `1641685433`, = ensayo) |
+| Iguales (ya cumplían) | 689.522 | 582.574 |
+| Recalculados con valor distinto | 568 | 0 |
+| Nuevos | 685 | 0 |
+| Eliminados con causa | 29.099: 23.994 `PRERREQUISITO_DEUDA_V2`, 4.199 `ENTRADA_SIN_RESOLVER`, 906 `ENTRADA_AUSENTE_O_NULA` | 108.201: 102.075 `PRERREQUISITO_DEUDA_V2` (componente de deuda sin evidencia primaria), 5.637 `ENTRADA_EN_CONFLICTO`, 489 `ENTRADA_AUSENTE_O_NULA` |
+| Pendientes | 0 | 0 (0 normalizaciones rechazadas, 0 por precisión) |
+
+- Total del día: 719.189 → 582.574 KPI; 137.300 retirados con causa registrada, 568 recalculados, 685 nuevos, 0 pendientes. Ningún KPI conforme se borró: cada retirada tiene motivo en `exclusiones.ndjson`.
+- Verificación posterior en producción: simulación global con **0 cambios**; 0 KPI de deuda sin ambos componentes certificados; 0 evidencias primarias de Taiwán; 0 informes FinMind con fecha de publicación.
+- Copias restaurables: tabla completa previa `private_backups/kpi-global-20261101/kpi_financiero_informe_produccion_previo.sql` (sha256 `9f935e84…`); `produccion/aplicar/snapshot.ndjson` (1.ª) y `produccion2/aplicar/snapshot.ndjson` (2.ª), restaurables con `--restaurar` en orden inverso. Causas por KPI en `exclusiones.ndjson` de cada directorio.
+- La estimación previa (31.709 informes / 126.080 KPI de deuda) contaba informes con ambos componentes; el alcance real medido es el de la tabla.
+
 ## 2. Migraciones (estado exacto)
 | Migración | Ensayada en copia aislada | Aplicada | Reversible |
 |---|---|---|---|
@@ -118,7 +138,6 @@ Comprobación tras transferir: el sha256 del volcado (`.sha256`), la restauraci�
 **Espacio en disco**: las carpetas `G2EXCHANGE/private_backups/bundle-validation-*` (≈ 34 GB) son validaciones de Codex con copias de volcados del propio `private_backups`. Los tamaños coinciden con los originales, pero falta comparar su sha256 con los archivos `.sha256` del principal. Hasta entonces se conservan. `pcv-recovery-controls-2026-10-30T02-20-10-655Z.tar` (30 GB) tiene su propio manifiesto y no es redundante.
 
 ## 5. Pendiente (orden recomendado)
-0. **Defecto interno conocido — tabla persistida `kpi_financiero_informe`**: los informes que nunca se han recalculado conservan KPI calculados con políticas anteriores. Cota superior: unos 31.709 informes con 126.080 KPI de deuda sin deuda a corto plazo verificada (política V2) y entradas contradictorias sin `SELECCION_OBSERVACIONES_V2`. **No afecta** a la cobertura certificada ni al DCF (calculan desde PCV certificados), pero el endpoint de KPI del backend devuelve esos valores. Corrección: recálculo global con `server/scripts/recalcular-kpi-correcciones.cjs --informes <todos>` por tramos, con snapshot, ensayado antes en la copia aislada. No se ha improvisado en la congelación por ser una escritura masiva.
 1. **Propietario**: revocar las 20 variables comprometidas (§4) y configurar el `.env` nuevo; después reanudar los recuperadores (§3).
 2. Con una clave EDINET nueva: mapear la taxonomía IFRS (Toyota, Sony) y extraer el beneficio atribuible como concepto separado; verificar los cuatro ejercicios con evidencia primaria.
 3. Certificación de Taiwán: consentimiento de TWSE o descargas manuales de MOPS (`DATA_SOURCES.md`).

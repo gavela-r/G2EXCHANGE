@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-31T22:17:05.546Z",
+  "generatedAt": "2026-11-01T04:18:42.355Z",
   "source": "MYSQL_SOLO_LECTURA",
   "database": "2GB",
-  "snapshotAt": "2026-10-31 22:10:32.959625",
+  "snapshotAt": "2026-11-01 04:12:45.901781",
   "definition": {
     "core": [
       "INGRESOS",

@@ -42,6 +42,7 @@ Al congelar el backend el coordinador y los vigilantes US/JP están **detenidos*
 | Qué comprobar | Cómo |
 |---|---|
 | Cobertura | `npm run sectorial:coverage` (MySQL, solo lectura) |
+| KPI persistidos conformes | `node server/scripts/recalcular-kpi-correcciones.cjs --todos --checkpoint <dir nuevo>` (sin `--aplicar`): `informesConCambios` debe ser 0 |
 | Integridad de los lotes de Taiwán | `G2_PROJECT_ROOT=<proyecto> node sectorial/app/tools/verificar_lotes_tw.cjs` (sale con 1 si hay discrepancias) |
 | Integridad de las 60 valoraciones | `node sectoriales_auditoria_20261030/integracion_v02/tests/integridad_claude.cjs` |
 | Conflictos nuevos tras una reparación | contar `CONFLICT_PRESERVED` posteriores a la fecha de aplicación en celdas de `pcv_correccion_auditoria` |

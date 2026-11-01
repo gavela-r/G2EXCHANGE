@@ -7,7 +7,8 @@
 // división por cero; un cálculo con entradas no certificadas nunca cuenta.
 // Uso: G2_PROJECT_ROOT=<proyecto con .env> node tools/cobertura_mysql.cjs [salida.json]
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const{database}=require('../runtime.cjs'),{KPIS:TODOS}=require('../kpi.cjs'),{MAP}=require('../adapter.cjs');
+const{database}=require('../runtime.cjs'),{KPIS:TODOS}=require('../kpi.cjs'),{MAP,perimeter}=require('../adapter.cjs');
+const {noEsBeneficioNeto}=require(path.resolve(__dirname,'../../../server/dist/src/pcv/seleccionObservaciones'));
 const CORE=['INGRESOS','BENEFICIO_BRUTO','EBIT','BENEFICIO_NETO','GASTO_INTERESES','EFECTIVO','ACTIVOS_TOTALES','PASIVOS_TOTALES','PATRIMONIO_NETO','DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO','FLUJO_CAJA_OPERATIVO','CAPEX','DEPRECIACION_AMORTIZACION','INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR'];
 // La cobertura KPI oficial usa los 17 KPI históricos (sin `method`). Los indicadores de días de circulante (DSO, DPO,
 // DIO, CCC, con `method`) y ΔNWC se miden APARTE (derivedIndicators): no cambian la métrica comparada entre entregas.
@@ -32,8 +33,10 @@ async function main(out){
    const years=new Map(),nwcYears=new Map();
    for(const year of YEARS){
     const reports=await q(`WITH ranked AS (SELECT inf.id informe_id,inf.empresa_id,ROW_NUMBER() OVER(PARTITION BY inf.empresa_id ORDER BY inf.fecha_fin_periodo DESC,inf.fecha_publicacion DESC,inf.id DESC) rn FROM informe_financiero inf JOIN empresa e ON e.id=inf.empresa_id JOIN pais p ON p.id=e.pais_id WHERE p.codigo_iso=? AND inf.tipo_periodo='ANUAL' AND inf.fuente IN (?) AND YEAR(inf.fecha_fin_periodo)=?) SELECT informe_id,empresa_id FROM ranked WHERE rn=1`,[country,FUENTES_PAIS[country],year]);
-    const reportIds=reports.map(r=>Number(r.informe_id)),key=(i,c)=>i+'|'+c,present=new Set(),cert=new Set(),conflict=new Set(),resolved=new Set(),reportsWithPcv=new Set();
+    const tags=new Map(),reportIds=reports.map(r=>Number(r.informe_id)),key=(i,c)=>i+'|'+c,present=new Set(),cert=new Set(),conflict=new Set(),resolved=new Set(),reportsWithPcv=new Set();
     for(let k=0;k<reportIds.length;k+=2000){const chunk=reportIds.slice(k,k+2000);if(!chunk.length)continue;
+     // Perímetro de beneficio y patrimonio (como kpi.cjs): ROE sólo con perímetros conocidos e iguales.
+     for(const r of await q(`SELECT DISTINCT p.informe_id,t.concepto_estandar c,p.concepto tag FROM partida_contable_valor p JOIN taxonomia_concepto t ON t.id=p.concepto_estandar_id WHERE p.informe_id IN (?) AND p.importe IS NOT NULL AND t.concepto_estandar IN ('BENEFICIO_NETO','PATRIMONIO_NETO')`,[chunk])){if(noEsBeneficioNeto({concepto_estandar:r.c,concepto:r.tag}))continue;const k=key(r.informe_id,r.c);(tags.get(k)??tags.set(k,new Set()).get(k)).add(perimeter(r.c,r.tag));}
      for(const r of await q(`SELECT DISTINCT p.informe_id,t.concepto_estandar c FROM partida_contable_valor p JOIN taxonomia_concepto t ON t.id=p.concepto_estandar_id WHERE p.informe_id IN (?) AND p.importe IS NOT NULL AND t.concepto_estandar IN (?)`,[chunk,CONCEPTOS])){present.add(key(r.informe_id,r.c));reportsWithPcv.add(Number(r.informe_id));}
      for(const r of await q(`SELECT DISTINCT informe_id,concept_code c,outcome FROM pcv_verification_evidence WHERE informe_id IN (?) AND concept_code IN (?) AND outcome IN (?)`,[chunk,CONCEPTOS,CERT]))cert.add(key(r.informe_id,r.c));
      // Un conflicto deja de bloquear sólo si TODOS los CONFLICT_PRESERVED de la celda tienen un CONFLICT_RESOLVED de una
@@ -50,7 +53,8 @@ async function main(out){
      for(const k of KPIS)if(k.inputs.every(f=>trasCorregir(codeOf[f])))corr.kpi++;
      for(const c of CORE){const s=byConcept[c],k=key(id,c);if(present.has(k)){presentN++;s.present++;if(conflict.has(k)){conflictN++;s.conflict++;all=false;}else if(cert.has(k)){certN++;s.certified++;}else{unverified++;s.presentUnverified++;all=false;}}else{absentInReport++;s.absentInReport++;all=false;}}
      if(all)companiesComplete++;
-     for(const k of KPIS){if(k.inputs.every(f=>certified(codeOf[f]))){kpi.certified++;kpi.byKpi[k.code]++;}else kpi.blockedByInputs++;}
+     const per=c=>{const s=tags.get(key(id,c));return s&&s.size===1?[...s][0]:null;},roeOk=per('BENEFICIO_NETO')&&per('BENEFICIO_NETO')===per('PATRIMONIO_NETO');
+     for(const k of KPIS){if(k.inputs.every(f=>certified(codeOf[f]))&&(k.code!=='ROE'||roeOk)){kpi.certified++;kpi.byKpi[k.code]++;}else kpi.blockedByInputs++;}
      // Coste de ventas: declarado o derivado como ingresos − beneficio bruto (misma regla que adapter.cjs).
      const certDer=f=>f==='cogs'?certified('COSTE_VENTAS')||(certified('INGRESOS')&&certified('BENEFICIO_BRUTO')):certified(codeOf[f]);
      for(const k of DERIVADOS)if(k.inputs.every(certDer))der[k.code]++;

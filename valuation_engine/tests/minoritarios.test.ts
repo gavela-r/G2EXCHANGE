@@ -15,7 +15,7 @@ const aprobado=(input:ModeloInput)=>{input.premium_methodology='MANUAL_APPROVED'
 test('minoritarios sin cifra acreditada: NO_ESTIMABLE, REVIEW y aviso; el Excel lo rotula sin romper la celda numérica',()=>{
   const input=base();delete (input as any).minority_interest_fy0;
   const r=valorar(input,{root});
-  assert.equal(r.minority_interest_status,'NO_ESTIMABLE');assert.equal(r.status,'REVIEW');
+  assert.equal(r.minority_interest_status,'NO_ESTIMABLE');assert.equal(r.status,'REVIEW');assert.equal(r.fair_value_provisional,true);
   assert.ok(r.warnings.some(w=>/participaciones no dominantes/i.test(w)));
   const out=path.join(fs.mkdtempSync(path.join(os.tmpdir(),'g2nci-')),'v.xlsx');escribirExcel(input,r,out,root);
   const con=XLSX.readFile(out).Sheets['01_CONTROL'];const rows=Object.keys(con).filter(k=>/^A\d+$/.test(k));
@@ -25,7 +25,7 @@ test('minoritarios acreditados con primas aprobadas: ACREDITADO y no fuerza REVI
   try{
     const input=aprobado(base());input.minority_interest_fy0=10;
     const r=valorar(input,{root});
-    assert.equal(r.minority_interest_status,'ACREDITADO');
+    assert.equal(r.minority_interest_status,'ACREDITADO');assert.equal(r.fair_value_provisional,false);
     assert.ok(!r.warnings.some(w=>/participaciones no dominantes no acreditadas/i.test(w)));
   }catch(e:any){if(!/MANUAL_APPROVED|aprob/i.test(String(e.message)))throw e;}
 });

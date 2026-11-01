@@ -9,6 +9,7 @@ import crypto from 'node:crypto';
 import {clasificacionVigente,perfilPorCapitalizacion} from './evidencia';
 import {identidadEstructural} from '../capital/historico';
 import {perimetroDeEtiqueta} from '../pcv/seleccionObservaciones';
+import {kpiSincronizarInforme} from '../../insercionDatos/insercionKPIInformeFinanciero';
 
 export type Db = Pick<PoolConnection,'query'>;
 export type PerfilRating = 'GRANDE_NO_FINANCIERA'|'PEQUEÑA_RIESGOSA'|'FINANCIERA';
@@ -145,8 +146,12 @@ export async function prepararInstrumento(db:Db,id:number,asOf:string,hip?:Hipot
     if(financieras.length && f.fiscal_year!==financieras[financieras.length-1].fiscal_year+1)throw new Pendiente('PERIODOS_INCONSISTENTES','Cierres anuales no consecutivos');
     const prev=financieras[financieras.length-1];if(prev?.nwc_balance!==undefined&&f.nwc_balance!==undefined)f.change_nwc=f.nwc_balance-prev.nwc_balance;
     financieras.push(f);versiones.push(Number(vs[0].id));ultimo=p;ultimasPartidas=parts as any[];
-    const [kpis]=await db.query<RowDataPacket[]>('SELECT kpi,unidad,valor,nivel_confianza FROM kpi_financiero_informe WHERE informe_id=? ORDER BY kpi,id',[r.id]);
-    traces.push({informe_id:r.id,fecha:fechaCivil(r.fecha_fin_periodo),fuente:r.fuente,version_id:vs[0].id,hash_version:vs[0].hash_inputs,fecha_version:vs[0].fecha_fin_periodo,calidad:n.calidad,advertencias:n.advertencias,kpis});
+    // KPI con las reglas vigentes (escritor único en modo lectura). Un valor persistido que no coincide se identifica
+    // como obsoleto y nunca se devuelve como válido.
+    const sync=await kpiSincronizarInforme(db as any,r.id,false);
+    const kpis=sync.vigentes.map(k=>({kpi:k.kpi,unidad:k.unidad,valor:k.valor,nivel_confianza:k.nivelConfianza,estado:'CALCULADO_REGLAS_VIGENTES'}));
+    const kpisPersistidosObsoletos=[...sync.escribir.filter(k=>sync.antes.some(x=>x.kpi===k.kpi)).map(k=>({kpi:k.kpi,motivo:'VALOR_PERSISTIDO_DIFIERE'})),...sync.eliminados.map(e=>({kpi:e.kpi,motivo:e.motivo}))];
+    traces.push({informe_id:r.id,fecha:fechaCivil(r.fecha_fin_periodo),fuente:r.fuente,version_id:vs[0].id,hash_version:vs[0].hash_inputs,fecha_version:vs[0].fecha_fin_periodo,calidad:n.calidad,advertencias:n.advertencias,kpis,kpis_persistidos_obsoletos:kpisPersistidosObsoletos});
   }
   const need0=(k:string)=>{if(ultimo[k]===undefined)throw new Pendiente('DATO_PENDIENTE',`${k} FY0 ausente`);return ultimo[k];};
   const automaticProfile=perfilPorCapitalizacion(i.codigo_iso,i.moneda,cfg.valuationMethodFamily,Number(prices[0].precio_cierre),ultimo.ACCIONES_EN_CIRCULACION);

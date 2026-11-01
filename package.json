@@ -25,7 +25,7 @@
     "sectorial:qa:excel": "node sectorial/app/tests/qa_api_final.mjs",
     "verify": "npm run build && npm test && npm run sectorial:test",
     "sectorial:qa:excel:portable": "node sectorial/app/tests/qa_portable.mjs 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    "test:integration:mysql": "node --test server/tests/pcvIdempotencia.integration.cjs server/tests/pcvVerificadaMysql.integration.cjs",
+    "test:integration:mysql": "node --test server/tests/pcvIdempotencia.integration.cjs server/tests/pcvVerificadaMysql.integration.cjs server/tests/kpiSincronizacion.integration.cjs",
     "handoff:manifest": "node scripts/manifiesto-entrega.cjs"
   },
   "engines": {

@@ -25,7 +25,7 @@ Garantías del adaptador (`sectorial/app/adapter.cjs`):
 - **Proyecciones** en tres escenarios a partir de hipótesis citadas: `valuation_engine/src/proyecciones.ts` y `sectorial/app/engine/src/plan.ts`.
 - **FCFF** = EBIT·(1−t) + D&A − CAPEX − ΔNWC, descontado con WACC.
 - **Valor terminal**: Gordon.
-- **Puente de valor**: EV → equity (deuda neta y otras partidas) → valor por acción. Participaciones no dominantes (motor del backend): patrimonio total − patrimonio de la dominante del mismo informe FY0 cuando ambos están declarados; si no, aviso `NO_ESTIMABLE` en `data_quality_warnings` (nunca un cero supuesto). En el motor sectorial se declaran como otra partida del perímetro contable.
+- **Puente de valor**: EV → equity (deuda neta y otras partidas) → valor por acción. Participaciones no dominantes (motor del backend): patrimonio total − patrimonio de la dominante del mismo informe FY0 cuando ambos están declarados; si no, `minority_interest_status: NO_ESTIMABLE`, `fair_value_provisional: true`, estado `REVIEW`, aviso, rótulo en Excel (`01_CONTROL`) y PDF: el valor por acción es provisional y nunca se presenta como validado (el 0 operativo se mantiene solo porque 39 fórmulas usan esa celda). En el motor sectorial se declaran como otra partida del perímetro contable.
 - **Familias de modelo**: FCFF (general), FCFE con capital requerido (banca y seguros) y AFFO/NAV (REIT).
 
 ## 4. KPI (`server/insercionDatos/insercionKPIInformeFinanciero.ts`)

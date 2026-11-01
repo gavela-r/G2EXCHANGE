@@ -1,3 +1,4 @@
+if(process.env.G2_SKIP_MYSQL_TESTS){require('node:test').test('Capital MySQL (requiere MySQL local con datos de desarrollo)',{skip:true},()=>{});return;}
 const {test,before,after}=require('node:test'),assert=require('node:assert/strict'),path=require('node:path'),crypto=require('node:crypto');
 const dev=process.env.CAPITAL_DB_NAME||'g2_capital_dev_20261029';
 process.env.CAPITAL_DB_NAME='g2_capital_dev_pruebas_20261029';

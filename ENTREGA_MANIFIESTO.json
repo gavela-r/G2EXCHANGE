@@ -1,10 +1,10 @@
 {
- "generado": "2026-11-01T04:19:37.376Z",
+ "generado": "2026-11-01T12:57:30.112Z",
  "rama": "entrega/frontend-handoff-20261031",
- "commit": "ef4aae6a4007175d4f8b0f3bd330e6194392a5de",
- "archivos": 662,
- "bytes": 16909032,
- "sha256DelInventario": "c37f2faf050bb3850977665d804eaba270427223f5efb5e0e257a08636610daf",
+ "commit": "2299281c1028a120130e89bdb5de8d731b240954",
+ "archivos": 677,
+ "bytes": 17109927,
+ "sha256DelInventario": "44b78f6b352338194320ea43d6ce5b9c064d9476c1c0b073760b6d1f7c075782",
  "paquetes": [
   {
    "paquete": "client/package.json",
@@ -122,8 +122,8 @@
   },
   {
    "archivo": "DATABASE.md",
-   "bytes": 10370,
-   "sha256": "39cbad714b1340d9e308ca3175213dde287b593fb963b6dbc551baf31f5c317f"
+   "bytes": 11497,
+   "sha256": "fd7c6eafc086f701224165cbb46d9479a2f4b6d26e58fc3faa6cb499ef4ae893"
   },
   {
    "archivo": "DATA_SOURCES.md",
@@ -142,8 +142,8 @@
   },
   {
    "archivo": "HANDOFF.md",
-   "bytes": 18140,
-   "sha256": "75d69dad3ad532e518047e2628b5c25042e27e8374388da480f89dce1013931f"
+   "bytes": 19403,
+   "sha256": "17eef38ce6c4fdd98b874de31780e88d0da9e968e2a269b596e49244a02a87e7"
   },
   {
    "archivo": "OPERATIONS.md",
@@ -167,8 +167,13 @@
   },
   {
    "archivo": "TEST_REPORT.md",
-   "bytes": 7352,
-   "sha256": "f62b398128eda1dd231f3aba2454c1f35e8bc167df084c3dd0d46e3bfeebeb86"
+   "bytes": 8165,
+   "sha256": "11e83edabfc08936025afea435251337efe74700fe4ab8bf4a62232a4a8790d3"
+  },
+  {
+   "archivo": "VALORACION_ADAPTATIVA.md",
+   "bytes": 12755,
+   "sha256": "4caa3b6e6062c6c899f67e1f02569e269100e6606d7b96f0011f20adf851d0a6"
   },
   {
    "archivo": "VALUATION_ENGINE.md",
@@ -307,8 +312,8 @@
   },
   {
    "archivo": "package.json",
-   "bytes": 1987,
-   "sha256": "57bff8a1d2cc48672f4b824dc58919aafeda819c92943098b07d54bccdc2daad"
+   "bytes": 2320,
+   "sha256": "51e50e9a059b21f6dc0ddb3aa053c8173c4b1829d5bce914d524025f4b0601a3"
   },
   {
    "archivo": "scripts/manifiesto-entrega.cjs",
@@ -326,9 +331,14 @@
    "sha256": "630dabef7576be0ec57075246b60723974fd79bf7ddd33d955d385f6cd0c3eed"
   },
   {
+   "archivo": "sectorial/app/adaptativo.cjs",
+   "bytes": 31372,
+   "sha256": "70bc7717859763314fc67e238898ca919f567dddef9f82b7401e896e73b238d0"
+  },
+  {
    "archivo": "sectorial/app/adapter.cjs",
-   "bytes": 14660,
-   "sha256": "bef701b8ada3d9e16f58683e0fc59ad3bf783aa42b092fc0fc35775ea2151f26"
+   "bytes": 27770,
+   "sha256": "d3e9086dd9e64df3e3d2e5d2e80b163b2c350d22d6dddf0db61c448474164040"
   },
   {
    "archivo": "sectorial/app/build-client.mjs",
@@ -381,6 +391,11 @@
    "sha256": "5fb0bbf05bc794aee42381ab73204225f8c72a02eeab07df35bfc93dced6f409"
   },
   {
+   "archivo": "sectorial/app/coverage/backtest_proyeccion_20261101.json",
+   "bytes": 37023,
+   "sha256": "60eb64d1add4a397bf998898b4c0fd4adc73e0b9a43167001d9bfb69b49c245a"
+  },
+  {
    "archivo": "sectorial/app/coverage/cadena_casos_reales_20261031.json",
    "bytes": 2473,
    "sha256": "99aadcdd3fbaf5d603b6eb228682f98ac30865a545e1ca486bef4baf64a95a41"
@@ -394,6 +409,11 @@
    "archivo": "sectorial/app/coverage/cobertura_actual.json",
    "bytes": 83170,
    "sha256": "d1c0a0675b2ea0743162bef847fe240ffd54515a4b00e783abdcb0ab9d1edb23"
+  },
+  {
+   "archivo": "sectorial/app/coverage/cobertura_adaptativa_20261101.json",
+   "bytes": 15335,
+   "sha256": "f4c89c553fa6179cbfe0a2ec16d102d318a37287fe91c85f93a531887e69d813"
   },
   {
    "archivo": "sectorial/app/coverage/cobertura_final_entrega.json",
@@ -448,7 +468,7 @@
   {
    "archivo": "sectorial/app/engine/evidencias/pruebas_ts.json",
    "bytes": 8925,
-   "sha256": "e3298728a8e21d1be00c0eaf6f3460dd9cf39b0302fbb32d6bd3b2830f8c9fe2"
+   "sha256": "5cfd8ac8f774aed9bc83ee025a3464c3fae9a7dda873b52f21994e81a797bc00"
   },
   {
    "archivo": "sectorial/app/engine/probar.cjs",
@@ -457,13 +477,13 @@
   },
   {
    "archivo": "sectorial/app/engine/src/activos.ts",
-   "bytes": 7638,
-   "sha256": "bf492e69ce5264a939e4271e7beb505bd204cb31ba5a7d9ef8b138ec845c185f"
+   "bytes": 7679,
+   "sha256": "13028625d5ac375cb89ff7bbc39f79f0935460dbd7792d48e4030ce1e19d357f"
   },
   {
    "archivo": "sectorial/app/engine/src/activosAvanzados.ts",
-   "bytes": 9456,
-   "sha256": "dbdcd5116bd7d5dea86a19689e288b3903242919704ba88d5b26801e40a5af45"
+   "bytes": 9613,
+   "sha256": "3c40c31e983c7c694dd4003cf0bdf845b815b1268dd454d99daa30b4bf6da7b0"
   },
   {
    "archivo": "sectorial/app/engine/src/capital_port.ts",
@@ -497,8 +517,8 @@
   },
   {
    "archivo": "sectorial/app/engine/src/plan.ts",
-   "bytes": 46030,
-   "sha256": "1c3da71ed752be252f64afd3f4a450a220185a04ebae35168c8be81a0f8d73e8"
+   "bytes": 46244,
+   "sha256": "41afa380ff9d7c1e692cc59d54187309af09f1834e50a6950e9f204224e7ec38"
   },
   {
    "archivo": "sectorial/app/engine/tsconfig.json",
@@ -543,7 +563,7 @@
   {
    "archivo": "sectorial/app/evidencias/transmision_sectorial.json",
    "bytes": 43703,
-   "sha256": "0fd90c7fd3c30733ec498c165134ddcb8c8476030e242f8b7bbcce20386138c6"
+   "sha256": "bd2708df70ffef4c723cf03f0b6f84dbb78dc816dc85c6ecea7de18c0e92053b"
   },
   {
    "archivo": "sectorial/app/export-worker.mjs",
@@ -552,8 +572,8 @@
   },
   {
    "archivo": "sectorial/app/exporter-portable.mjs",
-   "bytes": 5934,
-   "sha256": "83ce0a2ce4054e89171862d293d3e6ef4d4e76006d4bda8b2dd5af7e61630593"
+   "bytes": 7869,
+   "sha256": "cf8d63a60c93b4e9d4c604060e72ff5c3ff8568e4341c4da1fbb5ec7830e44d5"
   },
   {
    "archivo": "sectorial/app/exporter.mjs",
@@ -662,8 +682,13 @@
   },
   {
    "archivo": "sectorial/app/native-qa.ps1",
-   "bytes": 3908,
-   "sha256": "5805fabc83bc7cdaa284bface8b16948b5e241d318966cf00e1681852e86b98a"
+   "bytes": 3924,
+   "sha256": "50b23d76a7519a9b11824ab552560bac4ae1b731f47158223d4836f557a7bf95"
+  },
+  {
+   "archivo": "sectorial/app/proyeccion.cjs",
+   "bytes": 12122,
+   "sha256": "63f1fa88bff7751a17130e463868bf1876b5135444a4144ea9ce6ee7343c1bf9"
   },
   {
    "archivo": "sectorial/app/registry.cjs",
@@ -677,8 +702,8 @@
   },
   {
    "archivo": "sectorial/app/server.cjs",
-   "bytes": 17485,
-   "sha256": "bf95f46bc4a8132e1e0530f4e98e3902dfd1527f6c59dae72a6ef9adb9e9e62d"
+   "bytes": 18267,
+   "sha256": "4425aa34234e49fd51849a970825bd7219e7569d895b6c7bbcf63858fabbc58f"
   },
   {
    "archivo": "sectorial/app/store.cjs",
@@ -781,6 +806,11 @@
    "sha256": "a2518206e04c270cdd6553c11c815bfc1d305c1bb5e6785130ca3d4275eade9d"
   },
   {
+   "archivo": "sectorial/app/tests/proyeccion.test.cjs",
+   "bytes": 5432,
+   "sha256": "6ad275993287a18669e5e58c665651888d945433edaaccb56816c5cc9deaa41c"
+  },
+  {
    "archivo": "sectorial/app/tests/qa_api_16.mjs",
    "bytes": 11143,
    "sha256": "ae4e903b430d0b9890cc922e264355b326146c6243e481c11a509a48a961601e"
@@ -826,6 +856,11 @@
    "sha256": "5d8c7795f4cbfd285169611ceffe6a1bce2b31a5a0b7b7c505103ec2f43b9a55"
   },
   {
+   "archivo": "sectorial/app/tools/backtest_proyeccion.cjs",
+   "bytes": 6567,
+   "sha256": "d44ecc6bab004b7a1a003f2ece7183aa940e0f953fc1ce8a952304274994f2f8"
+  },
+  {
    "archivo": "sectorial/app/tools/circulante_casos_reales.cjs",
    "bytes": 1911,
    "sha256": "cef251e31e93695258838bc7d1dc54aee402088b40521259e7a2f40d87d50763"
@@ -834,6 +869,11 @@
    "archivo": "sectorial/app/tools/clasificar_conflictos.cjs",
    "bytes": 2970,
    "sha256": "0ad5f01ae7da49090499b9597aca944f00bcb1bc0018797799f52f43bece1926"
+  },
+  {
+   "archivo": "sectorial/app/tools/cobertura_adaptativa.cjs",
+   "bytes": 5125,
+   "sha256": "9b84d3bce8f1e760095fff350549517d00a204f5aa575a5e52d4a4a41c3dc529"
   },
   {
    "archivo": "sectorial/app/tools/cobertura_mysql.cjs",
@@ -871,6 +911,11 @@
    "sha256": "4f871092b418481079ff986de2b6911a5b27a4cb7476af2ebb09d4087fa5b38a"
   },
   {
+   "archivo": "sectorial/app/tools/historicos_mysql.cjs",
+   "bytes": 5855,
+   "sha256": "73147802b6888745283df7ea7ebbb1f72b1b8fcdae110087e48e4321ffd1323c"
+  },
+  {
    "archivo": "sectorial/app/tools/potencial_corroboracion.cjs",
    "bytes": 3482,
    "sha256": "09831b7e3a4665311bdd33ea2046780a93f3ea37939e4b499a606f549cba8d38"
@@ -879,6 +924,11 @@
    "archivo": "sectorial/app/tools/reasignar_identidad.cjs",
    "bytes": 10578,
    "sha256": "23c86206850634c1a441afb31916d50fbe147c8ce5c66d60969a09e1dd3e9679"
+  },
+  {
+   "archivo": "sectorial/app/tools/valorar_adaptativo.cjs",
+   "bytes": 4767,
+   "sha256": "6aa9b9ee9238549df1040f4702e485f2785f441ea7a8beeca60a1f4b9843ffc9"
   },
   {
    "archivo": "sectorial/app/tools/verificar_lotes_tw.cjs",
@@ -922,8 +972,8 @@
   },
   {
    "archivo": "sectorial/app/workflow.cjs",
-   "bytes": 14869,
-   "sha256": "904cbb6f41280260c4c813b379856a31b30ed01d8cf97238cca9f1d6502b02fb"
+   "bytes": 16783,
+   "sha256": "e4a0e97ba6c4b93de62d59d7852e5201a1c9e79171d0ed23a96092620749df6a"
   },
   {
    "archivo": "sectorial/evidence/api_v3.json",
@@ -1461,6 +1511,11 @@
    "sha256": "0f163b19f1c1801355a0523f196ac714a1c83ddaec3c33b449a1a434ed40b7c1"
   },
   {
+   "archivo": "server/scripts/clasificar-actividad-oficial.cjs",
+   "bytes": 9500,
+   "sha256": "24a63f042df30095438a08dbeb020b5ed00e3179b598b268b884c0a5c217cb39"
+  },
+  {
    "archivo": "server/scripts/clasificar-finmind.cjs",
    "bytes": 3492,
    "sha256": "002c791e04eed630e4b7705d302130fa3834a0b76d18d47403705d0485255459"
@@ -1761,6 +1816,11 @@
    "sha256": "4ed65d5425066905c84dffe287032b04ff72a7a4b954e7103844b7780adce6be"
   },
   {
+   "archivo": "server/scripts/recuperar-sec-componentes.cjs",
+   "bytes": 10482,
+   "sha256": "8a2b49d48374a918efba4d6b9ac86dd95aea6221ee21eed5d3f5d1793aac5314"
+  },
+  {
    "archivo": "server/scripts/recuperar-sec-mapeo-v2.cjs",
    "bytes": 10804,
    "sha256": "c2becd95874c76a394a830c4fb6a4fa26566ed636a2f86b321e61a54048eeaa4"
@@ -1951,6 +2011,21 @@
    "sha256": "4e9d1bd71932cdcc3a8cb90123cba3531f4b4fd3fe30ad6e0c6a5d5b982f3932"
   },
   {
+   "archivo": "server/sql/34_taxonomia_componentes_sectoriales.rollback.sql",
+   "bytes": 4797,
+   "sha256": "c681ea47b237acd5c0cb709c99a7cbd1fe39b7fc612bf33e709bf22fcb5d1a9e"
+  },
+  {
+   "archivo": "server/sql/34_taxonomia_componentes_sectoriales.sql",
+   "bytes": 7890,
+   "sha256": "a6c98689206767446a63490f4dfd3a72602c97d9ae2c0ddca08b2397d7bfe79a"
+  },
+  {
+   "archivo": "server/sql/35_clasificacion_actividad_oficial.rollback.sql",
+   "bytes": 204,
+   "sha256": "36465dc1fc2a2863f1d6e5c9bf6cd823ede7287a0957a6c448d890eea34380c5"
+  },
+  {
    "archivo": "server/src/capital/api.ts",
    "bytes": 14943,
    "sha256": "01741c39b3cad78269e4a460024be6d5fe85607f12302e6631b22b595681df35"
@@ -2117,8 +2192,8 @@
   },
   {
    "archivo": "server/src/pcv/secAnualVerificado.ts",
-   "bytes": 9024,
-   "sha256": "eecde16906b3b0b81014465092347d2de9b75ffce96744c1c06a20b285b6ea3c"
+   "bytes": 18988,
+   "sha256": "3549929d8bb8ed02707136e2f58c65104bd0e7664bbdea87750d1dcb804ab4cf"
   },
   {
    "archivo": "server/src/pcv/secAnualVerificadoV2.ts",

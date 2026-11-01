@@ -24,13 +24,13 @@ try {
    foreach($node in $group.Group){
     $actual=$grid.GetValue([int]$node.row,[int]$node.col)
     if($node.value -is [string]){if($actual -cne $node.value){throw ('Paridad '+$node.id+': '+$actual+' / '+$node.value)}}
-    else{if($null -eq $actual -or $actual -is [string] -or [math]::Abs([double]$actual-[double]$node.value) -gt 1e-8*[math]::Max(1,[math]::Abs([double]$node.value))){throw ('Paridad '+$node.id+': '+$actual+' / '+$node.value)}}
+    else{if($null -eq $actual -or $actual -is [string] -or [math]::Abs([double]$actual-[double]$node.value) -gt 1e-8*[math]::Max([double]1,[math]::Abs([double]$node.value))){throw ('Paridad '+$node.id+': '+$actual+' / '+$node.value)}}
     $checked++
    }
   }
   $price=$book.Worksheets.Item('Proyeciones INDITEX').Range('M199').Value2
   if($case.price -is [string]){if($price -cne $case.price){throw 'Precio principal divergente'}}
-  elseif([math]::Abs([double]$price-[double]$case.price) -gt 1e-8*[math]::Max(1,[math]::Abs([double]$case.price))){throw 'Precio principal divergente'}
+  elseif([math]::Abs([double]$price-[double]$case.price) -gt 1e-8*[math]::Max([double]1,[math]::Abs([double]$case.price))){throw 'Precio principal divergente'}
  }
  if($spec.cases.Count -gt 0){
   $book.Worksheets.Item('S_Control').Range('B6').Value2=2.0

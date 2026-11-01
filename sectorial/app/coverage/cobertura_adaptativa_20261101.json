@@ -1,0 +1,756 @@
+{
+ "antes": {
+  "version": "G2_COBERTURA_ADAPTATIVA_0.1",
+  "fuente": {
+   "archivo": "historicos_produccion_antes.json",
+   "medidoEn": "2026-11-01 11:12:13.656520",
+   "base": "2GB"
+  },
+  "definicion": "Cobertura aplicable ≥ 85 % + críticos del último cierre + clasificación resuelta + plantilla con proyección automática",
+  "total": {
+   "empresas": 13194,
+   "conInformes": 9706,
+   "cobertura85": 0,
+   "criticosSuficientes": 0,
+   "cobertura85YCriticos": 0,
+   "clasificacionResuelta": 2255,
+   "candidatas": 0,
+   "tramos": {
+    "100": 0,
+    "90-99": 0,
+    "85-89": 0,
+    "75-84": 39,
+    "<75": 13155
+   }
+  },
+  "porPais": {
+   "US": {
+    "empresas": 8017,
+    "conInformes": 6207,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 815,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 37,
+     "<75": 7980
+    }
+   },
+   "JP": {
+    "empresas": 3581,
+    "conInformes": 3499,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 885,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 2,
+     "<75": 3579
+    }
+   },
+   "TW": {
+    "empresas": 1596,
+    "conInformes": 0,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 555,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 1596
+    }
+   }
+  },
+  "porPlantilla": {
+   "1": {
+    "empresas": 20,
+    "conInformes": 13,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 20,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 20
+    }
+   },
+   "2": {
+    "empresas": 207,
+    "conInformes": 83,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 0,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 1,
+     "<75": 206
+    }
+   },
+   "3": {
+    "empresas": 139,
+    "conInformes": 38,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 139,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 3,
+     "<75": 136
+    }
+   },
+   "4": {
+    "empresas": 625,
+    "conInformes": 355,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 602,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 1,
+     "<75": 624
+    }
+   },
+   "5": {
+    "empresas": 99,
+    "conInformes": 61,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 99,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 99
+    }
+   },
+   "6": {
+    "empresas": 427,
+    "conInformes": 367,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 386,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 1,
+     "<75": 426
+    }
+   },
+   "7": {
+    "empresas": 85,
+    "conInformes": 56,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 85,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 85
+    }
+   },
+   "8": {
+    "empresas": 70,
+    "conInformes": 50,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 70,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 1,
+     "<75": 69
+    }
+   },
+   "9": {
+    "empresas": 280,
+    "conInformes": 187,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 140,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 1,
+     "<75": 279
+    }
+   },
+   "10": {
+    "empresas": 21,
+    "conInformes": 21,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 21,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 21
+    }
+   },
+   "11": {
+    "empresas": 313,
+    "conInformes": 254,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 54,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 2,
+     "<75": 311
+    }
+   },
+   "12": {
+    "empresas": 312,
+    "conInformes": 299,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 244,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 1,
+     "<75": 311
+    }
+   },
+   "13": {
+    "empresas": 229,
+    "conInformes": 151,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 95,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 229
+    }
+   },
+   "14": {
+    "empresas": 26,
+    "conInformes": 26,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 26,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 26
+    }
+   },
+   "15": {
+    "empresas": 75,
+    "conInformes": 69,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 0,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 75
+    }
+   },
+   "16": {
+    "empresas": 10266,
+    "conInformes": 7676,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 274,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 28,
+     "<75": 10238
+    }
+   }
+  },
+  "motivosBloqueo": {
+   "COBERTURA_APLICABLE_INFERIOR_85": 13194,
+   "CRITICO:leaseDebt": 13194,
+   "CRITICO:contractAssets": 13194,
+   "CRITICO:contractLiabilities": 13194,
+   "CRITICO:taxPayable": 13194,
+   "CRITICO:taxReceivable": 13194,
+   "CRITICO:deferredTaxAsset": 13194,
+   "CRITICO:deferredTaxLiability": 13194,
+   "CRITICO:PPE": 13194,
+   "CRITICO:debt": 12946,
+   "CLASIFICACION_NO_RESUELTA": 10939,
+   "CRITICO:inventory": 10058,
+   "CRITICO:shares": 9074,
+   "CRITICO:payables": 7121,
+   "CRITICO:receivables": 7101,
+   "CRITICO:da": 6446,
+   "CRITICO:revenue": 6295,
+   "CRITICO:ebit": 5076,
+   "CRITICO:cash": 5024,
+   "CRITICO:liabilities": 4621,
+   "CRITICO:equity": 4494,
+   "CRITICO:assets": 3956,
+   "SIN_INFORMES_ACREDITADOS": 3488,
+   "PLANTILLA_SIN_PROYECCION_AUTOMATICA": 680,
+   "UN_SOLO_EJERCICIO": 269,
+   "ULTIMO_CIERRE_SIN_CONTEXTO_VERIFICADO": 257
+  },
+  "criticosMasAusentes": {
+   "leaseDebt": 9706,
+   "contractAssets": 9706,
+   "contractLiabilities": 9706,
+   "taxPayable": 9706,
+   "taxReceivable": 9706,
+   "deferredTaxAsset": 9706,
+   "deferredTaxLiability": 9706,
+   "PPE": 9706,
+   "debt": 9458,
+   "inventory": 6570,
+   "shares": 5586,
+   "payables": 3633,
+   "receivables": 3613,
+   "da": 2958,
+   "revenue": 2807,
+   "ebit": 1588,
+   "cash": 1536,
+   "liabilities": 1133,
+   "equity": 1006,
+   "assets": 468
+  }
+ },
+ "despues": {
+  "version": "G2_COBERTURA_ADAPTATIVA_0.1",
+  "fuente": {
+   "archivo": "historicos_produccion_despues.json",
+   "medidoEn": "2026-11-01 12:43:42.585240",
+   "base": "2GB"
+  },
+  "definicion": "Cobertura aplicable ≥ 85 % + críticos del último cierre + clasificación resuelta + plantilla con proyección automática",
+  "total": {
+   "empresas": 13194,
+   "conInformes": 9706,
+   "cobertura85": 2113,
+   "criticosSuficientes": 461,
+   "cobertura85YCriticos": 414,
+   "clasificacionResuelta": 8396,
+   "candidatas": 367,
+   "tramos": {
+    "100": 326,
+    "90-99": 1094,
+    "85-89": 693,
+    "75-84": 1453,
+    "<75": 9628
+   }
+  },
+  "porPais": {
+   "US": {
+    "empresas": 8017,
+    "conInformes": 6207,
+    "cobertura85": 2113,
+    "criticosSuficientes": 461,
+    "cobertura85YCriticos": 414,
+    "clasificacionResuelta": 5858,
+    "candidatas": 367,
+    "tramos": {
+     "100": 326,
+     "90-99": 1094,
+     "85-89": 693,
+     "75-84": 1451,
+     "<75": 4453
+    }
+   },
+   "JP": {
+    "empresas": 3581,
+    "conInformes": 3499,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 1983,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 2,
+     "<75": 3579
+    }
+   },
+   "TW": {
+    "empresas": 1596,
+    "conInformes": 0,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 555,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 1596
+    }
+   }
+  },
+  "porPlantilla": {
+   "1": {
+    "empresas": 67,
+    "conInformes": 57,
+    "cobertura85": 23,
+    "criticosSuficientes": 2,
+    "cobertura85YCriticos": 1,
+    "clasificacionResuelta": 67,
+    "candidatas": 1,
+    "tramos": {
+     "100": 3,
+     "90-99": 10,
+     "85-89": 10,
+     "75-84": 12,
+     "<75": 32
+    }
+   },
+   "2": {
+    "empresas": 760,
+    "conInformes": 576,
+    "cobertura85": 256,
+    "criticosSuficientes": 66,
+    "cobertura85YCriticos": 60,
+    "clasificacionResuelta": 617,
+    "candidatas": 60,
+    "tramos": {
+     "100": 51,
+     "90-99": 136,
+     "85-89": 69,
+     "75-84": 129,
+     "<75": 375
+    }
+   },
+   "3": {
+    "empresas": 378,
+    "conInformes": 262,
+    "cobertura85": 170,
+    "criticosSuficientes": 51,
+    "cobertura85YCriticos": 49,
+    "clasificacionResuelta": 378,
+    "candidatas": 49,
+    "tramos": {
+     "100": 31,
+     "90-99": 89,
+     "85-89": 50,
+     "75-84": 60,
+     "<75": 148
+    }
+   },
+   "4": {
+    "empresas": 1187,
+    "conInformes": 885,
+    "cobertura85": 181,
+    "criticosSuficientes": 37,
+    "cobertura85YCriticos": 32,
+    "clasificacionResuelta": 1164,
+    "candidatas": 32,
+    "tramos": {
+     "100": 26,
+     "90-99": 96,
+     "85-89": 59,
+     "75-84": 114,
+     "<75": 892
+    }
+   },
+   "5": {
+    "empresas": 205,
+    "conInformes": 164,
+    "cobertura85": 43,
+    "criticosSuficientes": 7,
+    "cobertura85YCriticos": 6,
+    "clasificacionResuelta": 205,
+    "candidatas": 6,
+    "tramos": {
+     "100": 2,
+     "90-99": 29,
+     "85-89": 12,
+     "75-84": 26,
+     "<75": 136
+    }
+   },
+   "6": {
+    "empresas": 858,
+    "conInformes": 784,
+    "cobertura85": 231,
+    "criticosSuficientes": 44,
+    "cobertura85YCriticos": 44,
+    "clasificacionResuelta": 845,
+    "candidatas": 43,
+    "tramos": {
+     "100": 45,
+     "90-99": 112,
+     "85-89": 74,
+     "75-84": 115,
+     "<75": 512
+    }
+   },
+   "7": {
+    "empresas": 303,
+    "conInformes": 261,
+    "cobertura85": 71,
+    "criticosSuficientes": 14,
+    "cobertura85YCriticos": 12,
+    "clasificacionResuelta": 303,
+    "candidatas": 12,
+    "tramos": {
+     "100": 11,
+     "90-99": 41,
+     "85-89": 19,
+     "75-84": 61,
+     "<75": 171
+    }
+   },
+   "8": {
+    "empresas": 212,
+    "conInformes": 177,
+    "cobertura85": 64,
+    "criticosSuficientes": 9,
+    "cobertura85YCriticos": 8,
+    "clasificacionResuelta": 212,
+    "candidatas": 0,
+    "tramos": {
+     "100": 9,
+     "90-99": 34,
+     "85-89": 21,
+     "75-84": 57,
+     "<75": 91
+    }
+   },
+   "9": {
+    "empresas": 736,
+    "conInformes": 584,
+    "cobertura85": 111,
+    "criticosSuficientes": 18,
+    "cobertura85YCriticos": 16,
+    "clasificacionResuelta": 629,
+    "candidatas": 0,
+    "tramos": {
+     "100": 13,
+     "90-99": 51,
+     "85-89": 47,
+     "75-84": 84,
+     "<75": 541
+    }
+   },
+   "10": {
+    "empresas": 181,
+    "conInformes": 155,
+    "cobertura85": 57,
+    "criticosSuficientes": 5,
+    "cobertura85YCriticos": 5,
+    "clasificacionResuelta": 181,
+    "candidatas": 5,
+    "tramos": {
+     "100": 3,
+     "90-99": 30,
+     "85-89": 24,
+     "75-84": 41,
+     "<75": 83
+    }
+   },
+   "11": {
+    "empresas": 398,
+    "conInformes": 326,
+    "cobertura85": 38,
+    "criticosSuficientes": 7,
+    "cobertura85YCriticos": 6,
+    "clasificacionResuelta": 148,
+    "candidatas": 6,
+    "tramos": {
+     "100": 6,
+     "90-99": 15,
+     "85-89": 17,
+     "75-84": 26,
+     "<75": 334
+    }
+   },
+   "12": {
+    "empresas": 907,
+    "conInformes": 854,
+    "cobertura85": 248,
+    "criticosSuficientes": 57,
+    "cobertura85YCriticos": 54,
+    "clasificacionResuelta": 902,
+    "candidatas": 53,
+    "tramos": {
+     "100": 32,
+     "90-99": 128,
+     "85-89": 88,
+     "75-84": 224,
+     "<75": 435
+    }
+   },
+   "13": {
+    "empresas": 580,
+    "conInformes": 480,
+    "cobertura85": 0,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 461,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 580
+    }
+   },
+   "14": {
+    "empresas": 128,
+    "conInformes": 125,
+    "cobertura85": 0,
+    "criticosSuficientes": 1,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 128,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 0,
+     "85-89": 0,
+     "75-84": 0,
+     "<75": 128
+    }
+   },
+   "15": {
+    "empresas": 318,
+    "conInformes": 311,
+    "cobertura85": 21,
+    "criticosSuficientes": 0,
+    "cobertura85YCriticos": 0,
+    "clasificacionResuelta": 306,
+    "candidatas": 0,
+    "tramos": {
+     "100": 0,
+     "90-99": 11,
+     "85-89": 10,
+     "75-84": 77,
+     "<75": 220
+    }
+   },
+   "16": {
+    "empresas": 5976,
+    "conInformes": 3705,
+    "cobertura85": 599,
+    "criticosSuficientes": 143,
+    "cobertura85YCriticos": 121,
+    "clasificacionResuelta": 1850,
+    "candidatas": 100,
+    "tramos": {
+     "100": 94,
+     "90-99": 312,
+     "85-89": 193,
+     "75-84": 427,
+     "<75": 4950
+    }
+   }
+  },
+  "motivosBloqueo": {
+   "COBERTURA_APLICABLE_INFERIOR_85": 11081,
+   "CRITICO:shares": 9074,
+   "CRITICO:debt": 8779,
+   "CRITICO:PPE": 8636,
+   "CRITICO:leaseDebt": 7331,
+   "CRITICO:payables": 7121,
+   "CRITICO:receivables": 7101,
+   "CRITICO:inventory": 6809,
+   "CRITICO:da": 6446,
+   "CRITICO:revenue": 6295,
+   "CRITICO:ebit": 5076,
+   "CRITICO:cash": 5024,
+   "CLASIFICACION_NO_RESUELTA": 4798,
+   "CRITICO:liabilities": 4621,
+   "CRITICO:equity": 4494,
+   "CRITICO:assets": 3956,
+   "SIN_INFORMES_ACREDITADOS": 3488,
+   "PLANTILLA_SIN_PROYECCION_AUTOMATICA": 1974,
+   "UN_SOLO_EJERCICIO": 269,
+   "ULTIMO_CIERRE_SIN_CONTEXTO_VERIFICADO": 257
+  },
+  "criticosMasAusentes": {
+   "shares": 5586,
+   "debt": 5291,
+   "PPE": 5148,
+   "leaseDebt": 3843,
+   "payables": 3633,
+   "receivables": 3613,
+   "inventory": 3321,
+   "da": 2958,
+   "revenue": 2807,
+   "ebit": 1588,
+   "cash": 1536,
+   "liabilities": 1133,
+   "equity": 1006,
+   "assets": 468
+  }
+ }
+}

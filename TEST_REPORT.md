@@ -17,7 +17,13 @@ Entorno: Windows 11, Node 24.19.0, MySQL 8 (contenedor `mysql:8`), Microsoft Exc
 | Lotes de Taiwán | `sectorial/app/tools/verificar_lotes_tw.cjs` | huella `509253268`; 21.643 + 7.249 + 4.204 vigentes, 0 discrepancias |
 | Integridad de producción | `integracion_v02/tests/integridad_claude.cjs` | 228 archivos operativos sin cambios, 16 maestros, **60 valoraciones congeladas idénticas** (sha256 `cb0a95e3…`) |
 
-\* La omitida es la integración de Capital con escritura en un MySQL de desarrollo, opcional con `CAPITAL_DB_TESTS=1`. No es un fallo.
+\| Motor de proyección adaptativa y derivaciones | `node --test sectorial/app/tests/proyeccion.test.cjs` (incluido en `sectorial:test`) | **9/9** |
+| Integración sectorial tras el modo adaptativo | `npm run sectorial:test` | **123/123** (114 + 9) |
+| Excel nativo de las 16 plantillas tras las tolerancias relativas | `npm run sectorial:qa:excel:portable` | **16/16 VALIDADO**, 118.293 comprobaciones, 0 referencias rotas |
+| Validación retrospectiva (133.580 predicciones) | `npm run sectorial:backtest` | ingresos: adaptativo mejor en h = 1/2/3 y fuera de muestra (T = 2025 y 2024); ratios: sin mejora frente al último valor |
+| Valoraciones reales con Excel nativo validado | `npm run sectorial:valorar:adaptativo` | 103 Excel validados (90 con valor utilizable, 13 con valor negativo) de 367 candidatas |
+
+* La omitida es la integración de Capital con escritura en un MySQL de desarrollo, opcional con `CAPITAL_DB_TESTS=1`. No es un fallo.
 
 ## Verificaciones de datos en producción (MySQL operativo)
 | Comprobación | Resultado |

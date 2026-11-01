@@ -212,7 +212,9 @@ export class Plan implements Emisor {
   // La disponibilidad se valida en el build propietario, nunca leyendo S_Revision.
   const disponible:Expr[]=[];
   for(let i=0;i<5;i++){
-   let own:Expr=mul(iff(ge(1e-8,op('ABS',this.salida.balanceDifference[i])),1,0),iff(ge(this.salida.cash[i],0),1,0));
+   // Tolerancia de cuadre relativa al tamaño del balance: con importes reales (~1e11) el redondeo binario supera 1e-8 absoluto.
+   const tolerancia=max(1e-8,mul(1e-9,op('ABS',this.salida.assets?.[i]??0)));
+   let own:Expr=mul(iff(ge(tolerancia,op('ABS',this.salida.balanceDifference[i])),1,0),iff(ge(this.salida.cash[i],0),1,0));
    if(this.salida.capitalShortfall)own=mul(own,iff(ge(1e-8,this.salida.capitalShortfall[i]),1,0));
    if(this.salida.rabAdditionsCheck)own=mul(own,this.salida.rabAdditionsCheck[i]);
    disponible.push(this.celda('S_Modelo','modelo.availability','Estados completos y financiación disponible',i,own,'indicador'));

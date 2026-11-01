@@ -42,7 +42,8 @@ export function crearCohorteAvanzada(e:Emisor,c:CohorteAvanzada,periods:PeriodoA
    const fraction=node(prefix+'.fraccion','Fracción activa fiscal del segmento',i,div(max(0,sub(until,max(from,service))),days));
    const depreciable=max(0,sub(net,residual));let charge:Expr=0;
    if(method==='LINEAL'||method==='SALDO_DECRECIENTE'){
-    const linear=iff(gt(life,0),mul(div(depreciable,life),min(life,fraction)),iff(gt(depreciable,0),div(1,0),0));
+    // Vida agotada: un remanente de redondeo binario (importes reales ~1e11) no es un activo sin vida; tolerancia relativa.
+    const linear=iff(gt(life,0),mul(div(depreciable,life),min(life,fraction)),iff(gt(depreciable,add(1e-6,mul(1e-9,op('ABS',net)))),div(1,0),0));
     charge=method==='LINEAL'?linear:iff(gt(rate,0),iff(ge(1,rate),min(depreciable,max(linear,mul(net,rate,fraction))),div(1,0)),div(1,0));
    }else if(method==='PRODUCCION'){
     const explicit=c.produccionSegmentos?.find(x=>serial(x.inicio)===from&&serial(x.fin)+1===until),quantity=boundaries.length===2?opts.produccion?.[i]??constant(prefix+'.produccion.'+i,'Producción fiscal',null,'unidades'):constant(prefix+'.produccion.'+i,'Producción del segmento',explicit?.unidades??null,'unidades');

@@ -1,0 +1,1437 @@
+{
+ "version": "G2_BACKTEST_0.1",
+ "motor": "G2_PROYECCION_ADAPTATIVA_0.1",
+ "fuente": {
+  "archivo": "historicos_produccion_antes.json",
+  "medidoEn": "2026-11-01 11:12:13.656520",
+  "base": "2GB"
+ },
+ "objetivos": [
+  2025,
+  2024
+ ],
+ "metodo": "Predicción de T con ejercicios < T; referencia sectorial con ejercicios <= T−1; ingresos en % de error absoluto, ratios en pp o días",
+ "observaciones": 133580,
+ "porVariable": {
+  "capexSobreIngresos": {
+   "n": 15261,
+   "ultimo": {
+    "mediana": 0.6959387352931377,
+    "media_recortada": 2.4030047304705295
+   },
+   "media": {
+    "mediana": 0.7868381603959571,
+    "media_recortada": 2.791345195791499
+   },
+   "cagr": {
+    "mediana": 0.8664716321768677,
+    "media_recortada": 3.234302914318377
+   },
+   "adaptativo": {
+    "mediana": 0.7000643833835627,
+    "media_recortada": 2.4323933107346933
+   },
+   "adaptativoGanaAlMejorSimple": 0.07011336085446564,
+   "adaptativoGanaAlUltimo": 0.3061398335626761,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasCobro": {
+   "n": 19092,
+   "ultimo": {
+    "mediana": 4.491273220145619,
+    "media_recortada": 8.280702761015796
+   },
+   "media": {
+    "mediana": 4.667168792196524,
+    "media_recortada": 8.613420194919629
+   },
+   "cagr": {
+    "mediana": 5.5911478702398405,
+    "media_recortada": 10.730383335495015
+   },
+   "adaptativo": {
+    "mediana": 4.484941064355105,
+    "media_recortada": 8.241059863321695
+   },
+   "adaptativoGanaAlMejorSimple": 0.053949298135344645,
+   "adaptativoGanaAlUltimo": 0.2929499266708569,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "diasInventario": {
+   "n": 11238,
+   "ultimo": {
+    "mediana": 4.363999333502816,
+    "media_recortada": 10.427140130076841
+   },
+   "media": {
+    "mediana": 5.006968004328778,
+    "media_recortada": 11.779673836062663
+   },
+   "cagr": {
+    "mediana": 5.7147465551868155,
+    "media_recortada": 13.49333097795444
+   },
+   "adaptativo": {
+    "mediana": 4.394286820233544,
+    "media_recortada": 10.469721718215352
+   },
+   "adaptativoGanaAlMejorSimple": 0.06958533546894465,
+   "adaptativoGanaAlUltimo": 0.2952482648158035,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasPago": {
+   "n": 17921,
+   "ultimo": {
+    "mediana": 3.3481218542749938,
+    "media_recortada": 8.157438164970634
+   },
+   "media": {
+    "mediana": 3.5308853266056346,
+    "media_recortada": 8.781071730114897
+   },
+   "cagr": {
+    "mediana": 4.258628763189584,
+    "media_recortada": 10.596646509550103
+   },
+   "adaptativo": {
+    "mediana": 3.3454657649126247,
+    "media_recortada": 8.158311500616755
+   },
+   "adaptativoGanaAlMejorSimple": 0.05992969142346967,
+   "adaptativoGanaAlUltimo": 0.289827576586128,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "ingresos": {
+   "n": 27233,
+   "ultimo": {
+    "mediana": 9.32904269435928,
+    "media_recortada": 14.864800720022604
+   },
+   "media": {
+    "mediana": 11.62029459901801,
+    "media_recortada": 17.86194460146457
+   },
+   "cagr": {
+    "mediana": 9.46277368627918,
+    "media_recortada": 16.74851604163163
+   },
+   "adaptativo": {
+    "mediana": 7.957240094303741,
+    "media_recortada": 14.30940216101194
+   },
+   "adaptativoGanaAlMejorSimple": 0.4234935556126758,
+   "adaptativoGanaAlUltimo": 0.5925164322696729,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "margenEbit": {
+   "n": 24394,
+   "ultimo": {
+    "mediana": 3.283238364457736,
+    "media_recortada": 22.098601522990517
+   },
+   "media": {
+    "mediana": 3.751669077813874,
+    "media_recortada": 25.853320435217675
+   },
+   "cagr": {
+    "mediana": 3.9072088151678424,
+    "media_recortada": 23.448853620069926
+   },
+   "adaptativo": {
+    "mediana": 3.315741682769393,
+    "media_recortada": 20.462491369140135
+   },
+   "adaptativoGanaAlMejorSimple": 0.09170287775682545,
+   "adaptativoGanaAlUltimo": 0.26936951709436746,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbitda": {
+   "n": 18441,
+   "ultimo": {
+    "mediana": 2.472018372035692,
+    "media_recortada": 8.864288624058041
+   },
+   "media": {
+    "mediana": 2.758277319973064,
+    "media_recortada": 9.87847648948045
+   },
+   "cagr": {
+    "mediana": 2.9599330961952846,
+    "media_recortada": 9.860272239426696
+   },
+   "adaptativo": {
+    "mediana": 2.4733884891995377,
+    "media_recortada": 8.679153852768824
+   },
+   "adaptativoGanaAlMejorSimple": 0.08735968765251342,
+   "adaptativoGanaAlUltimo": 0.267013719429532,
+   "mejorMetodoMediana": "ultimo"
+  }
+ },
+ "porVariableYHistoria": {
+  "capexSobreIngresos | h=1": {
+   "n": 6545,
+   "ultimo": {
+    "mediana": 0.7217116708093877,
+    "media_recortada": 2.6868797102400177
+   },
+   "media": {
+    "mediana": 0.7217116708093877,
+    "media_recortada": 2.6868797102400177
+   },
+   "cagr": {
+    "mediana": 0.7217116708093877,
+    "media_recortada": 2.6868797102400177
+   },
+   "adaptativo": {
+    "mediana": 0.7225054366336463,
+    "media_recortada": 2.663454809166705
+   },
+   "adaptativoGanaAlMejorSimple": 0.020320855614973262,
+   "adaptativoGanaAlUltimo": 0.020320855614973262,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "capexSobreIngresos | h=2": {
+   "n": 6006,
+   "ultimo": {
+    "mediana": 0.6992976491811587,
+    "media_recortada": 2.3004142762948354
+   },
+   "media": {
+    "mediana": 0.8202191669492023,
+    "media_recortada": 2.9147041354338428
+   },
+   "cagr": {
+    "mediana": 1.0238579828865118,
+    "media_recortada": 4.128591816624846
+   },
+   "adaptativo": {
+    "mediana": 0.7119898096925341,
+    "media_recortada": 2.378367902482757
+   },
+   "adaptativoGanaAlMejorSimple": 0.09806859806859806,
+   "adaptativoGanaAlUltimo": 0.51998001998002,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "capexSobreIngresos | h=3": {
+   "n": 2710,
+   "ultimo": {
+    "mediana": 0.6299240380272481,
+    "media_recortada": 2.057218464569292
+   },
+   "media": {
+    "mediana": 0.8660498258293446,
+    "media_recortada": 2.789194196287839
+   },
+   "cagr": {
+    "mediana": 0.8782908229321155,
+    "media_recortada": 2.932642194341304
+   },
+   "adaptativo": {
+    "mediana": 0.6365249140567151,
+    "media_recortada": 2.090482165420946
+   },
+   "adaptativoGanaAlMejorSimple": 0.12841328413284134,
+   "adaptativoGanaAlUltimo": 0.522509225092251,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasCobro | h=1": {
+   "n": 9158,
+   "ultimo": {
+    "mediana": 4.534818430353045,
+    "media_recortada": 8.440826262684904
+   },
+   "media": {
+    "mediana": 4.534818430353045,
+    "media_recortada": 8.440826262684904
+   },
+   "cagr": {
+    "mediana": 4.534818430353045,
+    "media_recortada": 8.440826262684904
+   },
+   "adaptativo": {
+    "mediana": 4.534818430353045,
+    "media_recortada": 8.430236502545544
+   },
+   "adaptativoGanaAlMejorSimple": 0.0025114653854553396,
+   "adaptativoGanaAlUltimo": 0.0025114653854553396,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasCobro | h=2": {
+   "n": 7216,
+   "ultimo": {
+    "mediana": 4.420803234180756,
+    "media_recortada": 8.060519048643874
+   },
+   "media": {
+    "mediana": 4.659363500182156,
+    "media_recortada": 8.461951603303602
+   },
+   "cagr": {
+    "mediana": 7.328313472612553,
+    "media_recortada": 13.922355668087619
+   },
+   "adaptativo": {
+    "mediana": 4.3975389130508145,
+    "media_recortada": 7.990504568476069
+   },
+   "adaptativoGanaAlMejorSimple": 0.08924611973392461,
+   "adaptativoGanaAlUltimo": 0.5593126385809313,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "diasCobro | h=3": {
+   "n": 2718,
+   "ultimo": {
+    "mediana": 4.477645468210005,
+    "media_recortada": 8.382809948216932
+   },
+   "media": {
+    "mediana": 5.171948854068744,
+    "media_recortada": 9.638483738490725
+   },
+   "cagr": {
+    "mediana": 5.75984403012939,
+    "media_recortada": 11.17318547761331
+   },
+   "adaptativo": {
+    "mediana": 4.493576576630062,
+    "media_recortada": 8.329914253272628
+   },
+   "adaptativoGanaAlMejorSimple": 0.1335540838852097,
+   "adaptativoGanaAlUltimo": 0.5643855776306107,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasInventario | h=1": {
+   "n": 4909,
+   "ultimo": {
+    "mediana": 4.475584039487636,
+    "media_recortada": 11.42085812168468
+   },
+   "media": {
+    "mediana": 4.475584039487636,
+    "media_recortada": 11.42085812168468
+   },
+   "cagr": {
+    "mediana": 4.475584039487636,
+    "media_recortada": 11.42085812168468
+   },
+   "adaptativo": {
+    "mediana": 4.475584039487636,
+    "media_recortada": 11.382857285083503
+   },
+   "adaptativoGanaAlMejorSimple": 0.009981666327154207,
+   "adaptativoGanaAlUltimo": 0.009981666327154207,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasInventario | h=2": {
+   "n": 4388,
+   "ultimo": {
+    "mediana": 4.3830868973384085,
+    "media_recortada": 10.1881904300055
+   },
+   "media": {
+    "mediana": 5.356095184811071,
+    "media_recortada": 11.992570100863094
+   },
+   "cagr": {
+    "mediana": 7.072919587503769,
+    "media_recortada": 16.567956764219154
+   },
+   "adaptativo": {
+    "mediana": 4.4448136149536825,
+    "media_recortada": 10.343625173667006
+   },
+   "adaptativoGanaAlMejorSimple": 0.09731084776663627,
+   "adaptativoGanaAlUltimo": 0.5125341841385597,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasInventario | h=3": {
+   "n": 1941,
+   "ultimo": {
+    "mediana": 4.022836645216202,
+    "media_recortada": 8.851014783447798
+   },
+   "media": {
+    "mediana": 5.593393025858873,
+    "media_recortada": 12.232515564104098
+   },
+   "cagr": {
+    "mediana": 6.087678920972188,
+    "media_recortada": 12.405975774176557
+   },
+   "adaptativo": {
+    "mediana": 4.023139079099387,
+    "media_recortada": 8.805956289033583
+   },
+   "adaptativoGanaAlMejorSimple": 0.15765069551777433,
+   "adaptativoGanaAlUltimo": 0.5255023183925811,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasPago | h=1": {
+   "n": 8662,
+   "ultimo": {
+    "mediana": 3.3786792745634067,
+    "media_recortada": 8.201669629535985
+   },
+   "media": {
+    "mediana": 3.3786792745634067,
+    "media_recortada": 8.201669629535985
+   },
+   "cagr": {
+    "mediana": 3.3786792745634067,
+    "media_recortada": 8.201669629535985
+   },
+   "adaptativo": {
+    "mediana": 3.3786792745634067,
+    "media_recortada": 8.122645580639468
+   },
+   "adaptativoGanaAlMejorSimple": 0.011198337566381897,
+   "adaptativoGanaAlUltimo": 0.011198337566381897,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasPago | h=2": {
+   "n": 6757,
+   "ultimo": {
+    "mediana": 3.320955207247737,
+    "media_recortada": 7.964019763996901
+   },
+   "media": {
+    "mediana": 3.5949204619698563,
+    "media_recortada": 8.926476951387693
+   },
+   "cagr": {
+    "mediana": 5.405310229018875,
+    "media_recortada": 13.359951489045123
+   },
+   "adaptativo": {
+    "mediana": 3.320703827286871,
+    "media_recortada": 8.037999483063068
+   },
+   "adaptativoGanaAlMejorSimple": 0.09560455823590351,
+   "adaptativoGanaAlUltimo": 0.5506881752256919,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "diasPago | h=3": {
+   "n": 2502,
+   "ultimo": {
+    "mediana": 3.289733050803449,
+    "media_recortada": 8.642489356031316
+   },
+   "media": {
+    "mediana": 3.893602511669138,
+    "media_recortada": 10.629058906291876
+   },
+   "cagr": {
+    "mediana": 4.682732399143483,
+    "media_recortada": 12.139014272318706
+   },
+   "adaptativo": {
+    "mediana": 3.249116049541482,
+    "media_recortada": 8.700778085592262
+   },
+   "adaptativoGanaAlMejorSimple": 0.13229416466826538,
+   "adaptativoGanaAlUltimo": 0.5499600319744204,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "ingresos | h=1": {
+   "n": 12605,
+   "ultimo": {
+    "mediana": 9.292433602848526,
+    "media_recortada": 14.854368176552754
+   },
+   "media": {
+    "mediana": 9.292433602848526,
+    "media_recortada": 14.854368176552754
+   },
+   "cagr": {
+    "mediana": 9.292433602848526,
+    "media_recortada": 14.854368176552754
+   },
+   "adaptativo": {
+    "mediana": 8.313777594880012,
+    "media_recortada": 14.465808693026293
+   },
+   "adaptativoGanaAlMejorSimple": 0.5943673145577152,
+   "adaptativoGanaAlUltimo": 0.5943673145577152,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "ingresos | h=2": {
+   "n": 10482,
+   "ultimo": {
+    "mediana": 9.342430903408843,
+    "media_recortada": 14.838792794623236
+   },
+   "media": {
+    "mediana": 12.970585998901424,
+    "media_recortada": 19.35990019846019
+   },
+   "cagr": {
+    "mediana": 9.679289827908105,
+    "media_recortada": 18.991143736267478
+   },
+   "adaptativo": {
+    "mediana": 7.708987214825491,
+    "media_recortada": 14.468336006971386
+   },
+   "adaptativoGanaAlMejorSimple": 0.27695096355657317,
+   "adaptativoGanaAlUltimo": 0.5804235832856325,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "ingresos | h=3": {
+   "n": 4146,
+   "ultimo": {
+    "mediana": 9.426414484860828,
+    "media_recortada": 14.967701609581313
+   },
+   "media": {
+    "mediana": 16.73448983764738,
+    "media_recortada": 23.605084683420124
+   },
+   "cagr": {
+    "mediana": 9.579721155016474,
+    "media_recortada": 17.66606334557453
+   },
+   "adaptativo": {
+    "mediana": 7.322405204596533,
+    "media_recortada": 13.544922113164368
+   },
+   "adaptativoGanaAlMejorSimple": 0.2744814278822962,
+   "adaptativoGanaAlUltimo": 0.6174626145682586,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "margenEbit | h=1": {
+   "n": 11444,
+   "ultimo": {
+    "mediana": 3.0596195237880703,
+    "media_recortada": 21.59964996700084
+   },
+   "media": {
+    "mediana": 3.0596195237880703,
+    "media_recortada": 21.59964996700084
+   },
+   "cagr": {
+    "mediana": 3.0596195237880703,
+    "media_recortada": 21.59964996700084
+   },
+   "adaptativo": {
+    "mediana": 3.065752834959688,
+    "media_recortada": 19.711457129283666
+   },
+   "adaptativoGanaAlMejorSimple": 0.046836770360013984,
+   "adaptativoGanaAlUltimo": 0.046836770360013984,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbit | h=2": {
+   "n": 9337,
+   "ultimo": {
+    "mediana": 3.346212736025764,
+    "media_recortada": 21.3838464852261
+   },
+   "media": {
+    "mediana": 4.0803974652360715,
+    "media_recortada": 27.229074490558812
+   },
+   "cagr": {
+    "mediana": 4.706934641351988,
+    "media_recortada": 24.364939427205595
+   },
+   "adaptativo": {
+    "mediana": 3.430511345385873,
+    "media_recortada": 20.322699692046793
+   },
+   "adaptativoGanaAlMejorSimple": 0.11256292170932848,
+   "adaptativoGanaAlUltimo": 0.4649244939488058,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbit | h=3": {
+   "n": 3613,
+   "ultimo": {
+    "mediana": 4.026909928211852,
+    "media_recortada": 25.93288356920129
+   },
+   "media": {
+    "mediana": 5.709896905253206,
+    "media_recortada": 37.53698077719304
+   },
+   "cagr": {
+    "mediana": 5.036815406727335,
+    "media_recortada": 27.387139899851203
+   },
+   "adaptativo": {
+    "mediana": 4.008831370571874,
+    "media_recortada": 23.373206582954175
+   },
+   "adaptativoGanaAlMejorSimple": 0.17990589537780238,
+   "adaptativoGanaAlUltimo": 0.4688624411846111,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "margenEbitda | h=1": {
+   "n": 8967,
+   "ultimo": {
+    "mediana": 2.3356921155562858,
+    "media_recortada": 8.676378659864085
+   },
+   "media": {
+    "mediana": 2.3356921155562858,
+    "media_recortada": 8.676378659864085
+   },
+   "cagr": {
+    "mediana": 2.3356921155562858,
+    "media_recortada": 8.676378659864085
+   },
+   "adaptativo": {
+    "mediana": 2.3368888302093964,
+    "media_recortada": 8.432773506282802
+   },
+   "adaptativoGanaAlMejorSimple": 0.04182000669120107,
+   "adaptativoGanaAlUltimo": 0.04182000669120107,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbitda | h=2": {
+   "n": 6963,
+   "ultimo": {
+    "mediana": 2.4861094799994836,
+    "media_recortada": 8.60990921912203
+   },
+   "media": {
+    "mediana": 2.980685223957169,
+    "media_recortada": 10.186962557248266
+   },
+   "cagr": {
+    "mediana": 3.676426882100409,
+    "media_recortada": 10.801474555430506
+   },
+   "adaptativo": {
+    "mediana": 2.5312575258287673,
+    "media_recortada": 8.556648426753778
+   },
+   "adaptativoGanaAlMejorSimple": 0.11360045957202355,
+   "adaptativoGanaAlUltimo": 0.4798219158408732,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbitda | h=3": {
+   "n": 2511,
+   "ultimo": {
+    "mediana": 3.0007732773757323,
+    "media_recortada": 10.446797509495847
+   },
+   "media": {
+    "mediana": 4.212760913244303,
+    "media_recortada": 13.547106755709368
+   },
+   "cagr": {
+    "mediana": 3.905954481124444,
+    "media_recortada": 11.55478109013029
+   },
+   "adaptativo": {
+    "mediana": 2.967890484716182,
+    "media_recortada": 10.055831808569069
+   },
+   "adaptativoGanaAlMejorSimple": 0.17722023098367184,
+   "adaptativoGanaAlUltimo": 0.4810832337714058,
+   "mejorMetodoMediana": "adaptativo"
+  }
+ },
+ "porPlantilla": {
+  "plantilla 1": {
+   "n": 20,
+   "ultimo": {
+    "mediana": 7.73690217693892,
+    "media_recortada": 11.528981945476758
+   },
+   "media": {
+    "mediana": 16.4927487955793,
+    "media_recortada": 18.021263577285985
+   },
+   "cagr": {
+    "mediana": 6.641306212559117,
+    "media_recortada": 11.898777033731852
+   },
+   "adaptativo": {
+    "mediana": 4.956404547648246,
+    "media_recortada": 9.049329033136647
+   },
+   "adaptativoGanaAlMejorSimple": 0.3,
+   "adaptativoGanaAlUltimo": 0.65,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 10": {
+   "n": 56,
+   "ultimo": {
+    "mediana": 8.564273239529442,
+    "media_recortada": 7.530344412578165
+   },
+   "media": {
+    "mediana": 8.293181273211452,
+    "media_recortada": 8.576031693719973
+   },
+   "cagr": {
+    "mediana": 7.714362380422318,
+    "media_recortada": 7.473663024058016
+   },
+   "adaptativo": {
+    "mediana": 5.655676898664508,
+    "media_recortada": 6.591310808866202
+   },
+   "adaptativoGanaAlMejorSimple": 0.35714285714285715,
+   "adaptativoGanaAlUltimo": 0.6071428571428571,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 11": {
+   "n": 693,
+   "ultimo": {
+    "mediana": 9.035460543972007,
+    "media_recortada": 10.675079893581946
+   },
+   "media": {
+    "mediana": 10.424398036227045,
+    "media_recortada": 12.755006057895844
+   },
+   "cagr": {
+    "mediana": 8.429820316604042,
+    "media_recortada": 10.050658204976655
+   },
+   "adaptativo": {
+    "mediana": 6.948761947614779,
+    "media_recortada": 8.958000792885306
+   },
+   "adaptativoGanaAlMejorSimple": 0.48484848484848486,
+   "adaptativoGanaAlUltimo": 0.6565656565656566,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 12": {
+   "n": 714,
+   "ultimo": {
+    "mediana": 18.190512253624966,
+    "media_recortada": 34.2821457132178
+   },
+   "media": {
+    "mediana": 22.192639834476083,
+    "media_recortada": 39.301795492337625
+   },
+   "cagr": {
+    "mediana": 18.321116072501436,
+    "media_recortada": 40.881783094036756
+   },
+   "adaptativo": {
+    "mediana": 15.2932704018353,
+    "media_recortada": 34.54793697219631
+   },
+   "adaptativoGanaAlMejorSimple": 0.42436974789915966,
+   "adaptativoGanaAlUltimo": 0.6190476190476191,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 13": {
+   "n": 248,
+   "ultimo": {
+    "mediana": 7.676344537362379,
+    "media_recortada": 10.282230584120901
+   },
+   "media": {
+    "mediana": 10.925572963593844,
+    "media_recortada": 13.019130275562643
+   },
+   "cagr": {
+    "mediana": 8.108755553075458,
+    "media_recortada": 10.959394726781662
+   },
+   "adaptativo": {
+    "mediana": 5.9637100221669845,
+    "media_recortada": 8.634152492785946
+   },
+   "adaptativoGanaAlMejorSimple": 0.5,
+   "adaptativoGanaAlUltimo": 0.6733870967741935,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 14": {
+   "n": 104,
+   "ultimo": {
+    "mediana": 13.575103776714148,
+    "media_recortada": 19.10423932656167
+   },
+   "media": {
+    "mediana": 17.94827547222353,
+    "media_recortada": 21.540204942526273
+   },
+   "cagr": {
+    "mediana": 12.706807392105773,
+    "media_recortada": 20.442533174787453
+   },
+   "adaptativo": {
+    "mediana": 10.67294034186967,
+    "media_recortada": 17.221780824188247
+   },
+   "adaptativoGanaAlMejorSimple": 0.40384615384615385,
+   "adaptativoGanaAlUltimo": 0.5865384615384616,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 15": {
+   "n": 224,
+   "ultimo": {
+    "mediana": 10.060033248890187,
+    "media_recortada": 14.421407457942221
+   },
+   "media": {
+    "mediana": 14.99502558601592,
+    "media_recortada": 19.740204250929178
+   },
+   "cagr": {
+    "mediana": 10.10415434671475,
+    "media_recortada": 15.889069699738123
+   },
+   "adaptativo": {
+    "mediana": 8.076356884259894,
+    "media_recortada": 12.511633377879507
+   },
+   "adaptativoGanaAlMejorSimple": 0.45982142857142855,
+   "adaptativoGanaAlUltimo": 0.6428571428571429,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 16": {
+   "n": 21617,
+   "ultimo": {
+    "mediana": 9.576665656760408,
+    "media_recortada": 15.335057708487472
+   },
+   "media": {
+    "mediana": 11.936751043596239,
+    "media_recortada": 18.410663218550006
+   },
+   "cagr": {
+    "mediana": 9.720519160546237,
+    "media_recortada": 17.4334137917262
+   },
+   "adaptativo": {
+    "mediana": 8.154810272033409,
+    "media_recortada": 14.874056885343183
+   },
+   "adaptativoGanaAlMejorSimple": 0.4192996252949068,
+   "adaptativoGanaAlUltimo": 0.5902299116436138,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 2": {
+   "n": 305,
+   "ultimo": {
+    "mediana": 13.909017666630296,
+    "media_recortada": 20.948709307832875
+   },
+   "media": {
+    "mediana": 16.668166620536006,
+    "media_recortada": 26.157343478090052
+   },
+   "cagr": {
+    "mediana": 12.373412983496667,
+    "media_recortada": 23.9731402222685
+   },
+   "adaptativo": {
+    "mediana": 7.595403062921557,
+    "media_recortada": 19.078825934447806
+   },
+   "adaptativoGanaAlMejorSimple": 0.46557377049180326,
+   "adaptativoGanaAlUltimo": 0.639344262295082,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 3": {
+   "n": 150,
+   "ultimo": {
+    "mediana": 18.12889882243054,
+    "media_recortada": 26.55792487750376
+   },
+   "media": {
+    "mediana": 17.63234300849334,
+    "media_recortada": 30.076756618761504
+   },
+   "cagr": {
+    "mediana": 17.69942828440435,
+    "media_recortada": 26.315963791942544
+   },
+   "adaptativo": {
+    "mediana": 16.911517021497083,
+    "media_recortada": 25.4093666687314
+   },
+   "adaptativoGanaAlMejorSimple": 0.38,
+   "adaptativoGanaAlUltimo": 0.6333333333333333,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 4": {
+   "n": 945,
+   "ultimo": {
+    "mediana": 6.928774928774928,
+    "media_recortada": 8.786639517523236
+   },
+   "media": {
+    "mediana": 8.152246448027755,
+    "media_recortada": 10.379460370959539
+   },
+   "cagr": {
+    "mediana": 7.634950277121688,
+    "media_recortada": 10.520301843556759
+   },
+   "adaptativo": {
+    "mediana": 6.239558106586951,
+    "media_recortada": 8.823691342112253
+   },
+   "adaptativoGanaAlMejorSimple": 0.41375661375661377,
+   "adaptativoGanaAlUltimo": 0.5386243386243387,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 5": {
+   "n": 211,
+   "ultimo": {
+    "mediana": 5.891472868217051,
+    "media_recortada": 9.956946109678158
+   },
+   "media": {
+    "mediana": 8.739199269245345,
+    "media_recortada": 12.429716042371593
+   },
+   "cagr": {
+    "mediana": 8.33673889212665,
+    "media_recortada": 12.008865812668677
+   },
+   "adaptativo": {
+    "mediana": 7.233533710091167,
+    "media_recortada": 10.29346299417552
+   },
+   "adaptativoGanaAlMejorSimple": 0.3886255924170616,
+   "adaptativoGanaAlUltimo": 0.5023696682464455,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "plantilla 6": {
+   "n": 1104,
+   "ultimo": {
+    "mediana": 6.706386061092429,
+    "media_recortada": 9.40402635504318
+   },
+   "media": {
+    "mediana": 8.042001021857503,
+    "media_recortada": 11.507148708338342
+   },
+   "cagr": {
+    "mediana": 6.392291775203785,
+    "media_recortada": 9.726658845726647
+   },
+   "adaptativo": {
+    "mediana": 5.476345990016368,
+    "media_recortada": 8.599016425327992
+   },
+   "adaptativoGanaAlMejorSimple": 0.4492753623188406,
+   "adaptativoGanaAlUltimo": 0.595108695652174,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 7": {
+   "n": 166,
+   "ultimo": {
+    "mediana": 6.814603424522736,
+    "media_recortada": 14.62004089179869
+   },
+   "media": {
+    "mediana": 8.901912423891655,
+    "media_recortada": 20.261908402491635
+   },
+   "cagr": {
+    "mediana": 6.764153043069044,
+    "media_recortada": 14.228433350397449
+   },
+   "adaptativo": {
+    "mediana": 5.336639276666605,
+    "media_recortada": 12.675698029348839
+   },
+   "adaptativoGanaAlMejorSimple": 0.5180722891566265,
+   "adaptativoGanaAlUltimo": 0.6626506024096386,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "plantilla 8": {
+   "n": 195,
+   "ultimo": {
+    "mediana": 13.12864307984276,
+    "media_recortada": 22.42171895213119
+   },
+   "media": {
+    "mediana": 19.092768172522778,
+    "media_recortada": 32.02416812004376
+   },
+   "cagr": {
+    "mediana": 15.319962380316998,
+    "media_recortada": 23.309157460959888
+   },
+   "adaptativo": {
+    "mediana": 13.289976619452194,
+    "media_recortada": 20.853836973073307
+   },
+   "adaptativoGanaAlMejorSimple": 0.3487179487179487,
+   "adaptativoGanaAlUltimo": 0.5743589743589743,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "plantilla 9": {
+   "n": 481,
+   "ultimo": {
+    "mediana": 5.110461937621114,
+    "media_recortada": 7.573472824152271
+   },
+   "media": {
+    "mediana": 5.659740686874382,
+    "media_recortada": 8.230716897559994
+   },
+   "cagr": {
+    "mediana": 5.6371486440838,
+    "media_recortada": 8.467452056189677
+   },
+   "adaptativo": {
+    "mediana": 4.7985827964103445,
+    "media_recortada": 7.403539096273356
+   },
+   "adaptativoGanaAlMejorSimple": 0.44282744282744285,
+   "adaptativoGanaAlUltimo": 0.5758835758835759,
+   "mejorMetodoMediana": "adaptativo"
+  }
+ },
+ "ingresosConAtipico": {
+  "con posible atípico": {
+   "n": 1172,
+   "ultimo": {
+    "mediana": 21.146521344218634,
+    "media_recortada": 34.05286671626698
+   },
+   "media": {
+    "mediana": 35.90904988741411,
+    "media_recortada": 65.62471687444639
+   },
+   "cagr": {
+    "mediana": 34.24415583795343,
+    "media_recortada": 52.891355597474096
+   },
+   "adaptativo": {
+    "mediana": 20.865242399805666,
+    "media_recortada": 34.155796826118895
+   },
+   "adaptativoGanaAlMejorSimple": 0.24232081911262798,
+   "adaptativoGanaAlUltimo": 0.5776450511945392,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "sin atípico": {
+   "n": 2974,
+   "ultimo": {
+    "mediana": 7.6374879413664996,
+    "media_recortada": 9.721284819911356
+   },
+   "media": {
+    "mediana": 13.59723461063011,
+    "media_recortada": 16.316118609598217
+   },
+   "cagr": {
+    "mediana": 6.318747287441878,
+    "media_recortada": 9.153528935718198
+   },
+   "adaptativo": {
+    "mediana": 5.3431178747429975,
+    "media_recortada": 7.6907457164069655
+   },
+   "adaptativoGanaAlMejorSimple": 0.2871553463349025,
+   "adaptativoGanaAlUltimo": 0.6331540013449899,
+   "mejorMetodoMediana": "adaptativo"
+  }
+ },
+ "margenConAtipico": {
+  "con posible atípico": {
+   "n": 1560,
+   "ultimo": {
+    "mediana": 5.599699468563679,
+    "media_recortada": 24.96773367125314
+   },
+   "media": {
+    "mediana": 8.262064750760622,
+    "media_recortada": 32.36879071039773
+   },
+   "cagr": {
+    "mediana": 7.017066643905784,
+    "media_recortada": 26.540849010122017
+   },
+   "adaptativo": {
+    "mediana": 5.6264022695093505,
+    "media_recortada": 21.951382991546215
+   },
+   "adaptativoGanaAlMejorSimple": 0.20512820512820512,
+   "adaptativoGanaAlUltimo": 0.492948717948718,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "sin atípico": {
+   "n": 951,
+   "ultimo": {
+    "mediana": 1.3457079364013802,
+    "media_recortada": 2.0414894406663855
+   },
+   "media": {
+    "mediana": 1.7987013203154378,
+    "media_recortada": 2.8497972959696996
+   },
+   "cagr": {
+    "mediana": 1.7034254368785584,
+    "media_recortada": 2.5624536404445557
+   },
+   "adaptativo": {
+    "mediana": 1.3881195295108895,
+    "media_recortada": 2.0520698554491674
+   },
+   "adaptativoGanaAlMejorSimple": 0.13144058885383805,
+   "adaptativoGanaAlUltimo": 0.4616193480546793,
+   "mejorMetodoMediana": "ultimo"
+  }
+ },
+ "porPais": {
+  "JP": {
+   "n": 8338,
+   "ultimo": {
+    "mediana": 6.7668761790328436,
+    "media_recortada": 8.178575228933921
+   },
+   "media": {
+    "mediana": 7.961633132332462,
+    "media_recortada": 9.704396224614323
+   },
+   "cagr": {
+    "mediana": 6.6371580091807765,
+    "media_recortada": 8.481849487724643
+   },
+   "adaptativo": {
+    "mediana": 5.234281165680244,
+    "media_recortada": 7.046329817051936
+   },
+   "adaptativoGanaAlMejorSimple": 0.49616214919644996,
+   "adaptativoGanaAlUltimo": 0.6319261213720316,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "US": {
+   "n": 18895,
+   "ultimo": {
+    "mediana": 11.281771671886299,
+    "media_recortada": 19.011919835786976
+   },
+   "media": {
+    "mediana": 14.40366972477064,
+    "media_recortada": 23.010711359237767
+   },
+   "cagr": {
+    "mediana": 11.660254364680355,
+    "media_recortada": 22.006779776797682
+   },
+   "adaptativo": {
+    "mediana": 9.854987520397263,
+    "media_recortada": 18.840270263527664
+   },
+   "adaptativoGanaAlMejorSimple": 0.3914263032548293,
+   "adaptativoGanaAlUltimo": 0.5751256946282085,
+   "mejorMetodoMediana": "adaptativo"
+  }
+ },
+ "porAnioObjetivo": {
+  "capexSobreIngresos | T=2024": {
+   "n": 6351,
+   "ultimo": {
+    "mediana": 0.758535961500463,
+    "media_recortada": 2.5164752093032567
+   },
+   "media": {
+    "mediana": 0.808570264369151,
+    "media_recortada": 2.878126095296851
+   },
+   "cagr": {
+    "mediana": 0.9265799173113244,
+    "media_recortada": 3.3678675030451397
+   },
+   "adaptativo": {
+    "mediana": 0.7647087092756365,
+    "media_recortada": 2.569450653372626
+   },
+   "adaptativoGanaAlMejorSimple": 0.05904581955597544,
+   "adaptativoGanaAlUltimo": 0.2624783498661628,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "capexSobreIngresos | T=2025": {
+   "n": 8910,
+   "ultimo": {
+    "mediana": 0.6394116464242906,
+    "media_recortada": 2.3274868643873896
+   },
+   "media": {
+    "mediana": 0.7698163117380856,
+    "media_recortada": 2.7352347765026956
+   },
+   "cagr": {
+    "mediana": 0.8192100585370339,
+    "media_recortada": 3.1491451978111686
+   },
+   "adaptativo": {
+    "mediana": 0.6489771554952473,
+    "media_recortada": 2.3421162871413546
+   },
+   "adaptativoGanaAlMejorSimple": 0.07800224466891134,
+   "adaptativoGanaAlUltimo": 0.3372615039281706,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasCobro | T=2024": {
+   "n": 7516,
+   "ultimo": {
+    "mediana": 4.585948266510421,
+    "media_recortada": 8.610092805687097
+   },
+   "media": {
+    "mediana": 4.856543294111338,
+    "media_recortada": 8.852595361737137
+   },
+   "cagr": {
+    "mediana": 5.525482256183789,
+    "media_recortada": 10.830022485973027
+   },
+   "adaptativo": {
+    "mediana": 4.581473458195077,
+    "media_recortada": 8.574593861019356
+   },
+   "adaptativoGanaAlMejorSimple": 0.0363225119744545,
+   "adaptativoGanaAlUltimo": 0.21341138903672166,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "diasCobro | T=2025": {
+   "n": 11576,
+   "ultimo": {
+    "mediana": 4.423498222490451,
+    "media_recortada": 8.07177429083778
+   },
+   "media": {
+    "mediana": 4.568543535411749,
+    "media_recortada": 8.4634736767537
+   },
+   "cagr": {
+    "mediana": 5.631634354274894,
+    "media_recortada": 10.671960114412787
+   },
+   "adaptativo": {
+    "mediana": 4.416331459777778,
+    "media_recortada": 8.029075125082796
+   },
+   "adaptativoGanaAlMejorSimple": 0.0653939184519696,
+   "adaptativoGanaAlUltimo": 0.3445922598479613,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "diasInventario | T=2024": {
+   "n": 4637,
+   "ultimo": {
+    "mediana": 4.735519232813871,
+    "media_recortada": 11.43760390192221
+   },
+   "media": {
+    "mediana": 5.351491742559318,
+    "media_recortada": 12.335013188015868
+   },
+   "cagr": {
+    "mediana": 6.08120877339287,
+    "media_recortada": 14.660708338888002
+   },
+   "adaptativo": {
+    "mediana": 4.847098288661883,
+    "media_recortada": 11.579641178949371
+   },
+   "adaptativoGanaAlMejorSimple": 0.04852275177916757,
+   "adaptativoGanaAlUltimo": 0.2359284019840414,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasInventario | T=2025": {
+   "n": 6601,
+   "ultimo": {
+    "mediana": 4.1203579007189575,
+    "media_recortada": 9.74279736933738
+   },
+   "media": {
+    "mediana": 4.791789972557922,
+    "media_recortada": 11.392423053566667
+   },
+   "cagr": {
+    "mediana": 5.492143553934561,
+    "media_recortada": 12.700338112019073
+   },
+   "adaptativo": {
+    "mediana": 4.1203579007189575,
+    "media_recortada": 9.726452311074773
+   },
+   "adaptativoGanaAlMejorSimple": 0.08438115437054991,
+   "adaptativoGanaAlUltimo": 0.3369186486895925,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasPago | T=2024": {
+   "n": 6964,
+   "ultimo": {
+    "mediana": 3.531724028860056,
+    "media_recortada": 8.765700852636078
+   },
+   "media": {
+    "mediana": 3.734253604526657,
+    "media_recortada": 9.468173707756755
+   },
+   "cagr": {
+    "mediana": 4.335112181642577,
+    "media_recortada": 11.152236689591698
+   },
+   "adaptativo": {
+    "mediana": 3.548227916214124,
+    "media_recortada": 8.716279970587458
+   },
+   "adaptativoGanaAlMejorSimple": 0.04595060310166571,
+   "adaptativoGanaAlUltimo": 0.21410109132682367,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "diasPago | T=2025": {
+   "n": 10957,
+   "ultimo": {
+    "mediana": 3.260044318327502,
+    "media_recortada": 7.829183124810976
+   },
+   "media": {
+    "mediana": 3.4185428980890435,
+    "media_recortada": 8.41895278094509
+   },
+   "cagr": {
+    "mediana": 4.229511697882522,
+    "media_recortada": 10.300584012701151
+   },
+   "adaptativo": {
+    "mediana": 3.235492959143432,
+    "media_recortada": 7.845554950795177
+   },
+   "adaptativoGanaAlMejorSimple": 0.06881445651181893,
+   "adaptativoGanaAlUltimo": 0.3379574701104317,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "ingresos | T=2024": {
+   "n": 10858,
+   "ultimo": {
+    "mediana": 10.044092404779903,
+    "media_recortada": 15.893649910901482
+   },
+   "media": {
+    "mediana": 11.490782605210903,
+    "media_recortada": 18.11034843051716
+   },
+   "cagr": {
+    "mediana": 10.4856120164165,
+    "media_recortada": 18.339374089890942
+   },
+   "adaptativo": {
+    "mediana": 8.816392217614155,
+    "media_recortada": 15.885123963459064
+   },
+   "adaptativoGanaAlMejorSimple": 0.4452937925953214,
+   "adaptativoGanaAlUltimo": 0.560508380917296,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "ingresos | T=2025": {
+   "n": 16375,
+   "ultimo": {
+    "mediana": 8.94340351554954,
+    "media_recortada": 14.216107531817713
+   },
+   "media": {
+    "mediana": 11.717765644687105,
+    "media_recortada": 17.713579320519873
+   },
+   "cagr": {
+    "mediana": 8.845203597035223,
+    "media_recortada": 15.767675061080835
+   },
+   "adaptativo": {
+    "mediana": 7.360394165325368,
+    "media_recortada": 13.326209868487192
+   },
+   "adaptativoGanaAlMejorSimple": 0.4090381679389313,
+   "adaptativoGanaAlUltimo": 0.6137404580152672,
+   "mejorMetodoMediana": "adaptativo"
+  },
+  "margenEbit | T=2024": {
+   "n": 9688,
+   "ultimo": {
+    "mediana": 3.795839942285764,
+    "media_recortada": 24.00114839627263
+   },
+   "media": {
+    "mediana": 4.11991313289035,
+    "media_recortada": 27.831680436299006
+   },
+   "cagr": {
+    "mediana": 4.224605170873145,
+    "media_recortada": 25.4790734179743
+   },
+   "adaptativo": {
+    "mediana": 3.8439710593702947,
+    "media_recortada": 24.727571522784633
+   },
+   "adaptativoGanaAlMejorSimple": 0.07060280759702725,
+   "adaptativoGanaAlUltimo": 0.20757638315441784,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbit | T=2025": {
+   "n": 14706,
+   "ultimo": {
+    "mediana": 2.9701342908336317,
+    "media_recortada": 20.870788317938562
+   },
+   "media": {
+    "mediana": 3.528259957169958,
+    "media_recortada": 24.6699619138783
+   },
+   "cagr": {
+    "mediana": 3.691564452569569,
+    "media_recortada": 22.12987808297391
+   },
+   "adaptativo": {
+    "mediana": 2.990013279559732,
+    "media_recortada": 18.145745610371677
+   },
+   "adaptativoGanaAlMejorSimple": 0.1056031551747586,
+   "adaptativoGanaAlUltimo": 0.31007751937984496,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbitda | T=2024": {
+   "n": 7247,
+   "ultimo": {
+    "mediana": 2.8733276129547125,
+    "media_recortada": 9.929739569677523
+   },
+   "media": {
+    "mediana": 3.103360338976402,
+    "media_recortada": 10.971924505231152
+   },
+   "cagr": {
+    "mediana": 3.25501601658873,
+    "media_recortada": 10.871608825732292
+   },
+   "adaptativo": {
+    "mediana": 2.9230290528148486,
+    "media_recortada": 10.230265024444252
+   },
+   "adaptativoGanaAlMejorSimple": 0.0680281495791362,
+   "adaptativoGanaAlUltimo": 0.19911687594866842,
+   "mejorMetodoMediana": "ultimo"
+  },
+  "margenEbitda | T=2025": {
+   "n": 11194,
+   "ultimo": {
+    "mediana": 2.1808126259694482,
+    "media_recortada": 8.216778827360997
+   },
+   "media": {
+    "mediana": 2.5678425214829215,
+    "media_recortada": 9.22021899595901
+   },
+   "cagr": {
+    "mediana": 2.778084314102592,
+    "media_recortada": 9.24195964238307
+   },
+   "adaptativo": {
+    "mediana": 2.1882936865612264,
+    "media_recortada": 7.88533317986288
+   },
+   "adaptativoGanaAlMejorSimple": 0.09987493299982134,
+   "adaptativoGanaAlUltimo": 0.31097016258710025,
+   "mejorMetodoMediana": "ultimo"
+  }
+ }
+}

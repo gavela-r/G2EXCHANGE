@@ -82,6 +82,18 @@ Snapshots reversibles en `private_backups/congelacion-20261101/` (`--restaurar <
 - Copias restaurables: tabla completa previa `private_backups/kpi-global-20261101/kpi_financiero_informe_produccion_previo.sql` (sha256 `9f935e84…`); `produccion/aplicar/snapshot.ndjson` (1.ª) y `produccion2/aplicar/snapshot.ndjson` (2.ª), restaurables con `--restaurar` en orden inverso. Causas por KPI en `exclusiones.ndjson` de cada directorio.
 - La estimación previa (31.709 informes / 126.080 KPI de deuda) contaba informes con ambos componentes; el alcance real medido es el de la tabla.
 
+### Valoración adaptativa y cobertura funcional (01/11/2026, `VALORACION_ADAPTATIVA.md`)
+- **Datos.**
+  - Migración 34: 36 conceptos componentes de balance (arrendamientos, contratos con clientes, deuda por instrumento, impuestos, inmovilizado, minoritarios, valores negociables), cargados desde el volcado SEC local por la vía verificada: 196.613 partidas nuevas, 720.357 ausencias acreditadas (`NOT_PRESENTED`), 0 filas existentes modificadas, KPI intactos.
+  - Clasificación por código oficial de actividad (SIC SEC y TSE33 EDINET; 7.560 evidencias, 0 contradicciones).
+- **Requisitos.**
+  - Condicionales con evidencia y derivaciones trazables (deuda total, arrendamientos, contratos).
+  - Tolerancias numéricas corregidas en el motor (cuadre de balance y vida agotada) y en la QA nativa (desbordamiento Int32).
+- **Motor adaptativo y validación retrospectiva.** En ingresos, mejora frente a último valor, media y CAGR. En ratios no hay mejora demostrada y se declara.
+- **Resultado.**
+  - Antes: 0 empresas con cobertura aplicable ≥ 85 % y 0 valoraciones ejecutables.
+  - Después: 2.113 con cobertura aplicable ≥ 85 %, 367 candidatas y **90 empresas reales valoradas con Excel validado** (provisionales), más 13 calculadas con valor negativo.
+
 ## 2. Migraciones (estado exacto)
 | Migración | Ensayada en copia aislada | Aplicada | Reversible |
 |---|---|---|---|

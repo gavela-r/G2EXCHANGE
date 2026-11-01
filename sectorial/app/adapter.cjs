@@ -4,6 +4,11 @@ const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex'
 const parse=x=>{try{return typeof x==='string'?JSON.parse(x):x;}catch{return null;}};
 const date=x=>{if(typeof x!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(x)||!Number.isFinite(Date.parse(x))||new Date(x+'T00:00:00Z').toISOString().slice(0,10)!==x)throw Error('Fecha civil inválida');return x;};
 const MAP={INGRESOS:'revenue',COSTE_VENTAS:'cogs',BENEFICIO_BRUTO:'grossProfit',GASTOS_OPERATIVOS:'opex',EBITDA:'ebitda',EBIT:'ebit',DEPRECIACION_AMORTIZACION:'da',BENEFICIO_ANTES_IMPUESTOS:'preTax',IMPUESTO_BENEFICIOS:'taxExpense',BENEFICIO_NETO:'netIncome',EFECTIVO:'cash',ACTIVOS_TOTALES:'assets',PASIVOS_TOTALES:'liabilities',PATRIMONIO_NETO:'equity',INVENTARIOS:'inventory',CUENTAS_COBRAR:'receivables',CUENTAS_PAGAR:'payables',DEUDA_CORTO_PLAZO:'shortDebt',DEUDA_LARGO_PLAZO:'longDebt',DEUDA_TOTAL:'totalDebtReported',CAPEX:'capex',FLUJO_CAJA_OPERATIVO:'cfo',FLUJO_CAJA_INVERSION:'cfi',FLUJO_CAJA_FINANCIACION:'cff',DIVIDENDOS_PAGADOS:'dividends',ACCIONES_EN_CIRCULACION:'shares',GASTO_INTERESES:'interest',ACTIVOS_CORRIENTES:'currentAssets',PASIVOS_CORRIENTES:'currentLiabilities',INMOVILIZADO_MATERIAL:'PPE',INMOVILIZADO_INTANGIBLE:'INTANGIBLE',DERECHOS_USO:'ROU',PASIVO_ARRENDAMIENTOS:'leaseDebt',ACTIVOS_CONTRACTUALES:'contractAssets',PASIVOS_CONTRACTUALES:'contractLiabilities'};
+// Componentes de balance (migración 34, server/src/pcv/secAnualVerificado.ts TAGS_SEC_COMPONENTES). No son campos de la
+// plantilla: se combinan en derive*() con trazabilidad (registros, reglas y ausencias acreditadas).
+const COMPONENTES=['ARREND_OPERATIVO_TOTAL','ARREND_OPERATIVO_CORRIENTE','ARREND_OPERATIVO_NO_CORRIENTE','ARREND_FINANCIERO_TOTAL','ARREND_FINANCIERO_CORRIENTE','ARREND_FINANCIERO_NO_CORRIENTE','ARREND_IFRS_TOTAL','ARREND_IFRS_CORRIENTE','ARREND_IFRS_NO_CORRIENTE','ACT_CONTRACTUAL_TOTAL','ACT_CONTRACTUAL_CORRIENTE','ACT_CONTRACTUAL_NO_CORRIENTE','PAS_CONTRACTUAL_TOTAL','PAS_CONTRACTUAL_CORRIENTE','PAS_CONTRACTUAL_NO_CORRIENTE','INGRESO_DIFERIDO_TOTAL','INGRESO_DIFERIDO_CORRIENTE','INGRESO_DIFERIDO_NO_CORRIENTE','DEUDA_LP_TOTAL','DEUDA_LP_CORRIENTE','DEUDA_LP_NO_CORRIENTE','EMPRESTITOS_CORTO_PLAZO','PAPEL_COMERCIAL','DEUDA_FINANCIERA_COMBINADA','PRESTAMOS_IFRS_TOTAL','IMPUESTO_CORRIENTE_PAGAR','IMPUESTO_CORRIENTE_COBRAR','ACTIVO_IMPUESTO_DIFERIDO','PASIVO_IMPUESTO_DIFERIDO','INMOVILIZADO_MATERIAL_NETO','DERECHO_USO_OPERATIVO','INTANGIBLES_NETOS','FONDO_COMERCIO','PARTICIPACIONES_NO_DOMINANTES','VALORES_NEGOCIABLES_CORRIENTES','VALORES_NEGOCIABLES_NO_CORRIENTES'];
+// Clasificación por código oficial de actividad (evidencia ACCEPTED/HIGH con plantilla explícita en evidence_json).
+const CRITERIOS_PLANTILLA=new Set(['SEC_SIC_PLANTILLA_V1','TSE33_PLANTILLA_V1']);
 // Perímetro de BENEFICIO_NETO y PATRIMONIO_NETO por etiqueta XBRL; réplica de server/src/pcv/seleccionObservaciones.ts
 // (perimetroDeEtiqueta), comprobada por sectorial/app/tests/perimetro.test.cjs.
 function perimeter(code,tag){const t=String(tag??'').split(':').pop();
@@ -43,6 +48,69 @@ function observe(row,proofs,report,context){
  if(new Set(accepted.map(x=>[x.value,x.currency,x.basis,x.norm,x.periodStart].join('|'))).size!==1)return{...result,reason:'Atestaciones incompatibles del mismo registro',validation:'CONFLICTIVO'};
  return accepted[0];
 }
+const tolerancia=v=>Math.max(1,Math.abs(v)*1e-4);
+// Estado de cada componente: V (atestado), NA (no presentado en el documento, evidencia NOT_PRESENTED), C (conflicto), P.
+function estadoComponentes(observations,ausentes){
+ return Object.fromEntries(COMPONENTES.map(code=>{const all=observations.filter(x=>x.code===code),valid=all.filter(x=>x.validation==='VALIDADO'),values=new Set(valid.map(x=>[x.value,x.norm,x.currency,x.basis].join('|')));
+  return[code,valid.length&&values.size===1?{estado:'V',...valid[0],allRecordIds:valid.map(x=>x.recordId)}:values.size>1||all.some(x=>x.validation==='CONFLICTIVO')?{estado:'C',code}:ausentes.has(code)?{estado:'NA',code}:{estado:'P',code,reason:all.map(x=>x.reason).filter(Boolean).join('; ')||'Componente no cargado'}];}));
+}
+// Total directo o suma de partes; una parte sólo cuenta como inexistente con evidencia NOT_PRESENTED.
+function totalOPartes(c,total,partes){
+ const T=c[total],P=partes.map(p=>c[p]);
+ if(T.estado==='C'||P.some(p=>p.estado==='C'))return{estado:'C',motivo:'Componente en conflicto con la evidencia'};
+ if(T.estado==='V'){if(P.every(p=>p.estado==='V')){const suma=P.reduce((a,p)=>a+p.value,0);if(Math.abs(suma-T.value)>tolerancia(T.value))return{estado:'C',motivo:'Total y partes atestados no concilian'};}return{estado:'V',value:T.value,inputs:[T],regla:total};}
+ if(P.some(p=>p.estado==='V')&&P.every(p=>p.estado==='V'||p.estado==='NA')){const v=P.filter(p=>p.estado==='V');return{estado:'V',value:v.reduce((a,p)=>a+p.value,0),inputs:v,noPresentados:P.filter(p=>p.estado==='NA').map(p=>p.code),regla:partes.join(' + ')};}
+ if(T.estado==='NA'&&P.every(p=>p.estado==='NA'))return{estado:'NA'};
+ return{estado:'P'};
+}
+function derivarComponentes(fields,observations,ausentes,parsed){
+ const c=estadoComponentes(observations,ausentes),verif=code=>parsed.filter(p=>p.outcome==='NOT_PRESENTED'&&p.concept_code===code).map(p=>p.id);
+ const fijar=(key,res,familia,regla)=>{
+  if(res.estado==='V'){const ctx=new Set(res.inputs.map(x=>[x.norm,x.currency,x.basis].join('|')));if(ctx.size!==1){fields[key]={value:null,validation:'PENDIENTE',code:key,reason:'Componentes con contexto (norma/moneda/base) incompatible'};return;}
+   fields[key]={...res.inputs[0],value:res.value,recordId:null,code:key,validation:'VALIDADO',derivation:{rule:regla??res.regla,inputs:res.inputs.map(x=>x.code),records:res.inputs.flatMap(x=>x.allRecordIds??[x.recordId]),noPresentados:res.noPresentados??[]},reason:null};return;}
+  if(res.estado==='C'){fields[key]={value:null,validation:'CONFLICTIVO',code:key,reason:res.motivo};return;}
+  if(familia&&ausentes.has(familia)){fields[key]={value:0,validation:'NO_APLICABLE',code:key,reason:'No presentado en el documento original del cierre ('+familia+'); no se trata como cero contable sino como partida no presentada',evidence:{family:familia,verificationIds:verif(familia)}};return;}
+  if(fields[key]?.validation==='VALIDADO')return;
+  fields[key]={value:null,validation:'PENDIENTE',code:key,reason:res.estado==='NA'?'Familia presentada con etiquetas no extraídas':'Componentes no atestados'};
+ };
+ // Deuda financiera (sin arrendamientos). Precedencia documentada; un candidato alternativo que difiera > 5 % la bloquea.
+ const cand=[],corto=(()=>{const E=c.EMPRESTITOS_CORTO_PLAZO,P=c.PAPEL_COMERCIAL;
+  if(E.estado==='C'||P.estado==='C')return{estado:'C'};
+  if(E.estado==='V'&&P.estado==='V')return P.value<=E.value+tolerancia(E.value)?{estado:'V',value:E.value,inputs:[E],nota:'Papel comercial incluido en empréstitos a corto plazo'}:{estado:'C',motivo:'Papel comercial superior a los empréstitos a corto plazo'};
+  if(E.estado==='V')return{estado:'V',value:E.value,inputs:[E]};if(P.estado==='V')return{estado:'V',value:P.value,inputs:[P]};
+  return ausentes.has('FAMILIA_DEUDA_CORTO_PLAZO_OTRA')?{estado:'NA'}:{estado:'P'};})();
+ if(c.DEUDA_FINANCIERA_COMBINADA.estado==='V')cand.push({estado:'V',value:c.DEUDA_FINANCIERA_COMBINADA.value,inputs:[c.DEUDA_FINANCIERA_COMBINADA],regla:'DEUDA_FINANCIERA_COMBINADA'});
+ if(fields.shortDebt?.validation==='VALIDADO'&&fields.longDebt?.validation==='VALIDADO')cand.push({estado:'V',value:fields.shortDebt.value+fields.longDebt.value,inputs:[fields.shortDebt,fields.longDebt],regla:'DEUDA_CORTO_PLAZO + DEUDA_LARGO_PLAZO',arrendamientoFinanciero:/CapitalLease|FinanceLease/.test(fields.longDebt.concept??'')});
+ const lp=(()=>{const t=c.DEUDA_LP_TOTAL;if(t.estado==='V')return{estado:'V',value:t.value,inputs:[t]};const nc=c.DEUDA_LP_NO_CORRIENTE.estado==='V'?c.DEUDA_LP_NO_CORRIENTE:fields.longDebt?.validation==='VALIDADO'&&!/CapitalLease|FinanceLease/.test(fields.longDebt.concept??'')?{...fields.longDebt,estado:'V'}:null,cu=c.DEUDA_LP_CORRIENTE;
+  if(nc&&(cu.estado==='V'||cu.estado==='NA'))return{estado:'V',value:nc.value+(cu.estado==='V'?cu.value:0),inputs:cu.estado==='V'?[nc,cu]:[nc]};return null;})();
+ if(lp&&(corto.estado==='V'||corto.estado==='NA'))cand.push({estado:'V',value:lp.value+(corto.estado==='V'?corto.value:0),inputs:[...lp.inputs,...(corto.estado==='V'?corto.inputs:[])],regla:'DEUDA_LP (incl. vencimientos corrientes) + EMPRÉSTITOS/PAPEL COMERCIAL',noPresentados:corto.estado==='NA'?['FAMILIA_DEUDA_CORTO_PLAZO_OTRA']:[]});
+ if(c.PRESTAMOS_IFRS_TOTAL.estado==='V')cand.push({estado:'V',value:c.PRESTAMOS_IFRS_TOTAL.value,inputs:[c.PRESTAMOS_IFRS_TOTAL],regla:'PRESTAMOS_IFRS_TOTAL'});
+ let deudaConArrendamientoFinanciero=false;
+ if(cand.length){const elegido=cand[0],discrepa=cand.slice(1).find(x=>Math.abs(x.value-elegido.value)>Math.max(tolerancia(elegido.value),Math.abs(elegido.value)*0.05));
+  if(discrepa)fijar('debt',{estado:'C',motivo:'Definiciones de deuda atestadas incompatibles: '+elegido.regla+' frente a '+discrepa.regla},null);else{fijar('debt',elegido,null,elegido.regla);deudaConArrendamientoFinanciero=!!elegido.arrendamientoFinanciero;}}
+ else fijar('debt',{estado:corto.estado==='C'?'C':'P',motivo:'Componentes de deuda en conflicto'},'FAMILIA_DEUDA_FINANCIERA');
+ // Arrendamientos: NIIF 16 total, o operativo + financiero (sin el financiero si ya está dentro de la deuda).
+ const ifrs=totalOPartes(c,'ARREND_IFRS_TOTAL',['ARREND_IFRS_CORRIENTE','ARREND_IFRS_NO_CORRIENTE']),op=totalOPartes(c,'ARREND_OPERATIVO_TOTAL',['ARREND_OPERATIVO_CORRIENTE','ARREND_OPERATIVO_NO_CORRIENTE']),fin=totalOPartes(c,'ARREND_FINANCIERO_TOTAL',['ARREND_FINANCIERO_CORRIENTE','ARREND_FINANCIERO_NO_CORRIENTE']);
+ if(ifrs.estado==='V')fijar('leaseDebt',ifrs,'FAMILIA_ARRENDAMIENTOS','Pasivos por arrendamiento NIIF 16');
+ else if([op,fin].some(x=>x.estado==='C'))fijar('leaseDebt',{estado:'C',motivo:'Componentes de arrendamiento en conflicto'},null);
+ else if((op.estado==='V'||op.estado==='NA')&&(fin.estado==='V'||fin.estado==='NA')&&(op.estado==='V'||fin.estado==='V')){const partes=[op,...(deudaConArrendamientoFinanciero?[]:[fin])].filter(x=>x.estado==='V');
+  fijar('leaseDebt',partes.length?{estado:'V',value:partes.reduce((a,x)=>a+x.value,0),inputs:partes.flatMap(x=>x.inputs),noPresentados:[...(op.noPresentados??[]),...(fin.noPresentados??[])]}:{estado:'NA'},'FAMILIA_ARRENDAMIENTOS',deudaConArrendamientoFinanciero?'Arrendamientos operativos (los financieros ya figuran en la deuda)':'Arrendamientos operativos + financieros');}
+ else fijar('leaseDebt',{estado:'P'},'FAMILIA_ARRENDAMIENTOS');
+ fijar('contractAssets',totalOPartes(c,'ACT_CONTRACTUAL_TOTAL',['ACT_CONTRACTUAL_CORRIENTE','ACT_CONTRACTUAL_NO_CORRIENTE']),'FAMILIA_ACT_CONTRACTUALES');
+ // Pasivos contractuales: contratos con clientes (ASC 606/NIIF 15) y, si no se presentan, ingresos diferidos.
+ const pc=totalOPartes(c,'PAS_CONTRACTUAL_TOTAL',['PAS_CONTRACTUAL_CORRIENTE','PAS_CONTRACTUAL_NO_CORRIENTE']);
+ fijar('contractLiabilities',pc.estado==='V'||pc.estado==='C'?pc:totalOPartes(c,'INGRESO_DIFERIDO_TOTAL',['INGRESO_DIFERIDO_CORRIENTE','INGRESO_DIFERIDO_NO_CORRIENTE']),'FAMILIA_PAS_CONTRACTUALES');
+ const simple=(key,code,familia)=>fijar(key,c[code].estado==='V'?{estado:'V',value:c[code].value,inputs:[c[code]],regla:code}:{estado:c[code].estado},familia);
+ simple('taxPayable','IMPUESTO_CORRIENTE_PAGAR','FAMILIA_IMPUESTO_CORRIENTE_PAGAR');simple('taxReceivable','IMPUESTO_CORRIENTE_COBRAR','FAMILIA_IMPUESTO_CORRIENTE_COBRAR');
+ simple('deferredTaxAsset','ACTIVO_IMPUESTO_DIFERIDO','FAMILIA_ACTIVO_IMPUESTO_DIFERIDO');simple('deferredTaxLiability','PASIVO_IMPUESTO_DIFERIDO','FAMILIA_PASIVO_IMPUESTO_DIFERIDO');
+ simple('PPE','INMOVILIZADO_MATERIAL_NETO',null);simple('ROU','DERECHO_USO_OPERATIVO','FAMILIA_DERECHO_USO');simple('INTANGIBLE','INTANGIBLES_NETOS','FAMILIA_INTANGIBLES');simple('goodwill','FONDO_COMERCIO','FAMILIA_FONDO_COMERCIO');
+ simple('nci','PARTICIPACIONES_NO_DOMINANTES','FAMILIA_PARTICIPACIONES_NO_DOMINANTES');
+ // Valores negociables e inversiones financieras (activo financiero no operativo para el puente al valor del accionista).
+ const vn=[c.VALORES_NEGOCIABLES_CORRIENTES,c.VALORES_NEGOCIABLES_NO_CORRIENTES];
+ fijar('marketableSecurities',vn.some(x=>x.estado==='C')?{estado:'C',motivo:'Valores negociables en conflicto'}:vn.some(x=>x.estado==='V')&&vn.every(x=>x.estado==='V'||x.estado==='NA')?{estado:'V',value:vn.filter(x=>x.estado==='V').reduce((a,x)=>a+x.value,0),inputs:vn.filter(x=>x.estado==='V'),noPresentados:vn.filter(x=>x.estado==='NA').map(x=>x.code),regla:'VALORES_NEGOCIABLES_CORRIENTES + VALORES_NEGOCIABLES_NO_CORRIENTES'}:{estado:vn.every(x=>x.estado==='NA')?'NA':'P'},'FAMILIA_VALORES_NEGOCIABLES');
+ if(fields.inventory?.validation!=='VALIDADO'&&fields.inventory?.validation!=='CONFLICTIVO'&&ausentes.has('FAMILIA_INVENTARIOS'))fijar('inventory',{estado:'NA'},'FAMILIA_INVENTARIOS');
+ return Object.fromEntries(Object.entries(c).map(([k,v])=>[k,{estado:v.estado,value:v.estado==='V'?v.value:null,concept:v.concept??null,recordId:v.recordId??null}]));
+}
 function mapPeriod(raw,proofs,report,reportEvidence){
  const parsed=proofs.map(p=>({...p,payload:parse(p.evidence_json)}));
  const contexts=[reportEvidence?.context,...parsed.map(p=>p.payload?.context)].filter(Boolean);
@@ -56,19 +124,31 @@ function mapPeriod(raw,proofs,report,reportEvidence){
   fields[key]=valid.length&&values.size===1?{...valid[0],allRecordIds:valid.map(x=>x.recordId),...(['BENEFICIO_NETO','PATRIMONIO_NETO'].includes(code)?{perimeter:new Set(valid.map(x=>perimeter(code,x.concept))).size===1?perimeter(code,valid[0].concept):null}:{})}:{value:null,validation:values.size>1||all.some(x=>x.validation==='CONFLICTIVO')?'CONFLICTIVO':'PENDIENTE',code,reason:values.size>1?'Totales atestados incompatibles':all.length?all.map(x=>x.reason).filter(Boolean).join('; '):'Concepto ausente',recordIds:all.map(x=>x.recordId)};
  }
  const derive=(key,deps,fn)=>{if(fields[key]?.value!=null||fields[key]?.validation==='CONFLICTIVO'||!deps.every(k=>fields[k]?.validation==='VALIDADO'))return;const inputs=deps.map(k=>fields[k]);if(new Set(inputs.map(x=>[x.norm,x.currency,x.basis].join('|'))).size!==1)return;fields[key]={...inputs[0],value:fn(...inputs.map(x=>x.value)),recordId:null,code:key,validation:'VALIDADO',derivation:{rule:deps.join(' / '),inputs:deps,records:inputs.flatMap(x=>x.allRecordIds??[x.recordId])},reason:null};};
- derive('ebitda',['ebit','da'],(a,b)=>a+b);derive('cogs',['revenue','grossProfit'],(a,b)=>a-b);derive('debt',['shortDebt','longDebt'],(a,b)=>a+b);derive('liabilitiesEquity',['liabilities','equity'],(a,b)=>a+b);derive('balanceDifference',['assets','liabilitiesEquity'],(a,b)=>a-b);
+ derive('ebitda',['ebit','da'],(a,b)=>a+b);derive('cogs',['revenue','grossProfit'],(a,b)=>a-b);
+ const ausentes=new Set(parsed.filter(p=>p.outcome==='NOT_PRESENTED'&&p.payload?.source_identifier===report.identificador_fuente&&p.payload?.evidence?.end===report.fecha_fin_periodo).map(p=>p.concept_code));
+ const componentes=derivarComponentes(fields,observations,ausentes,parsed);derive('liabilitiesEquity',['liabilities','equity'],(a,b)=>a+b);derive('balanceDifference',['assets','liabilitiesEquity'],(a,b)=>a-b);
  const norms=new Set(Object.values(fields).filter(x=>x.validation==='VALIDADO').map(x=>x.norm));if(norms.size>1)issues.push('Normas incompatibles dentro del mismo cierre');
- return{reportId:report.id,fiscalYear:Number(report.fecha_fin_periodo.slice(0,4)),periodStart:context?.start??null,periodEnd:report.fecha_fin_periodo,publication:report.fecha_publicacion,document:report.identificador_fuente,provider:report.fuente,currency:context?.currency??null,basis:context?.basis??null,norm:norms.size===1?[...norms][0]:null,fields,observations,issues,rawRecords:raw.length,validatedRecords:observations.filter(x=>x.validation==='VALIDADO').length};
+ return{reportId:report.id,fiscalYear:Number(report.fecha_fin_periodo.slice(0,4)),periodStart:context?.start??null,periodEnd:report.fecha_fin_periodo,publication:report.fecha_publicacion,document:report.identificador_fuente,provider:report.fuente,currency:context?.currency??null,basis:context?.basis??null,norm:norms.size===1?[...norms][0]:null,fields,componentes,ausentes:[...ausentes].sort(),observations,issues,rawRecords:raw.length,validatedRecords:observations.filter(x=>x.validation==='VALIDADO').length};
 }
 async function search(db,q=''){if(q.length>100)throw Error('Búsqueda demasiado larga');const[r]=await db.query(`SELECT e.id,e.nombre_empresa,e.sector_id,s.nombre_sector,p.codigo_iso,MIN(i.ticker) ticker FROM empresa e JOIN pais p ON p.id=e.pais_id LEFT JOIN sector s ON s.id=e.sector_id LEFT JOIN instrumento i ON i.empresa_id=e.id WHERE e.nombre_empresa LIKE ? OR i.ticker LIKE ? GROUP BY e.id ORDER BY e.nombre_empresa LIMIT 40`,['%'+q+'%',q+'%']);return r;}
+// Plantilla de cada evidencia aceptada: explícita (código oficial de actividad → plantilla, criterio versionado) o vía el
+// sector MySQL acreditado (mapeo no REVISAR). Varias evidencias aceptadas con plantillas distintas: contradicción.
+async function resolverClasificacion(db,company,asOf){
+ const[classes]=await db.query('SELECT c.id,c.sector_id,c.source,c.reference_date,c.criterion,c.confidence,c.status,c.evidence_hash,c.evidence_json,s.nombre_sector FROM classification_evidence c LEFT JOIN sector s ON s.id=c.sector_id WHERE empresa_id=? AND reference_date<=? ORDER BY reference_date DESC,id DESC LIMIT 20',[company.id,asOf]);
+ const plantillaDe=cl=>{if(CRITERIOS_PLANTILLA.has(cl.criterion)){const p=Number(parse(cl.evidence_json)?.plantilla);return Number.isInteger(p)&&p>=1&&p<=16?{model:p,method:cl.criterion}:null;}const m=MAPEO_SECTORES[cl.sector_id];return m&&m.clasificacion!=='REVISAR'&&m.nombre.toLowerCase()===cl.nombre_sector?.toLowerCase()?{model:Number(m.plantilla),method:m.clasificacion}:null;};
+ const aceptadas=classes.filter(cl=>cl.status==='ACCEPTED'&&cl.confidence==='HIGH').map(cl=>({cl,p:plantillaDe(cl)})).filter(x=>x.p),modelos=new Set(aceptadas.map(x=>x.p.model));
+ const nominalM=MAPEO_SECTORES[company.sector_id],nominal=nominalM?Number(nominalM.plantilla):null,base={sectorId:company.sector_id,sectorName:company.nombre_sector,nominal};
+ if(modelos.size>1)return{...base,model:null,status:'BLOQUEADO',method:'CONTRADICCION',evidence:aceptadas.map(x=>({id:x.cl.id,criterion:x.cl.criterion,model:x.p.model})),reason:'Evidencias de clasificación aceptadas con plantillas distintas'};
+ if(modelos.size===1){const x=aceptadas[0];return{...base,sectorId:x.cl.sector_id??company.sector_id,sectorName:x.cl.nombre_sector??company.nombre_sector,model:x.p.model,status:'RESUELTO',method:x.p.method,evidence:{id:x.cl.id,criterion:x.cl.criterion,source:x.cl.source,reference_date:x.cl.reference_date,evidence_hash:x.cl.evidence_hash},reason:null};}
+ // Sin evidencia aceptada: sólo el sector MySQL acreditado sin evidencias pendientes o rechazadas.
+ const resolved=!classes.length&&nominalM&&nominalM.clasificacion!=='REVISAR'&&nominalM.nombre.toLowerCase()===company.nombre_sector?.toLowerCase();
+ return{...base,model:resolved?nominal:null,status:resolved?'RESUELTO':'BLOQUEADO',method:nominalM?.clasificacion??'SIN_MAPEO',evidence:null,reason:resolved?null:'Clasificación pendiente, contradictoria o sin mapeo acreditado'};
+}
 async function loadCompany(db,id,asOf){
  date(asOf);if(!Number.isSafeInteger(id)||id<1)throw Error('Empresa inválida');
  const[rows]=await db.query('SELECT e.id,e.nombre_empresa,e.sector_id,s.nombre_sector,p.codigo_iso FROM empresa e JOIN pais p ON p.id=e.pais_id LEFT JOIN sector s ON s.id=e.sector_id WHERE e.id=?',[id]);if(rows.length!==1)throw Error('Empresa inexistente');const company=rows[0];
  const[instruments]=await db.query('SELECT id,ticker,isin,moneda,mercado_id FROM instrumento WHERE empresa_id=? ORDER BY id LIMIT 20',[id]);
- const[classes]=await db.query('SELECT c.id,c.sector_id,c.source,c.reference_date,c.confidence,c.status,c.evidence_hash,s.nombre_sector FROM classification_evidence c LEFT JOIN sector s ON s.id=c.sector_id WHERE empresa_id=? AND reference_date<=? ORDER BY reference_date DESC,id DESC LIMIT 1',[id,asOf]);
- const cl=classes[0],accepted=cl?.status==='ACCEPTED'&&cl.confidence==='HIGH',sectorId=accepted?cl.sector_id:company.sector_id,sectorName=accepted?cl.nombre_sector:company.nombre_sector,m=MAPEO_SECTORES[sectorId];
- const resolved=(!cl||accepted)&&m&&m.clasificacion!=='REVISAR'&&m.nombre.toLowerCase()===sectorName?.toLowerCase();
- const classification={sectorId,sectorName,model:resolved?Number(m.plantilla):null,status:resolved?'RESUELTO':'BLOQUEADO',method:m?.clasificacion??'SIN_MAPEO',evidence:accepted?cl:null,reason:resolved?null:'Clasificación pendiente, contradictoria o sin mapeo acreditado'};
+ const classification=await resolverClasificacion(db,company,asOf);
  // Sólo informes de la fuente del país de la empresa: hubo documentos EDINET de emisores japoneses asignados a empresas
  // de Taiwán por colisión de código bursátil (identidad cruzada, migración 32); nunca se valoran con ellos.
  const fuentes=FUENTES_PAIS[company.codigo_iso];if(!fuentes)throw Error('País sin fuente primaria acreditada');
@@ -88,4 +168,4 @@ async function loadCompany(db,id,asOf){
  if(periods.some(p=>p.issues.length))issues.push({code:'CONTEXTO_FINANCIERO_INCOMPLETO'});
  const result={version:'MYSQL_SECTORIAL_READONLY_0.2',readAt:new Date().toISOString(),asOf,company,instruments,classification,periods,issues,source:'MYSQL_SOLO_LECTURA',immutableHistory:true};result.inputHash=hash({asOf,company,classification,periods,issues});return result;
 }
-module.exports={perimeter,MAP,FUENTES_PAIS,flow,hash,date,observe,mapPeriod,search,loadCompany};
+module.exports={perimeter,MAP,COMPONENTES,FUENTES_PAIS,flow,hash,date,observe,mapPeriod,search,loadCompany,resolverClasificacion,derivarComponentes};

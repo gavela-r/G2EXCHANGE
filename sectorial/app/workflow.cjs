@@ -19,16 +19,26 @@ function declaredClassification(snapshot,item){
 // Metodología G2 por defecto: días de cobro, inventario y pago sobre VENTAS. La convencional debe declararse.
 function workingCapitalDays(config){const x=config.workingCapitalDays??'SOBRE_VENTAS';if(!['SOBRE_VENTAS','CONVENCIONAL'].includes(x))throw Error('Metodología de días de circulante desconocida');return x;}
 function buildEntry(snapshot,config={}){
- const issues=[...snapshot.issues.map(x=>({...x,kind:'DATOS'}))],notices=[],declared=declaredClassification(snapshot,config.classification);
+ const enAdaptativo=x=>config.modo==='ADAPTATIVO'&&x.code==='CUATRO_EJERCICIOS_NO_DISPONIBLES';
+ const issues=[...snapshot.issues.filter(x=>!enAdaptativo(x)).map(x=>({...x,kind:'DATOS'}))],notices=snapshot.issues.filter(enAdaptativo).map(x=>({...x,kind:'AVISO'})),declared=declaredClassification(snapshot,config.classification);
  if(declared)notices.push({code:'CLASIFICACION_DECLARADA_POR_ANALISTA',model:declared.model,message:'La clasificación acreditada no estaba resuelta; se aplica el modelo declarado con fuente y responsable. Requiere revisión.'});
  const m=model(declared?.model??snapshot.classification.model);
  if(!m)return{entry:null,model:null,calendar:null,issues:[...issues,{code:'CLASIFICACION_NO_RESUELTA',kind:'DATOS',message:snapshot.classification.reason}],notices,classification:snapshot.classification};
  if(config.inputHash&&config.inputHash!==snapshot.inputHash)throw Error('La información histórica cambió; volver a cargar y revisar las hipótesis');
  if(config.companyId!==undefined&&Number(config.companyId)!==snapshot.company.id)throw Error('Hipótesis de otra empresa');
  const calendar=forecastCalendar(snapshot.periods,config.calendar,snapshot.asOf);issues.push(...calendar.issues.map(message=>({code:'CALENDARIO_PENDIENTE',kind:'DATOS',message})));
- for(const period of snapshot.periods)for(const key of m.requiredHistory){const item=period.fields[key];if(item?.value==null||item.validation!=='VALIDADO')issues.push({code:'HISTORICO_PENDIENTE',kind:'DATOS',field:key,period:period.periodEnd,message:item?.reason??'Concepto o nota no disponible'});}
- if(snapshot.periods.length!==4||calendar.periods.length!==5)return{entry:null,model:m,calendar,issues,notices,classification:declared?{...snapshot.classification,declared}:snapshot.classification};
- const histories=snapshot.periods.map(p=>({ejercicio:p.fiscalYear,publicado:p.publication,fuente:p.provider+':'+p.document,valores:Object.fromEntries(Object.entries(p.fields).map(([k,v])=>[k,v.validation==='VALIDADO'?v.value:null]))}));
+ // Modo ADAPTATIVO: proyección automática a partir de los históricos acreditados disponibles (2–4 ejercicios consecutivos);
+ // un histórico ausente no se rellena: queda vacío y se avisa. NO_APLICABLE = partida no presentada con evidencia.
+ const adaptativo=config.modo==='ADAPTATIVO';if(config.modo!==undefined&&!adaptativo)throw Error('Modo de valoración desconocido');
+ const usable=item=>item?.value!=null&&(item.validation==='VALIDADO'||item.validation==='NO_APLICABLE');
+ for(const period of snapshot.periods)for(const key of m.requiredHistory){const item=period.fields[key];if(!usable(item))(adaptativo?notices:issues).push({code:adaptativo?'HISTORICO_NO_DISPONIBLE':'HISTORICO_PENDIENTE',kind:adaptativo?'AVISO':'DATOS',field:key,period:period.periodEnd,message:item?.reason??'Concepto o nota no disponible'});}
+ if(adaptativo){const n=snapshot.periods.length,consecutivos=snapshot.periods.every((p,i)=>!i||p.fiscalYear===snapshot.periods[i-1].fiscalYear+1);
+  if(n<2||!consecutivos)issues.push({code:'HISTORIA_INSUFICIENTE_ADAPTATIVA',kind:'DATOS',message:'Se requieren al menos dos ejercicios consecutivos acreditados'});
+  else if(n<4)notices.push({code:n===2?'ANALISIS_CONDICIONADO_DOS_EJERCICIOS':'TENDENCIA_TRES_EJERCICIOS',message:n===2?'Dos ejercicios: análisis condicionado, sin tendencia robusta':'Tendencia estimada con tres ejercicios'});}
+ const adaptable=adaptativo&&snapshot.periods.length>=2&&snapshot.periods.length<=4;
+ if((snapshot.periods.length!==4&&!adaptable)||calendar.periods.length!==5)return{entry:null,model:m,calendar,issues,notices,classification:declared?{...snapshot.classification,declared}:snapshot.classification};
+ const histories=snapshot.periods.map(p=>({ejercicio:p.fiscalYear,publicado:p.publication,fuente:p.provider+':'+p.document,valores:Object.fromEntries(Object.entries(p.fields).map(([k,v])=>[k,v.validation==='VALIDADO'||(adaptativo&&v.validation==='NO_APLICABLE')?v.value:null]))}));
+ if(adaptativo)while(histories.length<4){const first=histories[0];histories.unshift({ejercicio:first.ejercicio-1,publicado:first.publicado,fuente:'EJERCICIO_NO_DISPONIBLE: sin informe acreditado; columna vacía',valores:Object.fromEntries(Object.keys(first.valores).map(k=>[k,null]))});}
  const constants=Object.fromEntries(m.constants.map(k=>[k,cited(config.constants?.[k],snapshot.asOf,k)]));
  if(!config.constants?.shares)constants.shares=snapshot.asOf===snapshot.periods.at(-1).periodEnd?snapshot.periods.at(-1).fields.shares?.value??null:null;
  for(let i=0;i<5;i++){const p=calendar.periods[i],duration=day(p.end)-day(p.start)+1,annual=day(p.fiscalEnd??p.end)-day(p.fiscalStart??p.start)+1;constants['periodDays.'+i]=duration;constants['yearFraction.'+i]=duration/annual;}
@@ -89,7 +99,7 @@ function evaluate(snapshot,config={}){
   const financialMissing=preparation.issues.some(x=>x.kind==='DATOS'||x.kind==='METODO');
   result.scenarios.push({id:scenario,name:['Conservador','Base','Optimista'][scenario-1],status:get('price')!==null&&!financialMissing?'CALCULADO_PENDIENTE_REVISION':'BLOQUEADO',valuePerShare:financialMissing?null:get('price'),rawCalculatedValue:financialMissing?null:get('price'),states,capital:{rates,premiums:premium},warnings:rates?[]:['Componentes de capital no acreditados/completos']});
  }
- result.status=result.scenarios.every(s=>s.status==='CALCULADO_PENDIENTE_REVISION')?'CALCULADO_PENDIENTE_REVISION':'BLOQUEADO';result.resultHash=hash({inputHash:result.inputHash,configurationHash:result.configurationHash,scenarios:result.scenarios,status:result.status});
+ result.status=result.scenarios.every(s=>s.status==='CALCULADO_PENDIENTE_REVISION')?'CALCULADO_PENDIENTE_REVISION':'BLOQUEADO';if(config.modo==='ADAPTATIVO'){result.modo='ADAPTATIVO';result.provisional=true;result.provisionalReason='Proyección adaptativa automática y apertura con el último balance auditado publicado; sin revisión del analista';}result.resultHash=hash({inputHash:result.inputHash,configurationHash:result.configurationHash,scenarios:result.scenarios,status:result.status});
  return{result,entry:preparation.entry,plan};
 }
 function scenariosValue(plan,values,key){const value=values.get(key);return typeof value==='number'?value:null;}

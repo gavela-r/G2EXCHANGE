@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),crypto=require('node:crypto'),cp=require('node:child_process');
 require('./env.cjs');
-const {database,readOnly}=require('./runtime.cjs'),adapter=require('./adapter.cjs'),{models,model}=require('./registry.cjs'),{evaluate}=require('./workflow.cjs'),store=require('./store.cjs'),{kpisForSnapshot}=require('./kpi.cjs'),taxonomy=require('./taxonomy.cjs');
+const {database,readOnly}=require('./runtime.cjs'),adapter=require('./adapter.cjs'),{models,model}=require('./registry.cjs'),{evaluate}=require('./workflow.cjs'),store=require('./store.cjs'),{kpisForSnapshot}=require('./kpi.cjs'),taxonomy=require('./taxonomy.cjs'),adaptativo=require('./adaptativo.cjs');
 const VERSION='G2_SECTORIAL_DEV_0.3';
 // Errores tipados: {error:<mensaje legible>, code:<código estable>}. Nunca se devuelven valores ficticios.
 class ApiError extends Error{constructor(status,code,message){super(message);this.status=status;this.code=code;}}
@@ -9,7 +9,7 @@ function artifactToolAvailable(){let dir=__dirname;for(;;){if(fs.existsSync(path
 // options.source: {mode, search(q), load(id,asOf)} para modo mock; por defecto, adaptador MySQL en transacción READ ONLY.
 // options.corsOrigins: orígenes de desarrollo permitidos (lista blanca exacta); por defecto ninguno (usar el proxy de Vite).
 function createApp(pool,options={}){
- const source=options.source??{mode:'MYSQL_SOLO_LECTURA',search:q=>readOnly(pool,db=>adapter.search(db,q)),load:(id,asOf)=>readOnly(pool,db=>adapter.loadCompany(db,id,asOf))};
+ const source=options.source??{mode:'MYSQL_SOLO_LECTURA',search:q=>readOnly(pool,db=>adapter.search(db,q)),load:(id,asOf)=>readOnly(pool,db=>adapter.loadCompany(db,id,asOf)),referencias:(snapshot,asOf)=>readOnly(pool,db=>adaptativo.referencias(db,snapshot,asOf,null))};
  pool??=source.mode==='MYSQL_SOLO_LECTURA'?database():{end:async()=>{}};
  const cors=new Set(options.corsOrigins??String(process.env.G2_SECTORIAL_CORS_ORIGINS??'').split(',').map(x=>x.trim()).filter(Boolean));
  const token=crypto.randomBytes(32).toString('hex'),jobs=new Map(),queue=[],startupHash=store.engineHash(),capabilities={xlsxGenerator:artifactToolAvailable()?'ARTIFACT_TOOL_INDITEX':'PORTABLE_SHEETJS',nativeValidation:process.platform==='win32'?'MICROSOFT_EXCEL_COM_SI_INSTALADO':'NO_DISPONIBLE_FUERA_DE_WINDOWS',downloadPolicy:'SOLO_XLSX_CON_VALIDACION_NATIVA_VIGENTE'};let active=null;
@@ -58,10 +58,12 @@ function createApp(pool,options={}){
     const id=Number(parts[3]);if(parts.length===5&&parts[4]==='history'&&req.method==='GET')return send(200,store.list(id));
     if(parts.length===4&&req.method==='GET'){const snapshot=await source.load(id,asOfParam(url.searchParams.get('asOf'))),evaluation=evaluate(snapshot);return send(200,{snapshot,result:evaluation.result});}
     if(parts.length===5&&parts[4]==='pcv'&&req.method==='GET'){const s=await source.load(id,asOfParam(url.searchParams.get('asOf')));return send(200,{company:s.company,asOf:s.asOf,inputHash:s.inputHash,periods:s.periods.map(p=>({periodEnd:p.periodEnd,fiscalYear:p.fiscalYear,publication:p.publication,document:p.document,provider:p.provider,currency:p.currency,basis:p.basis,norm:p.norm,fields:p.fields,observations:p.observations})),issues:s.issues});}
+    // Preparación adaptativa calculada en el servidor (bloqueos, configuración propuesta y trazabilidad); no guarda nada.
+    if(parts.length===5&&parts[4]==='adaptive'&&req.method==='GET'){if(source.mode!=='MYSQL_SOLO_LECTURA')fail(404,'SOLO_MODO_MYSQL','La preparación adaptativa requiere datos reales');const asOf=asOfParam(url.searchParams.get('asOf')),snapshot=await source.load(id,asOf),refs=await source.referencias(snapshot,asOf),prep=adaptativo.preparar(snapshot,refs,{asOf});return send(200,{company:snapshot.company,asOf,inputHash:snapshot.inputHash,bloqueos:prep.bloqueos,configuracion:prep.config,trazabilidad:prep.traza});}
     if(parts.length===5&&parts[4]==='kpis'&&req.method==='GET')return send(200,kpisForSnapshot(await source.load(id,asOfParam(url.searchParams.get('asOf')))));
     if(parts.length===5&&parts[4]==='evaluate'&&req.method==='POST'){
      const input=await body(req);if(Object.keys(input).some(x=>!['asOf','configuration'].includes(x)))fail(400,'CAMPO_NO_ADMITIDO','El cliente no puede sustituir históricos, resultados o evidencia');
-     const config=input.configuration??{},allowed=['companyId','inputHash','scenarios','constants','assets','calendar','terminalSource','valuationBridge','accountingPolicy','classification','workingCapitalDays'];if(Object.keys(config).some(x=>!allowed.includes(x)))fail(400,'CAMPO_CONFIGURACION_NO_ADMITIDO','Campo de configuración no admitido');
+     const config=input.configuration??{},allowed=['companyId','inputHash','scenarios','constants','assets','calendar','terminalSource','valuationBridge','accountingPolicy','classification','workingCapitalDays','modo'];if(Object.keys(config).some(x=>!allowed.includes(x)))fail(400,'CAMPO_CONFIGURACION_NO_ADMITIDO','Campo de configuración no admitido');
      const snapshot=await source.load(id,asOfParam(input.asOf));if(config.inputHash!==snapshot.inputHash)fail(409,'DATOS_CAMBIADOS','Los datos cambiaron o falta su hash; volver a cargar antes de calcular');
      let evaluated;try{evaluated=evaluate(snapshot,config);}catch(e){fail(400,'CONFIGURACION_RECHAZADA',e.message);}const run=store.save(snapshot,config,evaluated.result);return send(201,{id:run.id,result:run.result});
     }

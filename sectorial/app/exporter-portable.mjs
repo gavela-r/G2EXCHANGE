@@ -24,6 +24,16 @@ export async function exportWorkbookPortable(run,evaluated,file){
   put(main,'B199',value('Valor por acción ('+entry.moneda+') · revisión pendiente'));const p=out('price',0);put(main,'M199',p===undefined?value('NO_ESTIMABLE'):formula(f(p),cv(p),FORMAT.importe));
   const control=sheet('S_Control');put(control,'A9',value('Estado del expediente: '+result.status+'. Cambiar hipótesis en Excel es una simulación manual; no acredita fuentes ni actualiza MySQL.'));
  }else put(main,'B4',value('BLOQUEADO · Sin modelo/calendario acreditado. No se presenta valoración ni proyecciones artificiales.'));
+ // Valoración provisional y trazabilidad de la proyección adaptativa (sólo si la ejecución la incluye).
+ if(result.provisional)put(main,'B3',value('VALORACIÓN PROVISIONAL — '+result.provisionalReason));
+ const tz=run.configuration?.trazabilidad;
+ if(tz){const ws=sheet('S_Proyeccion'),rows=[['G2 '+tz.version+' — origen y técnica de cada proyección (las proyecciones no son hechos)'],['Cobertura histórica aplicable',tz.cobertura?((tz.cobertura.porcentaje*100).toFixed(1)+' %'):'',JSON.stringify(tz.cobertura??{})],['Calendario',tz.calendario?.politica??''],[],['Variable','Técnica','Estimación','Confianza','Ejercicios','Pesos (0 = posible atípico)','Atípicos','Patrón','Sin ajustar','Motivo']];
+  for(const[k,a]of Object.entries(tz.variables??{}))rows.push([k,a.estimacion?.metodo??a.estado,a.estimacion?.g0??a.estimacion?.nivel??null,a.estimacion?.confianza??'',(a.ejercicios??[]).join(', '),JSON.stringify(a.pesos??{}),(a.atipicos??[]).map(x=>x.year+' '+x.tipo).join('; '),a.patron??'',a.sinAjustar?.g0??a.sinAjustar?.nivel??null,a.estimacion?.motivo??(a.advertencias??[]).join('; ')]);
+  rows.push([],['Hipótesis','Valor','Origen','Técnica / fuente']);for(const h of tz.hipotesis??[])rows.push([h.clave,Array.isArray(h.valor)?h.valor.join(' / '):h.valor??'',h.origen,h.tecnica??((h.fuente??'')+(h.fecha?' ('+h.fecha+')':''))]);
+  rows.push([],['Origen de la apertura']);for(const[k,o]of Object.entries(tz.origenes??{}))rows.push([k,o]);
+  rows.push([],['Notas']);for(const n of tz.notas??[])rows.push([n]);
+  if(tz.escenarios){rows.push([],['Senda por escenario','Año 1','Año 2','Año 3','Año 4','Año 5']);for(const[i,n]of tz.escenarios.nombres.entries()){rows.push(['Crecimiento de ingresos — '+n,...tz.escenarios.crecimiento[n]]);rows.push(['Margen EBITDA — '+n,...tz.escenarios.margenEbitda[n]]);}}
+  rows.forEach((row,i)=>row.forEach((v,j)=>put(ws,letra(1+j)+(1+i),value(v===undefined?null:v))));}
  const hist=sheet('S_Historico'),trace=[['Ejercicio','Concepto','Estado','Importe admitido','Importe original','Moneda','Unidad','Escala','Norma','Perímetro','Informe','Registro','Verificación','Documento','Publicación','Motivo']];
  for(const p of run.snapshot.periods)for(const o of p.observations)trace.push([p.periodEnd,o.code??o.concept,o.validation,o.value,o.rawValue,o.currency,o.unit,o.scale,o.norm,o.basis,p.reportId,o.recordId,o.verificationId??null,p.document,p.publication,o.reason]);
  trace.forEach((row,i)=>row.forEach((v,j)=>put(hist,letra(21+j)+(4+i),value(v))));

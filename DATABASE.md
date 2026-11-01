@@ -82,5 +82,13 @@ Procedimiento obligatorio para cualquier migración con datos (`OPERATIONS.md`):
 ## 7 bis. KPI persistidos (`kpi_financiero_informe`)
 Un único escritor, `kpiSincronizarInforme`, aplica las reglas vigentes (selección V2 con evidencia primaria, perímetro de ROE conocido e igual, deuda V2 con ambos componentes certificados con evidencia primaria, entradas con conflicto preservado sin resolver excluidas salvo que haya fila certificada), escribe sólo cambios reales (DECIMAL(30,10)) y retira con causa lo que ya no es calculable. Recálculo global reanudable: `node server/scripts/recalcular-kpi-correcciones.cjs --todos --checkpoint <dir> [--aplicar]` (universo congelado, un lote por transacción, snapshot antes del commit, estado atómico); `--restaurar <dir>/snapshot.ndjson` devuelve el estado previo. Comprobación: la misma orden sin `--aplicar` debe dar 0 cambios. Los KPI persistidos son calculados, no certificados: la certificación se mide desde PCV certificados (`kpi.cjs`, `cobertura_mysql.cjs`, mismo criterio que la API sectorial).
 
+## 7 ter. Componentes sectoriales y clasificación oficial (01/11/2026)
+- **Migración 34** (`server/sql/34_taxonomia_componentes_sectoriales.sql`, rollback `.rollback.sql`): inserta 36 conceptos en `taxonomia_concepto` (id 470–505 en producción).
+  - Las partidas las carga `server/scripts/recuperar-sec-componentes.cjs` (reanudable, idempotente, vía `persistirRecuperacionVerificada`).
+  - Además registra `pcv_verification_evidence.outcome='NOT_PRESENTED'` por familia y componente cuando el documento original del cierre no contiene ninguna etiqueta estándar.
+  - Ninguno de estos conceptos alimenta los KPI.
+  - Ensayo: aplicar, revertir exacto, reaplicar e idempotencia en la copia aislada. La producción coincide con el ensayo (196.613 partidas, 720.357 ausencias).
+- **Clasificación oficial** (`server/scripts/clasificar-actividad-oficial.cjs`, rollback `server/sql/35_clasificacion_actividad_oficial.rollback.sql`): evidencia `ACCEPTED/HIGH` con plantilla explícita (`SEC_SIC_PLANTILLA_V1`, `TSE33_PLANTILLA_V1`) sólo para cruces inequívocos. El adaptador bloquea las evidencias aceptadas contradictorias.
+
 ## 8. Indicadores derivados no persistidos
 Los días operativos (DSO, DPO, días de inventario, CCC; variantes sobre ventas y convencional) y `DELTA_NWC` se calculan al vuelo desde los PCV certificados (`sectorial/app/kpi.cjs`) y **no se guardan** en `kpi_financiero_informe`: no hubo migración ni escritura masiva. Conceptos que usan: `CUENTAS_COBRAR`, `INVENTARIOS`, `CUENTAS_PAGAR`, `INGRESOS`, `COSTE_VENTAS` (o ingresos − `BENEFICIO_BRUTO`) y `ACTIVOS_CONTRACTUALES` (solo la métrica ampliada). Fórmulas en `VALUATION_ENGINE.md` §4 bis; disponibilidad por país en `COVERAGE_REPORT.md`.

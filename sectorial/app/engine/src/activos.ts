@@ -47,7 +47,7 @@ export function crearCohorte(e:Emisor,c:Cohorte,years:Expr[],opts:{adicion?:Expr
   const vidaAbierta=i?vidas[i-1]:vida;
   const resAbierta=add(i?reservas[i-1]:reservaInicial,opts.reservasAdiciones?.[i]??0);
   let cargo:Expr=0;
-  if(c.metodo==='LINEAL')cargo=iff(gt(vidaAbierta,0),min(disponible,mul(div(disponible,vidaAbierta),min(vidaAbierta,fraccion))),iff(gt(disponible,0),div(1,0),0));
+  if(c.metodo==='LINEAL')cargo=iff(gt(vidaAbierta,0),min(disponible,mul(div(disponible,vidaAbierta),min(vidaAbierta,fraccion))),iff(gt(disponible,add(1e-6,mul(1e-9,op('ABS',aperturas[i])))),div(1,0),0));
   if(c.metodo==='SALDO_DECRECIENTE')cargo=iff(gt(vidaAbierta,0),iff(gt(tasa,0),iff(ge(1,tasa),min(disponible,max(mul(aperturas[i],tasa,fraccion),mul(div(disponible,vidaAbierta),min(vidaAbierta,fraccion)))),div(1,0)),div(1,0)),iff(gt(disponible,0),div(1,0),0));
   if(c.metodo==='PRODUCCION'){
    const produccion=opts.produccion?.[i]??e.constante(key+'.produccion.'+i,'Producción '+c.id+' período '+(i+1),null,'unidades');

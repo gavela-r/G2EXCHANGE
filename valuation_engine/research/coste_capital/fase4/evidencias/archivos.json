@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-30T07:55:22.022Z",
+  "created": [
+    "server/src/capital/primas.ts",
+    "server/src/capital/automatico.ts",
+    "server/src/capital/excelAutomatico.ts",
+    "server/tests/capitalPrimas.test.cjs",
+    "server/tests/capitalExcelAutomatico.test.cjs",
+    "server/tests/fixtures/capitalPrimas.cjs",
+    "server/scripts/capital-primas-real.cjs",
+    "server/scripts/capital-primas-excel-qa.cjs",
+    "server/scripts/capital-primas-entrega.cjs",
+    "valuation_engine/research/coste_capital/docs/18_PRIMAS_AUTOMATICAS_RESULTADOS.md",
+    "valuation_engine/research/coste_capital/fase4/README.md"
+  ],
+  "modified": [
+    "server/src/capital/datos.ts",
+    "server/src/capital/api.ts",
+    "server/src/capital/reportes.ts",
+    "client/src/CapitalApp.jsx",
+    "server/tests/capitalMysql.test.cjs",
+    "server/tests/capitalPlantillas.test.cjs",
+    "server/scripts/capital-test.cjs",
+    "server/scripts/capital-client-qa.cjs",
+    "server/scripts/capital-replay-analysis.cjs",
+    "valuation_engine/research/coste_capital/README.md",
+    "valuation_engine/research/coste_capital/docs/16_USO_Y_OPERACION.md"
+  ],
+  "generated": [
+    "valuation_engine/research/coste_capital/fase4/evidencias/archivos.json",
+    "valuation_engine/research/coste_capital/fase4/evidencias/build-capital.txt",
+    "valuation_engine/research/coste_capital/fase4/evidencias/cierre.json",
+    "valuation_engine/research/coste_capital/fase4/evidencias/cliente-dom.html",
+    "valuation_engine/research/coste_capital/fase4/evidencias/cliente-dom.json",
+    "valuation_engine/research/coste_capital/fase4/evidencias/ejemplos-reales.json",
+    "valuation_engine/research/coste_capital/fase4/evidencias/excel-recalculado.json",
+    "valuation_engine/research/coste_capital/fase4/evidencias/pruebas-capital.txt",
+    "valuation_engine/research/coste_capital/fase4/evidencias/pruebas-resumen.json",
+    "valuation_engine/research/coste_capital/fase4/evidencias/regresion-backend-previo.txt",
+    "valuation_engine/research/coste_capital/fase4/evidencias/regresion-modulos-previos.txt",
+    "valuation_engine/research/coste_capital/fase4/evidencias/replay.json",
+    "valuation_engine/research/coste_capital/fase4/evidencias/typecheck-backend.txt",
+    "valuation_engine/research/coste_capital/fase4/salida/AMD_US.json",
+    "valuation_engine/research/coste_capital/fase4/salida/AMD_US.pdf",
+    "valuation_engine/research/coste_capital/fase4/salida/AMD_US.xlsx",
+    "valuation_engine/research/coste_capital/fase4/salida/GOGOLOOK_TW.json",
+    "valuation_engine/research/coste_capital/fase4/salida/GOGOLOOK_TW.pdf",
+    "valuation_engine/research/coste_capital/fase4/salida/GOGOLOOK_TW.xlsx",
+    "valuation_engine/research/coste_capital/fase4/salida/TOYOTA_JP.json",
+    "valuation_engine/research/coste_capital/fase4/salida/TOYOTA_JP.pdf",
+    "valuation_engine/research/coste_capital/fase4/salida/TOYOTA_JP.xlsx"
+  ],
+  "temporaryQA": [
+    ".verification/capital-primas-render",
+    ".verification/capital-qa/node_modules/hyperformula"
+  ],
+  "productDependenciesAdded": 0,
+  "migrationsExecuted": 0
+}

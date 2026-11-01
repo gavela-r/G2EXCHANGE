@@ -1,0 +1,466 @@
+﻿{
+  "overall": {
+    "denominatorCompanies": 13194,
+    "reports": 41758,
+    "companiesWithReport": 10536,
+    "companiesWithPublishedReport": 9727,
+    "companiesWithAnyNumeric": 10383,
+    "companiesWithAnyPublishedNumeric": 9695,
+    "companiesWithContext": 5708,
+    "companiesWithRawShares": 8601,
+    "companiesWithPublishedShares": 8050,
+    "metrics": {
+      "INGRESOS": {
+        "storedCompanies": 9504,
+        "eligibleCompanies": 8820,
+        "attestationMetadataCompanies": 4020,
+        "storedReports": 36560,
+        "eligibleReports": 33777,
+        "origins": {
+          "PCV": 36560,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "EBITDA": {
+        "storedCompanies": 8331,
+        "eligibleCompanies": 7661,
+        "attestationMetadataCompanies": 3129,
+        "storedReports": 32752,
+        "eligibleReports": 30017,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 30523,
+          "KPI": 2229
+        }
+      },
+      "EBIT": {
+        "storedCompanies": 9184,
+        "eligibleCompanies": 8513,
+        "attestationMetadataCompanies": 4156,
+        "storedReports": 35821,
+        "eligibleReports": 33081,
+        "origins": {
+          "PCV": 35821,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "ACTIVOS_TOTALES": {
+        "storedCompanies": 10350,
+        "eligibleCompanies": 9665,
+        "attestationMetadataCompanies": 4521,
+        "storedReports": 40723,
+        "eligibleReports": 37924,
+        "origins": {
+          "PCV": 40723,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "EFECTIVO": {
+        "storedCompanies": 9970,
+        "eligibleCompanies": 9285,
+        "attestationMetadataCompanies": 3900,
+        "storedReports": 39104,
+        "eligibleReports": 36305,
+        "origins": {
+          "PCV": 39104,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "DEUDA_FINANCIERA": {
+        "storedCompanies": 5348,
+        "eligibleCompanies": 4754,
+        "attestationMetadataCompanies": 134,
+        "storedReports": 18473,
+        "eligibleReports": 16153,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 18473,
+          "KPI": 0
+        }
+      },
+      "DEUDA_NETA": {
+        "storedCompanies": 5342,
+        "eligibleCompanies": 4748,
+        "attestationMetadataCompanies": 128,
+        "storedReports": 18445,
+        "eligibleReports": 16125,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 18445,
+          "KPI": 0
+        }
+      },
+      "PATRIMONIO_NETO": {
+        "storedCompanies": 10149,
+        "eligibleCompanies": 9464,
+        "attestationMetadataCompanies": 4310,
+        "storedReports": 40100,
+        "eligibleReports": 37301,
+        "origins": {
+          "PCV": 40100,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "CFO": {
+        "storedCompanies": 10317,
+        "eligibleCompanies": 9629,
+        "attestationMetadataCompanies": 4604,
+        "storedReports": 40702,
+        "eligibleReports": 37899,
+        "origins": {
+          "PCV": 40702,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "CAPEX": {
+        "storedCompanies": 9122,
+        "eligibleCompanies": 8453,
+        "attestationMetadataCompanies": 3732,
+        "storedReports": 34997,
+        "eligibleReports": 32276,
+        "origins": {
+          "PCV": 34997,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "FCF": {
+        "storedCompanies": 9092,
+        "eligibleCompanies": 8423,
+        "attestationMetadataCompanies": 3409,
+        "storedReports": 34664,
+        "eligibleReports": 31943,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 20620,
+          "KPI": 14044
+        }
+      },
+      "COBERTURA_INTERESES": {
+        "storedCompanies": 6586,
+        "eligibleCompanies": 6462,
+        "attestationMetadataCompanies": 2573,
+        "storedReports": 22859,
+        "eligibleReports": 22390,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 22859,
+          "KPI": 0
+        }
+      },
+      "DEUDA_NETA_EBITDA": {
+        "storedCompanies": 4328,
+        "eligibleCompanies": 3743,
+        "attestationMetadataCompanies": 89,
+        "storedReports": 14891,
+        "eligibleReports": 12704,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 14891,
+          "KPI": 0
+        }
+      },
+      "CURRENT_RATIO": {
+        "storedCompanies": 0,
+        "eligibleCompanies": 0,
+        "attestationMetadataCompanies": 0,
+        "storedReports": 0,
+        "eligibleReports": 0,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "QUICK_RATIO": {
+        "storedCompanies": 0,
+        "eligibleCompanies": 0,
+        "attestationMetadataCompanies": 0,
+        "storedReports": 0,
+        "eligibleReports": 0,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      },
+      "CASH_RATIO": {
+        "storedCompanies": 0,
+        "eligibleCompanies": 0,
+        "attestationMetadataCompanies": 0,
+        "storedReports": 0,
+        "eligibleReports": 0,
+        "origins": {
+          "PCV": 0,
+          "DERIVADO": 0,
+          "KPI": 0
+        }
+      }
+    },
+    "bundles": {
+      "TAMANO_BASICO": {
+        "storedCompanies": 8045,
+        "eligibleCompanies": 7377,
+        "contextCompanies": 3865,
+        "attestationMetadataCompanies": 2947,
+        "eligibleReports": 27973,
+        "nonfinancialResolved": 1378,
+        "familyPending": 5988,
+        "financialFamily": 11
+      },
+      "TAMANO_AMPLIADO": {
+        "storedCompanies": 4832,
+        "eligibleCompanies": 4241,
+        "contextCompanies": 836,
+        "attestationMetadataCompanies": 96,
+        "eligibleReports": 14264,
+        "nonfinancialResolved": 945,
+        "familyPending": 3291,
+        "financialFamily": 5
+      },
+      "LIQUIDEZ_PARCIAL": {
+        "storedCompanies": 3447,
+        "eligibleCompanies": 3325,
+        "contextCompanies": 457,
+        "attestationMetadataCompanies": 33,
+        "eligibleReports": 10857,
+        "nonfinancialResolved": 787,
+        "familyPending": 2534,
+        "financialFamily": 4
+      },
+      "LIQUIDEZ_COMPLETA": {
+        "storedCompanies": 0,
+        "eligibleCompanies": 0,
+        "contextCompanies": 0,
+        "attestationMetadataCompanies": 0,
+        "eligibleReports": 0,
+        "nonfinancialResolved": 0,
+        "familyPending": 0,
+        "financialFamily": 0
+      }
+    },
+    "priceCompanies": 8118,
+    "capitalizationPartial": 6269,
+    "capitalizationReliable": 0,
+    "capitalizationUnavailable": 6925
+  },
+  "byCountry": {
+    "US": {
+      "companies": 8017,
+      "publishedFinancial": 5903,
+      "partialSize": {
+        "storedCompanies": 3734,
+        "eligibleCompanies": 3734,
+        "contextCompanies": 2234,
+        "attestationMetadataCompanies": 1343,
+        "eligibleReports": 13350,
+        "nonfinancialResolved": 424,
+        "familyPending": 3301,
+        "financialFamily": 9
+      },
+      "partialLiquidity": {
+        "storedCompanies": 1016,
+        "eligibleCompanies": 1016,
+        "contextCompanies": 216,
+        "attestationMetadataCompanies": 32,
+        "eligibleReports": 2563,
+        "nonfinancialResolved": 117,
+        "familyPending": 898,
+        "financialFamily": 1
+      },
+      "prices": 4216,
+      "capitalizationPartial": 3496,
+      "noSectorEffective": 6919
+    },
+    "JP": {
+      "companies": 3581,
+      "publishedFinancial": 3498,
+      "partialSize": {
+        "storedCompanies": 3360,
+        "eligibleCompanies": 3360,
+        "contextCompanies": 1631,
+        "attestationMetadataCompanies": 1604,
+        "eligibleReports": 13507,
+        "nonfinancialResolved": 831,
+        "familyPending": 2527,
+        "financialFamily": 2
+      },
+      "partialLiquidity": {
+        "storedCompanies": 2085,
+        "eligibleCompanies": 2085,
+        "contextCompanies": 241,
+        "attestationMetadataCompanies": 1,
+        "eligibleReports": 7518,
+        "nonfinancialResolved": 575,
+        "familyPending": 1507,
+        "financialFamily": 3
+      },
+      "prices": 2484,
+      "capitalizationPartial": 2480,
+      "noSectorEffective": 2271
+    },
+    "TW": {
+      "companies": 1596,
+      "publishedFinancial": 294,
+      "partialSize": {
+        "storedCompanies": 951,
+        "eligibleCompanies": 283,
+        "contextCompanies": 0,
+        "attestationMetadataCompanies": 0,
+        "eligibleReports": 1116,
+        "nonfinancialResolved": 123,
+        "familyPending": 160,
+        "financialFamily": 0
+      },
+      "partialLiquidity": {
+        "storedCompanies": 346,
+        "eligibleCompanies": 224,
+        "contextCompanies": 0,
+        "attestationMetadataCompanies": 0,
+        "eligibleReports": 776,
+        "nonfinancialResolved": 95,
+        "familyPending": 129,
+        "financialFamily": 0
+      },
+      "prices": 1418,
+      "capitalizationPartial": 293,
+      "noSectorEffective": 811
+    }
+  },
+  "fourYears": {
+    "TAMANO_BASICO": {
+      "potential": 5102,
+      "withCommonContext": 918
+    },
+    "TAMANO_AMPLIADO": {
+      "potential": 1915,
+      "withCommonContext": 80
+    },
+    "LIQUIDEZ_PARCIAL": {
+      "potential": 1198,
+      "withCommonContext": 42
+    },
+    "LIQUIDEZ_COMPLETA": {
+      "potential": 0,
+      "withCommonContext": 0
+    }
+  },
+  "sourceBasis": [
+    {
+      "key": "US:DESCONOCIDA:DESCONOCIDA",
+      "reports": 11547,
+      "companies": 3480,
+      "eligible": 11547,
+      "contextIdentified": 0
+    },
+    {
+      "key": "US:consolidated:USD",
+      "reports": 11018,
+      "companies": 4001,
+      "eligible": 11018,
+      "contextIdentified": 11018
+    },
+    {
+      "key": "JP:DESCONOCIDA:DESCONOCIDA",
+      "reports": 10481,
+      "companies": 2641,
+      "eligible": 10481,
+      "contextIdentified": 0
+    },
+    {
+      "key": "JP:standalone:JPY",
+      "reports": 528,
+      "companies": 237,
+      "eligible": 528,
+      "contextIdentified": 528
+    },
+    {
+      "key": "TW:DESCONOCIDA:DESCONOCIDA",
+      "reports": 4470,
+      "companies": 1103,
+      "eligible": 1176,
+      "contextIdentified": 0
+    },
+    {
+      "key": "JP:consolidated:JPY",
+      "reports": 3714,
+      "companies": 1499,
+      "eligible": 3714,
+      "contextIdentified": 3714
+    }
+  ],
+  "samples": {
+    "US": [
+      200051,
+      199943,
+      199746,
+      199739,
+      199731,
+      199725,
+      199717,
+      199714,
+      199705,
+      199703,
+      199698,
+      199692,
+      199680,
+      199676,
+      199669,
+      199668,
+      199663,
+      199646,
+      199644,
+      199627
+    ],
+    "JP": [
+      203408,
+      203405,
+      203398,
+      203392,
+      203391,
+      203390,
+      203385,
+      203383,
+      203380,
+      203379,
+      203378,
+      203377,
+      203374,
+      203373,
+      203372,
+      203371,
+      203370,
+      203369,
+      203368,
+      203367
+    ],
+    "TW": [
+      87628,
+      87612,
+      87591,
+      87585,
+      87576,
+      87549,
+      87546,
+      87518,
+      87504,
+      87501,
+      87497,
+      87486,
+      87483,
+      87463,
+      87455,
+      87442,
+      87430,
+      87426,
+      87418,
+      87416
+    ]
+  }
+}

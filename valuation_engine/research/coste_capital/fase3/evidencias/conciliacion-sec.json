@@ -1,0 +1,231 @@
+{
+  "at": "2026-10-29T20:49:17.905Z",
+  "database": "g2_capital_dev_20261029",
+  "companies": 5,
+  "results": [
+    {
+      "empresa": 1,
+      "informe": 2,
+      "originalDate": "2026-01-25",
+      "date": "2026-01-25",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 1,
+      "informe": 6,
+      "originalDate": "2025-01-26",
+      "date": "2025-01-26",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 1,
+      "informe": 10,
+      "originalDate": "2024-01-28",
+      "date": "2024-01-28",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 1,
+      "informe": 14,
+      "originalDate": "2023-01-29",
+      "date": "2023-01-29",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 1,
+      "informe": 190863,
+      "originalDate": null,
+      "date": "2022-01-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 2,
+      "informe": 20,
+      "originalDate": "2025-09-26",
+      "date": "2025-09-27",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 2,
+      "informe": 24,
+      "originalDate": "2024-09-27",
+      "date": "2024-09-28",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 2,
+      "informe": 28,
+      "originalDate": "2023-09-29",
+      "date": "2023-09-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 2,
+      "informe": 32,
+      "originalDate": "2022-09-23",
+      "date": "2022-09-24",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 4,
+      "informe": 46,
+      "originalDate": "2026-06-29",
+      "date": "2026-06-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 4,
+      "informe": 50,
+      "originalDate": "2025-06-29",
+      "date": "2025-06-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 4,
+      "informe": 54,
+      "originalDate": "2024-06-29",
+      "date": "2024-06-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 4,
+      "informe": 58,
+      "originalDate": "2023-06-29",
+      "date": "2023-06-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 4,
+      "informe": 190865,
+      "originalDate": null,
+      "date": "2022-06-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 5,
+      "informe": 64,
+      "originalDate": "2025-12-30",
+      "date": "2025-12-31",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 5,
+      "informe": 68,
+      "originalDate": "2024-12-30",
+      "date": "2024-12-31",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 5,
+      "informe": 72,
+      "originalDate": "2023-12-30",
+      "date": "2023-12-31",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 5,
+      "informe": 76,
+      "originalDate": "2022-12-30",
+      "date": "2022-12-31",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes"
+      ]
+    },
+    {
+      "empresa": 6,
+      "informe": 80,
+      "originalDate": "2025-11-01",
+      "date": "2025-11-02",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes",
+        "prepagos"
+      ]
+    },
+    {
+      "empresa": 6,
+      "informe": 84,
+      "originalDate": "2024-11-02",
+      "date": "2024-11-03",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes",
+        "prepagos"
+      ]
+    },
+    {
+      "empresa": 6,
+      "informe": 88,
+      "originalDate": "2023-10-28",
+      "date": "2023-10-29",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes",
+        "prepagos"
+      ]
+    },
+    {
+      "empresa": 6,
+      "informe": 92,
+      "originalDate": "2022-10-29",
+      "date": "2022-10-30",
+      "fields": [
+        "activosCorrientes",
+        "pasivosCorrientes",
+        "prepagos"
+      ]
+    }
+  ]
+}

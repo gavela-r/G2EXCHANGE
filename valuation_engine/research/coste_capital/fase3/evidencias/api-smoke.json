@@ -1,0 +1,297 @@
+{
+  "at": "2026-10-30T07:13:01.010Z",
+  "scope": "API local sobre copia de desarrollo; datos reales; hipótesis de tasas cero",
+  "checks": [
+    {
+      "url": "/session",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/companies?q=NVIDIA",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/companies/1?asOf=2026-10-29&periodEnd=2025-01-26",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/companies/1/evaluations",
+      "method": "POST",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "url": "/companies/1/history",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/analyses/17/decisions",
+      "method": "POST",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "url": "/analyses/17/decisions",
+      "method": "POST",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "url": "/runs/533/simulations",
+      "method": "POST",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "url": "/companies/1/benchmarks",
+      "method": "POST",
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "url": "/analyses/17/export/xlsx",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/analyses/17/export/pdf",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/analyses/17/export/json",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/analyses/18/export/xlsx",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/analyses/18/export/pdf",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/analyses/18/export/json",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "url": "/companies/1/history",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    }
+  ],
+  "diagnostic": {
+    "company": "NVIDIA CORP",
+    "period": "2025-01-26",
+    "validIndicators": 12,
+    "indicators": [
+      {
+        "id": "EFECTIVO",
+        "value": 8589000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      },
+      {
+        "id": "DEUDA_BRUTA",
+        "value": 8463000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      },
+      {
+        "id": "DEUDA_NETA",
+        "value": -126000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      },
+      {
+        "id": "CURRENT_RATIO",
+        "value": 4.439851498864077,
+        "unit": "VECES"
+      },
+      {
+        "id": "CASH_RATIO",
+        "value": 0.47592397628414695,
+        "unit": "VECES"
+      },
+      {
+        "id": "DEUDA_NETA_EBITDA",
+        "value": -0.001512296410096379,
+        "unit": "VECES"
+      },
+      {
+        "id": "CFO",
+        "value": 64089000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      },
+      {
+        "id": "FCF",
+        "value": 60853000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      },
+      {
+        "id": "FCF_DEUDA",
+        "value": 7.190476190476191,
+        "unit": "VECES"
+      },
+      {
+        "id": "INGRESOS",
+        "value": 130497000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      },
+      {
+        "id": "EBITDA",
+        "value": 83317000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      },
+      {
+        "id": "ACTIVOS_TOTALES",
+        "value": 111601000000,
+        "unit": "MONEDA",
+        "currency": "USD"
+      }
+    ]
+  },
+  "analysisId": 17,
+  "simulationId": 18,
+  "benchmarkId": 19,
+  "benchmarkUniverse": 31,
+  "benchmarkStatistics": [
+    {
+      "indicator": "EFECTIVO",
+      "n": 3,
+      "exclusions": 27
+    },
+    {
+      "indicator": "DEUDA_BRUTA",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "DEUDA_NETA",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "CURRENT_RATIO",
+      "n": 1,
+      "exclusions": 29
+    },
+    {
+      "indicator": "QUICK_RATIO",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "CASH_RATIO",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "COBERTURA_INTERESES",
+      "n": 1,
+      "exclusions": 29
+    },
+    {
+      "indicator": "DEUDA_NETA_EBITDA",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "CFO",
+      "n": 3,
+      "exclusions": 27
+    },
+    {
+      "indicator": "FCF",
+      "n": 3,
+      "exclusions": 27
+    },
+    {
+      "indicator": "FCF_DEUDA",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "INGRESOS",
+      "n": 3,
+      "exclusions": 27
+    },
+    {
+      "indicator": "EBITDA",
+      "n": 2,
+      "exclusions": 28
+    },
+    {
+      "indicator": "ACTIVOS_TOTALES",
+      "n": 3,
+      "exclusions": 27
+    },
+    {
+      "indicator": "ACTIVOS_OPERATIVOS",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "NECESIDAD_FINANCIACION",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "VENCIMIENTOS",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "POSICION_COMPETITIVA",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "ESTABILIDAD_OPERATIVA",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "DIVERSIFICACION_GEOGRAFICA",
+      "n": 0,
+      "exclusions": 30
+    },
+    {
+      "indicator": "ACCESO_FINANCIACION",
+      "n": 0,
+      "exclusions": 30
+    }
+  ],
+  "exports": [
+    "diagnostico.json",
+    "diagnostico.pdf",
+    "diagnostico.xlsx",
+    "simulacion.json",
+    "simulacion.pdf",
+    "simulacion.xlsx"
+  ],
+  "visualReview": "NOT_VERIFIED: browser host unavailable; native app approval timed out"
+}

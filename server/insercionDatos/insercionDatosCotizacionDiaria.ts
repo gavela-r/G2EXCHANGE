@@ -1,3 +1,4 @@
+import { guardarPreciosResueltos } from "../src/capital/historico";
 import { Request, Response } from "express";
 import conexion from "../conexion/bd";
 
@@ -1041,124 +1042,16 @@ async function ejecutarTwelveDataJapon(
 // BD: UPSERT COTIZACION_DIARIA (compartido USA + TAIWAN)
 // ============================================================================
 
-async function guardarCotizacionesUSA(
-    cotizaciones: PrecioResueltoUSA[]
-): Promise<number> {
-    if (cotizaciones.length === 0) return 0;
-
-    // La clave única debe ser (instrumento_id, fecha).
-    // El último valor obtenido para ese día sustituye al anterior.
-    const lotes = dividirEnLotes(cotizaciones, 1000);
-    let total = 0;
-
-    const conn = typeof (conexion as any).getConnection === "function"
-        ? await (conexion as any).getConnection()
-        : conexion as any;
-
-    try {
-        await conn.beginTransaction?.();
-
-        for (const lote of lotes) {
-            const values = lote.map(c => [
-                c.instrumentoId,
-                c.fecha,
-                c.precio
-            ]);
-
-            const [result]: any = await conn.query(
-                `
-                INSERT INTO cotizacion_diaria (
-                    instrumento_id,
-                    fecha,
-                    precio_cierre
-                )
-                VALUES ?
-                ON DUPLICATE KEY UPDATE
-                    precio_cierre = VALUES(precio_cierre)
-                `,
-                [values]
-            );
-
-            total += Number(result?.affectedRows || lote.length);
-        }
-
-        await conn.commit?.();
-        return total;
-    } catch (error) {
-        await conn.rollback?.();
-        throw error;
-    } finally {
-        if (conn !== conexion && typeof conn.release === "function") {
-            conn.release();
-        }
-    }
+async function guardarCotizacionesUSA(cotizaciones: PrecioResueltoUSA[]): Promise<number> {
+    return guardarPreciosResueltos(conexion, cotizaciones);
 }
 
-async function guardarCotizacionesTaiwan(
-    cotizaciones: PrecioResueltoTaiwan[]
-): Promise<number> {
-    if (cotizaciones.length === 0) return 0;
-
-    const values = cotizaciones.map(c => [c.instrumentoId, c.fecha, c.precio]);
-
-    const [result]: any = await (conexion as any).query(
-        `
-        INSERT INTO cotizacion_diaria (
-            instrumento_id,
-            fecha,
-            precio_cierre
-        )
-        VALUES ?
-        ON DUPLICATE KEY UPDATE
-            precio_cierre = VALUES(precio_cierre)
-        `,
-        [values]
-    );
-
-    return Number(result?.affectedRows || cotizaciones.length);
+async function guardarCotizacionesTaiwan(cotizaciones: PrecioResueltoTaiwan[]): Promise<number> {
+    return guardarPreciosResueltos(conexion, cotizaciones);
 }
 
-async function guardarCotizacionesJapon(
-    cotizaciones: PrecioResueltoJapon[]
-): Promise<number> {
-    if (cotizaciones.length === 0) return 0;
-
-    // Deduplicamos por (instrumento_id, fecha) antes de insertar, por si
-    // Yahoo y Twelve Data llegaran a resolver el mismo par en la misma pasada.
-    const mapa = new Map<string, PrecioResueltoJapon>();
-    for (const cotizacion of cotizaciones) {
-        const clave = `${cotizacion.instrumentoId}|${cotizacion.fecha}`;
-        mapa.set(clave, cotizacion);
-    }
-
-    const values = Array.from(mapa.values()).map(c => [
-        c.instrumentoId,
-        c.fecha,
-        c.precio
-    ]);
-
-    const lotes = dividirEnLotes(values, 1000);
-    let total = 0;
-
-    for (const lote of lotes) {
-        const [result]: any = await (conexion as any).query(
-            `
-            INSERT INTO cotizacion_diaria (
-                instrumento_id,
-                fecha,
-                precio_cierre
-            )
-            VALUES ?
-            ON DUPLICATE KEY UPDATE
-                precio_cierre = VALUES(precio_cierre)
-            `,
-            [lote]
-        );
-
-        total += Number(result?.affectedRows || lote.length);
-    }
-
-    return total;
+async function guardarCotizacionesJapon(cotizaciones: PrecioResueltoJapon[]): Promise<number> {
+    return guardarPreciosResueltos(conexion, cotizaciones);
 }
 
 // ============================================================================

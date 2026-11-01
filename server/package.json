@@ -12,7 +12,23 @@
     "valuation:watch": "node dist/src/valoracion/watch.js",
     "valuation:replay": "node dist/src/valoracion/replay.js",
     "test:integration": "npm run build && node --test tests/mysqlValoracion.integration.cjs",
-    "valuation:classification": "node dist/src/valoracion/informeClasificacion.js"
+    "valuation:classification": "node dist/src/valoracion/informeClasificacion.js",
+    "pcv:recover": "node scripts/recuperar-pcv-proveedores.cjs",
+    "pcv:reports:jp": "node scripts/recuperar-informes-jp-v2.cjs",
+    "pcv:recover:jp": "node scripts/recuperar-pcv-jp-v3.cjs --country JP",
+    "pcv:plan": "node scripts/recuperar-pcv-plan.cjs",
+    "pcv:audit": "node scripts/auditar-pcv-kpi-2022-2025.cjs",
+    "test:pcv:integration": "npm run build && node --test tests/pcvMysql.integration.cjs tests/informeDiscovery.integration.cjs",
+    "capital:build": "node scripts/capital-build.cjs",
+    "capital:start": "node dist-capital/server/src/capital/main.js",
+    "capital:test": "node scripts/capital-test.cjs",
+    "capital:migrate": "node scripts/capital-dev.cjs --migrate",
+    "capital:load:twse": "node scripts/capital-load.cjs TWSE 5",
+    "capital:load:tpex": "node scripts/capital-load.cjs TPEX 5",
+    "capital:reconcile": "node scripts/capital-reconcile.cjs 5",
+    "capital:status": "node scripts/capital-status.cjs",
+    "capital:verify": "node scripts/capital-verify.cjs",
+    "capital:smoke": "node scripts/capital-smoke.cjs"
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
@@ -26,7 +42,8 @@
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.24.5",
     "pinyin": "^4.0.0",
-    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
+    "yauzl": "3.4.0"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.8",

@@ -1,0 +1,8 @@
+const fs=require('node:fs'),path=require('node:path'),{pathToFileURL}=require('node:url');
+const root=path.resolve(__dirname,'../..'),qa=path.join(root,'.verification/capital-qa/node_modules');
+(async()=>{const canvas=require(path.join(qa,'@napi-rs/canvas'));global.DOMMatrix=canvas.DOMMatrix;global.ImageData=canvas.ImageData;global.Path2D=canvas.Path2D;
+ const pdfjs=await import(pathToFileURL(path.join(qa,'pdfjs-dist/legacy/build/pdf.mjs')).href),dir=path.join(root,'valuation_engine/research/coste_capital/fase3/salida'),render=path.join(root,'.verification/capital-pdf-render');fs.mkdirSync(render,{recursive:true});const results=[];
+ for(const name of ['diagnostico.pdf','simulacion.pdf']){const task=pdfjs.getDocument({data:new Uint8Array(fs.readFileSync(path.join(dir,name))),useSystemFonts:true,disableFontFace:true}),doc=await task.promise;
+  const pages=[];for(let n=1;n<=doc.numPages;n++){const page=await doc.getPage(n),viewport=page.getViewport({scale:1.5}),c=canvas.createCanvas(Math.ceil(viewport.width),Math.ceil(viewport.height));await page.render({canvasContext:c.getContext('2d'),viewport}).promise;const file=path.join(render,name.replace('.pdf','')+'-'+n+'.png');fs.writeFileSync(file,c.toBuffer('image/png'));const text=await page.getTextContent();pages.push({page:n,width:viewport.width,height:viewport.height,textItems:text.items.length,image:file});}results.push({file:name,pages});await task.destroy?.();}
+ fs.writeFileSync(path.join(root,'valuation_engine/research/coste_capital/fase3/evidencias/pdf-render.json'),JSON.stringify({at:new Date().toISOString(),tool:'PDF.js + canvas, herramientas libres temporales de QA',results},null,2));console.log(JSON.stringify(results));
+})().catch(e=>{console.error(e.stack);process.exitCode=1});

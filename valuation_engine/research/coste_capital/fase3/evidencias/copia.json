@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-29T20:36:56.290Z",
+  "sourceReadOnly": true,
+  "target": "g2_capital_dev_20261029",
+  "counts": {
+    "pais": 3,
+    "sector": 46,
+    "mercado": 6,
+    "model_version": 2,
+    "taxonomia_concepto": 39,
+    "coste_capital_referencia": 138,
+    "rating_sintetico": 45,
+    "empresa": 13194,
+    "instrumento": 8417,
+    "informe_financiero": 3056,
+    "valuation_input_version": 6265,
+    "classification_evidence": 62,
+    "financial_report_evidence": 82,
+    "partida_contable_valor": 160661,
+    "pcv_import_evidence": 2563,
+    "pcv_verification_evidence": 74380,
+    "valuation_input_snapshot": 594,
+    "valuation_run": 592,
+    "valuation_execution": 60,
+    "valuation_input_snapshot_detalle": 2373,
+    "valuation_run_parametros": 0,
+    "valuation_run_resultado": 120,
+    "cotizacion_diaria": 8241,
+    "evento_corporativo": 1214
+  },
+  "schemaHash": "264a5773466dd4982711c09fe2ca1194f6c34c06f780a05e0edb9df149d97bb5",
+  "scope": "dimensiones completas; informes de empresas con runs; no es réplica completa"
+}

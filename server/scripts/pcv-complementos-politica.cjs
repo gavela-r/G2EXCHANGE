@@ -1,0 +1,5 @@
+const BALANCE=new Set(['ACCIONES_EN_CIRCULACION','EFECTIVO','ACTIVOS_TOTALES','PASIVOS_TOTALES','PATRIMONIO_NETO','DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO','INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR']);
+const canon=d=>['CAPEX','DIVIDENDOS_PAGADOS'].includes(d.codigo)?Math.abs(d.importe):d.importe;
+function combinarFuenteYComplemento(primary,supplement){const byCode=new Map(primary.map(d=>[d.codigo,d])),extra=[],discrepancies=[];for(const d of supplement){if(d.provider==='ALPHAVANTAGE')throw Error('ALPHA_HISTORICAL_BINDING_REQUIRED');const original=byCode.get(d.codigo);if(!original)extra.push(d);else if(Math.abs(canon(original)-canon(d))>0.000051)discrepancies.push({code:d.codigo,primary:original,supplement:d});}return {rows:[...primary,...extra],discrepancies};}
+function enlazarPeriodo(rows,i,ctx,extra={}){return rows.map(d=>({...d,identifier:i.accession,evidence:{...d.evidence,end:i.end,start:BALANCE.has(d.codigo)?null:ctx.start,...extra}}));}
+module.exports={combinarFuenteYComplemento,enlazarPeriodo};

@@ -1,0 +1,1050 @@
+{
+  "identity": {
+    "schema_name": "2GB",
+    "mysql_version": "8.4.11",
+    "session_read_only": 1,
+    "max_execution_time": 2000,
+    "isolation_level": "READ-COMMITTED",
+    "server_time": "2026-10-29 19:40:18",
+    "dedicatedReadOnlyConfiguration": false,
+    "accountHasPermissionsBeyondRead": true,
+    "safeguard": "SET SESSION TRANSACTION READ ONLY + START TRANSACTION READ ONLY por consulta; ROLLBACK inmediato; MAX_EXECUTION_TIME 2000 ms; timeout cliente 3500 ms"
+  },
+  "reports": [
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2022,
+      "informes": 3424,
+      "empresas": 3424,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2023,
+      "informes": 3419,
+      "empresas": 3419,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2024,
+      "informes": 3235,
+      "empresas": 3235,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2025,
+      "informes": 2755,
+      "empresas": 2755,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "SEMESTRAL",
+      "ejercicio": 2025,
+      "informes": 19,
+      "empresas": 19,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "4"
+    },
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2026,
+      "informes": 1840,
+      "empresas": 1836,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "SEMESTRAL",
+      "ejercicio": 2026,
+      "informes": 2291,
+      "empresas": 2285,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "2244"
+    },
+    {
+      "codigo_iso": "JP",
+      "tipo_periodo": "SEMESTRAL",
+      "ejercicio": 2027,
+      "informes": 40,
+      "empresas": 40,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "40"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2021,
+      "informes": 2,
+      "empresas": 2,
+      "sin_publicacion": "2",
+      "publicacion_anterior_cierre": null
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2021,
+      "informes": 12,
+      "empresas": 12,
+      "sin_publicacion": "12",
+      "publicacion_anterior_cierre": null
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2022,
+      "informes": 905,
+      "empresas": 899,
+      "sin_publicacion": "820",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2022,
+      "informes": 2,
+      "empresas": 2,
+      "sin_publicacion": "2",
+      "publicacion_anterior_cierre": null
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2023,
+      "informes": 1116,
+      "empresas": 1094,
+      "sin_publicacion": "824",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2023,
+      "informes": 2,
+      "empresas": 2,
+      "sin_publicacion": "2",
+      "publicacion_anterior_cierre": null
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2024,
+      "informes": 1118,
+      "empresas": 1097,
+      "sin_publicacion": "825",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2024,
+      "informes": 1,
+      "empresas": 1,
+      "sin_publicacion": "1",
+      "publicacion_anterior_cierre": null
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2025,
+      "informes": 2,
+      "empresas": 2,
+      "sin_publicacion": "2",
+      "publicacion_anterior_cierre": null
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "SEMESTRAL",
+      "ejercicio": 2025,
+      "informes": 3,
+      "empresas": 3,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2025,
+      "informes": 1119,
+      "empresas": 1098,
+      "sin_publicacion": "825",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "SEMESTRAL",
+      "ejercicio": 2026,
+      "informes": 263,
+      "empresas": 262,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "260"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2026,
+      "informes": 212,
+      "empresas": 209,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2026,
+      "informes": 904,
+      "empresas": 824,
+      "sin_publicacion": "904",
+      "publicacion_anterior_cierre": null
+    },
+    {
+      "codigo_iso": "TW",
+      "tipo_periodo": "SEMESTRAL",
+      "ejercicio": 2027,
+      "informes": 2,
+      "empresas": 2,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "2"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2021,
+      "informes": 25,
+      "empresas": 25,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2022,
+      "informes": 5256,
+      "empresas": 5256,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2022,
+      "informes": 1299,
+      "empresas": 927,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2023,
+      "informes": 5532,
+      "empresas": 5529,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2023,
+      "informes": 2886,
+      "empresas": 980,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2024,
+      "informes": 5668,
+      "empresas": 5666,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2024,
+      "informes": 3005,
+      "empresas": 1022,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2025,
+      "informes": 5633,
+      "empresas": 5632,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2025,
+      "informes": 3147,
+      "empresas": 1068,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "ANUAL",
+      "ejercicio": 2026,
+      "informes": 476,
+      "empresas": 476,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    },
+    {
+      "codigo_iso": "US",
+      "tipo_periodo": "TRIMESTRAL",
+      "ejercicio": 2026,
+      "informes": 5041,
+      "empresas": 3840,
+      "sin_publicacion": "0",
+      "publicacion_anterior_cierre": "0"
+    }
+  ],
+  "samples": {
+    "US": [
+      {
+        "id": 10543,
+        "informe_id": 200052,
+        "provider": "SEC_EDGAR",
+        "context": {
+          "basis": "consolidated",
+          "start": "2024-07-01",
+          "currency": "USD",
+          "identity": {
+            "cik": "0002109869",
+            "indexHash": "f5d594c317826414ddf27ff74b20159cfdeb5bc9a7bff2848f5cfda6ff2cac10",
+            "databaseName": "D. Boral ARC Merger Corp",
+            "responseHash": "b055da50c14d6578b322b630378879facbf9ba17828e00fc2cb08e6791d8b581",
+            "bulkFactsHash": "c115ae2ab0c851f67a66790d72ae8f5791100e1a04854d755adb70d5a80544f4",
+            "sourceAccession": "0001829126-26-010462",
+            "submissionsHash": "f5d594c317826414ddf27ff74b20159cfdeb5bc9a7bff2848f5cfda6ff2cac10",
+            "companyFactsName": "EXASCALE LABS HOLDINGS INC.",
+            "currentLegalName": "Exascale Labs Holdings Inc.",
+            "identityCriterion": "OFFICIAL_SAME_CIK_EXPLICIT_NAME_CONTINUITY",
+            "bulkSubmissionsHash": "73e6ce8b6d57770e0b0db229a75f72d36ecafb84e49a18dfef368458e0caf1c4"
+          }
+        },
+        "metadata_keys": null,
+        "identity_keys": null,
+        "fecha_fin_periodo": "2025-06-30",
+        "fecha_publicacion": "2026-09-28"
+      },
+      {
+        "id": 10544,
+        "informe_id": 200053,
+        "provider": "SEC_EDGAR",
+        "context": {
+          "basis": "consolidated",
+          "start": "2021-10-01",
+          "currency": "USD",
+          "identity": {
+            "cik": "0001452804",
+            "indexHash": "d92527b939a2209fa024cf8858f6ce128d3e210dbabc2058037d3ee256d0f8a7",
+            "databaseName": "Retrieve Medical Holdings, Inc.",
+            "responseHash": "3fd5eb06bfdebffa42021b094c4c379c1efd3c7143204265bf035090db070211",
+            "bulkFactsHash": "c115ae2ab0c851f67a66790d72ae8f5791100e1a04854d755adb70d5a80544f4",
+            "sourceAccession": "0001199835-22-000838",
+            "submissionsHash": "d92527b939a2209fa024cf8858f6ce128d3e210dbabc2058037d3ee256d0f8a7",
+            "companyFactsName": "PEAK PHARMACEUTICALS, INC.",
+            "currentLegalName": "Retrieve Medical Holdings, Inc.",
+            "identityCriterion": "OFFICIAL_SAME_CIK_EXPLICIT_NAME_CONTINUITY",
+            "bulkSubmissionsHash": "73e6ce8b6d57770e0b0db229a75f72d36ecafb84e49a18dfef368458e0caf1c4"
+          }
+        },
+        "metadata_keys": null,
+        "identity_keys": null,
+        "fecha_fin_periodo": "2022-09-30",
+        "fecha_publicacion": "2022-12-19"
+      }
+    ],
+    "US_verification": [
+      {
+        "id": 696829,
+        "informe_id": 284,
+        "concept_code": "GASTO_INTERESES",
+        "outcome": "INSERTED",
+        "context": {
+          "basis": "consolidated",
+          "start": "2024-07-28",
+          "currency": "USD",
+          "identity": {
+            "cik": "0000858877",
+            "indexHash": "af29bf8ffa25fbe34c81ac9ae15d4541bba7b6855eccd94b0bcaa92f92cbb717",
+            "databaseName": "CISCO SYSTEMS, INC.",
+            "responseHash": "f9f6cfb3c04bb8102552f121868831471a474165074ccc7c539f6f80f19d1b99",
+            "sourceAccession": "0000858877-25-000111",
+            "submissionsHash": "af29bf8ffa25fbe34c81ac9ae15d4541bba7b6855eccd94b0bcaa92f92cbb717",
+            "companyFactsName": "CISCO SYSTEMS, INC.",
+            "currentLegalName": "CISCO SYSTEMS, INC.",
+            "identityCriterion": "CURRENT_LEGAL_NAME"
+          }
+        },
+        "record_id": 2477765,
+        "record_ids": null,
+        "amount": 1593000000,
+        "currency": "USD",
+        "basis": "consolidated",
+        "start": "2024-07-28",
+        "end": "2025-07-26",
+        "scale": null,
+        "filed": null
+      },
+      {
+        "id": 696868,
+        "informe_id": 288,
+        "concept_code": "GASTO_INTERESES",
+        "outcome": "INSERTED",
+        "context": {
+          "basis": "consolidated",
+          "start": "2023-07-30",
+          "currency": "USD",
+          "identity": {
+            "cik": "0000858877",
+            "indexHash": "af29bf8ffa25fbe34c81ac9ae15d4541bba7b6855eccd94b0bcaa92f92cbb717",
+            "databaseName": "CISCO SYSTEMS, INC.",
+            "responseHash": "f9f6cfb3c04bb8102552f121868831471a474165074ccc7c539f6f80f19d1b99",
+            "sourceAccession": "0000858877-24-000017",
+            "submissionsHash": "af29bf8ffa25fbe34c81ac9ae15d4541bba7b6855eccd94b0bcaa92f92cbb717",
+            "companyFactsName": "CISCO SYSTEMS, INC.",
+            "currentLegalName": "CISCO SYSTEMS, INC.",
+            "identityCriterion": "CURRENT_LEGAL_NAME"
+          }
+        },
+        "record_id": 2477783,
+        "record_ids": null,
+        "amount": 1006000000,
+        "currency": "USD",
+        "basis": "consolidated",
+        "start": "2023-07-30",
+        "end": "2024-07-27",
+        "scale": null,
+        "filed": null
+      }
+    ],
+    "JP": [
+      {
+        "id": 13151,
+        "informe_id": 203342,
+        "provider": "EDINET",
+        "context": {
+          "basis": "consolidated",
+          "start": "2024-04-01",
+          "currency": "JPY",
+          "identity": {
+            "published": "2025-06-23",
+            "documentId": "S100W0KR",
+            "edinetCode": "E26443",
+            "documentEnd": "2025-03-31",
+            "registryHash": "54e522dce7838febed6d1596bc746c496457153c58395472957debe47b61de6e",
+            "responseHash": "75a1a7cfba5786689802b42f59ca0b8ecd4ae54c2ab58d30171eb2a4a485147e",
+            "securityCode": "60600"
+          }
+        },
+        "metadata_keys": [
+          "start",
+          "metadata",
+          "published",
+          "metadataHash"
+        ],
+        "identity_keys": [
+          "end",
+          "edinetCode",
+          "consolidated",
+          "securityCode"
+        ],
+        "fecha_fin_periodo": "2025-03-31",
+        "fecha_publicacion": "2025-06-23"
+      },
+      {
+        "id": 13152,
+        "informe_id": 203343,
+        "provider": "EDINET",
+        "context": {
+          "basis": "consolidated",
+          "start": "2024-04-01",
+          "currency": "JPY",
+          "identity": {
+            "published": "2025-06-23",
+            "documentId": "S100W1XA",
+            "edinetCode": "E30746",
+            "documentEnd": "2025-03-31",
+            "registryHash": "54e522dce7838febed6d1596bc746c496457153c58395472957debe47b61de6e",
+            "responseHash": "40b9bedab2395b9e0a7a4b98d59c63ba517aa1f5816748050c36a30aa5299cda",
+            "securityCode": "71730"
+          }
+        },
+        "metadata_keys": [
+          "start",
+          "metadata",
+          "published",
+          "metadataHash"
+        ],
+        "identity_keys": [
+          "end",
+          "edinetCode",
+          "consolidated",
+          "securityCode"
+        ],
+        "fecha_fin_periodo": "2025-03-31",
+        "fecha_publicacion": "2025-06-23"
+      }
+    ],
+    "JP_verification": [
+      {
+        "id": 739111,
+        "informe_id": 203343,
+        "concept_code": "DEPRECIACION_AMORTIZACION",
+        "outcome": "INSERTED",
+        "context": {
+          "basis": "consolidated",
+          "start": "2024-04-01",
+          "currency": "JPY",
+          "identity": {
+            "published": "2025-06-23",
+            "documentId": "S100W1XA",
+            "edinetCode": "E30746",
+            "documentEnd": "2025-03-31",
+            "registryHash": "54e522dce7838febed6d1596bc746c496457153c58395472957debe47b61de6e",
+            "responseHash": "40b9bedab2395b9e0a7a4b98d59c63ba517aa1f5816748050c36a30aa5299cda",
+            "securityCode": "71730"
+          }
+        },
+        "record_id": 2519977,
+        "record_ids": null,
+        "amount": 7370000000,
+        "currency": "JPY",
+        "basis": "consolidated",
+        "start": "2024-04-01",
+        "end": "2025-03-31",
+        "scale": null,
+        "filed": "2025-06-23"
+      },
+      {
+        "id": 739112,
+        "informe_id": 203343,
+        "concept_code": "EPS_DILUIDO",
+        "outcome": "INSERTED",
+        "context": {
+          "basis": "consolidated",
+          "start": "2024-04-01",
+          "currency": "JPY",
+          "identity": {
+            "published": "2025-06-23",
+            "documentId": "S100W1XA",
+            "edinetCode": "E30746",
+            "documentEnd": "2025-03-31",
+            "registryHash": "54e522dce7838febed6d1596bc746c496457153c58395472957debe47b61de6e",
+            "responseHash": "40b9bedab2395b9e0a7a4b98d59c63ba517aa1f5816748050c36a30aa5299cda",
+            "securityCode": "71730"
+          }
+        },
+        "record_id": 2519978,
+        "record_ids": null,
+        "amount": 722.73,
+        "currency": "JPY/shares",
+        "basis": "consolidated",
+        "start": "2024-04-01",
+        "end": "2025-03-31",
+        "scale": null,
+        "filed": "2025-06-23"
+      }
+    ],
+    "TW": [],
+    "TW_verification": []
+  },
+  "reference": {
+    "countries": [
+      {
+        "id": 120,
+        "codigo_iso": "US",
+        "interes_bono_10_ano": "4.6800",
+        "fecha_publicacion_bono10": "2026-07-30",
+        "tasa_impositiva": "25.5700",
+        "equity_risk_premium": null,
+        "prima_riesgo_mercado": "4.460000",
+        "riesgo_extra_por_pais": "0.2300",
+        "fecha_actualizacion_prima_mercado": "2026-10-08",
+        "fuente_prima_mercado": "Damodaran - Total Equity Risk Premium"
+      },
+      {
+        "id": 166,
+        "codigo_iso": "JP",
+        "interes_bono_10_ano": "2.6700",
+        "fecha_publicacion_bono10": "2026-06-01",
+        "tasa_impositiva": "29.7400",
+        "equity_risk_premium": null,
+        "prima_riesgo_mercado": "5.142949",
+        "riesgo_extra_por_pais": "0.9100",
+        "fecha_actualizacion_prima_mercado": "2026-10-08",
+        "fuente_prima_mercado": "Damodaran - Total Equity Risk Premium"
+      },
+      {
+        "id": 265,
+        "codigo_iso": "TW",
+        "interes_bono_10_ano": "1.9600",
+        "fecha_publicacion_bono10": "2026-08-01",
+        "tasa_impositiva": "20.0000",
+        "equity_risk_premium": null,
+        "prima_riesgo_mercado": "5.006007",
+        "riesgo_extra_por_pais": "0.7800",
+        "fecha_actualizacion_prima_mercado": "2026-10-08",
+        "fuente_prima_mercado": "Damodaran - Total Equity Risk Premium"
+      }
+    ],
+    "sectors": [
+      {
+        "id": 221,
+        "nombre_sector": "N/A",
+        "sensibilidad_al_mercado": "1.0403",
+        "empresas": 10431
+      },
+      {
+        "id": 14,
+        "nombre_sector": "Technology",
+        "sensibilidad_al_mercado": "1.3540",
+        "empresas": 322
+      },
+      {
+        "id": 27,
+        "nombre_sector": "Communications",
+        "sensibilidad_al_mercado": "0.7557",
+        "empresas": 259
+      },
+      {
+        "id": 15,
+        "nombre_sector": "Retail",
+        "sensibilidad_al_mercado": "0.9604",
+        "empresas": 233
+      },
+      {
+        "id": 29,
+        "nombre_sector": "Commercial Services & Supplies",
+        "sensibilidad_al_mercado": "1.1018",
+        "empresas": 188
+      },
+      {
+        "id": 46,
+        "nombre_sector": "Electrical Equipment",
+        "sensibilidad_al_mercado": "1.5982",
+        "empresas": 150
+      },
+      {
+        "id": 10,
+        "nombre_sector": "Metals & Mining",
+        "sensibilidad_al_mercado": "1.1289",
+        "empresas": 137
+      },
+      {
+        "id": 5,
+        "nombre_sector": "Financial Services",
+        "sensibilidad_al_mercado": "0.7483",
+        "empresas": 134
+      },
+      {
+        "id": 31,
+        "nombre_sector": "Construction",
+        "sensibilidad_al_mercado": "0.9602",
+        "empresas": 122
+      },
+      {
+        "id": 3,
+        "nombre_sector": "Chemicals",
+        "sensibilidad_al_mercado": "1.1536",
+        "empresas": 116
+      },
+      {
+        "id": 20,
+        "nombre_sector": "Machinery",
+        "sensibilidad_al_mercado": "1.3695",
+        "empresas": 111
+      },
+      {
+        "id": 23,
+        "nombre_sector": "Biotechnology",
+        "sensibilidad_al_mercado": "1.2308",
+        "empresas": 83
+      },
+      {
+        "id": 26,
+        "nombre_sector": "Real Estate",
+        "sensibilidad_al_mercado": "0.6078",
+        "empresas": 75
+      },
+      {
+        "id": 137,
+        "nombre_sector": "Pharmaceuticals",
+        "sensibilidad_al_mercado": "1.0626",
+        "empresas": 73
+      },
+      {
+        "id": 56,
+        "nombre_sector": "Textiles, Apparel & Luxury Goods",
+        "sensibilidad_al_mercado": "0.9184",
+        "empresas": 72
+      },
+      {
+        "id": 181,
+        "nombre_sector": "Food Products",
+        "sensibilidad_al_mercado": "0.6737",
+        "empresas": 69
+      },
+      {
+        "id": 28,
+        "nombre_sector": "Health Care",
+        "sensibilidad_al_mercado": "0.7602",
+        "empresas": 68
+      },
+      {
+        "id": 16,
+        "nombre_sector": "Banking",
+        "sensibilidad_al_mercado": "0.5135",
+        "empresas": 67
+      },
+      {
+        "id": 6,
+        "nombre_sector": "Energy",
+        "sensibilidad_al_mercado": "0.9482",
+        "empresas": 54
+      },
+      {
+        "id": 13,
+        "nombre_sector": "Consumer Products",
+        "sensibilidad_al_mercado": "0.8301",
+        "empresas": 51
+      },
+      {
+        "id": 9,
+        "nombre_sector": "Automobiles",
+        "sensibilidad_al_mercado": "1.4060",
+        "empresas": 46
+      },
+      {
+        "id": 97,
+        "nombre_sector": "Packaging",
+        "sensibilidad_al_mercado": "0.8887",
+        "empresas": 42
+      },
+      {
+        "id": 35,
+        "nombre_sector": "Media",
+        "sensibilidad_al_mercado": "0.8166",
+        "empresas": 40
+      },
+      {
+        "id": 131,
+        "nombre_sector": "Marine",
+        "sensibilidad_al_mercado": "0.8744",
+        "empresas": 32
+      },
+      {
+        "id": 19,
+        "nombre_sector": "Semiconductors",
+        "sensibilidad_al_mercado": "1.9681",
+        "empresas": 28
+      },
+      {
+        "id": 7550,
+        "nombre_sector": "Building Materials",
+        "sensibilidad_al_mercado": "1.0344",
+        "empresas": 24
+      },
+      {
+        "id": 2,
+        "nombre_sector": "Hotels, Restaurants & Leisure",
+        "sensibilidad_al_mercado": "0.7547",
+        "empresas": 21
+      },
+      {
+        "id": 1,
+        "nombre_sector": "Logistics & Transportation",
+        "sensibilidad_al_mercado": "0.9639",
+        "empresas": 18
+      },
+      {
+        "id": 12,
+        "nombre_sector": "Insurance",
+        "sensibilidad_al_mercado": "0.9895",
+        "empresas": 17
+      },
+      {
+        "id": 4,
+        "nombre_sector": "Utilities",
+        "sensibilidad_al_mercado": "0.7046",
+        "empresas": 16
+      },
+      {
+        "id": 25,
+        "nombre_sector": "Aerospace & Defense",
+        "sensibilidad_al_mercado": "1.2309",
+        "empresas": 13
+      },
+      {
+        "id": 75,
+        "nombre_sector": "Professional Services",
+        "sensibilidad_al_mercado": "1.0237",
+        "empresas": 10
+      },
+      {
+        "id": 65,
+        "nombre_sector": "Auto Components",
+        "sensibilidad_al_mercado": "0.9408",
+        "empresas": 9
+      },
+      {
+        "id": 73,
+        "nombre_sector": "Life Sciences Tools & Services",
+        "sensibilidad_al_mercado": "1.1584",
+        "empresas": 8
+      },
+      {
+        "id": 368,
+        "nombre_sector": "Diversified Consumer Services",
+        "sensibilidad_al_mercado": "0.8117",
+        "empresas": 8
+      },
+      {
+        "id": 11,
+        "nombre_sector": "Trading Companies & Distributors",
+        "sensibilidad_al_mercado": "0.6848",
+        "empresas": 7
+      },
+      {
+        "id": 176,
+        "nombre_sector": "Airlines",
+        "sensibilidad_al_mercado": "0.9906",
+        "empresas": 7
+      },
+      {
+        "id": 336,
+        "nombre_sector": "Road & Rail",
+        "sensibilidad_al_mercado": "0.8498",
+        "empresas": 7
+      },
+      {
+        "id": 62,
+        "nombre_sector": "Telecommunication",
+        "sensibilidad_al_mercado": "0.7290",
+        "empresas": 7
+      },
+      {
+        "id": 128,
+        "nombre_sector": "Building",
+        "sensibilidad_al_mercado": "0.9887",
+        "empresas": 5
+      },
+      {
+        "id": 160,
+        "nombre_sector": "Beverages",
+        "sensibilidad_al_mercado": "0.5928",
+        "empresas": 5
+      },
+      {
+        "id": 182,
+        "nombre_sector": "Leisure Products",
+        "sensibilidad_al_mercado": "1.0064",
+        "empresas": 4
+      },
+      {
+        "id": 266,
+        "nombre_sector": "Tobacco",
+        "sensibilidad_al_mercado": "0.4273",
+        "empresas": 3
+      },
+      {
+        "id": 102,
+        "nombre_sector": "Distributors",
+        "sensibilidad_al_mercado": "0.8136",
+        "empresas": 2
+      },
+      {
+        "id": 121,
+        "nombre_sector": "Transportation Infrastructure",
+        "sensibilidad_al_mercado": "0.8419",
+        "empresas": 0
+      },
+      {
+        "id": 187,
+        "nombre_sector": "Industrial Conglomerates",
+        "sensibilidad_al_mercado": "0.7974",
+        "empresas": 0
+      }
+    ],
+    "credit": [
+      {
+        "perfil_empresa": "GRANDE_NO_FINANCIERA",
+        "filas": 15,
+        "activas": "15",
+        "fecha_min": "2026-08-06",
+        "fecha_max": "2026-08-06",
+        "spread_min": "0.4000",
+        "spread_max": "19.0000",
+        "fuente_intervalos": "DAMODARAN_RATINGS_XLS",
+        "fuente_spread_mercado": null
+      },
+      {
+        "perfil_empresa": "PEQUEÑA_RIESGOSA",
+        "filas": 15,
+        "activas": "15",
+        "fecha_min": "2026-08-06",
+        "fecha_max": "2026-08-06",
+        "spread_min": "0.4000",
+        "spread_max": "19.0000",
+        "fuente_intervalos": "DAMODARAN_RATINGS_XLS",
+        "fuente_spread_mercado": null
+      },
+      {
+        "perfil_empresa": "FINANCIERA",
+        "filas": 15,
+        "activas": "15",
+        "fecha_min": "2026-08-06",
+        "fecha_max": "2026-08-06",
+        "spread_min": "0.4000",
+        "spread_max": "19.0000",
+        "fuente_intervalos": "DAMODARAN_RATINGS_XLS",
+        "fuente_spread_mercado": null
+      }
+    ],
+    "cost": [
+      {
+        "pais_id": 120,
+        "filas": 46,
+        "sectores": 46,
+        "fecha_min": "2026-10-08",
+        "fecha_max": "2026-10-08",
+        "ke_null": "0",
+        "erp_null": "0"
+      },
+      {
+        "pais_id": 166,
+        "filas": 46,
+        "sectores": 46,
+        "fecha_min": "2026-10-08",
+        "fecha_max": "2026-10-08",
+        "ke_null": "0",
+        "erp_null": "0"
+      },
+      {
+        "pais_id": 265,
+        "filas": 46,
+        "sectores": 46,
+        "fecha_min": "2026-10-08",
+        "fecha_max": "2026-10-08",
+        "ke_null": "0",
+        "erp_null": "0"
+      }
+    ],
+    "events": [
+      {
+        "tipo_evento": "DERECHO_SUSCRIPCION",
+        "filas": 2,
+        "instrumentos": 2,
+        "fecha_min": "2026-08-18",
+        "fecha_max": "2026-08-20"
+      },
+      {
+        "tipo_evento": "DIVIDENDO",
+        "filas": 799,
+        "instrumentos": 641,
+        "fecha_min": "2026-04-10",
+        "fecha_max": "2026-08-21"
+      },
+      {
+        "tipo_evento": "DIVIDENDO_ACCIONES",
+        "filas": 5,
+        "instrumentos": 5,
+        "fecha_min": "2026-08-18",
+        "fecha_max": "2026-08-20"
+      },
+      {
+        "tipo_evento": "SPLIT",
+        "filas": 20,
+        "instrumentos": 20,
+        "fecha_min": "2022-08-29",
+        "fecha_max": "2026-07-07"
+      },
+      {
+        "tipo_evento": "WORTHLESS_REMOVAL",
+        "filas": 388,
+        "instrumentos": 10,
+        "fecha_min": "2026-07-17",
+        "fecha_max": "2026-08-20"
+      }
+    ],
+    "snapshots": [
+      {
+        "filas": 594,
+        "empresas": 573,
+        "fechas": 5,
+        "fecha_min": "2026-07-21",
+        "fecha_max": "2026-08-13"
+      }
+    ],
+    "markets": [
+      {
+        "id": 1,
+        "nombre_bolsa": "NASDAQ Stock Market",
+        "region": "United States"
+      },
+      {
+        "id": 2,
+        "nombre_bolsa": "New York Stock Exchange",
+        "region": "United States"
+      },
+      {
+        "id": 3,
+        "nombre_bolsa": "NYSE American",
+        "region": "United States"
+      },
+      {
+        "id": 4,
+        "nombre_bolsa": "Tokyo Stock Exchange",
+        "region": "Japan"
+      },
+      {
+        "id": 5,
+        "nombre_bolsa": "Taiwan Stock Exchange",
+        "region": "Taiwan"
+      },
+      {
+        "id": 6,
+        "nombre_bolsa": "Taipei Exchange",
+        "region": "Taiwan"
+      }
+    ]
+  },
+  "plan": [
+    {
+      "id": 1,
+      "select_type": "SIMPLE",
+      "table": "partida_contable_valor",
+      "partitions": null,
+      "type": "range",
+      "possible_keys": "informe_id,fk_partida_taxonomia",
+      "key": "informe_id",
+      "key_len": "5",
+      "ref": null,
+      "rows": 5663,
+      "filtered": 100,
+      "Extra": "Using index condition; Using where"
+    }
+  ],
+  "probeRows": 4208
+}

@@ -111,7 +111,7 @@ interface EmpresaSEC {
 interface InformeSEC {
     empresaId: number;
     tipoPeriodo: "ANUAL" | "TRIMESTRAL";
-    tipoDocumento: "10-K" | "10-Q";
+    tipoDocumento: "10-K" | "10-K/A" | "20-F" | "20-F/A" | "40-F" | "40-F/A" | "10-Q" | "10-Q/A";
     fechaFinPeriodo: string | null;
     fechaPublicacion: string;
     fuente: "SEC_EDGAR";
@@ -720,7 +720,7 @@ async function twCargarEmpresas(): Promise<TWInstrumentoEmpresa[]> {
 // EXTRAER 10-K / 10-Q (USA)
 // ============================================================================
 
-function extraerInformesRecientes(
+export function extraerInformesRecientes(
     empresaId: number,
     jsonSEC: any
 ): InformeSEC[] {
@@ -746,7 +746,8 @@ function extraerInformesRecientes(
         // SOLO CUENTAS ANUALES Y TRIMESTRALES
         // ================================================================
 
-        if (form !== "10-K" && form !== "10-Q") {
+        const anual=/^(10-K|20-F|40-F)(\/A)?$/.test(form);
+        if (!anual && !/^10-Q(\/A)?$/.test(form)) {
             continue;
         }
 
@@ -758,7 +759,9 @@ function extraerInformesRecientes(
 
         const fecha = new Date(`${fechaPublicacion}T00:00:00Z`);
 
-        if (fecha < fechaLimite) {
+        const cierre=fechaValida(reportDates[i]);
+        const protegido=anual&&cierre&&Number(cierre.slice(0,4))>=2022&&Number(cierre.slice(0,4))<=2025;
+        if (fecha < fechaLimite&&!protegido) {
             continue;
         }
 
@@ -770,9 +773,9 @@ function extraerInformesRecientes(
 
         resultado.push({
             empresaId,
-            tipoPeriodo: form === "10-K" ? "ANUAL" : "TRIMESTRAL",
-            tipoDocumento: form as "10-K" | "10-Q",
-            fechaFinPeriodo: fechaValida(reportDates[i]),
+            tipoPeriodo: anual ? "ANUAL" : "TRIMESTRAL",
+            tipoDocumento: form as InformeSEC['tipoDocumento'],
+            fechaFinPeriodo: cierre,
             fechaPublicacion,
             fuente: "SEC_EDGAR",
             identificadorFuente: accession
@@ -887,7 +890,13 @@ async function descargarInformesEmpresa(
     const url = `https://data.sec.gov/submissions/CIK${cik}.json`;
     const json = await fetchSEC(url);
 
-    return extraerInformesRecientes(empresaId, json);
+    const reports=extraerInformesRecientes(empresaId,json);
+    for(const file of json?.filings?.files||[]){
+        if(!new RegExp('^CIK'+cik+'-submissions-\\d+\\.json$').test(file.name||'')||file.filingTo<'2022-01-01')continue;
+        const history=await fetchSEC('https://data.sec.gov/submissions/'+file.name);
+        reports.push(...extraerInformesRecientes(empresaId,{filings:{recent:history}}));
+    }
+    return [...new Map(reports.map(r=>[r.identificadorFuente,r])).values()];
 }
 
 // ============================================================================
@@ -1053,8 +1062,8 @@ type InformeRetencion = {
     identificadorFuente: string;
 };
 
-function seleccionarInformesObjetivo<T extends InformeRetencion>(
-    informes: T[]
+export function seleccionarInformesObjetivo<T extends InformeRetencion>(
+    informes: T[], protegerHistorico=false
 ): T[] {
     const validos = informes.filter(x => !!x.fechaFinPeriodo);
 
@@ -1082,11 +1091,11 @@ function seleccionarInformesObjetivo<T extends InformeRetencion>(
         }
     }
 
-    const anuales = Array.from(anualPorEjercicio.values())
+    const ordenados = Array.from(anualPorEjercicio.values())
         .sort((a, b) =>
             b.fechaFinPeriodo!.localeCompare(a.fechaFinPeriodo!)
-        )
-        .slice(0, 4);
+        );
+    const anuales=ordenados.filter((inf,index)=>index<4||(protegerHistorico&&Number(inf.fechaFinPeriodo!.slice(0,4))>=2022&&Number(inf.fechaFinPeriodo!.slice(0,4))<=2025));
 
     const ultimoAnual = anuales[0]?.fechaFinPeriodo || null;
 
@@ -1245,6 +1254,9 @@ async function twGuardarInformes(
 async function aplicarRetencionInformesFuente(
     fuente: "SEC_EDGAR" | "EDINET" | "FINMIND"
 ): Promise<number> {
+    // US/JP historical recovery is additive. Never delete old metadata merely
+    // because a newer closing year has arrived. Valuation still selects four FY.
+    if(fuente==='SEC_EDGAR'||fuente==='EDINET')return 0;
     const db = conexion as any;
 
     const [resultado]: any = await db.query(
@@ -1408,7 +1420,7 @@ export async function ejecutarCargaInformesUSA() {
                 empresa.cik
             );
 
-            const informesObjetivo = seleccionarInformesObjetivo(informes);
+            const informesObjetivo = seleccionarInformesObjetivo(informes,true);
 
             totalInformes += informesObjetivo.length;
 

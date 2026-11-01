@@ -1,0 +1,138 @@
+[
+  {
+    "label": "session_control",
+    "sql": "SET SESSION MAX_EXECUTION_TIME=2000",
+    "parameters": [],
+    "ms": 4,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION lock_wait_timeout=2",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "session_control",
+    "sql": "SET SESSION innodb_lock_wait_timeout=2",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 3,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "identity",
+    "sql": "SELECT DATABASE() schema_name,@@version mysql_version,@@session.transaction_read_only session_read_only,@@session.max_execution_time max_execution_time,@@session.transaction_isolation isolation_level,NOW() server_time",
+    "parameters": [],
+    "ms": 6,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "grants",
+    "sql": "SHOW GRANTS",
+    "parameters": [],
+    "ms": 4,
+    "rows": 2,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "frozen_market_variables",
+    "sql": "SELECT COUNT(*) runs,SUM(JSON_CONTAINS_PATH(input_json,'one','$.risk_inputs.median_daily_dollar_volume_90d')) con_volumen_agregado,SUM(JSON_CONTAINS_PATH(input_json,'one','$.risk_inputs.free_float','$.free_float','$.bid','$.ask','$.daily_prices','$.quotes','$.prices')) con_campos_bursatiles_alternativos FROM valuation_execution",
+    "parameters": [],
+    "ms": 28,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_begin",
+    "sql": "START TRANSACTION READ ONLY",
+    "parameters": [],
+    "ms": 2,
+    "rows": null,
+    "outcome": "OK"
+  },
+  {
+    "label": "reference_quality",
+    "sql": "SELECT COUNT(*) filas,SUM(ke_referencia IS NULL) ke_null,SUM(equity_risk_premium IS NULL) erp_null FROM coste_capital_referencia",
+    "parameters": [],
+    "ms": 6,
+    "rows": 1,
+    "outcome": "OK"
+  },
+  {
+    "label": "transaction_end",
+    "sql": "ROLLBACK",
+    "parameters": [],
+    "ms": 1,
+    "rows": null,
+    "outcome": "OK"
+  }
+]

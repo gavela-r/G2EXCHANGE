@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "checks": 43601,
+  "sqlReadStatementsLogged": 4812,
+  "maxQueryMs": 1799,
+  "schemaTablesCompared": 28,
+  "schemaDifferences": [],
+  "originalFilesCompared": 328,
+  "protectedChanges": [],
+  "manifestMatches": true,
+  "reportPopulation": 41758,
+  "companyPopulation": 13194,
+  "note": "Validaciones de auditoría y documentos; no son nuevas pruebas del motor financiero ni estimaciones de primas."
+}

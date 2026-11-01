@@ -1,0 +1,407 @@
+{
+  "at": "2026-10-30T07:48:38.919Z",
+  "checks": [
+    {
+      "label": "AMD_US",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "TOYOTA_JP",
+      "compared": 0,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "GOGOLOOK_TW",
+      "compared": 0,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_01_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_01_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_01_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_02_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_02_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_02_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_03_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_03_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_03_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_04_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_04_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_04_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_05_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_05_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_05_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_06_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_06_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_06_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_07_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_07_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_07_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_08_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_08_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_08_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_09_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_09_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_09_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_10_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_10_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_10_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_11_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_11_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_11_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_12_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_12_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_12_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_13_-1",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_13_0",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_13_1",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_14_-1",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_14_0",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_14_1",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_15_-1",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_15_0",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_15_1",
+      "compared": 25,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_16_-1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_16_0",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    },
+    {
+      "label": "HYPOTHETICAL_16_1",
+      "compared": 28,
+      "formulaEngine": "HyperFormula 3.5.0 GPLv3, temporal QA",
+      "nativeExcel": false,
+      "passed": true
+    }
+  ],
+  "renders": [
+    {
+      "sheet": "Primas_auto",
+      "file": "C:\\Users\\Juan\\Desktop\\G2_EXCHAGE\\G2EXCHANGE\\.verification\\capital-primas-render\\AMD_US.png",
+      "range": "A1:D31",
+      "method": "Vista derivada de celdas del XLSX, no captura de Excel nativo"
+    },
+    {
+      "sheet": "07_WACC",
+      "file": "C:\\Users\\Juan\\Desktop\\G2_EXCHAGE\\G2EXCHANGE\\.verification\\capital-primas-render\\AMD_WACC.png",
+      "range": "A18:M40",
+      "method": "Vista derivada de celdas del XLSX, no captura de Excel nativo"
+    },
+    {
+      "sheet": "Primas_auto",
+      "file": "C:\\Users\\Juan\\Desktop\\G2_EXCHAGE\\G2EXCHANGE\\.verification\\capital-primas-render\\TOYOTA_JP.png",
+      "range": "A1:D31",
+      "method": "Vista derivada de celdas del XLSX, no captura de Excel nativo"
+    },
+    {
+      "sheet": "Primas_auto",
+      "file": "C:\\Users\\Juan\\Desktop\\G2_EXCHAGE\\G2EXCHANGE\\.verification\\capital-primas-render\\GOGOLOOK_TW.png",
+      "range": "A1:D31",
+      "method": "Vista derivada de celdas del XLSX, no captura de Excel nativo"
+    },
+    {
+      "sheet": "Primas_auto",
+      "file": "C:\\Users\\Juan\\Desktop\\G2_EXCHAGE\\G2EXCHANGE\\.verification\\capital-primas-render\\HYPOTHETICAL_03.png",
+      "range": "A1:D31",
+      "method": "Vista derivada de celdas del XLSX, no captura de Excel nativo"
+    },
+    {
+      "sheet": "Primas_auto",
+      "file": "C:\\Users\\Juan\\Desktop\\G2_EXCHAGE\\G2EXCHANGE\\.verification\\capital-primas-render\\HYPOTHETICAL_13.png",
+      "range": "A1:D31",
+      "method": "Vista derivada de celdas del XLSX, no captura de Excel nativo"
+    }
+  ],
+  "total": 51,
+  "passed": 51,
+  "limitations": [
+    "Artifact Tool no está disponible en el runtime",
+    "Verificación independiente de fórmulas con HyperFormula; no se ha controlado Excel nativo",
+    "Render derivado de celdas, sin certificación de objetos/gráficos/formato nativo"
+  ]
+}

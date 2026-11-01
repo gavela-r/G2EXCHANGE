@@ -1,0 +1,5 @@
+# Evidencias locales voluminosas: conservar en disco, evitar commits accidentales.
+/evidencias/observaciones_financieras.json
+/evidencias/checkpoint_financiero.json
+/evidencias/consultas_financieros.json
+/evidencias/consultas_financieros_intento1.json

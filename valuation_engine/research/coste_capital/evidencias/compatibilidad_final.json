@@ -1,0 +1,35 @@
+{
+  "auditedOn": "2026-10-29",
+  "filesCompared": 299,
+  "differences": [
+    {
+      "file": "server/docs/RESULTADOS_PROVEEDORES_20261028.md",
+      "before": "4062cd71bd4c2770336e220d73bdb7f94236a24ab905d28aa34db494a4f7bb5e",
+      "after": "2b9ef56b8bf87926d7c7703f212f6ed59659bd8a68114d4a34b2d7c2deada06b"
+    }
+  ],
+  "operationalReports": [
+    {
+      "file": "server/docs/RESULTADOS_PROVEEDORES_20261028.md",
+      "before": "4062cd71bd4c2770336e220d73bdb7f94236a24ab905d28aa34db494a4f7bb5e",
+      "after": "2b9ef56b8bf87926d7c7703f212f6ed59659bd8a68114d4a34b2d7c2deada06b"
+    }
+  ],
+  "protectedChanges": [],
+  "engineBefore": {
+    "manifest": {
+      "version": "1.5.1",
+      "sourceHash": "bf3e3f2a3e7bc0f936dd628f6723d4840f37a1b328cb69220275fc633ab8dca7",
+      "compiledHash": "512eddbe78c73bcdc01045cd8555c5b0a321581a3dcd9c52f964b6b6c25207c3"
+    },
+    "syntheticDcfOutputHash": "7ca41ecafc4d16259e47884fde23a6f3fb0c1593e50f8449fa1cde6cde2cdd49"
+  },
+  "engineAfter": {
+    "manifest": {
+      "version": "1.5.1",
+      "sourceHash": "bf3e3f2a3e7bc0f936dd628f6723d4840f37a1b328cb69220275fc633ab8dca7",
+      "compiledHash": "512eddbe78c73bcdc01045cd8555c5b0a321581a3dcd9c52f964b6b6c25207c3"
+    },
+    "syntheticDcfOutputHash": "7ca41ecafc4d16259e47884fde23a6f3fb0c1593e50f8449fa1cde6cde2cdd49"
+  }
+}

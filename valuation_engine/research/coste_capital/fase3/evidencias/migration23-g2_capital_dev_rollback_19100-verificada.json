@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-30T07:38:01.624Z",
+  "database": "g2_capital_dev_rollback_19100",
+  "analysesPreserved": 0,
+  "methodsPreserved": 0,
+  "byteEquality": true,
+  "digest": "c4cd51b5290bdd877ccf841f997b5de93ac08f316b00a5017fbf5396121fe877",
+  "backup": "migration23-g2_capital_dev_rollback_19100-1793345880517.local.json"
+}

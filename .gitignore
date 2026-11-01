@@ -8,11 +8,18 @@ server/resultados_valoraciones/
 **/*.bak
 **/*.BACKUP*
 *BACKUP*
+!server/scripts/backup-pcv-consistente.cjs
+!server/scripts/verificar-backup-pcv.cjs
+!server/scripts/backup-controles-pcv.cjs
+!server/scripts/backup-db.cjs
+!server/scripts/backup-pcv-en-vivo.cjs
 consulta_empresas_temporal.cjs
 ercionDatosinsercionDatosSector.ts*
 valuation_engine/docs/*.pdf
 .vite/
 .verification/
+# Separate repository supplied by the user; do not stage or alter it here.
+/G2EXCHANGE/
 valuation_engine_COPIA/
 valuation_engine/salida*/
 *.sql.gz
@@ -29,6 +36,9 @@ node_modules
 valuation_engine/archives/
 dist
 dist-ssr
+server/dist-capital/
+valuation_engine/research/coste_capital/fase3/archives/
+valuation_engine/research/coste_capital/fase3/evidencias/*.local.json
 *.local
 
 # Editor directories and files

@@ -1,0 +1,21 @@
+# Decisiones previas a ajustes reales
+
+El módulo de diagnóstico queda disponible para revisión interna. La activación financiera permanece pendiente. No se solicita autorización para ejecutar ningún cambio de producción en esta entrega.
+
+1. **Confirmar alcance de los hallazgos existentes:** decidir cómo retirar/reemplazar las primas DRAFT sin cambiar valoraciones previas; definir quién aprueba metodología y calibraciones. REVIEW no convierte una regla en evidencia.
+2. **Inspeccionar la instancia MySQL identificada en solo lectura:** contrastar SHOW CREATE TABLE, índices y columnas con el DDL/versiones. Medir cobertura por empresa/concepto/fecha, sin interferir con recuperación.
+3. **Resolver el histórico de precios:** decidir una versión futura del almacenamiento diario y fechas correctas. No usar la fila única como histórico. Cualquier corrección del escritor o esquema requiere fase aprobada.
+4. **Aportar/localizar el maestro Inditex:** revisar fórmulas reales de G2_ESCENARIOS. No certificar filas del archivo ausente por analogía con Template_06.
+5. **Definir unidades y contexto de entrada:** moneda, multiplicador, consolidación, signos, publicación original/rectificación; requisitos para marcar datos validados. No hacer casts de DECIMAL de MySQL ni pasar millones como unidades sin adaptación verificada.
+6. **Conciliar capitalización:** clase, acciones emitidas/en circulación/diluidas, treasury shares, splits, ADR, fecha de precio y fecha de acciones. No sustituir mercado por patrimonio contable.
+7. **Revisar el baseline:** Rf libre de default vs bono soberano local, ERP total que incluye país, exposición geográfica efectiva, versión/fecha y beta apalancada sectorial. Decidir futura desapalancación/reapalancación y estructura objetivo por familia.
+8. **Conciliar caja/deuda/fiscalidad:** caja operativa/restringida/excedentaria, arrendamientos y deuda financiera bruta/mercado, cobertura y perfil de rating, capacidad fiscal. Documentar las ventajas ya incorporadas y no deducirlas otra vez del coste de capital.
+9. **Definir universo y benchmark:** sector/subsector, país/región, negocio, bolsa/calendario, contabilidad, periodo, revisiones y sesgos de selección/supervivencia; mantener variación de tamaño para estudiarlo. No fijar percentiles de concesión de prima.
+10. **Verificar fuentes gratuitas y derechos concretos:** reutilizar proveedores autorizados y datos ya guardados; SEC/EDINET/TW oficiales para estados, volumen/importe/ajustes con fuente y licencia pertinentes. No asumir microestructura gratuita/comercial universal. Sin dato → NO_ESTIMABLE.
+11. **Elegir y validar metodología:** indicador Amihud no es prima. Para LCAPM/multifactor/residual de tamaño, determinar mercado/periodo/horizonte, variables y estimación conjunta, incertidumbre/estabilidad, costes y validación fuera de muestra; aprobar los coeficientes con trazabilidad. No habilitar parámetros universales ni copiar papers.
+12. **Justificar cada dirección cuantitativa:** positiva solo ante riesgo remunerado incremental no incluido; negativa solo frente a referencia que ya contenga ese riesgo y diferencia demostrada, dentro de magnitud conciliada. No inferir signo de capitalización.
+13. **Aislar riesgos compartidos:** liquidez/tamaño/calidad/crédito y efecto ya en flujos/beta/spreads/caja. Determinar explícitamente qué exposición residual queda; no sumar primas univariantes.
+14. **Aprobar arquitectura/versiones:** sidecar mínimo y estados de aprobación/override append-only; NULL distinto de cero; parámetros con componente/unidad/signo. No actualizar execution/históricos. Nuevo run/modelo/maestro si se aprueba un cambio.
+15. **Validar candidato por familia:** FCFF frente a DDM/AFFO, tasas/flujos/escenarios, terminal e impacto intrínseco; pruebas de replay y conciliación TS/Excel/PDF. Definir criterios de revisión, aprobación del usuario y reversión funcional antes de activar.
+
+Hasta completar estas decisiones, no hay una prima positiva o negativa real autorizada por el módulo, ni un WACC/valor intrínseco real ajustado por él. La salida útil actual es el diagnóstico trazable y la explicación de por qué un ajuste es cero incremental, ya está incorporado, no aplica o no puede estimarse.

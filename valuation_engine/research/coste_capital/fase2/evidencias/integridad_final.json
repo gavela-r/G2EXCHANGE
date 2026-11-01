@@ -1,0 +1,34 @@
+{
+  "comparedFiles": 328,
+  "unchanged": 325,
+  "differences": [
+    {
+      "file": "server/docs/INFORME_COBERTURA_85.md",
+      "before": "96415de2d38fc07ae4bb0c3d8710f00272aa868d6517f33446e5f2c639edfc6c",
+      "after": "5234f7f76f214faa0017494b059a3187abc530f8befe1dca5e39df7655f1a409"
+    },
+    {
+      "file": "server/docs/INFORME_FMP_COMPLEMENTARIO.md",
+      "before": "f45da377e49380345ad1fe8cd08137fd465d2ec483ffa7059cb10a0f1478dfba",
+      "after": "9933e6ff0676395d2372cb6428d4c2357f2e1b6ba51b345eecd10d38420c7a72"
+    },
+    {
+      "file": "server/docs/INFORME_RECUPERACION_US_JP_TW.md",
+      "before": "0d16a8d726dda3a74fad05d3d84a1d16ca94a8984b5ca4bdff73c155bdcbfbc1",
+      "after": "23f6983458c8d85ed268cc2c59de1c04a1a584a0f5892f96d593aa3474dc6381"
+    }
+  ],
+  "protectedChanges": [],
+  "manifest": {
+    "version": "1.5.1",
+    "sourceHash": "bf3e3f2a3e7bc0f936dd628f6723d4840f37a1b328cb69220275fc633ab8dca7",
+    "compiledHash": "512eddbe78c73bcdc01045cd8555c5b0a321581a3dcd9c52f964b6b6c25207c3"
+  },
+  "phase1Manifest": {
+    "version": "1.5.1",
+    "sourceHash": "bf3e3f2a3e7bc0f936dd628f6723d4840f37a1b328cb69220275fc633ab8dca7",
+    "compiledHash": "512eddbe78c73bcdc01045cd8555c5b0a321581a3dcd9c52f964b6b6c25207c3"
+  },
+  "manifestMatches": true,
+  "capturedAtUtc": "2026-10-29T20:09:23.791Z"
+}

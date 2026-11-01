@@ -1,0 +1,83 @@
+{
+  "at": "2026-10-30T07:48:46.307Z",
+  "test": "React production bundle + in-memory DOM + real development API",
+  "company": "NVIDIA CORP",
+  "period": "2025-01-26",
+  "checks": [
+    "búsqueda API real",
+    "selección empresa",
+    "selección periodo",
+    "12 indicadores validados",
+    "diferenciación NO_ESTIMABLE",
+    "aprobación bloqueada",
+    "guardado versionado por interfaz",
+    "enlaces de descarga",
+    "sin errores DOM",
+    "cálculo automático desde React",
+    "ceros operativos y NO_ESTIMABLE visibles"
+  ],
+  "requests": [
+    {
+      "path": "/api/capital/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies/1/history",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies/1/proposals",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies/1",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies/1/history",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies/1/proposals",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies/1",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/companies/1/evaluations",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/capital/companies/1/history",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/capital/runs/550/automatic-premiums",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/capital/companies/1/history",
+      "method": "GET",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "visualBrowserReview": false
+}

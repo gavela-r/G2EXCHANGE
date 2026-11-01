@@ -1,0 +1,1272 @@
+﻿{
+  "at": "2026-10-29T22:16:56.167Z",
+  "runtime": "v22.23.4",
+  "platform": "linux",
+  "arch": "x64",
+  "network": "NONE",
+  "engineMount": "READ_ONLY",
+  "inputs": "FROZEN_ONLY",
+  "exact": 46,
+  "numericallyEquivalent": 14,
+  "total": 60,
+  "replays": [
+    {
+      "run": 533,
+      "status": "EXACT_MATCH",
+      "outputHash": "5b66a2aa122c320e80b9094df8978c685cefda2383cff8484a87c5fb75af340c",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 534,
+      "status": "EXACT_MATCH",
+      "outputHash": "9baa88da84ca88212f56dec2725a5360aa2d9bd376863c269934fe46066cd6bb",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 535,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "c5b1c5ffd86ee21d0a9733724841003087a2ae4bb76830438d09d9ac51de09ea",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.fair_value",
+            "stored": 3.356701615020851,
+            "computed": 3.3567016150208517,
+            "absoluteDifference": 8.881784197001252e-16,
+            "calculationScale": 3.3567016150208517,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.max_buy_price",
+            "stored": 2.3496911305145955,
+            "computed": 2.349691130514596,
+            "absoluteDifference": 4.440892098500626e-16,
+            "calculationScale": 2.349691130514596,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.upside",
+            "stored": -0.42225445524598093,
+            "computed": -0.4222544552459807,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_empresa_millones",
+            "stored": 215.1039642260996,
+            "computed": 215.10396422609966,
+            "absoluteDifference": 5.684341886080802e-14,
+            "calculationScale": 215.10396422609966,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_patrimonio_millones",
+            "stored": 178.7529642260996,
+            "computed": 178.75296422609966,
+            "absoluteDifference": 5.684341886080802e-14,
+            "calculationScale": 260.8509642260996,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 536,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "d47622cbeb5a659328d0bff141a4330df26e6fc821e4278059dbdfe52c4154cf",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.1.valor_empresa_millones",
+            "stored": 1610.7357778387614,
+            "computed": 1610.7357778387611,
+            "absoluteDifference": 2.2737367544323206e-13,
+            "calculationScale": 1610.7357778387614,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 537,
+      "status": "EXACT_MATCH",
+      "outputHash": "0aa04d5a5ca1cd835732b3f6ebf1603d0349a8079cb1d7e4982ef817e0ffe7c9",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 538,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "c5af4fc712a4dcd8cd5b901738e0505014aa6bd1d610cb8e8b91fe458b0ed707",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.fair_value",
+            "stored": 89.37886899839536,
+            "computed": 89.37886899839538,
+            "absoluteDifference": 1.4210854715202004e-14,
+            "calculationScale": 89.37886899839538,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.max_buy_price",
+            "stored": 62.56520829887675,
+            "computed": 62.56520829887676,
+            "absoluteDifference": 1.4210854715202004e-14,
+            "calculationScale": 62.56520829887676,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.terminal_value_weight",
+            "stored": 0.7747541316232246,
+            "computed": 0.7747541316232245,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.upside",
+            "stored": 1.9723601263184358,
+            "computed": 1.9723601263184363,
+            "absoluteDifference": 4.440892098500626e-16,
+            "calculationScale": 1.9723601263184363,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_empresa_millones",
+            "stored": 30024.997177668633,
+            "computed": 30024.997177668636,
+            "absoluteDifference": 3.637978807091713e-12,
+            "calculationScale": 30024.997177668636,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_patrimonio_millones",
+            "stored": 18887.997177668633,
+            "computed": 18887.997177668636,
+            "absoluteDifference": 3.637978807091713e-12,
+            "calculationScale": 43171.997177668636,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 539,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "e3f71ed892141f789475b0c368a8273383e281d7e2024331bd49aae548424062",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.1.fair_value",
+            "stored": 39.85189965267396,
+            "computed": 39.85189965267395,
+            "absoluteDifference": 7.105427357601002e-15,
+            "calculationScale": 39.85189965267396,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.max_buy_price",
+            "stored": 29.88892473950547,
+            "computed": 29.888924739505462,
+            "absoluteDifference": 7.105427357601002e-15,
+            "calculationScale": 29.88892473950547,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.upside",
+            "stored": -0.17009788311799345,
+            "computed": -0.17009788311799356,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_empresa_millones",
+            "stored": 7324.989883008422,
+            "computed": 7324.989883008421,
+            "absoluteDifference": 9.094947017729282e-13,
+            "calculationScale": 7324.989883008422,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_patrimonio_millones",
+            "stored": 5032.789883008422,
+            "computed": 5032.789883008421,
+            "absoluteDifference": 9.094947017729282e-13,
+            "calculationScale": 10379.389883008422,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 540,
+      "status": "EXACT_MATCH",
+      "outputHash": "d223d65426f7fe3a8c5329e1909b75775a7d10a1af4432fab5073d7a74e130f0",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 541,
+      "status": "EXACT_MATCH",
+      "outputHash": "b63a3ee04a7fa1ee8613df1cd73e2cede2e6fe18d6371d9f4a1f9716fbe0a445",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 542,
+      "status": "EXACT_MATCH",
+      "outputHash": "d25bdcb27fd0251944e8d7c4a84b45a38e4cd433d8b0b4e16547153a1f9c07c8",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 543,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "bbe69124490f808ca75755c47bdb60a084ebb831cd72f0d3be9e7b9122f7bc38",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.1.fair_value",
+            "stored": 57.34818024773512,
+            "computed": 57.34818024773513,
+            "absoluteDifference": 7.105427357601002e-15,
+            "calculationScale": 57.34818024773513,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.max_buy_price",
+            "stored": 43.01113518580134,
+            "computed": 43.01113518580135,
+            "absoluteDifference": 7.105427357601002e-15,
+            "calculationScale": 43.01113518580135,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_empresa_millones",
+            "stored": 7188.451167815344,
+            "computed": 7188.451167815345,
+            "absoluteDifference": 9.094947017729282e-13,
+            "calculationScale": 7188.451167815345,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_patrimonio_millones",
+            "stored": 5663.443167815344,
+            "computed": 5663.443167815345,
+            "absoluteDifference": 9.094947017729282e-13,
+            "calculationScale": 9227.807167815345,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 544,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "77826a2593ebd8952b3a3789ed5e6574361ef424f654ab7a4d9edcc06d7df20b",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.historical_cagr",
+            "stored": 0.18895300565550532,
+            "computed": 0.1889530056555051,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.historical_cagr",
+            "stored": 0.18895300565550532,
+            "computed": 0.1889530056555051,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.fair_value",
+            "stored": 203.16181343618908,
+            "computed": 203.16181343618914,
+            "absoluteDifference": 5.684341886080802e-14,
+            "calculationScale": 203.16181343618914,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.historical_cagr",
+            "stored": 0.18895300565550532,
+            "computed": 0.1889530056555051,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.max_buy_price",
+            "stored": 162.52945074895126,
+            "computed": 162.52945074895132,
+            "absoluteDifference": 5.684341886080802e-14,
+            "calculationScale": 162.52945074895132,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.upside",
+            "stored": -0.13718890945070783,
+            "computed": -0.1371889094507076,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.valor_empresa_millones",
+            "stored": 6186.665369812134,
+            "computed": 6186.6653698121345,
+            "absoluteDifference": 9.094947017729282e-13,
+            "calculationScale": 6186.6653698121345,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.valor_patrimonio_millones",
+            "stored": 5639.465369812134,
+            "computed": 5639.465369812135,
+            "absoluteDifference": 9.094947017729282e-13,
+            "calculationScale": 7389.065369812133,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 545,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "73c1bed93038999b189ec33c56cb810487319a0797011e05f590277bb7459b6c",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.1.terminal_value_weight",
+            "stored": 0.555992987789011,
+            "computed": 0.5559929877890109,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_empresa_millones",
+            "stored": 114.91780588757624,
+            "computed": 114.91780588757625,
+            "absoluteDifference": 1.4210854715202004e-14,
+            "calculationScale": 114.91780588757625,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_patrimonio_millones",
+            "stored": 119.71580588757624,
+            "computed": 119.71580588757625,
+            "absoluteDifference": 1.4210854715202004e-14,
+            "calculationScale": 154.57780588757623,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 546,
+      "status": "EXACT_MATCH",
+      "outputHash": "77b99891b05f526e39400a7c47f12d092c865c47ae37fd660d1aab49f46e13fd",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 547,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "89e4fa3afe627fd01a1eb2ce8bb6e9df5f360f55a5bf5003b928bc8c0c80c53e",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.fair_value",
+            "stored": 339.1336761881472,
+            "computed": 339.13367618814726,
+            "absoluteDifference": 5.684341886080802e-14,
+            "calculationScale": 339.13367618814726,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.max_buy_price",
+            "stored": 237.39357333170304,
+            "computed": 237.39357333170307,
+            "absoluteDifference": 2.842170943040401e-14,
+            "calculationScale": 237.39357333170307,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.upside",
+            "stored": 6.823152853244457,
+            "computed": 6.823152853244458,
+            "absoluteDifference": 8.881784197001252e-16,
+            "calculationScale": 6.823152853244458,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_empresa_millones",
+            "stored": 103852.95789047444,
+            "computed": 103852.95789047446,
+            "absoluteDifference": 1.4551915228366852e-11,
+            "calculationScale": 103852.95789047446,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_patrimonio_millones",
+            "stored": 99832.20089047444,
+            "computed": 99832.20089047446,
+            "absoluteDifference": 1.4551915228366852e-11,
+            "calculationScale": 112704.77889047444,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.fair_value",
+            "stored": 411.6328433548879,
+            "computed": 411.6328433548878,
+            "absoluteDifference": 5.684341886080802e-14,
+            "calculationScale": 411.6328433548879,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.max_buy_price",
+            "stored": 308.7246325161659,
+            "computed": 308.72463251616585,
+            "absoluteDifference": 5.684341886080802e-14,
+            "calculationScale": 308.7246325161659,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_empresa_millones",
+            "stored": 125194.84142835916,
+            "computed": 125194.84142835914,
+            "absoluteDifference": 1.4551915228366852e-11,
+            "calculationScale": 125194.84142835916,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.valor_patrimonio_millones",
+            "stored": 121174.08442835916,
+            "computed": 121174.08442835914,
+            "absoluteDifference": 1.4551915228366852e-11,
+            "calculationScale": 134046.66242835915,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 548,
+      "status": "EXACT_MATCH",
+      "outputHash": "955e7bfb79a3ad447390857df204d041dadd4ba0a73a073d368c1237ad21eb09",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 549,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "607eebaa0767a791fbac09df725d972d846b74d3b293c7b871bf7e18999546ed",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.fair_value",
+            "stored": 3.2447822959880868,
+            "computed": 3.244782295988088,
+            "absoluteDifference": 1.3322676295501878e-15,
+            "calculationScale": 3.244782295988088,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.max_buy_price",
+            "stored": 2.2713476071916605,
+            "computed": 2.2713476071916614,
+            "absoluteDifference": 8.881784197001252e-16,
+            "calculationScale": 2.2713476071916614,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_empresa_millones",
+            "stored": 112.57432937301517,
+            "computed": 112.57432937301519,
+            "absoluteDifference": 1.4210854715202004e-14,
+            "calculationScale": 112.57432937301519,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_patrimonio_millones",
+            "stored": 74.26832937301516,
+            "computed": 74.26832937301519,
+            "absoluteDifference": 2.842170943040401e-14,
+            "calculationScale": 168.6223293730152,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.fair_value",
+            "stored": 39.97824759081741,
+            "computed": 39.97824759081742,
+            "absoluteDifference": 7.105427357601002e-15,
+            "calculationScale": 39.97824759081742,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.max_buy_price",
+            "stored": 31.98259807265393,
+            "computed": 31.982598072653936,
+            "absoluteDifference": 7.105427357601002e-15,
+            "calculationScale": 31.982598072653936,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.terminal_value_weight",
+            "stored": 0.7399945776496683,
+            "computed": 0.7399945776496684,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.upside",
+            "stored": 0.5195077001450936,
+            "computed": 0.5195077001450938,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.valor_empresa_millones",
+            "stored": 953.349719112328,
+            "computed": 953.3497191123281,
+            "absoluteDifference": 1.1368683772161603e-13,
+            "calculationScale": 953.3497191123281,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.valor_patrimonio_millones",
+            "stored": 915.043719112328,
+            "computed": 915.0437191123281,
+            "absoluteDifference": 1.1368683772161603e-13,
+            "calculationScale": 1009.397719112328,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 550,
+      "status": "EXACT_MATCH",
+      "outputHash": "982eef0323989da0cd27699727b3c40adb51080320510c7403e8cc87ad07955a",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 551,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "f48ee0dd09657791628a864ca734932de937fc96867343bd642e1cbe7bbc13e9",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.historical_cagr",
+            "stored": 0.16237530563994418,
+            "computed": 0.16237530563994396,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.1.historical_cagr",
+            "stored": 0.16237530563994418,
+            "computed": 0.16237530563994396,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.historical_cagr",
+            "stored": 0.16237530563994418,
+            "computed": 0.16237530563994396,
+            "absoluteDifference": 2.220446049250313e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 552,
+      "status": "EXACT_MATCH",
+      "outputHash": "c0745ad6294eb8509caaacd6bb85cc7d002f3c9e57e723082ab7b14757df8d6e",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 553,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "4cc87e1d4cb0a21a55bc01081e3d4357d2730c5570014f57020021a5663ee890",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.2.fair_value",
+            "stored": 21.764106598349038,
+            "computed": 21.76410659834904,
+            "absoluteDifference": 3.552713678800501e-15,
+            "calculationScale": 21.76410659834904,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.max_buy_price",
+            "stored": 17.41128527867923,
+            "computed": 17.411285278679234,
+            "absoluteDifference": 3.552713678800501e-15,
+            "calculationScale": 17.411285278679234,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.terminal_value_weight",
+            "stored": 0.7124267664335495,
+            "computed": 0.7124267664335494,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.valor_empresa_millones",
+            "stored": 438.47516169298444,
+            "computed": 438.47516169298456,
+            "absoluteDifference": 1.1368683772161603e-13,
+            "calculationScale": 438.47516169298456,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.valor_patrimonio_millones",
+            "stored": 527.2591616929844,
+            "computed": 527.2591616929845,
+            "absoluteDifference": 1.1368683772161603e-13,
+            "calculationScale": 616.6171616929846,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 554,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "fae5866d1a0151c067a8b93e62917f01cdbcb301ee315cf001e65b42a2f1c4f0",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.fair_value",
+            "stored": 25.03161034886109,
+            "computed": 25.031610348861093,
+            "absoluteDifference": 3.552713678800501e-15,
+            "calculationScale": 25.031610348861093,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.max_buy_price",
+            "stored": 17.52212724420276,
+            "computed": 17.522127244202764,
+            "absoluteDifference": 3.552713678800501e-15,
+            "calculationScale": 17.522127244202764,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.terminal_value_weight",
+            "stored": 0.48927977252562177,
+            "computed": 0.48927977252562166,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_empresa_millones",
+            "stored": 1041.1924616209387,
+            "computed": 1041.192461620939,
+            "absoluteDifference": 2.2737367544323206e-13,
+            "calculationScale": 1041.192461620939,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_patrimonio_millones",
+            "stored": 1349.7294616209388,
+            "computed": 1349.729461620939,
+            "absoluteDifference": 2.2737367544323206e-13,
+            "calculationScale": 2292.912461620939,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.terminal_value_weight",
+            "stored": 0.6492901164505155,
+            "computed": 0.6492901164505154,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 555,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "9f50596ca68934bd8d5378b41974178149826df6fc1ddf50feb5354b00263e80",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.0.fair_value",
+            "stored": 9.205967020853354,
+            "computed": 9.20596702085335,
+            "absoluteDifference": 3.552713678800501e-15,
+            "calculationScale": 9.205967020853354,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.max_buy_price",
+            "stored": 6.444176914597348,
+            "computed": 6.444176914597345,
+            "absoluteDifference": 2.6645352591003757e-15,
+            "calculationScale": 6.444176914597348,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.terminal_value_weight",
+            "stored": 0.6535950968673052,
+            "computed": 0.6535950968673053,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.upside",
+            "stored": -0.7536535450668088,
+            "computed": -0.7536535450668089,
+            "absoluteDifference": 1.1102230246251565e-16,
+            "calculationScale": 1,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_empresa_millones",
+            "stored": 740.2757011838339,
+            "computed": 740.2757011838338,
+            "absoluteDifference": 1.1368683772161603e-13,
+            "calculationScale": 740.2757011838339,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.0.valor_patrimonio_millones",
+            "stored": 536.744701183834,
+            "computed": 536.7447011838337,
+            "absoluteDifference": 2.2737367544323206e-13,
+            "calculationScale": 1142.2587011838339,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 556,
+      "status": "EXACT_MATCH",
+      "outputHash": "bb2283c5954fa7f669f5875d0c226c51d3ee974a31216b046606d7da382a151d",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 557,
+      "status": "EXACT_MATCH",
+      "outputHash": "fc0e8d3d54252897e23842dd29110f7c150e03b1453f072435608c7b4f438a6f",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 558,
+      "status": "IEEE754_EQUIVALENT",
+      "outputHash": "e0ba20e56095a98fe778e8100939210fbb26dae8ca5c3cd995d1b7768bfd79b2",
+      "comparison": {
+        "exact": false,
+        "numericallyEquivalent": true,
+        "differences": [
+          {
+            "path": "$.valuations.2.valor_empresa_millones",
+            "stored": 871.3456636761997,
+            "computed": 871.3456636761996,
+            "absoluteDifference": 1.1368683772161603e-13,
+            "calculationScale": 871.3456636761997,
+            "numericEquivalent": true
+          },
+          {
+            "path": "$.valuations.2.valor_patrimonio_millones",
+            "stored": 893.1406636761997,
+            "computed": 893.1406636761996,
+            "absoluteDifference": 1.1368683772161603e-13,
+            "calculationScale": 915.5196636761997,
+            "numericEquivalent": true
+          }
+        ],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 559,
+      "status": "EXACT_MATCH",
+      "outputHash": "dc250d7df546f6dcc40a71a3177e31333adfbc297470da3f7e9841c883ebd912",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 560,
+      "status": "EXACT_MATCH",
+      "outputHash": "188fb3fd7fe51a25c04aa724fe2d0b57ffdb24f0492e189548bf2ec755223022",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 561,
+      "status": "EXACT_MATCH",
+      "outputHash": "10d99a3323f66d47141b4145f1149ff4ef03b90c30da390a4d124c6a81ec2bce",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 562,
+      "status": "EXACT_MATCH",
+      "outputHash": "4b4eb71708a6f2c9d984ff01aa80538c1c143762f541c5d5b2256506b9bd209d",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 563,
+      "status": "EXACT_MATCH",
+      "outputHash": "49fc23734bb20832ad3a67fa6d8d2d2f46b0384bfc5fcb660d9b8d0b657619ae",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 566,
+      "status": "EXACT_MATCH",
+      "outputHash": "0a6139e9204f6d07bff9522afe2804e00e73728d2bd7ecdb1c999dc93dff6fa1",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 568,
+      "status": "EXACT_MATCH",
+      "outputHash": "faaa618630c8361f3ddca17d58edfebaef827e3f2eb1d130f529f513e9796723",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 569,
+      "status": "EXACT_MATCH",
+      "outputHash": "d9125a044471c19bbdcb5126a2f186393bedc4d351eec9e9f1fca6ccf6e12f1e",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 570,
+      "status": "EXACT_MATCH",
+      "outputHash": "c9b11034c85d98f753eab831e28ed3f8e089aaf3f365e22deaf0ca8a1bf33e71",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 571,
+      "status": "EXACT_MATCH",
+      "outputHash": "15c15e19be7a6f03e93ea442fa6043a86087baa70b19478b22d445e7f83ee0ef",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 572,
+      "status": "EXACT_MATCH",
+      "outputHash": "f2075da169588b48149752be01b09a5a7c7391e0c44a12f11980b6e870eb8920",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 573,
+      "status": "EXACT_MATCH",
+      "outputHash": "9a0897bfc90aa3ea4e247b5243be8006c7ea28f8281906b3e028bd2ea4a4c2ff",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 575,
+      "status": "EXACT_MATCH",
+      "outputHash": "578c31e428c462b7d90410947037efd75e01bc32606bc1278abc1212514dfe00",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 577,
+      "status": "EXACT_MATCH",
+      "outputHash": "e0ff3fbaf5cf55335cd44fd45041f9888b2f793165fe2969251f6e5ffd192289",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 578,
+      "status": "EXACT_MATCH",
+      "outputHash": "223b72e29923de1169a2eb693067c2b8f47da5d9cd18790a58ed7f2898de2cd6",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 579,
+      "status": "EXACT_MATCH",
+      "outputHash": "aece120dd7787b0076ab38f903dc8cb5d92e0dd2d42052356c30b1978284bcb6",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 580,
+      "status": "EXACT_MATCH",
+      "outputHash": "8fca60dfc2643f0af6c9f8fcf84bf947ecc0a3a247662c8edeca1bc510860424",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 582,
+      "status": "EXACT_MATCH",
+      "outputHash": "a9d76a778e8effbe7b516369ea71a60ce7c0e769c98ac21e81cf8b3070a27e03",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 583,
+      "status": "EXACT_MATCH",
+      "outputHash": "9f253b2ef94aefd00a9e02820ed601948ffca7826d24b311141439a8374a1495",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 584,
+      "status": "EXACT_MATCH",
+      "outputHash": "51680f46b697ca583e693a5af8cae0cb6c29a40bffc71ec3370e5efc0784d440",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 585,
+      "status": "EXACT_MATCH",
+      "outputHash": "6b28dbdd9fe04569217e0feab56e21ce2c2c359cb7f83094ba29951896d20ad6",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 586,
+      "status": "EXACT_MATCH",
+      "outputHash": "03146951d67d61277f3733db2dd7c832b501af1b56c99b7db551e29c7a244876",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 587,
+      "status": "EXACT_MATCH",
+      "outputHash": "933fae10ad0fda4251e94d6b1f6c481c4b3d543e9976bc89792e052782e9a0e7",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 590,
+      "status": "EXACT_MATCH",
+      "outputHash": "8eed87918a3d3bde91ebd771cc1f0fc7e0ed4967074276781e7130cae56a7f9f",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 593,
+      "status": "EXACT_MATCH",
+      "outputHash": "46e5f957bd856e2175a13cace5881e3d0dbcfa550e2097b9eb84ed313b8c8e93",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 594,
+      "status": "EXACT_MATCH",
+      "outputHash": "a6037bc8b26626884f19e061d22b37130cdf7641983e96ff847c854013d531d9",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 595,
+      "status": "EXACT_MATCH",
+      "outputHash": "c4ee3256525a88f585ccce9776e73ccba0fc2d3dd146fad20545de4528687221",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 601,
+      "status": "EXACT_MATCH",
+      "outputHash": "19589a1ee10a911d02a02ad57eb2526d5c637673ca36ae387348aee661fcfae8",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 602,
+      "status": "EXACT_MATCH",
+      "outputHash": "dfc36d84eb222f9c2914b5fe21336b271867da37fd28292f706de491be06b2cd",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 603,
+      "status": "EXACT_MATCH",
+      "outputHash": "56eefca527d850636567625730ffc577992b9774e67c5e486391190aa60f3a42",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 605,
+      "status": "EXACT_MATCH",
+      "outputHash": "ba7847891e4ace55cec9bec98ce076d3972edc119f7b292a8e5996fb8d30b117",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 606,
+      "status": "EXACT_MATCH",
+      "outputHash": "6a3f1d8e1973973d67f91be4e875a108b0810b151ff40a105761cc92b402064f",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 607,
+      "status": "EXACT_MATCH",
+      "outputHash": "3df10ec67330284fa8a3993bf1cc73352f892a69a75ab339525595256fbe6274",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    },
+    {
+      "run": 608,
+      "status": "EXACT_MATCH",
+      "outputHash": "fb0f9f79bb4d55fbb505c0a20915773dca3aaba4ce757bdd86c9e63039a96430",
+      "comparison": {
+        "exact": true,
+        "numericallyEquivalent": true,
+        "differences": [],
+        "tolerance": "8 × Number.EPSILON × escala de cálculo; en EV/Equity con cancelación, suma de operandos absolutos descontados. Resto max(1, |a|, |b|). Textos/estructura exactos. No se redondean ni sobrescriben resultados."
+      }
+    }
+  ]
+}

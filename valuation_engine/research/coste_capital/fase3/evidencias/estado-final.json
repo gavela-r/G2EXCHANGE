@@ -1,0 +1,226 @@
+{
+  "at": "2026-10-30T07:13:14.415Z",
+  "asOf": "2026-10-30",
+  "developmentDatabase": "g2_capital_dev_20261029",
+  "productionReadOnly": true,
+  "companiesSourceRecounted": 13194,
+  "migrations": [
+    {
+      "version": "2.0.0",
+      "migration_hash": "05794c9dcd02a84d9bda4de3bfa066074faf97096bc8b5e06914d7b5b60ea187",
+      "applied_at": "2026-10-29 20:36:57"
+    },
+    {
+      "version": "2.1.0",
+      "migration_hash": "e1ad3478a8c74562c012e07891b4d62bbbaf9688023d52a54dbe67cc6d3e3837",
+      "applied_at": "2026-10-29 21:55:40"
+    },
+    {
+      "version": "2.2.0",
+      "migration_hash": "8d5d25ae3c196905961c3cd979073c28af5505603112e90817ffedc9e0a8ce76",
+      "applied_at": "2026-10-29 22:02:01"
+    },
+    {
+      "version": "2.3.0",
+      "migration_hash": "4f42d7cb566499dee0eb4b8f383ed3e514a22f9b6f9d4a323a98d39ac48b5903",
+      "applied_at": "2026-10-30 07:00:02"
+    }
+  ],
+  "counts": {
+    "capital_daily_observation": 13,
+    "capital_identity_evidence": 322,
+    "capital_instrument_alias": 5,
+    "capital_financial_evidence": 22,
+    "capital_methodology": 0,
+    "capital_analysis": 20,
+    "capital_decision": 7,
+    "capital_download_checkpoint": 8
+  },
+  "groups": [
+    {
+      "instrumento_id": 7883,
+      "empresa_id": 19630,
+      "source": "TWSE_OPEN",
+      "feed": "TWSE_OFFICIAL",
+      "observations": 2,
+      "sessions": 2,
+      "validSessions": 2,
+      "firstDate": "2026-10-28",
+      "lastDate": "2026-10-29"
+    },
+    {
+      "instrumento_id": 7884,
+      "empresa_id": 19147,
+      "source": "TWSE_OPEN",
+      "feed": "TWSE_OFFICIAL",
+      "observations": 2,
+      "sessions": 2,
+      "validSessions": 2,
+      "firstDate": "2026-10-28",
+      "lastDate": "2026-10-29"
+    },
+    {
+      "instrumento_id": 7885,
+      "empresa_id": 19109,
+      "source": "TWSE_OPEN",
+      "feed": "TWSE_OFFICIAL",
+      "observations": 2,
+      "sessions": 2,
+      "validSessions": 2,
+      "firstDate": "2026-10-28",
+      "lastDate": "2026-10-29"
+    },
+    {
+      "instrumento_id": 7886,
+      "empresa_id": 19527,
+      "source": "TWSE_OPEN",
+      "feed": "TWSE_OFFICIAL",
+      "observations": 2,
+      "sessions": 2,
+      "validSessions": 2,
+      "firstDate": "2026-10-28",
+      "lastDate": "2026-10-29"
+    },
+    {
+      "instrumento_id": 7887,
+      "empresa_id": 19680,
+      "source": "TWSE_OPEN",
+      "feed": "TWSE_OFFICIAL",
+      "observations": 2,
+      "sessions": 2,
+      "validSessions": 2,
+      "firstDate": "2026-10-28",
+      "lastDate": "2026-10-29"
+    },
+    {
+      "instrumento_id": 7899,
+      "empresa_id": 19596,
+      "source": "TPEX_OPEN",
+      "feed": "TPEX_OFFICIAL",
+      "observations": 1,
+      "sessions": 1,
+      "validSessions": 0,
+      "firstDate": "2026-10-29",
+      "lastDate": "2026-10-29"
+    },
+    {
+      "instrumento_id": 7956,
+      "empresa_id": 18845,
+      "source": "TPEX_OPEN",
+      "feed": "TPEX_OFFICIAL",
+      "observations": 1,
+      "sessions": 1,
+      "validSessions": 0,
+      "firstDate": "2026-10-29",
+      "lastDate": "2026-10-29"
+    },
+    {
+      "instrumento_id": 7957,
+      "empresa_id": 19169,
+      "source": "TPEX_OPEN",
+      "feed": "TPEX_OFFICIAL",
+      "observations": 1,
+      "sessions": 1,
+      "validSessions": 0,
+      "firstDate": "2026-10-29",
+      "lastDate": "2026-10-29"
+    }
+  ],
+  "validation": [
+    {
+      "source": "TWSE_OPEN",
+      "validation_status": "VALID",
+      "observations": 10,
+      "withShareVolume": "10",
+      "withTradedValue": "10"
+    },
+    {
+      "source": "TPEX_OPEN",
+      "validation_status": "UNRECONCILED",
+      "observations": 3,
+      "withShareVolume": "3",
+      "withTradedValue": "3"
+    }
+  ],
+  "analyses": [
+    {
+      "kind": "DIAGNOSTIC",
+      "n": 8
+    },
+    {
+      "kind": "SIMULATION",
+      "n": 6
+    },
+    {
+      "kind": "BENCHMARK",
+      "n": 6
+    }
+  ],
+  "decisions": [
+    {
+      "action": "REJECTED",
+      "n": 7
+    }
+  ],
+  "marketTotals": {
+    "observations": 13,
+    "companiesWithAnyObservation": 8,
+    "companiesWithMultipleValidSessions": 5,
+    "amihud90Calculable": 0
+  },
+  "sourceActivity": [
+    {
+      "id": 968271,
+      "created_at": "2026-10-30 03:23:04"
+    }
+  ],
+  "sourceInstrumentIndexes": [
+    {
+      "INDEX_NAME": "empresa_id",
+      "NON_UNIQUE": 1,
+      "columns_list": "empresa_id"
+    },
+    {
+      "INDEX_NAME": "mercado_id",
+      "NON_UNIQUE": 1,
+      "columns_list": "mercado_id"
+    },
+    {
+      "INDEX_NAME": "PRIMARY",
+      "NON_UNIQUE": 0,
+      "columns_list": "id"
+    },
+    {
+      "INDEX_NAME": "ticker",
+      "NON_UNIQUE": 0,
+      "columns_list": "ticker"
+    }
+  ],
+  "developmentInstrumentIndexes": [
+    {
+      "INDEX_NAME": "empresa_id",
+      "NON_UNIQUE": 1,
+      "columns_list": "empresa_id"
+    },
+    {
+      "INDEX_NAME": "ix_instrument_ticker_lookup",
+      "NON_UNIQUE": 1,
+      "columns_list": "ticker"
+    },
+    {
+      "INDEX_NAME": "mercado_id",
+      "NON_UNIQUE": 1,
+      "columns_list": "mercado_id"
+    },
+    {
+      "INDEX_NAME": "PRIMARY",
+      "NON_UNIQUE": 0,
+      "columns_list": "id"
+    },
+    {
+      "INDEX_NAME": "uq_instrument_market_ticker",
+      "NON_UNIQUE": 0,
+      "columns_list": "mercado_id,ticker"
+    }
+  ]
+}

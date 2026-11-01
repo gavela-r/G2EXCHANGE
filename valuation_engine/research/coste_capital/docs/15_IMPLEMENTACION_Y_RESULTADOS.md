@@ -1,0 +1,96 @@
+# Implementación ejecutada y resultados — 30 de octubre de 2026
+
+**Estado: diagnóstico y simulación operativos en desarrollo; no activado para valoraciones definitivas de producción.** No existe ninguna prima real calibrada o autorizada. Se han implementado componentes y rutas ejecutables, no sólo documentación. Los bloqueos financieros y de datos siguen explícitos.
+
+## Resultado verificable
+
+| Comprobación | Resultado y alcance |
+|---|---|
+| Empresas en la base operativa, recontadas | 13.194 |
+| Destino de las migraciones y escrituras nuevas | `g2_capital_dev_20261029`; la base operativa se consulta en READ ONLY |
+| Empresas con informes en la copia financiera verificada | 573; no es la cobertura total de la base operativa |
+| Con algún indicador financiero acreditado en al menos un cierre | 91 / 573 |
+| Con algún indicador acreditado en su cierre más reciente | 5 / 573; no significa diagnóstico completo |
+| Con ingresos y activos acreditados en el mismo informe | 75 / 573; tamaño operativo parcial |
+| Observaciones nuevas conservadas | 13 en 8 empresas de desarrollo |
+| Históricos con más de una sesión validada | 5 empresas; dos sesiones TWSE por instrumento, no años de histórico |
+| Volumen e importe monetario | TWSE_OPEN: 10 con acciones y 10 con importe; VALID; TPEX_OPEN: 3 con acciones y 3 con importe; UNRECONCILED |
+| Amihud real calculable, ventana de 90 sesiones | 0; faltan longitud, ajustes y calendario acreditados |
+| Capitalización integral validada en la cohorte | 0; se muestran productos parciales sin certificarlos |
+| Conciliaciones contables/civiles nuevas | 22 evidencias SEC de cinco empresas; no updates masivos |
+| Identidad puesta en cuarentena en desarrollo | 299 instrumentos de 294 empresas TW/Tokyo; no reasignados |
+| Métodos cuantitativos reales autorizados | 0; ninguna prima positiva o negativa aplicada |
+| Pruebas automatizadas | 151 superadas, 0 fallidas |
+| Prueba API con datos reales | 16 peticiones con estado esperado, incluidos bloqueos de aprobación |
+| React | 9 comprobaciones de interacción con DOM en memoria y API real; no es inspección visual de navegador |
+| Plantillas | 16/16 probadas con entradas hipotéticas, familia financiera y exportación; originales intactos |
+| Ejecuciones históricas | 60 registros congelados idénticos entre fuente y copia; sin sobrescrituras |
+
+Fechas de captura: estado MySQL **2026-10-30T07:13:14.415Z**, cobertura de la cohorte **2026-10-30T07:03:34.862Z**, pruebas **2026-10-30T07:02:48.664Z**, API **2026-10-30T07:13:01.010Z**. La cobertura financiera utiliza la fecha de evaluación 2026-10-29 sobre la copia; no convierte los números de la auditoría anterior en resultados nuevos. La actividad financiera de la fuente observada fue el registro 968271 de 2026-10-30 03:23:04. No se han detenido los recuperadores.
+
+## Qué se ha corregido e implementado
+
+1. **Fechas civiles:** los nuevos DATE se aceptan como `YYYY-MM-DD`, sin convertir instantes con getters locales. La prueba reproduce el desplazamiento UTC/local y comprueba US, Japón y Taiwán. No se afirma que todos los registros históricos tengan una única causa demostrada: no se conserva todo su entorno de ejecución. Se han conciliado cierres concretos contra documentos SEC y preservado las fechas/versiones originales. No se sumó un día a 88.464 registros.
+2. **Identidad:** clave por mercado/ticker en la copia, aliases por proveedor/mercado/clase y evidencia; los upserts de instrumentos dejan de cambiar silenciosamente de emisor. Los 299 instrumentos sospechosos y sus informes originales se conservan; las nuevas evaluaciones los bloquean.
+3. **Cotizaciones:** almacén de sesiones independiente del último precio legacy, revisiones append-only, hash idempotente, bloqueo transaccional por instrumento y reintentos limitados. El backfill no retrocede el último precio y los precios legacy se conservan como evidencia no conciliada antes de actualizarlos. Los lectores canónicos asOf no utilizan sesiones posteriores.
+4. **Escritores:** USA, Japón y Taiwán usan el adaptador de persistencia nuevo en el código fuente. Una última operación sin cierre/ajustes certificados queda no conciliada; no se presenta como barra histórica validada. No se han recompilado los workers operativos bajo procesos activos.
+5. **Proveedores:** TWSE y TPEx se probaron contra sus API oficiales abiertas. La repetición no añadió duplicados. Se conservan TradeVolume/TradingShares en acciones y TradeValue/TransactionAmount en TWD. Los datos TPEx siguen no conciliados para identidad completa. Alpaca respondió HTTP 200 a una prueba SIP histórica mínima, sin conservar sus precios. Su carga corporativa sigue bloqueada por derechos no acreditados; IEX y SIP no se mezclan. Japón devuelve ausencia explícita de proveedor corporativo gratuito acreditado.
+6. **Datos financieros:** se reutilizan PCV y evidencias verificadas por registro, importe, unidad, periodo y publicación. Los campos ambiguos o sin prueba no se rescatan porque sean numéricos. AC/PC y, cuando existe un tag total exacto, prepagos se recuperan de la caché SEC sin cambiar PCV. Se calculan ratios, tamaño operativo y estadísticas de estabilidad cuando los inputs están completos.
+7. **Amihud:** cálculo de retornos ajustados e importe monetario, ventanas 90/180/252, exclusiones y calendario externo. Existe prueba de extremo a extremo MySQL → API con 91 sesiones y calendario **hipotéticos en la base de pruebas**. Ni esa prueba ni Amihud autorizan una prima. Los datos reales actuales no cumplen las condiciones.
+8. **Capitalización:** estados validada/parcial/no disponible/bloqueada, acciones outstanding frente a emitidas/diluidas, fechas y moneda explícitas. El adaptador sólo puede certificar cuando existe un paquete factual aprobado que enlaza precio canónico, registro de acciones, clase, documentos, splits y ADR. Actualmente no hay uno completo. No se declara conciliada una empresa por obtener un producto positivo. La agregación de múltiples clases y los cambios de capital sin conciliación siguen bloqueados.
+9. **Comparables:** universo, miembros, exclusiones, fuentes, periodo, moneda, consolidación, familia y versión se conservan. El benchmark probado tiene 31 candidatas, objetivo excluido, y hasta tres comparables acreditados para ingresos/activos/efectivo/CFO/FCF. EBITDA tiene dos; otras variables tienen uno o cero. **No es una calibración.** La cohorte anual alternativa declara cierres no simultáneos; el criterio estricto no se relaja silenciosamente.
+10. **Estimación:** OLS con QR, controles y separación temporal de entrenamiento/prueba, rechazo de falta de rango o información futura. Es investigación sobre rentabilidades realizadas; carece de panel real suficiente, inferencia robusta y validación económica/estabilidad. No se presenta como LCAPM completo ni como un estimador autorizado de primas. No se copian coeficientes académicos.
+11. **Revisión financiera:** diagnóstico, propuesta, decisión y simulación separados. El servidor verifica método, versión, factor, componente autorizado, evidencia, universo, fecha, incorporación y decisión. Una prima negativa necesita un libro de primas conciliado en la referencia base. El CAPM puro no recibe un descuento por mayor liquidez o tamaño. Las exposiciones duplicadas o parcialmente incorporadas bloquean ajustes.
+12. **Ke/Kd/WACC:** se recalculan por componentes, pesos y fiscalidad. Concentración de clientes se excluye de nuevas primas; el ERP total conserva el riesgo país sin duplicación. Sin primas autorizadas, WACC ajustado = WACC base financiero. Los estados desconocido, cero, ya incorporado y no aplicable permanecen distintos.
+13. **DCF:** simulación separada sobre flujos y numerador terminal congelados, tres escenarios y puente EV → Equity. Bancos/seguros/REIT utilizan su lógica equity y Ke; no se fuerzan a WACC industrial. Tasa terminal inválida bloquea el cálculo. Los márgenes/precios de compra derivados no se dejan desactualizados tras cambiar el valor. No hay nuevas valoraciones definitivas desde datos frescos no conciliados.
+14. **Interfaz:** entrada React real accesible, búsqueda y selección, periodos, indicadores, gráficos de sesiones registradas, referencias, evidencias, revisión, hipótesis manuales en pb, escenarios e historial. La revisión local y su nonce no sustituyen autenticación/RBAC de producción.
+15. **Documentos:** Excel del modelo sectorial con generador archivado y hash del maestro original comprobado, hoja Capital_v2 y trazabilidad completa; PDF con unidades/moneda y tasas legibles, y JSON completo. Los PDF de muestra se renderizaron y sus tres páginas se inspeccionaron sin recortes. La verificación visual del navegador real sigue pendiente por indisponibilidad del host/autorización de aplicaciones; la interacción React sí se ha probado con DOM en memoria.
+
+## MySQL y despliegue
+
+Se ejecutaron las migraciones **20, 21, 22 y 23**, idempotentes y con huella, exclusivamente en la copia y en bases dedicadas a pruebas. Se crearon estas nueve estructuras:
+
+- `capital_schema_version`
+- `capital_identity_evidence`
+- `capital_daily_observation`
+- `capital_financial_evidence`
+- `capital_methodology`
+- `capital_analysis`
+- `capital_decision`
+- `capital_download_checkpoint`
+- `capital_instrument_alias`
+
+En desarrollo se amplió la unicidad de instrumento de ticker global a mercado/ticker, se añadió la referencia de versión de análisis y se registró `2.0.0-capital` en model_version. Los precios legacy de la copia se actualizan coherentemente con observaciones conservadas; **ninguna de esas operaciones se ejecutó en la base operativa**. Los modelos, snapshots y runs antiguos no fueron reasignados.
+
+Existen respaldos y recibos de restauración anteriores, consultados en private_backups. No se han confundido con una ventana segura de despliegue del estado operativo vigente: hay recuperadores activos y sus compilados/contratos deben preservarse. Se probó una copia aislada, reversión de esquema vacío, reinstalación, FKs y rechazo de borrado cuando existen datos. No se aplicó un down destructivo ni se sustituyeron contenedores operativos.
+
+## Regresión y precisión
+
+Los 60 inputs/outputs y metadatos congelados coinciden exactamente entre fuente y copia: hash `cb0a95e394950608f4b3b310a2604a65a4eae0134ffc8d229b9a9e0efc51087e`.
+
+Recalculando el código archivado, Windows obtiene 47 coincidencias exactas y 13 equivalencias numéricas. Node v22.23.4 Linux, en una instancia efímera **sin red y con montajes de sólo lectura**, obtiene 46 exactas y 14 equivalencias. No se anuncia identidad bit a bit de los 60 recálculos. Se registran las diferencias y el criterio de precisión IEEE-754, incluyendo la escala de operandos cuando EV/Equity sufren cancelación. No se redondean ni reescriben los valores almacenados.
+
+Las nuevas escrituras exigen manifiesto de **fuentes y compilados** coincidente con el cargado por el proceso. Un cambio requiere recompilar/reiniciar; una prueba verifica el bloqueo. Se conserva un paquete del código utilizado sin credenciales.
+
+La reproducción detectó que el tipo JSON nativo de MySQL podía cambiar en una unidad del último bit algunos números de doble precisión. La migración 23 conserva los nuevos snapshots y calibraciones como texto JSON exacto, con restricción JSON_VALID y versión de codificación. Se respaldaron las tablas de investigación de desarrollo y se comprobó la igualdad textual antes/después de la conversión. Los análisis previos se conservan como versión 1, sin certificarlos como snapshots exactos; las nuevas escrituras son versión 2. Un primer intento falló en la comprobación del recibo después del DDL por serializar incorrectamente un objeto al calcular su hash; se corrigió y se verificó la continuación idempotente, sin pérdida de filas. La evidencia es migration23-g2_capital_dev_20261029-verificada.json.
+
+La reproducción independiente desde el código compilado archivado y el snapshot de entrada exacto contiene **1** simulación nueva con coincidencia exacta. El detalle está en fase3/evidencias/replay-capital-v2.json. Los análisis anteriores a esta corrección son artefactos de desarrollo, no aprobaciones financieras de producción.
+
+Excel muestra los resultados calculados por TypeScript y fórmulas de Ke/Kd/WACC contrastadas. No es un nuevo DCF interactivo autónomo: modificar celdas no vuelve a ejecutar el motor TypeScript de simulación. Para cambiar hipótesis y regenerar documentos debe utilizarse la interfaz/API.
+
+Incidencias resueltas durante la verificación: precisión del JSON nativo y continuación del recibo de migración descritas arriba; una repetición del smoke test recibió el 409 esperado por concurrencia de decisiones, pero su script asumía incorrectamente que aún no había decisión previa. Se corrigió para consultar el historial antes de enviar la revisión; la ejecución final contiene 16 respuestas con estado esperado. El control de concurrencia del servidor se mantiene. Las pruebas finales no tienen fallos pendientes; ello no certifica los datos, licencias ni validaciones financieras todavía bloqueados.
+
+## Límites que impiden activar ajustes reales
+
+- Falta histórico bursátil largo, ajustado y con calendario acreditado. Las sesiones antiguas desaparecidas no se reconstruyeron.
+- Estados Unidos: acceso técnico confirmado, derechos corporativos/redistribución no acreditados. Japón: no se emplea J-Quants personal.
+- TPEx: observaciones conservadas, identidad completa aún pendiente; no entran como sesiones válidas para primas.
+- No hay capitalización integral real certificada; no se infieren clase, autocartera, dilución, splits, ADR ni roll-forward de acciones.
+- La clasificación y familia sin evidencia siguen sin resolver; no se fuerza una sectorización para aumentar comparables.
+- Ninguna relación empírica real está calibrada/validada/autorizada. Los coeficientes positivos/negativos de las pruebas son exclusivamente hipotéticos.
+- No se ha desplegado en producción ni certificado el flujo de autenticación corporativa. El servicio local es para diagnóstico y simulación.
+- PDF usa fuente latina estándar: no se certifica soporte tipográfico CJK completo. JSON/Excel conservan los textos originales.
+
+La siguiente acción operativa es mantener capturas incrementales compatibles con licencia y completar la evidencia de identidad/acciones/calendarios, utilizando estos componentes ya ejecutables. La activación financiera requiere una calibración real y revisión expresa; no se solicita otra investigación documental como sustituto del desarrollo.
+
+Condiciones contrastadas: [TWSE abierto](https://data.gov.tw/en/datasets/11549), [TPEx abierto](https://data.gov.tw/dataset/11371), [Alpaca y redistribución](https://alpaca.markets/support/redistribute-alpaca-api), [J-Quants y uso corporativo](https://jpx-jquants.com/en/help/usage).

@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-30T07:02:48.664Z",
+  "runtime": "v24.19.0",
+  "results": [
+    {
+      "name": "build-capital",
+      "exit": 0,
+      "pass": 0,
+      "fail": 0,
+      "signal": null
+    },
+    {
+      "name": "typecheck-backend",
+      "exit": 0,
+      "pass": 0,
+      "fail": 0,
+      "signal": null
+    },
+    {
+      "name": "pruebas-capital",
+      "exit": 0,
+      "pass": 78,
+      "fail": 0,
+      "signal": null
+    },
+    {
+      "name": "regresion-modulos-previos",
+      "exit": 0,
+      "pass": 46,
+      "fail": 0,
+      "signal": null
+    },
+    {
+      "name": "regresion-backend-previo",
+      "exit": 0,
+      "pass": 27,
+      "fail": 0,
+      "signal": null
+    }
+  ],
+  "totalPass": 151,
+  "totalFail": 0,
+  "ok": true
+}

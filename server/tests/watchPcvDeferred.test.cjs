@@ -1,0 +1,8 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),{spawn}=require('node:child_process');
+test('Restarted supervisor honours a saved future quota window before spawning any worker',async()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'g2-watch-deferred-')),checkpoint={done:false,scan_complete:true,deferred_until:new Date(Date.now()+3600000).toISOString()},cp=path.join(dir,'checkpoint.json'),marker=path.join(dir,'unexpected-worker');fs.writeFileSync(cp,JSON.stringify(checkpoint));
+ const guard=path.join(dir,'guard.cjs');fs.writeFileSync(guard,`const fs=require('fs');require('child_process').spawn=()=>{fs.writeFileSync(${JSON.stringify(marker)},'UNEXPECTED');process.exit(77);};const original=setTimeout;global.setTimeout=(fn,ms,...args)=>original(fn,Math.min(ms,20),...args);`);
+ const child=spawn(process.execPath,['--require',guard,path.resolve(__dirname,'../scripts/recuperar-pcv-watch.cjs'),'--directory',dir,'--job','pcv'],{stdio:['ignore','pipe','pipe'],windowsHide:true});let stderr='';child.stderr.on('data',b=>stderr+=b);const exit=new Promise((resolve,reject)=>{child.on('error',reject);child.on('exit',code=>resolve(code));});
+ try{await new Promise(resolve=>setTimeout(resolve,300));fs.writeFileSync(path.join(dir,'stop.request'),'TEST_CHECKPOINT_STOP');const code=await exit;assert.equal(code,0,stderr);assert.equal(fs.existsSync(marker),false);assert.deepEqual(JSON.parse(fs.readFileSync(cp)),checkpoint);}
+ finally{if(child.exitCode===null)child.kill('SIGTERM');assert.ok(path.resolve(dir).startsWith(path.resolve(os.tmpdir())+path.sep));fs.rmSync(dir,{recursive:true,force:true});}
+});

@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-30T07:02:19.139Z",
+  "database": "g2_capital_dev_pruebas_20261029",
+  "analysesPreserved": 68,
+  "methodsPreserved": 7,
+  "byteEquality": true,
+  "digest": "2df3ef49c0e1a480b1dc22f2b879d0b5d2c5432eca3cd60c8862f39817d06c49",
+  "backup": "migration23-g2_capital_dev_pruebas_20261029-1793343739057.local.json"
+}

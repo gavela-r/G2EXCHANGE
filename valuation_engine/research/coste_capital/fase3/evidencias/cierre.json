@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-30T07:14:53.112Z",
+  "entry": "http://127.0.0.1:3100/",
+  "httpStatus": 200,
+  "reactEntryServed": true,
+  "automatedTests": {
+    "passed": 151,
+    "failed": 0
+  },
+  "frontendBuild": {
+    "command": "npm.cmd run build",
+    "exitObserved": 0
+  },
+  "frontendLint": {
+    "command": "npm.cmd run lint",
+    "exitObserved": 0
+  },
+  "containerReadCheck": {
+    "backend_valoracion": "Up 20 hours",
+    "mysql_valoracion": "Up 24 hours",
+    "method": "docker ps --format, read only; processes unchanged"
+  },
+  "writesScope": "development database only",
+  "financialPremiumsAuthorized": 0
+}

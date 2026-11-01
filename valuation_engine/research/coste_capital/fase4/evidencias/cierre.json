@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-30T07:53:52.634Z",
+  "appStatus": 200,
+  "primasStatus": 200,
+  "primas": [
+    {
+      "factor": "LIQUIDEZ_BURSATIL",
+      "estimada": null,
+      "operativa": 0,
+      "estado": "NO_ESTIMABLE"
+    },
+    {
+      "factor": "TAMANO_RESIDUAL",
+      "estimada": null,
+      "operativa": 0,
+      "estado": "NO_ESTIMABLE"
+    }
+  ],
+  "clientBuild": "PASSED",
+  "clientLint": "PASSED",
+  "nativeExcelVerified": false
+}

@@ -18,7 +18,17 @@
     "pcv:recover:jp": "node scripts/recuperar-pcv-jp-v3.cjs --country JP",
     "pcv:plan": "node scripts/recuperar-pcv-plan.cjs",
     "pcv:audit": "node scripts/auditar-pcv-kpi-2022-2025.cjs",
-    "test:pcv:integration": "npm run build && node --test tests/pcvMysql.integration.cjs tests/informeDiscovery.integration.cjs"
+    "test:pcv:integration": "npm run build && node --test tests/pcvMysql.integration.cjs tests/informeDiscovery.integration.cjs",
+    "capital:build": "node scripts/capital-build.cjs",
+    "capital:start": "node dist-capital/server/src/capital/main.js",
+    "capital:test": "node scripts/capital-test.cjs",
+    "capital:migrate": "node scripts/capital-dev.cjs --migrate",
+    "capital:load:twse": "node scripts/capital-load.cjs TWSE 5",
+    "capital:load:tpex": "node scripts/capital-load.cjs TPEX 5",
+    "capital:reconcile": "node scripts/capital-reconcile.cjs 5",
+    "capital:status": "node scripts/capital-status.cjs",
+    "capital:verify": "node scripts/capital-verify.cjs",
+    "capital:smoke": "node scripts/capital-smoke.cjs"
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",

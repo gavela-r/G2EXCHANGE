@@ -141,29 +141,20 @@ export class ListaSeguimientoService {
     const [rows] = await this.pool.query<RowDataPacket[]>(
       `SELECT
          ls.id, ls.usuario_id AS usuarioId, ls.empresa_id AS empresaId,
-         ls.notas, ls.fecha_marcado AS fechaMarcado,
-         e.nombre_empresa AS nombreEmpresa,
-         i.ticker AS ticker,
-         vr.decision AS decision,
-         vr.valor_estimado AS valorEstimadoBase,
+         ls.notas, NULL AS fechaMarcado, e.nombre_empresa AS nombreEmpresa,
+         i.ticker AS ticker, result.decision, result.fair_value AS valorEstimadoBase,
          cd.precio_cierre AS precioActual
        FROM lista_seguimiento ls
-       JOIN empresa e ON e.id = ls.empresa_id
-       LEFT JOIN instrumento i
-         ON i.empresa_id = e.id AND i.instrumento_principal = 1
-       LEFT JOIN cotizacion_diaria cd
-         ON cd.instrumento_id = i.id
-         AND cd.fecha = (
-           SELECT MAX(fecha) FROM cotizacion_diaria WHERE instrumento_id = i.id
-         )
-       LEFT JOIN valuation_run vr
-         ON vr.empresa_id = e.id AND vr.escenario = 'BASE'
-         AND vr.id = (
-           SELECT MAX(id) FROM valuation_run
-           WHERE empresa_id = e.id AND escenario = 'BASE'
-         )
-       WHERE ls.usuario_id = ?
-       ORDER BY ls.fecha_marcado DESC`,
+       JOIN empresa e ON e.id=ls.empresa_id
+       LEFT JOIN valuation_run vr ON vr.id=(SELECT MAX(r.id) FROM valuation_run r
+         JOIN valuation_execution x ON x.valuation_run_id=r.id WHERE r.empresa_id=e.id)
+       LEFT JOIN valuation_execution ve ON ve.valuation_run_id=vr.id
+       LEFT JOIN instrumento i ON i.id=COALESCE(ve.instrumento_id,
+         (SELECT CASE WHEN COUNT(*)=1 THEN MIN(id) ELSE NULL END FROM instrumento WHERE empresa_id=e.id))
+       LEFT JOIN cotizacion_diaria cd ON cd.id=(SELECT id FROM cotizacion_diaria
+         WHERE instrumento_id=i.id ORDER BY fecha DESC,id DESC LIMIT 1)
+       LEFT JOIN valuation_run_resultado result ON result.valuation_run_id=vr.id AND result.escenario='BASE'
+       WHERE ls.usuario_id=? ORDER BY ls.id DESC`,
       [usuarioId]
     );
     return rows as ListaSeguimientoConValoracion[];

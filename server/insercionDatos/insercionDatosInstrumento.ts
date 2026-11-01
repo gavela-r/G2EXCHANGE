@@ -815,6 +815,10 @@ export async function ejecutarCargaInstrumentos(): Promise<void> {
                 empresasEnlazadas++;
 
                 if (existente) {
+                    if (existente.empresa_id !== empresaId) {
+                        console.warn('[IDENTIDAD_BLOQUEADA] Instrumento existente con otro emisor', { instrumentoId: existente.id, mercadoId });
+                        continue;
+                    }
                     updates.push([
                         empresaId,
                         item.isin,
@@ -866,9 +870,7 @@ export async function ejecutarCargaInstrumentos(): Promise<void> {
                                             (empresa_id, mercado_id, ticker, isin, moneda)
                                             VALUES ?
                                             ON DUPLICATE KEY UPDATE
-                                                empresa_id = VALUES(empresa_id),
-                                                isin = VALUES(isin),
-                                                moneda = VALUES(moneda)`,
+                                                id = id`,
                             [lote]
                         );
                     }
@@ -904,9 +906,8 @@ export async function ejecutarCargaInstrumentos(): Promise<void> {
                         UPDATE instrumento i
                         JOIN temp_upd t ON i.id = t.id
                         SET
-                            i.empresa_id = COALESCE(t.e, i.empresa_id),
-                            i.isin = COALESCE(t.isin, i.isin),
-                            i.moneda = COALESCE(t.mon, i.moneda)
+                            i.isin = COALESCE(i.isin, t.isin)
+                        WHERE i.empresa_id = t.e AND i.moneda = t.mon
                     `);
 
                     console.log(

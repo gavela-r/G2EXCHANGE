@@ -1,0 +1,5452 @@
+{
+  "identity": {
+    "schema_name": "2GB",
+    "mysql_version": "8.4.11",
+    "session_read_only": 1,
+    "max_execution_time": 2000,
+    "isolation_level": "READ-COMMITTED",
+    "server_time": "2026-10-29 19:53:00",
+    "dedicatedReadOnlyConfiguration": false,
+    "accountHasPermissionsBeyondRead": true,
+    "safeguard": "SET SESSION TRANSACTION READ ONLY + START TRANSACTION READ ONLY por consulta; ROLLBACK inmediato; MAX_EXECUTION_TIME 2000 ms; timeout cliente 3500 ms"
+  },
+  "population": [
+    {
+      "codigo_iso": "JP",
+      "empresas": 3581,
+      "instrumentos": 2497,
+      "empresas_informes": 3498,
+      "empresas_anuales": 3498
+    },
+    {
+      "codigo_iso": "TW",
+      "empresas": 1596,
+      "instrumentos": 1646,
+      "empresas_informes": 1111,
+      "empresas_anuales": 1109
+    },
+    {
+      "codigo_iso": "US",
+      "empresas": 8017,
+      "instrumentos": 4274,
+      "empresas_informes": 6060,
+      "empresas_anuales": 5935
+    }
+  ],
+  "versionDateOffsets": [
+    {
+      "dias": -1,
+      "versiones": 88464,
+      "informes": 35643
+    },
+    {
+      "dias": 0,
+      "versiones": 4,
+      "informes": 4
+    }
+  ],
+  "versionDateSamples": [
+    {
+      "version_id": 109565,
+      "informe_id": 103054,
+      "empresa_id": 21013,
+      "fecha_informe": "2022-12-31",
+      "fecha_version": "2022-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    },
+    {
+      "version_id": 109564,
+      "informe_id": 103058,
+      "empresa_id": 21013,
+      "fecha_informe": "2023-12-31",
+      "fecha_version": "2023-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    },
+    {
+      "version_id": 109563,
+      "informe_id": 103062,
+      "empresa_id": 21013,
+      "fecha_informe": "2024-12-31",
+      "fecha_version": "2024-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    },
+    {
+      "version_id": 109562,
+      "informe_id": 103066,
+      "empresa_id": 21013,
+      "fecha_informe": "2025-12-31",
+      "fecha_version": "2025-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    },
+    {
+      "version_id": 109561,
+      "informe_id": 103038,
+      "empresa_id": 21012,
+      "fecha_informe": "2022-12-31",
+      "fecha_version": "2022-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    },
+    {
+      "version_id": 109560,
+      "informe_id": 103042,
+      "empresa_id": 21012,
+      "fecha_informe": "2023-12-31",
+      "fecha_version": "2023-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    },
+    {
+      "version_id": 109559,
+      "informe_id": 103046,
+      "empresa_id": 21012,
+      "fecha_informe": "2024-12-31",
+      "fecha_version": "2024-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    },
+    {
+      "version_id": 109558,
+      "informe_id": 103050,
+      "empresa_id": 21012,
+      "fecha_informe": "2025-12-31",
+      "fecha_version": "2025-12-30",
+      "tipo_periodo": "ANUAL",
+      "tipo_version": "ANUAL",
+      "moneda": "TWD"
+    }
+  ],
+  "kpiKinds": [
+    {
+      "kpi": "CAPITAL_CIRCULANTE_OPERATIVO",
+      "unidad": "MONEDA",
+      "filas": 30262,
+      "no_null": "30262"
+    },
+    {
+      "kpi": "CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS",
+      "unidad": "PORCENTAJE",
+      "filas": 29934,
+      "no_null": "29934"
+    },
+    {
+      "kpi": "COBERTURA_INTERESES",
+      "unidad": "VECES",
+      "filas": 30139,
+      "no_null": "30139"
+    },
+    {
+      "kpi": "DEUDA_NETA",
+      "unidad": "MONEDA",
+      "filas": 39215,
+      "no_null": "38259"
+    },
+    {
+      "kpi": "DEUDA_SOBRE_ACTIVOS",
+      "unidad": "PORCENTAJE",
+      "filas": 39440,
+      "no_null": "38338"
+    },
+    {
+      "kpi": "DEUDA_SOBRE_PATRIMONIO",
+      "unidad": "PORCENTAJE",
+      "filas": 39296,
+      "no_null": "38245"
+    },
+    {
+      "kpi": "DEUDA_TOTAL",
+      "unidad": "MONEDA",
+      "filas": 39591,
+      "no_null": "38489"
+    },
+    {
+      "kpi": "EBITDA",
+      "unidad": "MONEDA",
+      "filas": 48024,
+      "no_null": "48024"
+    },
+    {
+      "kpi": "FCF",
+      "unidad": "MONEDA",
+      "filas": 49560,
+      "no_null": "49560"
+    },
+    {
+      "kpi": "MARGEN_BRUTO",
+      "unidad": "PORCENTAJE",
+      "filas": 36591,
+      "no_null": "36591"
+    },
+    {
+      "kpi": "MARGEN_EBIT",
+      "unidad": "PORCENTAJE",
+      "filas": 47743,
+      "no_null": "47743"
+    },
+    {
+      "kpi": "MARGEN_EBITDA",
+      "unidad": "PORCENTAJE",
+      "filas": 45033,
+      "no_null": "45033"
+    },
+    {
+      "kpi": "MARGEN_FCF",
+      "unidad": "PORCENTAJE",
+      "filas": 46478,
+      "no_null": "46478"
+    },
+    {
+      "kpi": "MARGEN_NETO",
+      "unidad": "PORCENTAJE",
+      "filas": 52011,
+      "no_null": "52011"
+    },
+    {
+      "kpi": "PASIVO_SOBRE_ACTIVOS",
+      "unidad": "PORCENTAJE",
+      "filas": 55100,
+      "no_null": "55100"
+    },
+    {
+      "kpi": "ROA",
+      "unidad": "PORCENTAJE",
+      "filas": 58127,
+      "no_null": "58127"
+    },
+    {
+      "kpi": "ROE",
+      "unidad": "PORCENTAJE",
+      "filas": 57796,
+      "no_null": "57796"
+    }
+  ],
+  "triggers": [],
+  "events": [],
+  "freezeSummary": [
+    {
+      "financial_state": "BLOQUEADA",
+      "engine_version": "1.5.1",
+      "runs": 20,
+      "instrumentos": 20,
+      "created_min": "2026-10-12 16:16:46",
+      "created_max": "2026-10-12 16:19:25"
+    },
+    {
+      "financial_state": "COMPLETA_CON_ADVERTENCIAS",
+      "engine_version": "1.5.1",
+      "runs": 40,
+      "instrumentos": 40,
+      "created_min": "2026-10-12 15:33:51",
+      "created_max": "2026-10-12 16:17:03"
+    }
+  ],
+  "twSourceSamples": [
+    {
+      "id": 87576,
+      "empresa_id": 18799,
+      "nombre_empresa": "hua ya ke",
+      "fuente": "EDINET",
+      "tipo_documento": "Annual Securities Report",
+      "identificador_fuente": "S100XUW1",
+      "fecha_fin_periodo": "2025-12-31",
+      "fecha_publicacion": "2026-03-27"
+    },
+    {
+      "id": 87585,
+      "empresa_id": 20587,
+      "nombre_empresa": "tai wan jing rui",
+      "fuente": "EDINET",
+      "tipo_documento": "Annual Securities Report",
+      "identificador_fuente": "S100XUJT",
+      "fecha_fin_periodo": "2025-12-31",
+      "fecha_publicacion": "2026-03-27"
+    },
+    {
+      "id": 87591,
+      "empresa_id": 20622,
+      "nombre_empresa": "nan bao",
+      "fuente": "EDINET",
+      "tipo_documento": "Annual Securities Report",
+      "identificador_fuente": "S100XUYO",
+      "fecha_fin_periodo": "2025-12-31",
+      "fecha_publicacion": "2026-03-27"
+    },
+    {
+      "id": 87612,
+      "empresa_id": 19013,
+      "nombre_empresa": "xi pin",
+      "fuente": "EDINET",
+      "tipo_documento": "Annual Securities Report",
+      "identificador_fuente": "S100XV5A",
+      "fecha_fin_periodo": "2025-12-31",
+      "fecha_publicacion": "2026-03-30"
+    },
+    {
+      "id": 87628,
+      "empresa_id": 20669,
+      "nombre_empresa": "guang yue",
+      "fuente": "EDINET",
+      "tipo_documento": "Annual Securities Report",
+      "identificador_fuente": "S100XVVP",
+      "fecha_fin_periodo": "2025-12-31",
+      "fecha_publicacion": "2026-03-31"
+    }
+  ],
+  "twConceptSamples": [
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "6465324000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "6839000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "1232120000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "6465324000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "6839000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "1232120000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 1,
+      "concepto": "jpcrp_cor:NetSalesSummaryOfBusinessResults",
+      "importe": "6465324000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "6839000.0000"
+    },
+    {
+      "informe_id": 87576,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "1232120000.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "593290000.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "68453800.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "1205026000.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "593290000.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "68453800.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "1205026000.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 1,
+      "concepto": "jpcrp_cor:NetSalesSummaryOfBusinessResults",
+      "importe": "593290000.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "68453800.0000"
+    },
+    {
+      "informe_id": 87585,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "1205026000.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "2021104000.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "11229800.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "803665000.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "2021104000.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "11229800.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "803665000.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 1,
+      "concepto": "jpcrp_cor:NetSalesSummaryOfBusinessResults",
+      "importe": "2021104000.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "11229800.0000"
+    },
+    {
+      "informe_id": 87591,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "803665000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "24854337000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "10048000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "17827341000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "24854337000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "10048000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "17827341000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 1,
+      "concepto": "jpcrp_cor:NetSalesSummaryOfBusinessResults",
+      "importe": "24854337000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "10048000.0000"
+    },
+    {
+      "informe_id": 87612,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "17827341000.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "635724000.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "8275582.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "711426000.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 1,
+      "concepto": "jppfs_cor:NetSales",
+      "importe": "635724000.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "8275582.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "711426000.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 1,
+      "concepto": "jpcrp_cor:NetSalesSummaryOfBusinessResults",
+      "importe": "635724000.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 13,
+      "concepto": "jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults",
+      "importe": "8275582.0000"
+    },
+    {
+      "informe_id": 87628,
+      "concepto_estandar_id": 9,
+      "concepto": "jppfs_cor:CashAndDeposits",
+      "importe": "711426000.0000"
+    }
+  ],
+  "sample": [
+    {
+      "country": "US",
+      "reportId": 200051,
+      "companyId": 7115,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "EBITDA",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199943,
+      "companyId": 4597,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199746,
+      "companyId": 4018,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEUDA_LARGO_PLAZO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199739,
+      "companyId": 3947,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199731,
+      "companyId": 3768,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199725,
+      "companyId": 3621,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199717,
+      "companyId": 3479,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199714,
+      "companyId": 3376,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "EBITDA"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199705,
+      "companyId": 3309,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199703,
+      "companyId": 3298,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199698,
+      "companyId": 3263,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199692,
+      "companyId": 2065,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199680,
+      "companyId": 1921,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "EBITDA",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEUDA_LARGO_PLAZO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199676,
+      "companyId": 1906,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "DEUDA_FINANCIERA",
+        "DEUDA_NETA",
+        "FCF",
+        "DEUDA_NETA_EBITDA"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEUDA_CORTO_PLAZO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEUDA_LARGO_PLAZO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199669,
+      "companyId": 10074,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199668,
+      "companyId": 10059,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "EBITDA"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199663,
+      "companyId": 10040,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "EBITDA"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199646,
+      "companyId": 9938,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "EBITDA"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199644,
+      "companyId": 9874,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "reportId": 199627,
+      "companyId": 9753,
+      "basis": "consolidated",
+      "currency": "USD",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "EBITDA"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACCIONES_EN_CIRCULACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203408,
+      "companyId": 10711,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203405,
+      "companyId": 13865,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203398,
+      "companyId": 11193,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203392,
+      "companyId": 13779,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203391,
+      "companyId": 10948,
+      "basis": "standalone",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203390,
+      "companyId": 14358,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203385,
+      "companyId": 11125,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203383,
+      "companyId": 11150,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203380,
+      "companyId": 10721,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203379,
+      "companyId": 11619,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203378,
+      "companyId": 13280,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203377,
+      "companyId": 13057,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203374,
+      "companyId": 11631,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203373,
+      "companyId": 10543,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203372,
+      "companyId": 11506,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203371,
+      "companyId": 10889,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "EBITDA"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203370,
+      "companyId": 11999,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF",
+        "COBERTURA_INTERESES"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "GASTO_INTERESES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_COBRAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203369,
+      "companyId": 12948,
+      "basis": "standalone",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DIVIDENDOS_PAGADOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CUENTAS_PAGAR",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203368,
+      "companyId": 11539,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "reportId": 203367,
+      "companyId": 10652,
+      "basis": "consolidated",
+      "currency": "JPY",
+      "publicationMatch": true,
+      "validMetrics": [
+        "INGRESOS",
+        "EBIT",
+        "ACTIVOS_TOTALES",
+        "EFECTIVO",
+        "PATRIMONIO_NETO",
+        "CFO",
+        "CAPEX",
+        "EBITDA",
+        "FCF"
+      ],
+      "checks": [
+        {
+          "code": "INGRESOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_BRUTO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EBIT",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "BENEFICIO_ANTES_IMPUESTOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "IMPUESTO_BENEFICIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EFECTIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "ACTIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "PASIVOS_TOTALES",
+          "valueMatch": true,
+          "periodMatch": false,
+          "contextMatch": true
+        },
+        {
+          "code": "PATRIMONIO_NETO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEUDA_CORTO_PLAZO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "FLUJO_CAJA_OPERATIVO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "CAPEX",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "DEPRECIACION_AMORTIZACION",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "INVENTARIOS",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        },
+        {
+          "code": "EPS_DILUIDO",
+          "valueMatch": true,
+          "periodMatch": true,
+          "contextMatch": true
+        }
+      ]
+    },
+    {
+      "country": "TW",
+      "reportId": 87628,
+      "companyId": 20669,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87612,
+      "companyId": 19013,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87591,
+      "companyId": 20622,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87585,
+      "companyId": 20587,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87576,
+      "companyId": 18799,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87549,
+      "companyId": 20051,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87546,
+      "companyId": 19636,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87518,
+      "companyId": 18987,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87504,
+      "companyId": 19344,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87501,
+      "companyId": 20885,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87497,
+      "companyId": 20582,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87486,
+      "companyId": 19617,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87483,
+      "companyId": 20780,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87463,
+      "companyId": 19012,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87455,
+      "companyId": 19176,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87442,
+      "companyId": 20847,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87430,
+      "companyId": 19282,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87426,
+      "companyId": 19008,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87418,
+      "companyId": 18789,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    },
+    {
+      "country": "TW",
+      "reportId": 87416,
+      "companyId": 20600,
+      "basis": "DESCONOCIDA",
+      "currency": "DESCONOCIDA",
+      "publicationMatch": false,
+      "validMetrics": [],
+      "checks": []
+    }
+  ],
+  "sampleSummary": {
+    "US": {
+      "reports": 20,
+      "publicationMatched": 20,
+      "metrics": {
+        "INGRESOS": 20,
+        "EBITDA": 20,
+        "EBIT": 20,
+        "ACTIVOS_TOTALES": 20,
+        "EFECTIVO": 18,
+        "DEUDA_FINANCIERA": 1,
+        "DEUDA_NETA": 1,
+        "PATRIMONIO_NETO": 19,
+        "CFO": 19,
+        "CAPEX": 13,
+        "FCF": 13,
+        "COBERTURA_INTERESES": 4,
+        "DEUDA_NETA_EBITDA": 1,
+        "CURRENT_RATIO": 0,
+        "QUICK_RATIO": 0,
+        "CASH_RATIO": 0
+      }
+    },
+    "JP": {
+      "reports": 20,
+      "publicationMatched": 20,
+      "metrics": {
+        "INGRESOS": 20,
+        "EBITDA": 20,
+        "EBIT": 20,
+        "ACTIVOS_TOTALES": 20,
+        "EFECTIVO": 20,
+        "DEUDA_FINANCIERA": 0,
+        "DEUDA_NETA": 0,
+        "PATRIMONIO_NETO": 20,
+        "CFO": 20,
+        "CAPEX": 19,
+        "FCF": 19,
+        "COBERTURA_INTERESES": 14,
+        "DEUDA_NETA_EBITDA": 0,
+        "CURRENT_RATIO": 0,
+        "QUICK_RATIO": 0,
+        "CASH_RATIO": 0
+      }
+    },
+    "TW": {
+      "reports": 20,
+      "publicationMatched": 0,
+      "metrics": {
+        "INGRESOS": 0,
+        "EBITDA": 0,
+        "EBIT": 0,
+        "ACTIVOS_TOTALES": 0,
+        "EFECTIVO": 0,
+        "DEUDA_FINANCIERA": 0,
+        "DEUDA_NETA": 0,
+        "PATRIMONIO_NETO": 0,
+        "CFO": 0,
+        "CAPEX": 0,
+        "FCF": 0,
+        "COBERTURA_INTERESES": 0,
+        "DEUDA_NETA_EBITDA": 0,
+        "CURRENT_RATIO": 0,
+        "QUICK_RATIO": 0,
+        "CASH_RATIO": 0
+      }
+    }
+  },
+  "finishedAtUtc": "2026-10-29T19:53:05.712Z"
+}

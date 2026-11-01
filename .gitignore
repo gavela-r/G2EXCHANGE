@@ -36,6 +36,9 @@ node_modules
 valuation_engine/archives/
 dist
 dist-ssr
+server/dist-capital/
+valuation_engine/research/coste_capital/fase3/archives/
+valuation_engine/research/coste_capital/fase3/evidencias/*.local.json
 *.local
 
 # Editor directories and files

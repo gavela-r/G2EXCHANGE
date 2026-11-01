@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-30T06:14:43.993Z",
+  "database": "g2_capital_dev_20261029",
+  "proveedor": "TPEX_OPEN",
+  "descargadas": 13242,
+  "incorporadas": [
+    {
+      "id": 11,
+      "inserted": false,
+      "revision": 1
+    },
+    {
+      "id": 12,
+      "inserted": false,
+      "revision": 1
+    },
+    {
+      "id": 13,
+      "inserted": false,
+      "revision": 1
+    }
+  ]
+}

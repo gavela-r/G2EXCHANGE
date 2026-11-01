@@ -1,0 +1,28 @@
+{
+  "identity": {
+    "schema_name": "2GB",
+    "mysql_version": "8.4.11",
+    "session_read_only": 1,
+    "max_execution_time": 2000,
+    "isolation_level": "READ-COMMITTED",
+    "server_time": "2026-10-29 20:09:22",
+    "dedicatedReadOnlyConfiguration": false,
+    "accountHasPermissionsBeyondRead": true,
+    "safeguard": "SET SESSION TRANSACTION READ ONLY + START TRANSACTION READ ONLY por consulta; ROLLBACK inmediato; MAX_EXECUTION_TIME 2000 ms; timeout cliente 3500 ms"
+  },
+  "frozenRisk": [
+    {
+      "runs": 60,
+      "con_volumen_agregado": "0",
+      "con_campos_bursatiles_alternativos": "0"
+    }
+  ],
+  "refQuality": [
+    {
+      "filas": 138,
+      "ke_null": "0",
+      "erp_null": "0"
+    }
+  ],
+  "capturedAtUtc": "2026-10-29T20:09:22.883Z"
+}

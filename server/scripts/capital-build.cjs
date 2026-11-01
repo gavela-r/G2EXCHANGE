@@ -1,0 +1,3 @@
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),M=require('./capital-manifest.cjs');
+const r=cp.spawnSync(process.execPath,[path.join(M.root,'server/node_modules/typescript/bin/tsc'),'-p',path.join(M.root,'server/tsconfig.capital.json')],{cwd:M.root,stdio:'inherit'});
+if(r.status!==0){process.exitCode=r.status||1;}else{const m=M.inspect();const manifest={version:m.version,sourceHash:m.sourceHash,compiledHash:m.compiledHash};fs.writeFileSync(path.join(M.root,'server/dist-capital/build-manifest.json'),JSON.stringify(manifest,null,2));console.log(JSON.stringify(manifest));}

@@ -3,7 +3,7 @@ import type {Pool,RowDataPacket,ResultSetHeader} from 'mysql2/promise';
 import {createHash} from 'node:crypto';
 import type {DatoPcv,InformePcv} from './normalizarProveedores';
 import {normalizarPartidas,type Partida} from '../valoracion/datos';
-import {kpiCalcularInforme} from '../../insercionDatos/insercionKPIInformeFinanciero';
+import {kpiCalcularInforme,kpiValoresDeFilas} from '../../insercionDatos/insercionKPIInformeFinanciero';
 
 // currency: JPY para EDINET; para la SEC, la moneda de presentación del propio documento (USD salvo emisores
 // extranjeros 20-F/40-F que presentan en su moneda, p. ej. EUR o CAD).
@@ -53,7 +53,7 @@ export async function persistirRecuperacionVerificada(pool:Pool,i:InformePcv,dat
    }
    if(actual){attested.push(actual);attestedCodes.add(code);inputEvidence.push({code,record_id:actualId,source:d,stored_amount:actual.importe});}
   }
-  const values=normalizarPartidas(attested,meta[0].fuente).valores;
+  const values=kpiValoresDeFilas(attested,meta[0].fuente).valores;
   const unverifiedStoredDebt=initial.some(r=>['DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO'].includes(r.concepto_estandar)&&r.importe!==null&&!attestedCodes.has(r.concepto_estandar));
   const calculated=kpiCalcularInforme(i.id,values).filter(k=>!DEBT.has(k.kpi)||!unverifiedStoredDebt);
   const [existing]=await c.query<RowDataPacket[]>('SELECT * FROM kpi_financiero_informe WHERE informe_id=? FOR UPDATE',[i.id]);

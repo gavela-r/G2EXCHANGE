@@ -282,7 +282,7 @@ export async function kpiCargarPartidas(
     return (await kpiCargarPartidasConDiagnostico(informeId)).valores;
 }
 
-// Igual que kpiCargarPartidas, devolviendo también los conceptos resueltos y sin resolver por SELECCION_OBSERVACIONES_V1.
+// Igual que kpiCargarPartidas, devolviendo también los conceptos resueltos y sin resolver por SELECCION_OBSERVACIONES_V2.
 export async function kpiCargarPartidasConDiagnostico(
     informeId: number
 ): Promise<{ valores: KpiPartidas; sinResolver: { concepto: string; motivo: string }[]; resueltas: { concepto: string; criterio: string }[] }> {
@@ -315,7 +315,7 @@ export async function kpiCargarPartidasConDiagnostico(
     );
 
     const [meta]: any = await db.query("SELECT fuente FROM informe_financiero WHERE id=?",[informeId]);
-    // SELECCION_OBSERVACIONES_V1: con varias filas para un concepto, la observación la decide la evidencia primaria o
+    // SELECCION_OBSERVACIONES_V2: con varias filas para un concepto, la observación la decide la evidencia primaria o
     // la etiqueta del estado principal; un concepto sin resolver se excluye (sólo bloquea los KPI que lo usan).
     const [prov]: any = await db.query(
         "SELECT concept_code, JSON_EXTRACT(evidence_json,'$.evidence.record_id') rid, JSON_EXTRACT(evidence_json,'$.evidence.record_ids') rids FROM pcv_verification_evidence WHERE informe_id=? AND outcome IN ('INSERTED','NULL_FILLED','VERIFIED_EXISTING')",
@@ -327,11 +327,18 @@ export async function kpiCargarPartidasConDiagnostico(
         const lista = [p.rid, ...(Array.isArray(p.rids) ? p.rids : typeof p.rids === "string" ? JSON.parse(p.rids) : [])];
         for (const id of lista) if (Number.isInteger(Number(id)) && id !== null) s.add(Number(id));
     }
-    const seleccion = seleccionarObservaciones<any>(rows, certificadas);
-    const valores = normalizarPartidas(seleccion.filas, meta[0]?.fuente ?? "").valores;
+    const { valores, seleccion } = kpiValoresDeFilas(rows, meta[0]?.fuente ?? "", certificadas);
+    return { valores, sinResolver: seleccion.sinResolver, resueltas: seleccion.resueltas };
+}
+
+// Única ruta de filas PCV → valores KPI (recálculo, recuperadores): SELECCION_OBSERVACIONES, normalización y registro
+// del perímetro de beneficio y patrimonio que exige el ROE.
+export function kpiValoresDeFilas(filas: any[], fuente: string, certificadas: Map<string, Set<number>> = new Map()) {
+    const seleccion = seleccionarObservaciones<any>(filas, certificadas);
+    const valores = normalizarPartidas(seleccion.filas, fuente).valores;
     const per = (c: string) => { const p = new Set(seleccion.filas.filter((f: any) => f.concepto_estandar === c && f.importe !== null).map((f: any) => perimetroDeEtiqueta(c, f.concepto))); return p.size === 1 ? [...p][0] : null; };
     PERIMETROS.set(valores, { beneficio: per("BENEFICIO_NETO"), patrimonio: per("PATRIMONIO_NETO") });
-    return { valores, sinResolver: seleccion.sinResolver, resueltas: seleccion.resueltas };
+    return { valores, seleccion };
 }
 
 
@@ -772,7 +779,8 @@ export function kpiCalcularInforme(
     // ROE exige beneficio y patrimonio del MISMO perímetro (dominante/dominante o total/total); si consta que difieren,
     // no se calcula (PERIMETRO_INCOMPATIBLE). Margen neto usa BENEFICIO_NETO tal como lo define la taxonomía del país.
     const perimetros = PERIMETROS.get(p);
-    if (perimetros?.beneficio && perimetros?.patrimonio && perimetros.beneficio !== perimetros.patrimonio) return resultado.filter(k => k.kpi !== "ROE");
+    // ROE sólo con beneficio y patrimonio de perímetro CONOCIDO e igual (dominante/dominante o total/total).
+    if (!perimetros?.beneficio || !perimetros?.patrimonio || perimetros.beneficio !== perimetros.patrimonio) return resultado.filter(k => k.kpi !== "ROE");
     return resultado;
 }
 

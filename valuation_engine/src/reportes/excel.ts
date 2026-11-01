@@ -35,6 +35,11 @@ export function escribirExcel(data:ModeloInput,r:Resultado,output:string,root:st
     const key=String(con[`A${row}`]?.v??'');const v=values[key];
     if(v!==undefined)set(con,`B${row}`,v);
   }
+  // Estado de las participaciones no dominantes en una fila libre de 01_CONTROL (la celda numérica la usan fórmulas).
+  {let row=4;while(row<200&&con[`A${row}`]?.v!==undefined&&con[`A${row}`]?.v!=='')row++;
+   const st=r.minority_interest_status==='NO_ESTIMABLE'?'NO_ESTIMABLE: sin cifra acreditada; 0 operativo en el puente, valor por acción no validado':'ACREDITADO';
+   set(con,`A${row}`,'minority_interest_status');set(con,`B${row}`,st);
+   const ref=con['!ref']&&XLSX.utils.decode_range(con['!ref']);if(ref&&ref.e.r<row-1){ref.e.r=row-1;con['!ref']=XLSX.utils.encode_range(ref);}}
   for(let idx=0;idx<data.financials.length;idx++){
     const year=data.financials[idx],col='BCDE'[idx];
     for(let j=0;j<rawFields.length;j++){

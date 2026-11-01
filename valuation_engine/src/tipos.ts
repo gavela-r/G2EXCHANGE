@@ -140,7 +140,7 @@ export interface Resultado {
   motor:'G2EXCHANGE_TS_v1.5.1';company_name:string;ticker:string;template_code:string;
   valuation_run_id:string|number;input_snapshot_id:string|number;valuation_date:string;
   status:'REVIEW'|'PENDING_REVIEW';validation_status:'REVIEW'|'BLOCKED';
-  currency:string;premium_methodology:string;wacc_scenarios:WaccEscenario[];
+  currency:string;premium_methodology:string;minority_interest_status?:'ACREDITADO'|'NO_ESTIMABLE';wacc_scenarios:WaccEscenario[];
   valuations:ValorEscenario[];news_audit:Array<{signal_id:string|number;aplicado:boolean;motivo:string}>;
   warnings:string[];information_note:string;
 }

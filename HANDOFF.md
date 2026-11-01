@@ -29,18 +29,38 @@ Leyenda: **IMPL** implementado · **PROB** probado · **MYSQL** aplicado en MySQ
 | Días operativos (DSO, DPO, DIO, CCC sobre ventas y convencionales), NWC y ΔNWC históricos | IMPL · PROB · VERIF (Apple, Microsoft, ASML con datos reales) | derivados al vuelo de PCV certificados (`kpi.cjs`); sin migración; `VALUATION_ENGINE.md` §4 bis |
 | Proyección del circulante por días (metodología `SOBRE_VENTAS` por defecto o `CONVENCIONAL`) en los modelos 1–12, 15 y 16 | IMPL · PROB (motor + Excel 16/16) | ΔNWC restado una vez en el FCFF; banca y seguros no aplican |
 | Cargador FinMind sin sobrescritura de importes | IMPL · PROB (integración MySQL aislado) | antes `ON DUPLICATE KEY UPDATE importe`; ahora conserva la fila existente |
-| `SELECCION_OBSERVACIONES_V1` (contradicciones) | IMPL · PROB · MYSQL (vía KPI) · VERIF | ningún informe queda bloqueado entero |
+| `SELECCION_OBSERVACIONES_V2` (contradicciones) | IMPL · PROB · MYSQL (vía KPI) · VERIF | ningún informe queda bloqueado entero |
 | Perímetro de ROE (dominante/total) | IMPL · PROB · MYSQL (vía KPI) | |
 | KPI recalculados (25.950 + 906 informes) con la causa de cada retirada | IMPL · PROB · MYSQL · VERIF | snapshots reversibles |
 | Identidad de observación e índice único (migración 33) | IMPL · PROB · MYSQL · VERIF | datos intactos (hash idéntico), 1.123.912 filas con identidad |
 | Cargadores idempotentes | IMPL · PROB (integración en MySQL aislado) | los recuperadores en ejecución usan aún el código anterior (§3) |
-| Perímetro del beneficio y del patrimonio | IMPL · PROB | cada BENEFICIO_NETO/PATRIMONIO_NETO lleva su perímetro (dominante/total); ROE solo con perímetros iguales en backend **y** capa sectorial (corregido); margen neto y ROA informan el perímetro; EPS = diluido declarado (dominante); el DCF usa EBIT (independiente del perímetro) |
-| Participaciones no dominantes en el puente EV → patrimonio (motor del backend) | IMPL · PROB | antes se restaba 0 en silencio; ahora total − dominante del mismo informe o aviso `NO_ESTIMABLE` |
+| Perímetro del beneficio y del patrimonio | IMPL · PROB · MYSQL · VERIF | cada BENEFICIO_NETO/PATRIMONIO_NETO lleva su perímetro (dominante/total); ROE solo con perímetros **conocidos** e iguales en backend, recuperadores y capa sectorial (corregido 01/11: antes un perímetro desconocido no bloqueaba y los recuperadores no lo comprobaban); 56.668 ROE guardados verificados; margen neto y ROA informan el perímetro; EPS = diluido declarado (dominante); el DCF usa EBIT (independiente del perímetro) |
+| Participaciones no dominantes en el puente EV → patrimonio (motor del backend) | IMPL · PROB | antes se restaba 0 en silencio; ahora total − dominante del mismo informe o `minority_interest_status: NO_ESTIMABLE`, valoración forzada a `REVIEW`, aviso y rótulo en Excel (fila nueva de `01_CONTROL`) y PDF. El 0 operativo se mantiene solo porque 39 fórmulas de las plantillas usan esa celda |
 | Extracción de un concepto separado para el beneficio atribuible en EDINET | PEND · EXT | requiere descargar documentos EDINET; las claves EDINET están comprometidas |
 | Certificación de Taiwán | EXT | condiciones de TWSE; verificador MOPS manual listo (`sectorial/app/tools/verificar_mops_local.cjs`) |
 | Valoración de ADR | BLOQUEADA a propósito | backend: `ADR_RATIO_PENDIENTE` para emisores 20-F y `FX_PENDIENTE` si la moneda difiere (corregido: antes un 20-F en USD pasaba); sectorial: valor por acción ordinaria en la moneda de presentación, sin comparación con el precio del ADS |
 | Taxonomía IFRS JP (Toyota, Sony: ingresos, beneficio bruto, CAPEX, acciones) | PEND · EXT | no hay documentos en caché y descargarlos exige una clave EDINET; las tres están comprometidas. Tras la rotación: ampliar `edinetAnualVerificado.ts` y verificar los cuatro ejercicios |
 | Primas de liquidez y tamaño | PEND (calibración) | `NO_ESTIMABLE` con ajuste operativo 0 y valoración en `REVIEW`; Excel y PDF lo rotulan como no estimable (corregido: el Excel decía solo `REVIEW`) |
+
+### Taiwán: clasificación de los datos
+| Capa | Situación (verificada en MySQL el 01/11/2026) |
+|---|---|
+| Recuperado | descarga trimestral FinMind de 906 empresas (0 fallidas); 837 empresas con informe anual FinMind en MySQL (3.306 anuales y 913 trimestrales) |
+| Normalizado | 33.096 PCV de resultados corregidos de T4 aislado a suma T1–T4 (lotes 1–3, auditados, 0 discrepancias) |
+| Contrastado | muestras con Eulerpool (`sectorial/app/coverage/contraste_tw_eulerpool.json`); no certifica |
+| Certificado | **0**: ninguna evidencia primaria en informes de empresas TW |
+| Fecha de publicación | **NULL en los 4.219 informes FinMind**: no se inventa; por eso el DCF (backend y sectorial) no los usa (`fecha_publicacion ≤ fecha de valoración`) |
+| `nivel_confianza` ALTA/MEDIA | confianza de extracción del proveedor, no certificación; ningún módulo lo usa como certificado |
+
+### Recálculos de KPI del 01/11/2026 (ensayados en copia aislada con restauración exacta)
+| Conjunto | Informes | Resultado en producción | Huella final = ensayo |
+|---|---|---|---|
+| Etiquetas sin perímetro o mal mapeadas (minoritarios/impuesto como beneficio neto) | 62 | 248 → 172 KPI; 157 recalculados; 44 ROE y 32 KPI sin entrada válida retirados | sí (`2435222585`) |
+| Lote 1 de Taiwán (comprobación) | 1.185 | sin cambios reales (huella idéntica antes y después) | sí (`2974263235`) |
+| Perímetro no único (mismo importe con etiquetas de distinto perímetro) | 23 | 23 ROE y 84 KPI de deuda (política V2) retirados | — |
+| ROE previos al control de perímetro | 933 | 926 ROE retirados; además, KPI fuera de la política vigente: 1.303 deuda V2, 412 entradas sin resolver, 23 ausentes | sí (`2410467274`) |
+
+Snapshots reversibles en `private_backups/congelacion-20261101/` (`--restaurar <archivo>`).
 
 ## 2. Migraciones (estado exacto)
 | Migración | Ensayada en copia aislada | Aplicada | Reversible |
@@ -56,8 +76,8 @@ Leyenda: **IMPL** implementado · **PROB** probado · **MYSQL** aplicado en MySQ
 **Incidente durante la migración 33**: el `ALTER` esperó unos 35 minutos por el bloqueo de metadatos que retenía la auditoría estructural de Codex (proceso 7180, con una transacción de solo lectura abierta). Mientras tanto quedaron en espera las consultas a `partida_contable_valor`. No se canceló nada: la auditoría terminó, la migración completó y se verificó que no hubo cambios parciales. Lección: `OPERATIONS.md` §4.5.
 
 ## 3. Recuperadores: estado y transición
-- **Estado al congelar**: vigilantes US (`pcv-us-complementos-v5`) y JP (`pcv-jp-complementos-identidad-v5`) **detenidos** con `stop.request`; no habían escrito nada desde la migración 33. Coordinador (`recuperar-pcv-plan.cjs`, PID 22200): parada solicitada con `--stop`, estado `STOPPING`; espera a que termine su tarea de métricas (`auditar-cobertura-estructural.cjs --after`, solo lectura) y sale sin relanzar vigilantes. **Ningún proceso escritor activo.** Checkpoints y journals intactos.
-- **Motivo**: ejecutaban el código anterior del árbol operativo (PCV sin `identidad_observacion`, KPI sin `SELECCION_OBSERVACIONES_V1` ni perímetro de ROE, cargador FinMind que sobrescribía importes). El coordinador antiguo, además, retira los `stop.request` tras su mantenimiento, así que había que detenerlo a él también.
+- **Estado al congelar**: vigilantes US (`pcv-us-complementos-v5`) y JP (`pcv-jp-complementos-identidad-v5`) **detenidos** con `stop.request`; no habían escrito nada desde la migración 33. Coordinador (`recuperar-pcv-plan.cjs`): detenido con `--stop`, estado `STOPPED` (31/10/2026 23:51 UTC). **Ningún proceso de recuperación vivo.** Checkpoints y journals intactos.
+- **Motivo**: ejecutaban el código anterior del árbol operativo (PCV sin `identidad_observacion`, KPI sin `SELECCION_OBSERVACIONES_V2` ni perímetro de ROE, cargador FinMind que sobrescribía importes). El coordinador antiguo, además, retira los `stop.request` tras su mantenimiento, así que había que detenerlo a él también.
 - **Cambios locales de Codex protegidos** sin tocar su árbol ni su índice: rama local `codex-wip-20261101` (commit `b09643c`, 174 archivos, 0 secretos) y archivo `private_backups/codex-wip-20261101.tar` (sha256 `c023a5a6…`). El código de entrega contiene todo lo de esa instantánea (0 archivos perdidos; las diferencias son correcciones posteriores).
 - **Transición preparada y probada**: worktree operativo `G2EXCHANGE_operativo/` (commit de entrega, `private_backups` enlazado sin copiar, sin `.env`). `node server/scripts/transicion-recuperadores.cjs --comprobar` verifica: ningún recuperador vivo, código compilado con identidad, migración 33 en MySQL, checkpoints legibles y ninguna credencial comprometida. Hoy falla **solo** por credenciales (no hay `.env` nuevo), que es el comportamiento esperado.
 - **Reanudar** (cuando el propietario haya rotado las claves):
@@ -98,6 +118,7 @@ Comprobación tras transferir: el sha256 del volcado (`.sha256`), la restauraci�
 **Espacio en disco**: las carpetas `G2EXCHANGE/private_backups/bundle-validation-*` (≈ 34 GB) son validaciones de Codex con copias de volcados del propio `private_backups`. Los tamaños coinciden con los originales, pero falta comparar su sha256 con los archivos `.sha256` del principal. Hasta entonces se conservan. `pcv-recovery-controls-2026-10-30T02-20-10-655Z.tar` (30 GB) tiene su propio manifiesto y no es redundante.
 
 ## 5. Pendiente (orden recomendado)
+0. **Defecto interno conocido — tabla persistida `kpi_financiero_informe`**: los informes que nunca se han recalculado conservan KPI calculados con políticas anteriores. Cota superior: unos 31.709 informes con 126.080 KPI de deuda sin deuda a corto plazo verificada (política V2) y entradas contradictorias sin `SELECCION_OBSERVACIONES_V2`. **No afecta** a la cobertura certificada ni al DCF (calculan desde PCV certificados), pero el endpoint de KPI del backend devuelve esos valores. Corrección: recálculo global con `server/scripts/recalcular-kpi-correcciones.cjs --informes <todos>` por tramos, con snapshot, ensayado antes en la copia aislada. No se ha improvisado en la congelación por ser una escritura masiva.
 1. **Propietario**: revocar las 20 variables comprometidas (§4) y configurar el `.env` nuevo; después reanudar los recuperadores (§3).
 2. Con una clave EDINET nueva: mapear la taxonomía IFRS (Toyota, Sony) y extraer el beneficio atribuible como concepto separado; verificar los cuatro ejercicios con evidencia primaria.
 3. Certificación de Taiwán: consentimiento de TWSE o descargas manuales de MOPS (`DATA_SOURCES.md`).

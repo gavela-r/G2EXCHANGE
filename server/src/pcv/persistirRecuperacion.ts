@@ -3,7 +3,7 @@ import type {Pool,RowDataPacket,ResultSetHeader} from 'mysql2/promise';
 import {createHash} from 'node:crypto';
 import type {DatoPcv,InformePcv} from './normalizarProveedores';
 import {normalizarPartidas} from '../valoracion/datos';
-import {kpiCalcularInforme} from '../../insercionDatos/insercionKPIInformeFinanciero';
+import {kpiCalcularInforme,kpiValoresDeFilas} from '../../insercionDatos/insercionKPIInformeFinanciero';
 
 export async function persistirRecuperacion(pool:Pool,informe:InformePcv,datos:DatoPcv[],write:boolean){
  const c=await pool.getConnection();const result={pcv:0,kpiNew:0,kpiUpdated:0,kpiSkipped:false,precisionPending:0,byProvider:{} as Record<string,number>};
@@ -33,7 +33,7 @@ export async function persistirRecuperacion(pool:Pool,informe:InformePcv,datos:D
    result.pcv++;result.byProvider[d.provider]=(result.byProvider[d.provider]||0)+1;
   }
   const [parts]=await c.query<RowDataPacket[]>(`SELECT pc.concepto,pc.importe,tc.concepto_estandar,tc.signo_esperado,tc.alias_sec,tc.alias_edinet,tc.alias_finmind FROM partida_contable_valor pc JOIN taxonomia_concepto tc ON tc.id=pc.concepto_estandar_id WHERE pc.informe_id=? ORDER BY pc.id`,[informe.id]);
-  let kpis:ReturnType<typeof kpiCalcularInforme>=[];try{kpis=kpiCalcularInforme(informe.id,normalizarPartidas(parts as any,meta[0].fuente).valores);}catch{result.kpiSkipped=true;}
+  let kpis:ReturnType<typeof kpiCalcularInforme>=[];try{kpis=kpiCalcularInforme(informe.id,kpiValoresDeFilas(parts as any[],meta[0].fuente).valores);}catch{result.kpiSkipped=true;}
   const [oldKpis]=await c.query<RowDataPacket[]>('SELECT * FROM kpi_financiero_informe WHERE informe_id=? FOR UPDATE',[informe.id]);
   for(const k of kpis){if(k.valor===null||!Number.isFinite(k.valor))continue;const old=oldKpis.find(x=>x.kpi===k.kpi);if(old&&old.valor!==null&&Math.abs(Number(old.valor)-k.valor)<1e-9)continue;
    // Existing valid KPI is recalculated only after new PCV changed this report.

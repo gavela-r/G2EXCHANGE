@@ -33,9 +33,10 @@ test('perímetro por etiqueta: dominante frente a total',()=>{
  assert.equal(per('BENEFICIO_NETO','jppfs_cor:ProfitLoss'),'TOTAL');assert.equal(per('BENEFICIO_NETO','ProfitLoss'),'TOTAL');
  assert.equal(per('PATRIMONIO_NETO','StockholdersEquity'),'DOMINANTE');assert.equal(per('PATRIMONIO_NETO','StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'),'TOTAL');assert.equal(per('PATRIMONIO_NETO','jppfs_cor:NetAssets'),'TOTAL');
 });
-test('ROE no se calcula con beneficio de la dominante y patrimonio total (y sí con perímetros iguales)',()=>{
+test('ROE sólo con perímetros conocidos e iguales: no con dominante/total ni con perímetro desconocido',()=>{
  const base={INGRESOS:1000,BENEFICIO_NETO:100,PATRIMONIO_NETO:500,ACTIVOS_TOTALES:2000};
  const a={...base};K.kpiRegistrarPerimetros(a,{beneficio:'DOMINANTE',patrimonio:'TOTAL'});assert.ok(!K.kpiCalcularInforme(1,a).some(k=>k.kpi==='ROE'));
  const b={...base};K.kpiRegistrarPerimetros(b,{beneficio:'TOTAL',patrimonio:'TOTAL'});const roe=K.kpiCalcularInforme(1,b).find(k=>k.kpi==='ROE');assert.ok(roe);assert.ok(Math.abs(roe.valor-20)<1e-9||Math.abs(roe.valor-0.2)<1e-9);
- assert.ok(K.kpiCalcularInforme(1,{...base}).some(k=>k.kpi==='ROE'),'sin perímetro conocido se mantiene el comportamiento anterior');
+ assert.ok(!K.kpiCalcularInforme(1,{...base}).some(k=>k.kpi==='ROE'),'sin perímetro conocido no hay ROE (V2)');
+ const c={...base};K.kpiRegistrarPerimetros(c,{beneficio:'DOMINANTE',patrimonio:null});assert.ok(!K.kpiCalcularInforme(1,c).some(k=>k.kpi==='ROE'),'un perímetro desconocido basta para no calcularlo');
 });

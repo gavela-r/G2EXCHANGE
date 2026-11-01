@@ -591,6 +591,10 @@ export function valorar(dataOriginal:ModeloInput,options:{root?:string}={}):Resu
   if (terminalRequiresReview) {
   warnings.push('El valor terminal no esta normalizado: falta un ROIC terminal valido y documentado. Se utiliza el metodo FCFF heredado.');
 }
+  // Participaciones no dominantes sin cifra acreditada: el puente EV → patrimonio usa 0 operativo, pero el resultado no
+  // puede presentarse como validado. Se marca NO_ESTIMABLE y la valoración queda en REVIEW.
+  const minorityStatus:'ACREDITADO'|'NO_ESTIMABLE'=data.minority_interest_fy0===undefined?'NO_ESTIMABLE':'ACREDITADO';
+  if(minorityStatus==='NO_ESTIMABLE'&&!warnings.some(w=>/participaciones no dominantes/i.test(w)))warnings.push('NO_ESTIMABLE: participaciones no dominantes no acreditadas; el puente EV → patrimonio no las descuenta y el valor por acción puede estar sobrestimado. Revisión obligatoria.');
   if(pending)warnings.push('Faltan entradas especÃ­ficas para una o mÃ¡s valoraciones sectoriales: NO publicar fair value.');
   if(news.audit.some(x=>!x.aplicado))warnings.push('Algunas noticias no se aplicaron: revisar auditorÃ­a.');
   if(especial)warnings.push('Modelos bancario/asegurador/REIT simplificados. No homologados para decisiÃ³n automÃ¡tica.');
@@ -607,7 +611,8 @@ export function valorar(dataOriginal:ModeloInput,options:{root?:string}={}):Resu
     terminalRequiresReview ||
     prem.method === 'DRAFT_POLICY' ||
     prem.method === 'SIMULATION_ONLY' ||
-    prem.method === 'SYSTEM_DEFAULT_ZERO'
+    prem.method === 'SYSTEM_DEFAULT_ZERO' ||
+    minorityStatus === 'NO_ESTIMABLE'
 ) 
     ? 'REVIEW'
     : 'PENDING_REVIEW',
@@ -616,6 +621,7 @@ export function valorar(dataOriginal:ModeloInput,options:{root?:string}={}):Resu
 
     currency: data.valuation_currency,
     premium_methodology: prem.method,
+    minority_interest_status: minorityStatus,
 
     wacc_scenarios: wacc,
     valuations: values,

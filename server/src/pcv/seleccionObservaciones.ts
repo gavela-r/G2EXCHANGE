@@ -1,4 +1,4 @@
-// SELECCION_OBSERVACIONES_V1 — selección determinista de la observación contable de un concepto en un informe cuando
+// SELECCION_OBSERVACIONES_V2 — selección determinista de la observación contable de un concepto en un informe cuando
 // partida_contable_valor contiene varias filas (originales repetidos por distintas recuperaciones o etiquetas
 // distintas mapeadas al mismo concepto estándar). Nunca decide por el valor (ni mayor, ni menor, ni más reciente):
 //  1. EVIDENCIA PRIMARIA: si hay filas certificadas por la fuente primaria (record_id/record_ids de INSERTED,
@@ -8,7 +8,8 @@
 //     si queda al menos una etiqueta del estado financiero principal.
 //  3. Si aún hay importes distintos, la celda queda SIN RESOLVER (no se calcula nada con ella) con su causa.
 // Las filas originales no se modifican: esta capa sólo decide qué observación consume el cálculo.
-export const POLITICA_SELECCION = "SELECCION_OBSERVACIONES_V1";
+// V2 (2026-11-01): además, no son BENEFICIO_NETO la parte atribuible sólo a minoritarios ni el impuesto (FinMind `TAX`).
+export const POLITICA_SELECCION = "SELECCION_OBSERVACIONES_V2";
 
 export interface FilaObservacion { id?: number; concepto_estandar: string; concepto: string; importe: unknown }
 export interface ResultadoSeleccion<T extends FilaObservacion> {
@@ -19,13 +20,20 @@ export interface ResultadoSeleccion<T extends FilaObservacion> {
 
 const SALDOS = new Set(["INVENTARIOS", "CUENTAS_COBRAR", "CUENTAS_PAGAR", "EFECTIVO", "DEUDA_CORTO_PLAZO", "DEUDA_LARGO_PLAZO", "PATRIMONIO_NETO", "ACTIVOS_TOTALES", "PASIVOS_TOTALES"]);
 const secundaria = (tag: string) => /SummaryOfBusinessResults$/.test(tag) || /^jpcrp\d{6}-[a-z]+_E\d{5}-\d{3}:/.test(tag);
+// Etiquetas mapeadas a BENEFICIO_NETO que no son el beneficio neto: resultado atribuible SÓLO a participaciones no
+// dominantes (no el total que las incluye) e impuesto.
+export const noEsBeneficioNeto = (f: { concepto_estandar: string; concepto: string }) => {
+    if (f.concepto_estandar.toUpperCase() !== "BENEFICIO_NETO") return false;
+    const t = f.concepto.split(":").pop() ?? "";
+    return t === "TAX" || (/(Attributed|Attributable)(To)?Non[Cc]ontrollingInterests?$/.test(t) && !/IncludingPortion/.test(t));
+};
 const importe = (v: unknown) => (v === null || v === undefined || v === "" ? null : String(Number(v)));
 
 export function seleccionarObservaciones<T extends FilaObservacion>(filas: T[], certificadas: Map<string, Set<number>> = new Map()): ResultadoSeleccion<T> {
     const porConcepto = new Map<string, T[]>();
     // Mismo prefiltro que normalizarPartidas: movimientos en conceptos de saldo y reservas/reversiones en D&A no son la
     // magnitud del concepto y no pueden hacer «contradictoria» una celda.
-    const noEsMagnitud = (f: T) => (SALDOS.has(f.concepto_estandar.toUpperCase()) && /writedown|reversal|increase|decrease|changein|impairment/i.test(f.concepto)) || (f.concepto_estandar.toUpperCase() === "DEPRECIACION_AMORTIZACION" && /reversal|reserve|impairment/i.test(f.concepto));
+    const noEsMagnitud = (f: T) => noEsBeneficioNeto(f) || (SALDOS.has(f.concepto_estandar.toUpperCase()) && /writedown|reversal|increase|decrease|changein|impairment/i.test(f.concepto)) || (f.concepto_estandar.toUpperCase() === "DEPRECIACION_AMORTIZACION" && /reversal|reserve|impairment/i.test(f.concepto));
     for (const f of filas) { if (noEsMagnitud(f)) continue; (porConcepto.get(f.concepto_estandar) ?? porConcepto.set(f.concepto_estandar, []).get(f.concepto_estandar)!).push(f); }
     const out: T[] = [], sinResolver: ResultadoSeleccion<T>["sinResolver"] = [], resueltas: ResultadoSeleccion<T>["resueltas"] = [];
     for (const [concepto, grupo] of porConcepto) {

@@ -22,15 +22,17 @@ MySQL 8, base operativa `DB_NAME` (en la instalación original, `2GB` en el cont
 | **Original** | filas de `partida_contable_valor` tal como se recuperaron (incluidos duplicados históricos) | nunca se borran; las correcciones guardan el valor anterior en `pcv_correccion_auditoria` |
 | **Normalizada** | `normalizarPartidas` (`server/src/valoracion/datos.ts`): signos de salida de caja, D&A válido, movimientos excluidos de saldos | determinista |
 | **Certificada** | una fila con evidencia primaria `INSERTED`/`NULL_FILLED`/`VERIFIED_EXISTING` (`record_id(s)`) y sin `CONFLICT_PRESERVED` pendiente (o resuelto por una regla versionada) | certificación solo con fuente primaria (SEC, EDINET, MOPS) |
-| **Seleccionada** | `SELECCION_OBSERVACIONES_V1` (`server/src/pcv/seleccionObservaciones.ts`), usada por el cálculo de KPI | ver §3 |
+| **Seleccionada** | `SELECCION_OBSERVACIONES_V2` (`server/src/pcv/seleccionObservaciones.ts`), usada por el cálculo de KPI | ver §3 |
 
-## 3. Selección de observaciones (`SELECCION_OBSERVACIONES_V1`)
+## 3. Selección de observaciones (`SELECCION_OBSERVACIONES_V2`)
 Cuando un informe tiene varias filas para un concepto:
 1. Si las filas certificadas por la fuente primaria tienen un único importe, se seleccionan esas.
 2. Si no hay certificación, la etiqueta del estado financiero principal prevalece sobre la sección resumen del mismo documento (`*SummaryOfBusinessResults`) y sobre las extensiones propias de la empresa.
 3. Si siguen quedando importes distintos, el concepto queda **sin resolver**, se excluye del cálculo y bloquea solo los KPI que lo usan.
 
 La selección nunca elige por el valor: ni el mayor, ni el menor, ni el más reciente. Los movimientos (deterioros, reversiones, variaciones) no cuentan como magnitud de saldo, y las reservas o reversiones no cuentan como D&A.
+
+**V2 (01/11/2026)**: además, no se consideran BENEFICIO_NETO el resultado atribuible solo a participaciones no dominantes (p. ej. FinMind `ComprehensiveIncomeConsolidatedNetIncomeAttributedNonControllingInterest`) ni el impuesto (FinMind `TAX`); se encontraron 24 filas así mapeadas. La misma función (`kpiValoresDeFilas`) alimenta el recálculo y los recuperadores.
 
 ## 4. Certificación y conflictos
 - **Celda certificada**: hay un PCV no nulo, una prueba certificadora y ningún conflicto sin resolver.
@@ -59,7 +61,7 @@ La selección nunca elige por el valor: ni el mayor, ni el menor, ni el más rec
 - **DOMINANTE**: `NetIncomeLoss`, `StockholdersEquity`, `*AttributableToOwnersOfParent`.
 - **TOTAL**: `ProfitLoss`, `NetAssets`, `EquityIFRS`, `*IncludingPortionAttributableToNoncontrollingInterest`, `IncomeAfterTaxes`/`Equity` de FinMind.
 
-ROE solo se calcula si los dos perímetros coinciden. Definición efectiva por país:
+ROE solo se calcula si los dos perímetros son **conocidos e iguales**; si alguno es desconocido (etiqueta no clasificada o etiquetas de perímetro distinto en el mismo concepto) no se calcula. Aplicado a la tabla persistida el 01/11/2026: 56.668 ROE guardados, todos con perímetro conocido e igual. Definición efectiva por país:
 - **EE. UU.**: BENEFICIO_NETO es el atribuible a la dominante.
 - **Japón y Taiwán**: es el consolidado.
 

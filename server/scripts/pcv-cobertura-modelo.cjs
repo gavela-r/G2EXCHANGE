@@ -1,6 +1,7 @@
 // Diagnostic only. A usable local value is not proof of issuer/period provenance.
 const {normalizarPartidas}=require('../dist/src/valoracion/datos');
-const {kpiCalcularInforme}=require('../dist/insercionDatos/insercionKPIInformeFinanciero');
+const {kpiCalcularInforme,kpiRegistrarPerimetros}=require('../dist/insercionDatos/insercionKPIInformeFinanciero');
+const {perimetroDeEtiqueta}=require('../dist/src/pcv/seleccionObservaciones');
 const {filtrarKpiCalculables,deudaCompleta}=require('./pcv-prerrequisitos-kpi.cjs');
 function diagnosticarPartidas(rows,source){
  const groups=new Map(),conflicts=[],invalid=[];
@@ -18,6 +19,9 @@ function diagnosticarPartidas(rows,source){
   if(normalized.valores[code]===undefined)invalid.push(...rs.map(r=>({code,id:r.id,reasons:normalized.advertencias,quality:normalized.calidad[code]})));
   else accepted.push(rs.find(r=>r.importe!==null&&Number.isFinite(Number(r.importe)))||rs[0]);
  }
+ // Perímetro de beneficio y patrimonio de las filas aceptadas: el ROE lo exige conocido e igual (como kpiValoresDeFilas).
+ const per=c=>{const p=new Set(accepted.filter(r=>r.concepto_estandar?.toUpperCase()===c&&r.importe!==null).map(r=>perimetroDeEtiqueta(c,r.concepto)));return p.size===1?[...p][0]:null;};
+ if(normalized?.valores)kpiRegistrarPerimetros(normalized.valores,{beneficio:per('BENEFICIO_NETO'),patrimonio:per('PATRIMONIO_NETO')});
  return {...normalized,conflicts,invalid,accepted};
 }
 function diagnosticarKpi(id,rows,source,stored,expected){

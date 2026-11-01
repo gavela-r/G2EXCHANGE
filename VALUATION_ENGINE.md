@@ -5,7 +5,7 @@ Hay dos motores, alimentados ambos por observaciones **certificadas**:
 2. **`sectorial/app/engine/`**: los 16 modelos sectoriales con exportación a Excel (`VALUATION_MODELS.md`), servidos por la API sectorial (`API.md`).
 
 ## 1. Cadena de datos
-fuente primaria → identidad empresarial (país, CIK/EDINET, mercado) → documento (`informe_financiero`) → ejercicio → concepto (`taxonomia_concepto`) → normalización → certificación → selección (`SELECCION_OBSERVACIONES_V1`) → KPI → CAPM/WACC → DCF → modelo sectorial → Excel → interfaz.
+fuente primaria → identidad empresarial (país, CIK/EDINET, mercado) → documento (`informe_financiero`) → ejercicio → concepto (`taxonomia_concepto`) → normalización → certificación → selección (`SELECCION_OBSERVACIONES_V2`) → KPI → CAPM/WACC → DCF → modelo sectorial → Excel → interfaz.
 
 Garantías del adaptador (`sectorial/app/adapter.cjs`):
 - **Fuente**: solo informes de la fuente del país.
@@ -38,7 +38,7 @@ Todas las entradas de un KPI deben estar en el mismo informe. Los valores ausent
 | EBITDA / MARGEN_EBITDA | EBIT + D&A; / ingresos | D&A válido (sin reservas ni reversiones) |
 | MARGEN_NETO | beneficio neto / ingresos | perímetro de BENEFICIO_NETO según el país (`DATABASE.md` §6) |
 | ROA | beneficio neto / activos totales | |
-| ROE | beneficio neto / patrimonio neto | **solo si ambos tienen el mismo perímetro** (dominante/dominante o total/total); en el backend y en la capa sectorial (`kpi.cjs`, causa `PERIMETRO_INCOMPATIBLE`) |
+| ROE | beneficio neto / patrimonio neto | **solo si ambos perímetros son conocidos e iguales** (dominante/dominante o total/total); desconocido → no se calcula (`PERIMETRO_DESCONOCIDO`); en el backend y en la capa sectorial (`kpi.cjs`, causa `PERIMETRO_INCOMPATIBLE`) |
 | DEUDA_TOTAL / DEUDA_NETA | deuda CP + deuda LP; − efectivo | política `BOTH_VERIFIED_DEBT_COMPONENTS_REQUIRED_V2`: los dos componentes verificados |
 | DEUDA_SOBRE_PATRIMONIO / DEUDA_SOBRE_ACTIVOS / PASIVO_SOBRE_ACTIVOS | cocientes respectivos | misma política de deuda |
 | COBERTURA_INTERESES | EBIT / gasto por intereses | |

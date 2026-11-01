@@ -39,7 +39,7 @@ informe_financiero ──► partida_contable_valor (ORIGINAL; identidad_observa
    │                         │
    │                         ├─ normalización (src/valoracion/datos.ts)
    │                         ├─ certificación (pcv_verification_evidence; reglas versionadas, migración 31)
-   │                         └─ selección SELECCION_OBSERVACIONES_V1 (src/pcv/seleccionObservaciones.ts)
+   │                         └─ selección SELECCION_OBSERVACIONES_V2 (src/pcv/seleccionObservaciones.ts)
    ▼
 KPI (insercionKPIInformeFinanciero.ts; perímetro de ROE) ──► kpi_financiero_informe
    ▼

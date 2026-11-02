@@ -9,6 +9,7 @@ import {
     importarDatosValoracion
 } from "./valoracion/motorServicio";
 import { cargarMotor } from "./valoracion/rutas";
+import { landingRouter } from "./landing";
 
 dotenv.config();
 
@@ -147,6 +148,7 @@ router.post("/api/valoracion", async (req, res) => {
 // ============================================================
 
 app.use(router);
+app.use(landingRouter);
 
 // ============================================================
 // INICIAR SERVIDOR

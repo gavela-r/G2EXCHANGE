@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import '../css/cuerpo.css';
 import TradingViewWidget from './TradingViewWidget';
+import { SIN_DATOS, decimal, moneda, porcentaje, fecha, importeGrande, nombreLegible } from '../formato';
 
-const API = '/api/landing';
+// En producción (Cloudflare Pages) VITE_API_URL apunta al backend; en local se usa el proxy de Vite
+const API = `${import.meta.env.VITE_API_URL ?? ''}/api/landing`;
 
 const rangos = [
     { etiqueta: '1D', valor: '1D' },
@@ -12,35 +14,6 @@ const rangos = [
     { etiqueta: '1A', valor: '12M' },
     { etiqueta: '5A', valor: '60M' },
 ];
-
-// ---------------- Formato ----------------
-
-const SIN_DATOS = 'Sin datos';
-
-const decimal = (n, d = 2) =>
-    new Intl.NumberFormat('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n);
-
-const moneda = (n, codigo = 'USD') => n == null ? SIN_DATOS :
-    new Intl.NumberFormat('es-ES', { style: 'currency', currency: codigo || 'USD' }).format(n);
-
-const porcentaje = (n, d = 2) => n == null ? SIN_DATOS : `${n > 0 ? '+' : ''}${decimal(n, d)}%`;
-
-const fecha = (iso, opciones = { day: '2-digit', month: '2-digit', year: 'numeric' }) => iso == null ? SIN_DATOS :
-    new Intl.DateTimeFormat('es-ES', { ...opciones, timeZone: 'UTC' }).format(new Date(`${iso}T00:00:00Z`));
-
-function importeGrande(n, codigo = 'USD') {
-    if (n == null) return SIN_DATOS;
-    if (n >= 1e12) return `${decimal(n / 1e12)} billones ${codigo}`;
-    if (n >= 1e9) return `${decimal(n / 1e9, 1)} mil M ${codigo}`;
-    if (n >= 1e6) return `${decimal(n / 1e6, 1)} M ${codigo}`;
-    return `${decimal(n, 0)} ${codigo}`;
-}
-
-// En la BD muchos nombres están en mayúsculas (p. ej. "NVIDIA CORP")
-function nombreLegible(nombre = '') {
-    if (nombre !== nombre.toUpperCase()) return nombre;
-    return nombre.toLowerCase().replace(/(^|[\s(&.-])(\p{L})/gu, (_, sep, letra) => sep + letra.toUpperCase());
-}
 
 function etiquetaFortaleza(total) {
     if (total == null) return SIN_DATOS;
@@ -107,6 +80,7 @@ function FilaEmpresa({ empresa, activa, onClick }) {
 }
 
 export function Cuerpo(){
+    const [parametros] = useSearchParams();
     const [watchlist, setWatchlist] = useState([]);
     const [empresa, setEmpresa] = useState(null);
     const [busqueda, setBusqueda] = useState('');
@@ -117,8 +91,19 @@ export function Cuerpo(){
     const [mercado, setMercado] = useState(() => estadoMercado());
 
     useEffect(() => {
+        // Desde el screener se llega con /?empresa=ID para abrir esa ficha
+        const pedida = Number(parametros.get('empresa'));
         pedir(`${API}/empresas`)
-            .then(d => { setWatchlist(d.empresas); setEmpresa(d.empresas[0] ?? null); })
+            .then(async d => {
+                setWatchlist(d.empresas);
+                const enLista = d.empresas.find(e => e.id === pedida);
+                if (!pedida || enLista) { setEmpresa(enLista ?? d.empresas[0] ?? null); return; }
+                try {
+                    setEmpresa((await pedir(`${API}/empresas/${pedida}`)).empresa);
+                } catch {
+                    setEmpresa(d.empresas[0] ?? null);
+                }
+            })
             .catch(e => setError(e.message))
             .finally(() => setCargando(false));
         const reloj = setInterval(() => setMercado(estadoMercado()), 60_000);

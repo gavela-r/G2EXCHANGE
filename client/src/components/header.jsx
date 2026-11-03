@@ -1,5 +1,5 @@
 import '../css/header.css';
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 
 export function Header(){
@@ -11,10 +11,10 @@ export function Header(){
                         <Link to='/' className='inicio'><img src="../img/G2EXCHANGE.png" alt="logo" /></Link>   
                     </div>
                     <nav className='navbar'>
-                        <Link to='/' className='inicio'>Inicio</Link>
+                        <NavLink to='/' end className='inicio'>Inicio</NavLink>
                         <Link to='/' className='panel'>Panel</Link>
                         <Link to='/' className='fichaEmpresa'>Ficha empresa</Link>
-                        <Link to='/' className='screener'>Screener</Link>
+                        <NavLink to='/screener' className='screener'>Screener</NavLink>
                         <Link to='/' className='comparador'>Comarador</Link>
                     </nav>
                 </div>

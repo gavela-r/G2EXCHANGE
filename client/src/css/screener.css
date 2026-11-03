@@ -1,0 +1,283 @@
+/* Screener: reutiliza las variables y tarjetas de cuerpo.css */
+
+.cuerpo.screener .tarjeta{
+  margin-top: 20px;
+}
+
+.cuerpo.screener .filtros{
+  margin-top: 28px;
+}
+
+.cuerpo.screener .acciones{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cuerpo.screener .boton{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background-color: var(--input);
+  color: var(--texto);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.cuerpo.screener .boton:hover:not(:disabled){
+  border-color: var(--acento);
+}
+
+.cuerpo.screener .boton:disabled{
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- Filtros ---------- */
+
+.cuerpo.screener .rejillaFiltros{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 20px 0 14px;
+}
+
+.cuerpo.screener .rejillaFiltros .ancho{
+  grid-column: span 2;
+}
+
+.cuerpo.screener label{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--secundario);
+}
+
+.cuerpo.screener select,
+.cuerpo.screener input{
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background-color: var(--input);
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.cuerpo.screener select:focus,
+.cuerpo.screener input:focus{
+  outline: none;
+  border-color: var(--acento);
+}
+
+.cuerpo.screener input::placeholder{
+  color: var(--apagado);
+}
+
+.cuerpo.screener .operador{
+  display: flex;
+  gap: 6px;
+}
+
+.cuerpo.screener .operador select{
+  width: 108px;
+  flex: 0 0 auto;
+}
+
+.cuerpo.screener .operador input{
+  flex: 1;
+}
+
+.cuerpo.screener .campoBusqueda{
+  position: relative;
+  display: flex;
+}
+
+.cuerpo.screener .campoBusqueda i{
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--apagado);
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.cuerpo.screener .campoBusqueda input{
+  width: 100%;
+  padding-left: 32px;
+}
+
+/* ---------- Resultados ---------- */
+
+.cuerpo.screener .resultados{
+  padding: 20px 0 0;
+  overflow: hidden;
+}
+
+.cuerpo.screener .resultados > .cabeceraTarjeta,
+.cuerpo.screener .resultados > .vacio{
+  padding: 0 20px;
+}
+
+.cuerpo.screener .vacio{
+  padding-bottom: 24px !important;
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--apagado);
+}
+
+.cuerpo.screener .tablaScroll{
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+.cuerpo.screener table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.cuerpo.screener th{
+  padding: 0 12px 8px;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.cuerpo.screener th.num{
+  text-align: right;
+}
+
+.cuerpo.screener th button{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--apagado);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cuerpo.screener th button:hover,
+.cuerpo.screener th button i{
+  color: var(--acento);
+}
+
+.cuerpo.screener td{
+  padding: 12px;
+  border-bottom: 1px solid var(--borde);
+  white-space: nowrap;
+  color: var(--texto);
+}
+
+.cuerpo.screener td.num{
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.cuerpo.screener td.sector{
+  color: var(--secundario);
+}
+
+.cuerpo.screener td.pos{ color: var(--verde); }
+.cuerpo.screener td.neg{ color: var(--rojo); }
+
+.cuerpo.screener tbody tr{
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.15s;
+}
+
+.cuerpo.screener tbody tr:hover,
+.cuerpo.screener tbody tr:focus-visible{
+  outline: none;
+  background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
+}
+
+.cuerpo.screener .compania{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cuerpo.screener .compania .caja{
+  flex: 0 0 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background-color: #223C63;
+  color: #A9C8FF;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.cuerpo.screener .compania .nombre{
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+.cuerpo.screener .compania .nota{
+  margin-top: 2px;
+}
+
+.cuerpo.screener .insignia{
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.cuerpo.screener .insignia.BUY{ color: var(--verde); background-color: rgba(61, 214, 140, 0.1); }
+.cuerpo.screener .insignia.WATCH{ color: var(--ambar); background-color: rgba(245, 184, 75, 0.1); }
+.cuerpo.screener .insignia.WAIT{ color: var(--rojo); background-color: rgba(242, 97, 122, 0.1); }
+.cuerpo.screener .insignia.DATA_PENDING{ color: var(--apagado); background-color: rgba(104, 119, 140, 0.1); }
+
+.cuerpo.screener .paginacion{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+}
+
+.cuerpo.screener .aviso{
+  margin-top: 16px;
+}
+
+@media (max-width: 760px){
+  .cuerpo.screener .rejillaFiltros .ancho{
+    grid-column: auto;
+  }
+
+  .cuerpo.screener .acciones{
+    justify-content: flex-start;
+  }
+
+  .cuerpo.screener .filtros > .cabeceraTarjeta{
+    flex-direction: column;
+  }
+}
+
+.cuerpo.screener .vacioCelda{
+  font-size: 9px;
+  color: var(--apagado);
+}

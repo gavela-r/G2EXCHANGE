@@ -6,7 +6,7 @@
     "dev": "node --watch --require ts-node/register src/index.ts",
     "build": "npm --prefix ../valuation_engine run build && tsc -p tsconfig.json",
     "start": "node dist/src/index.js",
-    "test": "npm run build && node --require ./tests/config.cjs --test tests/*.test.cjs",
+    "test": "npm run build && npm run capital:build && node --require ./tests/config.cjs --test tests/*.test.cjs",
     "valuation": "node dist/valoracionAutomatica.js",
     "valuation:dev": "ts-node --project tsconfig.json valoracionAutomatica.ts",
     "valuation:watch": "node dist/src/valoracion/watch.js",

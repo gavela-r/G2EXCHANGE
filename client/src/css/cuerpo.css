@@ -1,5 +1,17 @@
 .cuerpo{
-  background-color: #09111F;
+  --fondo: #09111F;
+  --tarjeta: #111D2F;
+  --input: #0F1A2B;
+  --borde: #25334A;
+  --texto: #F1F5FB;
+  --apagado: #68778C;
+  --secundario: #8190A7;
+  --acento: #6B9CFF;
+  --verde: #3DD68C;
+  --rojo: #F2617A;
+  --ambar: #F5B84B;
+
+  background-color: var(--fondo);
   background-image: radial-gradient(
     ellipse 60% 45% at 80% 0%,
     #122340 0%,
@@ -7,240 +19,774 @@
   );
   background-repeat: no-repeat;
   min-height: 100vh;
-  padding: 20px;
+  padding: 36px 20px 60px;
+  box-sizing: border-box;
+  color: var(--texto);
 }
 
-.cuerpo h1, .cuerpo p{
+.cuerpo *{
+  box-sizing: border-box;
+}
+
+.cuerpo p, .cuerpo h1, .cuerpo h2, .cuerpo h3, .cuerpo h4{
   margin: 0;
-  color: #F1F5FB;
-  padding: 10px;
 }
 
-.cuerpo p{
-  color: #6B9CFF;
-}
-
-.cuerpo .descripcion{
-  color: #8190A7;
-  font-size: 20px;
-}
-
-.cuerpo .principal{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 20px;
-}
-
-.cuerpo .principal .left{
-  width: 400px;
-  border: 1px solid #25334A;
-  background-color: #111D2F;
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 20px;
-  overflow: hidden;
-  
-}
-.cuerpo .principal .left .subtitulo{
-  padding: 0;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-align: start;
-}
-.cuerpo .principal .titulo{
-  margin: 8px 0 0;
-  font-size: 20px;
-  font-weight: 700;
-  text-align: start;
-  color: #F1F5FB
-}
-
-.cuerpo .principal .left .buscador{
-  position: relative;
-  width: 100%;
-  margin-top: 18px;
-}
-
-.cuerpo .principal .left .lupa{
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #68778C;
-}
-.cuerpo .principal .left .buscar{
-  width: 100%;
-  height: 44px;
-  padding-left: 40px;
-  box-sizing: border-box;
-  background-color: #0F1A2B;
-  border: 1px solid #25334A;
-  border-radius: 10px;
-  color: #F1F5FB;
-  font-size: 14px;
-}
-
-.cuerpo .principal .left .buscar:focus{
-  outline: none;
-  border-color: #6B9CFF;
-}
-
-
-.principal .left .empresas .cavecera{
-  font-size: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.principal .left .empresas .cavecera .nombre,
-.principal .left .empresas .cavecera .ticker{
-  color: #68778C;
-}
-
-.principal .left .empresas .filas{
-  margin: 0 -20px;
-}
-
-.principal .left .empresas .filas .fila{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #25334A;
-  padding: 0 20px;
-}
-
-.principal .left .empresas .filas .fila .caja{
-  background-color: #223C63;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  border-radius: 20%;
-  color: #A9C8FF;
-}
-
-.principal .left .empresas .filas .fila .informacion .nombre{
-  font-size: 14px;
-  color: #F1F5FB;
-}
-
-.principal .left .empresas .filas .fila .informacion .nasdaq{
-  font-size: 12px;
-  color: #68778C;
-}
-
-.principal .left .empresas .filas .fila .precio .ticker{
-  font-size: 14px;
-  color: #F1F5FB;
-}
-
-.principal .left .empresas .filas .fila .precio .valor{
-  font-size: 12px;
-  color: #3DD68C;
-}
-
-.principal .left .empresas .filas .fila:hover{
-  background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
-  border-left-color: #6B9CFF;
+.cuerpo button{
+  font-family: inherit;
   cursor: pointer;
 }
 
+.cuerpo .contenedor{
+  max-width: 1260px;
+  margin: 0 auto;
+}
 
-.principal .centro .nombreEmpresa{
-  width: 900px;
-  height: 130px;
-  border: 1px solid #25334A;
-  background-color: #111D2F;
-  border-radius: 10px;
-  box-sizing: border-box;
+/* ---------- Encabezado ---------- */
+
+.cuerpo .encabezado{
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  align-items: flex-end;
+  gap: 20px;
 }
 
-.principal .centro .cajaEmpresa{
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border: 1px solid #25334A;
-  background-color: #111D2F;
+.cuerpo .migas{
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--acento);
+}
+
+.cuerpo h1{
+  margin-top: 14px;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .descripcion{
+  margin-top: 8px;
+  color: var(--secundario);
+  font-size: 16px;
+}
+
+.cuerpo .estadoMercado{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--borde);
   border-radius: 10px;
-  box-sizing: border-box;
-  padding: 20px;
-  background-color: #6692e2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(17, 29, 47, 0.7);
 }
 
-.principal .centro .nombreEmpresa .cajaEmpresa .inicialEmpresa{
-  color: #F1F5FB;
+.cuerpo .estadoMercado .punto{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--verde);
+  box-shadow: 0 0 0 4px rgba(61, 214, 140, 0.15);
 }
 
-.principal .centro .nombreEmpresa .infoEmpresa{
-  padding-right: 340px;
-  display: flex;
-  flex-direction: column;
-
+.cuerpo .estadoMercado .estado{
+  font-size: 12px;
+  font-weight: 700;
 }
 
-.principal .centro .nombreEmpresa .infoEmpresa .nasdaq{
+.cuerpo .estadoMercado .cierre{
+  margin-top: 2px;
   font-size: 10px;
-  color:#68778C;
+  color: var(--apagado);
 }
 
-.principal .centro .nombreEmpresa .precioEmpresa{
-  text-align: end;
+/* ---------- Rejilla principal ---------- */
+
+.cuerpo .principal{
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 260px;
+  gap: 16px;
+  margin-top: 28px;
+  align-items: start;
 }
 
-.principal .centro .nombreEmpresa .precioEmpresa .precioActual{
+.cuerpo .left,
+.cuerpo .nombreEmpresa,
+.cuerpo .evolucionAccion,
+.cuerpo .metrica,
+.cuerpo .tarjeta{
+  border: 1px solid var(--borde);
+  background-color: var(--tarjeta);
+  border-radius: 10px;
+}
+
+.cuerpo .subtitulo,
+.cuerpo .rendimiento,
+.cuerpo .precioActual,
+.cuerpo .etiqueta{
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--acento);
+}
+
+.cuerpo .titulo,
+.cuerpo .tituloEvolucion{
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .cabeceraTarjeta{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cuerpo .nota{
+  font-size: 9px;
+  color: var(--apagado);
+}
+
+.cuerpo .valor{
+  color: var(--verde);
+}
+
+.cuerpo .valor.negativo{
+  color: var(--rojo);
+}
+
+/* ---------- Watchlist ---------- */
+
+.cuerpo .left{
+  padding: 20px 0 0;
+  overflow: hidden;
+  align-self: stretch;
+}
+
+.cuerpo .left .cabeceraTarjeta,
+.cuerpo .left .buscador{
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.cuerpo .botonIcono{
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--borde);
+  border-radius: 7px;
+  background-color: var(--input);
+  color: var(--texto);
   font-size: 10px;
-  color: #68778C;
 }
 
-.principal .centro .nombreEmpresa .precioEmpresa .precio{
-  color: #F1F5FB;
-  margin: 0px;
+.cuerpo .botonIcono:hover{
+  border-color: var(--acento);
 }
 
-.principal .centro .nombreEmpresa .precioEmpresa .valor{
-  color:#3DD68C;
+.cuerpo .left .buscador{
+  position: relative;
+  margin-top: 18px;
+}
+
+.cuerpo .left .lupa{
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--apagado);
   font-size: 11px;
 }
 
-.principal .centro .evolucionAccion{
-  width: auto;
-  height: auto;
-  border: 1px solid #25334A;
-  border-radius: 10px;
-  background-color: #111D2F;
-  padding: 10px;
-  margin-top: 10px;
+.cuerpo .left .buscar{
+  width: 100%;
+  height: 36px;
+  padding-left: 34px;
+  background-color: var(--input);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 12px;
 }
 
-.principal .centro .evolucionAccion .tituloEvolucion{
-  color: #F1F5FB;
+.cuerpo .left .buscar::placeholder{
+  color: var(--apagado);
 }
 
-.principal .centro .evolucionAccion .precioValor{
+.cuerpo .left .buscar:focus{
+  outline: none;
+  border-color: var(--acento);
+}
+
+.cuerpo .empresas .cavecera{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 0 16px 8px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.cuerpo .empresas .cavecera p{
+  color: var(--apagado);
+}
+
+.cuerpo .empresas .fila{
+  width: 100%;
   display: flex;
   align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--borde);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  transition: background 0.15s;
 }
 
-.principal .centro .evolucionAccion .precioValor .precioAccion{
-  color: #F1F5FB;
+.cuerpo .empresas .fila:hover,
+.cuerpo .empresas .fila.activa{
+  background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
 }
 
-.principal .centro .evolucionAccion .precioValor .valor{
-  color:#3DD68C;
-  padding-left: 10px;
+.cuerpo .empresas .fila.activa{
+  border-left-color: var(--acento);
 }
 
-.principal .centro .evolucionAccion .precioValor .tiempo{
+.cuerpo .empresas .fila .caja{
+  flex: 0 0 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #223C63;
+  border-radius: 7px;
+  color: #A9C8FF;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.cuerpo .empresas .fila .informacion{
+  flex: 1;
+  min-width: 0;
+}
+
+.cuerpo .empresas .fila .informacion .nombre{
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cuerpo .empresas .fila .informacion .nasdaq{
+  margin-top: 3px;
+  font-size: 8px;
+  color: var(--apagado);
+}
+
+.cuerpo .empresas .fila .precio{
+  text-align: right;
+}
+
+.cuerpo .empresas .fila .precio .ticker{
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .empresas .fila .precio .valor{
+  margin-top: 3px;
+  font-size: 8px;
+}
+
+.cuerpo .sinResultados{
+  padding: 20px 16px;
+  font-size: 11px;
+  color: var(--apagado);
+}
+
+.cuerpo .verTodas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 18px;
   font-size: 10px;
-  color: #68778C
+  font-weight: 700;
+  color: var(--acento);
+  text-decoration: none;
+}
+
+.cuerpo .verTodas:hover{
+  color: var(--texto);
+}
+
+/* ---------- Columna central ---------- */
+
+.cuerpo .centro{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.cuerpo .nombreEmpresa{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+}
+
+.cuerpo .cajaEmpresa{
+  flex: 0 0 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #7FA8F5 0%, #4F7FE0 100%);
+}
+
+.cuerpo .cajaEmpresa .inicialEmpresa{
+  color: var(--texto);
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+}
+
+.cuerpo .infoEmpresa{
+  flex: 1;
+  min-width: 0;
+}
+
+.cuerpo .nombreCorporacion{
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .verificado{
+  margin-left: 4px;
+  font-size: 13px;
+  color: var(--acento);
+}
+
+.cuerpo .infoEmpresa .nasdaq{
+  margin-top: 4px;
+  font-size: 9px;
+  color: var(--apagado);
+}
+
+.cuerpo .precioEmpresa{
+  text-align: right;
+}
+
+.cuerpo .precioEmpresa .precioActual{
+  color: var(--apagado);
+}
+
+.cuerpo .precioEmpresa .precio{
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .precioEmpresa .valor{
+  margin-top: 4px;
+  font-size: 9px;
+}
+
+.cuerpo .evolucionAccion{
+  padding: 20px;
+}
+
+.cuerpo .rangos{
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background-color: var(--input);
+}
+
+.cuerpo .rangos button{
+  min-width: 26px;
+  padding: 7px 6px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--apagado);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.cuerpo .rangos button:hover{
+  color: var(--texto);
+}
+
+.cuerpo .rangos button.activo{
+  background-color: #2A4572;
+  color: var(--texto);
+}
+
+.cuerpo .precioValor{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.cuerpo .precioAccion{
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .precioValor .valor{
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.cuerpo .precioValor .tiempo{
+  font-size: 8px;
+  color: var(--apagado);
+}
+
+.cuerpo .grafico{
+  height: 230px;
+  margin-top: 12px;
+}
+
+.cuerpo .tradingview-widget-copyright{
+  font-size: 8px;
+  text-align: right;
+}
+
+.cuerpo .tradingview-widget-copyright a{
+  color: var(--apagado);
+  text-decoration: none;
+}
+
+.cuerpo .metricas{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cuerpo .metrica{
+  padding: 18px 16px;
+}
+
+.cuerpo .metrica .etiqueta{
+  color: var(--apagado);
+  font-size: 8px;
+}
+
+.cuerpo .cifra{
+  margin: 10px 0 6px;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* ---------- Columna derecha ---------- */
+
+.cuerpo .right{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cuerpo .tarjeta{
+  padding: 20px 18px;
+}
+
+.cuerpo .indicador{
+  position: relative;
+  width: 104px;
+  height: 104px;
+  margin: 18px auto 12px;
+}
+
+.cuerpo .indicador svg{
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.cuerpo .indicador circle{
+  fill: none;
+  stroke-width: 5;
+}
+
+.cuerpo .indicador .pista{
+  stroke: var(--borde);
+}
+
+.cuerpo .indicador .progreso{
+  stroke: #4F86F7;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.cuerpo .indicadorValor{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Manrope", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.cuerpo .indicadorValor span{
+  margin-top: 10px;
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--apagado);
+}
+
+.cuerpo .fortalezaTexto{
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--acento);
+}
+
+.cuerpo .nota.centrada{
+  margin-top: 4px;
+  text-align: center;
+  font-size: 7px;
+}
+
+.cuerpo .puntuaciones{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.cuerpo .puntuacionTexto{
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: var(--secundario);
+}
+
+.cuerpo .numero{
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .barra{
+  height: 3px;
+  margin-top: 6px;
+  border-radius: 2px;
+  background-color: var(--borde);
+  overflow: hidden;
+}
+
+.cuerpo .barra div{
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #4F86F7, #8A7CF6);
+  transition: width 0.6s ease;
+}
+
+.cuerpo .recomendacion{
+  margin: 8px 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+.cuerpo .recomendacion.neutral{
+  color: var(--ambar);
+}
+
+.cuerpo .objetivo{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+}
+
+.cuerpo .objetivoPrecio{
+  text-align: right;
+}
+
+.cuerpo .objetivoPrecio .cifra{
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.cuerpo .objetivoPrecio .valor{
+  font-size: 7px;
+}
+
+.cuerpo .votos{
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cuerpo .votos li{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 8px;
+  color: var(--secundario);
+}
+
+.cuerpo .votos .numero{
+  margin-left: auto;
+}
+
+.cuerpo .votos .punto{
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.cuerpo .punto.verde{ background-color: var(--verde); }
+.cuerpo .punto.ambar{ background-color: var(--ambar); }
+.cuerpo .punto.rojo{ background-color: var(--rojo); }
+
+.cuerpo .aviso{
+  font-size: 8px;
+  text-align: center;
+  color: var(--apagado);
+}
+
+/* ---------- Datos reales ---------- */
+
+.cuerpo .estadoMercado .punto.cerrado{
+  background-color: var(--apagado);
+  box-shadow: 0 0 0 4px rgba(104, 119, 140, 0.15);
+}
+
+.cuerpo .avisoError{
+  margin-top: 20px;
+  padding: 12px 16px;
+  border: 1px solid rgba(242, 97, 122, 0.4);
+  border-radius: 10px;
+  background-color: rgba(242, 97, 122, 0.08);
+  color: var(--rojo);
+  font-size: 13px;
+}
+
+.cuerpo .empresas .fila .precio .fechaFila{
+  margin-top: 3px;
+  font-size: 8px;
+  color: var(--apagado);
+}
+
+.cuerpo .precioEmpresa .fechaCierre{
+  margin-top: 4px;
+  font-size: 9px;
+  color: var(--apagado);
+}
+
+.cuerpo .sinDatos{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--apagado);
+}
+
+.cuerpo .fuente{
+  font-size: 9px;
+  color: var(--apagado);
+}
+
+.cuerpo .detalleKpis{
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cuerpo .detalleKpis li{
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: var(--secundario);
+}
+
+.cuerpo .detalleKpis span{
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.cuerpo .recomendacion.sinDatosTitulo{
+  color: var(--apagado);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px){
+  .cuerpo .principal{
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+
+  .cuerpo .right{
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cuerpo .aviso{
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px){
+  .cuerpo{
+    padding: 24px 16px 40px;
+  }
+
+  .cuerpo h1{
+    font-size: 30px;
+  }
+
+  .cuerpo .encabezado{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cuerpo .principal,
+  .cuerpo .right{
+    grid-template-columns: 1fr;
+  }
+
+  .cuerpo .metricas{
+    grid-template-columns: 1fr;
+  }
+
+  .cuerpo .evolucionAccion .cabeceraTarjeta{
+    flex-direction: column;
+  }
 }

@@ -9,13 +9,16 @@ import {
     importarDatosValoracion
 } from "./valoracion/motorServicio";
 import { cargarMotor } from "./valoracion/rutas";
+import { landingRouter } from "./landing";
+import { screenerRouter } from "./screener";
 
 dotenv.config();
 
 const app = express();
 const router = Router();
 
-app.use(cors());
+// En el servidor público solo se acepta la web de Cloudflare Pages (ALLOWED_ORIGIN)
+app.use(cors(process.env.ALLOWED_ORIGIN ? { origin: process.env.ALLOWED_ORIGIN } : undefined));
 app.use(express.json({ limit: "2mb" }));
 
 // ============================================================
@@ -146,15 +149,22 @@ router.post("/api/valoracion", async (req, res) => {
 // ACTIVAR RUTAS
 // ============================================================
 
-app.use(router);
+// Con SOLO_LECTURA=1 (servidor público) no se exponen las rutas que insertan datos o lanzan el motor
+if (process.env.SOLO_LECTURA !== "1") {
+    app.use(router);
+}
+app.use(landingRouter);
+app.use(screenerRouter);
 
 // ============================================================
 // INICIAR SERVIDOR
 // ============================================================
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT || 3000);
+// En la VM se pone HOST=127.0.0.1 para que la API solo sea accesible a través de Caddy
+const HOST = process.env.HOST || "0.0.0.0";
 
-app.listen(PORT, () => {
+app.listen(PORT, HOST, () => {
     console.log(
         `Servidor escuchando en puerto ${PORT}`
     );

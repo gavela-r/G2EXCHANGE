@@ -492,6 +492,17 @@ const TAXONOMIA_CONCEPTOS: TaxonomiaConceptoDef[] = [
         unidad_tipo: "PORCENTAJE",
         signo_esperado: "VARIABLE",
         activo: true
+    },
+    {
+        concepto_estandar: "DEUDA_NETA_SOBRE_EBITDA",
+        categoria: "RATIO",
+        alias_sec: "CALCULADO",
+        alias_edinet: "CALCULADO",
+        alias_finmind: "CALCULADO",
+        descripcion: "DFN/EBITDA: deuda financiera neta (deuda total menos efectivo) dividida entre EBITDA. Solo con EBITDA positivo.",
+        unidad_tipo: "VECES",
+        signo_esperado: "VARIABLE",
+        activo: true
     }
 ];
 

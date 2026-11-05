@@ -6,8 +6,9 @@ import { resolverConfiguracionFinanciera } from './motorServicio';
 import { obtenerMapeoSector } from './mapeoSectores';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-import {clasificacionVigente,perfilPorCapitalizacion} from './evidencia';
+import {clasificacionVigente,perfilPorCapitalizacion,tipoCambioReferencia} from './evidencia';
 import {identidadEstructural} from '../capital/historico';
+import {resolverPartidas} from './resolucionConceptos';
 
 export type Db = Pick<PoolConnection,'query'>;
 export type PerfilRating = 'GRANDE_NO_FINANCIERA'|'PEQUEÑA_RIESGOSA'|'FINANCIERA';
@@ -49,6 +50,13 @@ export interface Partida { concepto_estandar:string; concepto:string; importe:un
 export function normalizarPartidas(rows:Partida[],fuente:string):{valores:Record<string,number>; calidad:Record<string,unknown>; advertencias:string[]} {
   const {numeroDato,conceptoDAValido}=cargarCalidad();
   const valores:Record<string,number>={},calidad:Record<string,unknown>={},advertencias:string[]=[];
+  // Resolución determinista de conceptos de origen: prioridad de agregados, suma de componentes
+  // disjuntos y exclusión de mapeos incompatibles. Cada decisión queda en calidad/advertencias.
+  const resuelto=resolverPartidas(rows,fuente);rows=resuelto.rows;
+  for(const n of resuelto.notas){
+    calidad[`RESOLUCION_${n.concepto}`]=n;
+    if(n.regla!=='PRIORIDAD_AGREGADO'&&n.regla!=='AGREGADO_PUBLICADO')advertencias.push(`${n.concepto}: ${n.regla} (${n.usados.join(', ')||'-'})`);
+  }
   for(const r of rows) {
     const k=r.concepto_estandar.toUpperCase();
     if(['INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR','EFECTIVO','DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO','PATRIMONIO_NETO','ACTIVOS_TOTALES','PASIVOS_TOTALES'].includes(k) && /writedown|reversal|increase|decrease|changein|impairment/i.test(r.concepto)) {
@@ -132,7 +140,8 @@ export async function prepararInstrumento(db:Db,id:number,asOf:string,hip?:Hipot
     traces.push({informe_id:r.id,fecha:fechaCivil(r.fecha_fin_periodo),fuente:r.fuente,version_id:vs[0].id,hash_version:vs[0].hash_inputs,fecha_version:vs[0].fecha_fin_periodo,calidad:n.calidad,advertencias:n.advertencias,kpis});
   }
   const need0=(k:string)=>{if(ultimo[k]===undefined)throw new Pendiente('DATO_PENDIENTE',`${k} FY0 ausente`);return ultimo[k];};
-  const automaticProfile=perfilPorCapitalizacion(i.codigo_iso,i.moneda,cfg.valuationMethodFamily,Number(prices[0].precio_cierre),ultimo.ACCIONES_EN_CIRCULACION);
+  const fxTamano=await tipoCambioReferencia(db,i.moneda,asOf);
+  const automaticProfile=perfilPorCapitalizacion(i.codigo_iso,i.moneda,cfg.valuationMethodFamily,Number(prices[0].precio_cierre),ultimo.ACCIONES_EN_CIRCULACION,fxTamano);
   const perfil=hip?.perfil_rating??automaticProfile?.profile;
   if(!perfil)throw new Pendiente('PERFIL_RATING_PENDIENTE','Falta evidencia del perfil de tamaño/riesgo; no se elige un tramo arbitrario');
   if(['BANK','INSURANCE'].includes(cfg.valuationMethodFamily)!==(perfil==='FINANCIERA'))throw new Pendiente('PERFIL_INCOMPATIBLE','Perfil rating no corresponde a metodología');

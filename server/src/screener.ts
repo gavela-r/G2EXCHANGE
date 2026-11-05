@@ -45,6 +45,8 @@ WITH inf AS (
     MAX(CASE WHEN k.kpi = 'MARGEN_FCF' THEN k.valor END) margen_fcf,
     MAX(CASE WHEN k.kpi = 'DEUDA_TOTAL' THEN k.valor END) deuda_total,
     MAX(CASE WHEN k.kpi = 'EBITDA' THEN k.valor END) ebitda,
+    MAX(CASE WHEN k.kpi = 'DEUDA_NETA' THEN k.valor END) deuda_neta,
+    MAX(CASE WHEN k.kpi = 'DEUDA_NETA_SOBRE_EBITDA' THEN k.valor END) dfn_ebitda,
     MAX(CASE WHEN k.kpi = 'COBERTURA_INTERESES' THEN k.valor END) cobertura,
     MAX(CASE WHEN k.kpi = 'CAPITAL_CIRCULANTE_OPERATIVO' THEN k.valor END) circulante
   FROM inf JOIN kpi_financiero_informe k ON k.informe_id = inf.id
@@ -59,7 +61,7 @@ WITH inf AS (
 ), base AS (
   SELECT i.id, i.ticker, e.nombre_empresa, pa.codigo_iso, m.nombre_bolsa, s.nombre_sector, i.moneda,
          c.precio_cierre, c.fecha, p.acciones, p.beneficio, p.eps, p.ingresos, p.ingresos_ant,
-         k.fecha_informe, k.roe, k.roa, k.margen_neto, k.margen_fcf, k.deuda_total, k.ebitda,
+         k.fecha_informe, k.roe, k.roa, k.margen_neto, k.margen_fcf, k.deuda_total, k.ebitda, k.deuda_neta, k.dfn_ebitda,
          k.cobertura, k.circulante,
          v.fair_value, v.upside, v.decision, v.confidence, v.validation_status,
          ROW_NUMBER() OVER (PARTITION BY i.empresa_id
@@ -122,6 +124,9 @@ async function construir() {
         const ingresosAnt = numero(f.ingresos_ant);
         const deuda = numero(f.deuda_total);
         const ebitda = numero(f.ebitda);
+        const deudaNeta = numero(f.deuda_neta);
+        // DFN/EBITDA persistido; si el informe es anterior al KPI se deriva de DEUDA_NETA y EBITDA del mismo informe.
+        const dfnEbitda = numero(f.dfn_ebitda) ?? (deudaNeta !== null && ebitda && ebitda > 0 ? deudaNeta / ebitda : null);
 
         const perBruto = precio !== null && eps ? precio / eps : null;
         const perSensato = perBruto !== null && Math.abs(perBruto) >= 1 && Math.abs(perBruto) <= 1000;
@@ -147,6 +152,7 @@ async function construir() {
             margenNeto: redondear(numero(f.margen_neto)),
             margenFcf: redondear(numero(f.margen_fcf)),
             deudaEbitda: deuda !== null && ebitda && ebitda > 0 ? redondear(deuda / ebitda) : null,
+            dfnEbitda: redondear(dfnEbitda),
             cobertura: redondear(numero(f.cobertura)),
             capitalCirculante: numero(f.circulante),
             crecimiento: ingresos && ingresosAnt && ingresos > 0 && ingresosAnt > 0

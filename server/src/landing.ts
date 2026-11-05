@@ -121,7 +121,7 @@ async function ficha(instrumento: any) {
     if (actual) {
         const [filas]: any = await conexion.query(
             `SELECT kpi, valor FROM kpi_financiero_informe
-             WHERE informe_id = ? AND kpi IN ('ROE', 'MARGEN_NETO')`,
+             WHERE informe_id = ? AND kpi IN ('ROE', 'MARGEN_NETO', 'DEUDA_NETA', 'EBITDA', 'DEUDA_NETA_SOBRE_EBITDA')`,
             [actual.id]
         );
         for (const f of filas) {
@@ -144,6 +144,9 @@ async function ficha(instrumento: any) {
         p.INGRESOS && pAnterior.INGRESOS ? (p.INGRESOS / pAnterior.INGRESOS - 1) * 100 : null;
     const roe = kpis.ROE ?? null;
     const margenNeto = kpis.MARGEN_NETO ?? null;
+    // DFN/EBITDA: persistido o derivado de DEUDA_NETA y EBITDA del mismo informe (solo EBITDA > 0).
+    const dfnEbitda = kpis.DEUDA_NETA_SOBRE_EBITDA ??
+        (kpis.DEUDA_NETA !== undefined && kpis.EBITDA > 0 ? kpis.DEUDA_NETA / kpis.EBITDA : null);
     const pasivoSobreActivos =
         p.PASIVOS_TOTALES && p.ACTIVOS_TOTALES ? (p.PASIVOS_TOTALES / p.ACTIVOS_TOTALES) * 100 : null;
 
@@ -181,7 +184,8 @@ async function ficha(instrumento: any) {
             crecimientoIngresos,
             roe,
             margenNeto,
-            pasivoSobreActivos
+            pasivoSobreActivos,
+            dfnEbitda
         },
         fortaleza: { total, puntuaciones },
         consenso: null // no existe en la base de datos

@@ -20,10 +20,23 @@ export async function clasificacionVigente(db:Db,companyId:number,date:string):P
  const row=rows[0];return row?.status==='ACCEPTED'&&row.confidence==='HIGH'?row:undefined;
  }catch(e:any){if(e.code==='ER_NO_SUCH_TABLE')return undefined;throw e;}
 }
-/** System policy based on observed USD size, never a guessed country FX or financial rating. */
-export function perfilPorCapitalizacion(country:string,currency:string,family:string,price:number,shares:number):{profile:PerfilRating;criterion:string;marketCap:number}|undefined {
- if(country!=='US'||currency!=='USD'||!Number.isFinite(price)||!Number.isFinite(shares)||price<=0||shares<=0)return undefined;
+/** Tipo de cambio de referencia (H.10 Reserva Federal) para clasificar tamaño; nunca convierte estados financieros. */
+export interface TipoCambioUsd { unidadesPorUsd:number; fecha:string; fuente:string; serie:string }
+export async function tipoCambioReferencia(db:Db,currency:string,date:string):Promise<TipoCambioUsd|undefined> {
+ if(currency==='USD')return undefined;
+ try{
+  const [rows]=await db.query<RowDataPacket[]>("SELECT unidades_por_usd,DATE_FORMAT(fecha,'%Y-%m-%d') fecha,fuente,serie FROM tipo_cambio_referencia WHERE moneda=? AND fecha<=? ORDER BY fecha DESC LIMIT 1",[currency,date]);
+  const r=rows[0];
+  return r&&Number(r.unidades_por_usd)>0?{unidadesPorUsd:Number(r.unidades_por_usd),fecha:r.fecha,fuente:r.fuente,serie:r.serie}:undefined;
+ }catch(e:any){if(e.code==='ER_NO_SUCH_TABLE')return undefined;throw e;}
+}
+/** System policy based on observed USD size, never a guessed country FX or financial rating.
+ *  JP/TW: capitalización local convertida con el tipo H.10 de la Reserva Federal a la fecha de valoración (solo para el umbral de tamaño). */
+export function perfilPorCapitalizacion(country:string,currency:string,family:string,price:number,shares:number,fx?:TipoCambioUsd):{profile:PerfilRating;criterion:string;marketCap:number}|undefined {
+ const local=currency!=='USD';
+ if(!['US','JP','TW'].includes(country)||(country==='US')!==(currency==='USD')||(local&&!fx)||!Number.isFinite(price)||!Number.isFinite(shares)||price<=0||shares<=0)return undefined;
  if(['BANK','INSURANCE'].includes(family))return {profile:'FINANCIERA',criterion:'VERIFIED_FINANCIAL_FAMILY_V1',marketCap:price*shares};
- const marketCap=price*shares;if(!Number.isFinite(marketCap)||marketCap===5e9)return undefined;
- return {profile:marketCap>5e9?'GRANDE_NO_FINANCIERA':'PEQUEÑA_RIESGOSA',criterion:'DAMODARAN_SIZE_5BN_USD_V1: price x reported outstanding shares; REVIEW proxy',marketCap};
+ const marketCap=price*shares/(local?fx!.unidadesPorUsd:1);if(!Number.isFinite(marketCap)||marketCap===5e9)return undefined;
+ const fxTxt=local?`; FX ${currency}/USD ${fx!.unidadesPorUsd} ${fx!.serie} ${fx!.fecha} (${fx!.fuente})`:'';
+ return {profile:marketCap>5e9?'GRANDE_NO_FINANCIERA':'PEQUEÑA_RIESGOSA',criterion:`DAMODARAN_SIZE_5BN_USD_V1: price x reported outstanding shares${fxTxt}; REVIEW proxy`,marketCap};
 }

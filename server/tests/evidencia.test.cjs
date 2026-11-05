@@ -8,7 +8,7 @@ test('Fuente TW: industria específica, categorías contradictorias y financiera
 test('Perfil rating: umbral documentado USD; no fabricar FX ni tamaños',()=>{
  assert.equal(perfilPorCapitalizacion('US','USD','FCFF',100,60e6).profile,'GRANDE_NO_FINANCIERA');
  assert.equal(perfilPorCapitalizacion('US','USD','FCFF',100,40e6).profile,'PEQUEÑA_RIESGOSA');
- for(const args of [['JP','JPY','FCFF',100,60e6],['US','USD','FCFF',100,50e6],['US','USD','FCFF',NaN,60e6]])assert.equal(perfilPorCapitalizacion(...args),undefined);
+ for(const args of [['JP','JPY','FCFF',100,60e6],['TW','USD','FCFF',100,60e6],['US','USD','FCFF',100,50e6],['US','USD','FCFF',NaN,60e6]])assert.equal(perfilPorCapitalizacion(...args),undefined);
  assert.equal(perfilPorCapitalizacion('US','USD','BANK',100,60e6).profile,'FINANCIERA');
 });
 test('Clasificación: último dictamen pendiente revoca uso del anterior; no ocultar errores DB',async()=>{

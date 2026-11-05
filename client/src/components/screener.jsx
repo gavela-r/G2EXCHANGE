@@ -16,6 +16,7 @@ const NUMERICOS = [
     { k: 'margenFcf', l: 'Margen FCF (%)', op: '>' },
     { k: 'crecimiento', l: 'Crecimiento de ingresos (%)', op: '>' },
     { k: 'deudaEbitda', l: 'Deuda / EBITDA (veces)', op: '<' },
+    { k: 'dfnEbitda', l: 'DFN / EBITDA (veces)', op: '<' },
     { k: 'cobertura', l: 'Cobertura de intereses (veces)', op: '>' },
     { k: 'potencial', l: 'Potencial del motor (%)', op: '>' },
 ];
@@ -38,6 +39,7 @@ const COLUMNAS = [
     { k: 'roa', l: 'ROA' },
     { k: 'margenFcf', l: 'Margen FCF' },
     { k: 'deudaEbitda', l: 'Deuda / EBITDA' },
+    { k: 'dfnEbitda', l: 'DFN / EBITDA' },
     { k: 'crecimiento', l: 'Crec. ingresos' },
     { k: 'potencial', l: 'Potencial' },
     { k: 'decision', l: 'Decisión', texto: true },
@@ -70,10 +72,10 @@ const signo = (n) => n == null ? '' : n >= 0 ? 'pos' : 'neg';
 
 function descargarCsv(filas) {
     const columnas = ['ticker', 'nombre', 'mercado', 'sector', 'moneda', 'precio', 'capitalizacion', 'per', 'per_sector',
-        'roe', 'roa', 'margen_neto', 'margen_fcf', 'deuda_ebitda', 'crecimiento_ingresos', 'potencial', 'decision', 'confianza'];
+        'roe', 'roa', 'margen_neto', 'margen_fcf', 'deuda_ebitda', 'dfn_ebitda', 'crecimiento_ingresos', 'potencial', 'decision', 'confianza'];
     const celda = (v) => v == null ? '' : typeof v === 'string' ? `"${v.replace(/"/g, '""')}"` : v;
     const lineas = filas.map(e => [e.ticker, e.nombre, e.mercado, e.sector, e.moneda, e.precio, e.capitalizacion, e.per,
-        e.perSectorMediana, e.roe, e.roa, e.margenNeto, e.margenFcf, e.deudaEbitda, e.crecimiento, e.potencial,
+        e.perSectorMediana, e.roe, e.roa, e.margenNeto, e.margenFcf, e.deudaEbitda, e.dfnEbitda, e.crecimiento, e.potencial,
         e.decision, e.confianza].map(celda).join(','));
     const url = URL.createObjectURL(new Blob([[columnas.join(','), ...lineas].join('\n')], { type: 'text/csv' }));
     const enlace = document.createElement('a');
@@ -361,6 +363,10 @@ export function Screener() {
                                             <td className={`num ${signo(e.roa)}`}>{pct(e.roa)}</td>
                                             <td className={`num ${signo(e.margenFcf)}`}>{pct(e.margenFcf)}</td>
                                             <td className="num">{veces(e.deudaEbitda)}</td>
+                                            <td className={`num ${e.dfnEbitda != null && e.dfnEbitda < 0 ? 'pos' : ''}`}
+                                                title={e.dfnEbitda != null && e.dfnEbitda < 0 ? 'Caja neta: el efectivo supera la deuda financiera' : undefined}>
+                                                {veces(e.dfnEbitda)}
+                                            </td>
                                             <td className={`num ${signo(e.crecimiento)}`}>{pct(e.crecimiento)}</td>
                                             <td className={`num ${signo(e.potencial)}`}>{pct(e.potencial)}</td>
                                             <td><Decision e={e} /></td>

@@ -305,6 +305,7 @@ export function Cuerpo(){
                                             <li>ROE<span>{m.roe == null ? SIN_DATOS : `${decimal(m.roe, 1)}%`}</span></li>
                                             <li>Margen neto<span>{m.margenNeto == null ? SIN_DATOS : `${decimal(m.margenNeto, 1)}%`}</span></li>
                                             <li>Pasivo / activos<span>{m.pasivoSobreActivos == null ? SIN_DATOS : `${decimal(m.pasivoSobreActivos, 1)}%`}</span></li>
+                                            <li title="Deuda financiera neta (deuda total menos efectivo) entre EBITDA. Negativo = caja neta.">DFN / EBITDA<span>{m.dfnEbitda == null ? SIN_DATOS : `${decimal(m.dfnEbitda, 1)}x`}</span></li>
                                         </ul>
                                     </div>
 

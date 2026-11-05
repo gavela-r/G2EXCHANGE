@@ -330,6 +330,7 @@ export async function kpiCargarPartidas(
 // - CAPITAL_CIRCULANTE_OPERATIVO
 // - CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS
 // - PASIVO_SOBRE_ACTIVOS
+// - DEUDA_NETA_SOBRE_EBITDA (DFN/EBITDA)
 //
 // ============================================================================
 
@@ -461,11 +462,18 @@ export function kpiCalcularInforme(
     // DEUDA TOTAL
     // ========================================================================
 
+    // Un componente de deuda ausente es desconocido, no cero: sin ambos
+    // componentes no se calcula la deuda total ni sus derivados (DFN, DFN/EBITDA...).
     const deudaTotal =
-        kpiSuma(
-            p.DEUDA_CORTO_PLAZO,
-            p.DEUDA_LARGO_PLAZO
-        );
+        p.DEUDA_CORTO_PLAZO !== undefined &&
+        p.DEUDA_LARGO_PLAZO !== undefined
+            ?
+            kpiSuma(
+                p.DEUDA_CORTO_PLAZO,
+                p.DEUDA_LARGO_PLAZO
+            )
+            :
+            null;
 
     push(
         "DEUDA_TOTAL",
@@ -619,6 +627,33 @@ export function kpiCalcularInforme(
             :
             null,
         "PORCENTAJE",
+        "MEDIA"
+    );
+
+
+    // ========================================================================
+    // DFN / EBITDA  (Deuda Financiera Neta / EBITDA, en veces)
+    //
+    // DFN = deuda financiera total (CP + LP) - efectivo y equivalentes.
+    // Solo se calcula con EBITDA positivo: con EBITDA <= 0 el cociente no
+    // mide apalancamiento (cambia de signo o tiende a infinito) y no se
+    // persiste. Una DFN negativa (caja neta) sí es un resultado válido.
+    //
+    // ========================================================================
+
+    push(
+        "DEUDA_NETA_SOBRE_EBITDA",
+        deudaNeta !== null &&
+        ebitda !== null &&
+        ebitda > 0
+            ?
+            kpiDivision(
+                deudaNeta,
+                ebitda
+            )
+            :
+            null,
+        "VECES",
         "MEDIA"
     );
 

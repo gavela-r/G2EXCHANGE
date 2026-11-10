@@ -173,6 +173,11 @@
 }
 
 .cuerpo .botonIcono{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  text-decoration: none;
   width: 26px;
   height: 26px;
   border: 1px solid var(--borde);

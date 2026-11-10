@@ -170,9 +170,9 @@ export function Cuerpo(){
                                     <p className="subtitulo">WATCHLIST</p>
                                     <h4 className="titulo">Empresas destacadas</h4>
                                 </div>
-                                <button className="botonIcono" aria-label="Ver watchlist completa">
+                                <Link to="/screener" className="botonIcono" aria-label="Ver todas las empresas en el screener">
                                     <i className="fa-solid fa-chevron-right"></i>
-                                </button>
+                                </Link>
                             </div>
                             <form className="buscador" onSubmit={e => e.preventDefault()}>
                                 <i className="fa-solid fa-magnifying-glass lupa"></i>
@@ -194,7 +194,7 @@ export function Cuerpo(){
                                         <p className="sinResultados">No hay empresas que coincidan con “{busqueda}”.</p>
                                     )}
                                 </div>
-                                <Link to="/" className="verTodas">
+                                <Link to="/screener" className="verTodas">
                                     Ver todas las empresas <i className="fa-solid fa-arrow-right"></i>
                                 </Link>
                             </div>

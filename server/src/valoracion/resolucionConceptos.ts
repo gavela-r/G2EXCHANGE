@@ -85,6 +85,8 @@ const PRIORIDAD: Record<string, string[]> = {
   GASTO_INTERESES: ['InterestExpense', 'InterestAndDebtExpense', 'InterestExpenseDebt', 'InterestExpenseNonoperating', 'InterestExpensesNOE', 'FinanceCostsIFRS', 'InterestExpenseOperating', 'InterestExpenseBorrowings', 'InterestExpensesOpeCF'],
   CAPEX: ['PaymentsToAcquirePropertyPlantAndEquipment', 'PaymentsToAcquireProductiveAssets', 'PurchaseOfPropertyPlantAndEquipmentInvCF', 'PurchaseOfPropertyPlantAndEquipmentInvCFIFRS', 'PropertyAndPlantAndEquipment'],
   BENEFICIO_ANTES_IMPUESTOS: ['IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest', 'IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments', 'ProfitLossBeforeTaxIFRS', 'IncomeBeforeIncomeTaxes', 'NetIncomeBeforeTax'],
+  ACTIVOS_CORRIENTES: ['AssetsCurrent', 'CurrentAssets', 'CurrentAssetsIFRS'],
+  PASIVOS_CORRIENTES: ['LiabilitiesCurrent', 'CurrentLiabilities', 'CurrentLiabilitiesIFRS'],
   DIVIDENDOS_PAGADOS: ['PaymentsOfDividends', 'PaymentsOfDividendsCommonStock', 'PaymentsOfOrdinaryDividends', 'CashDividendsPaidFinCF', 'DividendsPaidFinCFIFRS'],
 };
 
@@ -131,6 +133,11 @@ function numero(v: unknown): number | undefined {
 
 function idx(lista: string[], c: string) { const l = lc(c); return lista.findIndex(x => x.toLowerCase() === l); }
 
+// Partes corrientes de deuda a largo plazo que algunas cargas mapearon a DEUDA_LARGO_PLAZO.
+// Son deuda financiera corriente (componentes disjuntos de DEUDA_CORTO_PLAZO): antes se
+// descartaban por EXCLUIR y la deuda corriente quedaba incompleta o ausente.
+const CORRIENTE_EN_LP = /^(currentportionoflongtermloanspayable|currentportionofbonds|currentportionofbondswithsubscriptionrightstoshares|shorttermbondspayable|longtermdebtcurrent|currentportionoflongtermborrowingsclifrs)$/i;
+
 /**
  * Devuelve las filas con, como máximo, un importe por concepto estándar resuelto por regla.
  * Las filas de conceptos sin regla se devuelven intactas.
@@ -138,6 +145,16 @@ function idx(lista: string[], c: string) { const l = lc(c); return lista.findInd
 export function resolverPartidas<T extends FilaPartida>(rows: T[], _fuente: Fuente): { rows: T[]; notas: NotaResolucion[] } {
   const notas: NotaResolucion[] = [];
   const porConcepto = new Map<string, T[]>();
+  // Reclasificación de partes corrientes mapeadas como LP (solo si esa misma línea no figura ya en CP).
+  const enCP = new Set(rows.filter(r => String(r.concepto_estandar).toUpperCase() === 'DEUDA_CORTO_PLAZO').map(r => lc(r.concepto)));
+  const movidas: string[] = [];
+  rows = rows.flatMap(r => {
+    if (String(r.concepto_estandar).toUpperCase() !== 'DEUDA_LARGO_PLAZO' || !CORRIENTE_EN_LP.test(local(r.concepto))) return [r];
+    if (enCP.has(lc(r.concepto))) return [];
+    enCP.add(lc(r.concepto)); movidas.push(r.concepto);
+    return [{ ...r, concepto_estandar: 'DEUDA_CORTO_PLAZO' }];
+  });
+  if (movidas.length) notas.push({ concepto: 'DEUDA_CORTO_PLAZO', regla: 'RECLASIFICADO_CORRIENTE_DESDE_LP', usados: movidas, descartados: [] });
   for (const r of rows) {
     const k = String(r.concepto_estandar).toUpperCase();
     if (!porConcepto.has(k)) porConcepto.set(k, []);
@@ -155,6 +172,16 @@ export function resolverPartidas<T extends FilaPartida>(rows: T[], _fuente: Fuen
     const conImporte = validos.filter(r => numero(r.importe) !== undefined);
     const distintos = new Set(conImporte.map(r => numero(r.importe)));
     if (descartados.length) notas.push({ concepto: k, regla: 'EXCLUIDO_MAPEO_INCOMPATIBLE', usados: [], descartados });
+    // US: LongTermDebt como única línea LP es el total (corriente + no corriente). Si la parte corriente
+    // figura en CP, se resta aquí para no contarla dos veces en la deuda total.
+    if (distintos.size === 1 && k === 'DEUDA_LARGO_PLAZO' && corrienteLTD !== undefined && conImporte.every(r => lc(r.concepto) === 'longtermdebt')) {
+      const total = numero(conImporte[0].importe)!;
+      if (corrienteLTD <= total) {
+        salida.push({ ...conImporte[0], importe: total - corrienteLTD });
+        notas.push({ concepto: k, regla: 'LTD_TOTAL_MENOS_CORRIENTE', usados: [conImporte[0].concepto], descartados: [] });
+        continue;
+      }
+    }
     if (distintos.size <= 1) { salida.push(...validos); continue; }
 
     if (COMPONENTES[k]) {

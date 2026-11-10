@@ -38,6 +38,7 @@ const HISTORICO = [
     { l: 'DFN / EBITDA', o: 'kpis', k: 'DEUDA_NETA_SOBRE_EBITDA', f: 'veces', inversa: true },
     { l: 'Cobertura de intereses', o: 'kpis', k: 'COBERTURA_INTERESES', f: 'veces' },
     { l: 'Pasivo / activos', o: 'kpis', k: 'PASIVO_SOBRE_ACTIVOS', f: 'pct', inversa: true },
+    { l: 'Fondo de maniobra', o: 'kpis', k: 'FONDO_MANIOBRA', f: 'importe' },
 ];
 
 async function pedir(url, signal) {

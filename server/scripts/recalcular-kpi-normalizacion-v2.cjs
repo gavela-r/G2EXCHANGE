@@ -16,7 +16,7 @@ const { kpiCalcularInforme } = require('../dist/insercionDatos/insercionKPIInfor
 const WRITE = process.argv.includes('--write');
 const PAIS = process.argv.includes('--pais') ? process.argv[process.argv.indexOf('--pais') + 1] : null;
 const PROPIOS = ['MARGEN_BRUTO', 'MARGEN_EBIT', 'MARGEN_NETO', 'ROA', 'ROE', 'DEUDA_TOTAL', 'DEUDA_NETA', 'DEUDA_SOBRE_PATRIMONIO', 'DEUDA_SOBRE_ACTIVOS',
-  'COBERTURA_INTERESES', 'EBITDA', 'MARGEN_EBITDA', 'DEUDA_NETA_SOBRE_EBITDA', 'FCF', 'MARGEN_FCF', 'CAPITAL_CIRCULANTE_OPERATIVO', 'CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS', 'PASIVO_SOBRE_ACTIVOS'];
+  'COBERTURA_INTERESES', 'EBITDA', 'MARGEN_EBITDA', 'DEUDA_NETA_SOBRE_EBITDA', 'FCF', 'MARGEN_FCF', 'CAPITAL_CIRCULANTE_OPERATIVO', 'CAPITAL_CIRCULANTE_OPERATIVO_SOBRE_INGRESOS', 'PASIVO_SOBRE_ACTIVOS', 'FONDO_MANIOBRA'];
 
 (async () => {
   const db = await mysql.createConnection({ host: process.env.DB_HOST, port: +process.env.DB_PORT, user: process.env.DB_USER, password: process.env.DB_PASSWORD, database: process.env.DB_NAME });

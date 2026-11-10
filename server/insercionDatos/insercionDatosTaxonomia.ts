@@ -503,6 +503,39 @@ const TAXONOMIA_CONCEPTOS: TaxonomiaConceptoDef[] = [
         unidad_tipo: "VECES",
         signo_esperado: "VARIABLE",
         activo: true
+    },
+    {
+        concepto_estandar: "ACTIVOS_CORRIENTES",
+        categoria: "BALANCE",
+        alias_sec: "AssetsCurrent",
+        alias_edinet: "CurrentAssets",
+        alias_finmind: "CurrentAssets",
+        descripcion: "Total del activo corriente publicado.",
+        unidad_tipo: "MONEDA",
+        signo_esperado: "POSITIVO",
+        activo: true
+    },
+    {
+        concepto_estandar: "PASIVOS_CORRIENTES",
+        categoria: "BALANCE",
+        alias_sec: "LiabilitiesCurrent",
+        alias_edinet: "CurrentLiabilities",
+        alias_finmind: "CurrentLiabilities",
+        descripcion: "Total del pasivo corriente publicado.",
+        unidad_tipo: "MONEDA",
+        signo_esperado: "POSITIVO",
+        activo: true
+    },
+    {
+        concepto_estandar: "FONDO_MANIOBRA",
+        categoria: "RATIO",
+        alias_sec: "CALCULADO",
+        alias_edinet: "CALCULADO",
+        alias_finmind: "CALCULADO",
+        descripcion: "Fondo de maniobra: activo corriente total menos pasivo corriente total.",
+        unidad_tipo: "MONEDA",
+        signo_esperado: "VARIABLE",
+        activo: true
     }
 ];
 

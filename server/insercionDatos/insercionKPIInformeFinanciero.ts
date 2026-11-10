@@ -50,6 +50,13 @@ interface KpiPartidas {
 
     DEUDA_LARGO_PLAZO?: number;
 
+    // Total publicado o reconstruido por normalizarPartidas (CP + LP, o agregado total SEC).
+    DEUDA_TOTAL?: number;
+
+    ACTIVOS_CORRIENTES?: number;
+
+    PASIVOS_CORRIENTES?: number;
+
     FLUJO_CAJA_OPERATIVO?: number;
 
     CAPEX?: number;
@@ -464,21 +471,30 @@ export function kpiCalcularInforme(
 
     // Un componente de deuda ausente es desconocido, no cero: sin ambos
     // componentes no se calcula la deuda total ni sus derivados (DFN, DFN/EBITDA...).
-    const deudaTotal =
+    // Excepción: un agregado publicado que ya es el total (corriente + no corriente),
+    // resuelto por normalizarPartidas como DEUDA_TOTAL; en ese caso confianza MEDIA.
+    const deudaPorComponentes =
         p.DEUDA_CORTO_PLAZO !== undefined &&
-        p.DEUDA_LARGO_PLAZO !== undefined
+        p.DEUDA_LARGO_PLAZO !== undefined;
+
+    const deudaTotal =
+        deudaPorComponentes
             ?
             kpiSuma(
                 p.DEUDA_CORTO_PLAZO,
                 p.DEUDA_LARGO_PLAZO
             )
             :
-            null;
+            p.DEUDA_TOTAL ?? null;
+
+    const confianzaDeuda: "ALTA" | "MEDIA" =
+        deudaPorComponentes ? "ALTA" : "MEDIA";
 
     push(
         "DEUDA_TOTAL",
         deudaTotal,
-        "MONEDA"
+        "MONEDA",
+        confianzaDeuda
     );
 
 
@@ -498,7 +514,8 @@ export function kpiCalcularInforme(
     push(
         "DEUDA_NETA",
         deudaNeta,
-        "MONEDA"
+        "MONEDA",
+        confianzaDeuda
     );
 
 
@@ -518,7 +535,8 @@ export function kpiCalcularInforme(
             )
             :
             null,
-        "PORCENTAJE"
+        "PORCENTAJE",
+        confianzaDeuda
     );
 
 
@@ -538,7 +556,8 @@ export function kpiCalcularInforme(
             )
             :
             null,
-        "PORCENTAJE"
+        "PORCENTAJE",
+        confianzaDeuda
     );
 
 
@@ -757,6 +776,23 @@ export function kpiCalcularInforme(
             :
             null,
         "PORCENTAJE"
+    );
+
+
+    // ========================================================================
+    // FONDO DE MANIOBRA
+    //
+    // Activo corriente total - pasivo corriente total (totales publicados).
+    // No depende del desglose de la deuda: el pasivo corriente ya la incluye.
+    // ========================================================================
+
+    push(
+        "FONDO_MANIOBRA",
+        kpiResta(
+            p.ACTIVOS_CORRIENTES,
+            p.PASIVOS_CORRIENTES
+        ),
+        "MONEDA"
     );
 
 

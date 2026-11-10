@@ -47,6 +47,8 @@ export function primasCero(fecha:string):Ajustes {
   return Object.fromEntries(['CONSERVATIVE','BASE','OPTIMISTIC'].map(s=>[s,Object.fromEntries(['prima_iliquidez','prima_tamano','prima_concentracion_clientes','otros_ajustes_wacc'].map(f=>[f,{value:0,source:'SYSTEM_DEFAULT_ZERO_V1',reference_date:fecha}]))])) as Ajustes;
 }
 export interface Partida { concepto_estandar:string; concepto:string; importe:unknown; signo_esperado:string; alias_sec?:string; alias_edinet?:string; alias_finmind?:string; }
+// Agregados US-GAAP de deuda definidos como total (partes corriente y no corriente).
+const DEUDA_TOTAL_SEC=/^(longtermdebt|notespayable|seniornotes|convertiblenotespayable|secureddebt|unsecureddebt|longtermloanspayable|longtermnotespayable|debtlongtermandshorttermcombinedamount)$/i;
 export function normalizarPartidas(rows:Partida[],fuente:string):{valores:Record<string,number>; calidad:Record<string,unknown>; advertencias:string[]} {
   const {numeroDato,conceptoDAValido}=cargarCalidad();
   const valores:Record<string,number>={},calidad:Record<string,unknown>={},advertencias:string[]=[];
@@ -59,10 +61,15 @@ export function normalizarPartidas(rows:Partida[],fuente:string):{valores:Record
   }
   for(const r of rows) {
     const k=r.concepto_estandar.toUpperCase();
-    if(['INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR','EFECTIVO','DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO','PATRIMONIO_NETO','ACTIVOS_TOTALES','PASIVOS_TOTALES'].includes(k) && /writedown|reversal|increase|decrease|changein|impairment/i.test(r.concepto)) {
+    if(['INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR','EFECTIVO','DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO','PATRIMONIO_NETO','ACTIVOS_TOTALES','PASIVOS_TOTALES','ACTIVOS_CORRIENTES','PASIVOS_CORRIENTES'].includes(k) && /writedown|reversal|increase|decrease|changein|impairment/i.test(r.concepto)) {
       advertencias.push(`Concepto de movimiento incompatible con saldo ${k}: ${r.concepto}`);continue;
     }
-    if(k==='DEPRECIACION_AMORTIZACION' && !conceptoDAValido(r.concepto)) {
+    // DepreciationAmortizationAndAccretionNet es el agregado US-GAAP de D&A del estado de flujos (eléctricas,
+    // energía): incluye la acreción de obligaciones de retiro de activos, otro cargo no monetario operativo.
+    // El filtro genérico lo rechazaba por contener "accretion"; se acepta solo ese nombre exacto y queda trazado.
+    const daAgregadoAcrecion=k==='DEPRECIACION_AMORTIZACION'&&/^depreciationamortizationandaccretionnet$/i.test(r.concepto.split(':').pop()!.trim());
+    if(daAgregadoAcrecion)calidad.DEPRECIACION_AMORTIZACION_NOTA={regla:'AGREGADO_SEC_INCLUYE_ACRECION',source:r.concepto};
+    if(k==='DEPRECIACION_AMORTIZACION' && !daAgregadoAcrecion && !conceptoDAValido(r.concepto)) {
       calidad[k]={estado:'INVALIDO',source:r.concepto,reason:'Reserva/reversión/deterioro no representa D&A'};
       advertencias.push(`D&A incompatible: ${r.concepto}`);continue;
     }
@@ -85,6 +92,17 @@ export function normalizarPartidas(rows:Partida[],fuente:string):{valores:Record
   reconstruir('EBITDA',['EBIT','DEPRECIACION_AMORTIZACION'],(a,b)=>a+b);
   reconstruir('BENEFICIO_ANTES_IMPUESTOS',['BENEFICIO_NETO','IMPUESTO_BENEFICIOS'],(a,b)=>a+b);
   reconstruir('DEUDA_TOTAL',['DEUDA_CORTO_PLAZO','DEUDA_LARGO_PLAZO'],(a,b)=>a+b);
+  // US-GAAP: estos agregados se definen "incluyendo las partes corriente y no corriente". Si la empresa
+  // solo publica uno de ellos (balance sin clasificar: aseguradoras, REIT...) y ninguna línea de deuda
+  // corriente, ese importe ES su deuda total: se usa tal cual, sin suponer cero en el corto plazo.
+  if(fuente==='SEC_EDGAR'&&valores.DEUDA_TOTAL===undefined&&valores.DEUDA_LARGO_PLAZO!==undefined&&valores.DEUDA_CORTO_PLAZO===undefined){
+    const origen=String((calidad.DEUDA_LARGO_PLAZO as {source?:string}|undefined)?.source??'');
+    if(DEUDA_TOTAL_SEC.test(origen.split(':').pop()!.trim())){
+      valores.DEUDA_TOTAL=valores.DEUDA_LARGO_PLAZO;
+      calidad.DEUDA_TOTAL={estado:'RECONSTRUIDO',rule:'AGREGADO_SEC_CORRIENTE_Y_NO_CORRIENTE',source:origen};
+      advertencias.push(`DEUDA_TOTAL: agregado publicado ${origen} (incluye corriente y no corriente; sin desglose CP)`);
+    }
+  }
   reconstruir('CAPITAL_CIRCULANTE_OPERATIVO',['INVENTARIOS','CUENTAS_COBRAR','CUENTAS_PAGAR'],(a,b,c)=>a+b-c);
   reconstruir('FCF',['FLUJO_CAJA_OPERATIVO','CAPEX'],(a,b)=>a-b);
   return {valores,calidad,advertencias};

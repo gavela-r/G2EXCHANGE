@@ -24,6 +24,8 @@
 //      acciones de ese ejercicio, pero el resto sí).
 //
 // Uso: node server/scripts/importar-finmind-tw-anual.cjs <dir_fuentes> [--write] [--limit N] [--ticker 2330]
+// Reanudable: checkpoint por empresa y caché de respuestas en private_backups/finmind-tw-cache.
+// Parada limpia: crear private_backups/tw-finmind-anual.stop (se borra al arrancar).
 require('dotenv').config({ path: require('node:path').join(__dirname, '../../.env') });
 const fs = require('node:fs');
 const path = require('node:path');
@@ -44,12 +46,18 @@ const CHECKPOINT = path.join(__dirname, '../../private_backups/tw-finmind-anual-
 
 const IS = { INGRESOS: ['Revenue'], BENEFICIO_BRUTO: ['GrossProfit'], EBIT: ['OperatingIncome'], BENEFICIO_ANTES_IMPUESTOS: ['PreTaxIncome'], IMPUESTO_BENEFICIOS: ['TAX'], BENEFICIO_NETO: ['EquityAttributableToOwnersOfParent'], EPS_DILUIDO: ['EPS'] };
 const CF = { FLUJO_CAJA_OPERATIVO: ['CashFlowsFromOperatingActivities'], CAPEX: ['PropertyAndPlantAndEquipment'], DEPRECIACION_AMORTIZACION: ['Depreciation', 'AmortizationExpense'], GASTO_INTERESES: ['InterestExpense'] };
-const BS = { EFECTIVO: ['CashAndCashEquivalents'], ACTIVOS_TOTALES: ['TotalAssets'], PASIVOS_TOTALES: ['Liabilities'], PATRIMONIO_NETO: ['EquityAttributableToOwnersOfParent'], INVENTARIOS: ['Inventories'], CUENTAS_COBRAR: ['AccountsReceivableNet'], CUENTAS_PAGAR: ['AccountsPayable'], DEUDA_CORTO_PLAZO: ['ShorttermBorrowings'], DEUDA_LARGO_PLAZO: ['LongtermBorrowings', 'BondsPayable'] };
+const BS = { EFECTIVO: ['CashAndCashEquivalents'], ACTIVOS_TOTALES: ['TotalAssets'], PASIVOS_TOTALES: ['Liabilities'], PATRIMONIO_NETO: ['EquityAttributableToOwnersOfParent'], INVENTARIOS: ['Inventories'], CUENTAS_COBRAR: ['AccountsReceivableNet'], CUENTAS_PAGAR: ['AccountsPayable'], DEUDA_CORTO_PLAZO: ['ShorttermBorrowings'], DEUDA_LARGO_PLAZO: ['LongtermBorrowings', 'BondsPayable'], ACTIVOS_CORRIENTES: ['CurrentAssets'], PASIVOS_CORRIENTES: ['CurrentLiabilities'] };
 
 const dormir = ms => new Promise(r => setTimeout(r, ms));
-let ultimo = 0;
+// Caché de respuestas: una reanudación tras un corte no repite peticiones ya hechas (ahorra cuota).
+const CACHE = path.join(__dirname, '../../private_backups/finmind-tw-cache');
+fs.mkdirSync(CACHE, { recursive: true });
+const PARADA = path.join(__dirname, '../../private_backups/tw-finmind-anual.stop');
+let ultimo = 0, bloqueos = 0;
 async function finmind(dataset, ticker) {
-  for (let intento = 0; intento < 8; intento++) {
+  const fichero = path.join(CACHE, `${dataset}-${ticker}.json`);
+  if (fs.existsSync(fichero)) return JSON.parse(fs.readFileSync(fichero, 'utf8'));
+  for (let intento = 0; intento < 10; intento++) {
     const espera = ultimo + ESPERA_MS - Date.now();
     if (espera > 0) await dormir(espera);
     ultimo = Date.now();
@@ -57,10 +65,19 @@ async function finmind(dataset, ticker) {
     try {
       const r = await fetch(url, { headers: TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}, signal: AbortSignal.timeout(45000) });
       const j = await r.json().catch(() => ({}));
-      if (r.status === 402 || r.status === 429 || j.status === 402) { console.log(`[cuota] ${r.status} esperando 10 min`); await dormir(600000); continue; }
+      if (r.status === 402 || r.status === 429 || j.status === 402) {
+        // Límite horario alcanzado: espera creciente (15, 30, 45, 60 min) en vez de reintentar cada poco y alargar el bloqueo.
+        bloqueos++;
+        const min = Math.min(60, 15 * bloqueos);
+        console.log(`[cuota] ${r.status} ${new Date().toISOString()} esperando ${min} min`);
+        await dormir(min * 60000);
+        continue;
+      }
       if (!r.ok || j.status !== 200) throw new Error(`HTTP ${r.status} ${j.msg ?? ''}`);
+      bloqueos = 0;
+      fs.writeFileSync(fichero, JSON.stringify(j.data));
       return j.data;
-    } catch (e) { if (intento >= 3) throw e; await dormir(5000 * (intento + 1)); }
+    } catch (e) { if (intento >= 4) throw e; await dormir(5000 * (intento + 1)); }
   }
   throw new Error('Cuota FinMind no recuperada');
 }
@@ -115,6 +132,7 @@ function construirEjercicio(y, is, cf, bs, par) {
 
 (async () => {
   if (!dir) throw new Error('Uso: importar-finmind-tw-anual.cjs <dir_fuentes> [--write] [--limit N] [--ticker T]');
+  if (fs.existsSync(PARADA)) fs.unlinkSync(PARADA);
   const par = new Map(), accionesOf = new Map();
   for (const r of leer('twse_list.json')) { par.set(r['公司代號'].trim(), num(r['普通股每股面額'])); accionesOf.set(r['公司代號'].trim(), num(r['已發行普通股數或TDR原股發行股數'])); }
   for (const r of leer('tpex_list.json')) { par.set(String(r.SecuritiesCompanyCode).trim(), num(r.ParValueOfCommonStock)); accionesOf.set(String(r.SecuritiesCompanyCode).trim(), num(r.IssueShares)); }
@@ -133,6 +151,7 @@ function construirEjercicio(y, is, cf, bs, par) {
 
   let n = 0;
   for (const u of cola) {
+    if (fs.existsSync(PARADA)) { console.log(`Parada solicitada (${PARADA}); checkpoint guardado.`); break; }
     n++;
     try {
       const [is, cf, bs] = [porTipoFecha(await finmind('TaiwanStockFinancialStatements', u.ticker)), porTipoFecha(await finmind('TaiwanStockCashFlowsStatement', u.ticker)), porTipoFecha(await finmind('TaiwanStockBalanceSheet', u.ticker))];
@@ -178,6 +197,12 @@ function construirEjercicio(y, is, cf, bs, par) {
     } catch (err) {
       hecho.errores[u.ticker] = String(err.message).slice(0, 300);
       console.log(`[${n}/${cola.length}] ${u.ticker} ERROR ${err.message}`);
+      // Sin base de datos no tiene sentido seguir recorriendo la cola: se para y se reanuda después.
+      if (/closed state|ECONNREFUSED|PROTOCOL_CONNECTION_LOST|ECONNRESET/.test(String(err.message) + String(err.code))) {
+        if (WRITE) fs.writeFileSync(CHECKPOINT, JSON.stringify(hecho, null, 1));
+        console.log('Conexión con MySQL perdida: importación detenida. Arrancar mysql_valoracion y relanzar.');
+        process.exit(2);
+      }
     }
     if (WRITE) fs.writeFileSync(CHECKPOINT, JSON.stringify(hecho, null, 1));
   }

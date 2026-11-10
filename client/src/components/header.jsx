@@ -12,7 +12,7 @@ export function Header(){
                     </div>
                     <nav className='navbar'>
                         <NavLink to='/' end className='inicio'>Inicio</NavLink>
-                        <Link to='/' className='panel'>Panel</Link>
+                        <NavLink to='/panel' className='panel'>Panel</NavLink>
                         <Link to='/' className='fichaEmpresa'>Ficha empresa</Link>
                         <NavLink to='/screener' className='screener'>Screener</NavLink>
                         <Link to='/' className='comparador'>Comarador</Link>

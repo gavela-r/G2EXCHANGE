@@ -1,0 +1,220 @@
+/* Panel: reutiliza variables y tarjetas de cuerpo.css y la tabla/botones de screener.css */
+
+.cuerpo.panel .barraMercado{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.cuerpo.panel .rangos{
+  width: fit-content;
+}
+
+.cuerpo.panel .rangos button{
+  min-width: 64px;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+
+.cuerpo.panel .boton{
+  text-decoration: none;
+}
+
+.cuerpo.panel .metricas.cuatro{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 20px;
+}
+
+.cuerpo.panel .metrica .cifra{
+  font-size: 24px;
+}
+
+.cuerpo.panel .rejillaPanel{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.cuerpo.panel .rejillaPanel > .tarjeta{
+  margin-top: 0;
+}
+
+.cuerpo.panel .nota.margen{
+  margin-top: 18px;
+  line-height: 1.5;
+}
+
+.cuerpo.panel .votos li,
+.cuerpo.panel .puntuacionTexto{
+  font-size: 11px;
+}
+
+/* ---------- Barra apilada de decisiones ---------- */
+
+.cuerpo.panel .barraApilada{
+  display: flex;
+  height: 10px;
+  margin-top: 22px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--borde);
+}
+
+.cuerpo.panel .barraApilada div{
+  height: 100%;
+  transition: width 0.6s ease;
+}
+
+.cuerpo.panel .barraApilada .verde{ background-color: var(--verde); }
+.cuerpo.panel .barraApilada .ambar{ background-color: var(--ambar); }
+.cuerpo.panel .barraApilada .rojo{ background-color: var(--rojo); }
+
+.cuerpo.panel .votos{
+  margin-top: 18px;
+  gap: 12px;
+}
+
+/* ---------- Tabla de sectores ---------- */
+
+.cuerpo.panel .resultados .cabeceraTarjeta{
+  align-items: center;
+}
+
+.cuerpo.panel th .th{
+  color: var(--apagado);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cuerpo.panel tbody tr.estatica{
+  cursor: default;
+}
+
+.cuerpo.panel .peso{
+  display: inline-block;
+  width: 60px;
+  height: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border-radius: 2px;
+  background-color: var(--borde);
+  overflow: hidden;
+}
+
+.cuerpo.panel .peso span{
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #4F86F7, #8A7CF6);
+}
+
+.cuerpo.panel .resultados .verTodas{
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+/* ---------- Listas de empresas ---------- */
+
+.cuerpo.panel .lista{
+  padding: 20px 0 6px;
+  overflow: hidden;
+}
+
+.cuerpo.panel .lista .cabeceraTarjeta,
+.cuerpo.panel .lista .vacio{
+  padding: 0 18px;
+}
+
+.cuerpo.panel .lista ul{
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+.cuerpo.panel .lista li button{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 18px;
+  border: 0;
+  border-top: 1px solid var(--borde);
+  border-left: 3px solid transparent;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.cuerpo.panel .lista li button:hover,
+.cuerpo.panel .lista li button:focus-visible{
+  outline: none;
+  border-left-color: var(--acento);
+  background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
+}
+
+.cuerpo.panel .posicion{
+  width: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--apagado);
+}
+
+.cuerpo.panel .lista .compania{
+  flex: 1;
+  min-width: 0;
+}
+
+.cuerpo.panel .lista .compania > div{
+  min-width: 0;
+}
+
+.cuerpo.panel .lista .compania .nombre{
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.cuerpo.panel .dato{
+  text-align: right;
+}
+
+.cuerpo.panel .principalDato{
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto);
+  white-space: nowrap;
+}
+
+.cuerpo.panel .dato .nota{
+  margin-top: 3px;
+}
+
+.cuerpo.panel .nota.pos{ color: var(--verde); }
+.cuerpo.panel .nota.neg{ color: var(--rojo); }
+
+@media (max-width: 1100px){
+  .cuerpo.panel .metricas.cuatro{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px){
+  .cuerpo.panel .barraMercado{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cuerpo.panel .rangos button{
+    min-width: 0;
+  }
+
+  .cuerpo.panel .metricas.cuatro,
+  .cuerpo.panel .rejillaPanel{
+    grid-template-columns: 1fr;
+  }
+}

@@ -6,6 +6,7 @@ import { Home } from './home';
 import { Screener } from './components/screener';
 import { Panel } from './components/panel';
 import { Ficha } from './components/ficha';
+import { Comparador } from './components/comparador';
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
           <Route path='/panel' element={<Panel />}/>
           <Route path='/ficha' element={<Ficha />}/>
           <Route path='/ficha/:id' element={<Ficha />}/>
+          <Route path='/comparador' element={<Comparador />}/>
           <Route path='/screener' element={<Screener />}/>
           
         </Route>

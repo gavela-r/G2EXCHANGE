@@ -15,7 +15,7 @@ export function Header(){
                         <NavLink to='/panel' className='panel'>Panel</NavLink>
                         <NavLink to='/ficha' className='fichaEmpresa'>Ficha empresa</NavLink>
                         <NavLink to='/screener' className='screener'>Screener</NavLink>
-                        <Link to='/' className='comparador'>Comarador</Link>
+                        <NavLink to='/comparador' className='comparador'>Comparador</NavLink>
                     </nav>
                 </div>
             

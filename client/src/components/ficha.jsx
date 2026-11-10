@@ -419,7 +419,7 @@ export function Ficha() {
                         <p className="aviso">
                             {empresa.informe && `Último informe anual: ${empresa.informe.documento} cerrado el ${fecha(empresa.informe.fechaFin)}. `}
                             Verde o rojo indica mejora o empeoramiento frente al año anterior. Datos informativos, no constituyen una recomendación de inversión.
-                            {' '}<Link to="/screener">Comparar en el screener</Link>
+                            {' '}<Link to={`/comparador?ids=${empresa.id}`}>Comparar con otras empresas</Link>
                         </p>
                     </>
                 )}

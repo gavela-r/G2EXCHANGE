@@ -1,0 +1,305 @@
+/* Comparador: reutiliza variables y tarjetas de cuerpo.css y tabla/insignias de screener.css */
+
+.cuerpo.comparador .cargandoTexto{
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--apagado);
+}
+
+/* ---------- Selector ---------- */
+
+.cuerpo.comparador .selector{
+  position: relative;
+  width: 300px;
+}
+
+.cuerpo.comparador .campoBusqueda input{
+  width: 100%;
+  height: 40px;
+}
+
+.cuerpo.comparador .campoBusqueda input:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cuerpo.comparador .desplegable{
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background-color: var(--tarjeta);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.cuerpo.comparador .desplegable button{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 14px;
+  border: 0;
+  background: transparent;
+  color: var(--texto);
+  text-align: left;
+}
+
+.cuerpo.comparador .desplegable button:hover,
+.cuerpo.comparador .desplegable button:focus-visible{
+  outline: none;
+  background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
+}
+
+.cuerpo.comparador .desplegable .nombre{
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cuerpo.comparador .sinCoincidencias{
+  padding: 10px 14px;
+  font-size: 11px;
+}
+
+/* ---------- Tarjetas de empresas ---------- */
+
+.cuerpo.comparador .tarjetasEmpresas{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.cuerpo.comparador .tarjetasEmpresas .tarjeta{
+  margin-top: 0;
+}
+
+.cuerpo.comparador .empresaComparada{
+  border-top: 3px solid var(--color);
+}
+
+.cuerpo.comparador .empresaComparada .compania{
+  min-width: 0;
+}
+
+.cuerpo.comparador .empresaComparada .compania > div{
+  min-width: 0;
+}
+
+.cuerpo.comparador .empresaComparada .compania .nombre{
+  max-width: none;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.cuerpo.comparador .empresaComparada .caja{
+  color: var(--color);
+}
+
+.cuerpo.comparador .empresaComparada .cifra{
+  margin: 18px 0 4px;
+  font-size: 22px;
+}
+
+.cuerpo.comparador .enlaceFicha{
+  margin-top: 12px;
+}
+
+.cuerpo.comparador .avisoUna{
+  margin-top: 14px;
+  font-size: 11px;
+}
+
+.cuerpo.comparador .vacioComparador{
+  margin-top: 28px;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.cuerpo.comparador .vacioComparador i{
+  font-size: 28px;
+  color: var(--acento);
+}
+
+.cuerpo.comparador .vacioComparador .titulo{
+  margin-top: 14px;
+}
+
+.cuerpo.comparador .vacioComparador .nota{
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+/* ---------- Tabla ---------- */
+
+.cuerpo.comparador .resultados .cabeceraTarjeta{
+  align-items: center;
+}
+
+.cuerpo.comparador th .th{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--apagado);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cuerpo.comparador .puntoColor{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.cuerpo.comparador table td:first-child{
+  color: var(--secundario);
+}
+
+.cuerpo.comparador td.num{
+  width: 22%;
+}
+
+.cuerpo.comparador .ayuda{
+  margin-left: 6px;
+  font-size: 10px;
+  color: var(--apagado);
+}
+
+.cuerpo.comparador tbody tr.estatica,
+.cuerpo.comparador tbody tr.grupo{
+  cursor: default;
+}
+
+.cuerpo.comparador tbody tr.estatica:hover{
+  background: rgba(27, 48, 79, 0.4);
+}
+
+.cuerpo.comparador tbody tr.grupo td{
+  padding-top: 18px;
+  color: var(--acento);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.cuerpo.comparador tbody tr.grupo:hover{
+  background: none;
+}
+
+.cuerpo.comparador td.mejor{
+  color: var(--verde);
+  font-weight: 700;
+  background-color: rgba(61, 214, 140, 0.07);
+}
+
+.cuerpo.comparador .leyendaMejor{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.cuerpo.comparador .puntoMejor{
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background-color: rgba(61, 214, 140, 0.35);
+  border: 1px solid var(--verde);
+}
+
+/* ---------- Gráfico ---------- */
+
+.cuerpo.comparador .historicoIngresos{
+  margin-top: 20px;
+}
+
+.cuerpo.comparador .leyenda{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 14px;
+  font-size: 10px;
+  color: var(--secundario);
+}
+
+.cuerpo.comparador .leyenda i{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+
+.cuerpo.comparador svg.grafica{
+  display: block;
+  width: 100%;
+  max-height: 280px;
+  margin-top: 16px;
+}
+
+.cuerpo.comparador .grafica .eje{
+  stroke: var(--borde);
+  stroke-dasharray: 3 4;
+}
+
+.cuerpo.comparador .grafica .eje.base{
+  stroke: var(--secundario);
+  stroke-dasharray: none;
+  opacity: 0.5;
+}
+
+.cuerpo.comparador .grafica .valorEje,
+.cuerpo.comparador .grafica .anio{
+  fill: var(--apagado);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cuerpo.comparador .grafica .valorEje{
+  text-anchor: end;
+}
+
+.cuerpo.comparador .grafica .anio{
+  text-anchor: middle;
+}
+
+.cuerpo.comparador .sinDatos.grafica{
+  padding: 40px 0;
+}
+
+.cuerpo.comparador .nota.margen{
+  margin-top: 12px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px){
+  .cuerpo.comparador .selector{
+    width: 100%;
+  }
+
+  .cuerpo.comparador .tarjetasEmpresas{
+    grid-template-columns: 1fr;
+  }
+
+  .cuerpo.comparador .historicoIngresos > .cabeceraTarjeta,
+  .cuerpo.comparador .resultados > .cabeceraTarjeta{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cuerpo.comparador .leyenda{
+    justify-content: flex-start;
+  }
+}

@@ -70,7 +70,7 @@ function ListaEmpresas({ subtitulo, titulo, empresas, columna, vacio }) {
                 <ul>
                     {empresas.map((e, i) => (
                         <li key={e.id}>
-                            <button type="button" onClick={() => navegar(`/?empresa=${e.id}`)}>
+                            <button type="button" onClick={() => navegar(`/ficha/${e.id}`)}>
                                 <span className="posicion">{i + 1}</span>
                                 <div className="compania">
                                     <span className="caja">{nombreLegible(e.nombre)[0]}</span>

@@ -13,7 +13,7 @@ export function Header(){
                     <nav className='navbar'>
                         <NavLink to='/' end className='inicio'>Inicio</NavLink>
                         <NavLink to='/panel' className='panel'>Panel</NavLink>
-                        <Link to='/' className='fichaEmpresa'>Ficha empresa</Link>
+                        <NavLink to='/ficha' className='fichaEmpresa'>Ficha empresa</NavLink>
                         <NavLink to='/screener' className='screener'>Screener</NavLink>
                         <Link to='/' className='comparador'>Comarador</Link>
                     </nav>

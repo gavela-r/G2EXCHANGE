@@ -341,8 +341,8 @@ export function Screener() {
                                 <tbody>
                                     {visibles.map(e => (
                                         <tr key={e.id} tabIndex={0}
-                                            onClick={() => navegar(`/?empresa=${e.id}`)}
-                                            onKeyDown={k => k.key === 'Enter' && navegar(`/?empresa=${e.id}`)}>
+                                            onClick={() => navegar(`/ficha/${e.id}`)}
+                                            onKeyDown={k => k.key === 'Enter' && navegar(`/ficha/${e.id}`)}>
                                             <td>
                                                 <div className="compania">
                                                     <span className="caja">{nombreLegible(e.nombre)[0]}</span>

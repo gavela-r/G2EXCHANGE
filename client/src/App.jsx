@@ -5,6 +5,7 @@ import './css/App.css';
 import { Home } from './home';
 import { Screener } from './components/screener';
 import { Panel } from './components/panel';
+import { Ficha } from './components/ficha';
 
 function App() {
   
@@ -15,6 +16,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path='/' element={<Home />}/>
           <Route path='/panel' element={<Panel />}/>
+          <Route path='/ficha' element={<Ficha />}/>
+          <Route path='/ficha/:id' element={<Ficha />}/>
           <Route path='/screener' element={<Screener />}/>
           
         </Route>

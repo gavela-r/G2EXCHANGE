@@ -391,6 +391,21 @@
   text-align: right;
 }
 
+.cuerpo .enlaceFicha{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--acento);
+  text-decoration: none;
+}
+
+.cuerpo .enlaceFicha:hover{
+  color: var(--texto);
+}
+
 .cuerpo .precioEmpresa .precioActual{
   color: var(--apagado);
 }

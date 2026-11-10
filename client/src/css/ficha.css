@@ -1,0 +1,382 @@
+/* Ficha empresa: reutiliza variables y tarjetas de cuerpo.css y tabla/insignias de screener.css */
+
+.cuerpo.ficha .identidad{
+  min-width: 0;
+}
+
+.cuerpo.ficha .tituloEmpresa{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.cuerpo.ficha .tituloEmpresa h1{
+  margin-top: 0;
+}
+
+.cuerpo.ficha .cajaEmpresa{
+  flex: 0 0 48px;
+  height: 48px;
+}
+
+.cuerpo.ficha .lateralEncabezado{
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.cuerpo.ficha .lateralEncabezado .estadoMercado{
+  min-width: 150px;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.cuerpo.ficha .precioCabecera{
+  margin: 4px 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* ---------- Buscador ---------- */
+
+.cuerpo.ficha .buscadorFicha{
+  position: relative;
+  width: 260px;
+  align-self: center;
+}
+
+.cuerpo.ficha .campoBusqueda input{
+  width: 100%;
+  height: 40px;
+}
+
+.cuerpo.ficha .desplegable{
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background-color: var(--tarjeta);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.cuerpo.ficha .desplegable button{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 14px;
+  border: 0;
+  background: transparent;
+  color: var(--texto);
+  text-align: left;
+}
+
+.cuerpo.ficha .desplegable button:hover,
+.cuerpo.ficha .desplegable button:focus-visible{
+  outline: none;
+  background: linear-gradient(90deg, #1B304F 0%, #182A45 100%);
+}
+
+.cuerpo.ficha .desplegable .nombre{
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cuerpo.ficha .sinCoincidencias{
+  padding: 10px 14px;
+  font-size: 11px;
+}
+
+/* ---------- Métricas y rejilla ---------- */
+
+.cuerpo.ficha .metricas.cuatro{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 28px;
+}
+
+.cuerpo.ficha .metrica .cifra{
+  font-size: 20px;
+}
+
+.cuerpo.ficha .rejillaFicha{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 16px;
+  margin-top: 16px;
+  align-items: stretch;
+}
+
+.cuerpo.ficha .rejillaFicha > .tarjeta{
+  margin-top: 0;
+}
+
+.cuerpo.ficha .grafico.alto{
+  height: 400px;
+}
+
+.cuerpo.ficha .puntuacionTexto,
+.cuerpo.ficha .detalleKpis li{
+  font-size: 11px;
+}
+
+/* ---------- Valoración ---------- */
+
+.cuerpo.ficha .etiquetas{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.cuerpo.ficha .chip{
+  padding: 3px 8px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background-color: var(--input);
+  color: var(--secundario);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.cuerpo.ficha .escala{
+  position: relative;
+  height: 8px;
+  margin: 48px 4px 40px;
+  border-radius: 4px;
+  background-color: var(--borde);
+}
+
+.cuerpo.ficha .escala .banda{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(79, 134, 247, 0.5), rgba(138, 124, 246, 0.8));
+}
+
+.cuerpo.ficha .escala .marca{
+  position: absolute;
+  top: -6px;
+  width: 3px;
+  height: 20px;
+  margin-left: -1px;
+  border-radius: 2px;
+}
+
+.cuerpo.ficha .escala .marca span{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.cuerpo.ficha .escala .marca.izquierda span{
+  left: -4px;
+  transform: none;
+}
+
+.cuerpo.ficha .escala .marca.derecha span{
+  left: auto;
+  right: -4px;
+  transform: none;
+}
+
+.cuerpo.ficha .escala .razonable{
+  background-color: #A9C8FF;
+}
+
+.cuerpo.ficha .escala .razonable span{
+  bottom: 26px;
+  color: #A9C8FF;
+}
+
+.cuerpo.ficha .escala .precio{
+  background-color: var(--texto);
+}
+
+.cuerpo.ficha .escala .precio span{
+  top: 26px;
+  color: var(--texto);
+}
+
+.cuerpo.ficha .escenarios{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cuerpo.ficha .escenario{
+  padding: 16px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background-color: var(--input);
+}
+
+.cuerpo.ficha .escenario.destacado{
+  border-color: var(--acento);
+}
+
+.cuerpo.ficha .escenario .etiqueta{
+  color: var(--apagado);
+  font-size: 8px;
+}
+
+.cuerpo.ficha .escenario .cifra{
+  margin: 10px 0 4px;
+  font-size: 20px;
+}
+
+.cuerpo.ficha .potencial{
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cuerpo.ficha .potencial.pos{ color: var(--verde); }
+.cuerpo.ficha .potencial.neg{ color: var(--rojo); }
+
+.cuerpo.ficha .escenario .detalleKpis{
+  margin-top: 14px;
+}
+
+.cuerpo.ficha .nota.margen{
+  margin-top: 14px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* ---------- Histórico ---------- */
+
+.cuerpo.ficha .leyenda{
+  display: flex;
+  gap: 14px;
+  font-size: 10px;
+  color: var(--secundario);
+}
+
+.cuerpo.ficha .leyenda i{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+
+.cuerpo.ficha .leyenda .ingresos,
+.cuerpo.ficha .grafica rect.ingresos{ background-color: #4F86F7; fill: #4F86F7; }
+.cuerpo.ficha .leyenda .beneficio,
+.cuerpo.ficha .grafica rect.beneficio{ background-color: var(--verde); fill: var(--verde); }
+.cuerpo.ficha .grafica rect.negativa{ fill: var(--rojo); }
+
+.cuerpo.ficha .contenedorGrafica{
+  padding: 8px 20px 0;
+}
+
+.cuerpo.ficha svg.grafica{
+  display: block;
+  width: 100%;
+  max-height: 240px;
+}
+
+.cuerpo.ficha .grafica .eje{
+  stroke: var(--borde);
+}
+
+.cuerpo.ficha .grafica .anio{
+  fill: var(--apagado);
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.cuerpo.ficha .sinDatos.grafica{
+  padding: 30px 0;
+}
+
+.cuerpo.ficha th .th{
+  color: var(--apagado);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cuerpo.ficha tbody tr.estatica,
+.cuerpo.ficha tbody tr.grupo{
+  cursor: default;
+}
+
+.cuerpo.ficha tbody tr.estatica:hover{
+  background: rgba(27, 48, 79, 0.4);
+}
+
+.cuerpo.ficha tbody tr.grupo td{
+  padding-top: 18px;
+  color: var(--acento);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.cuerpo.ficha tbody tr.grupo:hover{
+  background: none;
+}
+
+.cuerpo.ficha td.sube{ color: var(--verde); }
+.cuerpo.ficha td.baja{ color: var(--rojo); }
+
+.cuerpo.ficha .aviso a{
+  color: var(--acento);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px){
+  .cuerpo.ficha .rejillaFicha{
+    grid-template-columns: 1fr;
+  }
+
+  .cuerpo.ficha .metricas.cuatro{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px){
+  .cuerpo.ficha .lateralEncabezado{
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .cuerpo.ficha .buscadorFicha{
+    width: 100%;
+  }
+
+  .cuerpo.ficha .lateralEncabezado .estadoMercado{
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  .cuerpo.ficha .metricas.cuatro,
+  .cuerpo.ficha .escenarios{
+    grid-template-columns: 1fr;
+  }
+
+  .cuerpo.ficha .grafico.alto{
+    height: 300px;
+  }
+
+  .cuerpo.ficha .historico > .cabeceraTarjeta{
+    flex-direction: column;
+  }
+}

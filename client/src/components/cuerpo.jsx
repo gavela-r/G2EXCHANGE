@@ -15,7 +15,7 @@ const rangos = [
     { etiqueta: '5A', valor: '60M' },
 ];
 
-function etiquetaFortaleza(total) {
+export function etiquetaFortaleza(total) {
     if (total == null) return SIN_DATOS;
     if (total >= 80) return 'Muy sólida';
     if (total >= 65) return 'Sólida';
@@ -47,7 +47,7 @@ async function pedir(url) {
 
 // ---------------- Componentes ----------------
 
-function Indicador({ valor }) {
+export function Indicador({ valor }) {
     const radio = 44, circunferencia = 2 * Math.PI * radio;
     return (
         <div className="indicador">
@@ -212,6 +212,9 @@ export function Cuerpo(){
                                                 {nombre} <i className="fa-solid fa-circle-check verificado"></i>
                                             </h2>
                                             <p className="nasdaq">{empresa.bolsa}: {empresa.ticker} · {empresa.sector ?? 'Sector sin clasificar'}</p>
+                                            <Link to={`/ficha/${empresa.id}`} className="enlaceFicha">
+                                                Ver ficha completa <i className="fa-solid fa-arrow-right"></i>
+                                            </Link>
                                         </div>
                                         <div className="precioEmpresa">
                                             <p className="precioActual">ÚLTIMO CIERRE</p>

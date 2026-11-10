@@ -6,6 +6,7 @@ import conexion from "../conexion/bd";
 //
 // GET /api/landing/empresas          watchlist por defecto
 // GET /api/landing/empresas/:id      ficha de un instrumento
+// GET /api/landing/empresas/:id/detalle  histórico anual y valoración del motor
 // GET /api/landing/buscar?q=texto    buscador por nombre o ticker
 //
 // Todo se calcula con lo que hay en MySQL. Lo que no existe
@@ -38,7 +39,25 @@ const BOLSAS: Record<string, { corto: string; tradingView: string }> = {
 
 const CONFIANZA: Record<string, number> = { ALTA: 0, MEDIA: 1, BAJA: 2 };
 
-type Partidas = Partial<Record<keyof typeof CONCEPTOS, number>>;
+// Conceptos adicionales para el histórico de la ficha completa
+const CONCEPTOS_HISTORICO = {
+    INGRESOS: 1,
+    BENEFICIO_NETO: 4,
+    EPS_DILUIDO: 8,
+    EFECTIVO: 9,
+    PATRIMONIO_NETO: 12,
+    FLUJO_CAJA_OPERATIVO: 19,
+    CAPEX: 20
+} as const;
+
+const KPIS_HISTORICO = [
+    "EBITDA", "FCF", "MARGEN_BRUTO", "MARGEN_EBIT", "MARGEN_NETO", "MARGEN_FCF", "ROE", "ROA",
+    "DEUDA_NETA", "DEUDA_NETA_SOBRE_EBITDA", "COBERTURA_INTERESES", "PASIVO_SOBRE_ACTIVOS"
+];
+
+const ANIOS_HISTORICO = 6;
+
+type Partidas = Partial<Record<string, number>>;
 
 const numero = (v: unknown): number | null => {
     if (v === null || v === undefined) return null;
@@ -67,7 +86,7 @@ function datosBolsa(nombre: string | null) {
 }
 
 // Varias partidas pueden mapear al mismo concepto: se elige la de mayor confianza.
-async function partidasPorInforme(informeIds: number[]) {
+async function partidasPorInforme(informeIds: number[], conceptos: Record<string, number> = CONCEPTOS) {
     const resultado = new Map<number, Partidas>();
     if (!informeIds.length) return resultado;
 
@@ -75,7 +94,7 @@ async function partidasPorInforme(informeIds: number[]) {
         `SELECT informe_id, concepto_estandar_id, importe, nivel_confianza
          FROM partida_contable_valor
          WHERE informe_id IN (?) AND concepto_estandar_id IN (?)`,
-        [informeIds, Object.values(CONCEPTOS)]
+        [informeIds, Object.values(conceptos)]
     );
 
     const elegidas = new Map<string, { importe: number; rango: number }>();
@@ -90,8 +109,7 @@ async function partidasPorInforme(informeIds: number[]) {
 
     for (const [clave, { importe }] of elegidas) {
         const [informeId, conceptoId] = clave.split(":").map(Number);
-        const nombre = (Object.keys(CONCEPTOS) as (keyof typeof CONCEPTOS)[])
-            .find(k => CONCEPTOS[k] === conceptoId)!;
+        const nombre = Object.keys(conceptos).find(k => conceptos[k] === conceptoId)!;
         const partidas = resultado.get(informeId) ?? {};
         partidas[nombre] = importe;
         resultado.set(informeId, partidas);
@@ -272,6 +290,102 @@ landingRouter.get("/api/landing/empresas/:id", async (req, res) => {
     } catch (error) {
         console.error("[landing] ficha:", error);
         res.status(500).json({ ok: false, error: "No se pudo cargar la empresa" });
+    }
+});
+
+// GET /api/landing/empresas/:id/detalle
+// Histórico de informes anuales (partidas y KPIs) y última valoración completada con sus tres escenarios.
+async function detalle(empresaId: number) {
+    const [informes]: any = await conexion.query(
+        `SELECT id, fecha_fin_periodo, tipo_documento, fuente
+         FROM informe_financiero
+         WHERE empresa_id = ? AND tipo_periodo = 'ANUAL'
+         ORDER BY fecha_fin_periodo DESC
+         LIMIT ?`,
+        [empresaId, ANIOS_HISTORICO]
+    );
+    const ids = informes.map((i: any) => i.id);
+    const partidas = await partidasPorInforme(ids, CONCEPTOS_HISTORICO);
+
+    const kpis = new Map<number, Record<string, number>>();
+    if (ids.length) {
+        const [filas]: any = await conexion.query(
+            `SELECT informe_id, kpi, valor FROM kpi_financiero_informe WHERE informe_id IN (?) AND kpi IN (?)`,
+            [ids, KPIS_HISTORICO]
+        );
+        for (const f of filas) {
+            const v = numero(f.valor);
+            if (v === null) continue;
+            kpis.set(f.informe_id, { ...(kpis.get(f.informe_id) ?? {}), [f.kpi]: v });
+        }
+    }
+
+    const [ultima]: any = await conexion.query(
+        `SELECT id, template_code, valuation_method_family, engine_version, fecha_fin
+         FROM valuation_run
+         WHERE empresa_id = ? AND estado = 'COMPLETADO'
+         ORDER BY fecha_fin DESC, id DESC
+         LIMIT 1`,
+        [empresaId]
+    );
+    let valoracion = null;
+    if (ultima.length) {
+        const [escenarios]: any = await conexion.query(
+            `SELECT escenario, fair_value, max_buy_price, current_price, upside, wacc, terminal_growth,
+                    decision, confidence, validation_status
+             FROM valuation_run_resultado WHERE valuation_run_id = ?
+             ORDER BY FIELD(escenario, 'CONSERVATIVE', 'BASE', 'OPTIMISTIC')`,
+            [ultima[0].id]
+        );
+        valoracion = {
+            metodo: ultima[0].valuation_method_family,
+            plantilla: ultima[0].template_code,
+            version: ultima[0].engine_version,
+            fecha: ultima[0].fecha_fin,
+            escenarios: escenarios.map((e: any) => ({
+                escenario: e.escenario,
+                valorRazonable: numero(e.fair_value),
+                precioMaximoCompra: numero(e.max_buy_price),
+                precioReferencia: numero(e.current_price),
+                potencial: e.upside === null ? null : Number(e.upside) * 100,
+                wacc: e.wacc === null ? null : Number(e.wacc) * 100,
+                crecimientoTerminal: e.terminal_growth === null ? null : Number(e.terminal_growth) * 100,
+                decision: e.decision,
+                confianza: e.confidence,
+                validacion: e.validation_status
+            }))
+        };
+    }
+
+    return {
+        // Del más antiguo al más reciente, para leer el histórico de izquierda a derecha
+        informes: informes.reverse().map((i: any) => ({
+            fechaFin: i.fecha_fin_periodo,
+            documento: i.tipo_documento,
+            fuente: i.fuente,
+            partidas: partidas.get(i.id) ?? {},
+            kpis: kpis.get(i.id) ?? {}
+        })),
+        valoracion
+    };
+}
+
+landingRouter.get("/api/landing/empresas/:id/detalle", async (req, res) => {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+        res.status(400).json({ ok: false, error: "id debe ser un entero positivo" });
+        return;
+    }
+    try {
+        const [filas]: any = await conexion.query(`SELECT empresa_id FROM instrumento WHERE id = ?`, [id]);
+        if (!filas.length) {
+            res.status(404).json({ ok: false, error: "Empresa no encontrada" });
+            return;
+        }
+        res.json({ ok: true, ...(await detalle(filas[0].empresa_id)) });
+    } catch (error) {
+        console.error("[landing] detalle:", error);
+        res.status(500).json({ ok: false, error: "No se pudo cargar el detalle de la empresa" });
     }
 });
 

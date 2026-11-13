@@ -100,7 +100,8 @@ Taxonomía `server/sql/26_fondo_maniobra.sql` (`ACTIVOS_CORRIENTES`, `PASIVOS_CO
 nombres que el módulo de capital. Se muestra en el histórico de la ficha.
 
 - TW: el importador ya guarda `CurrentAssets`/`CurrentLiabilities`; `server/scripts/completar-corrientes-tw.cjs`
-  rellena los anuales ya importados (caché sin cuota; `--fetch` pide solo el balance). Encadenado tras la importación.
+  rellena los anuales ya importados (caché sin cuota; `--fetch` pide solo el balance). Hecho el 13/11: 1.269 informes con
+  fondo de maniobra; 95 sin desglose en FinMind.
 - JP: EDINET publica los totales, pero hay que volver a extraerlos (la PCV solo guardó conceptos mapeados).
 - US: `AssetsCurrent`/`LiabilitiesCurrent` requieren descargar de la SEC (pendiente de contacto).
 
@@ -108,8 +109,24 @@ nombres que el módulo de capital. Se muestra en el histórico de la ficha.
 |---|---:|---:|---:|---:|
 | US | 1.342 → 1.476 | 1.341 → 1.472 | 304 | 125 |
 | JP | 2.064 | 1.969 | 1.496 | 1.265 |
-| TW (importación en curso) | 280 → 441 | 438 | 387 | 380 |
+| TW (13/11, importación terminada) | 280 → ver §7 | 994 | 778 | 753 |
 
 `node server/scripts/cobertura-empresas.cjs` mide las tres últimas columnas (deuda total por componentes o agregado).
 En US el 100 % sigue bajo porque exige los 18 KPI: capital circulante operativo (sin existencias en bancos/servicios)
 y cobertura de intereses no aplican a muchas empresas.
+## 7. Cierre Taiwán (13/11/2026)
+
+- Importación FinMind terminada: 1.428/1.430 empresas con precio (las restantes son ETF/preferentes sin estados
+  financieros: se registran como rechazadas, no como error). Sin bloqueos de cuota.
+- Relleno de activo/pasivo corriente terminado (fondo de maniobra disponible en TW).
+- Valoración incremental `--write`: 495 nuevas, 222 bloqueadas (FCFF negativo, sin valor razonable por diseño),
+  934 reutilizadas, 0 errores técnicos. TW pasa de 210 a 661 empresas con valoración (~461 con valor razonable).
+
+| País | Con precio | Núcleo | Fundamentales | 100 % | Valoradas |
+|---|---:|---:|---:|---:|---:|
+| JP | 2.774 | 1.969 | 1.496 | 1.265 | 878 |
+| TW | 1.430 | 994 | 778 | 753 | 661 |
+| US | 4.216 | 1.472 | 304 | 125 | 120 |
+
+Operativa: tras un apagado forzado Docker Desktop puede no arrancar por sockets antiguos en
+`%LOCALAPPDATA%\Docker\run` (`*.stale` no borrables); se resuelve renombrando esa carpeta antes de arrancarlo.
